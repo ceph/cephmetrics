@@ -1,0 +1,105 @@
+#!/usr/bin/env python
+import os
+import socket
+import glob
+# import thread
+import collectd
+from collectors.mon import Mon
+from collectors.utils import flatten_dict
+# import json
+PLUGIN_NAME = 'cephmetrics'
+
+
+class Ceph(object):
+    def __init__(self):
+        self.cluster_name = None
+        self.host_name = socket.gethostname().split('.')[0]
+
+        self.mon_socket = None
+        self.rgw_socket = None
+
+        self.mon = None
+        self.rgw = None
+
+    def probe(self):
+        """
+        set up the sockets to use based on what we find in /var/run/ceph
+        :return:
+        """
+
+        mon_socket = '/var/run/ceph/{}-mon.{}.asok'.format(self.cluster_name,
+                                                           self.host_name)
+        if os.path.exists(mon_socket):
+            self.mon_socket = mon_socket
+            self.mon = Mon(self.cluster_name,
+                           admin_socket=mon_socket)
+
+        rgw_socket = glob.glob('/var/run/ceph/{}-client.rgw.{}.'
+                               '*.asok'.format(self.cluster_name,
+                                               self.host_name))
+        if rgw_socket:
+            self.rgw_socket = rgw_socket[0]
+
+
+def write_stats(role_metrics, stats):
+
+    flat_stats = flatten_dict(stats, '.')
+    
+    for key_name in flat_stats:
+        attr_name = key_name.split('.')[-1]
+
+        # TODO: this needs some more think time, since the key from the name
+        # is not the key of the all_metrics dict
+        attr_type = role_metrics[attr_name][1]     # gauge / derive etc
+        attr_value = flat_stats[key_name]
+
+        val = collectd.Values(plugin=PLUGIN_NAME, type=attr_type)
+        instance_name = "{}.{}".format(CEPH.cluster_name,
+                                       key_name)
+        val.type_instance = instance_name
+        val.values = [attr_value]
+        val.dispatch()
+
+
+def configure_callback(conf):
+
+    global CEPH
+    module_parms = {node.key: node.values[0] for node in conf.children}
+
+    if 'ClusterName' in module_parms:
+        cluster_name = module_parms['ClusterName']
+        # cluster name is all we need to get started
+        if not os.path.exists('/etc/ceph/{}.conf'.format(cluster_name)):
+            collectd.error("Clustername given ('{}') not found in "
+                           "/etc/ceph".format(module_parms['ClusterName']))
+
+        # let's assume the conf file is OK to use
+        CEPH.cluster_name = cluster_name
+
+        CEPH.probe()
+
+    else:
+        collectd.error("ClusterName is required")
+
+
+def read_callback():
+
+    if CEPH.mon:
+        mon_stats = CEPH.mon.get_stats()
+        write_stats(Mon.all_metrics, mon_stats)
+        pass
+
+    if CEPH.rgw:
+        pass
+
+
+if __name__ == '__main__':
+    # run interactively or maybe test the code
+    collectd.info("in main for some reason !")
+    pass
+else:
+
+    CEPH = Ceph()
+
+    collectd.register_config(configure_callback)
+    collectd.register_read(read_callback)

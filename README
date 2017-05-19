@@ -1,0 +1,51 @@
+On the ceph node install collectd
+- tested with collectd-5.7.0-4.el7ost.x86_64
+
+Interval is set to 10 in collectd.conf
+
+write_graphite plugin configured as follows;
+
+LoadPlugin "write_graphite"
+<Plugin write_graphite>
+  <Node "local">
+    Host "192.168.1.52"
+    Port "2003"
+    Protocol "tcp"
+    LogSendErrors true
+    Prefix "collectd."
+    StoreRates true
+    AlwaysAppendDS false
+    EscapeCharacter "_"
+    PreserveSeparator true
+    SeparateInstances true
+  </Node>
+</Plugin>
+
+5.7 introduces the PreserveSeparator parm, allowing the type instance name to
+contain '.'. At the moment I used .'s in the metric name since the same plugin
+provides all metrics.
+
+Comments welcome!
+
+This is what an entry looks like as seen in influx
+collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.pools._rgw_root.num_bytes_recovered
+        |                     |            \     \    \     \
+        |                     |             \     \    \     \
+        |                     |              |     \    \      \
+prefix  | hostname            |  plugin name | type |ceph|metric| metric name
+                                                     name  group
+
+In the case of pools, the metric name is prefixed by the pool name
+
+Added cephmetrics.conf to /etc/collectd.d dir
+
+mkdir -p /usr/lib64/collectd/python-plugins
+
+to the plugin dir, I copied
+ - cephmetrics.py
+ - collectors dir
+
+
+
+
+
