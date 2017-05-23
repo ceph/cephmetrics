@@ -1,6 +1,11 @@
 #!/usr/bin/env python
 
 
+import socket
+
+def get_hostname():
+    return socket.gethostname().split('.')[0]
+
 def add_dicts(dict1, dict2):
     """
     Add dictionary values together
