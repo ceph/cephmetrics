@@ -4,8 +4,11 @@ import socket
 import glob
 # import thread
 import collectd
+import json
 from collectors.mon import Mon
-from collectors.utils import flatten_dict
+from collectors.rgw import RGW
+
+from collectors.utils import flatten_dict, get_hostname
 # import json
 PLUGIN_NAME = 'cephmetrics'
 
@@ -13,7 +16,7 @@ PLUGIN_NAME = 'cephmetrics'
 class Ceph(object):
     def __init__(self):
         self.cluster_name = None
-        self.host_name = socket.gethostname().split('.')[0]
+        self.host_name = get_hostname()
 
         self.mon_socket = None
         self.rgw_socket = None
@@ -34,11 +37,13 @@ class Ceph(object):
             self.mon = Mon(self.cluster_name,
                            admin_socket=mon_socket)
 
-        rgw_socket = glob.glob('/var/run/ceph/{}-client.rgw.{}.'
-                               '*.asok'.format(self.cluster_name,
-                                               self.host_name))
-        if rgw_socket:
-            self.rgw_socket = rgw_socket[0]
+        rgw_socket_list = glob.glob('/var/run/ceph/{}-client.rgw.{}.'
+                                    '*.asok'.format(self.cluster_name,
+                                                    self.host_name))
+        if rgw_socket_list:
+            rgw_socket = rgw_socket_list[0]
+            self.rgw = RGW(self.cluster_name,
+                           admin_socket=rgw_socket)
 
 
 def write_stats(role_metrics, stats):
@@ -87,10 +92,12 @@ def read_callback():
     if CEPH.mon:
         mon_stats = CEPH.mon.get_stats()
         write_stats(Mon.all_metrics, mon_stats)
-        pass
 
     if CEPH.rgw:
-        pass
+        rgw_stats = CEPH.rgw.get_stats()
+        collectd.info(json.dumps(rgw_stats))
+        write_stats(RGW.all_metrics, rgw_stats)
+
 
 
 if __name__ == '__main__':
