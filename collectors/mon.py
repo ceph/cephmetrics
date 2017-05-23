@@ -3,11 +3,10 @@
 import rados
 import json
 
-from ceph_daemon import admin_socket
-
+from collectors.base import BaseCollector
 from collectors.utils import add_dicts, merge_dicts
 
-class Mon(object):
+class Mon(BaseCollector):
 
     # metrics are declared, where each element has a description and collectd
     # data type. The description is used to ensure the names sent by collectd
@@ -57,11 +56,6 @@ class Mon(object):
     all_metrics = merge_dicts(pool_recovery_metrics, pool_client_metrics)
     all_metrics = merge_dicts(all_metrics, cluster_metrics)
 
-    def __init__(self, cluster_name, admin_socket=None):
-        self.cluster_name = cluster_name
-        self.admin_socket = admin_socket
-        self.metrics = {}
-
     def _mon_command(self, cmd_request):
         """ Issue a command to the monitor """
 
@@ -75,10 +69,8 @@ class Mon(object):
         return json.loads(buf_s)
 
     def _mon_health(self):
-        response = admin_socket(self.admin_socket, ['perf', 'dump'],
-                                format='json')
 
-        cluster_data = json.loads(response).get('cluster')
+        cluster_data = self._admin_socket().get('cluster')
 
         return {Mon.cluster_metrics[k][0]: cluster_data[k]
                 for k in cluster_data}
@@ -135,6 +127,7 @@ class Mon(object):
         pool_stats['_all_'] = all_pools
 
         return pool_stats
+
 
     def get_stats(self):
         """
