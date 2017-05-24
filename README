@@ -47,9 +47,12 @@ to the plugin dir, I copied
 
 
 Known Issues
-1. rgw request latency is calculated by the collector, but needs to be a derived value and calculated at the
-database. influxdb does not support math across measurements, so this confirms the requirement for graphite/carbon
-2. client iops needs a sum of read + write from the _all_ measurements, but again this isn't possible with influx
+1. Singlestat panels don't track the graph panel values 100% of the time
 
 
+
+
+Container Configuration - pulled from docker.io registry
+- grafana - grafana/grafana (official image)
+- graphite - nickstenning/graphite - https://hub.docker.com/r/nickstenning/graphite/
 
