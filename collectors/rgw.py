@@ -19,9 +19,16 @@ class RGW(BaseCollector):
         "qactive": ("requests_active", "derive")
     }
 
+    int_latencies = [
+        "get_initial_lat",
+        "put_initial_lat"
+    ]
+
     latencies = {
-        "get_initial_lat": ("get_initial_lat", "gauge"),
-        "put_initial_lat": ("put_initial_lat", "gauge")
+        "get_initial_lat_sum": ("get_initial_lat_sum", "derive"),
+        "get_initial_lat_avgcount": ("get_initial_lat_avgcount", "derive"),
+        "put_initial_lat_sum": ("put_initial_lat_sum", "derive"),
+        "put_initial_lat_avgcount": ("put_initial_lat_avgcount", "derive")
     }
 
     all_metrics = merge_dicts(simple_metrics, latencies)
@@ -43,9 +50,10 @@ class RGW(BaseCollector):
 
         filtered = {key: stats[key] for key in RGW.simple_metrics}
 
-        for key in RGW.latencies:
-            latency = stats[key]['sum'] / stats[key]['avgcount']
-            filtered[key] = latency
+        for key in RGW.int_latencies:
+            for _attr in stats[key]:
+                new_key = "{}_{}".format(key, _attr)
+                filtered[new_key] = stats[key].get(_attr)
 
         return filtered
 
