@@ -8,6 +8,10 @@ from collectors.utils import add_dicts, merge_dicts
 
 class Mon(BaseCollector):
 
+    health = {
+        "HEALTH_OK": 0
+    }
+
     # metrics are declared, where each element has a description and collectd
     # data type. The description is used to ensure the names sent by collectd
     # remain the same even if the source name changes in ceph.
@@ -34,7 +38,8 @@ class Mon(BaseCollector):
         "num_mds_up": ("num_mds_up", "gauge"),
         "num_mds_in": ("num_mds_in", "gauge"),
         "num_mds_failed": ("num_mds_failed", "gauge"),
-        "mds_epoch": ("mds_epoch", "gauge")
+        "mds_epoch": ("mds_epoch", "gauge"),
+        "health": ("health", "gauge")
     }
 
     pool_client_metrics = {
@@ -71,9 +76,16 @@ class Mon(BaseCollector):
     def _mon_health(self):
 
         cluster_data = self._admin_socket().get('cluster')
+        health_text = self._mon_command("health").get('overall_status',
+                                                      'UNKNOWN')
+        health_num = Mon.health.get(health_text, 16)
 
-        return {Mon.cluster_metrics[k][0]: cluster_data[k]
-                for k in cluster_data}
+        cluster = {Mon.cluster_metrics[k][0]: cluster_data[k]
+                   for k in cluster_data}
+
+        cluster['health'] = health_num
+
+        return cluster
 
     @classmethod
     def _seed(cls, metrics):
