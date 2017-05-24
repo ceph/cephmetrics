@@ -1,0 +1,24 @@
+
+collectd
+- add network and cpu to all deployments
+- define standard easy roll-out conf (use collectd.d for write_graphite, cephmetrics, cpu and network)
+
+Dashboard
+
+
+collectd : cephmetrics
+- add metrics starting message so you know collection is active
+
+Python Modules
+Mon
+-
+
+RGW
+-
+
+
+
+Completed Items
+05/24 RGW: implement the latencies as different metrics to allow summarisation at the db layer
+05/24 MON: add ceph health status (OK/WARN) to output dict
+05/24 Dashboard: Add ceph health text
