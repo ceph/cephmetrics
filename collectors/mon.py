@@ -149,6 +149,7 @@ class Mon(BaseCollector):
 
         pool_stats = self._get_pool_stats()
         cluster_state = self._mon_health()
+        all_stats = merge_dicts(cluster_state, {"pools": pool_stats})
 
-        return {"pools": pool_stats, "cluster": cluster_state}
+        return {"mon": all_stats}
 
