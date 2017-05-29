@@ -1,15 +1,15 @@
 #!/usr/bin/env python
 import os
-import socket
 import glob
-# import thread
 import collectd
-import json
+
 from collectors.mon import Mon
 from collectors.rgw import RGW
-
+from collectors.osd import OSDs
 from collectors.utils import flatten_dict, get_hostname
-# import json
+
+__author__ = 'Paul Cuzner'
+
 PLUGIN_NAME = 'cephmetrics'
 
 
@@ -23,11 +23,12 @@ class Ceph(object):
 
         self.mon = None
         self.rgw = None
+        self.osd = None
 
     def probe(self):
         """
-        set up the sockets to use based on what we find in /var/run/ceph
-        :return:
+        set up which collector(s) to use, based on what types of sockets we
+        find in /var/run/ceph
         """
 
         mon_socket = '/var/run/ceph/{}-mon.{}.asok'.format(self.cluster_name,
@@ -44,6 +45,12 @@ class Ceph(object):
             rgw_socket = rgw_socket_list[0]
             self.rgw = RGW(self.cluster_name,
                            admin_socket=rgw_socket)
+
+
+        osd_socket_list = glob.glob('/var/run/ceph/{}-osd.*'
+                                    '.asok'.format(self.cluster_name))
+        if osd_socket_list:
+            self.osd = OSDs(self.cluster_name)
 
 
 def write_stats(role_metrics, stats):
@@ -95,15 +102,18 @@ def read_callback():
 
     if CEPH.rgw:
         rgw_stats = CEPH.rgw.get_stats()
-        collectd.info(json.dumps(rgw_stats))
         write_stats(RGW.all_metrics, rgw_stats)
 
+    if CEPH.osd:
+        osd_node_stats = CEPH.osd.get_stats()
+        write_stats(OSDs.all_metrics, osd_node_stats)
 
 
 if __name__ == '__main__':
     # run interactively or maybe test the code
-    collectd.info("in main for some reason !")
+    collectd.info("In main for some reason !")
     pass
+
 else:
 
     CEPH = Ceph()
