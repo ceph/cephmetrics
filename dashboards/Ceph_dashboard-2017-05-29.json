@@ -397,7 +397,7 @@
               "value": "null"
             }
           ],
-          "valueName": "current"
+          "valueName": "avg"
         },
         {
           "cacheTimeout": null,
@@ -1111,7 +1111,7 @@
       "titleSize": "h6"
     },
     {
-      "collapse": false,
+      "collapse": true,
       "height": 256,
       "panels": [
         {
@@ -1433,7 +1433,7 @@
       "titleSize": "h6"
     },
     {
-      "collapse": false,
+      "collapse": true,
       "height": 238,
       "panels": [
         {
@@ -2259,7 +2259,7 @@
           "targets": [
             {
               "refId": "A",
-              "target": "aliasByNode(scale(averageSeries(collectd.$rgw_name.$domain.cpu.*.cpu.idle),0.01), 1)",
+              "target": "aliasByNode(scale(averageSeries(collectd.$rgw_name.$domain.cpu.percent.idle),0.01), 1)",
               "textEditor": true
             }
           ],
@@ -2380,7 +2380,7 @@
       "titleSize": "h6"
     },
     {
-      "collapse": false,
+      "collapse": true,
       "height": "300",
       "panels": [
         {
@@ -2822,7 +2822,7 @@
       "titleSize": "h6"
     },
     {
-      "collapse": false,
+      "collapse": true,
       "height": 250,
       "panels": [
         {
@@ -3089,7 +3089,7 @@
       "titleSize": "h6"
     },
     {
-      "collapse": false,
+      "collapse": true,
       "height": 250,
       "panels": [
         {
@@ -3665,5 +3665,5 @@
   },
   "timezone": "browser",
   "title": "Ceph Dashboard (Graphite)",
-  "version": 36
+  "version": 37
 }
