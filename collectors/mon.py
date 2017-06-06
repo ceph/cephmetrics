@@ -4,12 +4,15 @@ import rados
 import json
 
 from collectors.base import BaseCollector
-from collectors.utils import add_dicts, merge_dicts
+from collectors.common import add_dicts, merge_dicts
+
 
 class Mon(BaseCollector):
 
     health = {
-        "HEALTH_OK": 0
+        "HEALTH_OK": 0,
+        "HEALTH_WARN": 4,
+        "HEALTH_ERR": 8
     }
 
     # metrics are declared, where each element has a description and collectd
@@ -43,6 +46,8 @@ class Mon(BaseCollector):
     }
 
     pool_client_metrics = {
+        'bytes_sec': ("bytes_sec", "gauge"),
+        'op_per_sec': ("op_per_sec", "gauge"),
         'read_bytes_sec': ("read_bytes_sec", "gauge"),
         'write_op_per_sec': ("write_op_per_sec", "gauge"),
         'write_bytes_sec': ("write_bytes_sec", "gauge"),
@@ -116,7 +121,14 @@ class Mon(BaseCollector):
 
             pool_md = {}
             if client_io:
+
+                # Add pool level aggregation
+                client_io['bytes_sec'] = client_io.get('read_bytes_sec', 0) + \
+                    client_io.get('write_bytes_sec', 0)
+                client_io["op_per_sec"] = client_io.get('read_op_per_sec', 0)+ \
+                    client_io.get('write_op_per_sec', 0)
                 pool_md = client_io
+
             else:
                 pool_md = Mon._seed(Mon.pool_client_metrics)
 
@@ -127,16 +139,6 @@ class Mon(BaseCollector):
                     Mon.pool_recovery_metrics))
 
             pool_stats[pool_name] = pool_md
-
-        all_pools = merge_dicts(Mon._seed(Mon.pool_client_metrics),
-                                Mon._seed(Mon.pool_recovery_metrics))
-
-        # now walk all the pools to generate an _all_ entry
-        for pool_name in pool_stats:
-            pool_md = pool_stats[pool_name]
-            all_pools = add_dicts(all_pools, pool_md)
-
-        pool_stats['_all_'] = all_pools
 
         return pool_stats
 
