@@ -6,7 +6,7 @@ import collectd
 from collectors.mon import Mon
 from collectors.rgw import RGW
 from collectors.osd import OSDs
-from collectors.utils import flatten_dict, get_hostname
+from collectors.common import flatten_dict, get_hostname
 
 __author__ = 'Paul Cuzner'
 

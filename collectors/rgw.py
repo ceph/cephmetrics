@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from collectors.base import BaseCollector
-from collectors.utils import get_hostname, merge_dicts
+from collectors.common import get_hostname, merge_dicts
 
 __author__ = "paul.cuzner@redhat.com"
 
