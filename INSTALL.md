@@ -83,7 +83,7 @@ file, and then rerun the ```dashUpdater.py``` script.
 
 
 ## Configuration on Each Ceph Node
-1. install collectd
+1. install collectd (this will also require libcollectdclient)
 2. create the required directories for the cephmetrics collectors (see known
 issues [2])
 ```markdown
@@ -91,13 +91,19 @@ mkdir -p /usr/lib64/collectd/python-plugins/collectors
 ```
 3. copy the collectors to the directory created in [2], and cephmetrics.py
 to /usr/lib64/collectd/python-plugins
-2. Copy the example plugin files to the /etc/collectd.d directory (i.e. cpu.conf,
-memory.conf etc)
-3. update the "ClusterName" parameter in the cephmetrics plugin file to match
- the name of your ceph cluster
-4. enable collectd
-5. start collectd
-6. check collectd is running without errors
+4. Setup the collectd plugins  
+4.1 Update the write_graphite.conf file to specify the hostname where the 
+grafana/graphite environment is (use a hostname not IP - anecdotally I found that
+with an IP the plugin fails to connect to the graphite container port?)    
+4.2 copy the example plugin files to the /etc/collectd.d directory (i.e. cpu.conf,
+memory.conf etc)  
+5. update the "ClusterName" parameter in the cephmetrics plugin file to match
+ the name of your ceph cluster (default is 'ceph')
+6. copy the example collectd.conf file to the ceph node (or update the existing
+configuration to ensure there is a ```Include "/etc/collectd.d/*.conf"``` entry)
+7. enable collectd
+8. start collectd
+9. check collectd is running without errors
 
 ## Known Issues
 1. Following a reboot of an OSD node, the cephmetrics collectd plugin doesn't send disk 
