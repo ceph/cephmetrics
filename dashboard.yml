@@ -1,0 +1,36 @@
+---
+##########################################################
+# Change these settings to reflect your ceph environment #
+##########################################################
+osd_servers:
+  - obj-osd-1
+  - obj-osd-2
+  - obj-osd-3
+
+rgw_servers:
+  - obj-rgw-1
+
+domain: storage.lab
+
+###########################################################################
+# This section defines the internal variables (denoted by the '_' prefix) #
+# that govern how dashUpdater.py runs. Normally you'd leave these alone   #
+###########################################################################
+_dashboards:
+  - ceph-at-a-glance
+  - ceph-backend-storage
+  - ceph-frontend
+  - ceph-rados
+  - ceph-rgw-workload
+  - disk-busy-by-server
+  - iops-by-server
+  - latency-by-server
+  - network-usage-by-node
+  - osd-node-detail
+
+_credentials:
+  user: admin
+  password: admin
+
+_grafana_port: 3000
+
