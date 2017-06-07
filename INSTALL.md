@@ -32,37 +32,46 @@ graphite data.
 mkdir -p /opt/docker/grafana/etc
 mkdir -p /opt/docker/grafana/data/plugins
 mkdir -p /opt/docker/graphite
-
 ```
 3. Download the additional status panel plugin
 ```markdown
+cd /opt/docker/grafana/data/plugins
 wget https://grafana.com/api/plugins/vonage-status-panel/versions/1.0.4/download
 unzip download
-cp -r Vonage-* /opt/docker/grafana/data/plugins
+rm -f download
 ```
-4. Edit the docker-compose.yml example (if necessary)
-5. From the directory with the compose file, issue  
+4. Copy the seed .ini file for grafana to the containers etc directory, and reset
+the permissions to be compatible with the containers
+```markdown
+cp etc/grafana/grafana.ini /opt/docker/grafana/etc
+chown -R 104:107 /opt/docker/grafana
+chown -R 997 /opt/docker/graphite
+chmod g+w /opt/docker/graphite
+
+```
+5. Edit the docker-compose.yml example (if necessary)
+6. From the directory with the compose file, issue  
 ```
 docker-compose up -d
 ```
-6. check that the containers are running and the endpoints are listening  
-6.1 Use ```docker ps```  
-6.2 use ```netstat``` and look for the following ports: 3000,80,2003,2004,7002  
-6.3 open a browser and connect to graphite - it should be running on port 80 of
+7. check that the containers are running and the endpoints are listening  
+7.1 Use ```docker ps```  
+7.2 use ```netstat``` and look for the following ports: 3000,80,2003,2004,7002  
+7.3 open a browser and connect to graphite - it should be running on port 80 of
 the local machine
-7. Add the graphite instance as a datasource to grafana  
-7.1 update setup/add_datasource.json with the IP of the host machine  
-7.2 register the graphite instance to grafana as the default data source  
+8. Add the graphite instance as a datasource to grafana  
+8.1 update setup/add_datasource.json with the IP of the host machine  
+8.2 register the graphite instance to grafana as the default data source  
 ```markdown
 curl -u admin:admin -H "Content-Type: application/json" -X POST http://localhost:3000/api/datasources \
 --data-binary @setup/add_datasource.json
 ```
-8. the sample dashboards need to be added/edited to reflect the ceph cluster to
+9. the sample dashboards need to be added/edited to reflect the ceph cluster to
 monitor  
-8.1 seed dashboards are provided in the dashboards/current directory   
-8.2 edit ```dashboard.yml``` with the shortnames of the OSD's and RGW's, plus
+9.1 seed dashboards are provided in the dashboards/current directory   
+9.2 edit ```dashboard.yml``` with the shortnames of the OSD's and RGW's, plus
 the dns domain name of the environment.  
-8.3 run the following command  
+9.3 run the following command  
 ```markdown
 python dashUpdater.py
 ```
