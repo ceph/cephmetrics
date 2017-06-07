@@ -1,0 +1,9 @@
+---
+- include: install_packages.yml
+  when: not containerized_deployment
+
+- include: install_collectd_plugins.yml
+  when: not containerized_deployment
+
+- include: start_collectd.yml
+  when: not containerized_deployment

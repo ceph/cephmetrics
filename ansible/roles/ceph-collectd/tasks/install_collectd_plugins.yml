@@ -1,0 +1,31 @@
+---
+- set_fact:
+    collectors_dir: /usr/lib64/collectd/python-plugins/collectors
+
+- set_fact:
+    repo_relpath: "../../../"
+
+- file:
+    name: "{{ collectors_dir }}"
+    state: directory
+
+- copy:
+    src: "{{ repo_relpath }}/collectors/"
+    dest: "{{ collectors_dir }}/cephmetrics"
+
+- copy:
+    src: "{{ repo_relpath }}/cephmetrics.py"
+    dest: /usr/lib64/collectd/python-plugins/
+
+- copy:
+    src: "{{ repo_relpath }}/etc/collectd.conf"
+    dest: /etc/
+
+- copy:
+    src: "{{ repo_relpath }}/etc/collectd.d"
+    dest: /etc/
+
+- replace:
+    path: /etc/collectd.d/cephmetrics.conf
+    regexp: 'ClusterName ".*"'
+    replace: 'ClusterName "{{ cluster }}"'

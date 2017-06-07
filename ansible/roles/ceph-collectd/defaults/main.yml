@@ -1,0 +1,3 @@
+---
+containerized_deployment: false
+cluster: ceph
