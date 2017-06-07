@@ -82,7 +82,9 @@ After adding ceph nodes to the configuration, update the ```dashboard.yml```
 file, and then rerun the ```dashUpdater.py``` script.
 
 
-## Configuration on Each Ceph Node
+## Configuration on Each Ceph Node  
+You may need to update your SELINUX policy to allow the write_graphite plugin
+to access outbound on port 2003. To test, simply disable SELINUX  
 1. install collectd (this will also require libcollectdclient)
 2. create the required directories for the cephmetrics collectors (see known
 issues [2])
@@ -119,6 +121,7 @@ import UI - but this makes the templates fail to initialise if you try to use th
 same file from a curl request.  
 5. The "at a glance" dashboard has some singlestat panels for host counts of OSD's
 and RGW's. These values can be wrong - the query needs some work!  
+6. SELINUX may block the write_graphite plugin writing outbound on port 2003
 
 
 
