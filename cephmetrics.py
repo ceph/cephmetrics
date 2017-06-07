@@ -6,7 +6,7 @@ import collectd
 from collectors.mon import Mon
 from collectors.rgw import RGW
 from collectors.osd import OSDs
-from collectors.common import flatten_dict, get_hostname
+from collectors.common import flatten_dict, get_hostname, freadlines
 
 __author__ = 'Paul Cuzner'
 
@@ -46,11 +46,19 @@ class Ceph(object):
             self.rgw = RGW(self.cluster_name,
                            admin_socket=rgw_socket)
 
-
         osd_socket_list = glob.glob('/var/run/ceph/{}-osd.*'
                                     '.asok'.format(self.cluster_name))
-        if osd_socket_list:
+        mounted = freadlines('/proc/mounts')
+        osds_mounted = [mnt for mnt in mounted
+                        if mnt.split()[1].startswith('/var/lib/ceph')]
+        if osd_socket_list or osds_mounted:
             self.osd = OSDs(self.cluster_name)
+
+        collectd.info("{}: Roles detected - mon:{} "
+                      "osd:{} rgw:{}".format(__name__,
+                                             isinstance(self.mon, Mon),
+                                             isinstance(self.osd, OSDs),
+                                             isinstance(self.rgw, RGW)))
 
 
 def write_stats(role_metrics, stats):
