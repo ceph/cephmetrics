@@ -25,6 +25,12 @@
     src: "{{ repo_relpath }}/etc/collectd.d"
     dest: /etc/
 
+- name: Set hostname in write_graphite.conf
+  replace:
+    path: "/etc/collectd.d/write_graphite.conf"
+    regexp: 'Host ".*"'
+    replace: "Host \"{{ groups['ceph-grafana'][0] }}\""
+
 - replace:
     path: /etc/collectd.d/cephmetrics.conf
     regexp: 'ClusterName ".*"'
