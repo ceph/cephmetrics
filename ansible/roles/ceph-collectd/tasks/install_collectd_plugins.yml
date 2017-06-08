@@ -11,7 +11,7 @@
 
 - copy:
     src: "{{ repo_relpath }}/collectors/"
-    dest: "{{ collectors_dir }}/cephmetrics"
+    dest: "{{ collectors_dir }}"
 
 - copy:
     src: "{{ repo_relpath }}/cephmetrics.py"
