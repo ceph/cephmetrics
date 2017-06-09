@@ -2,4 +2,4 @@
 - service:
     name: collectd
     enabled: yes
-    state: started
+    state: restarted
