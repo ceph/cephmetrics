@@ -99,3 +99,12 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# vim swap files
+*.swp
+
+# Python virtualenv
+virtualenv/
+
+# ansible retry files
+*.retry
