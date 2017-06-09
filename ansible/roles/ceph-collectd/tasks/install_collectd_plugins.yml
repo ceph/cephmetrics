@@ -2,9 +2,6 @@
 - set_fact:
     collectors_dir: /usr/lib64/collectd/python-plugins/collectors
 
-- set_fact:
-    repo_relpath: "../../../"
-
 - name: Create collectors directory
   file:
     name: "{{ collectors_dir }}"
@@ -12,22 +9,22 @@
 
 - name: Ship collector plugins
   copy:
-    src: "{{ repo_relpath }}/collectors/"
+    src: files/collectors/
     dest: "{{ collectors_dir }}"
 
 - name: Ship cephmetrics.py
   copy:
-    src: "{{ repo_relpath }}/cephmetrics.py"
+    src: files/cephmetrics.py
     dest: /usr/lib64/collectd/python-plugins/
 
 - name: Ship collectd.conf
   copy:
-    src: "{{ repo_relpath }}/etc/collectd.conf"
+    src: files/etc/collectd.conf
     dest: /etc/
 
 - name: Ship /etc/collectd.d
   copy:
-    src: "{{ repo_relpath }}/etc/collectd.d"
+    src: files/etc/collectd.d
     dest: /etc/
 
 - name: Set hostname in write_graphite.conf
