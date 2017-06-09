@@ -1,0 +1,8 @@
+---
+- name: Create Graphite DB tables
+  command: /usr/bin/graphite-manage syncdb --noinput
+  become_user: apache
+
+- name: Build Graphite index
+  command: /usr/bin/graphite-build-index
+  become_user: apache

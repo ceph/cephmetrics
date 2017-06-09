@@ -1,0 +1,12 @@
+---
+- name: Enable and restart services
+  service:
+    name: "{{ item }}"
+    state: restarted
+    enabled: true
+  with_items:
+    - carbon-cache
+    - graphite-api
+    # graphite-web is served by httpd
+    - httpd
+    - grafana-server
