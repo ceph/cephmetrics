@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from collectors.osd import OSDs
-from collectors.utils import flatten_dict
+from collectors.common import flatten_dict
 
 import time
 

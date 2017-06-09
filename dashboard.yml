@@ -3,14 +3,14 @@
 # Change these settings to reflect your ceph environment #
 ##########################################################
 osd_servers:
-  - obj-osd-1
-  - obj-osd-2
-  - obj-osd-3
+  - ceph-1
+  - ceph-2
+  - ceph-3
 
-rgw_servers:
-  - obj-rgw-1
+#rgw_servers:
+#  - obj-rgw-1
 
-domain: storage.lab
+domain: test.lab
 
 ###########################################################################
 # This section defines the internal variables (denoted by the '_' prefix) #

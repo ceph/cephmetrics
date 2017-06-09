@@ -22,3 +22,4 @@ Completed Items
 05/24 RGW: implement the latencies as different metrics to allow summarisation at the db layer
 05/24 MON: add ceph health status (OK/WARN) to output dict
 05/24 Dashboard: Add ceph health text
+05/29 OSD: OSD metrics added, with dashboard updates
