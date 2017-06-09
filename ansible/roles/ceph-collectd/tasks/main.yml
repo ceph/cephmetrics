@@ -9,6 +9,11 @@
   tags:
     - collectors
 
+- include: selinux.yml
+  when: not containerized_deployment
+  tags:
+    - selinux
+
 - include: start_collectd.yml
   when: not containerized_deployment
   tags:
