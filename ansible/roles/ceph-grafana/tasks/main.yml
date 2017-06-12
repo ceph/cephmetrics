@@ -4,17 +4,17 @@
   tags:
     - packages
 
-- include: install_collectd_plugins.yml
+- include: configure_graphite.yml
   when: not containerized_deployment
   tags:
-    - collectors
+    - graphite
 
-- include: selinux.yml
+- include: configure_grafana.yml
   when: not containerized_deployment
   tags:
-    - selinux
+    - grafana
 
-- include: start_collectd.yml
+- include: start_services.yml
   when: not containerized_deployment
   tags:
     - services

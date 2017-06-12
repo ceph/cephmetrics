@@ -1,0 +1,7 @@
+---
+- name: Enable collectd_tcp_network_connect SELinux boolean
+  seboolean:
+    name: collectd_tcp_network_connect
+    state: yes
+    persistent: yes
+  when: ansible_selinux.status is defined and ansible_selinux.status == 'enabled'

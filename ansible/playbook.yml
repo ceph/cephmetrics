@@ -1,5 +1,11 @@
 ---
 - hosts:
+  - ceph-grafana
+  become: true
+  roles:
+  - ceph-grafana
+
+- hosts:
   # These are roles used by ceph-ansible
   - mons
   - agents

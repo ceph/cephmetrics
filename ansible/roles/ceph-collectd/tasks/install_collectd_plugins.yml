@@ -2,30 +2,39 @@
 - set_fact:
     collectors_dir: /usr/lib64/collectd/python-plugins/collectors
 
-- set_fact:
-    repo_relpath: "../../../"
-
-- file:
+- name: Create collectors directory
+  file:
     name: "{{ collectors_dir }}"
     state: directory
 
-- copy:
-    src: "{{ repo_relpath }}/collectors/"
-    dest: "{{ collectors_dir }}/cephmetrics"
+- name: Ship collector plugins
+  copy:
+    src: files/collectors/
+    dest: "{{ collectors_dir }}"
 
-- copy:
-    src: "{{ repo_relpath }}/cephmetrics.py"
+- name: Ship cephmetrics.py
+  copy:
+    src: files/cephmetrics.py
     dest: /usr/lib64/collectd/python-plugins/
 
-- copy:
-    src: "{{ repo_relpath }}/etc/collectd.conf"
+- name: Ship collectd.conf
+  copy:
+    src: files/etc/collectd.conf
     dest: /etc/
 
-- copy:
-    src: "{{ repo_relpath }}/etc/collectd.d"
+- name: Ship /etc/collectd.d
+  copy:
+    src: files/etc/collectd.d
     dest: /etc/
 
-- replace:
+- name: Set hostname in write_graphite.conf
+  replace:
+    path: "/etc/collectd.d/write_graphite.conf"
+    regexp: 'Host ".*"'
+    replace: "Host \"{{ groups['ceph-grafana'][0] }}\""
+
+- name: Set cluster name in cephmetrics.conf
+  replace:
     path: /etc/collectd.d/cephmetrics.conf
     regexp: 'ClusterName ".*"'
     replace: 'ClusterName "{{ cluster }}"'
