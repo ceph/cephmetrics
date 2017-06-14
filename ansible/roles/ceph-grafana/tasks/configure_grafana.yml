@@ -19,6 +19,22 @@
     # If we get a 409 Conflict, it means we're already set up
     status_code: 200,409
 
+- name: Set domain in grafana.ini
+  lineinfile:
+    path: /etc/grafana/grafana.ini
+    regexp: "^domain = .*"
+    insertafter: "^;domain = .*"
+    line: "domain = {{ ansible_fqdn }}"
+  tags: [ini]
+
+- name: Set root_url in grafana.ini
+  lineinfile:
+    path: /etc/grafana/grafana.ini
+    regexp: "^root_url = .*"
+    insertafter: "^;root_url = .*"
+    line: "root_url = %(protocol)s://%(domain)s:3000"
+  tags: [ini]
+
 - name: Download Vonage Status Panel
   get_url:
     url: https://grafana.com/api/plugins/vonage-status-panel/versions/1.0.4/download
