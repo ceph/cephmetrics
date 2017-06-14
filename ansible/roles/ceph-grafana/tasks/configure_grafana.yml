@@ -1,23 +1,50 @@
 ---
-- name: Configure data source
-  uri:
-    url: http://localhost:3000/api/datasources
-    method: POST
-    user: admin
-    password: admin
-    force_basic_auth: yes
-    body_format: json
-    body: >
+- set_fact:
+    grafana_data_source: >
       {
-        "name":"Local",
+        "name":"{{ graphite.grafana_name }}",
         "type":"graphite",
-        "url":"http://localhost",
+        "url":"http://localhost:{{ graphite.port }}",
         "access":"proxy",
         "basicAuth":false,
         "isDefault":true
       }
-    # If we get a 409 Conflict, it means we're already set up
+
+- name: Add data source
+  uri:
+    url: http://localhost:3000/api/datasources
+    method: POST
+    user: "{{ graphite.user }}"
+    password: "{{ graphite.password }}"
+    force_basic_auth: yes
+    body_format: json
+    body: "{{ grafana_data_source }}"
+    # If we get a 409 Conflict, it means we're already set up. We'll update
+    # after this.
     status_code: 200,409
+  register: grafana_data_source_result
+
+- name: Get datasource ID
+  uri:
+    url: "http://localhost:3000/api/datasources/id/{{ graphite.grafana_name }}"
+    method: GET
+    user: "{{ graphite.user }}"
+    password: "{{ graphite.password }}"
+    force_basic_auth: yes
+  register: grafana_data_source_id
+  when: grafana_data_source_result is defined and grafana_data_source_result.status == 409
+
+- name: Update datasource
+  uri:
+    url: "http://localhost:3000/api/datasources/{{ grafana_data_source_id.json.id }}"
+    method: PUT
+    user: "{{ graphite.user }}"
+    password: "{{ graphite.password }}"
+    force_basic_auth: yes
+    body_format: json
+    body: "{{ grafana_data_source }}"
+    status_code: 200
+  when: grafana_data_source_result is defined and grafana_data_source_result.status == 409
 
 - name: Set domain in grafana.ini
   lineinfile:

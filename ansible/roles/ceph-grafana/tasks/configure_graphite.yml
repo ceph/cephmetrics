@@ -6,3 +6,18 @@
 - name: Build Graphite index
   command: /usr/bin/graphite-build-index
   become_user: apache
+
+- name: Set port in graphite httpd config
+  lineinfile:
+    dest: /etc/httpd/conf.d/graphite-web.conf
+    regexp: "^Listen .*"
+    line: "Listen {{ graphite.port }}"
+    insertbefore: "^<VirtualHost .*"
+    #state: "{{ graphite.port == 80 | ternary('absent', 'present') }}"
+    state: "{{ 'absent' if graphite.port == '80' else 'present' }}"
+
+- name: Set VirtualHost port in graphite httpd config
+  replace:
+    path: /etc/httpd/conf.d/graphite-web.conf
+    regexp: "^<VirtualHost \\*:.+>$"
+    replace: "<VirtualHost *:{{ graphite.port }}>"
