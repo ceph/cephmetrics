@@ -1,8 +1,8 @@
 ---
-- name: Enable and restart services
+- name: Enable and start services
   service:
     name: "{{ item }}"
-    state: restarted
+    state: started
     enabled: true
   with_items:
     - carbon-cache
