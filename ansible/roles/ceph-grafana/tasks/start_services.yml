@@ -6,7 +6,6 @@
     enabled: true
   with_items:
     - carbon-cache
-    - graphite-api
     # graphite-web is served by httpd
     - httpd
     - grafana-server

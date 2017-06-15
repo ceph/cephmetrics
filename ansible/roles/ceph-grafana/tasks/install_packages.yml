@@ -15,7 +15,6 @@
     name: "{{ item }}"
     state: latest
   with_items:
-    - graphite-api
     - graphite-web
     - python-carbon
     - grafana
