@@ -18,3 +18,7 @@
   when: not containerized_deployment
   tags:
     - services
+
+- include: configure_firewall.yml
+  tags:
+    - firewall
