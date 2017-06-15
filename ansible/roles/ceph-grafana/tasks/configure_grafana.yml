@@ -1,4 +1,10 @@
 ---
+- name: Start Grafana
+  service:
+    name: grafana-server
+    state: started
+    enabled: true
+
 - set_fact:
     grafana_data_source: >
       {
@@ -53,6 +59,7 @@
     insertafter: "^;domain = .*"
     line: "domain = {{ ansible_fqdn }}"
   tags: [ini]
+  notify: Restart Grafana
 
 - name: Set root_url in grafana.ini
   lineinfile:
@@ -61,6 +68,7 @@
     insertafter: "^;root_url = .*"
     line: "root_url = %(protocol)s://%(domain)s:3000"
   tags: [ini]
+  notify: Restart Grafana
 
 - name: Download Vonage Status Panel
   get_url:
@@ -89,6 +97,7 @@
 - name: Move Vonage Status Panel into place
   shell: "mv -f {{ vonage_plugin_path }}* {{ vonage_plugin_path }}"
   when: vonage_plugin.stat.exists is defined and not vonage_plugin.stat.exists
+  notify: Restart Grafana
 
 - name: Ship dashboard templates
   copy:
