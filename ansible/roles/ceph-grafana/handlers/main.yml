@@ -11,3 +11,9 @@
     name: httpd
     state: restarted
     enabled: true
+
+- name: Restart carbon-cache
+  service:
+    name: carbon-cache
+    state: restarted
+    enabled: true

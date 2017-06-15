@@ -13,6 +13,11 @@
     - packages
     - services
 
+- include: configure_carbon.yml
+  when: not containerized_deployment
+  tags:
+    - carbon
+
 - include: configure_graphite.yml
   when: not containerized_deployment
   tags:
