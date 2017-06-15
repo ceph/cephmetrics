@@ -4,6 +4,15 @@
   tags:
     - packages
 
+- name: Reload systemd
+  systemd:
+    daemon_reload: yes
+    # Even when just calling daemon-reload, ansible < 2.4 requires a name for this call
+    name: grafana-server
+  tags:
+    - packages
+    - services
+
 - include: configure_graphite.yml
   when: not containerized_deployment
   tags:
