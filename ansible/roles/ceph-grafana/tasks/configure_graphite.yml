@@ -7,6 +7,15 @@
   command: /usr/bin/graphite-build-index
   become_user: apache
 
+- name: Set or unset port in main httpd config
+  lineinfile:
+    dest: /etc/httpd/conf/httpd.conf
+    regexp: "^Listen .*"
+    line: "Listen 80"
+    insertafter: "^#Listen .*"
+    state: "{{ 'present' if graphite.port == '80' else 'absent' }}"
+  notify: Restart graphite-web
+
 - name: Set port in graphite httpd config
   lineinfile:
     dest: /etc/httpd/conf.d/graphite-web.conf
