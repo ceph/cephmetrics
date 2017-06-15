@@ -67,6 +67,11 @@
     url: https://grafana.com/api/plugins/vonage-status-panel/versions/1.0.4/download
     dest: /tmp/vonage.zip
 
+- name: Create Grafana plugins directory
+  file:
+    name: /var/lib/grafana/plugins
+    state: directory
+
 - set_fact:
     vonage_plugin_path: /var/lib/grafana/plugins/Vonage-Grafana_Status_panel
 
