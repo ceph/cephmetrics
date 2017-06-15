@@ -15,9 +15,11 @@
     insertbefore: "^<VirtualHost .*"
     #state: "{{ graphite.port == 80 | ternary('absent', 'present') }}"
     state: "{{ 'absent' if graphite.port == '80' else 'present' }}"
+  notify: Restart graphite-web
 
 - name: Set VirtualHost port in graphite httpd config
   replace:
     path: /etc/httpd/conf.d/graphite-web.conf
     regexp: "^<VirtualHost \\*:.+>$"
     replace: "<VirtualHost *:{{ graphite.port }}>"
+  notify: Restart graphite-web

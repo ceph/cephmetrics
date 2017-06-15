@@ -4,3 +4,10 @@
     name: grafana-server
     state: restarted
     enabled: true
+
+- name: Restart graphite-web
+  service:
+    # graphite-web is served by httpd
+    name: httpd
+    state: restarted
+    enabled: true
