@@ -32,3 +32,11 @@
     regexp: "^<VirtualHost \\*:.+>$"
     replace: "<VirtualHost *:{{ graphite.port }}>"
   notify: Restart graphite-web
+
+- name: Allow connecting to graphite without auth
+  lineinfile:
+    dest: /etc/httpd/conf.d/graphite-web.conf
+    line: "	Require all granted"
+    insertafter: '<Directory "/usr/share/graphite/">'
+    state: present
+  notify: Restart graphite-web
