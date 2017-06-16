@@ -5,3 +5,5 @@ graphite:
   user: admin
   password: admin
   grafana_name: Local
+# The firewalld zone that carbon and grafana will use
+firewalld_zone: internal
