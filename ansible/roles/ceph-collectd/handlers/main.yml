@@ -1,6 +1,6 @@
 ---
-- name: Start collectd
+- name: Restart collectd
   service:
     name: collectd
     enabled: yes
-    state: started
+    state: restarted

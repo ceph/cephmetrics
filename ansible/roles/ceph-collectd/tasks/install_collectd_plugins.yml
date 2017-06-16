@@ -11,30 +11,36 @@
   copy:
     src: files/collectors/
     dest: "{{ collectors_dir }}"
+  notify: Restart collectd
 
 - name: Ship cephmetrics.py
   copy:
     src: files/cephmetrics.py
     dest: /usr/lib64/collectd/python-plugins/
+  notify: Restart collectd
 
 - name: Ship collectd.conf
   copy:
     src: files/etc/collectd.conf
     dest: /etc/
+  notify: Restart collectd
 
 - name: Ship /etc/collectd.d
   copy:
     src: files/etc/collectd.d
     dest: /etc/
+  notify: Restart collectd
 
 - name: Set hostname in write_graphite.conf
   replace:
     path: "/etc/collectd.d/write_graphite.conf"
     regexp: 'Host ".*"'
     replace: "Host \"{{ groups['ceph-grafana'][0] }}\""
+  notify: Restart collectd
 
 - name: Set cluster name in cephmetrics.conf
   replace:
     path: /etc/collectd.d/cephmetrics.conf
     regexp: 'ClusterName ".*"'
     replace: 'ClusterName "{{ cluster }}"'
+  notify: Restart collectd
