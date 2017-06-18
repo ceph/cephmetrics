@@ -1,20 +1,60 @@
 #!/usr/bin/env python2
 
 import os
+import sys
+import logging
 import json
 import yaml
 from requests import get, post
+import argparse
+import socket
 
 __author__ = 'Paul Cuzner'
+__version__ = '2.0'
 
 HEADERS = {"Accept": "application/json",
            "Content-Type": "application/json"
            }
 
-dashboard_dir = 'dashboards/current'
+dashboard_dir = os.path.join(os.getcwd(),
+                             'dashboards/current')
 
 # variables that need to be updated for the local environment must be defined
 # to grafana as 'custom', for the updater to work
+
+
+class Config(object):
+    pass
+
+
+class DashBoardException(Exception):
+    pass
+
+
+def get_options():
+    """
+    Process runtime options
+
+    """
+    # Set up the runtime overrides
+    parser = argparse.ArgumentParser(prog='dashmgr',
+                                     description='Manage Ceph Monitoring '
+                                                 'dashboards in Grafana')
+    parser.add_argument('-c', '--config-file', type=str,
+                        help='path of the config file to use',
+                        default=os.path.join(os.getcwd(), 'dashboard.yml'))
+    parser.add_argument('-m', '--mode', type=str,
+                        help='run mode',
+                        choices=['update', 'refresh'],
+                        default='update')
+    parser.add_argument('-d', '--debug', action='store_true',
+                        default=False,
+                        help='run with additional debug')
+    parser.add_argument('-v', '--version', action='version',
+                        version='%(prog)s - {}'.format(__version__))
+
+    return parser.parse_args()
+
 
 def fread(file_name=None):
     with open(file_name) as f:
@@ -22,125 +62,255 @@ def fread(file_name=None):
     return f_data
 
 
+def port_open(port, host='localhost'):
+    """
+    Check a given port is accessible
+    :param port: (int) port number to check
+    :param host: (str)hostname to check, default is localhost
+    :return: (bool) true if the port is accessible
+    """
+    socket.setdefaulttimeout(1)
+
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    try:
+        sock.connect_ex((host, port))
+        sock.shutdown(socket.SHUT_RDWR)
+        sock.close()
+        return True
+    except socket.error:
+        return False
+
+
+def get_config(file_name):
+    """
+    read a given file, and attempt to load as yaml
+    :return (Config) config object instance
+    """
+    if os.path.exists(file_name):
+        config_data = fread(file_name)
+        try:
+            yaml_config = yaml.load(config_data)
+        except:
+            return None
+        else:
+            cfg = Config()
+            cfg.grafana_host = yaml_config.get('_grafana_host', 'localhost')
+            cfg.dashboards = yaml_config.get('_dashboards', [])
+            cfg.auth = yaml_config.get('_credentials', {"user": 'admin',
+                                                      "password": "admin"})
+            cfg.grafana_credentials = (cfg.auth.get('user'),
+                                       cfg.auth.get('password'))
+            cfg.grafana_port = yaml_config.get('_grafana_port', 3000)
+            cfg.yaml = yaml_config
+            return cfg
+
+    else:
+        return None
+
+
+def update_dashboard(dashboard_json, vars_to_update):
+    updates_made = 0
+    templating = dashboard_json['dashboard'].get('templating')
+    template_names = []
+    for l in templating.get('list'):
+        template_name = l.get('name')
+        if template_name in vars_to_update:
+
+            logger.debug("\tprocessing variable '{}'".format(template_name))
+            logger.debug("\tbefore")
+            logger.debug("\t{}".format(l))
+            template_names.append(template_name)
+            replacement_vars = vars_to_update.get(template_name)
+
+            if isinstance(replacement_vars, str):
+                replacement_vars = [replacement_vars]
+
+            l['query'] = ','.join(replacement_vars)
+            num_new_items = len(replacement_vars)
+            if num_new_items == 1:
+                l['current'] = {"text": replacement_vars[0],
+                                "value": replacement_vars[0]}
+                l['options'] = [{"text": replacement_vars[0],
+                                 "selected": True,
+                                 "value": replacement_vars[0]}]
+            else:
+                l['current'] = {"text": "All",
+                                "selected": True,
+                                "value": "$__all"}
+                l['options'] = [{"text": "All",
+                                 "selected": True,
+                                 "value": "$__all"}]
+                for item in replacement_vars:
+                    l['options'].append({"text": item,
+                                         "selected": False,
+                                         "value": item})
+
+            logger.debug("\tafter")
+            logger.debug("\t{}".format(l))
+            updates_made += 1
+
+    logger.info("- {} templating variables updated "
+                ": {}".format(updates_made,
+                              ','.join(template_names)))
+    return dashboard_json
+
+
+def load_dashboard(dashboard_name):
+
+    sample_dashboard = os.path.join(dashboard_dir,
+                                    "{}.json".format(dashboard_name))
+    if os.path.exists(sample_dashboard):
+        # load it in
+        dashboard_data = fread(sample_dashboard)
+        try:
+            dashjson = json.loads(dashboard_data)
+        except:
+            raise DashBoardException("Invalid json in {} "
+                                     "dashboard".format(dashboard_name))
+        else:
+            logger.debug("- {} sample loaded from {}".format(dashboard_name,
+                                                    dashboard_dir))
+            del dashjson['meta']
+            dashjson['overwrite'] = False
+
+            # 'id' must be null for this to be a create, if it is anything
+            # else grafana will attempt an update, which will fail
+            # with a 404
+            dashjson['dashboard']['id'] = None
+            return dashjson
+    else:
+        logger.warning("- sample not available for {}, "
+                       "skipping".format(dashboard_name))
+        return {}
+
+
+def get_dashboard(dashboard_name):
+
+    resp = get("http://{}:{}/api/dashboards/"
+               "db/{}".format(config.grafana_host,
+                              config.grafana_port,
+                              dashboard_name),
+               auth=config.grafana_credentials)
+
+    if resp.status_code == 404:
+        logger.info("- dashboard not found in Grafana")
+        return resp.status_code, {}
+
+    elif resp.status_code == 200:
+        logger.debug("- fetch of {} from Grafana "
+                     "successful".format(dashboard_name))
+        return resp.status_code, resp.json()
+    else:
+        raise DashBoardException("Unknown problem fetching dashboard")
+
+
+def put_dashboard(dashjson):
+    upload_str = json.dumps(dashjson)
+    resp = post("http://{}:{}/api/dashboards/"
+                "db".format(config.grafana_host,
+                            config.grafana_port),
+                headers=HEADERS,
+                auth=config.grafana_credentials,
+                data=upload_str)
+
+    return resp.status_code
+
+
+def setup_logging():
+
+    logger = logging.getLogger('dashUpdater')
+    logger.setLevel(logging.DEBUG)
+
+    stream_handler = logging.StreamHandler(stream=sys.stdout)
+    if opts.debug:
+        stream_handler.setLevel(logging.DEBUG)
+    else:
+        stream_handler.setLevel(logging.INFO)
+
+    logger.addHandler(stream_handler)
+
+    return logger
+
+
 def main():
 
-    config_data = fread(file_name=os.path.join(os.getcwd(),
-                                               "dashboard.yml"))
+    rc = 0
 
-    config = yaml.load(config_data)
+    if port_open(config.grafana_port, config.grafana_host):
+        logger.debug("Connection to Grafana is ok")
+    else:
+        logger.error("Unable to contact Grafana - does the config file "
+                     "specify a valid host/ip address for Grafana?")
+        return 16
 
-    dashboards = config.get('_dashboards', [])
-    credentials = config.get('_credentials', {"user": 'admin',
-                                              "password": "admin"})
-    grafana_credentials = (credentials.get('user'),
-                           credentials.get('password'))
-    grafana_port = config.get('_grafana_port', 3000)
-
-    if dashboards:
-        vars_to_update = {k: config[k] for k in config
+    if config.dashboards:
+        vars_to_update = {k: config.yaml[k] for k in config.yaml
                           if not k.startswith('_')}
     else:
-        print(
-            "Config file doesn't contain dashboards! Unable to continue")
-        return
+        logger.error("Config file doesn't contain dashboards! Unable "
+                     "to continue")
+        return 12
 
     dashboards_updated = 0
-    print(vars_to_update)
+    logger.debug("Templates to update: {}".format(vars_to_update))
 
-    for dashname in dashboards:
-        print("\nProcessing dashboard {}".format(dashname))
+    for dashname in config.dashboards:
+        logger.info("\nProcessing dashboard {}".format(dashname))
 
-        resp = get("http://localhost:{}/api/dashboards/"
-                   "db/{}".format(grafana_port,
-                                  dashname),
-                   auth=grafana_credentials)
+        if opts.mode == 'update':
+            http_rc, dashjson = get_dashboard(dashname)
+            if http_rc == 404:
+                dashjson = load_dashboard(dashname)
 
-        if resp.status_code == 404:
-            print("- dashboard not found, looking for a sample to upload")
-            sample_dashboard = os.path.join(os.getcwd(), dashboard_dir,
-                                            "{}.json".format(dashname))
-            if os.path.exists(sample_dashboard):
-                # load it in
-                dashboard_data = fread(sample_dashboard)
-                dashjson = json.loads(dashboard_data)
+                if not dashjson:
+                    logger.warning("- sample not available, skipping")
+                    rc = max(rc, 4)
+                    continue
 
-                del dashjson['meta']
-                dashjson['overwrite'] = False
-
-                # 'id' must be null for this to be a create, if it is anything
-                # else grafana will attempt an update, which will fail
-                # with a 404
-                dashjson['dashboard']['id'] = None
-
-            else:
-                print("- sample not available, skipping")
+            logger.info("- dashboard retrieved")
+        elif opts.mode == 'refresh':
+            dashjson = load_dashboard(dashname)
+            if not dashjson:
+                logger.warning("- sample not available, skipping")
+                rc = max(rc, 4)
                 continue
 
-        elif resp.status_code != 200:
-            print("Problem fetching dashboard {} - status "
-                  "code {}".format(dashname, resp.status_code))
-            continue
-        else:
-            dashjson = resp.json()
-
-        print("- dashboard retrieved")
-
-        updates_made = 0
         templating = dashjson['dashboard'].get('templating')
-        for l in templating.get('list'):
-            template_name = l.get('name')
-            if template_name in vars_to_update:
-                print("\tprocessing - {}".format(template_name))
-                print("\tbefore")
-                print("\t{}".format(l))
-                replacement_vars = vars_to_update.get(template_name)
+        if templating:
+            dashjson = update_dashboard(dashjson, vars_to_update)
+        else:
+            logger.info('- templating not defined in {}, '
+                        'skipping'.format(dashname))
+            rc = max(rc, 4)
 
-                if isinstance(replacement_vars, str):
-                    replacement_vars = [replacement_vars]
+        http_rc = put_dashboard(dashjson)
 
-                l['query'] = ','.join(replacement_vars)
-                num_new_items = len(replacement_vars)
-                if num_new_items == 1:
-                    l['current'] = {"text": replacement_vars[0],
-                                    "value": replacement_vars[0]}
-                    l['options'] = [{"text": replacement_vars[0],
-                                     "selected": True,
-                                     "value": replacement_vars[0]}]
-                else:
-                    l['current'] = {"text": "All",
-                                    "selected": True,
-                                    "value": "$__all"}
-                    l['options'] = [{"text": "All",
-                                     "selected": True,
-                                     "value": "$__all"}]
-                    for item in replacement_vars:
-                        l['options'].append({"text": item,
-                                             "selected": False,
-                                             "value": item})
-
-                print("\tafter")
-                print("\t{}".format(l))
-                updates_made += 1
-
-        upload_str = json.dumps(dashjson)
-        resp = post("http://localhost:{}/api/dashboards/"
-                    "db".format(grafana_port),
-                    headers=HEADERS,
-                    auth=grafana_credentials,
-                    data=upload_str)
-
-        if resp.status_code == 200:
-            print("- dashboard updated successful, {} template variables"
-                  " changed".format(updates_made))
+        if http_rc == 200:
+            logger.info("- dashboard update successful")
             dashboards_updated += 1
         else:
-            print("- Error : update failed - {}".format(resp.status_code))
+            logger.error("- dashboard {} update failed ({})".format(dashname,
+                                                                    http_rc))
+            rc = max(rc, 8)
 
-
-    print("\nUpdate Summary: {} dashboards updated, "
-          "{} failures".format(dashboards_updated,
-                               (len(dashboards) - dashboards_updated)))
+    return rc
 
 
 if __name__ == '__main__':
-    main()
+
+    opts = get_options()
+
+    config = get_config(opts.config_file)
+
+    if config:
+
+        logger = setup_logging()
+
+        rc = main()
+
+        sys.exit(rc)
+
+    else:
+
+        print("Invalid config file detected, unable to start")
+        sys.exit(16)
