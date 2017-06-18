@@ -1,7 +1,7 @@
 ---
 osd_servers: [{% for fqdn in groups['osds'] | default([]) %}{{ fqdn.split('.')[0] }},{% endfor %}]
 rgw_servers: [{% for fqdn in groups['rgws'] | default([]) %}{{ fqdn.split('.')[0] }},{% endfor %}]
-domain: "{{ ansible_dns['domain'] }}"
+domain: "{{ ansible_domain }}"
 _dashboards:
   - ceph-at-a-glance
   - ceph-backend-storage

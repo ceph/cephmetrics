@@ -1,7 +1,9 @@
 ---
 containerized_deployment: false
 graphite:
-  port: "{{ graphite_port | default('80') }}"
+  port: "{{ graphite_port | default('8080') }}"
   user: admin
   password: admin
   grafana_name: Local
+# The firewalld zone that carbon and grafana will use
+firewalld_zone: internal
