@@ -15,6 +15,11 @@ class Mon(BaseCollector):
         "HEALTH_ERR": 8
     }
 
+    osd_state = {
+        "up": 0,
+        "down": 1
+    }
+
     # metrics are declared, where each element has a description and collectd
     # data type. The description is used to ensure the names sent by collectd
     # remain the same even if the source name changes in ceph.
@@ -63,8 +68,13 @@ class Mon(BaseCollector):
         "num_keys_recovered": ("num_keys_recovered", "gauge")
     }
 
+    osd_metrics = {
+        "status": ("status", "gauge")
+    }
+
     all_metrics = merge_dicts(pool_recovery_metrics, pool_client_metrics)
     all_metrics = merge_dicts(all_metrics, cluster_metrics)
+    all_metrics = merge_dicts(all_metrics, osd_metrics)
 
     def _mon_command(self, cmd_request):
         """ Issue a command to the monitor """
@@ -143,6 +153,16 @@ class Mon(BaseCollector):
         return pool_stats
 
 
+    def _get_osd_states(self):
+
+        raw = self._mon_command('osd tree')
+        osds = {str(osd.get('id')): {"status": Mon.osd_state.get(osd.get('status'))}
+                for osd in raw.get('nodes')
+                if osd.get('type') == 'osd'}
+
+        return osds
+
+
     def get_stats(self):
         """
         method associated with the plugin callback to gather the metrics
@@ -150,8 +170,10 @@ class Mon(BaseCollector):
         """
 
         pool_stats = self._get_pool_stats()
+        osd_states = self._get_osd_states()
         cluster_state = self._mon_health()
-        all_stats = merge_dicts(cluster_state, {"pools": pool_stats})
+        all_stats = merge_dicts(cluster_state, {"pools": pool_stats,
+                                                "osd_state": osd_states})
 
         return {"mon": all_stats}
 
