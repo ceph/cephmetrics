@@ -115,13 +115,7 @@ the installation steps.
 3. At-A-Glance Health History chart doesn't work as hoped due to interpolation over the
 7 day timeline. For example a 4 gets averaged over a number of samples to fit on
 the graph and appears as a '1'!  
-4. you can't easily export from the UI and then import programmitically with curl.
-The export process puts additional metadata into the json, that is used by the 
-import UI - but this makes the templates fail to initialise if you try to use the 
-same file from a curl request.  
-5. The "at a glance" dashboard has some singlestat panels for host counts of OSD's
-and RGW's. These values can be wrong - the query needs some work!  
-6. SELINUX may block the write_graphite plugin writing outbound on port 2003
+4. SELINUX may block the write_graphite plugin writing outbound on port 2003
 
 
 
