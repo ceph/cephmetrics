@@ -112,10 +112,7 @@ configuration to ensure there is a ```Include "/etc/collectd.d/*.conf"``` entry)
 stats. ***Workaround**: Following the reboot of an OSD, restart the collectd service.*  
 2. the cephmetrics.py and collectors should be installed through python-setuptools to cut down on 
 the installation steps.  
-3. At-A-Glance Health History chart doesn't work as hoped due to interpolation over the
-7 day timeline. For example a 4 gets averaged over a number of samples to fit on
-the graph and appears as a '1'!  
-4. SELINUX may block the write_graphite plugin writing outbound on port 2003
+3. SELINUX may block the write_graphite plugin writing outbound on port 2003
 
 
 
