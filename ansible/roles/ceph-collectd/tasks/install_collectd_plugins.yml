@@ -1,20 +1,20 @@
 ---
 - set_fact:
-    collectors_dir: /usr/lib64/collectd/python-plugins/collectors
+    collectd_dir: /usr/lib64/collectd/cephmetrics
 
 - name: Create collectors directory
   file:
-    name: "{{ collectors_dir }}"
+    name: "{{ collectd_dir }}/collectors"
     state: directory
 
 - name: Ship collector plugins
   copy:
     src: files/collectors/
-    dest: "{{ collectors_dir }}"
+    dest: "{{ collectd_dir }}/collectors"
   notify: Restart collectd
 
 - name: Ship cephmetrics.py
   copy:
     src: files/cephmetrics.py
-    dest: /usr/lib64/collectd/python-plugins/
+    dest: "{{ collectd_dir }}"
   notify: Restart collectd
