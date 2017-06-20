@@ -33,14 +33,14 @@
 
 - name: Set hostname in write_graphite.conf
   replace:
-    path: "/etc/collectd.d/write_graphite.conf"
+    dest: "/etc/collectd.d/write_graphite.conf"
     regexp: 'Host ".*"'
     replace: "Host \"{{ groups['ceph-grafana'][0] }}\""
   notify: Restart collectd
 
 - name: Set cluster name in cephmetrics.conf
   replace:
-    path: /etc/collectd.d/cephmetrics.conf
+    dest: /etc/collectd.d/cephmetrics.conf
     regexp: 'ClusterName ".*"'
     replace: 'ClusterName "{{ cluster }}"'
   notify: Restart collectd

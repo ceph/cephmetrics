@@ -54,7 +54,7 @@
 
 - name: Set domain in grafana.ini
   lineinfile:
-    path: /etc/grafana/grafana.ini
+    dest: /etc/grafana/grafana.ini
     regexp: "^domain = .*"
     insertafter: "^;domain = .*"
     line: "domain = {{ ansible_fqdn }}"
@@ -63,7 +63,7 @@
 
 - name: Set root_url in grafana.ini
   lineinfile:
-    path: /etc/grafana/grafana.ini
+    dest: /etc/grafana/grafana.ini
     regexp: "^root_url = .*"
     insertafter: "^;root_url = .*"
     line: "root_url = %(protocol)s://%(domain)s:3000"
