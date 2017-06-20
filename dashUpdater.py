@@ -171,7 +171,7 @@ def load_dashboard(dashboard_name):
             logger.debug("- {} sample loaded from {}".format(dashboard_name,
                                                     dashboard_dir))
             del dashjson['meta']
-            dashjson['overwrite'] = False
+            dashjson['overwrite'] = True
 
             # 'id' must be null for this to be a create, if it is anything
             # else grafana will attempt an update, which will fail
