@@ -2,6 +2,8 @@
 - name: Check firewalld status
   shell: "systemctl show firewalld | grep UnitFileState"
   register: firewalld_status
+  failed_when: false
+  changed_when: false
 
 - name: Open ports for Grafana and Carbon
   firewalld:
