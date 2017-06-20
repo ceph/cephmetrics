@@ -29,3 +29,15 @@
     state: latest
   when: ansible_pkg_mgr == "yum" and not use_epel
   notify: Restart collectd
+
+- name: Install dependencies for collector plugins
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    # For the json python module
+    - python-libs
+    # For the rados python module
+    - python-rados
+    # For the ceph_daemon python module
+    - ceph-common
