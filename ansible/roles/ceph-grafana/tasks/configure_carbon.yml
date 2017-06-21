@@ -10,3 +10,13 @@
   notify:
     - Resize whisper databases
     - Restart carbon-cache
+
+- name: Ensure /var/lib/carbon has the right ownership
+  file:
+    path: /var/lib/carbon
+    state: directory
+    owner: carbon
+    group: carbon
+    recurse: yes
+  notify:
+    - Restart carbon-cache
