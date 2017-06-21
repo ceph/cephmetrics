@@ -5,6 +5,13 @@
     state: restarted
     enabled: true
 
+- name: Resize whisper databases
+  # xargs -P parallelizes execution; scale it to the number of cores on the system
+  shell: "find /var/lib/carbon/whisper -name '*.wsp' -print0 | xargs -n1 -0 -P {{ ansible_processor_vcpus }} -I {} whisper-resize {} {{ whisper_retention.replace(',', ' ') }}"
+  register: whisper_resize
+  failed_when: "'Traceback' in whisper_resize.stdout"
+  no_log: true
+
 - name: Restart graphite-web
   service:
     # graphite-web is served by httpd
