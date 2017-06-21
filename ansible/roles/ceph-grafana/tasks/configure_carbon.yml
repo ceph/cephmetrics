@@ -1,7 +1,7 @@
 ---
 - name: Configure retention for collectd stats
   blockinfile:
-    path: /etc/carbon/storage-schemas.conf
+    dest: /etc/carbon/storage-schemas.conf
     # NOTE: Retention settings are applied to metrics as they are *created*. If
     # these settings are changed after-the-fact, it's necessary to either
     # delete the whisper files (!) or run whisper-resize on them all.

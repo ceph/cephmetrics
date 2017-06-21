@@ -54,7 +54,7 @@
 
 - name: Set domain in grafana.ini
   lineinfile:
-    path: /etc/grafana/grafana.ini
+    dest: /etc/grafana/grafana.ini
     regexp: "^domain = .*"
     insertafter: "^;domain = .*"
     line: "domain = {{ ansible_fqdn }}"
@@ -63,7 +63,7 @@
 
 - name: Set root_url in grafana.ini
   lineinfile:
-    path: /etc/grafana/grafana.ini
+    dest: /etc/grafana/grafana.ini
     regexp: "^root_url = .*"
     insertafter: "^;root_url = .*"
     line: "root_url = %(protocol)s://%(domain)s:3000"
@@ -109,18 +109,12 @@
     src: files/dashUpdater.py
     dest: /tmp/dashUpdater.py
 
-- name: Set correct path in dashUpdater.py
-  replace:
-    path: /tmp/dashUpdater.py
-    regexp: "^dashboard_dir = '.*'"
-    replace: "dashboard_dir = 'dashboards'"
-
 - name: Write dashboard.yml
   template:
     src: dashboard.yml
     dest: /tmp/dashboard.yml
 
 - name: Push dashboards to Grafana
-  command: python dashUpdater.py
+  command: python dashUpdater.py -D ./dashboards
   args:
     chdir: /tmp

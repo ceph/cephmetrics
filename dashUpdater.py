@@ -16,9 +16,6 @@ HEADERS = {"Accept": "application/json",
            "Content-Type": "application/json"
            }
 
-dashboard_dir = os.path.join(os.getcwd(),
-                             'dashboards/current')
-
 # variables that need to be updated for the local environment must be defined
 # to grafana as 'custom', for the updater to work
 
@@ -43,6 +40,10 @@ def get_options():
     parser.add_argument('-c', '--config-file', type=str,
                         help='path of the config file to use',
                         default=os.path.join(os.getcwd(), 'dashboard.yml'))
+    parser.add_argument('-D', '--dashboard-dir', type=str,
+                        help='path to the directory containing dashboards',
+                        default=os.path.join(
+                            os.getcwd(), 'dashboards/current'))
     parser.add_argument('-m', '--mode', type=str,
                         help='run mode',
                         choices=['update', 'refresh'],
@@ -155,7 +156,7 @@ def update_dashboard(dashboard_json, vars_to_update):
     return dashboard_json
 
 
-def load_dashboard(dashboard_name):
+def load_dashboard(dashboard_dir, dashboard_name):
 
     sample_dashboard = os.path.join(dashboard_dir,
                                     "{}.json".format(dashboard_name))
@@ -260,7 +261,7 @@ def main():
         if opts.mode == 'update':
             http_rc, dashjson = get_dashboard(dashname)
             if http_rc == 404:
-                dashjson = load_dashboard(dashname)
+                dashjson = load_dashboard(opts.dashboard_dir, dashname)
 
                 if not dashjson:
                     logger.warning("- sample not available, skipping")
@@ -269,7 +270,7 @@ def main():
 
             logger.info("- dashboard retrieved")
         elif opts.mode == 'refresh':
-            dashjson = load_dashboard(dashname)
+            dashjson = load_dashboard(opts.dashboard_dir, dashname)
             if not dashjson:
                 logger.warning("- sample not available, skipping")
                 rc = max(rc, 4)
