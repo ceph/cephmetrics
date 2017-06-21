@@ -38,9 +38,9 @@ class Ceph(object):
             self.mon = Mon(self.cluster_name,
                            admin_socket=mon_socket)
 
-        rgw_socket_list = glob.glob('/var/run/ceph/{}-client.rgw.{}.'
-                                    '*.asok'.format(self.cluster_name,
-                                                    self.host_name))
+        rgw_socket_list = glob.glob('/var/run/ceph/{}-client.rgw.*.'
+                                    'asok'.format(self.cluster_name))
+
         if rgw_socket_list:
             rgw_socket = rgw_socket_list[0]
             self.rgw = RGW(self.cluster_name,
