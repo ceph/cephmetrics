@@ -18,6 +18,10 @@
     - packages
     - services
 
+- include: configure_firewall.yml
+  tags:
+    - firewall
+
 - include: configure_carbon.yml
   when: not containerized_deployment
   tags:
@@ -37,7 +41,3 @@
   when: not containerized_deployment
   tags:
     - services
-
-- include: configure_firewall.yml
-  tags:
-    - firewall
