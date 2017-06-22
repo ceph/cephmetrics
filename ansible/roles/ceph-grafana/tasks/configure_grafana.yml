@@ -52,21 +52,22 @@
     status_code: 200
   when: grafana_data_source_result is defined and grafana_data_source_result.status == 409
 
+- name: Write grafana.ini
+  copy:
+    src: files/grafana.ini
+    dest: /etc/grafana/grafana.ini
+    owner: root
+    group: grafana
+    mode: 0640
+  tags: [ini]
+  notify: Restart Grafana
+
 - name: Set domain in grafana.ini
   lineinfile:
     dest: /etc/grafana/grafana.ini
     regexp: "^domain = .*"
     insertafter: "^;domain = .*"
     line: "domain = {{ ansible_fqdn }}"
-  tags: [ini]
-  notify: Restart Grafana
-
-- name: Set root_url in grafana.ini
-  lineinfile:
-    dest: /etc/grafana/grafana.ini
-    regexp: "^root_url = .*"
-    insertafter: "^;root_url = .*"
-    line: "root_url = %(protocol)s://%(domain)s:3000"
   tags: [ini]
   notify: Restart Grafana
 
