@@ -1,4 +1,9 @@
 ---
+- include: setup_repos.yml
+  when: not containerized_deployment
+  tags:
+    - packages
+
 - include: install_packages.yml
   when: not containerized_deployment
   tags:
