@@ -5,7 +5,7 @@ import sys
 import logging
 import json
 import yaml
-from requests import get, post
+from requests import get, post, put
 import argparse
 import socket
 
@@ -102,6 +102,8 @@ def get_config(file_name):
             cfg.grafana_credentials = (cfg.auth.get('user'),
                                        cfg.auth.get('password'))
             cfg.grafana_port = yaml_config.get('_grafana_port', 3000)
+            cfg.home_dashboard = yaml_config.get('_home_dashboard',
+                                                 'ceph-at-a-glance')
             cfg.yaml = yaml_config
             return cfg
 
@@ -217,6 +219,62 @@ def put_dashboard(dashjson):
     return resp.status_code
 
 
+def star_dashboard(dashboard_id):
+
+    resp = post('http://{}:{}/api/user/stars/'
+                'dashboard/{}'.format(config.grafana_host,
+                                      config.grafana_port,
+                                      dashboard_id),
+                headers=HEADERS,
+                auth=config.grafana_credentials)
+
+    if resp.status_code == 200:
+        logger.debug("- dashboard starred successfully")
+    else:
+        logger.warning("- starring dashboard with id {} "
+                       "failed : {}".format(dashboard_id,
+                                            resp.status_code))
+    return resp.status_code
+
+def set_home_dashboard(home_dashboard):
+    # Ideally we should just check the json returned from an org query...but
+    # 4.3 of grafana doesn't return the home dashboard or theme settings!
+
+    logger.debug("- checking '{}' is starred".format(home_dashboard))
+
+    http_rc, dashjson = get_dashboard(home_dashboard)
+    if http_rc == 200 and dashjson:
+
+        dash_id = dashjson.get('dashboard').get('id')
+        is_starred = dashjson.get('meta').get('isStarred')
+        if not is_starred:
+            # star it
+            http_rc = star_dashboard(dash_id)
+            is_starred = True if http_rc == 200 else False
+
+        if is_starred:
+            # update the org's home dashboard
+            resp = put('http://{}:{}/api/org/'
+                       'preferences'.format(config.grafana_host,
+                                            config.grafana_port),
+                       headers=HEADERS,
+                       auth=config.grafana_credentials,
+                       data=json.dumps({"name": "Main Org.",
+                                        "homeDashboardId": dash_id}))
+
+            if resp.status_code == 200:
+                logger.info("- setting home dashboard complete")
+            else:
+                logger.error("- setting home dashboard failed")
+
+            return resp.status_code
+
+    else:
+        logger.error("- unable to access dashboard {}".format(home_dashboard))
+
+    return http_rc
+
+
 def setup_logging():
 
     logger = logging.getLogger('dashUpdater')
@@ -250,7 +308,7 @@ def main():
     else:
         logger.error("Config file doesn't contain dashboards! Unable "
                      "to continue")
-        return 12
+        return 16
 
     dashboards_updated = 0
     logger.debug("Templates to update: {}".format(vars_to_update))
@@ -271,6 +329,7 @@ def main():
             logger.info("- dashboard retrieved")
         elif opts.mode == 'refresh':
             dashjson = load_dashboard(opts.dashboard_dir, dashname)
+
             if not dashjson:
                 logger.warning("- sample not available, skipping")
                 rc = max(rc, 4)
@@ -289,6 +348,15 @@ def main():
         if http_rc == 200:
             logger.info("- dashboard update successful")
             dashboards_updated += 1
+
+            if dashname == config.home_dashboard:
+                # ensure the home dashboard is defined
+                http_rc = set_home_dashboard(dashname)
+
+                if http_rc != 200:
+                    logger.warning("- Unable to set the home dashboard")
+                    rc = max(rc, 12)
+
         else:
             logger.error("- dashboard {} update failed ({})".format(dashname,
                                                                     http_rc))

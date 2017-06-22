@@ -17,3 +17,4 @@ _credentials:
   user: admin
   password: admin
 _grafana_port: 3000
+_home_dashboard: ceph-at-a-glance

@@ -3,14 +3,14 @@
 # Change these settings to reflect your ceph environment #
 ##########################################################
 osd_servers:
-  - ceph-1
-  - ceph-2
-  - ceph-3
+  - obj-osd-1
+  - obj-osd-2
+  - obj-osd-3
 
-#rgw_servers:
-#  - obj-rgw-1
+rgw_servers:
+  - obj-rgw-1
 
-domain: test.lab
+domain: storage.lab
 
 ###########################################################################
 # This section defines the internal variables (denoted by the '_' prefix) #
@@ -28,8 +28,10 @@ _dashboards:
   - network-usage-by-node
   - osd-node-detail
 
+_home_dashboard: ceph-at-a-glance
+
 _credentials:
-  user: admin
+  user: admin@localhost
   password: admin
 
 _grafana_port: 3000
