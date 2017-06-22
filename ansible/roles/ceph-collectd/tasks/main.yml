@@ -12,6 +12,7 @@
 - include: install_collectd_plugins.yml
   when:
     - not containerized_deployment
+    - devel_mode
   tags:
     - collectors
 

@@ -24,3 +24,11 @@
     regexp: 'ClusterName ".*"'
     replace: 'ClusterName "{{ cluster }}"'
   notify: Restart collectd
+
+- name: Set plugin path in cephmetrics.conf
+  replace:
+    dest: /etc/collectd.d/cephmetrics.conf
+    regexp: 'ModulePath ".*"'
+    replace: 'ModulePath "/usr/lib64/collectd/cephmetrics"'
+  when: not devel_mode
+  notify: Restart collectd
