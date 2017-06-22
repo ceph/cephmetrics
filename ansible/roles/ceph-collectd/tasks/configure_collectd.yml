@@ -1,0 +1,26 @@
+---
+- name: Ship collectd.conf
+  copy:
+    src: files/etc/collectd.conf
+    dest: /etc/
+  notify: Restart collectd
+
+- name: Ship /etc/collectd.d
+  copy:
+    src: files/etc/collectd.d
+    dest: /etc/
+  notify: Restart collectd
+
+- name: Set hostname in write_graphite.conf
+  replace:
+    dest: "/etc/collectd.d/write_graphite.conf"
+    regexp: 'Host ".*"'
+    replace: "Host \"{{ groups['ceph-grafana'][0] }}\""
+  notify: Restart collectd
+
+- name: Set cluster name in cephmetrics.conf
+  replace:
+    dest: /etc/collectd.d/cephmetrics.conf
+    regexp: 'ClusterName ".*"'
+    replace: 'ClusterName "{{ cluster }}"'
+  notify: Restart collectd

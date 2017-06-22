@@ -10,6 +10,12 @@
     - packages
 
 - include: install_collectd_plugins.yml
+  when:
+    - not containerized_deployment
+  tags:
+    - collectors
+
+- include: configure_collectd.yml
   when: not containerized_deployment
   tags:
     - collectors
