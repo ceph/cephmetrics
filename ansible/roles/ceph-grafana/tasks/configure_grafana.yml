@@ -72,16 +72,19 @@
   notify: Restart Grafana
 
 - include: grafana_plugins.yml
+  when: devel_mode
 
 - name: Ship dashboard templates
   copy:
     src: files/dashboards
     dest: /tmp/
+  when: devel_mode
 
 - name: Ship dashUpdater.py
   copy:
     src: files/dashUpdater.py
     dest: /tmp/dashUpdater.py
+  when: devel_mode
 
 - name: Write dashboard.yml
   template:
@@ -89,6 +92,9 @@
     dest: /tmp/dashboard.yml
 
 - name: Push dashboards to Grafana
-  command: python dashUpdater.py -D ./dashboards
-  args:
-    chdir: /tmp
+  command: python /tmp/dashUpdater.py -c /tmp/dashboard.yml -D /tmp/dashboards
+  when: devel_mode
+
+- name: Push dashboards to Grafana
+  command: /usr/libexec/cephmetrics/dashUpdater.py -c /tmp/dashboard.yml -D /usr/share/cephmetrics/dashboards
+  when: not devel_mode

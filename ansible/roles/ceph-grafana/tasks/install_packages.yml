@@ -9,3 +9,10 @@
     - graphite-web
     - python-carbon
     - grafana
+  when: devel_mode
+
+- name: Install cephmetrics
+  package:
+    name: cephmetrics
+    state: latest
+  when: not devel_mode
