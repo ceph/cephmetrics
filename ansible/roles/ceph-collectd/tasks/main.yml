@@ -1,6 +1,8 @@
 ---
 - include: setup_repos.yml
-  when: not containerized_deployment
+  when:
+    - not containerized_deployment
+    - devel_mode
   tags:
     - packages
 

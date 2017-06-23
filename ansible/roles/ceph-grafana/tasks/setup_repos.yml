@@ -5,7 +5,6 @@
     state: "{{ 'present' if use_epel else 'absent' }}"
   when:
     - ansible_pkg_mgr == "yum"
-    - devel_mode
 
 - name: Install chacra repo
   copy:
@@ -30,7 +29,6 @@
   when:
     - ansible_pkg_mgr == 'yum'
     - use_epel
-    - devel_mode
 
 - name: Remove Grafana repo
   file:
