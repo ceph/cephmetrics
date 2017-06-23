@@ -170,9 +170,9 @@ class IOstat(object):
             self.r_await = float(
                 self._read_ms) / self._reads if self._reads > 0 else 0
             self.r_bytes_per_sec = (float(
-                self._sectors_read * IOstat.sector_size) / 1024 ** 2) / sample_interval
+                self._sectors_read * IOstat.sector_size)) / sample_interval
             self.w_bytes_per_sec = (float(
-                self._sectors_written * IOstat.sector_size) / 1024 ** 2) / sample_interval
+                self._sectors_written * IOstat.sector_size)) / sample_interval
             self.bytes_per_sec = self.r_bytes_per_sec + self.w_bytes_per_sec
 
 
