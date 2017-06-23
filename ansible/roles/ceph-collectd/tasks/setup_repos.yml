@@ -4,7 +4,6 @@
     name: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm"
     state: "{{ 'present' if use_epel else 'absent' }}"
   when:
-    - devel_mode
     - ansible_pkg_mgr == "yum"
 
 - name: Install chacra repo
