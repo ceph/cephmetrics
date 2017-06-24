@@ -3,6 +3,7 @@
 
 import socket
 from os import statvfs
+import math
 
 
 def get_hostname():
@@ -182,6 +183,7 @@ class Disk(object):
         "disk_size": ("disk_size", "gauge"),
         "fs_size": ("fs_size", "gauge"),
         "fs_used": ("fs_used", "gauge"),
+        "fs_percent_used": ("fs_percent_used", "gauge"),
         "osd_id": ("osd_id", "gauge")
     }
 
@@ -193,7 +195,10 @@ class Disk(object):
 
     def _get_fssize(self):
         s = statvfs("{}/whoami".format(self._path_name))
-        return s.f_blocks * s.f_bsize, s.f_bfree * s.f_bsize
+        fs_size = s.f_blocks * s.f_bsize
+        fs_used = fs_size - (s.f_bfree * s.f_bsize)
+        fs_percent_used = math.ceil((float(fs_used) / fs_size) * 100)
+        return fs_size, fs_used, fs_percent_used
 
     def refresh(self):
-        self.fs_size, self.fs_used = self._get_fssize()
+        self.fs_size, self.fs_used, self.fs_percent_used = self._get_fssize()
