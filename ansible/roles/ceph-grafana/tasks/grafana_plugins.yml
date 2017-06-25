@@ -26,4 +26,3 @@
 - name: Move Vonage Status Panel into place
   shell: "mv -f {{ vonage_plugin_path }}* {{ vonage_plugin_path }}"
   when: vonage_plugin.stat.exists is defined and not vonage_plugin.stat.exists
-  notify: Restart Grafana
