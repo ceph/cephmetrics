@@ -104,6 +104,9 @@ class Mon(BaseCollector):
     all_metrics = merge_dicts(all_metrics, osd_metrics)
     all_metrics = merge_dicts(all_metrics, mon_states)
 
+    def __init__(self, *args, **kwargs):
+        BaseCollector.__init__(self, *args, **kwargs)
+
     def _mon_command(self, cmd_request):
         """ Issue a command to the monitor """
 

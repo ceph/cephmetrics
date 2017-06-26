@@ -13,8 +13,8 @@ class OSDs(BaseCollector):
 
     all_metrics = merge_dicts(Disk.metrics, IOstat.metrics)
 
-    def __init__(self, cluster_name):
-        BaseCollector.__init__(self, cluster_name)
+    def __init__(self, cluster_name, **kwargs):
+        BaseCollector.__init__(self, cluster_name, **kwargs)
         self.timestamp = int(time.time())
 
         self.osd = {}		# dict of disk objects, each disk contains osd_id
