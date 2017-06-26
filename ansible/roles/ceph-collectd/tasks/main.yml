@@ -24,7 +24,10 @@
     - collectors
 
 - include: selinux.yml
-  when: not containerized_deployment
+  when:
+   - not containerized_deployment
+   - ansible_selinux.status is defined
+   - ansible_selinux.status == 'enabled'
   tags:
     - selinux
 

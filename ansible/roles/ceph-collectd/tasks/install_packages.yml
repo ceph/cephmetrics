@@ -37,6 +37,11 @@
     - python-rados
     # For the ceph_daemon python module
     - ceph-common
+    # For semodule
+    - make
+    - libsemanage-python
+    - policycoreutils-python
+    - selinux-policy-devel
   when:
     - ansible_pkg_mgr == "yum"
     - devel_mode
