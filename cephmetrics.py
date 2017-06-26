@@ -25,10 +25,11 @@ class Ceph(object):
         self.rgw = None
         self.osd = None
 
-    def probe(self):
+    def probe(self, log_level='debug'):
         """
         set up which collector(s) to use, based on what types of sockets we
         find in /var/run/ceph
+        log_level: (str) logging level (debug or info)
         """
 
         mon_socket = '/var/run/ceph/{}-mon.{}.asok'.format(self.cluster_name,
@@ -36,7 +37,8 @@ class Ceph(object):
         if os.path.exists(mon_socket):
             self.mon_socket = mon_socket
             self.mon = Mon(self.cluster_name,
-                           admin_socket=mon_socket)
+                           admin_socket=mon_socket,
+                           log_level=log_level)
 
         rgw_socket_list = glob.glob('/var/run/ceph/{}-client.rgw.*.'
                                     'asok'.format(self.cluster_name))
@@ -44,7 +46,8 @@ class Ceph(object):
         if rgw_socket_list:
             rgw_socket = rgw_socket_list[0]
             self.rgw = RGW(self.cluster_name,
-                           admin_socket=rgw_socket)
+                           admin_socket=rgw_socket,
+                           log_level=log_level)
 
         osd_socket_list = glob.glob('/var/run/ceph/{}-osd.*'
                                     '.asok'.format(self.cluster_name))
@@ -52,7 +55,8 @@ class Ceph(object):
         osds_mounted = [mnt for mnt in mounted
                         if mnt.split()[1].startswith('/var/lib/ceph')]
         if osd_socket_list or osds_mounted:
-            self.osd = OSDs(self.cluster_name)
+            self.osd = OSDs(self.cluster_name,
+                            log_level=log_level)
 
         collectd.info("{}: Roles detected - mon:{} "
                       "osd:{} rgw:{}".format(__name__,
@@ -70,7 +74,12 @@ def write_stats(role_metrics, stats):
 
         # TODO: this needs some more think time, since the key from the name
         # is not the key of the all_metrics dict
-        attr_type = role_metrics[attr_name][1]     # gauge / derive etc
+        if attr_name in role_metrics:
+            attr_type = role_metrics[attr_name][1]     # gauge / derive etc
+        else:
+            # assign a default
+            attr_type = 'gauge'
+
         attr_value = flat_stats[key_name]
 
         val = collectd.Values(plugin=PLUGIN_NAME, type=attr_type)
@@ -82,9 +91,15 @@ def write_stats(role_metrics, stats):
 
 
 def configure_callback(conf):
+    valid_log_levels = ['debug', 'info']
 
     global CEPH
     module_parms = {node.key: node.values[0] for node in conf.children}
+
+    log_level = module_parms.get('LogLevel', 'debug')
+    if log_level not in valid_log_levels:
+        collectd.error("LogLevel specified is invalid - must"
+                       " be :{}".format(' or '.join(valid_log_levels)))
 
     if 'ClusterName' in module_parms:
         cluster_name = module_parms['ClusterName']
@@ -96,7 +111,7 @@ def configure_callback(conf):
         # let's assume the conf file is OK to use
         CEPH.cluster_name = cluster_name
 
-        CEPH.probe()
+        CEPH.probe(log_level)
 
     else:
         collectd.error("ClusterName is required")
