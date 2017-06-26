@@ -17,6 +17,8 @@ require {
 allow collectd_t ceph_t:unix_stream_socket connectto;
 allow collectd_t ceph_var_run_t:dir read;
 allow collectd_t self:capability2 block_suspend;
+allow collectd_t var_log_t:dir { add_name write };
+allow collectd_t var_log_t:file create;
 corecmd_exec_shell(collectd_t)
 files_list_tmp(collectd_t)
 libs_exec_ldconfig(collectd_t)
