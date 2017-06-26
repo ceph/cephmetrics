@@ -5,7 +5,7 @@
     state: directory
 
 - set_fact:
-    grafana_plugins: "['vonage-status-panel']"
+    grafana_plugins: "['vonage-status-panel', 'grafana-piechart-panel']"
 
 - name: Install Grafana plugins
   command: "grafana-cli plugins install {{ item }}"
