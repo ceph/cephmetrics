@@ -103,10 +103,18 @@
     src: dashboard.yml
     dest: /tmp/dashboard.yml
 
-- name: Push dashboards to Grafana
-  command: python /tmp/dashUpdater.py -c /tmp/dashboard.yml -D /tmp/dashboards
+- set_fact:
+    dashupdate_cmd: "python /tmp/dashUpdater.py"
+    dashboard_dir: "/tmp/dashboards"
   when: devel_mode
 
-- name: Push dashboards to Grafana
-  command: /usr/libexec/cephmetrics/dashUpdater.py -c /tmp/dashboard.yml -D /usr/share/cephmetrics/dashboards
+- set_fact:
+    dashupdate_cmd: "/usr/libexec/cephmetrics/dashUpdater.py"
+    dashboard_dir: "/usr/share/cephmetrics/dashboards"
   when: not devel_mode
+
+- set_fact:
+    dashupdate_mode: "{{ 'refresh' if replace_dashboards else 'update' }}"
+
+- name: Push dashboards to Grafana
+  command: "{{ dashupdate_cmd }} -m {{ dashupdate_mode }} -c /tmp/dashboard.yml -D {{ dashboard_dir }}"

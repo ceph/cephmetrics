@@ -2,6 +2,7 @@
 containerized_deployment: false
 use_epel: false
 devel_mode: true
+replace_dashboards: true
 graphite:
   port: "{{ graphite_port | default('8080') }}"
   user: admin
