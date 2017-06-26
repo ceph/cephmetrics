@@ -4,7 +4,8 @@
     name: /var/lib/grafana/plugins
     state: directory
 
-- set_fact:
+- name: Set grafana_plugins
+  set_fact:
     grafana_plugins: "['vonage-status-panel', 'grafana-piechart-panel']"
 
 - name: Install Grafana plugins
