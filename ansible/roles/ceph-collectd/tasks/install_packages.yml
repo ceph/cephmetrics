@@ -1,33 +1,29 @@
 ---
-- name: Enable EPEL
-  yum:
-    name: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm"
-    state: "{{ 'present' if use_epel else 'absent' }}"
-  when: ansible_pkg_mgr == "yum"
-
-- name: Install chacra repo
-  copy:
-    src: cephmetrics.repo
-    dest: /etc/yum.repos.d/cephmetrics.repo
-  when: ansible_pkg_mgr == "yum"
-
-- name: Remove chacra repo
-  file:
-    path: /etc/yum.repos.d/cephmetrics.repo
-    state: absent
-  when: ansible_pkg_mgr == "yum" and use_epel
-
 - name: Install collectd
   package:
     name: collectd
     state: latest
+  when:
+    - devel_mode
   notify: Restart collectd
 
 - name: Install collectd-python
   package:
     name: collectd-python
     state: latest
-  when: ansible_pkg_mgr == "yum" and not use_epel
+  when:
+    - ansible_pkg_mgr == "yum"
+    - devel_mode
+    - not use_epel
+  notify: Restart collectd
+
+- name: Install cephmetrics-collectors
+  package:
+    name: cephmetrics-collectors
+    state: latest
+  when:
+    - ansible_pkg_mgr == "yum"
+    - not devel_mode
   notify: Restart collectd
 
 - name: Install dependencies for collector plugins
@@ -41,3 +37,7 @@
     - python-rados
     # For the ceph_daemon python module
     - ceph-common
+  when:
+    - ansible_pkg_mgr == "yum"
+    - devel_mode
+  notify: Restart collectd

@@ -1,0 +1,93 @@
+Name:		cephmetrics
+Version:	@VERSION@
+Release:	@RELEASE@%{?dist}
+Summary:	Monitoring service for Ceph clusters
+
+License:	GPLv3
+URL:		https://github.com/pcuzner/cephmetrics
+Source0:	cephmetrics-0.1.zip
+Source1:	vonage-status-panel-1.0.4.zip
+
+Requires:	graphite-web
+Requires:	python-carbon
+Requires:       cephmetrics-vonage = %{version}-%{release}
+Requires:       cephmetrics-collectors = %{version}-%{release}
+
+%description
+The monitoring service with web frontend for Ceph storage clusters providing several statistical data graphed by grafana.
+
+
+%package vonage
+Summary:	Vonage plugin for graphana
+Requires:	grafana
+License:        ASL 2.0
+%description vonage
+The vonage status panel for grafana web server.
+
+
+%package collectors
+Summary:	Ceph metrics collectors
+Requires:	collectd
+Requires:	collectd-python
+%description collectors
+The collectors for Ceph implemented with help of statistics collection daemon collectd.
+
+
+%package ansible
+Summary:	Ansible playbooks for Ceph metrics
+Requires:	ceph-ansible
+%description ansible
+Ansible playbooks for Ceph metrics
+
+
+%prep
+%setup -q
+unzip %SOURCE1
+mv -f Vonage* cephmetrics-vonage
+
+
+%install
+# Install dashUpdater.py
+install -d %{buildroot}%{_libexecdir}/cephmetrics
+install -m 755 dashUpdater.py %{buildroot}%{_libexecdir}/cephmetrics/
+install -d %{buildroot}%{_datadir}/cephmetrics/dashboards
+install -m 644 dashboards/current/* %{buildroot}%{_datadir}/cephmetrics/dashboards/
+
+# Install vonage plugin
+install -d %{buildroot}%{_localstatedir}/lib/grafana/plugins/
+cp -r cephmetrics-vonage %{buildroot}%{_localstatedir}/lib/grafana/plugins/
+
+# Install collectors
+install -d %{buildroot}%{_libdir}/collectd/cephmetrics/collectors
+install -m 755 cephmetrics.py %{buildroot}%{_libdir}/collectd/cephmetrics
+install -m 644 collectors/* %{buildroot}%{_libdir}/collectd/cephmetrics/collectors
+
+# Install ansible playbooks
+install -d %{buildroot}%{_datadir}
+cp -L -r ansible %{buildroot}%{_datadir}/cephmetrics-ansible
+
+exit 0
+
+
+%files
+%{_libexecdir}/cephmetrics/dashUpdater.py
+%{_datadir}/cephmetrics
+%doc dashboard.yml
+%doc etc/grafana
+%doc LICENSE
+%doc README
+
+%files vonage
+%{_localstatedir}/lib/grafana/plugins/cephmetrics-vonage
+
+%files collectors
+%{_libdir}/collectd/cephmetrics
+%doc etc/collectd.conf
+%doc etc/collectd.d
+
+%files ansible
+%{_datadir}/cephmetrics-ansible
+
+%changelog
+* Tue Jun 20 2017 Boris Ranto <branto@redhat.com> - 0.1-1
+- Initial build

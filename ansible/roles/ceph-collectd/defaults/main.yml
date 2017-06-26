@@ -2,3 +2,4 @@
 containerized_deployment: false
 cluster: ceph
 use_epel: false
+devel_mode: true

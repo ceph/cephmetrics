@@ -71,44 +71,20 @@
   tags: [ini]
   notify: Restart Grafana
 
-- name: Download Vonage Status Panel
-  get_url:
-    url: https://grafana.com/api/plugins/vonage-status-panel/versions/1.0.4/download
-    dest: /tmp/vonage.zip
-
-- name: Create Grafana plugins directory
-  file:
-    name: /var/lib/grafana/plugins
-    state: directory
-
-- set_fact:
-    vonage_plugin_path: /var/lib/grafana/plugins/Vonage-Grafana_Status_panel
-
-- stat:
-    path: "{{ vonage_plugin_path }}"
-  register: vonage_plugin
-
-- name: Unzip Vonage Status Panel
-  unarchive:
-    src: /tmp/vonage.zip
-    remote_src: true
-    dest: /var/lib/grafana/plugins/
-  when: vonage_plugin.stat.exists is defined and not vonage_plugin.stat.exists
-
-- name: Move Vonage Status Panel into place
-  shell: "mv -f {{ vonage_plugin_path }}* {{ vonage_plugin_path }}"
-  when: vonage_plugin.stat.exists is defined and not vonage_plugin.stat.exists
-  notify: Restart Grafana
+- include: grafana_plugins.yml
+  when: devel_mode
 
 - name: Ship dashboard templates
   copy:
     src: files/dashboards
     dest: /tmp/
+  when: devel_mode
 
 - name: Ship dashUpdater.py
   copy:
     src: files/dashUpdater.py
     dest: /tmp/dashUpdater.py
+  when: devel_mode
 
 - name: Write dashboard.yml
   template:
@@ -116,6 +92,9 @@
     dest: /tmp/dashboard.yml
 
 - name: Push dashboards to Grafana
-  command: python dashUpdater.py -D ./dashboards
-  args:
-    chdir: /tmp
+  command: python /tmp/dashUpdater.py -c /tmp/dashboard.yml -D /tmp/dashboards
+  when: devel_mode
+
+- name: Push dashboards to Grafana
+  command: /usr/libexec/cephmetrics/dashUpdater.py -c /tmp/dashboard.yml -D /usr/share/cephmetrics/dashboards
+  when: not devel_mode

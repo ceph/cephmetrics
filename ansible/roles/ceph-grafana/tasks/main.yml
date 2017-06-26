@@ -1,4 +1,11 @@
 ---
+- include: setup_repos.yml
+  when:
+    - not containerized_deployment
+    - devel_mode
+  tags:
+    - packages
+
 - include: install_packages.yml
   when: not containerized_deployment
   tags:
@@ -12,6 +19,10 @@
   tags:
     - packages
     - services
+
+- include: configure_firewall.yml
+  tags:
+    - firewall
 
 - include: configure_carbon.yml
   when: not containerized_deployment
@@ -32,7 +43,3 @@
   when: not containerized_deployment
   tags:
     - services
-
-- include: configure_firewall.yml
-  tags:
-    - firewall
