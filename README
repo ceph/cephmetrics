@@ -1,4 +1,4 @@
-On the ceph node install collectd
+oOn the ceph node install collectd
 - tested with collectd-5.7.0-4.el7ost.x86_64
 
 Interval is set to 10 in collectd.conf
