@@ -7,22 +7,23 @@ License:	GPLv3
 URL:		https://github.com/pcuzner/cephmetrics
 Source0:	cephmetrics-0.1.zip
 Source1:	vonage-status-panel-1.0.4.zip
+Source2:	grafana-piechart-panel-1.1.5.zip
 
 Requires:	graphite-web
 Requires:	python-carbon
-Requires:       cephmetrics-vonage = %{version}-%{release}
+Requires:       cephmetrics-grafana-plugins = %{version}-%{release}
 Requires:       cephmetrics-collectors = %{version}-%{release}
 
 %description
 The monitoring service with web frontend for Ceph storage clusters providing several statistical data graphed by grafana.
 
 
-%package vonage
+%package grafana-plugins
 Summary:	Vonage plugin for graphana
 Requires:	grafana
 License:        ASL 2.0
-%description vonage
-The vonage status panel for grafana web server.
+%description grafana-plugins
+The vonage status panel and piechart panel for grafana web server.
 
 
 %package collectors
@@ -44,6 +45,8 @@ Ansible playbooks for Ceph metrics
 %setup -q
 unzip %SOURCE1
 mv -f Vonage* cephmetrics-vonage
+unzip %SOURCE2
+mv -f grafana-piechart-panel* cephmetrics-piechart
 
 
 %install
@@ -53,9 +56,10 @@ install -m 755 dashUpdater.py %{buildroot}%{_libexecdir}/cephmetrics/
 install -d %{buildroot}%{_datadir}/cephmetrics/dashboards
 install -m 644 dashboards/current/* %{buildroot}%{_datadir}/cephmetrics/dashboards/
 
-# Install vonage plugin
+# Install vonage and piechart plugin
 install -d %{buildroot}%{_localstatedir}/lib/grafana/plugins/
 cp -r cephmetrics-vonage %{buildroot}%{_localstatedir}/lib/grafana/plugins/
+cp -r cephmetrics-piechart %{buildroot}%{_localstatedir}/lib/grafana/plugins/
 
 # Install collectors
 install -d %{buildroot}%{_libdir}/collectd/cephmetrics/collectors
@@ -77,8 +81,9 @@ exit 0
 %doc LICENSE
 %doc README
 
-%files vonage
+%files grafana-plugins
 %{_localstatedir}/lib/grafana/plugins/cephmetrics-vonage
+%{_localstatedir}/lib/grafana/plugins/cephmetrics-piechart
 
 %files collectors
 %{_libdir}/collectd/cephmetrics
@@ -89,5 +94,3 @@ exit 0
 %{_datadir}/cephmetrics-ansible
 
 %changelog
-* Tue Jun 20 2017 Boris Ranto <branto@redhat.com> - 0.1-1
-- Initial build
