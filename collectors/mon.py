@@ -7,7 +7,7 @@ import threading
 import time
 
 from collectors.base import BaseCollector
-from collectors.common import add_dicts, merge_dicts, get_hostname
+from collectors.common import merge_dicts, get_hostname
 
 class RBDScanner(threading.Thread):
 
