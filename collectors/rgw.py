@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+import time
+
 from collectors.base import BaseCollector
 from collectors.common import get_hostname, merge_dicts
 
@@ -59,8 +61,14 @@ class RGW(BaseCollector):
 
     def get_stats(self):
 
+        start = time.time()
+
         raw_stats = self._get_rgw_data()
 
         stats = self._filter(raw_stats)
+
+        end = time.time()
+
+        self.elapsed_log_msg("RGW get_stats", (end - start))
 
         return {"rgw": stats}

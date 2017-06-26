@@ -67,9 +67,9 @@ class OSDs(BaseCollector):
         Grab the disk stats from /proc
         """
 
-        now = int(time.time())
-        interval = now - self.timestamp
-        self.timestamp = now
+        now = time.time()
+        interval = int(now) - self.timestamp
+        self.timestamp = int(now)
 
         for perf_entry in freadlines('/proc/diskstats'):
 
@@ -88,6 +88,9 @@ class OSDs(BaseCollector):
                 device.perf.compute(interval)
                 device.refresh()
 
+        end = time.time()
+        self.elapsed_log_msg("disk performance stats generation", (end - now))
+
     def dump(self):
 
         osd_info = {}
@@ -100,7 +103,13 @@ class OSDs(BaseCollector):
 
     def get_stats(self):
 
+        start = time.time()
+
         self._dev_to_osd()
         self._stats_lookup()
+
+        end = time.time()
+
+        self.elapsed_log_msg("osd get_stats call", (end - start))
 
         return self.dump()
