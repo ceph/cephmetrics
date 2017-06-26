@@ -66,12 +66,18 @@ the local machine
 curl -u admin:admin -H "Content-Type: application/json" -X POST http://localhost:3000/api/datasources \
 --data-binary @setup/add_datasource.json
 ```
-9. the sample dashboards need to be added/edited to reflect the ceph cluster to
+9. Install the grafana labs pie-chart plugin   
+9.1 open a shell session to the grafana instance, and install the plugin  
+```markdown
+docker exec -it grafana bash
+grafana-cli plugins install grafana-piechart-panel
+```
+10. the sample dashboards need to be added/edited to reflect the ceph cluster to
 monitor  
-9.1 seed dashboards are provided in the dashboards/current directory   
-9.2 edit ```dashboard.yml``` with the shortnames of the OSD's and RGW's, plus
+10.1 seed dashboards are provided in the dashboards/current directory   
+10.2 edit ```dashboard.yml``` with the shortnames of the OSD's and RGW's, plus
 the dns domain name of the environment.  
-9.3 run the following command  
+10.3 run the following command  
 ```markdown
 python dashUpdater.py
 ```
