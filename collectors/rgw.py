@@ -35,8 +35,8 @@ class RGW(BaseCollector):
 
     all_metrics = merge_dicts(simple_metrics, latencies)
 
-    def __init__(self, cluster_name, admin_socket):
-        BaseCollector.__init__(self, cluster_name, admin_socket)
+    def __init__(self, cluster_name, admin_socket, **kwargs):
+        BaseCollector.__init__(self, cluster_name, admin_socket, **kwargs)
         self.host_name = get_hostname()
 
     def _get_rgw_data(self):

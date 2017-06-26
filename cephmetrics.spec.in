@@ -1,3 +1,7 @@
+%define debug_package %{nil}
+
+%{!?_selinux_policy_version: %global _selinux_policy_version %(sed -e 's,.*selinux-policy-\\([^/]*\\)/.*,\\1,' /usr/share/selinux/devel/policyhelp 2>/dev/null)}
+
 Name:		cephmetrics
 Version:	@VERSION@
 Release:	@RELEASE@%{?dist}
@@ -7,22 +11,32 @@ License:	GPLv3
 URL:		https://github.com/pcuzner/cephmetrics
 Source0:	cephmetrics-0.1.zip
 Source1:	vonage-status-panel-1.0.4.zip
+Source2:	grafana-piechart-panel-1.1.5.zip
+
+# SELinux deps
+BuildRequires:  checkpolicy
+BuildRequires:  selinux-policy-devel
+BuildRequires:  /usr/share/selinux/devel/policyhelp
+BuildRequires:  hardlink
+Requires:       policycoreutils, libselinux-utils
+Requires(post): selinux-policy >= %{_selinux_policy_version}, policycoreutils
+Requires(postun): policycoreutils
 
 Requires:	graphite-web
 Requires:	python-carbon
-Requires:       cephmetrics-vonage = %{version}-%{release}
+Requires:       cephmetrics-grafana-plugins = %{version}-%{release}
 Requires:       cephmetrics-collectors = %{version}-%{release}
 
 %description
 The monitoring service with web frontend for Ceph storage clusters providing several statistical data graphed by grafana.
 
 
-%package vonage
+%package grafana-plugins
 Summary:	Vonage plugin for graphana
 Requires:	grafana
 License:        ASL 2.0
-%description vonage
-The vonage status panel for grafana web server.
+%description grafana-plugins
+The vonage status panel and piechart panel for grafana web server.
 
 
 %package collectors
@@ -44,6 +58,12 @@ Ansible playbooks for Ceph metrics
 %setup -q
 unzip %SOURCE1
 mv -f Vonage* cephmetrics-vonage
+unzip %SOURCE2
+mv -f grafana-piechart-panel* cephmetrics-piechart
+
+
+%build
+make -f /usr/share/selinux/devel/Makefile cephmetrics.pp
 
 
 %install
@@ -53,9 +73,10 @@ install -m 755 dashUpdater.py %{buildroot}%{_libexecdir}/cephmetrics/
 install -d %{buildroot}%{_datadir}/cephmetrics/dashboards
 install -m 644 dashboards/current/* %{buildroot}%{_datadir}/cephmetrics/dashboards/
 
-# Install vonage plugin
+# Install vonage and piechart plugin
 install -d %{buildroot}%{_localstatedir}/lib/grafana/plugins/
 cp -r cephmetrics-vonage %{buildroot}%{_localstatedir}/lib/grafana/plugins/
+cp -r cephmetrics-piechart %{buildroot}%{_localstatedir}/lib/grafana/plugins/
 
 # Install collectors
 install -d %{buildroot}%{_libdir}/collectd/cephmetrics/collectors
@@ -66,6 +87,9 @@ install -m 644 collectors/* %{buildroot}%{_libdir}/collectd/cephmetrics/collecto
 install -d %{buildroot}%{_datadir}
 cp -L -r ansible %{buildroot}%{_datadir}/cephmetrics-ansible
 
+# Install SELinux
+install -d %{buildroot}%{_datadir}/selinux/packages
+install -m 644 cephmetrics.pp %{buildroot}%{_datadir}/selinux/packages/cephmetrics.pp
 exit 0
 
 
@@ -77,17 +101,25 @@ exit 0
 %doc LICENSE
 %doc README
 
-%files vonage
+%files grafana-plugins
 %{_localstatedir}/lib/grafana/plugins/cephmetrics-vonage
+%{_localstatedir}/lib/grafana/plugins/cephmetrics-piechart
 
 %files collectors
 %{_libdir}/collectd/cephmetrics
 %doc etc/collectd.conf
 %doc etc/collectd.d
+%{_datadir}/selinux/packages/cephmetrics.pp
+
+%post collectors
+/usr/sbin/semodule -i %{_datadir}/selinux/packages/cephmetrics.pp &> /dev/null || :
+
+%postun collectors
+if [ $1 == 0 ] ; then
+	/usr/sbin/semodule -r cephmetrics &> /dev/null || :
+fi
 
 %files ansible
 %{_datadir}/cephmetrics-ansible
 
 %changelog
-* Tue Jun 20 2017 Boris Ranto <branto@redhat.com> - 0.1-1
-- Initial build
