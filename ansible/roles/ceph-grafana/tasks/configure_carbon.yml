@@ -1,5 +1,6 @@
 ---
-- set_fact:
+- name: Set whisper_retention
+  set_fact:
     # Changing collectd_interval is not supported at this time
     whisper_retention: "{{ collectd_interval|default('10') }}s:7d,1m:30d,15m:5y"
 

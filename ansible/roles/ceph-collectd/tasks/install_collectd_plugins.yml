@@ -1,5 +1,6 @@
 ---
-- set_fact:
+- name: Set collectd_dir
+  set_fact:
     collectd_dir: /usr/lib64/collectd/cephmetrics
 
 - name: Create collectors directory

@@ -1,6 +1,6 @@
 ---
 - name: Install packages
-  package: 
+  package:
     name: "{{ item }}"
     state: latest
   with_items:
