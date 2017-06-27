@@ -4,4 +4,7 @@
     name: collectd_tcp_network_connect
     state: yes
     persistent: yes
-  when: ansible_selinux.status is defined and ansible_selinux.status == 'enabled'
+
+- include: selinux_module.yml
+  when:
+    - devel_mode
