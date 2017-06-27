@@ -46,16 +46,28 @@ Notes:
 - [ceph-grafana](./roles/ceph-grafana/): Used for the dashboard host
 
 ## Variables
-TODO
+You may override certain variables by creating a `vars.yml` file:
+- `ansible_ssh_user`: The user account use for SSH connections. This may also be set on a per-host basis in the inventory file.
+- `cluster`: The name of the Ceph cluster. Default: ceph
+- `firewalld_zone`: The `firewalld` zone to use when opening ports for Grafana and Carbon. Default: public
+- `devel_mode`: Whether to perform a development-mode deployment vs. a production deployment. Default: true
+
+These variables are only relevent when `devel_mode` is true:
+- `use_epel`: Whether or not to use EPEL and grafana.com instead of ceph.com-sourced packages for dependencies. Default: false
 
 ## Current Limitations
 
 - Only RHEL 7 hosts are supported
 - Currently, metrics are only *displayed* for `osd` and `rgw` hosts.
-- The `collectd` and `graphite-web` packages are sourced from [EPEL](https://fedoraproject.org/wiki/EPEL) and the `grafana` package is sourced from [grafana.com](https://grafana.com/)
 - Authentication for grafana and graphite is fixed and creates a user `admin` with password `admin`.
 - Services are deployed on the dashboard host directly; there is not yet support for a containerized deployment.
 
 ## Usage
-
+If you are not overriding any variables:
+```
     ansible-playbook -v -i ./inventory
+```
+Or, if you are:
+```
+    ansible-playbook -v -i ./inventory -e '@vars.yml'
+```
