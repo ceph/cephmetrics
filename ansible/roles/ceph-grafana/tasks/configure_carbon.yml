@@ -1,4 +1,13 @@
 ---
+- name: Set WHISPER_AUTOFLUSH to True
+  lineinfile:
+    dest: /etc/carbon/carbon.conf
+    regexp: "^WHISPER_AUTOFLUSH = .*"
+    insertafter: "^#.*buffering writes from the kernel.*"
+    line: "WHISPER_AUTOFLUSH = True"
+  notify:
+    - Restart carbon-cache
+
 - name: Set whisper_retention
   set_fact:
     # Changing collectd_interval is not supported at this time
