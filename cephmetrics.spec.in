@@ -65,6 +65,9 @@ mv -f grafana-piechart-panel* cephmetrics-piechart
 %build
 make -f /usr/share/selinux/devel/Makefile cephmetrics.pp
 
+# Change the devel_mode defaults
+sed -i -e 's/devel_mode: true/devel_mode: false/' ansible/roles/*/defaults/main.yml
+
 
 %install
 # Install dashUpdater.py
