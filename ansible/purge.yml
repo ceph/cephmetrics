@@ -10,7 +10,7 @@
       enabled: no
       state: stopped
     with_items:
-      - grafana_server
+      - grafana-server
       - carbon-cache
       - httpd
     failed_when: false
