@@ -260,6 +260,7 @@ def set_home_dashboard(home_dashboard):
                        headers=HEADERS,
                        auth=config.grafana_credentials,
                        data=json.dumps({"name": "Main Org.",
+                                        "theme": "light",
                                         "homeDashboardId": dash_id}))
 
             if resp.status_code == 200:
