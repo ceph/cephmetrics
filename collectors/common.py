@@ -188,6 +188,21 @@ class Disk(object):
         "osd_id": ("osd_id", "gauge")
     }
 
+    def __init__(self, device_name, path_name=None, osd_id=None):
+
+        self._name = device_name
+        self._path_name = path_name
+        self.osd_id = osd_id
+
+        self.rotational = self._get_rota()
+        self.disk_size = self._get_size()
+        self.perf = IOstat()
+        self.fs_size = 0
+        self.fs_percent_used = 0
+        self.fs_used = 0
+
+        self.refresh()
+
     def _get_size(self):
         return int(fread("/sys/block/{}/size".format(self._name))) * 512
 
@@ -202,7 +217,20 @@ class Disk(object):
         return fs_size, fs_used, fs_percent_used
 
     def refresh(self):
-        self.fs_size, self.fs_used, self.fs_percent_used = self._get_fssize()
+        # only run the fs size update, if the _path_name is set.
+        if self._path_name:
+            self.fs_size, self.fs_used, self.fs_percent_used = self._get_fssize()
+
+    @staticmethod
+    def get_real_dev(dev_name):
+        # for nvme and intelcas devices, just use the device name as is, but
+        # for sdX type devices, strip of the partition id
+        if dev_name.startswith(('nvme', 'intelcas')):
+            device = dev_name
+        else:
+            # default strip any numeric ie. sdaa1 -> sdaa
+            device = filter(lambda ch: ch.isalpha(), dev_name)
+        return device
 
 
 class CollectorLog(object):
