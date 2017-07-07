@@ -5,7 +5,7 @@ import time
 
 from collectors.base import BaseCollector
 from collectors.common import (todict, freadlines, merge_dicts,
-                               IOstat, Disk, flatten_dict)
+                               IOstat, Disk)
 
 __author__ = "Paul Cuzner"
 
