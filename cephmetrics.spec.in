@@ -8,7 +8,7 @@ Release:	@RELEASE@%{?dist}
 Summary:	Monitoring service for Ceph clusters
 
 License:	GPLv3
-URL:		https://github.com/pcuzner/cephmetrics
+URL:		https://github.com/ceph/cephmetrics
 Source0:	cephmetrics-0.1.zip
 Source1:	vonage-status-panel-1.0.4.zip
 Source2:	grafana-piechart-panel-1.1.5.zip
