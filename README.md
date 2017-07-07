@@ -26,8 +26,8 @@ On the host machine on which you will run ansible-playbook, do the following ste
 sudo su -
 mkdir ~/cephmetrics
 subscription-manager repos --enable rhel-7-server-optional-rpms --enable rhel-7-server-rhscon-2-installer-rpms
-yum install cephmetrics-ansible
 curl -L -o /etc/yum.repos.d/cephmetrics.repo http://download.ceph.com/cephmetrics/rpm-master/el7/cephmetrics.repo
+yum install cephmetrics-ansible
 ```
 
 The cephmetrics repo also needs to be installed on all the ceph nodes as well.  Run the following on each ceph host:
