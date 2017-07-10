@@ -43,6 +43,12 @@
     - not use_epel
     - devel_mode
 
+- name: Enable subscription-manager repos
+  command: "subscription-manager repos{% for repo in rhsm_repos %} --enable={{ repo }}{% endfor %}"
+  when:
+    - ansible_pkg_mgr == "yum"
+    - not devel_mode
+
 - name: Install cephmetrics production repo
   copy:
     src: files/cephmetrics-prod.repo
