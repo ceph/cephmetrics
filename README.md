@@ -32,11 +32,6 @@ curl -L -o /etc/yum.repos.d/cephmetrics.repo http://download.ceph.com/cephmetric
 yum install cephmetrics-ansible
 ```
 
-The cephmetrics repo also needs to be installed on all the ceph nodes as well.  Run the following on each ceph host:
-```
-sudo curl -L -o /etc/yum.repos.d/cephmetrics.repo http://download.ceph.com/cephmetrics/rpm-master/el7/cephmetrics.repo
-```
-
 ### Create or edit the inventory file
 
 Next, we need an inventory file.  If you are running `ansible-playbook` on a host that previously ran `ceph-ansible`, you may simply modify `/etc/ansible/hosts`; otherwise you may copy `/usr/share/cephmetrics-ansible/inventory.sample` and modify it if you wish.
