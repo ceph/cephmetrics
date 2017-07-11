@@ -6,8 +6,8 @@ Cephmetrics is a tool that allows a user to visually monitor various metrics in 
 - RHEL 7 should be running on all hosts
 - A functional ceph cluster running version ceph-osd-10.2.7-27.el7cp.x86_64 or later is already up and running.
 - Another host machine independent of the ceph machines must be available.  This host will be used to receive data pushed by the hosts in the Ceph cluster, and will run the dashboard to display that data.
-- A host machine on which to execute `ansible-playbook` to orchestrate the deployment must be available.  In this document, this will be the same host as the dashboard host.
-- Passwordless SSH access from the deploy host to the ceph hosts. The username should be the same for all hosts.
+- A host machine on which to execute `ansible-playbook` to orchestrate the deployment must be available.
+- Passwordless SSH access from the deploy host to the ceph hosts.  The username should be the same for all hosts.
 - Passwordless sudo access on the ceph and dashboard hosts
 - All hosts must share the same DNS domain
 
@@ -21,25 +21,22 @@ After running this procedure, you will have the following configuration.
 
 ### Install cephmetrics-ansible
 
-On the host machine on which you will run ansible-playbook, do the following steps.  This will install a repo which includes the cephmetrics installation code and ansible (version 2.2.3 or later):
+First, decide which machine you want to use to run `ansible-playbook`.  If you used [`ceph-ansible`](https://github.com/ceph/ceph-ansible) to set up your cluster, you may want to reuse that same host to take advantage of the inventory file that was created as part of that process.
+
+Once the host is selected, perform the following steps there.  This will install a repo which includes the cephmetrics installation code and ansible (version 2.2.3 or later):
 ```
 sudo su -
 mkdir ~/cephmetrics
 subscription-manager repos --enable rhel-7-server-optional-rpms --enable rhel-7-server-rhscon-2-installer-rpms
-yum install cephmetrics-ansible
 curl -L -o /etc/yum.repos.d/cephmetrics.repo http://download.ceph.com/cephmetrics/rpm-master/el7/cephmetrics.repo
+yum install cephmetrics-ansible
 ```
 
-The cephmetrics repo also needs to be installed on all the ceph nodes as well.  Run the following on each ceph host:
-```
-sudo curl -L -o /etc/yum.repos.d/cephmetrics.repo http://download.ceph.com/cephmetrics/rpm-master/el7/cephmetrics.repo
-```
+### Create or edit the inventory file
 
-### Edit the inventory file
+Next, we need an inventory file.  If you are running `ansible-playbook` on a host that previously ran `ceph-ansible`, you may simply modify `/etc/ansible/hosts`; otherwise you may copy `/usr/share/cephmetrics-ansible/inventory.sample` and modify it if you wish.
 
-A file named ~/cephmetrics/inventory needs to be created.  `ansible-playbook` will use this inventory file when installing cephmetrics.  Inventory is an INI-like format file with entries for ceph-grafana and all the parts of the ceph cluster.  A template for this file can be copied from `/usr/share/cephmetrics-ansible/inventory.sample`
-
-Its format looks like:
+The inventory file format looks like:
 
     [ceph-grafana]
     grafana_host.example.com
@@ -60,19 +57,26 @@ Its format looks like:
     [rgws]
     rgw0.example.com
 
-Since we are running `ansible-playbook` directly on the dashboard (`ceph-grafana`) host, the inventory entry should look like:
+If you are running `ansible-playbook` on a host mentioned in the inventory file, you will need to append `ansible_connection=local` to each line in the inventory file that mentions that host.  An example:
     ```
-    [ceph-grafana]
-    grafana_host.example.com ansible_connection=local
+    my_host.example.com ansible_connection=local
     ```
 Omit the mdss section if no ceph mds nodes are installed.  Omit the rgws section if no rgw nodes are installed.
 
-Ansible variables can be set in ~/cephmetrics/vars.yml if the user so desires.  [Click here](./ansible/README.md) for more information.
+Ansible variables can be set in a `vars.yml` file if necessary.  If it is required, make sure to add `-e '@/path/to/vars.yml` to your `ansible-playbook` invocation below.  [Click here](./ansible/README.md) for more information.
 
 ## Deploy via ansible-playbook
 
-Run the following commands:
+If you are using a `ceph-ansible` host, run these commands:
 ```
 cd /usr/share/cephmetrics-ansible
-ansible-playbook -v -i ~/cephmetrics/inventory -e '@~/cephmetrics/vars.yml' playbook.yml
+ansible-playbook -v playbook.yml
 ```
+
+Otherwise, run these commands:
+```
+cd /usr/share/cephmetrics-ansible
+ansible-playbook -v -i /path/to/inventory playbook.yml
+```
+
+Note: The reason it is necessary to change directories is so that `ansible-playbook` will use the bundled `ansible.cfg`; there is currently no command-line argument allowing the specification of an arbitrary `.cfg` file.

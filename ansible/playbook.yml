@@ -22,3 +22,11 @@
   become: true
   roles:
   - ceph-collectd
+
+- hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: Print dashboard URL
+      debug:
+        msg: "All done! You may access your dashboard at http://{{ groups['ceph-grafana'][0] }}:3000/ with user 'admin' and password 'admin'."

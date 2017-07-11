@@ -5,22 +5,25 @@
     state: "{{ 'present' if use_epel else 'absent' }}"
   when:
     - ansible_pkg_mgr == "yum"
+    - devel_mode
 
-- name: Install chacra repo
+- name: Install cephmetrics development repo
   copy:
-    src: files/cephmetrics.repo
+    src: files/cephmetrics-devel.repo
     dest: /etc/yum.repos.d/cephmetrics.repo
   when:
     - ansible_pkg_mgr == "yum"
     - not use_epel
+    - devel_mode
 
-- name: Remove chacra repo
+- name: Remove cephmetrics repo
   file:
     path: /etc/yum.repos.d/cephmetrics.repo
     state: absent
   when:
     - ansible_pkg_mgr == "yum"
     - use_epel
+    - devel_mode
 
 - name: Add Grafana repo
   template:
@@ -29,6 +32,7 @@
   when:
     - ansible_pkg_mgr == 'yum'
     - use_epel
+    - devel_mode
 
 - name: Remove Grafana repo
   file:
@@ -37,3 +41,18 @@
   when:
     - ansible_pkg_mgr == "yum"
     - not use_epel
+    - devel_mode
+
+- name: Enable subscription-manager repos
+  command: "subscription-manager repos{% for repo in rhsm_repos %} --enable={{ repo }}{% endfor %}"
+  when:
+    - ansible_pkg_mgr == "yum"
+    - not devel_mode
+
+- name: Install cephmetrics production repo
+  copy:
+    src: files/cephmetrics-prod.repo
+    dest: /etc/yum.repos.d/cephmetrics.repo
+  when:
+    - ansible_pkg_mgr == "yum"
+    - not devel_mode
