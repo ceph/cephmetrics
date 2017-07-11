@@ -192,6 +192,7 @@ class Disk(object):
 
         self._name = device_name
         self._path_name = path_name
+        self._base_dev = Disk.get_base_dev(device_name)
         self.osd_id = osd_id
 
         self.rotational = self._get_rota()
@@ -204,10 +205,10 @@ class Disk(object):
         self.refresh()
 
     def _get_size(self):
-        return int(fread("/sys/block/{}/size".format(self._name))) * 512
+        return int(fread("/sys/block/{}/size".format(self._base_dev))) * 512
 
     def _get_rota(self):
-        return int(fread("/sys/block/{}/queue/rotational".format(self._name)))
+        return int(fread("/sys/block/{}/queue/rotational".format(self._base_dev)))
 
     def _get_fssize(self):
         s = statvfs("{}/whoami".format(self._path_name))
@@ -222,14 +223,20 @@ class Disk(object):
             self.fs_size, self.fs_used, self.fs_percent_used = self._get_fssize()
 
     @staticmethod
-    def get_real_dev(dev_name):
-        # for nvme and intelcas devices, just use the device name as is, but
-        # for sdX type devices, strip of the partition id
-        if dev_name.startswith(('nvme', 'intelcas')):
+    def get_base_dev(dev_name):
+
+        # for intelcas devices, just use the device name as is
+        if dev_name.startswith('intelcas'):
             device = dev_name
+        elif dev_name.startswith('nvme'):
+            if 'p' in dev_name:
+                device = dev_name[:(dev_name.index('p'))]
+            else:
+                device = dev_name
         else:
             # default strip any numeric ie. sdaa1 -> sdaa
             device = filter(lambda ch: ch.isalpha(), dev_name)
+
         return device
 
 

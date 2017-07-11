@@ -135,12 +135,12 @@ class OSDs(BaseCollector):
                 if dirs.issuperset(osd_indicators):
                     osd_id = path_name.split('-')[-1]
 
-                    osd_device = Disk.get_real_dev(dev_path.split('/')[-1])
+                    osd_device = dev_path.split('/')[-1]
 
                     if osd_device not in self.osd:
                         self.osd[osd_device] = Disk(osd_device,
-                                                    path_name,
-                                                    osd_id)
+                                                    path_name=path_name,
+                                                    osd_id=osd_id)
                         self.dev_lookup[osd_device] = 'osd'
 
                     if osd_id not in self.osd:
@@ -151,10 +151,12 @@ class OSDs(BaseCollector):
                     if os.path.exists(journal_link):
                         # this is a filestore based OSD
                         jrnl_path = os.path.realpath(journal_link)
-                        jrnl_dev = Disk.get_real_dev(jrnl_path.split('/')[-1])
+                        jrnl_dev = jrnl_path.split('/')[-1]
 
                         if jrnl_dev not in self.osd:
-                            self.jrnl[jrnl_dev] = Disk(jrnl_dev, osd_id=osd_id)
+                            self.jrnl[jrnl_dev] = Disk(jrnl_dev,
+                                                       osd_id=osd_id)
+
                             self.dev_lookup[jrnl_dev] = 'jrnl'
 
                     else:
