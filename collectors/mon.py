@@ -258,6 +258,7 @@ class Mon(BaseCollector):
         pool_list = self.get_pools()
         mon_list = sorted(monitors.keys())
         my_pools = Mon._select_pools(pool_list, mon_list)
+        self.logger.debug("Pools to scan : {}".format(','.join(my_pools)))
         threads = []
 
         start = time.time()
@@ -267,7 +268,7 @@ class Mon(BaseCollector):
             thread.start()
             threads.append(thread)
 
-        # wait for all threads
+        # wait for all threads to complete
         for thread in threads:
             thread.join()
 
@@ -275,6 +276,7 @@ class Mon(BaseCollector):
         self.elapsed_log_msg("rbd scans", (end - start))
 
         total_rbds = sum([thread.num_rbds for thread in threads])
+        self.logger.debug("total rbds found : {}".format(total_rbds))
 
         for thread in threads:
             del thread

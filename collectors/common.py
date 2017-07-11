@@ -188,11 +188,27 @@ class Disk(object):
         "osd_id": ("osd_id", "gauge")
     }
 
+    def __init__(self, device_name, path_name=None, osd_id=None):
+
+        self._name = device_name
+        self._path_name = path_name
+        self._base_dev = Disk.get_base_dev(device_name)
+        self.osd_id = osd_id
+
+        self.rotational = self._get_rota()
+        self.disk_size = self._get_size()
+        self.perf = IOstat()
+        self.fs_size = 0
+        self.fs_percent_used = 0
+        self.fs_used = 0
+
+        self.refresh()
+
     def _get_size(self):
-        return int(fread("/sys/block/{}/size".format(self._name))) * 512
+        return int(fread("/sys/block/{}/size".format(self._base_dev))) * 512
 
     def _get_rota(self):
-        return int(fread("/sys/block/{}/queue/rotational".format(self._name)))
+        return int(fread("/sys/block/{}/queue/rotational".format(self._base_dev)))
 
     def _get_fssize(self):
         s = statvfs("{}/whoami".format(self._path_name))
@@ -202,7 +218,26 @@ class Disk(object):
         return fs_size, fs_used, fs_percent_used
 
     def refresh(self):
-        self.fs_size, self.fs_used, self.fs_percent_used = self._get_fssize()
+        # only run the fs size update, if the _path_name is set.
+        if self._path_name:
+            self.fs_size, self.fs_used, self.fs_percent_used = self._get_fssize()
+
+    @staticmethod
+    def get_base_dev(dev_name):
+
+        # for intelcas devices, just use the device name as is
+        if dev_name.startswith('intelcas'):
+            device = dev_name
+        elif dev_name.startswith('nvme'):
+            if 'p' in dev_name:
+                device = dev_name[:(dev_name.index('p'))]
+            else:
+                device = dev_name
+        else:
+            # default strip any numeric ie. sdaa1 -> sdaa
+            device = filter(lambda ch: ch.isalpha(), dev_name)
+
+        return device
 
 
 class CollectorLog(object):

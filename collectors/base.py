@@ -1,8 +1,10 @@
 #!/usr/bin/env python
+
 from ceph_daemon import admin_socket
 import json
 from collectors.common import CollectorLog
 import time
+
 
 class BaseCollector(object):
 
@@ -14,12 +16,15 @@ class BaseCollector(object):
         self.logger = CollectorLog(log_type=class_name,
                                    log_level=log_level)
 
-    def _admin_socket(self, cmds=None):
+    def _admin_socket(self, cmds=None, socket_path=None):
+
+        adm_socket = self.admin_socket if not socket_path else socket_path
+
         if not cmds:
             cmds = ['perf', 'dump']
 
         start = time.time()
-        response = admin_socket(self.admin_socket, cmds,
+        response = admin_socket(adm_socket, cmds,
                                 format='json')
         end = time.time()
 

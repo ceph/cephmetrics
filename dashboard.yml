@@ -19,6 +19,7 @@ domain: storage.lab
 _dashboards:
   - ceph-at-a-glance
   - ceph-backend-storage
+  - ceph-osd-latency
   - ceph-frontend
   - ceph-rados
   - ceph-rgw-workload
