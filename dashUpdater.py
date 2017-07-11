@@ -104,6 +104,7 @@ def get_config(file_name):
             cfg.grafana_port = yaml_config.get('_grafana_port', 3000)
             cfg.home_dashboard = yaml_config.get('_home_dashboard',
                                                  'ceph-at-a-glance')
+            cfg.domain = yaml_config.get('domain', '')
             cfg.yaml = yaml_config
             return cfg
 
@@ -165,6 +166,11 @@ def load_dashboard(dashboard_dir, dashboard_name):
     if os.path.exists(sample_dashboard):
         # load it in
         dashboard_data = fread(sample_dashboard)
+
+        # if domain has not been given, we need to remove it from the queries
+        if not config.domain:
+            dashboard_data = dashboard_data.replace('$domain.', '')
+
         try:
             dashjson = json.loads(dashboard_data)
         except:
@@ -306,6 +312,9 @@ def main():
     if config.dashboards:
         vars_to_update = {k: config.yaml[k] for k in config.yaml
                           if not k.startswith('_')}
+        if 'domain' not in vars_to_update:
+            vars_to_update['domain'] = config.domain
+
     else:
         logger.error("Config file doesn't contain dashboards! Unable "
                      "to continue")
