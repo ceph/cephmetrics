@@ -14,3 +14,17 @@ firewalld_zone: public
 rhsm_repos:
   - rhel-7-server-rhscon-2-installer-rpms
   - rhel-7-server-optional-rpms
+devel_packages:
+  yum:
+    # unzip is needed to extract the Vonage plugin
+    - unzip
+    - graphite-web
+    - python-carbon
+    - grafana
+  apt:
+    # unzip is needed to extract the Vonage plugin
+    - unzip
+    - grafana
+    # for dashUpdater.py
+    - python-yaml
+    - python-requests

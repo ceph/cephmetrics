@@ -43,6 +43,31 @@
     - not use_epel
     - devel_mode
 
+- name: Install grafana repo
+  copy:
+    src: files/grafana.list
+    dest: /etc/apt/sources.list.d/grafana.list
+  when:
+    - ansible_pkg_mgr == "apt"
+    - devel_mode
+
+- name: Add packagecloud GPG key to apt
+  apt_key:
+    # This is the key used by the grafana repo
+    url: https://packagecloud.io/gpg.key
+    id: D59097AB
+    state: present
+  when:
+    - ansible_pkg_mgr == "apt"
+    - devel_mode
+
+- name: Update apt cache
+  apt:
+    update_cache: true
+  when:
+    - ansible_pkg_mgr == 'apt'
+    - devel_mode
+
 - name: Enable subscription-manager repos
   command: "subscription-manager repos{% for repo in rhsm_repos %} --enable={{ repo }}{% endfor %}"
   when:
