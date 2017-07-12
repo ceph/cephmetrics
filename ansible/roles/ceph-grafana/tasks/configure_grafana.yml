@@ -45,7 +45,7 @@
       {
         "name":"{{ graphite.grafana_name }}",
         "type":"graphite",
-        "url":"http://localhost:{{ graphite.port }}",
+        "url":"http://localhost:{{ graphite.web_port if graphite.service == 'graphite-web' else graphite.api_port }}",
         "access":"proxy",
         "basicAuth":false,
         "isDefault":true

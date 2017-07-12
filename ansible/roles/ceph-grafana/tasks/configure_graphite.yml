@@ -1,42 +1,8 @@
 ---
-- name: Create Graphite DB tables
-  command: /usr/bin/graphite-manage syncdb --noinput
-  become_user: apache
+- include: configure_graphite_web.yml
+  when:
+    - graphite.service == 'graphite-web'
 
-- name: Build Graphite index
-  command: /usr/bin/graphite-build-index
-  become_user: apache
-
-- name: Set or unset port in main httpd config
-  lineinfile:
-    dest: /etc/httpd/conf/httpd.conf
-    regexp: "^Listen .*"
-    line: "Listen 80"
-    insertafter: "^#Listen .*"
-    state: "{{ 'present' if graphite.port == '80' else 'absent' }}"
-  notify: Restart graphite-web
-
-- name: Set port in graphite httpd config
-  lineinfile:
-    dest: /etc/httpd/conf.d/graphite-web.conf
-    regexp: "^Listen .*"
-    line: "Listen {{ graphite.port }}"
-    insertbefore: "^<VirtualHost .*"
-    #state: "{{ graphite.port == 80 | ternary('absent', 'present') }}"
-    state: "{{ 'absent' if graphite.port == '80' else 'present' }}"
-  notify: Restart graphite-web
-
-- name: Set VirtualHost port in graphite httpd config
-  replace:
-    dest: /etc/httpd/conf.d/graphite-web.conf
-    regexp: "^<VirtualHost \\*:.+>$"
-    replace: "<VirtualHost *:{{ graphite.port }}>"
-  notify: Restart graphite-web
-
-- name: Allow connecting to graphite without auth
-  lineinfile:
-    dest: /etc/httpd/conf.d/graphite-web.conf
-    line: "	Require all granted"
-    insertafter: '<Directory "/usr/share/graphite/">'
-    state: present
-  notify: Restart graphite-web
+- include: configure_graphite_api.yml
+  when:
+    - graphite.service == 'graphite-api'

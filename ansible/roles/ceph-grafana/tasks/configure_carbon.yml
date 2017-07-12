@@ -21,12 +21,12 @@
     - Resize whisper databases
     - Restart carbon-cache
 
-- name: Ensure /var/lib/carbon has the right ownership
+- name: Ensure carbon storage has the right ownership
   file:
-    path: /var/lib/carbon
+    path: "{{ carbon.storage_dir[ansible_pkg_mgr] }}"
     state: directory
-    owner: carbon
-    group: carbon
+    owner: "{{ carbon.unix_user[ansible_pkg_mgr] }}"
+    group: "{{ carbon.unix_user[ansible_pkg_mgr] }}"
     recurse: yes
   notify:
     - Restart carbon-cache

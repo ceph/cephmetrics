@@ -7,5 +7,5 @@
   with_items:
     - carbon-cache
     # graphite-web is served by httpd
-    - httpd
+    - "{{ 'httpd' if graphite.service == 'graphite-web' else graphite.service }}"
     - grafana-server

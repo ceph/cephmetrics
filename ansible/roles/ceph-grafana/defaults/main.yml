@@ -4,10 +4,23 @@ use_epel: false
 devel_mode: true
 replace_dashboards: true
 graphite:
-  port: "{{ graphite_port | default('8080') }}"
+  service: "{{ 'graphite-web' if ansible_pkg_mgr == 'yum' else 'graphite-api' }}"
+  web_port: "{{ graphite_port | default('8080') }}"
+  api_port: 8888
   user: admin
   password: admin
   grafana_name: Local
+  # The unix account running the graphite-web process
+  unix_user:
+    yum: apache
+    apt: _graphite
+carbon:
+  unix_user:
+    yum: carbon
+    apt: _graphite
+  storage_dir:
+    yum: /var/lib/carbon
+    apt: /var/lib/graphite
 # The firewalld zone that carbon and grafana will use
 firewalld_zone: public
 # RHEL repos that need to be enabled with subscription-manager
@@ -24,6 +37,10 @@ devel_packages:
   apt:
     # unzip is needed to extract the Vonage plugin
     - unzip
+    - graphite-api
+    # For graphite-api
+    - gunicorn3
+    - graphite-carbon
     - grafana
     # for dashUpdater.py
     - python-yaml
