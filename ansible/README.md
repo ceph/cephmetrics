@@ -3,6 +3,7 @@
 This set of ansible roles, in combination with `playbook.yml`, provide a way to deploy cephmetrics to monitor a Ceph cluster.
 
 ## Prerequisites
+- RHEL 7 is supported with `devel_mode` set to `True` or `False`. Ubuntu 16.04 is supported only when `devel_mode` is `True` at this point.
 - Currently only RHEL 7 is supported for all hosts
 - A functional [ceph](https://ceph.com/) cluster. [collectd](https://collectd.org/) will be used to collect metrics
 - A separate host to receive data pushed by hosts in the Ceph cluster, and run the dashboard to display that data.
@@ -57,7 +58,6 @@ These variables are only relevent when `devel_mode` is true:
 
 ## Current Limitations
 
-- Only RHEL 7 hosts are supported
 - Currently, metrics are only *displayed* for `osd` and `rgw` hosts.
 - Authentication for grafana and graphite is fixed and creates a user `admin` with password `admin`.
 - Services are deployed on the dashboard host directly; there is not yet support for a containerized deployment.

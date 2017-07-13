@@ -18,6 +18,16 @@
     name: httpd
     state: restarted
     enabled: true
+  when:
+    - "{{ graphite.service == 'graphite-web' }}"
+
+- name: Restart graphite-api
+  service:
+    name: graphite-api
+    state: restarted
+    enabled: true
+  when:
+    - "{{ graphite.service == 'graphite-api' }}"
 
 - name: Restart carbon-cache
   service:

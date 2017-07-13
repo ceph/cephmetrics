@@ -30,19 +30,7 @@
   package:
     name: "{{ item }}"
     state: latest
-  with_items:
-    # For the json python module
-    - python-libs
-    # For the rados python module
-    - python-rados
-    # For the ceph_daemon python module
-    - ceph-common
-    # For semodule
-    - make
-    - libsemanage-python
-    - policycoreutils-python
-    - selinux-policy-devel
+  with_items: "{{ collector_dependencies[ansible_pkg_mgr] }}"
   when:
-    - ansible_pkg_mgr == "yum"
     - devel_mode
   notify: Restart collectd

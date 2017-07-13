@@ -1,26 +1,55 @@
 ---
+- name: Set collectd_conf
+  set_fact:
+    collectd_conf: "/etc/{{ 'collectd/' if ansible_pkg_mgr == 'apt' else '' }}collectd.conf"
+
+- name: Set collectd_conf_d
+  set_fact:
+    collectd_conf_d: "/etc/collectd{{ '/collectd.conf' if ansible_pkg_mgr == 'apt' else '' }}.d"
+
 - name: Ship collectd.conf
   copy:
     src: files/etc/collectd.conf
-    dest: /etc/
+    dest: "{{ collectd_conf }}"
   notify: Restart collectd
 
-- name: Ship /etc/collectd.d
+- name: Set PluginDir in collectd.conf
+  replace:
+    dest: "{{ collectd_conf }}"
+    regexp: 'PluginDir ".*"'
+    replace: 'PluginDir "{{ collectd_dir }}"'
+  notify: Restart collectd
+
+- name: Set Include path in collectd.conf
+  replace:
+    dest: "{{ collectd_conf }}"
+    regexp: 'Include ".*"'
+    replace: 'Include "{{ collectd_conf_d }}/*.conf"'
+  notify: Restart collectd
+
+- name: Ship /etc/collectd.d or /etc/collectd/collectd.conf.d
   copy:
-    src: files/etc/collectd.d
-    dest: /etc/
+    src: files/etc/collectd.d/
+    dest: "{{ collectd_conf_d }}"
   notify: Restart collectd
 
 - name: Set hostname in write_graphite.conf
   replace:
-    dest: "/etc/collectd.d/write_graphite.conf"
+    dest: "{{ collectd_conf_d }}/write_graphite.conf"
     regexp: 'Host ".*"'
     replace: "Host \"{{ groups['ceph-grafana'][0] }}\""
   notify: Restart collectd
 
 - name: Set cluster name in cephmetrics.conf
   replace:
-    dest: /etc/collectd.d/cephmetrics.conf
+    dest: "{{ collectd_conf_d }}/cephmetrics.conf"
     regexp: 'ClusterName ".*"'
     replace: 'ClusterName "{{ cluster }}"'
+  notify: Restart collectd
+
+- name: Set ModulePath in cephmetrics.conf
+  replace:
+    dest: "{{ collectd_conf_d }}/cephmetrics.conf"
+    regexp: 'ModulePath ".*"'
+    replace: 'ModulePath "{{ collectd_cephmetrics_dir }}"'
   notify: Restart collectd

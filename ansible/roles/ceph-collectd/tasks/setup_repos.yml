@@ -7,6 +7,30 @@
     - ansible_pkg_mgr == "yum"
     - devel_mode
 
+- name: Add collectd repo
+  template:
+    src: collectd.list
+    dest: /etc/apt/sources.list.d/collectd.list
+  when:
+    - ansible_pkg_mgr == 'apt'
+    - devel_mode
+
+- name: Add collectd.org GPG key to apt
+  apt_key:
+    id: 3994D24FB8543576
+    state: present
+    keyserver: ha.pool.sks-keyservers.net
+  when:
+    - ansible_pkg_mgr == 'apt'
+    - devel_mode
+
+- name: Update apt cache
+  apt:
+    update_cache: true
+  when:
+    - ansible_pkg_mgr == 'apt'
+    - devel_mode
+
 - name: Install cephmetrics development repo
   copy:
     src: cephmetrics-devel.repo

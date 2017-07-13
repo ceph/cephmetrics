@@ -1,21 +1,25 @@
 ---
 - name: Set collectd_dir
   set_fact:
-    collectd_dir: /usr/lib64/collectd/cephmetrics
+    collectd_dir: "/usr/lib{{ '64' if ansible_pkg_mgr == 'yum' else '' }}/collectd"
+
+- name: Set collectd_cephmetrics_dir
+  set_fact:
+    collectd_cephmetrics_dir: "{{ collectd_dir }}/cephmetrics"
 
 - name: Create collectors directory
   file:
-    name: "{{ collectd_dir }}/collectors"
+    name: "{{ collectd_cephmetrics_dir }}/collectors"
     state: directory
 
 - name: Ship collector plugins
   copy:
     src: files/collectors/
-    dest: "{{ collectd_dir }}/collectors"
+    dest: "{{ collectd_cephmetrics_dir }}/collectors"
   notify: Restart collectd
 
 - name: Ship cephmetrics.py
   copy:
     src: files/cephmetrics.py
-    dest: "{{ collectd_dir }}"
+    dest: "{{ collectd_cephmetrics_dir }}"
   notify: Restart collectd
