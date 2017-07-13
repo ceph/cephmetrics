@@ -21,6 +21,11 @@ carbon:
   storage_dir:
     yum: /var/lib/carbon
     apt: /var/lib/graphite
+whisper:
+  retention:
+    - ['10s', '7d']
+    - ['1m', '30d']
+    - ['15m', '5y']
 # The firewalld zone that carbon and grafana will use
 firewalld_zone: public
 # RHEL repos that need to be enabled with subscription-manager
