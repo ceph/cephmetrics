@@ -1,20 +1,19 @@
 #!/usr/bin/env python
 
-from ceph_daemon import admin_socket
 import json
-from collectors.common import CollectorLog
 import time
+import logging
+
+from ceph_daemon import admin_socket
 
 
 class BaseCollector(object):
 
-    def __init__(self, cluster_name, admin_socket=None, log_level='debug'):
+    def __init__(self, cluster_name, admin_socket=None):
         self.cluster_name = cluster_name
         self.admin_socket = admin_socket
 
-        class_name = self.__class__.__name__
-        self.logger = CollectorLog(log_type=class_name,
-                                   log_level=log_level)
+        self.logger = logging.getLogger('cephmetrics')
 
     def _admin_socket(self, cmds=None, socket_path=None):
 
@@ -28,13 +27,11 @@ class BaseCollector(object):
                                 format='json')
         end = time.time()
 
-        self.elapsed_log_msg("admin_socket call for {}".format(' '.join(cmds)),
-                             (end - start))
-        return json.loads(response)
+        self.logger.debug("admin_socket call '{}' : "
+                          "{:.3f}s".format(' '.join(cmds),
+                                           (end - start)))
 
-    def elapsed_log_msg(self, msg, elapsed_secs):
-        self.logger.debug("{0} took {1:.2f} secs".format(msg,
-                                                        elapsed_secs))
+        return json.loads(response)
 
     def get_stats(self):
 
