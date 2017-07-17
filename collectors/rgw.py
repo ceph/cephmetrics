@@ -69,6 +69,6 @@ class RGW(BaseCollector):
 
         end = time.time()
 
-        self.elapsed_log_msg("RGW get_stats", (end - start))
+        self.logger.info("RGW get_stats : {:.3f}s".format((end - start)))
 
         return {"rgw": stats}
