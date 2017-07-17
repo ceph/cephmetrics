@@ -9,6 +9,7 @@ import time
 from collectors.base import BaseCollector
 from collectors.common import merge_dicts, get_hostname
 
+
 class RBDScanner(threading.Thread):
 
     def __init__(self, cluster_name, pool_name):
@@ -119,8 +120,9 @@ class Mon(BaseCollector):
             rc, buf_s, out = cluster.mon_command(json.dumps(cmd), b'')
         end = time.time()
 
-        self.elapsed_log_msg("_mon_command call for {}".format(cmd_request),
-                             (end - start))
+        self.logger.debug("_mon_command call '{}' :"
+                          " {:.3f}s".format(cmd_request,
+                                        (end - start)))
 
         return json.loads(buf_s)
 
@@ -201,16 +203,21 @@ class Mon(BaseCollector):
 
     def _get_osd_states(self):
 
-        raw = self._mon_command('osd tree')
-        osds = {str(osd.get('id')): {"status":
-                Mon.osd_state.get(osd.get('status'))}
-                for osd in raw.get('nodes')
-                if osd.get('type') == 'osd'}
+        self.logger.debug("fetching osd states from the local mon")
+        raw = self._mon_command('osd dump')
+        osd_hosts = set()
+        osds = {}
+        for osd in raw.get('osds'):
+            cluster_addr = osd.get('cluster_addr').split(':')[0]
+            osd_hosts.add(cluster_addr)
 
-        num_osd_hosts = len([node.get('name') for node in raw.get('nodes')
-                             if node.get('type') == 'host'])
+            # NB. The key for the osds dict must be a string as the dict is
+            # flattened when the metric name is derived in the parent collectd
+            # module. If it is not converted, you get a TypeError
+            osds[str(osd.get('osd'))] = {"up": osd.get('up'),
+                                         "in": osd.get('in')}
 
-        return num_osd_hosts, osds
+        return len(osd_hosts), osds
 
     @staticmethod
     def _select_pools(pools, mons):
@@ -249,7 +256,7 @@ class Mon(BaseCollector):
             rados_pools = sorted(cluster.list_pools())
         end = time.time()
 
-        self.logger.debug('lspools took {0:.2f} secs'.format(end - start))
+        self.logger.debug('lspools took {:.3f}s'.format(end - start))
 
         return rados_pools
 
@@ -258,7 +265,8 @@ class Mon(BaseCollector):
         pool_list = self.get_pools()
         mon_list = sorted(monitors.keys())
         my_pools = Mon._select_pools(pool_list, mon_list)
-        self.logger.debug("Pools to scan : {}".format(','.join(my_pools)))
+        self.logger.debug("Pools to be scanned on this mon"
+                          " : {}".format(','.join(my_pools)))
         threads = []
 
         start = time.time()
@@ -273,7 +281,7 @@ class Mon(BaseCollector):
             thread.join()
 
         end = time.time()
-        self.elapsed_log_msg("rbd scans", (end - start))
+        self.logger.debug("rbd scans {:.3f}s".format((end - start)))
 
         total_rbds = sum([thread.num_rbds for thread in threads])
         self.logger.debug("total rbds found : {}".format(total_rbds))
@@ -286,7 +294,7 @@ class Mon(BaseCollector):
     def get_stats(self):
         """
         method associated with the plugin callback to gather the metrics
-        :return:
+        :return: (dict) metadata describing the state of the mon/osd's
         """
 
         start = time.time()
@@ -301,7 +309,7 @@ class Mon(BaseCollector):
                                                 "osd_state": osd_states})
 
         end = time.time()
-        self.elapsed_log_msg("mon get_stats call", (end - start))
+        self.logger.info("mon get_stats call : {:.3f}s".format((end - start)))
 
         return {"mon": all_stats}
 
