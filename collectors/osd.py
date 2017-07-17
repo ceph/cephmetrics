@@ -78,6 +78,7 @@ class OSDs(BaseCollector):
         self.jrnl = {}      # dict of journal devices (if not collocated)
         self.osd_id_list = []
         self.dev_lookup = {}    # dict dev_name -> osd | jrnl
+        self.osd_count = 0
 
     def __repr__(self):
 
@@ -106,6 +107,7 @@ class OSDs(BaseCollector):
                               for key_name in OSDstats.filestore_metrics}
 
         osd_stats = resp.get('osd')
+
         # Add disk usage stats
         stats['osd'] = {key_name: osd_stats.get(key_name)
                         for key_name in OSDstats.osd_capacity.keys()}
@@ -142,6 +144,7 @@ class OSDs(BaseCollector):
                                                     path_name=path_name,
                                                     osd_id=osd_id)
                         self.dev_lookup[osd_device] = 'osd'
+                        self.osd_count += 1
 
                     if osd_id not in self.osd:
                         self.osd[osd_id] = OSDstats()
@@ -196,15 +199,21 @@ class OSDs(BaseCollector):
                 device.perf.compute(interval)
                 device.refresh()
 
+        end = time.time()
+        self.logger.debug("OS disk stats calculated in "
+                          "{:.4f}s".format(end-now))
+
         # fetch stats from each osd daemon
+        osd_stats_start = time.time()
         for osd_id in self.osd_id_list:
             osd_stats = self._fetch_osd_stats(osd_id)
-            self.logger.debug('stats : {}'.format(osd_stats))
+            # self.logger.debug('stats : {}'.format(osd_stats))
             osd_device = self.osd[osd_id]
             osd_device.update(osd_stats)
-
-        end = time.time()
-        self.elapsed_log_msg("disk performance stats generation", (end - now))
+        osd_stats_end = time.time()
+        self.logger.debug("OSD perf dump stats collected for {} OSDs "
+                          "in {:.3f}s".format(len(self.osd_id_list),
+                                          (osd_stats_end - osd_stats_start)))
 
     @staticmethod
     def _dump_devs(device_dict):
@@ -226,19 +235,22 @@ class OSDs(BaseCollector):
         :return: (dict) dictionary representation of this OSDs on this host
         """
 
-        return {"osd": OSDs._dump_devs(self.osd),
-                "jrnl": OSDs._dump_devs(self.jrnl)}
+        return {
+            "num_osds": self.osd_count,
+            "osd": OSDs._dump_devs(self.osd),
+            "jrnl": OSDs._dump_devs(self.jrnl)
+        }
 
     def get_stats(self):
 
         start = time.time()
 
         self._dev_to_osd()
-        self.logger.debug("running stats lookup")
         self._stats_lookup()
 
         end = time.time()
 
-        self.elapsed_log_msg("osd get_stats call", (end - start))
+        self.logger.info("osd get_stats call "
+                         ": {:.3f}s".format((end - start)))
 
         return self.dump()
