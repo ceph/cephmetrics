@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import os
 import glob
+import logging
 import collectd
 
 from collectors.mon import Mon
@@ -25,11 +26,10 @@ class Ceph(object):
         self.rgw = None
         self.osd = None
 
-    def probe(self, log_level='debug'):
+    def probe(self):
         """
         set up which collector(s) to use, based on what types of sockets we
         find in /var/run/ceph
-        log_level: (str) logging level (debug or info)
         """
 
         mon_socket = '/var/run/ceph/{}-mon.{}.asok'.format(self.cluster_name,
@@ -37,8 +37,7 @@ class Ceph(object):
         if os.path.exists(mon_socket):
             self.mon_socket = mon_socket
             self.mon = Mon(self.cluster_name,
-                           admin_socket=mon_socket,
-                           log_level=log_level)
+                           admin_socket=mon_socket)
 
         rgw_socket_list = glob.glob('/var/run/ceph/{}-client.rgw.*.'
                                     'asok'.format(self.cluster_name))
@@ -46,8 +45,7 @@ class Ceph(object):
         if rgw_socket_list:
             rgw_socket = rgw_socket_list[0]
             self.rgw = RGW(self.cluster_name,
-                           admin_socket=rgw_socket,
-                           log_level=log_level)
+                           admin_socket=rgw_socket)
 
         osd_socket_list = glob.glob('/var/run/ceph/{}-osd.*'
                                     '.asok'.format(self.cluster_name))
@@ -55,8 +53,7 @@ class Ceph(object):
         osds_mounted = [mnt for mnt in mounted
                         if mnt.split()[1].startswith('/var/lib/ceph')]
         if osd_socket_list or osds_mounted:
-            self.osd = OSDs(self.cluster_name,
-                            log_level=log_level)
+            self.osd = OSDs(self.cluster_name)
 
         collectd.info("{}: Roles detected - mon:{} "
                       "osd:{} rgw:{}".format(__name__,
@@ -91,6 +88,7 @@ def write_stats(role_metrics, stats):
 
 
 def configure_callback(conf):
+
     valid_log_levels = ['debug', 'info']
 
     global CEPH
@@ -111,10 +109,25 @@ def configure_callback(conf):
         # let's assume the conf file is OK to use
         CEPH.cluster_name = cluster_name
 
-        CEPH.probe(log_level)
+        setup_module_logging(log_level)
+
+        CEPH.probe()
 
     else:
         collectd.error("ClusterName is required")
+
+
+def setup_module_logging(log_level):
+
+    level = {"debug": logging.DEBUG,
+             "info": logging.INFO}
+
+    logging.getLogger('cephmetrics')
+    logging.basicConfig(filename='/var/log/collectd-cephmetrics.log',
+                        format='%(asctime)s - %(levelname)-7s - '
+                               '[%(filename)s:%(lineno)s:%(funcName)s() - '
+                               '%(message)s',
+                        level=level.get(log_level))
 
 
 def read_callback():
@@ -133,6 +146,7 @@ def read_callback():
 
 
 if __name__ == '__main__':
+
     # run interactively or maybe test the code
     collectd.info("In main for some reason !")
     pass
