@@ -99,6 +99,12 @@ class OSDs(BaseCollector):
         stats = {}
         osd_socket_name = '/var/run/ceph/{}-osd.{}.asok'.format(self.cluster_name,
                                                                 osd_id)
+
+        if not os.path.exists(osd_socket_name):
+            # all OSD's should expose an admin socket, so if it's missing
+            # this node has a problem!
+            raise IOError("Socket file missing for OSD {}".format(osd_id))
+
         self.logger.debug("fetching osd stats for osd {}".format(osd_id))
         resp = self._admin_socket(socket_path=osd_socket_name)
 
