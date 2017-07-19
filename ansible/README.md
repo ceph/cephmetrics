@@ -52,6 +52,14 @@ You may override certain variables by creating a `vars.yml` file:
 - `cluster`: The name of the Ceph cluster. Default: ceph
 - `firewalld_zone`: The `firewalld` zone to use when opening ports for Grafana and Carbon. Default: public
 - `devel_mode`: Whether to perform a development-mode deployment vs. a production deployment. Default: true
+- `whisper`: May be used to configure [whisper retention](http://graphite.readthedocs.io/en/latest/config-carbon.html#storage-schemas-conf) settings. Default:
+    ```
+    whisper:
+      retention:
+        - ['10s', '7d']
+        - ['1m', '30d']
+        - ['15m', '5y']
+    ```
 
 These variables are only relevent when `devel_mode` is true:
 - `use_epel`: Whether or not to use EPEL and grafana.com instead of ceph.com-sourced packages for dependencies. Default: false
