@@ -6,6 +6,9 @@ defaults:
   replace_dashboards: true
   grafana:
     datasource: Local
+    # Note: changing this value won't update the password in Grafana itself;
+    # change it via the web UI and then override this value to reflect.
+    admin_password: admin
   graphite:
     service: "{{ 'graphite-web' if ansible_pkg_mgr == 'yum' else 'graphite-api' }}"
     web_port: "{{ graphite_port | default('8080') }}"
