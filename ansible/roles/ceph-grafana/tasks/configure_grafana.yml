@@ -43,7 +43,7 @@
   set_fact:
     grafana_data_source: >
       {
-        "name":"{{ graphite.grafana_name }}",
+        "name":"{{ grafana.datasource }}",
         "type":"graphite",
         "url":"http://localhost:{{ graphite.web_port if graphite.service == 'graphite-web' else graphite.api_port }}",
         "access":"proxy",
@@ -67,7 +67,7 @@
 
 - name: Get datasource ID
   uri:
-    url: "http://localhost:3000/api/datasources/id/{{ graphite.grafana_name }}"
+    url: "http://localhost:3000/api/datasources/id/{{ grafana.datasource }}"
     method: GET
     user: "{{ graphite.user }}"
     password: "{{ graphite.password }}"
