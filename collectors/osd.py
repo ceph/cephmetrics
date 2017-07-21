@@ -121,6 +121,18 @@ class OSDs(BaseCollector):
 
         return stats
 
+    @staticmethod
+    def get_osd_type(osd_path):
+
+        osd_type_fname = os.path.join(osd_path, 'type')
+        if os.path.exists(osd_type_fname):
+            return fread(osd_type_fname)
+        else:
+            if os.path.exists(os.path.join(osd_path, 'journal')):
+                return "filestore"
+            else:
+                raise ValueError("Unrecognised OSD type")
+
     def _dev_to_osd(self):
         """
         Look at the system to determine which disks are acting as OSD's
@@ -151,8 +163,7 @@ class OSDs(BaseCollector):
                         osd_id = fread(os.path.join(path_name, 'whoami'))
 
                     if osd_id not in self.osd:
-
-                        osd_type = fread(os.path.join(path_name, "type"))
+                        osd_type = OSDs.get_osd_type(path_name)
                         self.osd[osd_id] = OSDstats(osd_type=osd_type)
                         self.osd_id_list.append(osd_id)
 
