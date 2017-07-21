@@ -104,6 +104,8 @@ def get_config(file_name):
             cfg.grafana_port = yaml_config.get('_grafana_port', 3000)
             cfg.home_dashboard = yaml_config.get('_home_dashboard',
                                                  'ceph-at-a-glance')
+            cfg.alert_dashboard = yaml_config.get('_alert_dashboard',
+                                                  'alert-status')
             cfg.domain = yaml_config.get('domain', '')
             cfg.yaml = yaml_config
             return cfg
@@ -326,18 +328,32 @@ def main():
     for dashname in config.dashboards:
         logger.info("\nProcessing dashboard {}".format(dashname))
 
+        http_rc, dashjson = get_dashboard(dashname)
+        if dashname == config.alert_dashboard and http_rc == 200:
+            logger.info("- existing alert dashboard found, update bypassed")
+            continue
+
         if opts.mode == 'update':
-            http_rc, dashjson = get_dashboard(dashname)
-            if http_rc == 404:
+
+            if http_rc == 200:
+                # the dashboard is already loaded, so we'll use the existing
+                # definition
+                logger.debug("- existing dashboard will be updated")
+            else:
+                # get of dashboard failed, so just load it
                 dashjson = load_dashboard(opts.dashboard_dir, dashname)
 
-                if not dashjson:
+                if dashjson:
+                    logger.info("- dashboard loaded from sample")
+                else:
                     logger.warning("- sample not available, skipping")
                     rc = max(rc, 4)
                     continue
 
             logger.info("- dashboard retrieved")
+
         elif opts.mode == 'refresh':
+
             dashjson = load_dashboard(opts.dashboard_dir, dashname)
 
             if not dashjson:
@@ -345,13 +361,26 @@ def main():
                 rc = max(rc, 4)
                 continue
 
-        templating = dashjson['dashboard'].get('templating')
-        if templating:
-            dashjson = update_dashboard(dashjson, vars_to_update)
+        if dashname == config.alert_dashboard:
+            # if processing is here, this is 1st run so the alert_dashboard
+            # is new to grafana
+            dash_str = json.dumps(dashjson)
+            if config.domain:
+                dash_str = dash_str.replace('.$domain', ".{}".format(config.domain))
+            else:
+                dash_str = dash_str.replace('.$domain', '')
+
+            dashjson = json.loads(dash_str)
+
         else:
-            logger.info('- templating not defined in {}, '
-                        'skipping'.format(dashname))
-            rc = max(rc, 4)
+            # Normal dashboard processing
+            templating = dashjson['dashboard'].get('templating')
+            if templating:
+                dashjson = update_dashboard(dashjson, vars_to_update)
+            else:
+                logger.info('- templating not defined in {}, '
+                            'skipping'.format(dashname))
+                rc = max(rc, 4)
 
         http_rc = put_dashboard(dashjson)
 
