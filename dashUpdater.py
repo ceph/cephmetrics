@@ -300,6 +300,56 @@ def setup_logging():
     return logger
 
 
+def get_notification_id(channel_name):
+    """
+    Check whether the given notification channel has been defined to Grafana
+    :param (str) notification channel name
+    :return: (int) id of the channel, or 0 for doesn't exist
+    """
+
+    resp = get("http://{}:{}/api/"
+               "alert-notifications".format(config.grafana_host,
+                                            config.grafana_port),
+               auth=config.grafana_credentials)
+
+    if resp.status_code == 200:
+        notifications = resp.json()     # list if dicts returned by Grafana
+
+        # convert the list into a dict for lookup purposes
+        channels = {channel.get('name'): channel.get('id')
+                    for channel in notifications}
+        if channel_name in channels:
+            return channels[channel_name]
+        else:
+            return 0
+    else:
+        raise DashBoardException("Unable to get nofification channels from"
+                                 " Grafana")
+
+
+def define_notification(channel_name):
+    """
+    Add a given "seed" notification channel to Grafana using http post
+    :param channel_name: (str) channel name
+    :return: (int) http response code from post operation
+             (dict) response json object
+    """
+
+    seed_channel = json.dumps({"name": channel_name,
+                               "type": "email",
+                               "isDefault": False
+                               })
+
+    resp = post('http://{}:{}/api/'
+                'alert-notifications'.format(config.grafana_host,
+                                             config.grafana_port),
+                headers=HEADERS,
+                auth=config.grafana_credentials,
+                data=seed_channel)
+
+    return resp.status_code, resp.json()
+
+
 def main():
 
     rc = 0
@@ -364,11 +414,32 @@ def main():
         if dashname == config.alert_dashboard:
             # if processing is here, this is 1st run so the alert_dashboard
             # is new to grafana
-            dash_str = json.dumps(dashjson)
-            if config.domain:
-                dash_str = dash_str.replace('.$domain', ".{}".format(config.domain))
+            channel_id = get_notification_id("cephmetrics")
+            if channel_id:
+                logger.info("- notification channel already in place")
             else:
-                dash_str = dash_str.replace('.$domain', '')
+                http_rc, resp_json = define_notification("cephmetrics")
+                if http_rc == 200:
+                    channel_id = resp_json['id']
+                    logger.info("- notification channel added :"
+                                "{}".format(channel_id))
+                else:
+                    raise DashBoardException("Problem adding notification "
+                                             "channel ({})".format(http_rc))
+
+            dash_str = json.dumps(dashjson)
+            dash_str = dash_str.replace('"notifications": []',
+                                        '"notifications": [{{ "id":'
+                                        ' {0} }}]'.format(channel_id))
+            if config.domain:
+                logger.debug("- queries updated, replacing $domain with "
+                             "'{}'".format(config.domain))
+                dash_str = dash_str.replace('.$domain',
+                                            ".{}".format(config.domain))
+            else:
+                logger.debug("- queries updated, replacing $domain with NULL")
+                dash_str = dash_str.replace('.$domain',
+                                            '')
 
             dashjson = json.loads(dash_str)
 

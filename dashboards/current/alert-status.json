@@ -6,11 +6,11 @@
 		"canStar": true,
 		"slug": "alert-status",
 		"expires": "0001-01-01T00:00:00Z",
-		"created": "2017-07-18T00:47:55Z",
-		"updated": "2017-07-20T07:13:31Z",
-		"updatedBy": "admin",
-		"createdBy": "admin",
-		"version": 22
+		"created": "2017-07-23T22:23:27Z",
+		"updated": "2017-07-23T22:40:32Z",
+		"updatedBy": "admin@localhost",
+		"createdBy": "admin@localhost",
+		"version": 1
 	},
 	"dashboard": {
 		"annotations": {
@@ -20,7 +20,7 @@
 		"gnetId": null,
 		"graphTooltip": 0,
 		"hideControls": false,
-		"id": 13,
+		"id": 45,
 		"links": [],
 		"refresh": "30s",
 		"rows": [{
@@ -72,9 +72,7 @@
 					"message": "Cluster Health is not OK",
 					"name": "Overall Ceph Health",
 					"noDataState": "no_data",
-					"notifications": [{
-						"id": 1
-					}]
+					"notifications": []
 				},
 				"aliasColors": {
 					"Ceph Health": "#890F02",
@@ -179,9 +177,7 @@
 					"message": "DIsks Near full detected within the cluster. Warning threshold is 80% full.",
 					"name": "Disks Near Full",
 					"noDataState": "ok",
-					"notifications": [{
-						"id": 1
-					}]
+					"notifications": []
 				},
 				"aliasColors": {},
 				"bars": false,
@@ -282,9 +278,7 @@
 					"message": "OSD Down event",
 					"name": "OSDs Down",
 					"noDataState": "ok",
-					"notifications": [{
-						"id": 1
-					}]
+					"notifications": []
 				},
 				"aliasColors": {},
 				"bars": true,
@@ -401,9 +395,7 @@
 					"message": "Cluster Capacity Limit Warning",
 					"name": "Cluster Capacity",
 					"noDataState": "keep_state",
-					"notifications": [{
-						"id": 1
-					}]
+					"notifications": []
 				},
 				"aliasColors": {},
 				"bars": false,
@@ -531,9 +523,7 @@
 					"message": "Potential Disk Stall",
 					"name": "Disk I/O Stalls",
 					"noDataState": "no_data",
-					"notifications": [{
-						"id": 1
-					}]
+					"notifications": []
 				},
 				"aliasColors": {},
 				"bars": false,
@@ -640,9 +630,7 @@
 					"message": "PG peering is a taking a long time to finish",
 					"name": "PG Peering Delay",
 					"noDataState": "ok",
-					"notifications": [{
-						"id": 1
-					}]
+					"notifications": []
 				},
 				"aliasColors": {},
 				"bars": false,
@@ -744,9 +732,7 @@
 					"message": "PG's stuck inactive",
 					"name": "PG's Stuck",
 					"noDataState": "no_data",
-					"notifications": [{
-						"id": 1
-					}]
+					"notifications": []
 				},
 				"aliasColors": {},
 				"bars": false,
@@ -835,6 +821,7 @@
 		"style": "dark",
 		"tags": [],
 		"templating": {
+			"list": []
 		},
 		"time": {
 			"from": "now-24h",
@@ -846,6 +833,6 @@
 		},
 		"timezone": "browser",
 		"title": "Alert Status",
-		"version": 22
+		"version": 1
 	}
 }
