@@ -104,6 +104,8 @@ def get_config(file_name):
             cfg.grafana_port = yaml_config.get('_grafana_port', 3000)
             cfg.home_dashboard = yaml_config.get('_home_dashboard',
                                                  'ceph-at-a-glance')
+            cfg.alert_dashboard = yaml_config.get('_alert_dashboard',
+                                                  'alert-status')
             cfg.domain = yaml_config.get('domain', '')
             cfg.yaml = yaml_config
             return cfg
@@ -298,6 +300,56 @@ def setup_logging():
     return logger
 
 
+def get_notification_id(channel_name):
+    """
+    Check whether the given notification channel has been defined to Grafana
+    :param (str) notification channel name
+    :return: (int) id of the channel, or 0 for doesn't exist
+    """
+
+    resp = get("http://{}:{}/api/"
+               "alert-notifications".format(config.grafana_host,
+                                            config.grafana_port),
+               auth=config.grafana_credentials)
+
+    if resp.status_code == 200:
+        notifications = resp.json()     # list if dicts returned by Grafana
+
+        # convert the list into a dict for lookup purposes
+        channels = {channel.get('name'): channel.get('id')
+                    for channel in notifications}
+        if channel_name in channels:
+            return channels[channel_name]
+        else:
+            return 0
+    else:
+        raise DashBoardException("Unable to get nofification channels from"
+                                 " Grafana")
+
+
+def define_notification(channel_name):
+    """
+    Add a given "seed" notification channel to Grafana using http post
+    :param channel_name: (str) channel name
+    :return: (int) http response code from post operation
+             (dict) response json object
+    """
+
+    seed_channel = json.dumps({"name": channel_name,
+                               "type": "email",
+                               "isDefault": False
+                               })
+
+    resp = post('http://{}:{}/api/'
+                'alert-notifications'.format(config.grafana_host,
+                                             config.grafana_port),
+                headers=HEADERS,
+                auth=config.grafana_credentials,
+                data=seed_channel)
+
+    return resp.status_code, resp.json()
+
+
 def main():
 
     rc = 0
@@ -326,18 +378,32 @@ def main():
     for dashname in config.dashboards:
         logger.info("\nProcessing dashboard {}".format(dashname))
 
+        http_rc, dashjson = get_dashboard(dashname)
+        if dashname == config.alert_dashboard and http_rc == 200:
+            logger.info("- existing alert dashboard found, update bypassed")
+            continue
+
         if opts.mode == 'update':
-            http_rc, dashjson = get_dashboard(dashname)
-            if http_rc == 404:
+
+            if http_rc == 200:
+                # the dashboard is already loaded, so we'll use the existing
+                # definition
+                logger.debug("- existing dashboard will be updated")
+            else:
+                # get of dashboard failed, so just load it
                 dashjson = load_dashboard(opts.dashboard_dir, dashname)
 
-                if not dashjson:
+                if dashjson:
+                    logger.info("- dashboard loaded from sample")
+                else:
                     logger.warning("- sample not available, skipping")
                     rc = max(rc, 4)
                     continue
 
             logger.info("- dashboard retrieved")
+
         elif opts.mode == 'refresh':
+
             dashjson = load_dashboard(opts.dashboard_dir, dashname)
 
             if not dashjson:
@@ -345,13 +411,47 @@ def main():
                 rc = max(rc, 4)
                 continue
 
-        templating = dashjson['dashboard'].get('templating')
-        if templating:
-            dashjson = update_dashboard(dashjson, vars_to_update)
+        if dashname == config.alert_dashboard:
+            # if processing is here, this is 1st run so the alert_dashboard
+            # is new to grafana
+            channel_id = get_notification_id("cephmetrics")
+            if channel_id:
+                logger.info("- notification channel already in place")
+            else:
+                http_rc, resp_json = define_notification("cephmetrics")
+                if http_rc == 200:
+                    channel_id = resp_json['id']
+                    logger.info("- notification channel added :"
+                                "{}".format(channel_id))
+                else:
+                    raise DashBoardException("Problem adding notification "
+                                             "channel ({})".format(http_rc))
+
+            dash_str = json.dumps(dashjson)
+            dash_str = dash_str.replace('"notifications": []',
+                                        '"notifications": [{{ "id":'
+                                        ' {0} }}]'.format(channel_id))
+            if config.domain:
+                logger.debug("- queries updated, replacing $domain with "
+                             "'{}'".format(config.domain))
+                dash_str = dash_str.replace('.$domain',
+                                            ".{}".format(config.domain))
+            else:
+                logger.debug("- queries updated, replacing $domain with NULL")
+                dash_str = dash_str.replace('.$domain',
+                                            '')
+
+            dashjson = json.loads(dash_str)
+
         else:
-            logger.info('- templating not defined in {}, '
-                        'skipping'.format(dashname))
-            rc = max(rc, 4)
+            # Normal dashboard processing
+            templating = dashjson['dashboard'].get('templating')
+            if templating:
+                dashjson = update_dashboard(dashjson, vars_to_update)
+            else:
+                logger.info('- templating not defined in {}, '
+                            'skipping'.format(dashname))
+                rc = max(rc, 4)
 
         http_rc = put_dashboard(dashjson)
 

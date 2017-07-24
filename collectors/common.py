@@ -4,7 +4,6 @@
 import socket
 from os import statvfs
 import math
-import logging
 
 
 def get_hostname():
@@ -239,31 +238,3 @@ class Disk(object):
 
         return device
 
-
-class CollectorLog(object):
-
-    level = {'debug': logging.DEBUG,
-             'info': logging.INFO}
-
-    def __init__(self, log_type, log_level='debug'):
-        self.log = logging.getLogger(log_type)
-
-        fh = logging.FileHandler('/var/log/collectd-cephmetrics-{}'
-                                 '.log'.format(log_type),
-                                 mode='w')
-
-        self.log.setLevel(CollectorLog.level[log_level])
-        fmt = logging.Formatter('%(asctime)s - %(levelname)-7s : %(message)s')
-        fh.setFormatter(fmt)
-        self.log.addHandler(fh)
-
-        # set up redirection for debug and info, to make the class accept
-        # calls similar to a straight logger implementation
-        self.debug = self._debug_handler
-        self.info = self._info_handler
-
-    def _debug_handler(self, msg):
-        self.log.debug(msg)
-
-    def _info_handler(self, msg):
-        self.log.info(msg)

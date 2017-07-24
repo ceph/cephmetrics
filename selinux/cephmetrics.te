@@ -5,6 +5,7 @@ require {
 	type ceph_t;
 	type ceph_var_run_t;
 	type ceph_var_lib_t;
+	type fixed_disk_device_t;
 	class unix_stream_socket connectto;
 	class dir read;
 	class file getattr;
@@ -17,6 +18,9 @@ require {
 allow collectd_t ceph_t:unix_stream_socket connectto;
 allow collectd_t ceph_var_run_t:dir read;
 allow collectd_t ceph_var_lib_t:file getattr;
+allow collectd_t ceph_var_lib_t:lnk_file getattr;
+allow collectd_t ceph_var_lib_t:lnk_file read;
+allow collectd_t fixed_disk_device_t:blk_file getattr;
 allow collectd_t self:capability2 block_suspend;
 allow collectd_t var_log_t:dir { add_name write };
 allow collectd_t var_log_t:file create;

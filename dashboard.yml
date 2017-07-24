@@ -28,8 +28,10 @@ _dashboards:
   - latency-by-server
   - network-usage-by-node
   - osd-node-detail
+  - alert-status
 
 _home_dashboard: ceph-at-a-glance
+_alert_dashboard: alert-status
 
 _credentials:
   user: admin@localhost

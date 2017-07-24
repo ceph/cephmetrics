@@ -5,9 +5,11 @@ import rbd
 import json
 import threading
 import time
+import logging
 
 from collectors.base import BaseCollector
 from collectors.common import merge_dicts, get_hostname
+
 
 class RBDScanner(threading.Thread):
 
@@ -15,16 +17,21 @@ class RBDScanner(threading.Thread):
         self.cluster_name = cluster_name
         self.pool_name = pool_name
         self.num_rbds = 0
+        self.logger = logging.getLogger('cephmetrics')
+
         threading.Thread.__init__(self)
 
     def run(self):
         rbd_images = []
         conf_file = "/etc/ceph/{}.conf".format(self.cluster_name)
+        self.logger.debug("scan of '{}' starting".format(self.pool_name))
         with rados.Rados(conffile=conf_file) as cluster:
             with cluster.open_ioctx(self.pool_name) as ioctx:
                 rbd_inst = rbd.RBD()
+                self.logger.debug("listing rbd's in {}".format(self.pool_name))
                 rbd_images = rbd_inst.list(ioctx)
 
+        self.logger.info("pool scan complete for '{}'".format(self.pool_name))
         self.num_rbds = len(rbd_images)
 
 
@@ -106,6 +113,15 @@ class Mon(BaseCollector):
 
     def __init__(self, *args, **kwargs):
         BaseCollector.__init__(self, *args, **kwargs)
+        self.version = self._get_version()
+        if self.version < 12:
+            self.get_mon_health = self._mon_health
+        else:
+            self.get_mon_health = self._mon_health_new
+
+    def _get_version(self):
+        vers_info = self._mon_command('version')
+        return int(vers_info['version'].replace('.', ' ').split()[2])
 
     def _mon_command(self, cmd_request):
         """ Issue a command to the monitor """
@@ -119,29 +135,127 @@ class Mon(BaseCollector):
             rc, buf_s, out = cluster.mon_command(json.dumps(cmd), b'')
         end = time.time()
 
-        self.elapsed_log_msg("_mon_command call for {}".format(cmd_request),
-                             (end - start))
+        self.logger.debug("_mon_command call '{}' :"
+                          " {:.3f}s".format(cmd_request,
+                                        (end - start)))
 
         return json.loads(buf_s)
 
-    def _mon_health(self):
+    @staticmethod
+    def get_feature_state(summary_data, pg_states):
+        """
+        Look at the summary list to determine the state of RADOS features
+        :param summary_data: (list) summary data from a ceph health command
+        :return: (dict) dict indexed by feature
+                        0 Inactive, 1 Active, 2 Disabled
+        """
+        feature_lookup = {"noscrub": "scrub",
+                          "nodeep-scrub": "deep_scrub",
+                          "norecover": "recovery",
+                          "nobackfill": "backfill",
+                          "norebalance": "rebalance",
+                          "noout": "out",
+                          "nodown": "down"}
+
+        # Start with all features inactive i.e. enabled
+        feature_state = {feature_lookup.get(key): 0 for key in feature_lookup}
+
+        for summary in summary_data:
+            summary_desc = summary.get('summary')
+            if "flag(s) set" in summary_desc:
+                flags = summary_desc.replace(' flag(s) set', '').split(',')
+                for disabled_feature in flags:
+                    if disabled_feature in feature_lookup:
+                        feature = feature_lookup.get(disabled_feature)
+                        feature_state[feature] = 2      # feature disabled
+
+        # Now use the current pg state names to determine whether a feature is
+        # active - if not it stays set to '0', which means inactive
+        pg_state_names = [pg_state.get('name') for pg_state in pg_states]
+        for pg_state in pg_state_names:
+            states = pg_state.split('+')
+            if 'recovering' in states:
+                feature_state['recovery'] = 1  # Active
+                continue
+            if 'backfilling' in states:
+                feature_state['backfill'] = 1
+                continue
+            if 'deep' in states:
+                feature_state['deep_scrub'] = 1
+                continue
+            if 'scrubbing' in states:
+                feature_state['scrub'] = 1
+
+        return feature_state
+
+    @classmethod
+    def check_stuck_pgs(cls, summary_list):
+        bad_pg_words = ['pgs', 'stuck', 'inactive']
+        stuck_pgs = 0
+        for summary_data in summary_list:
+            if summary_data.get('severity') != 'HEALTH_ERR':
+                continue
+            if all(trigger in summary_data.get('summary')
+                   for trigger in bad_pg_words):
+                stuck_pgs = int(summary_data.get('summary').split()[0])
+
+        return stuck_pgs
+
+    def _mon_health_new(self):
+
+        cluster, health_data = self._mon_health_common()
+
+        mon_status_output = self._mon_command('mon_status')
+        quorum_list = mon_status_output.get('quorum')
+        mon_list = mon_status_output.get('monmap').get('mons')
+        mon_status = {}
+        for mon in mon_list:
+            state = 0 if mon.get('rank') in quorum_list else 4
+            mon_status[mon.get('name')] = state
+
+        cluster['mon_status'] = mon_status
+
+        return cluster
+
+    def _mon_health_common(self):
+
+        # for v12 (Luminous and beyond) add the following setting to
+        # ceph.conf "mon_health_preluminous_compat=true"
+        # this will provide the same output as pre-luminous
 
         cluster_data = self._admin_socket().get('cluster')
+        pg_data = self._mon_command("pg stat")
         health_data = self._mon_command("health")
         health_text = health_data.get('overall_status',
-                                      'UNKNOWN')
-
-        health_num = Mon.health.get(health_text, 16)
+                                      health_data.get('status', ''))
 
         cluster = {Mon.cluster_metrics[k][0]: cluster_data[k]
                    for k in cluster_data}
 
+        health_num = Mon.health.get(health_text, 16)
+
         cluster['health'] = health_num
+
+        pg_states = pg_data.get('num_pg_by_state')  # list of dict name,num
+        health_summary = health_data.get('summary', [])  # list of issues
+        cluster['num_pgs_stuck'] = Mon.check_stuck_pgs(health_summary)
+        cluster['features'] = Mon.get_feature_state(health_summary,
+                                                    pg_states)
+
+        self.logger.debug(
+            'Features:{}'.format(json.dumps(cluster['features'])))
+
+        return cluster, health_data
+
+    def _mon_health(self):
+
+        cluster, health_data = self._mon_health_common()
 
         services = health_data.get('health').get('health_services')
         monstats = {}
         for svc in services:
             if 'mons' in svc:
+                # Each monitor will have a numeric value denoting health
                 monstats = { mon.get('name'): Mon.health.get(mon.get('health'))
                              for mon in svc.get('mons')}
 
@@ -201,16 +315,21 @@ class Mon(BaseCollector):
 
     def _get_osd_states(self):
 
-        raw = self._mon_command('osd tree')
-        osds = {str(osd.get('id')): {"status":
-                Mon.osd_state.get(osd.get('status'))}
-                for osd in raw.get('nodes')
-                if osd.get('type') == 'osd'}
+        self.logger.debug("fetching osd states from the local mon")
+        raw = self._mon_command('osd dump')
+        osd_hosts = set()
+        osds = {}
+        for osd in raw.get('osds'):
+            cluster_addr = osd.get('cluster_addr').split(':')[0]
+            osd_hosts.add(cluster_addr)
 
-        num_osd_hosts = len([node.get('name') for node in raw.get('nodes')
-                             if node.get('type') == 'host'])
+            # NB. The key for the osds dict must be a string as the dict is
+            # flattened when the metric name is derived in the parent collectd
+            # module. If it is not converted, you get a TypeError
+            osds[str(osd.get('osd'))] = {"up": osd.get('up'),
+                                         "in": osd.get('in')}
 
-        return num_osd_hosts, osds
+        return len(osd_hosts), osds
 
     @staticmethod
     def _select_pools(pools, mons):
@@ -242,6 +361,7 @@ class Mon(BaseCollector):
         return pools_to_scan
 
     def get_pools(self):
+        skip_pools = ('default.rgw')
 
         start = time.time()
         conf_file = "/etc/ceph/{}.conf".format(self.cluster_name)
@@ -249,16 +369,20 @@ class Mon(BaseCollector):
             rados_pools = sorted(cluster.list_pools())
         end = time.time()
 
-        self.logger.debug('lspools took {0:.2f} secs'.format(end - start))
+        self.logger.debug('lspools took {:.3f}s'.format(end - start))
 
-        return rados_pools
+        filtered_pools = [pool for pool in rados_pools
+                          if not pool.startswith(skip_pools)]
+
+        return filtered_pools
 
     def _get_rbds(self, monitors):
 
         pool_list = self.get_pools()
         mon_list = sorted(monitors.keys())
         my_pools = Mon._select_pools(pool_list, mon_list)
-        self.logger.debug("Pools to scan : {}".format(','.join(my_pools)))
+        self.logger.debug("Pools to be scanned on this mon"
+                          " : {}".format(','.join(my_pools)))
         threads = []
 
         start = time.time()
@@ -270,10 +394,10 @@ class Mon(BaseCollector):
 
         # wait for all threads to complete
         for thread in threads:
-            thread.join()
+            thread.join(1)
 
         end = time.time()
-        self.elapsed_log_msg("rbd scans", (end - start))
+        self.logger.debug("rbd scans {:.3f}s".format((end - start)))
 
         total_rbds = sum([thread.num_rbds for thread in threads])
         self.logger.debug("total rbds found : {}".format(total_rbds))
@@ -286,14 +410,14 @@ class Mon(BaseCollector):
     def get_stats(self):
         """
         method associated with the plugin callback to gather the metrics
-        :return:
+        :return: (dict) metadata describing the state of the mon/osd's
         """
 
         start = time.time()
 
         pool_stats = self._get_pool_stats()
         num_osd_hosts, osd_states = self._get_osd_states()
-        cluster_state = self._mon_health()
+        cluster_state = self.get_mon_health()
         cluster_state['num_osd_hosts'] = num_osd_hosts
         cluster_state['num_rbds'] = self._get_rbds(cluster_state['mon_status'])
 
@@ -301,7 +425,7 @@ class Mon(BaseCollector):
                                                 "osd_state": osd_states})
 
         end = time.time()
-        self.elapsed_log_msg("mon get_stats call", (end - start))
+        self.logger.info("mon get_stats call : {:.3f}s".format((end - start)))
 
         return {"mon": all_stats}
 

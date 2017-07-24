@@ -4,7 +4,7 @@ import os
 import time
 
 from collectors.base import BaseCollector
-from collectors.common import (todict, freadlines, merge_dicts,
+from collectors.common import (todict, fread, freadlines, merge_dicts,
                                IOstat, Disk)
 
 __author__ = "Paul Cuzner"
@@ -25,9 +25,10 @@ class OSDstats(object):
         "queue_transaction_latency_avg"
     }
 
-    def __init__(self):
+    def __init__(self, osd_type='filestore'):
         self._current = {}
         self._previous = {}
+        self._osd_type = osd_type
 
 
     def update(self, stats):
@@ -78,6 +79,7 @@ class OSDs(BaseCollector):
         self.jrnl = {}      # dict of journal devices (if not collocated)
         self.osd_id_list = []
         self.dev_lookup = {}    # dict dev_name -> osd | jrnl
+        self.osd_count = 0
 
     def __repr__(self):
 
@@ -98,6 +100,12 @@ class OSDs(BaseCollector):
         stats = {}
         osd_socket_name = '/var/run/ceph/{}-osd.{}.asok'.format(self.cluster_name,
                                                                 osd_id)
+
+        if not os.path.exists(osd_socket_name):
+            # all OSD's should expose an admin socket, so if it's missing
+            # this node has a problem!
+            raise IOError("Socket file missing for OSD {}".format(osd_id))
+
         self.logger.debug("fetching osd stats for osd {}".format(osd_id))
         resp = self._admin_socket(socket_path=osd_socket_name)
 
@@ -106,11 +114,24 @@ class OSDs(BaseCollector):
                               for key_name in OSDstats.filestore_metrics}
 
         osd_stats = resp.get('osd')
+
         # Add disk usage stats
         stats['osd'] = {key_name: osd_stats.get(key_name)
                         for key_name in OSDstats.osd_capacity.keys()}
 
         return stats
+
+    @staticmethod
+    def get_osd_type(osd_path):
+
+        osd_type_fname = os.path.join(osd_path, 'type')
+        if os.path.exists(osd_type_fname):
+            return fread(osd_type_fname)
+        else:
+            if os.path.exists(os.path.join(osd_path, 'journal')):
+                return "filestore"
+            else:
+                raise ValueError("Unrecognised OSD type")
 
     def _dev_to_osd(self):
         """
@@ -133,23 +154,42 @@ class OSDs(BaseCollector):
                 # get mounted
                 dirs = set(path_name.split('/'))
                 if dirs.issuperset(osd_indicators):
-                    osd_id = path_name.split('-')[-1]
 
-                    osd_device = dev_path.split('/')[-1]
+                    # get the osd_id from the name is the most simple way
+                    # to get the id, due to naming conventions. If this fails
+                    # though, plan 'b' is the whoami file
+                    osd_id = path_name.split('-')[-1]
+                    if not osd_id.isdigit():
+                        osd_id = fread(os.path.join(path_name, 'whoami'))
+
+                    if osd_id not in self.osd:
+                        osd_type = OSDs.get_osd_type(path_name)
+                        self.osd[osd_id] = OSDstats(osd_type=osd_type)
+                        self.osd_id_list.append(osd_id)
+
+                    osd_type = self.osd[osd_id]._osd_type
+                    if osd_type == 'filestore':
+                        osd_device = dev_path.split('/')[-1]
+                    elif osd_type == 'bluestore':
+                        block_link = os.path.join(path_name, 'block')
+                        osd_path = os.path.realpath(block_link)
+                        osd_device = osd_path.split('/')[-1]
+                    else:
+                        raise ValueError("Unknown OSD type encountered")
 
                     if osd_device not in self.osd:
                         self.osd[osd_device] = Disk(osd_device,
                                                     path_name=path_name,
                                                     osd_id=osd_id)
                         self.dev_lookup[osd_device] = 'osd'
+                        self.osd_count += 1
 
-                    if osd_id not in self.osd:
-                        self.osd[osd_id] = OSDstats()
-                        self.osd_id_list.append(osd_id)
+                    if osd_type == 'filestore':
+                        journal_link = os.path.join(path_name, 'journal')
+                    else:
+                        journal_link = os.path.join(path_name, 'block.wal')
 
-                    journal_link = os.path.join(path_name, 'journal')
                     if os.path.exists(journal_link):
-                        # this is a filestore based OSD
                         jrnl_path = os.path.realpath(journal_link)
                         jrnl_dev = jrnl_path.split('/')[-1]
 
@@ -160,12 +200,13 @@ class OSDs(BaseCollector):
                             self.dev_lookup[jrnl_dev] = 'jrnl'
 
                     else:
-                        # No journal..?
+                        # No journal or WAL link..?
                         pass
 
     def _stats_lookup(self):
         """
-        Grab the disk stats from /proc
+        Grab the disk stats from /proc/diskstats, and the key osd perf dump
+        counters
         """
 
         now = time.time()
@@ -196,15 +237,29 @@ class OSDs(BaseCollector):
                 device.perf.compute(interval)
                 device.refresh()
 
-        # fetch stats from each osd daemon
-        for osd_id in self.osd_id_list:
-            osd_stats = self._fetch_osd_stats(osd_id)
-            self.logger.debug('stats : {}'.format(osd_stats))
-            osd_device = self.osd[osd_id]
-            osd_device.update(osd_stats)
-
         end = time.time()
-        self.elapsed_log_msg("disk performance stats generation", (end - now))
+        self.logger.debug("OS disk stats calculated in "
+                          "{:.4f}s".format(end-now))
+
+        # fetch stats from each osd daemon
+        osd_stats_start = time.time()
+        for osd_id in self.osd_id_list:
+
+            if self.osd[osd_id]._osd_type == 'filestore':
+                osd_stats = self._fetch_osd_stats(osd_id)
+
+                # self.logger.debug('stats : {}'.format(osd_stats))
+
+                osd_device = self.osd[osd_id]
+                osd_device.update(osd_stats)
+            else:
+                self.logger.debug("skipped 'bluestore' osd perf collection "
+                                  "for osd.{}".format(osd_id))
+
+        osd_stats_end = time.time()
+        self.logger.debug("OSD perf dump stats collected for {} OSDs "
+                          "in {:.3f}s".format(len(self.osd_id_list),
+                                          (osd_stats_end - osd_stats_start)))
 
     @staticmethod
     def _dump_devs(device_dict):
@@ -226,19 +281,22 @@ class OSDs(BaseCollector):
         :return: (dict) dictionary representation of this OSDs on this host
         """
 
-        return {"osd": OSDs._dump_devs(self.osd),
-                "jrnl": OSDs._dump_devs(self.jrnl)}
+        return {
+            "num_osds": self.osd_count,
+            "osd": OSDs._dump_devs(self.osd),
+            "jrnl": OSDs._dump_devs(self.jrnl)
+        }
 
     def get_stats(self):
 
         start = time.time()
 
         self._dev_to_osd()
-        self.logger.debug("running stats lookup")
         self._stats_lookup()
 
         end = time.time()
 
-        self.elapsed_log_msg("osd get_stats call", (end - start))
+        self.logger.info("osd get_stats call "
+                         ": {:.3f}s".format((end - start)))
 
         return self.dump()
