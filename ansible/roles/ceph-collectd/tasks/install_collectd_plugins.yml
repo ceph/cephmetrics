@@ -7,19 +7,17 @@
   set_fact:
     collectd_cephmetrics_dir: "{{ collectd_dir }}/cephmetrics"
 
-- name: Create collectors directory
+- name: Remove stale Python files
   file:
-    name: "{{ collectd_cephmetrics_dir }}/collectors"
-    state: directory
+    dest: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ collectd_cephmetrics_dir }}/cephmetrics.py"
+    - "{{ collectd_cephmetrics_dir }}/cephmetrics.pyc"
+    - "{{ collectd_cephmetrics_dir }}/collectors"
 
 - name: Ship collector plugins
   copy:
-    src: files/collectors/
-    dest: "{{ collectd_cephmetrics_dir }}/collectors"
-  notify: Restart collectd
-
-- name: Ship cephmetrics.py
-  copy:
-    src: files/cephmetrics.py
+    src: files/cephmetrics
     dest: "{{ collectd_cephmetrics_dir }}"
   notify: Restart collectd

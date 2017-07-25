@@ -2,8 +2,8 @@
 
 import time
 
-from collectors.base import BaseCollector
-from collectors.common import get_hostname, merge_dicts
+from cephmetrics.collectors.base import BaseCollector
+from cephmetrics.collectors.common import get_hostname, merge_dicts
 
 __author__ = "paul.cuzner@redhat.com"
 

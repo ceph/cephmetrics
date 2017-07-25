@@ -7,8 +7,8 @@ import threading
 import time
 import logging
 
-from collectors.base import BaseCollector
-from collectors.common import merge_dicts, get_hostname
+from cephmetrics.collectors.base import BaseCollector
+from cephmetrics.collectors.common import merge_dicts, get_hostname
 
 
 class RBDScanner(threading.Thread):
