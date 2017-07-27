@@ -17,7 +17,7 @@ _dashboards:
   - alert-status
 _credentials:
   user: admin
-  password: admin
+  password: {{ grafana.admin_password }}
 _grafana_port: 3000
 _home_dashboard: ceph-at-a-glance
 _alert_dashboard: alert-status
