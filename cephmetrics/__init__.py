@@ -124,17 +124,21 @@ def configure_callback(conf):
         collectd.error("ClusterName is required")
 
 
-def setup_module_logging(log_level):
+def setup_module_logging(log_level, path='/var/log/collectd-cephmetrics.log'):
 
     level = {"debug": logging.DEBUG,
              "info": logging.INFO}
 
     logging.getLogger('cephmetrics')
-    logging.basicConfig(filename='/var/log/collectd-cephmetrics.log',
-                        format='%(asctime)s - %(levelname)-7s - '
-                               '[%(filename)s:%(lineno)s:%(funcName)s() - '
-                               '%(message)s',
-                        level=level.get(log_level))
+    log_conf = dict(
+        format='%(asctime)s - %(levelname)-7s - '
+               '[%(filename)s:%(lineno)s:%(funcName)s() - '
+               '%(message)s',
+        level=level.get(log_level)
+    )
+    if path:
+        log_conf['filename'] = path
+    logging.basicConfig(**log_conf)
 
 
 def read_callback():
