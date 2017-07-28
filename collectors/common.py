@@ -178,6 +178,7 @@ class IOstat(object):
 
 
 class Disk(object):
+
     metrics = {
         "rotational": ("rotational", "gauge"),
         "disk_size": ("disk_size", "gauge"),
@@ -187,7 +188,11 @@ class Disk(object):
         "osd_id": ("osd_id", "gauge")
     }
 
-    def __init__(self, device_name, path_name=None, osd_id=None):
+    osd_types = {"filestore": 0,
+                "bluestore": 1}
+
+    def __init__(self, device_name, path_name=None, osd_id=None,
+                 in_osd_type="filestore", encrypted=0):
 
         self._name = device_name
         self._path_name = path_name
@@ -200,6 +205,8 @@ class Disk(object):
         self.fs_size = 0
         self.fs_percent_used = 0
         self.fs_used = 0
+        self.encrypted = encrypted
+        self.osd_type = Disk.osd_types[in_osd_type]
 
         self.refresh()
 
