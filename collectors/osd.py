@@ -2,6 +2,7 @@
 
 import os
 import time
+import math
 
 from collectors.base import BaseCollector
 from collectors.common import (todict, fread, freadlines, merge_dicts,
@@ -29,7 +30,7 @@ class OSDstats(object):
         self._current = {}
         self._previous = {}
         self._osd_type = osd_type
-
+        self.osd_percent_used = 0
 
     def update(self, stats):
         """
@@ -66,6 +67,8 @@ class OSDstats(object):
         for attr in stats['osd']:
             setattr(self, attr, stats['osd'].get(attr))
 
+        self.osd_percent_used = math.ceil((float(self.stat_bytes_used) /
+                                           self.stat_bytes) * 100)
 
 class OSDs(BaseCollector):
 
