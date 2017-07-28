@@ -139,10 +139,9 @@ class OSDs(BaseCollector):
         """
 
         # the logic here uses the mount points to determine which OSD's are
-        # in the system - so the focus is on filestore (XFS) OSD's. Another
-        # approach could be to go directly to the admin socket (status cmd)
-        # to get the osd_fsid, and then lookup that in /dev/disk/by-partuuid
-        # to derive the osd device name...
+        # in the system. The encryption state is determine just by the use
+        # devicemapper (i.e. /dev/mapper prefixed devices) - since at this time
+        # this is all dm is used for.
 
         osd_indicators = {'var', 'lib', 'osd'}
 
@@ -167,41 +166,64 @@ class OSDs(BaseCollector):
                         self.osd[osd_id] = OSDstats(osd_type=osd_type)
                         self.osd_id_list.append(osd_id)
 
-                    osd_type = self.osd[osd_id]._osd_type
-                    if osd_type == 'filestore':
-                        osd_device = dev_path.split('/')[-1]
-                    elif osd_type == 'bluestore':
-                        block_link = os.path.join(path_name, 'block')
-                        osd_path = os.path.realpath(block_link)
-                        osd_device = osd_path.split('/')[-1]
-                    else:
-                        raise ValueError("Unknown OSD type encountered")
+                        osd_type = self.osd[osd_id]._osd_type
+                        if osd_type == 'filestore':
+                            if dev_path.startswith('/dev/mapper'):
+                                encrypted = 1
+                                uuid = dev_path.split('/')[-1]
+                                partuuid = '/dev/disk/by-partuuid/{}'.format(uuid)
+                                dev_path = os.path.realpath(partuuid)
+                                osd_device = dev_path.split('/')[-1]
+                            else:
+                                encrypted = 0
+                                osd_device = dev_path.split('/')[-1]
 
-                    if osd_device not in self.osd:
+                        elif osd_type == 'bluestore':
+                            block_link = os.path.join(path_name, 'block')
+                            osd_path = os.path.realpath(block_link)
+                            osd_device = osd_path.split('/')[-1]
+                            encrypted = 0
+                        else:
+                            raise ValueError("Unknown OSD type encountered")
+
+                        # if the osd_id hasn't been seem neither has the
+                        # disk
                         self.osd[osd_device] = Disk(osd_device,
                                                     path_name=path_name,
-                                                    osd_id=osd_id)
+                                                    osd_id=osd_id,
+                                                    in_osd_type=osd_type,
+                                                    encrypted=encrypted)
                         self.dev_lookup[osd_device] = 'osd'
                         self.osd_count += 1
 
-                    if osd_type == 'filestore':
-                        journal_link = os.path.join(path_name, 'journal')
-                    else:
-                        journal_link = os.path.join(path_name, 'block.wal')
+                        if osd_type == 'filestore':
+                            journal_link = os.path.join(path_name, 'journal')
+                        else:
+                            journal_link = os.path.join(path_name, 'block.wal')
 
-                    if os.path.exists(journal_link):
-                        jrnl_path = os.path.realpath(journal_link)
-                        jrnl_dev = jrnl_path.split('/')[-1]
+                        if os.path.exists(journal_link):
+                            link_tgt = os.readlink(journal_link)
+                            if link_tgt.startswith('/dev/mapper'):
+                                encrypted = 1
+                            else:
+                                encrypted = 0
 
-                        if jrnl_dev not in self.osd:
-                            self.jrnl[jrnl_dev] = Disk(jrnl_dev,
-                                                       osd_id=osd_id)
+                            partuuid_path = os.path.join('/dev/disk/by-partuuid',
+                                                         link_tgt.split('/')[-1])
+                            jrnl_path = os.path.realpath(partuuid_path)
+                            jrnl_dev = jrnl_path.split('/')[-1]
 
-                            self.dev_lookup[jrnl_dev] = 'jrnl'
+                            if jrnl_dev not in self.osd:
+                                self.jrnl[jrnl_dev] = Disk(jrnl_dev,
+                                                           osd_id=osd_id,
+                                                           in_osd_type=osd_type,
+                                                           encrypted=encrypted)
 
-                    else:
-                        # No journal or WAL link..?
-                        pass
+                                self.dev_lookup[jrnl_dev] = 'jrnl'
+
+                        else:
+                            # No journal or WAL link..?
+                            pass
 
     def _stats_lookup(self):
         """
