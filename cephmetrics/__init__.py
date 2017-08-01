@@ -1,8 +1,16 @@
 #!/usr/bin/env python
+import sys
+TEST_MODE = (sys.argv[0].split('/')[-1] == 'py.test')
+
 import os
 import glob
 import logging
-import collectd
+
+try:
+    import collectd
+except ImportError:
+    if not TEST_MODE:
+        raise
 
 from collectors.mon import Mon
 from collectors.rgw import RGW
@@ -72,7 +80,6 @@ class Ceph(object):
 def write_stats(role_metrics, stats):
 
     flat_stats = flatten_dict(stats, '.')
-    
     for key_name in flat_stats:
         attr_name = key_name.split('.')[-1]
 
@@ -160,16 +167,9 @@ def read_callback():
         write_stats(ISCSIGateway.metrics, iscsi_stats)
 
 
-
-if __name__ == '__main__':
-
-    # run interactively or maybe test the code
-
+if TEST_MODE:
     pass
-
 else:
-
     CEPH = Ceph()
-
     collectd.register_config(configure_callback)
     collectd.register_read(read_callback)
