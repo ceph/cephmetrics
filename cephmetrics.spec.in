@@ -25,7 +25,6 @@ Requires(postun): policycoreutils
 Requires:	graphite-web
 Requires:	python-carbon
 Requires:       cephmetrics-grafana-plugins = %{version}-%{release}
-Requires:       cephmetrics-collectors = %{version}-%{release}
 
 %description
 The monitoring service with web frontend for Ceph storage clusters providing several statistical data graphed by grafana.
