@@ -3,11 +3,11 @@
         "annotations": {
             "list": []
         }, 
-        "editable": true, 
+        "editable": false, 
         "gnetId": null, 
         "graphTooltip": 0, 
-        "hideControls": false, 
-        "id": 53, 
+        "hideControls": true, 
+        "id": 73, 
         "links": [
             {
                 "asDropdown": true, 
@@ -161,7 +161,7 @@
                         "seriesOverrides": [], 
                         "spaceLength": 10, 
                         "span": 12, 
-                        "stack": false, 
+                        "stack": true, 
                         "steppedLine": false, 
                         "targets": [
                             {
@@ -189,11 +189,11 @@
                         }, 
                         "yaxes": [
                             {
-                                "format": "short", 
+                                "format": "decbytes", 
                                 "label": null, 
                                 "logBase": 1, 
                                 "max": null, 
-                                "min": null, 
+                                "min": "0", 
                                 "show": true
                             }, 
                             {
@@ -246,7 +246,7 @@
                         "seriesOverrides": [], 
                         "spaceLength": 10, 
                         "span": 12, 
-                        "stack": false, 
+                        "stack": true, 
                         "steppedLine": false, 
                         "targets": [
                             {
@@ -274,11 +274,11 @@
                         }, 
                         "yaxes": [
                             {
-                                "format": "short", 
+                                "format": "decbytes", 
                                 "label": null, 
                                 "logBase": 1, 
                                 "max": null, 
-                                "min": null, 
+                                "min": "0", 
                                 "show": true
                             }, 
                             {
@@ -331,7 +331,7 @@
                         "seriesOverrides": [], 
                         "spaceLength": 10, 
                         "span": 12, 
-                        "stack": false, 
+                        "stack": true, 
                         "steppedLine": false, 
                         "targets": [
                             {
@@ -359,11 +359,11 @@
                         }, 
                         "yaxes": [
                             {
-                                "format": "short", 
+                                "format": "decbytes", 
                                 "label": null, 
                                 "logBase": 1, 
                                 "max": null, 
-                                "min": null, 
+                                "min": "0", 
                                 "show": true
                             }, 
                             {
@@ -432,7 +432,6 @@
                 {
                     "allValue": null, 
                     "current": {
-                        "selected": true, 
                         "text": "storage.lab", 
                         "value": "storage.lab"
                     }, 
@@ -454,7 +453,6 @@
                 {
                     "allValue": null, 
                     "current": {
-                        "selected": true, 
                         "text": "ceph", 
                         "value": "ceph"
                     }, 
@@ -478,7 +476,6 @@
                 {
                     "allValue": null, 
                     "current": {
-                        "tags": [], 
                         "text": "All", 
                         "value": "$__all"
                     }, 
@@ -502,9 +499,8 @@
                 {
                     "allValue": null, 
                     "current": {
-                        "tags": [], 
-                        "text": "All", 
-                        "value": "$__all"
+                        "text": "obj-rgw-1", 
+                        "value": "obj-rgw-1"
                     }, 
                     "hide": 0, 
                     "includeAll": true, 
@@ -514,11 +510,6 @@
                     "options": [
                         {
                             "selected": true, 
-                            "text": "All", 
-                            "value": "$__all"
-                        }, 
-                        {
-                            "selected": false, 
                             "text": "obj-rgw-1", 
                             "value": "obj-rgw-1"
                         }
@@ -559,19 +550,19 @@
         }, 
         "timezone": "browser", 
         "title": "Network Usage by Node", 
-        "version": 3
+        "version": 1
     }, 
     "meta": {
         "canEdit": true, 
         "canSave": true, 
         "canStar": true, 
-        "created": "2017-08-01T05:18:58Z", 
+        "created": "2017-08-02T01:47:18Z", 
         "createdBy": "admin@localhost", 
         "expires": "0001-01-01T00:00:00Z", 
         "slug": "network-usage-by-node", 
         "type": "db", 
-        "updated": "2017-08-01T20:38:43Z", 
+        "updated": "2017-08-03T04:16:09Z", 
         "updatedBy": "admin@localhost", 
-        "version": 3
+        "version": 1
     }
 }
