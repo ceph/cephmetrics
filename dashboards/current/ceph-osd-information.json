@@ -7,7 +7,7 @@
         "gnetId": null, 
         "graphTooltip": 0, 
         "hideControls": true, 
-        "id": 61, 
+        "id": 67, 
         "links": [
             {
                 "asDropdown": true, 
@@ -407,7 +407,7 @@
                         "links": [], 
                         "maxDataPoints": "1", 
                         "minSpan": 2, 
-                        "pageSize": null, 
+                        "pageSize": 10, 
                         "scroll": true, 
                         "showHeader": true, 
                         "sort": {
@@ -470,7 +470,7 @@
                         "targets": [
                             {
                                 "refId": "A", 
-                                "target": "aliasByNode(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.$osd_id.stat_bytes),1,-2)", 
+                                "target": "aliasByNode(keepLastValue(maximumAbove(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.$osd_id.stat_bytes,0)),1,-2)", 
                                 "textEditor": true
                             }
                         ], 
@@ -602,8 +602,8 @@
                         "id": 3, 
                         "links": [], 
                         "minSpan": 2, 
-                        "pageSize": 6, 
-                        "scroll": true, 
+                        "pageSize": 5, 
+                        "scroll": false, 
                         "showHeader": true, 
                         "sort": {
                             "col": 1, 
@@ -668,7 +668,7 @@
                         "targets": [
                             {
                                 "refId": "A", 
-                                "target": "aliasByNode(limit(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.queue_transaction_latency_avg,$max_devices),-2)", 
+                                "target": "aliasByNode(limit(maximumAbove(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.queue_transaction_latency_avg,0),$max_devices),-2)", 
                                 "textEditor": true
                             }
                         ], 
@@ -689,8 +689,8 @@
                         "id": 4, 
                         "links": [], 
                         "minSpan": 2, 
-                        "pageSize": 6, 
-                        "scroll": true, 
+                        "pageSize": 5, 
+                        "scroll": false, 
                         "showHeader": true, 
                         "sort": {
                             "col": 1, 
@@ -755,7 +755,7 @@
                         "targets": [
                             {
                                 "refId": "A", 
-                                "target": "aliasByNode(limit(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.journal_latency,$max_devices),-2)", 
+                                "target": "aliasByNode(limit(maximumAbove(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.journal_latency,0),$max_devices),-2)", 
                                 "textEditor": true
                             }
                         ], 
@@ -776,8 +776,8 @@
                         "id": 5, 
                         "links": [], 
                         "minSpan": 2, 
-                        "pageSize": 6, 
-                        "scroll": true, 
+                        "pageSize": 5, 
+                        "scroll": false, 
                         "showHeader": true, 
                         "sort": {
                             "col": 1, 
@@ -842,7 +842,7 @@
                         "targets": [
                             {
                                 "refId": "A", 
-                                "target": "aliasByNode(limit(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.apply_latency,$max_devices),-2)", 
+                                "target": "aliasByNode(limit(maximumAbove(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.apply_latency,0),$max_devices),-2)", 
                                 "textEditor": true
                             }
                         ], 
@@ -863,8 +863,8 @@
                         "id": 6, 
                         "links": [], 
                         "minSpan": 2, 
-                        "pageSize": 6, 
-                        "scroll": true, 
+                        "pageSize": 5, 
+                        "scroll": false, 
                         "showHeader": true, 
                         "sort": {
                             "col": 1, 
@@ -929,7 +929,7 @@
                         "targets": [
                             {
                                 "refId": "A", 
-                                "target": "aliasByNode(limit(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.commitcycle_latency,$max_devices),-2)", 
+                                "target": "aliasByNode(limit(maximumAbove(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.commitcycle_latency,0),$max_devices),-2)", 
                                 "textEditor": true
                             }
                         ], 
@@ -946,6 +946,7 @@
                         "dashLength": 10, 
                         "dashes": false, 
                         "datasource": "Local", 
+                        "description": "Shows the latency for a given OSD, allowing you to compare a specific OSD against the $percentile%ile graph. Note that when the \"OSD Id\" pull-down shows **ALL**, only the **first** OSD is shown to prevent the graph from being unreadable!", 
                         "fill": 0, 
                         "height": "300px", 
                         "id": 1, 
@@ -985,29 +986,29 @@
                         "targets": [
                             {
                                 "refId": "A", 
-                                "target": "alias(averageSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.$osd_id.queue_transaction_latency_avg),\"Journal queue avg\")", 
+                                "target": "alias(limit(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.$osd_id.queue_transaction_latency_avg,1),\"Journal queue avg\")", 
                                 "textEditor": true
                             }, 
                             {
                                 "refId": "B", 
-                                "target": "alias(averageSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.$osd_id.journal_latency),\"Journal latency avg\")", 
+                                "target": "alias(limit(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.$osd_id.journal_latency,1),\"Journal latency avg\")", 
                                 "textEditor": true
                             }, 
                             {
                                 "refId": "C", 
-                                "target": "alias(averageSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.$osd_id.apply_latency), \"Apply latency avg\")", 
+                                "target": "alias(limit(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.$osd_id.apply_latency,1), \"Apply latency avg\")", 
                                 "textEditor": true
                             }, 
                             {
                                 "refId": "D", 
-                                "target": "alias(averageSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.$osd_id.commitcycle_latency),\"Commit latency avg\")", 
+                                "target": "alias(limit(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.$osd_id.commitcycle_latency,1),\"Commit latency avg\")", 
                                 "textEditor": true
                             }
                         ], 
                         "thresholds": [], 
                         "timeFrom": null, 
                         "timeShift": null, 
-                        "title": "Latency Averages for OSD Id - '$osd_id'", 
+                        "title": "Latency for OSD Id - '$osd_id'", 
                         "tooltip": {
                             "shared": true, 
                             "sort": 0, 
@@ -1149,7 +1150,6 @@
                 {
                     "allValue": null, 
                     "current": {
-                        "selected": true, 
                         "text": "storage.lab", 
                         "value": "storage.lab"
                     }, 
@@ -1171,7 +1171,6 @@
                 {
                     "allValue": null, 
                     "current": {
-                        "selected": true, 
                         "text": "ceph", 
                         "value": "ceph"
                     }, 
@@ -1259,6 +1258,7 @@
                 {
                     "allValue": null, 
                     "current": {
+                        "tags": [], 
                         "text": "All", 
                         "value": "$__all"
                     }, 
@@ -1318,12 +1318,12 @@
         "canEdit": true, 
         "canSave": true, 
         "canStar": true, 
-        "created": "2017-08-01T20:50:51Z", 
+        "created": "2017-08-02T01:47:18Z", 
         "createdBy": "admin@localhost", 
         "expires": "0001-01-01T00:00:00Z", 
         "slug": "ceph-osd-information", 
         "type": "db", 
-        "updated": "2017-08-01T21:01:21Z", 
+        "updated": "2017-08-03T04:50:23Z", 
         "updatedBy": "admin@localhost", 
         "version": 3
     }
