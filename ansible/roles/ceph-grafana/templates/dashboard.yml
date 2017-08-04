@@ -3,18 +3,18 @@ osd_servers: [{% for fqdn in groups['osds'] | default([]) %}{{ fqdn.split('.')[0
 rgw_servers: [{% for fqdn in groups['rgws'] | default([]) %}{{ fqdn.split('.')[0] }},{% endfor %}]
 domain: "{{ ansible_domain }}"
 _dashboards:
+  - alert-status
   - ceph-at-a-glance
   - ceph-backend-storage
-  - ceph-osd-latency
-  - ceph-frontend
-  - ceph-rados
+  - ceph-cluster
+  - ceph-osd-information
+  - ceph-pools
   - ceph-rgw-workload
   - disk-busy-by-server
   - iops-by-server
   - latency-by-server
   - network-usage-by-node
   - osd-node-detail
-  - alert-status
 _credentials:
   user: admin
   password: {{ grafana.admin_password }}

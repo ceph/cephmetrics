@@ -17,18 +17,18 @@ domain: storage.lab
 # that govern how dashUpdater.py runs. Normally you'd leave these alone   #
 ###########################################################################
 _dashboards:
+  - alert-status
   - ceph-at-a-glance
   - ceph-backend-storage
-  - ceph-osd-latency
-  - ceph-frontend
-  - ceph-rados
+  - ceph-cluster
+  - ceph-osd-information
+  - ceph-pools
   - ceph-rgw-workload
   - disk-busy-by-server
   - iops-by-server
   - latency-by-server
   - network-usage-by-node
   - osd-node-detail
-  - alert-status
 
 _home_dashboard: ceph-at-a-glance
 _alert_dashboard: alert-status
