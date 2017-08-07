@@ -487,13 +487,13 @@
                             {
                                 "hide": true, 
                                 "refId": "B", 
-                                "target": "countSeries(groupByNode(keepLastValue(collectd.$iscsi_gateway.$domain.cephmetrics.gauge.$cluster_name.iscsi.gw_clients.$clients.luns.*.size),-2,\"maxSeries\"))", 
+                                "target": "countSeries(groupByNode(keepLastValue(collectd.$iscsi_gateways.$domain.cephmetrics.gauge.$cluster_name.iscsi.gw_clients.$clients.luns.*.size),-2,\"maxSeries\"))", 
                                 "textEditor": true
                             }, 
                             {
                                 "refId": "C", 
                                 "target": "diffSeries(#A,#B)", 
-                                "targetFull": "diffSeries(maxSeries(consolidateBy(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.iscsi.gw_stats.lun_count), \"max\")),countSeries(groupByNode(keepLastValue(collectd.$iscsi_gateway.$domain.cephmetrics.gauge.$cluster_name.iscsi.gw_clients.$clients.luns.*.size),-2,\"maxSeries\")))", 
+                                "targetFull": "diffSeries(maxSeries(consolidateBy(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.iscsi.gw_stats.lun_count), \"max\")),countSeries(groupByNode(keepLastValue(collectd.$iscsi_gateways.$domain.cephmetrics.gauge.$cluster_name.iscsi.gw_clients.$clients.luns.*.size),-2,\"maxSeries\")))", 
                                 "textEditor": true
                             }
                         ], 
@@ -725,7 +725,7 @@
                         "targets": [
                             {
                                 "refId": "A", 
-                                "target": "groupByNode(collectd.$iscsi_gateway.$domain.interface.{bond,en,eth}*.if_octets.{tx,rx},1, \"sum\")", 
+                                "target": "groupByNode(collectd.$iscsi_gateways.$domain.interface.{bond,en,eth}*.if_octets.{tx,rx},1, \"sum\")", 
                                 "textEditor": true
                             }
                         ], 
@@ -794,13 +794,13 @@
                             {
                                 "hide": true, 
                                 "refId": "A", 
-                                "target": "keepLastValue(collectd.$iscsi_gateway.$domain.cephmetrics.gauge.$cluster_name.iscsi.gw_clients.*.luns.*.active_path)", 
+                                "target": "keepLastValue(collectd.$iscsi_gateways.$domain.cephmetrics.gauge.$cluster_name.iscsi.gw_clients.*.luns.*.active_path)", 
                                 "textEditor": true
                             }, 
                             {
                                 "refId": "B", 
                                 "target": "groupByNode(#A,1,\"sumSeries\")", 
-                                "targetFull": "groupByNode(keepLastValue(collectd.$iscsi_gateway.$domain.cephmetrics.gauge.$cluster_name.iscsi.gw_clients.*.luns.*.active_path),1,\"sumSeries\")", 
+                                "targetFull": "groupByNode(keepLastValue(collectd.$iscsi_gateways.$domain.cephmetrics.gauge.$cluster_name.iscsi.gw_clients.*.luns.*.active_path),1,\"sumSeries\")", 
                                 "textEditor": true
                             }
                         ], 
@@ -855,7 +855,7 @@
                         "targets": [
                             {
                                 "refId": "A", 
-                                "target": "groupByNode(collectd.$iscsi_gateway.$domain.cephmetrics.derive.$cluster_name.iscsi.gw_stats.iops,1, \"sum\")", 
+                                "target": "groupByNode(collectd.$iscsi_gateways.$domain.cephmetrics.derive.$cluster_name.iscsi.gw_stats.iops,1, \"sum\")", 
                                 "textEditor": true
                             }
                         ], 
@@ -930,7 +930,7 @@
                         "targets": [
                             {
                                 "refId": "A", 
-                                "target": "groupByNode(collectd.$iscsi_gateway.$domain.cephmetrics.derive.$cluster_name.iscsi.gw_stats.total_bytes_per_sec,1, \"sum\")", 
+                                "target": "groupByNode(collectd.$iscsi_gateways.$domain.cephmetrics.derive.$cluster_name.iscsi.gw_stats.total_bytes_per_sec,1, \"sum\")", 
                                 "textEditor": true
                             }
                         ], 
@@ -1005,7 +1005,7 @@
                         "targets": [
                             {
                                 "refId": "A", 
-                                "target": "groupByNode(collectd.$iscsi_gateway.$domain.cpu.percent.{interrupt,steal,system,user,wait},1, \"sum\")", 
+                                "target": "groupByNode(collectd.$iscsi_gateways.$domain.cpu.percent.{interrupt,steal,system,user,wait},1, \"sum\")", 
                                 "textEditor": true
                             }
                         ], 
@@ -1080,7 +1080,7 @@
                         "targets": [
                             {
                                 "refId": "A", 
-                                "target": "groupByNode(collectd.$iscsi_gateway.$domain.memory.percent.used,1, \"sum\")", 
+                                "target": "groupByNode(collectd.$iscsi_gateways.$domain.memory.percent.used,1, \"sum\")", 
                                 "textEditor": true
                             }
                         ], 
@@ -1514,7 +1514,7 @@
                         "targets": [
                             {
                                 "refId": "A", 
-                                "target": "groupByNode(collectd.*.$domain.cephmetrics.gauge.$cluster_name.iscsi.gw_clients.$clients.luns.*.size,-2,\"maxSeries\")", 
+                                "target": "groupByNode(maximumAbove(collectd.*.$domain.cephmetrics.gauge.$cluster_name.iscsi.gw_clients.$clients.luns.*.size,0),-2,\"maxSeries\")", 
                                 "textEditor": true
                             }
                         ], 
@@ -1679,7 +1679,7 @@
                         "targets": [
                             {
                                 "refId": "A", 
-                                "target": "sumSeries(groupByNode(keepLastValue(collectd.$iscsi_gateway.$domain.cephmetrics.gauge.$cluster_name.iscsi.gw_clients.$clients.luns.*.size),-2,\"maxSeries\"))", 
+                                "target": "sumSeries(groupByNode(keepLastValue(collectd.$iscsi_gateways.$domain.cephmetrics.gauge.$cluster_name.iscsi.gw_clients.$clients.luns.*.size),-2,\"maxSeries\"))", 
                                 "textEditor": true
                             }
                         ], 
@@ -1805,7 +1805,7 @@
                     "includeAll": true, 
                     "label": null, 
                     "multi": true, 
-                    "name": "iscsi_gateway", 
+                    "name": "iscsi_gateways", 
                     "options": [
                         {
                             "selected": true, 
@@ -1859,7 +1859,7 @@
         }, 
         "timezone": "browser", 
         "title": "iSCSI Overview", 
-        "version": 38
+        "version": 41
     }, 
     "meta": {
         "canEdit": true, 
@@ -1870,8 +1870,8 @@
         "expires": "0001-01-01T00:00:00Z", 
         "slug": "iscsi-overview", 
         "type": "db", 
-        "updated": "2017-08-06T23:57:49Z", 
+        "updated": "2017-08-07T23:20:49Z", 
         "updatedBy": "admin", 
-        "version": 38
+        "version": 41
     }
 }
