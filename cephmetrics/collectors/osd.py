@@ -48,9 +48,9 @@ class OSDstats(object):
 
             if self._previous:
                 d_sum = self._current[attr].get('sum') - \
-                        self._previous[attr].get('sum')
+                    self._previous[attr].get('sum')
                 d_avgcount = self._current[attr].get('avgcount') - \
-                             self._previous[attr].get('avgcount')
+                    self._previous[attr].get('avgcount')
 
                 if d_sum == 0 or d_avgcount == 0:
                     val = 0
@@ -68,9 +68,11 @@ class OSDstats(object):
         self.osd_percent_used = math.ceil((float(self.stat_bytes_used) /
                                            self.stat_bytes) * 100)
 
+
 class OSDs(base.BaseCollector):
 
-    all_metrics = common.merge_dicts(common.Disk.metrics, common.IOstat.metrics)
+    all_metrics = common.merge_dicts(
+        common.Disk.metrics, common.IOstat.metrics)
 
     def __init__(self, cluster_name, **kwargs):
         base.BaseCollector.__init__(self, cluster_name, **kwargs)
@@ -99,8 +101,8 @@ class OSDs(base.BaseCollector):
         # NB: osd stats are cumulative
 
         stats = {}
-        osd_socket_name = '/var/run/ceph/{}-osd.{}.asok'.format(self.cluster_name,
-                                                                osd_id)
+        osd_socket_name = '/var/run/ceph/{}-osd.{}.asok'.format(
+            self.cluster_name, osd_id)
 
         if not os.path.exists(osd_socket_name):
             # all OSD's should expose an admin socket, so if it's missing
@@ -160,7 +162,8 @@ class OSDs(base.BaseCollector):
                     # though, plan 'b' is the whoami file
                     osd_id = path_name.split('-')[-1]
                     if not osd_id.isdigit():
-                        osd_id = common.fread(os.path.join(path_name, 'whoami'))
+                        osd_id = common.fread(
+                            os.path.join(path_name, 'whoami'))
 
                     if osd_id not in self.osd:
                         osd_type = OSDs.get_osd_type(path_name)
@@ -172,7 +175,8 @@ class OSDs(base.BaseCollector):
                             if dev_path.startswith('/dev/mapper'):
                                 encrypted = 1
                                 uuid = dev_path.split('/')[-1]
-                                partuuid = '/dev/disk/by-partuuid/{}'.format(uuid)
+                                partuuid = '/dev/disk/by-partuuid/{}'.format(
+                                    uuid)
                                 dev_path = os.path.realpath(partuuid)
                                 osd_device = dev_path.split('/')[-1]
                             else:
@@ -210,8 +214,9 @@ class OSDs(base.BaseCollector):
                             else:
                                 encrypted = 0
 
-                            partuuid_path = os.path.join('/dev/disk/by-partuuid',
-                                                         link_tgt.split('/')[-1])
+                            partuuid_path = os.path.join(
+                                '/dev/disk/by-partuuid',
+                                link_tgt.split('/')[-1])
                             jrnl_path = os.path.realpath(partuuid_path)
                             jrnl_dev = jrnl_path.split('/')[-1]
 
@@ -258,7 +263,7 @@ class OSDs(base.BaseCollector):
                     device.perf._current = new_stats
                 else:
                     device.perf._current = new_stats
-                
+
                 device.perf.compute(interval)
                 device.refresh()
 
@@ -282,9 +287,9 @@ class OSDs(base.BaseCollector):
                                   "for osd.{}".format(osd_id))
 
         osd_stats_end = time.time()
-        self.logger.debug("OSD perf dump stats collected for {} OSDs "
-                          "in {:.3f}s".format(len(self.osd_id_list),
-                                          (osd_stats_end - osd_stats_start)))
+        self.logger.debug(
+            "OSD perf dump stats collected for {} OSDs in {:.3f}s".format(
+                len(self.osd_id_list), (osd_stats_end - osd_stats_start)))
 
     @staticmethod
     def _dump_devs(device_dict):

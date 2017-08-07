@@ -105,7 +105,8 @@ class Mon(base.BaseCollector):
         "mon_status": ("mon_status", "gauge")
     }
 
-    all_metrics = common.merge_dicts(pool_recovery_metrics, pool_client_metrics)
+    all_metrics = common.merge_dicts(
+        pool_recovery_metrics, pool_client_metrics)
     all_metrics = common.merge_dicts(all_metrics, cluster_metrics)
     all_metrics = common.merge_dicts(all_metrics, osd_metrics)
     all_metrics = common.merge_dicts(all_metrics, mon_states)

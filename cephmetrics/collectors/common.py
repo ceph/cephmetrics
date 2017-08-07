@@ -66,7 +66,7 @@ def todict(obj):
             data[key] = todict(value)
         except AttributeError:
             data[key] = value
-    
+
     return data
 
 
@@ -79,7 +79,7 @@ def fread(file_name=None):
 
     with open(file_name, 'r') as f:
         setting = f.read().rstrip()
-    return setting 
+    return setting
 
 
 def freadlines(file_name=None):
@@ -164,8 +164,8 @@ class IOstat(object):
             self.iops = int(total_io) / sample_interval
             self.r_iops = int(self._reads) / sample_interval
             self.w_iops = int(self._writes) / sample_interval
-            self.await = float(
-                self._write_ms + self._read_ms) / total_io if total_io > 0 else 0
+            self.await = (float(self._write_ms + self._read_ms) / total_io if
+                          total_io > 0 else 0)
             self.w_await = float(
                 self._write_ms) / self._writes if self._writes > 0 else 0
             self.r_await = float(
@@ -188,8 +188,7 @@ class Disk(object):
         "osd_id": ("osd_id", "gauge")
     }
 
-    osd_types = {"filestore": 0,
-                "bluestore": 1}
+    osd_types = {"filestore": 0, "bluestore": 1}
 
     def __init__(self, device_name, path_name=None, osd_id=None,
                  in_osd_type="filestore", encrypted=0):
@@ -214,7 +213,8 @@ class Disk(object):
         return int(fread("/sys/block/{}/size".format(self._base_dev))) * 512
 
     def _get_rota(self):
-        return int(fread("/sys/block/{}/queue/rotational".format(self._base_dev)))
+        return int(
+            fread("/sys/block/{}/queue/rotational".format(self._base_dev)))
 
     def _get_fssize(self):
         s = statvfs("{}/whoami".format(self._path_name))
@@ -226,7 +226,8 @@ class Disk(object):
     def refresh(self):
         # only run the fs size update, if the _path_name is set.
         if self._path_name:
-            self.fs_size, self.fs_used, self.fs_percent_used = self._get_fssize()
+            self.fs_size, self.fs_used, self.fs_percent_used = \
+                self._get_fssize()
 
     @staticmethod
     def get_base_dev(dev_name):
@@ -244,4 +245,3 @@ class Disk(object):
             device = filter(lambda ch: ch.isalpha(), dev_name)
 
         return device
-

@@ -64,7 +64,7 @@ class LUN(object):
         self.read_bytes_per_sec = int(read_mb * 1024 ** 2)
         self.write_bytes_per_sec = int(write_mb * 1024 ** 2)
         self.total_bytes_per_sec = self.read_bytes_per_sec + \
-                                   self.write_bytes_per_sec
+            self.write_bytes_per_sec
 
         if self._tpg_lun.alua_tg_pt_gp_name == 'ao':
             self.active_path = 1
@@ -161,7 +161,7 @@ class ISCSIGateway(base.BaseCollector):
                 self.read_bytes_per_sec += lun.read_bytes_per_sec
                 self.write_bytes_per_sec += lun.write_bytes_per_sec
                 self.total_bytes_per_sec = self.read_bytes_per_sec + \
-                                           self.write_bytes_per_sec
+                    self.write_bytes_per_sec
 
     def prune(self):
         """
@@ -198,11 +198,11 @@ class ISCSIGateway(base.BaseCollector):
             client_stats.update(client.dump())
 
         return {"iscsi": {
-                           "gw_name": {self.gateway_name: 0},
-                           "gw_stats": gw_stats,
-                           "gw_clients": client_stats
-                         }
-               }
+            "gw_name": {self.gateway_name: 0},
+            "gw_stats": gw_stats,
+            "gw_clients": client_stats
+            }
+        }
 
     def _get_so(self):
         return [so for so in self._root.storage_objects]
@@ -253,4 +253,3 @@ class ISCSIGateway(base.BaseCollector):
         self.logger.info("LIO stats took {}s".format(end - start))
 
         return self.dump()
-
