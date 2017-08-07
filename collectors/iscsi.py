@@ -105,8 +105,8 @@ class ISCSIGateway(BaseCollector):
     def refresh(self):
         """
         populate the instance by exploring rtslib
-        :return:
         """
+
         self.iops = 0
         self.read_bytes_per_sec = 0
         self.write_bytes_per_sec = 0
@@ -150,9 +150,9 @@ class ISCSIGateway(BaseCollector):
     def prune(self):
         """
         drop child objects held by the instance, that are no longer in the
-        iSCSI config i.e. don't report on old tut!
-        :return:
+        iSCSI config i.e. don't report on old information
         """
+
         for client_name in self.clients:
             client = self.clients[client_name]
 
@@ -189,43 +189,38 @@ class ISCSIGateway(BaseCollector):
                }
 
 
+
     def _get_so(self):
         return [so for so in self._root.storage_objects]
 
     def _get_node_acls(self):
         return [node for node in self._root.node_acls]
 
-    def _get_tpg_count(self):
+    @property
+    def tpg_count(self):
         return len([tpg for tpg in self._root.tpgs])
 
-    def _get_lun_count(self):
+    @property
+    def lun_count(self):
         return len(self._get_so())
 
-    def _get_session_count(self):
+    @property
+    def sessions(self):
         return len([session for session in self._root.sessions])
 
-    def _get_gateway_name(self):
+    @property
+    def gateway_name(self):
         # Only the 1st gateway is considered/supported
         gw_iqn = [gw.wwn for gw in self._root.targets][0]
         return gw_iqn.replace('.', '-')
 
-    def _get_client_count(self):
+    @property
+    def client_count(self):
         return len(self._get_node_acls())
 
-    def _get_capacity(self):
+    @property
+    def capacity(self):
         return sum([so.size for so in self._get_so()])
-
-    lun_count = property(_get_lun_count)
-
-    tpg_count = property(_get_tpg_count)
-
-    sessions = property(_get_session_count)
-
-    client_count = property(_get_client_count)
-
-    gateway_name = property(_get_gateway_name)
-
-    capacity = property(_get_capacity)
 
     def get_stats(self):
 
