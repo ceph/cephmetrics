@@ -44,6 +44,8 @@ defaults:
       - graphite-web
       - python-carbon
       - grafana
+      # PyYAML is required by dashUpdater.py
+      - PyYAML
     apt:
       # unzip is needed to extract the Vonage plugin
       - unzip
