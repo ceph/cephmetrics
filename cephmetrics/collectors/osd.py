@@ -4,9 +4,7 @@ import os
 import time
 import math
 
-from cephmetrics.collectors.base import BaseCollector
-from cephmetrics.collectors.common import (
-    todict, fread, freadlines, merge_dicts, IOstat, Disk)
+from cephmetrics.collectors import (base, common)
 
 __author__ = "Paul Cuzner"
 
@@ -70,12 +68,12 @@ class OSDstats(object):
         self.osd_percent_used = math.ceil((float(self.stat_bytes_used) /
                                            self.stat_bytes) * 100)
 
-class OSDs(BaseCollector):
+class OSDs(base.BaseCollector):
 
-    all_metrics = merge_dicts(Disk.metrics, IOstat.metrics)
+    all_metrics = common.merge_dicts(common.Disk.metrics, common.IOstat.metrics)
 
     def __init__(self, cluster_name, **kwargs):
-        BaseCollector.__init__(self, cluster_name, **kwargs)
+        base.BaseCollector.__init__(self, cluster_name, **kwargs)
         self.timestamp = int(time.time())
 
         self.osd = {}		# dict of disk objects, each disk contains osd_id
@@ -129,7 +127,7 @@ class OSDs(BaseCollector):
 
         osd_type_fname = os.path.join(osd_path, 'type')
         if os.path.exists(osd_type_fname):
-            return fread(osd_type_fname)
+            return common.fread(osd_type_fname)
         else:
             if os.path.exists(os.path.join(osd_path, 'journal')):
                 return "filestore"
@@ -148,7 +146,7 @@ class OSDs(BaseCollector):
 
         osd_indicators = {'var', 'lib', 'osd'}
 
-        for mnt in freadlines('/proc/mounts'):
+        for mnt in common.freadlines('/proc/mounts'):
             items = mnt.split(' ')
             dev_path, path_name = items[:2]
             if path_name.startswith('/var/lib'):
@@ -162,7 +160,7 @@ class OSDs(BaseCollector):
                     # though, plan 'b' is the whoami file
                     osd_id = path_name.split('-')[-1]
                     if not osd_id.isdigit():
-                        osd_id = fread(os.path.join(path_name, 'whoami'))
+                        osd_id = common.fread(os.path.join(path_name, 'whoami'))
 
                     if osd_id not in self.osd:
                         osd_type = OSDs.get_osd_type(path_name)
@@ -191,11 +189,12 @@ class OSDs(BaseCollector):
 
                         # if the osd_id hasn't been seem neither has the
                         # disk
-                        self.osd[osd_device] = Disk(osd_device,
-                                                    path_name=path_name,
-                                                    osd_id=osd_id,
-                                                    in_osd_type=osd_type,
-                                                    encrypted=encrypted)
+                        self.osd[osd_device] = common.Disk(
+                            osd_device,
+                            path_name=path_name,
+                            osd_id=osd_id,
+                            in_osd_type=osd_type,
+                            encrypted=encrypted)
                         self.dev_lookup[osd_device] = 'osd'
                         self.osd_count += 1
 
@@ -217,10 +216,11 @@ class OSDs(BaseCollector):
                             jrnl_dev = jrnl_path.split('/')[-1]
 
                             if jrnl_dev not in self.osd:
-                                self.jrnl[jrnl_dev] = Disk(jrnl_dev,
-                                                           osd_id=osd_id,
-                                                           in_osd_type=osd_type,
-                                                           encrypted=encrypted)
+                                self.jrnl[jrnl_dev] = common.Disk(
+                                    jrnl_dev,
+                                    osd_id=osd_id,
+                                    in_osd_type=osd_type,
+                                    encrypted=encrypted)
 
                                 self.dev_lookup[jrnl_dev] = 'jrnl'
 
@@ -239,7 +239,7 @@ class OSDs(BaseCollector):
         self.timestamp = int(now)
 
         # Fetch diskstats from the OS
-        for perf_entry in freadlines('/proc/diskstats'):
+        for perf_entry in common.freadlines('/proc/diskstats'):
 
             field = perf_entry.split()
             dev_name = field[2]
@@ -293,7 +293,7 @@ class OSDs(BaseCollector):
 
         for dev_name in sorted(device_dict):
             device = device_dict[dev_name]
-            dumped[dev_name] = todict(device)
+            dumped[dev_name] = common.todict(device)
 
         return dumped
 

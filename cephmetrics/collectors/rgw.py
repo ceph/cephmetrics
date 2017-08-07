@@ -2,13 +2,12 @@
 
 import time
 
-from cephmetrics.collectors.base import BaseCollector
-from cephmetrics.collectors.common import get_hostname, merge_dicts
+from cephmetrics.collectors import (base, common)
 
 __author__ = "paul.cuzner@redhat.com"
 
 
-class RGW(BaseCollector):
+class RGW(base.BaseCollector):
 
     simple_metrics = {
         "req": ("requests", "derive"),
@@ -33,11 +32,11 @@ class RGW(BaseCollector):
         "put_initial_lat_avgcount": ("put_initial_lat_avgcount", "derive")
     }
 
-    all_metrics = merge_dicts(simple_metrics, latencies)
+    all_metrics = common.merge_dicts(simple_metrics, latencies)
 
     def __init__(self, cluster_name, admin_socket, **kwargs):
-        BaseCollector.__init__(self, cluster_name, admin_socket, **kwargs)
-        self.host_name = get_hostname()
+        base.BaseCollector.__init__(self, cluster_name, admin_socket, **kwargs)
+        self.host_name = common.get_hostname()
 
     def _get_rgw_data(self):
 

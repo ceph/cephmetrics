@@ -7,8 +7,7 @@ import threading
 import time
 import logging
 
-from cephmetrics.collectors.base import BaseCollector
-from cephmetrics.collectors.common import merge_dicts, get_hostname
+from cephmetrics.collectors import (base, common)
 
 
 class RBDScanner(threading.Thread):
@@ -35,7 +34,7 @@ class RBDScanner(threading.Thread):
         self.num_rbds = len(rbd_images)
 
 
-class Mon(BaseCollector):
+class Mon(base.BaseCollector):
 
     health = {
         "HEALTH_OK": 0,
@@ -106,13 +105,13 @@ class Mon(BaseCollector):
         "mon_status": ("mon_status", "gauge")
     }
 
-    all_metrics = merge_dicts(pool_recovery_metrics, pool_client_metrics)
-    all_metrics = merge_dicts(all_metrics, cluster_metrics)
-    all_metrics = merge_dicts(all_metrics, osd_metrics)
-    all_metrics = merge_dicts(all_metrics, mon_states)
+    all_metrics = common.merge_dicts(pool_recovery_metrics, pool_client_metrics)
+    all_metrics = common.merge_dicts(all_metrics, cluster_metrics)
+    all_metrics = common.merge_dicts(all_metrics, osd_metrics)
+    all_metrics = common.merge_dicts(all_metrics, mon_states)
 
     def __init__(self, *args, **kwargs):
-        BaseCollector.__init__(self, *args, **kwargs)
+        base.BaseCollector.__init__(self, *args, **kwargs)
         self.version = self._get_version()
         if self.version < 12:
             self.get_mon_health = self._mon_health
@@ -304,9 +303,9 @@ class Mon(BaseCollector):
                 pool_md = Mon._seed(Mon.pool_client_metrics)
 
             if recovery:
-                pool_md = merge_dicts(pool_md, recovery)
+                pool_md = common.merge_dicts(pool_md, recovery)
             else:
-                pool_md = merge_dicts(pool_md, Mon._seed(
+                pool_md = common.merge_dicts(pool_md, Mon._seed(
                     Mon.pool_recovery_metrics))
 
             pool_stats[pool_name] = pool_md
@@ -348,7 +347,7 @@ class Mon(BaseCollector):
         pools_to_scan = []
 
         try:
-            freq = mons.index(get_hostname())
+            freq = mons.index(common.get_hostname())
         except ValueError:
             # this host's name is not in the monitor list?
             # twilight zone moment
@@ -421,7 +420,7 @@ class Mon(BaseCollector):
         cluster_state['num_osd_hosts'] = num_osd_hosts
         cluster_state['num_rbds'] = self._get_rbds(cluster_state['mon_status'])
 
-        all_stats = merge_dicts(cluster_state, {"pools": pool_stats,
+        all_stats = common.merge_dicts(cluster_state, {"pools": pool_stats,
                                                 "osd_state": osd_states})
 
         end = time.time()

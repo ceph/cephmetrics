@@ -12,11 +12,7 @@ except ImportError:
     if not TEST_MODE:
         raise
 
-from collectors.mon import Mon
-from collectors.rgw import RGW
-from collectors.osd import OSDs
-from collectors.iscsi import ISCSIGateway
-from collectors.common import flatten_dict, get_hostname, freadlines
+from collectors import (common, iscsi, mon, osd, rgw)
 
 __author__ = 'Paul Cuzner'
 
@@ -26,7 +22,7 @@ PLUGIN_NAME = 'cephmetrics'
 class Ceph(object):
     def __init__(self):
         self.cluster_name = None
-        self.host_name = get_hostname()
+        self.host_name = common.get_hostname()
 
         self.mon_socket = None
         self.rgw_socket = None
@@ -46,7 +42,7 @@ class Ceph(object):
                                                            self.host_name)
         if os.path.exists(mon_socket):
             self.mon_socket = mon_socket
-            self.mon = Mon(self.cluster_name,
+            self.mon = mon.Mon(self.cluster_name,
                            admin_socket=mon_socket)
 
         rgw_socket_list = glob.glob('/var/run/ceph/{}-client.rgw.*.'
@@ -54,32 +50,33 @@ class Ceph(object):
 
         if rgw_socket_list:
             rgw_socket = rgw_socket_list[0]
-            self.rgw = RGW(self.cluster_name,
+            self.rgw = rgw.RGW(self.cluster_name,
                            admin_socket=rgw_socket)
 
         osd_socket_list = glob.glob('/var/run/ceph/{}-osd.*'
                                     '.asok'.format(self.cluster_name))
-        mounted = freadlines('/proc/mounts')
+        mounted = common.freadlines('/proc/mounts')
         osds_mounted = [mnt for mnt in mounted
                         if mnt.split()[1].startswith('/var/lib/ceph')]
         if osd_socket_list or osds_mounted:
-            self.osd = OSDs(self.cluster_name)
+            self.osd = osd.OSDs(self.cluster_name)
 
         if os.path.exists('/sys/kernel/config/target/iscsi'):
-            self.iscsi = ISCSIGateway(self.cluster_name)
+            self.iscsi = iscsi.ISCSIGateway(self.cluster_name)
 
-        collectd.info("{}: Roles detected - "
-                      "mon:{} osd:{} rgw:{} "
-                      "iscsi:{}".format(__name__,
-                                        isinstance(self.mon, Mon),
-                                        isinstance(self.osd, OSDs),
-                                        isinstance(self.rgw, RGW),
-                                        isinstance(self.iscsi, ISCSIGateway)))
+        collectd.info(
+            "{}: Roles detected - mon:{} osd:{} rgw:{} iscsi:{}".format(
+                __name__,
+                isinstance(self.mon, mon.Mon),
+                isinstance(self.osd, osd.OSDs),
+                isinstance(self.rgw, rgw.RGW),
+                isinstance(self.iscsi, iscsi.ISCSIGateway),
+            ))
 
 
 def write_stats(role_metrics, stats):
 
-    flat_stats = flatten_dict(stats, '.')
+    flat_stats = common.flatten_dict(stats, '.')
     for key_name in flat_stats:
         attr_name = key_name.split('.')[-1]
 
@@ -152,19 +149,19 @@ def read_callback():
 
     if CEPH.mon:
         mon_stats = CEPH.mon.get_stats()
-        write_stats(Mon.all_metrics, mon_stats)
+        write_stats(mon.Mon.all_metrics, mon_stats)
 
     if CEPH.rgw:
         rgw_stats = CEPH.rgw.get_stats()
-        write_stats(RGW.all_metrics, rgw_stats)
+        write_stats(rgw.RGW.all_metrics, rgw_stats)
 
     if CEPH.osd:
         osd_node_stats = CEPH.osd.get_stats()
-        write_stats(OSDs.all_metrics, osd_node_stats)
+        write_stats(osd.OSDs.all_metrics, osd_node_stats)
 
     if CEPH.iscsi:
         iscsi_stats = CEPH.iscsi.get_stats()
-        write_stats(ISCSIGateway.metrics, iscsi_stats)
+        write_stats(iscsi.ISCSIGateway.metrics, iscsi_stats)
 
 
 if TEST_MODE:

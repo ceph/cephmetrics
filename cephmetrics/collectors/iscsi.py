@@ -10,8 +10,7 @@ import os
 import sys
 import time
 
-from collectors.base import BaseCollector
-from collectors.common import fread
+from cephmetrics.collectors import (base, common)
 
 
 class Client(object):
@@ -58,9 +57,10 @@ class LUN(object):
         self._cycle = cycle_id
         self.size = self._so.size
         stats_path = os.path.join(self._path, 'statistics/scsi_lu')
-        self.iops = int(fread(os.path.join(stats_path, "num_cmds")))
-        read_mb = float(fread(os.path.join(stats_path, "read_mbytes")))
-        write_mb = float(fread(os.path.join(stats_path, "write_mbytes")))
+        self.iops = int(common.fread(os.path.join(stats_path, "num_cmds")))
+        read_mb = float(common.fread(os.path.join(stats_path, "read_mbytes")))
+        write_mb = float(
+            common.fread(os.path.join(stats_path, "write_mbytes")))
         self.read_bytes_per_sec = int(read_mb * 1024 ** 2)
         self.write_bytes_per_sec = int(write_mb * 1024 ** 2)
         self.total_bytes_per_sec = self.read_bytes_per_sec + \
@@ -76,7 +76,7 @@ class LUN(object):
                                      if not k.startswith("_")}}
 
 
-class ISCSIGateway(BaseCollector):
+class ISCSIGateway(base.BaseCollector):
     """
     created on a host that has a /sys/kernel/config/target/iscsi dir
     i.e. there is an iscsi gateway here!
@@ -95,7 +95,7 @@ class ISCSIGateway(BaseCollector):
     }
 
     def __init__(self, *args, **kwargs):
-        BaseCollector.__init__(self, *args, **kwargs)
+        base.BaseCollector.__init__(self, *args, **kwargs)
 
         # Since the module can be imported by a parent class but not
         # instantiated, the rtslib import is deferred until the first instance
