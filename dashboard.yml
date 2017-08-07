@@ -10,6 +10,10 @@ osd_servers:
 rgw_servers:
   - obj-rgw-1
 
+#iscsi_gateways:
+#  - rh7-gw1
+#  - rh7-gw2
+
 domain: storage.lab
 
 ###########################################################################
