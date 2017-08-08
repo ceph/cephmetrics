@@ -1,11 +1,16 @@
 #!/usr/bin/env python2
 
 # requires python-rtslib_fb for LIO interaction
-
+#
+# NB. the rtslib_fb module is dynamically loaded by the ISCSIGateway
+# class instantiation. This prevents import errors within the generic parent
+# module cephmetrics
+#
 import os
+import sys
 import time
+
 from collectors.base import BaseCollector
-from rtslib_fb import RTSRoot
 from collectors.common import fread
 
 
@@ -91,6 +96,17 @@ class ISCSIGateway(BaseCollector):
 
     def __init__(self, *args, **kwargs):
         BaseCollector.__init__(self, *args, **kwargs)
+
+        # Since the module can be imported by a parent class but not
+        # instantiated, the rtslib import is deferred until the first instance
+        # of the the class is created. This keeps the parent module simple
+        # and more importantly generic
+        if 'rtslib_fb.root' not in sys.modules.keys():
+
+            try:
+                import rtslib_fb.root as RTSRoot
+            except ImportError:
+                raise ImportError("rtslib_fb python package is missing")
 
         self._root = RTSRoot()
 
@@ -187,8 +203,6 @@ class ISCSIGateway(BaseCollector):
                            "gw_clients": client_stats
                          }
                }
-
-
 
     def _get_so(self):
         return [so for so in self._root.storage_objects]
