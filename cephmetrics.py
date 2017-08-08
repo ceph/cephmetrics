@@ -7,6 +7,7 @@ import collectd
 from collectors.mon import Mon
 from collectors.rgw import RGW
 from collectors.osd import OSDs
+from collectors.iscsi import ISCSIGateway
 from collectors.common import flatten_dict, get_hostname, freadlines
 
 __author__ = 'Paul Cuzner'
@@ -25,6 +26,7 @@ class Ceph(object):
         self.mon = None
         self.rgw = None
         self.osd = None
+        self.iscsi = None
 
     def probe(self):
         """
@@ -55,11 +57,16 @@ class Ceph(object):
         if osd_socket_list or osds_mounted:
             self.osd = OSDs(self.cluster_name)
 
-        collectd.info("{}: Roles detected - mon:{} "
-                      "osd:{} rgw:{}".format(__name__,
-                                             isinstance(self.mon, Mon),
-                                             isinstance(self.osd, OSDs),
-                                             isinstance(self.rgw, RGW)))
+        if os.path.exists('/sys/kernel/config/target/iscsi'):
+            self.iscsi = ISCSIGateway(self.cluster_name)
+
+        collectd.info("{}: Roles detected - "
+                      "mon:{} osd:{} rgw:{} "
+                      "iscsi:{}".format(__name__,
+                                        isinstance(self.mon, Mon),
+                                        isinstance(self.osd, OSDs),
+                                        isinstance(self.rgw, RGW),
+                                        isinstance(self.iscsi, ISCSIGateway)))
 
 
 def write_stats(role_metrics, stats):
@@ -144,11 +151,16 @@ def read_callback():
         osd_node_stats = CEPH.osd.get_stats()
         write_stats(OSDs.all_metrics, osd_node_stats)
 
+    if CEPH.iscsi:
+        iscsi_stats = CEPH.iscsi.get_stats()
+        write_stats(ISCSIGateway.metrics, iscsi_stats)
+
+
 
 if __name__ == '__main__':
 
     # run interactively or maybe test the code
-    collectd.info("In main for some reason !")
+
     pass
 
 else:

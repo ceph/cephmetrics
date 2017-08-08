@@ -10,6 +10,10 @@ osd_servers:
 rgw_servers:
   - obj-rgw-1
 
+#iscsi_gateways:
+#  - rh7-gw1
+#  - rh7-gw2
+
 domain: storage.lab
 
 ###########################################################################
@@ -26,6 +30,7 @@ _dashboards:
   - ceph-rgw-workload
   - disk-busy-by-server
   - iops-by-server
+  - iscsi-overview
   - latency-by-server
   - network-usage-by-node
   - osd-node-detail

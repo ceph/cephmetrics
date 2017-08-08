@@ -12,6 +12,7 @@ _dashboards:
   - ceph-rgw-workload
   - disk-busy-by-server
   - iops-by-server
+  - iscsi-overview
   - latency-by-server
   - network-usage-by-node
   - osd-node-detail
