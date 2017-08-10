@@ -13,12 +13,16 @@
     state: absent
   with_items:
     - "{{ collectd_dir }}/cephmetrics"
-    - "{{ collectors_dir }}/collectors"
 
 - name: Ship collectors
-  copy:
+  synchronize:
     src: files/cephmetrics_collectors/
     dest: "{{ collectors_dir }}"
+    delete: yes
+    rsync_opts:
+      - "--exclude=*.pyc"
+      - "--exclude=__pycache__"
+      - "--delete-excluded"
   notify: Restart collectd
 
 - name: Ship collectd plugin
