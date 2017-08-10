@@ -7,7 +7,7 @@ import threading
 import time
 import logging
 
-from cephmetrics.collectors import (base, common)
+from cephmetrics_collectors import (base, common)
 
 
 class RBDScanner(threading.Thread):

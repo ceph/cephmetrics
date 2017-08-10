@@ -4,7 +4,7 @@ import os
 import time
 import math
 
-from cephmetrics.collectors import (base, common)
+from cephmetrics_collectors import (base, common)
 
 __author__ = "Paul Cuzner"
 

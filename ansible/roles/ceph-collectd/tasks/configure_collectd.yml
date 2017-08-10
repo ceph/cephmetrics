@@ -51,5 +51,5 @@
   replace:
     dest: "{{ collectd_conf_d }}/cephmetrics.conf"
     regexp: 'ModulePath ".*"'
-    replace: 'ModulePath "{{ collectd_cephmetrics_dir }}"'
+    replace: 'ModulePath "{{ collectd_dir }}"'
   notify: Restart collectd

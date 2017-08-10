@@ -2,7 +2,7 @@
 
 import time
 
-from cephmetrics.collectors import (base, common)
+from cephmetrics_collectors import (base, common)
 
 __author__ = "paul.cuzner@redhat.com"
 

@@ -10,7 +10,7 @@ import os
 import sys
 import time
 
-from cephmetrics.collectors import (base, common)
+from cephmetrics_collectors import (base, common)
 
 
 class Client(object):

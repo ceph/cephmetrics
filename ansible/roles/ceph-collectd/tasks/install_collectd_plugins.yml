@@ -3,21 +3,26 @@
   set_fact:
     collectd_dir: "/usr/lib{{ '64' if ansible_pkg_mgr == 'yum' else '' }}/collectd"
 
-- name: Set collectd_cephmetrics_dir
+- name: Set collectors_dir
   set_fact:
-    collectd_cephmetrics_dir: "{{ collectd_dir }}/cephmetrics"
+    collectors_dir: "{{ collectd_dir }}/cephmetrics_collectors"
 
 - name: Remove stale Python files
   file:
     dest: "{{ item }}"
     state: absent
   with_items:
-    - "{{ collectd_cephmetrics_dir }}/cephmetrics.py"
-    - "{{ collectd_cephmetrics_dir }}/cephmetrics.pyc"
-    - "{{ collectd_cephmetrics_dir }}/collectors"
+    - "{{ collectd_dir }}/cephmetrics"
+    - "{{ collectors_dir }}/collectors"
 
-- name: Ship collector plugins
+- name: Ship collectors
   copy:
-    src: files/cephmetrics
-    dest: "{{ collectd_cephmetrics_dir }}"
+    src: files/cephmetrics_collectors/
+    dest: "{{ collectors_dir }}"
+  notify: Restart collectd
+
+- name: Ship collectd plugin
+  copy:
+    src: files/cephmetrics.py
+    dest: "{{ collectd_dir }}"
   notify: Restart collectd
