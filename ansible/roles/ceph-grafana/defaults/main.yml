@@ -10,7 +10,7 @@ defaults:
     # change it via the web UI and then override this value to reflect.
     admin_password: admin
   graphite:
-    service: "{{ 'graphite-web' if ansible_pkg_mgr == 'yum' else 'graphite-api' }}"
+    service: graphite-web
     web_port: "{{ graphite_port | default('8080') }}"
     api_port: 8888
     user: admin
@@ -19,6 +19,18 @@ defaults:
     unix_user:
       yum: apache
       apt: _graphite
+    build_index:
+      yum: '/usr/bin/graphite-build-index'
+      apt: '/usr/bin/graphite-build-search-index'
+    apache_name:
+      yum: 'httpd'
+      apt: 'apache2'
+    apache_conf:
+      yum: '/etc/httpd/conf/httpd.conf'
+      apt: '/etc/apache2/apache2.conf'
+    site_conf:
+      yum: '/etc/httpd/conf.d/graphite-web.conf'
+      apt: '/etc/apache2/sites-available/graphite-web.conf'
   carbon:
     unix_user:
       yum: carbon
@@ -49,9 +61,9 @@ defaults:
     apt:
       # unzip is needed to extract the Vonage plugin
       - unzip
-      - graphite-api
-      # For graphite-api
-      - gunicorn3
+      - graphite-web
+      - apache2
+      - libapache2-mod-wsgi
       - graphite-carbon
       - grafana
       # for dashUpdater.py
