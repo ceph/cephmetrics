@@ -5,8 +5,6 @@ import time
 from collectors.base import BaseCollector
 from collectors.common import get_hostname, merge_dicts
 
-__author__ = "paul.cuzner@redhat.com"
-
 
 class RGW(BaseCollector):
 
@@ -35,8 +33,8 @@ class RGW(BaseCollector):
 
     all_metrics = merge_dicts(simple_metrics, latencies)
 
-    def __init__(self, cluster_name, admin_socket, **kwargs):
-        BaseCollector.__init__(self, cluster_name, admin_socket, **kwargs)
+    def __init__(self, *args, **kwargs):
+        BaseCollector.__init__(self, *args, **kwargs)
         self.host_name = get_hostname()
 
     def _get_rgw_data(self):
@@ -67,8 +65,12 @@ class RGW(BaseCollector):
 
         stats = self._filter(raw_stats)
 
+        stats['ceph_version'] = self.version
+
         end = time.time()
 
         self.logger.info("RGW get_stats : {:.3f}s".format((end - start)))
 
-        return {"rgw": stats}
+        return {
+                "rgw": stats
+        }
