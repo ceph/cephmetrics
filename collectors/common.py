@@ -2,12 +2,38 @@
 
 
 import socket
-from os import statvfs
-import math
+import os
+import subprocess
+
+
+def cmd_exists(command):
+    return any(
+        os.access(os.path.join(path, command), os.X_OK)
+        for path in os.environ["PATH"].split(os.pathsep)
+    )
+
+
+def os_cmd(command):
+    """
+    Issue a command to the OS and return the output. NB. check_output default
+    is shell=False
+    :param command: (str) OS command
+    :return: (list) command response
+    """
+    cmd_list = command.split(' ')
+    if cmd_exists(cmd_list[0]):
+        cmd_output = subprocess.check_output(cmd_list).rstrip()
+        return cmd_output
+    else:
+        return ''
 
 
 def get_hostname():
     return socket.gethostname().split('.')[0]
+
+
+def get_names():
+    return [get_hostname()]
 
 
 def add_dicts(dict1, dict2):
@@ -74,24 +100,30 @@ def fread(file_name=None):
     """
     Simple read function for files of a single value
     :param file_name: (str) file name to read
-    :return: (str) contents of the file
+    :return: (str) contents of the file, or null string for empty file
     """
-
-    with open(file_name, 'r') as f:
-        setting = f.read().rstrip()
-    return setting 
+    if os.path.exists(file_name):
+        with open(file_name, 'r') as f:
+            setting = f.read().rstrip()
+        return setting
+    else:
+        return ''
 
 
 def freadlines(file_name=None):
     """
     simple readlines function to return all records of a given file
     :param file_name: (str) file name to read
-    :return: (list) contents of the file
+    :return: (list) contents of the file, empty if file doesn't exist
     """
 
-    with open(file_name, 'r') as f:
-        data = f.readlines()
-    return data
+    if os.path.exists(file_name):
+        with open(file_name, 'r') as f:
+            data = f.readlines()
+        return data
+    else:
+        return []
+
 
 
 class IOstat(object):
@@ -182,9 +214,6 @@ class Disk(object):
     metrics = {
         "rotational": ("rotational", "gauge"),
         "disk_size": ("disk_size", "gauge"),
-        "fs_size": ("fs_size", "gauge"),
-        "fs_used": ("fs_used", "gauge"),
-        "fs_percent_used": ("fs_percent_used", "gauge"),
         "osd_id": ("osd_id", "gauge")
     }
 
@@ -202,31 +231,25 @@ class Disk(object):
         self.rotational = self._get_rota()
         self.disk_size = self._get_size()
         self.perf = IOstat()
-        self.fs_size = 0
-        self.fs_percent_used = 0
-        self.fs_used = 0
         self.encrypted = encrypted
         self.osd_type = Disk.osd_types[in_osd_type]
 
-        self.refresh()
-
     def _get_size(self):
-        return int(fread("/sys/block/{}/size".format(self._base_dev))) * 512
+        size = fread("/sys/block/{}/size".format(self._base_dev))
+        if size.isdigit():
+            size = int(size) * 512
+        else:
+            size = 0
+        return size
 
     def _get_rota(self):
-        return int(fread("/sys/block/{}/queue/rotational".format(self._base_dev)))
-
-    def _get_fssize(self):
-        s = statvfs("{}/whoami".format(self._path_name))
-        fs_size = s.f_blocks * s.f_bsize
-        fs_used = fs_size - (s.f_bfree * s.f_bsize)
-        fs_percent_used = math.ceil((float(fs_used) / fs_size) * 100)
-        return fs_size, fs_used, fs_percent_used
-
-    def refresh(self):
-        # only run the fs size update, if the _path_name is set.
-        if self._path_name:
-            self.fs_size, self.fs_used, self.fs_percent_used = self._get_fssize()
+        rota = fread("/sys/block/{}/queue/rotational".format(self._base_dev))
+        if rota.isdigit():
+            # 0 = flash/nvme/ssd, 1 = HDD
+            return rota
+        else:
+            # default to a HDD response
+            return 1
 
     @staticmethod
     def get_base_dev(dev_name):
