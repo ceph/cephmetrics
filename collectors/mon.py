@@ -6,9 +6,56 @@ import json
 import threading
 import time
 import logging
+import requests
 
 from collectors.base import BaseCollector
-from collectors.common import merge_dicts, get_hostname
+from collectors.common import merge_dicts, get_hostname, get_names
+
+
+class CephState(object):
+
+    def __init__(self, status=None, summary_list=[]):
+        self.status = status
+
+        # create a list of health issues, ignoring the warning that Luminous
+        # issues
+        summary_data = [health_issue.get('summary', '')
+                        for health_issue in summary_list]
+        self.summary = [health_desc for health_desc in summary_data
+                        if health_desc.find('update your health monitoring') == -1]
+
+    def update(self, state_object):
+        self.status = state_object.status
+        self.summary = state_object.summary
+
+    @property
+    def status_items(self):
+        """
+        The summary text will track pgs objects during recovery or backfill
+        operations, so every status could be different from the last as these
+        counts change. this function removes the int(s) from the status text
+        to reduce the frequency that a status check would generate an event
+        :return: items (set) unique set of status items
+        """
+        priority_errors = ['mons', 'osds', 'flag(s)']
+
+        items = set()
+        for summary_text in self.summary:
+            if any(prio_field in summary_text
+                   for prio_field in priority_errors):
+                # priority health messages kept as is
+                items.add(summary_text)
+            else:
+                # other messages get their 'counts' removed
+                new_text = filter(lambda x: not x.isdigit(), summary_text)
+                items.add(new_text)
+
+        return items
+
+    @property
+    def status_str(self):
+        return "{} : {}".format(self.status,
+                                ','.join(self.summary))
 
 
 class RBDScanner(threading.Thread):
@@ -98,30 +145,31 @@ class Mon(BaseCollector):
         "num_keys_recovered": ("num_keys_recovered", "gauge")
     }
 
-    osd_metrics = {
-        "status": ("status", "gauge")
-    }
-
     mon_states = {
         "mon_status": ("mon_status", "gauge")
     }
 
     all_metrics = merge_dicts(pool_recovery_metrics, pool_client_metrics)
     all_metrics = merge_dicts(all_metrics, cluster_metrics)
-    all_metrics = merge_dicts(all_metrics, osd_metrics)
     all_metrics = merge_dicts(all_metrics, mon_states)
 
     def __init__(self, *args, **kwargs):
         BaseCollector.__init__(self, *args, **kwargs)
-        self.version = self._get_version()
+
+        self.last_state = CephState()
+
+        self.ip_names = get_names()
+
         if self.version < 12:
             self.get_mon_health = self._mon_health
         else:
             self.get_mon_health = self._mon_health_new
 
-    def _get_version(self):
-        vers_info = self._mon_command('version')
-        return int(vers_info['version'].replace('.', ' ').split()[2])
+
+
+        if self._parent:
+            self.logger.debug("Event URL is : "
+                              "{}".format(self._parent.event_url))
 
     def _mon_command(self, cmd_request):
         """ Issue a command to the monitor """
@@ -215,6 +263,10 @@ class Mon(BaseCollector):
 
         cluster['mon_status'] = mon_status
 
+        self.manage_event(health_data.get('status'),
+                          health_data.get('summary', []),
+                          mon_status)
+
         return cluster
 
     def _mon_health_common(self):
@@ -226,8 +278,8 @@ class Mon(BaseCollector):
         cluster_data = self._admin_socket().get('cluster')
         pg_data = self._mon_command("pg stat")
         health_data = self._mon_command("health")
-        health_text = health_data.get('overall_status',
-                                      health_data.get('status', ''))
+        health_text = health_data.get('status',
+                                      health_data.get('overall_status', ''))
 
         cluster = {Mon.cluster_metrics[k][0]: cluster_data[k]
                    for k in cluster_data}
@@ -252,16 +304,99 @@ class Mon(BaseCollector):
         cluster, health_data = self._mon_health_common()
 
         services = health_data.get('health').get('health_services')
-        monstats = {}
+        mon_status = {}
         for svc in services:
             if 'mons' in svc:
                 # Each monitor will have a numeric value denoting health
-                monstats = { mon.get('name'): Mon.health.get(mon.get('health'))
-                             for mon in svc.get('mons')}
+                mon_status = {mon.get('name'): Mon.health.get(mon.get('health'))
+                              for mon in svc.get('mons')}
 
-        cluster['mon_status'] = monstats
+        cluster['mon_status'] = mon_status
+
+        self.manage_event(health_data.get('overall_status'),
+                          health_data.get('summary', []),
+                          mon_status)
 
         return cluster
+
+    def manage_event(self, health_text, health_summary, mon_status):
+
+        if not self._parent:
+            # invoked without a parent, as part of system tests
+            return
+        elif not self._parent.event_url:
+            # event generation skipped
+            return
+
+        candidates = [mon_name for mon_name in sorted(mon_status)
+                      if mon_status.get(mon_name) == 0]
+
+        if candidates:
+            sender = candidates[0]
+            if sender not in self.ip_names:
+                # only one mon should send, so if that's not us do nothing
+                return
+        else:
+            # no suitable mon to send the alert
+            self.logger.error("Unable to send ANY event - no valid mon "
+                              "found")
+            return
+
+        # If we're here, the current host is suitable to send an event so lets
+        # look deeper to see if we need to
+
+        current_state = CephState(health_text, health_summary)
+        self.logger.debug("health:{}".format(current_state.status))
+        self.logger.debug("health:{}".format(current_state.summary))
+        send_it = False
+
+        if health_text != self.last_state.status:
+            # Overall health has changed, so just send the current state!
+            send_it = True
+        else:
+            # look deeper - only send if the list of issues is different
+            if health_text == 'HEALTH_OK':
+                # nothing to do, nothing to send
+                pass
+            else:
+                if self.last_state.status_items != current_state.status_items:
+                    send_it = True
+
+        self.last_state.update(current_state)
+
+        if send_it:
+            tag = 'health_ok' if current_state.status == 'HEALTH_OK' \
+                else 'health_alert'
+
+            self.logger.info("sending cluster status to "
+                             "{}".format(self._parent.event_url))
+            self.logger.debug(current_state.status_str)
+
+            rc = Mon.post_event(self._parent.event_url,
+                                tag,
+                                current_state.status_str)
+
+            if rc != 200:
+                self.logger.warning("Unable to send event - graphite response "
+                                    "{}".format(rc))
+
+        else:
+            # no real change to report
+            pass
+
+    @staticmethod
+    def post_event(url, tag_name, event_message):
+
+        headers = {"Content-Type": "application/json"}
+
+        r = requests.post(url,
+                          headers=headers,
+                          data='{{"what":"Ceph Health",'
+                               '"tags":"{}",'
+                               '"data":"{}"}}'.format(tag_name,
+                                                      event_message))
+
+        return r.status_code
 
     @classmethod
     def _seed(cls, metrics):
@@ -423,9 +558,12 @@ class Mon(BaseCollector):
 
         all_stats = merge_dicts(cluster_state, {"pools": pool_stats,
                                                 "osd_state": osd_states})
+        all_stats['ceph_version'] = self.version
 
         end = time.time()
         self.logger.info("mon get_stats call : {:.3f}s".format((end - start)))
 
-        return {"mon": all_stats}
+        return {
+            "mon": all_stats
+        }
 
