@@ -377,6 +377,10 @@ class Mon(BaseCollector):
                                 current_state.status_str)
 
             if rc != 200:
+                self.error = True
+                self.error_msgs = ['POST request to {} failed ({}) - '
+                                   'firewall?'.format(self._parent.event_url,
+                                                      rc)]
                 self.logger.warning("Unable to send event - graphite response "
                                     "{}".format(rc))
 
@@ -389,14 +393,18 @@ class Mon(BaseCollector):
 
         headers = {"Content-Type": "application/json"}
 
-        r = requests.post(url,
-                          headers=headers,
-                          data='{{"what":"Ceph Health",'
-                               '"tags":"{}",'
-                               '"data":"{}"}}'.format(tag_name,
-                                                      event_message))
+        try:
+            r = requests.post(url,
+                              headers=headers,
+                              data='{{"what":"Ceph Health",'
+                                   '"tags":"{}",'
+                                   '"data":"{}"}}'.format(tag_name,
+                                                          event_message))
+        except requests.ConnectionError:
+            return 500
 
-        return r.status_code
+        else:
+            return r.status_code
 
     @classmethod
     def _seed(cls, metrics):
