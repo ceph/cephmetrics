@@ -41,9 +41,12 @@ class RGW(BaseCollector):
 
         response = self._admin_socket()
 
-        key_name = 'client.rgw.{}'.format(self.host_name)
-
-        return response.get(key_name)
+        if response:
+            key_name = 'client.rgw.{}'.format(self.host_name)
+            return response.get(key_name)
+        else:
+            # admin_socket call failed
+            return {}
 
     def _filter(self, stats):
         # pick out the simple metrics
@@ -62,8 +65,10 @@ class RGW(BaseCollector):
         start = time.time()
 
         raw_stats = self._get_rgw_data()
-
-        stats = self._filter(raw_stats)
+        if raw_stats:
+            stats = self._filter(raw_stats)
+        else:
+            stats = {}
 
         stats['ceph_version'] = self.version
 
