@@ -25,6 +25,7 @@ _dashboards:
   - ceph-at-a-glance
   - ceph-backend-storage
   - ceph-cluster
+  - ceph-health
   - ceph-osd-information
   - ceph-pools
   - ceph-rgw-workload
