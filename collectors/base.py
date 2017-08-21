@@ -40,15 +40,24 @@ class BaseCollector(object):
             cmds = ['perf', 'dump']
 
         start = time.time()
-        response = admin_socket(adm_socket, cmds,
-                                format='json')
+        try:
+            response = admin_socket(adm_socket, cmds,
+                                    format='json')
+        except RuntimeError as e:
+            self.logger.error("admin_socket error: {}".format(e.message))
+            self.error = True
+            self.error_msgs = [e.message]
+            resp = {}
+        else:
+            resp = json.loads(response)
+
         end = time.time()
 
         self.logger.debug("admin_socket call '{}' : "
                           "{:.3f}s".format(' '.join(cmds),
                                            (end - start)))
 
-        return json.loads(response)
+        return resp
 
     def get_version(self):
         """
