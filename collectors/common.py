@@ -100,7 +100,7 @@ def fread(file_name=None):
     """
     Simple read function for files of a single value
     :param file_name: (str) file name to read
-    :return: (str) contents of the file, or null string for empty file
+    :return: (str) contents of the file, or null string for non-existent file
     """
     if os.path.exists(file_name):
         with open(file_name, 'r') as f:

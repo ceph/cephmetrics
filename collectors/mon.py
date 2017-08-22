@@ -22,7 +22,7 @@ class CephState(object):
         summary_data = [health_issue.get('summary', '')
                         for health_issue in summary_list]
         self.summary = [health_desc for health_desc in summary_data
-                        if health_desc.find('update your health monitoring') == -1]
+                        if 'update your health monitoring' not in health_desc]
 
     def update(self, state_object):
         self.status = state_object.status
