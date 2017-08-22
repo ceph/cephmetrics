@@ -82,7 +82,7 @@ class ISCSIGateway(BaseCollector):
     i.e. there is an iscsi gateway here!
     """
 
-    metrics = {
+    all_metrics = {
         "lun_count": ("lun_count", "gauge"),
         "client_count": ("client_count", "gauge"),
         "tpg_count": ("tpg_count", "gauge"),
@@ -106,7 +106,7 @@ class ISCSIGateway(BaseCollector):
             try:
                 import rtslib_fb.root as RTSRoot
             except ImportError:
-                raise ImportError("rtslib_fb python package is missing")
+                raise
 
         self._root = RTSRoot()
 
@@ -190,7 +190,7 @@ class ISCSIGateway(BaseCollector):
         gw_stats = {}
         client_stats = {}
 
-        for metric in ISCSIGateway.metrics:
+        for metric in ISCSIGateway.all_metrics:
             gw_stats[metric] = getattr(self, metric)
 
         for client_name in self.clients:
@@ -198,6 +198,7 @@ class ISCSIGateway(BaseCollector):
             client_stats.update(client.dump())
 
         return {"iscsi": {
+                           "ceph_version": self.version,
                            "gw_name": {self.gateway_name: 0},
                            "gw_stats": gw_stats,
                            "gw_clients": client_stats
@@ -254,3 +255,6 @@ class ISCSIGateway(BaseCollector):
 
         return self.dump()
 
+    @classmethod
+    def probe(cls):
+        return os.path.exists('/sys/kernel/config/target/iscsi')

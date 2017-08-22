@@ -5,8 +5,6 @@ import time
 from collectors.base import BaseCollector
 from collectors.common import get_hostname, merge_dicts
 
-__author__ = "paul.cuzner@redhat.com"
-
 
 class RGW(BaseCollector):
 
@@ -35,17 +33,20 @@ class RGW(BaseCollector):
 
     all_metrics = merge_dicts(simple_metrics, latencies)
 
-    def __init__(self, cluster_name, admin_socket, **kwargs):
-        BaseCollector.__init__(self, cluster_name, admin_socket, **kwargs)
+    def __init__(self, *args, **kwargs):
+        BaseCollector.__init__(self, *args, **kwargs)
         self.host_name = get_hostname()
 
     def _get_rgw_data(self):
 
         response = self._admin_socket()
 
-        key_name = 'client.rgw.{}'.format(self.host_name)
-
-        return response.get(key_name)
+        if response:
+            key_name = 'client.rgw.{}'.format(self.host_name)
+            return response.get(key_name)
+        else:
+            # admin_socket call failed
+            return {}
 
     def _filter(self, stats):
         # pick out the simple metrics
@@ -64,11 +65,17 @@ class RGW(BaseCollector):
         start = time.time()
 
         raw_stats = self._get_rgw_data()
+        if raw_stats:
+            stats = self._filter(raw_stats)
+        else:
+            stats = {}
 
-        stats = self._filter(raw_stats)
+        stats['ceph_version'] = self.version
 
         end = time.time()
 
         self.logger.info("RGW get_stats : {:.3f}s".format((end - start)))
 
-        return {"rgw": stats}
+        return {
+                "rgw": stats
+        }

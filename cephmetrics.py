@@ -1,6 +1,6 @@
 #!/usr/bin/env python
+
 import os
-import glob
 import logging
 import collectd
 
@@ -8,20 +8,25 @@ from collectors.mon import Mon
 from collectors.rgw import RGW
 from collectors.osd import OSDs
 from collectors.iscsi import ISCSIGateway
-from collectors.common import flatten_dict, get_hostname, freadlines
+from collectors.common import flatten_dict, get_hostname
 
-__author__ = 'Paul Cuzner'
 
 PLUGIN_NAME = 'cephmetrics'
 
 
 class Ceph(object):
+
+    roles = {
+        "mon": "Mon",
+        "rgw": "RGW",
+        "osd": "OSDs",
+        "iscsi": "ISCSIGateway"
+    }
+
     def __init__(self):
         self.cluster_name = None
+        self.event_url = None
         self.host_name = get_hostname()
-
-        self.mon_socket = None
-        self.rgw_socket = None
 
         self.mon = None
         self.rgw = None
@@ -34,39 +39,40 @@ class Ceph(object):
         find in /var/run/ceph
         """
 
-        mon_socket = '/var/run/ceph/{}-mon.{}.asok'.format(self.cluster_name,
-                                                           self.host_name)
-        if os.path.exists(mon_socket):
-            self.mon_socket = mon_socket
-            self.mon = Mon(self.cluster_name,
-                           admin_socket=mon_socket)
+        mon_socket = Mon.probe(self.cluster_name, 'mon')
+        if mon_socket:
+            self.mon = Mon(self, self.cluster_name,
+                           admin_socket=mon_socket[0])
 
-        rgw_socket_list = glob.glob('/var/run/ceph/{}-client.rgw.*.'
-                                    'asok'.format(self.cluster_name))
+        rgw_socket = RGW.probe(self.cluster_name, 'rgw')
+        if rgw_socket:
+            self.rgw = RGW(self, self.cluster_name,
+                           admin_socket=rgw_socket[0])
 
-        if rgw_socket_list:
-            rgw_socket = rgw_socket_list[0]
-            self.rgw = RGW(self.cluster_name,
-                           admin_socket=rgw_socket)
+        osd_socket = OSDs.probe(self.cluster_name, 'osd')
+        if osd_socket:
+            self.osd = OSDs(self, self.cluster_name)
 
-        osd_socket_list = glob.glob('/var/run/ceph/{}-osd.*'
-                                    '.asok'.format(self.cluster_name))
-        mounted = freadlines('/proc/mounts')
-        osds_mounted = [mnt for mnt in mounted
-                        if mnt.split()[1].startswith('/var/lib/ceph')]
-        if osd_socket_list or osds_mounted:
-            self.osd = OSDs(self.cluster_name)
+        if ISCSIGateway.probe():
+            self.iscsi = ISCSIGateway(self, self.cluster_name)
 
-        if os.path.exists('/sys/kernel/config/target/iscsi'):
-            self.iscsi = ISCSIGateway(self.cluster_name)
+    def get_stats(self):
 
-        collectd.info("{}: Roles detected - "
-                      "mon:{} osd:{} rgw:{} "
-                      "iscsi:{}".format(__name__,
-                                        isinstance(self.mon, Mon),
-                                        isinstance(self.osd, OSDs),
-                                        isinstance(self.rgw, RGW),
-                                        isinstance(self.iscsi, ISCSIGateway)))
+        stats = {}
+
+        if self.mon:
+            stats['mon'] = self.mon.get_stats()
+
+        if self.rgw:
+            stats['rgw'] = self.rgw.get_stats()
+
+        if self.osd:
+            stats['osd'] = self.osd.get_stats()
+
+        if self.iscsi:
+            stats['iscsi'] = self.iscsi.get_stats()
+
+        return stats
 
 
 def write_stats(role_metrics, stats):
@@ -103,8 +109,16 @@ def configure_callback(conf):
 
     log_level = module_parms.get('LogLevel', 'debug')
     if log_level not in valid_log_levels:
-        collectd.error("LogLevel specified is invalid - must"
+        collectd.error("cephmetrics: LogLevel specified is invalid - must"
                        " be :{}".format(' or '.join(valid_log_levels)))
+
+    if 'EventURL' in module_parms:
+        CEPH.event_url = module_parms['EventURL']
+        collectd.info("cephmetrics: Event messages enabled for target "
+                      "{}".format(CEPH.event_url))
+    else:
+        collectd.warning("cephmetrics: EventURL missing - health events "
+                         "will not be reported")
 
     if 'ClusterName' in module_parms:
         cluster_name = module_parms['ClusterName']
@@ -120,8 +134,15 @@ def configure_callback(conf):
 
         CEPH.probe()
 
+        collectd.info("{}: Roles detected - "
+                      "mon:{} osd:{} rgw:{} "
+                      "iscsi:{}".format(__name__,
+                                        isinstance(CEPH.mon, Mon),
+                                        isinstance(CEPH.osd, OSDs),
+                                        isinstance(CEPH.rgw, RGW),
+                                        isinstance(CEPH.iscsi, ISCSIGateway)))
     else:
-        collectd.error("ClusterName is required")
+        collectd.error("cephmetrics: ClusterName is required")
 
 
 def setup_module_logging(log_level):
@@ -134,27 +155,36 @@ def setup_module_logging(log_level):
                         format='%(asctime)s - %(levelname)-7s - '
                                '[%(filename)s:%(lineno)s:%(funcName)s() - '
                                '%(message)s',
+                        filemode='w',
                         level=level.get(log_level))
 
 
 def read_callback():
 
-    if CEPH.mon:
-        mon_stats = CEPH.mon.get_stats()
-        write_stats(Mon.all_metrics, mon_stats)
+    stats = CEPH.get_stats()
 
-    if CEPH.rgw:
-        rgw_stats = CEPH.rgw.get_stats()
-        write_stats(RGW.all_metrics, rgw_stats)
+    for role in Ceph.roles:
+        if role in stats:
+            collector = getattr(CEPH, role)
 
-    if CEPH.osd:
-        osd_node_stats = CEPH.osd.get_stats()
-        write_stats(OSDs.all_metrics, osd_node_stats)
+            write_stats(collector.all_metrics, stats[role])
 
-    if CEPH.iscsi:
-        iscsi_stats = CEPH.iscsi.get_stats()
-        write_stats(ISCSIGateway.metrics, iscsi_stats)
+            error_handler(collector)
 
+
+def error_handler(collector):
+    if not collector.error:
+        return
+
+    # detected an error, let's flag it to the collectd log
+    msg_text = ",".join(collector.error_msgs)
+
+    collectd.error("cephmetrics error: {} - {}".format(collector._name,
+                                                       msg_text))
+
+    # reset the collector instance's error tracking
+    collector.error = False
+    del collector.error_msgs[:]
 
 
 if __name__ == '__main__':
