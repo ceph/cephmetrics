@@ -45,6 +45,11 @@ class RGW(BaseCollector):
                                 '{}.*.asok'.format(self.cluster_name,
                                                    self.host_name))
         if rgw_sockets:
+
+            if len(rgw_sockets) > 1:
+                self.logger.warning("multiple rgw sockets found - "
+                                    "data sent from {}".format(rgw_sockets[0]))
+
             response = self._admin_socket(socket_path=rgw_sockets[0])
 
             if response:
@@ -54,6 +59,7 @@ class RGW(BaseCollector):
                 # admin_socket call failed
                 return {}
         else:
+            # no socket found on the host, nothing to send to caller
             return {}
 
     @staticmethod
