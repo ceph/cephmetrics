@@ -156,6 +156,10 @@ class Mon(BaseCollector):
     def __init__(self, *args, **kwargs):
         BaseCollector.__init__(self, *args, **kwargs)
 
+        self.admin_socket = ('/var/run/ceph/{}-mon.'
+                             '{}.asok'.format(self.cluster_name,
+                                              get_hostname()))
+
         self.last_state = CephState()
 
         self.ip_names = get_names()
@@ -253,19 +257,20 @@ class Mon(BaseCollector):
 
         cluster, health_data = self._mon_health_common()
 
-        mon_status_output = self._mon_command('mon_status')
-        quorum_list = mon_status_output.get('quorum')
-        mon_list = mon_status_output.get('monmap').get('mons')
-        mon_status = {}
-        for mon in mon_list:
-            state = 0 if mon.get('rank') in quorum_list else 4
-            mon_status[mon.get('name')] = state
+        if cluster:
+            mon_status_output = self._mon_command('mon_status')
+            quorum_list = mon_status_output.get('quorum')
+            mon_list = mon_status_output.get('monmap').get('mons')
+            mon_status = {}
+            for mon in mon_list:
+                state = 0 if mon.get('rank') in quorum_list else 4
+                mon_status[mon.get('name')] = state
 
-        cluster['mon_status'] = mon_status
+            cluster['mon_status'] = mon_status
 
-        self.manage_event(health_data.get('status'),
-                          health_data.get('summary', []),
-                          mon_status)
+            self.manage_event(health_data.get('status'),
+                              health_data.get('summary', []),
+                              mon_status)
 
         return cluster
 
@@ -275,47 +280,51 @@ class Mon(BaseCollector):
         # ceph.conf "mon_health_preluminous_compat=true"
         # this will provide the same output as pre-luminous
 
-        cluster_data = self._admin_socket().get('cluster')
-        pg_data = self._mon_command("pg stat")
-        health_data = self._mon_command("health")
-        health_text = health_data.get('status',
-                                      health_data.get('overall_status', ''))
+        health_data = {}
+        cluster = {}
 
-        cluster = {Mon.cluster_metrics[k][0]: cluster_data[k]
-                   for k in cluster_data}
+        cluster_data = self._admin_socket().get('cluster', {})
+        if cluster_data:
+            pg_data = self._mon_command("pg stat")
+            health_data = self._mon_command("health")
+            health_text = health_data.get('status',
+                                          health_data.get('overall_status', ''))
 
-        health_num = Mon.health.get(health_text, 16)
+            cluster = {Mon.cluster_metrics[k][0]: cluster_data[k]
+                       for k in cluster_data}
 
-        cluster['health'] = health_num
+            health_num = Mon.health.get(health_text, 16)
 
-        pg_states = pg_data.get('num_pg_by_state')  # list of dict name,num
-        health_summary = health_data.get('summary', [])  # list of issues
-        cluster['num_pgs_stuck'] = Mon.check_stuck_pgs(health_summary)
-        cluster['features'] = Mon.get_feature_state(health_summary,
-                                                    pg_states)
+            cluster['health'] = health_num
 
-        self.logger.debug(
-            'Features:{}'.format(json.dumps(cluster['features'])))
+            pg_states = pg_data.get('num_pg_by_state')  # list of dict name,num
+            health_summary = health_data.get('summary', [])  # list of issues
+            cluster['num_pgs_stuck'] = Mon.check_stuck_pgs(health_summary)
+            cluster['features'] = Mon.get_feature_state(health_summary,
+                                                        pg_states)
+
+            self.logger.debug(
+                'Features:{}'.format(json.dumps(cluster['features'])))
 
         return cluster, health_data
 
     def _mon_health(self):
 
         cluster, health_data = self._mon_health_common()
+        if cluster:
+            services = health_data.get('health').get('health_services')
+            mon_status = {}
+            for svc in services:
+                if 'mons' in svc:
+                    # Each monitor will have a numeric value denoting health
+                    mon_status = {mon.get('name'): Mon.health.get(mon.get('health'))
+                                  for mon in svc.get('mons')}
 
-        services = health_data.get('health').get('health_services')
-        mon_status = {}
-        for svc in services:
-            if 'mons' in svc:
-                # Each monitor will have a numeric value denoting health
-                mon_status = {mon.get('name'): Mon.health.get(mon.get('health'))
-                              for mon in svc.get('mons')}
+            cluster['mon_status'] = mon_status
 
-        cluster['mon_status'] = mon_status
-
-        self.manage_event(health_data.get('overall_status'),
-                          health_data.get('summary', []),
-                          mon_status)
+            self.manage_event(health_data.get('overall_status'),
+                              health_data.get('summary', []),
+                              mon_status)
 
         return cluster
 
@@ -558,14 +567,24 @@ class Mon(BaseCollector):
 
         start = time.time()
 
-        pool_stats = self._get_pool_stats()
-        num_osd_hosts, osd_states = self._get_osd_states()
         cluster_state = self.get_mon_health()
-        cluster_state['num_osd_hosts'] = num_osd_hosts
-        cluster_state['num_rbds'] = self._get_rbds(cluster_state['mon_status'])
+        if cluster_state:
 
-        all_stats = merge_dicts(cluster_state, {"pools": pool_stats,
-                                                "osd_state": osd_states})
+            pool_stats = self._get_pool_stats()
+            num_osd_hosts, osd_states = self._get_osd_states()
+
+            cluster_state['num_osd_hosts'] = num_osd_hosts
+            cluster_state['num_rbds'] = self._get_rbds(cluster_state['mon_status'])
+
+            all_stats = merge_dicts(cluster_state, {"pools": pool_stats,
+                                                    "osd_state": osd_states})
+        else:
+            all_stats = {}
+            self.error = True
+            msg = 'MON socket is not available...is ceph-mon active?'
+            self.error_msgs = [msg]
+            self.logger.warning(msg)
+
         all_stats['ceph_version'] = self.version
 
         end = time.time()
