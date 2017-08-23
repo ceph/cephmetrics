@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import time
+import glob
 
 from collectors.base import BaseCollector
 from collectors.common import get_hostname, merge_dicts
@@ -35,20 +36,28 @@ class RGW(BaseCollector):
 
     def __init__(self, *args, **kwargs):
         BaseCollector.__init__(self, *args, **kwargs)
+
         self.host_name = get_hostname()
 
     def _get_rgw_data(self):
 
-        response = self._admin_socket()
+        rgw_sockets = glob.glob('/var/run/ceph/{}-client.rgw.'
+                                '{}.*.asok'.format(self.cluster_name,
+                                                   self.host_name))
+        if rgw_sockets:
+            response = self._admin_socket(socket_path=rgw_sockets[0])
 
-        if response:
-            key_name = 'client.rgw.{}'.format(self.host_name)
-            return response.get(key_name)
+            if response:
+                key_name = 'client.rgw.{}'.format(self.host_name)
+                return response.get(key_name)
+            else:
+                # admin_socket call failed
+                return {}
         else:
-            # admin_socket call failed
             return {}
 
-    def _filter(self, stats):
+    @staticmethod
+    def stats_filter(stats):
         # pick out the simple metrics
 
         filtered = {key: stats[key] for key in RGW.simple_metrics}
@@ -66,9 +75,13 @@ class RGW(BaseCollector):
 
         raw_stats = self._get_rgw_data()
         if raw_stats:
-            stats = self._filter(raw_stats)
+            stats = RGW.stats_filter(raw_stats)
         else:
             stats = {}
+            self.error = True
+            msg = 'RGW socket not available...radosgw running?'
+            self.error_msgs = [msg]
+            self.logger.warning(msg)
 
         stats['ceph_version'] = self.version
 
