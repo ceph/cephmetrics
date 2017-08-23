@@ -253,28 +253,27 @@ class Mon(BaseCollector):
 
         return stuck_pgs
 
-    def _mon_health_new(self):
+    def _mon_health_new(self, cluster_data):
 
-        cluster, health_data = self._mon_health_common()
+        cluster, health_data = self._mon_health_common(cluster_data)
 
-        if cluster:
-            mon_status_output = self._mon_command('mon_status')
-            quorum_list = mon_status_output.get('quorum')
-            mon_list = mon_status_output.get('monmap').get('mons')
-            mon_status = {}
-            for mon in mon_list:
-                state = 0 if mon.get('rank') in quorum_list else 4
-                mon_status[mon.get('name')] = state
+        mon_status_output = self._mon_command('mon_status')
+        quorum_list = mon_status_output.get('quorum')
+        mon_list = mon_status_output.get('monmap').get('mons')
+        mon_status = {}
+        for mon in mon_list:
+            state = 0 if mon.get('rank') in quorum_list else 4
+            mon_status[mon.get('name')] = state
 
-            cluster['mon_status'] = mon_status
+        cluster['mon_status'] = mon_status
 
-            self.manage_event(health_data.get('status'),
-                              health_data.get('summary', []),
-                              mon_status)
+        self.manage_event(health_data.get('status'),
+                          health_data.get('summary', []),
+                          mon_status)
 
         return cluster
 
-    def _mon_health_common(self):
+    def _mon_health_common(self, cluster_data):
 
         # for v12 (Luminous and beyond) add the following setting to
         # ceph.conf "mon_health_preluminous_compat=true"
@@ -283,48 +282,49 @@ class Mon(BaseCollector):
         health_data = {}
         cluster = {}
 
-        cluster_data = self._admin_socket().get('cluster', {})
-        if cluster_data:
-            pg_data = self._mon_command("pg stat")
-            health_data = self._mon_command("health")
-            health_text = health_data.get('status',
-                                          health_data.get('overall_status', ''))
+        pg_data = self._mon_command("pg stat")
+        health_data = self._mon_command("health")
+        health_text = health_data.get('status',
+                                      health_data.get('overall_status', ''))
 
-            cluster = {Mon.cluster_metrics[k][0]: cluster_data[k]
-                       for k in cluster_data}
+        cluster = {Mon.cluster_metrics[k][0]: cluster_data[k]
+                   for k in cluster_data}
 
-            health_num = Mon.health.get(health_text, 16)
+        health_num = Mon.health.get(health_text, 16)
 
-            cluster['health'] = health_num
+        cluster['health'] = health_num
 
-            pg_states = pg_data.get('num_pg_by_state')  # list of dict name,num
-            health_summary = health_data.get('summary', [])  # list of issues
-            cluster['num_pgs_stuck'] = Mon.check_stuck_pgs(health_summary)
-            cluster['features'] = Mon.get_feature_state(health_summary,
-                                                        pg_states)
+        pg_states = pg_data.get('num_pg_by_state')  # list of dict name,num
+        health_summary = health_data.get('summary', [])  # list of issues
+        cluster['num_pgs_stuck'] = Mon.check_stuck_pgs(health_summary)
+        cluster['features'] = Mon.get_feature_state(health_summary,
+                                                    pg_states)
 
-            self.logger.debug(
-                'Features:{}'.format(json.dumps(cluster['features'])))
+        self.logger.debug(
+            'Features:{}'.format(json.dumps(cluster['features'])))
 
         return cluster, health_data
 
-    def _mon_health(self):
+    def get_cluster_state(self):
+        return self._admin_socket().get('cluster', {})
 
-        cluster, health_data = self._mon_health_common()
-        if cluster:
-            services = health_data.get('health').get('health_services')
-            mon_status = {}
-            for svc in services:
-                if 'mons' in svc:
-                    # Each monitor will have a numeric value denoting health
-                    mon_status = {mon.get('name'): Mon.health.get(mon.get('health'))
-                                  for mon in svc.get('mons')}
+    def _mon_health(self, cluster_data):
 
-            cluster['mon_status'] = mon_status
+        cluster, health_data = self._mon_health_common(cluster_data)
 
-            self.manage_event(health_data.get('overall_status'),
-                              health_data.get('summary', []),
-                              mon_status)
+        services = health_data.get('health').get('health_services')
+        mon_status = {}
+        for svc in services:
+            if 'mons' in svc:
+                # Each monitor will have a numeric value denoting health
+                mon_status = {mon.get('name'): Mon.health.get(mon.get('health'))
+                              for mon in svc.get('mons')}
+
+        cluster['mon_status'] = mon_status
+
+        self.manage_event(health_data.get('overall_status'),
+                          health_data.get('summary', []),
+                          mon_status)
 
         return cluster
 
@@ -410,6 +410,8 @@ class Mon(BaseCollector):
                                    '"data":"{}"}}'.format(tag_name,
                                                           event_message))
         except requests.ConnectionError:
+            # if we hit this, the endpoint wasn't there (graphite web was not
+            # accessible) so identify that issue as a server error (500)
             return 500
 
         else:
@@ -512,8 +514,13 @@ class Mon(BaseCollector):
 
         return pools_to_scan
 
-    def get_pools(self):
-        skip_pools = ('default.rgw')
+    def get_rbd_pools(self):
+        """
+        Look at the rados pools to filter out pools that would normally not
+        be associated with rbd images
+        :return: (list) of pools that may contain rbd images
+        """
+        skip_pools = ('default.rgw', '.rgw.')
 
         start = time.time()
         conf_file = "/etc/ceph/{}.conf".format(self.cluster_name)
@@ -529,8 +536,15 @@ class Mon(BaseCollector):
         return filtered_pools
 
     def _get_rbds(self, monitors):
+        """
+        Scan a subset of the rados pools for rbd images. Each mon collector
+        will scan a subset of the pools to distribute the load using the
+        RBSScanner class
+        :param monitors: (dict) monitor names and states
+        :return total_rbs: (int) total rbd images found across pools
+        """
 
-        pool_list = self.get_pools()
+        pool_list = self.get_rbd_pools()
         mon_list = sorted(monitors.keys())
         my_pools = Mon._select_pools(pool_list, mon_list)
         self.logger.debug("Pools to be scanned on this mon"
@@ -562,14 +576,18 @@ class Mon(BaseCollector):
     def get_stats(self):
         """
         method associated with the plugin callback to gather the metrics
-        :return: (dict) metadata describing the state of the mon/osd's
+        :return: (dict) metadata describing the state of the mon/osd's etc
         """
 
         start = time.time()
 
-        cluster_state = self.get_mon_health()
-        if cluster_state:
+        # Attempt to read the admin socket for cluster data
+        cluster_data = self.get_cluster_state()
 
+        if cluster_data:
+
+            # read from the admin socket was OK, so process the data
+            cluster_state = self.get_mon_health(cluster_data)
             pool_stats = self._get_pool_stats()
             num_osd_hosts, osd_states = self._get_osd_states()
 
@@ -579,6 +597,9 @@ class Mon(BaseCollector):
             all_stats = merge_dicts(cluster_state, {"pools": pool_stats,
                                                     "osd_state": osd_states})
         else:
+            # problem reading from the admin socket, record it in cephmetrics
+            # log and set the object's error flag so it can be picked up at the
+            # layer above the Mon instance (Ceph instance -> collectd log)
             all_stats = {}
             self.error = True
             msg = 'MON socket is not available...is ceph-mon active?'
