@@ -3,11 +3,10 @@
 import json
 import time
 import logging
-import glob
 import os
 
 from ceph_daemon import admin_socket
-from collectors.common import os_cmd
+from collectors.common import os_cmd, cmd_exists
 
 
 class BaseCollector(object):
@@ -15,7 +14,8 @@ class BaseCollector(object):
     class_to_cmd = {
         "Mon": "ceph-mon",
         "RGW": "radosgw",
-        "OSDs": "ceph-osd"
+        "OSDs": "ceph-osd",
+        "ISCSIGateway": "gwcli"
     }
 
     def __init__(self, parent, cluster_name, admin_socket=None):
@@ -40,16 +40,20 @@ class BaseCollector(object):
             cmds = ['perf', 'dump']
 
         start = time.time()
-        try:
-            response = admin_socket(adm_socket, cmds,
-                                    format='json')
-        except RuntimeError as e:
-            self.logger.error("admin_socket error: {}".format(e.message))
-            self.error = True
-            self.error_msgs = [e.message]
-            resp = {}
+
+        if os.path.exists(adm_socket):
+            try:
+                response = admin_socket(adm_socket, cmds,
+                                        format='json')
+            except RuntimeError as e:
+                self.logger.error("admin_socket error: {}".format(e.message))
+                self.error = True
+                self.error_msgs = [e.message]
+                resp = {}
+            else:
+                resp = json.loads(response)
         else:
-            resp = json.loads(response)
+            resp = {}
 
         end = time.time()
 
@@ -64,39 +68,26 @@ class BaseCollector(object):
         Although the version number is v.r.m based, this isn't a float so it
         can't be stored as a number, so the version returned is just the
         vesion.release components (i.e. looks like a float!)
-
-        :return: version number (float)
+        :return: (float) version number (v.r format)
         """
         # version command returns output like this
         # ceph version 10.2.2-15.el7cp (60cd52496ca02bdde9c2f4191e617f75166d87b6)
 
         cmd = BaseCollector.class_to_cmd.get(self._name, 'ceph')
-        vers_command = "{} --version".format(cmd)
-        vers_output = os_cmd(vers_command)
+        vers_output = os_cmd('{} -v'.format(cmd))
         if vers_output:
             return float('.'.join(vers_output.split()[2].split('.')[:2]))
         else:
             return 0
 
     @classmethod
-    def probe(cls, cluster_name, daemon_type):
+    def probe(cls):
         """
-        Look for an admin socket related to the daemon
-        :param cluster_name: (str) cluster name
-        :param daemon_type: (str) mon, rgw, osd
-        :return: (list) list of socket paths or null list
+        Look for the relevant binary to signify a specific ceph role
+        :return: (bool) showing whether the binary was found or not
         """
 
-        daemon_pfx = {
-            "rgw": '{}-client.rgw'.format(cluster_name),
-            "osd": '{}-osd'.format(cluster_name),
-            "mon": '{}-mon'.format(cluster_name)
-        }
-
-        socket_path = os.path.join('/var/run/ceph/',
-                                   '{}.*.asok'.format(daemon_pfx[daemon_type]))
-
-        return glob.glob(socket_path)
+        return cmd_exists(BaseCollector.class_to_cmd.get(cls.__name__))
 
     def get_stats(self):
 
