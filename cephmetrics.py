@@ -35,22 +35,16 @@ class Ceph(object):
 
     def probe(self):
         """
-        set up which collector(s) to use, based on what types of sockets we
-        find in /var/run/ceph
+        set up which collector(s) to use
         """
 
-        mon_socket = Mon.probe(self.cluster_name, 'mon')
-        if mon_socket:
-            self.mon = Mon(self, self.cluster_name,
-                           admin_socket=mon_socket[0])
+        if Mon.probe():
+            self.mon = Mon(self, self.cluster_name)
 
-        rgw_socket = RGW.probe(self.cluster_name, 'rgw')
-        if rgw_socket:
-            self.rgw = RGW(self, self.cluster_name,
-                           admin_socket=rgw_socket[0])
+        if RGW.probe():
+            self.rgw = RGW(self, self.cluster_name)
 
-        osd_socket = OSDs.probe(self.cluster_name, 'osd')
-        if osd_socket:
+        if OSDs.probe():
             self.osd = OSDs(self, self.cluster_name)
 
         if ISCSIGateway.probe():

@@ -104,7 +104,7 @@ class ISCSIGateway(BaseCollector):
         if 'rtslib_fb.root' not in sys.modules.keys():
 
             try:
-                import rtslib_fb.root as RTSRoot
+                from rtslib_fb.root import RTSRoot
             except ImportError:
                 raise
 
@@ -242,19 +242,28 @@ class ISCSIGateway(BaseCollector):
         start = time.time()
 
         # populate gateway instance with the latest configuration from rtslib
-        self.refresh()
+        stats = {}
+        if os.path.exists('/sys/kernel/config/target/iscsi'):
+            self.refresh()
 
-        # Overtime they'll be churn in client and disks so we need to drop
-        # any entries from prior runs that are no longer seen in the iscsi
-        # configuration with the prune method
-        self.prune()
+            # Overtime they'll be churn in client and disks so we need to drop
+            # any entries from prior runs that are no longer seen in the iscsi
+            # configuration with the prune method
+            self.prune()
+            stats = self.dump()
+        else:
+            msg = "iSCSI Gateway is not active on this host"
+            self.logger.warning(msg)
+            self.error = True
+            self.error_msgs = [msg]
+            stats = {"iscsi": {
+                               "ceph_version": self.version
+                              }
+                     }
 
         end = time.time()
 
         self.logger.info("LIO stats took {}s".format(end - start))
 
-        return self.dump()
+        return stats
 
-    @classmethod
-    def probe(cls):
-        return os.path.exists('/sys/kernel/config/target/iscsi')

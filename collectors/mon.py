@@ -156,6 +156,10 @@ class Mon(BaseCollector):
     def __init__(self, *args, **kwargs):
         BaseCollector.__init__(self, *args, **kwargs)
 
+        self.admin_socket = ('/var/run/ceph/{}-mon.'
+                             '{}.asok'.format(self.cluster_name,
+                                              get_hostname()))
+
         self.last_state = CephState()
 
         self.ip_names = get_names()
@@ -249,9 +253,9 @@ class Mon(BaseCollector):
 
         return stuck_pgs
 
-    def _mon_health_new(self):
+    def _mon_health_new(self, cluster_data):
 
-        cluster, health_data = self._mon_health_common()
+        cluster, health_data = self._mon_health_common(cluster_data)
 
         mon_status_output = self._mon_command('mon_status')
         quorum_list = mon_status_output.get('quorum')
@@ -269,13 +273,15 @@ class Mon(BaseCollector):
 
         return cluster
 
-    def _mon_health_common(self):
+    def _mon_health_common(self, cluster_data):
 
         # for v12 (Luminous and beyond) add the following setting to
         # ceph.conf "mon_health_preluminous_compat=true"
         # this will provide the same output as pre-luminous
 
-        cluster_data = self._admin_socket().get('cluster')
+        health_data = {}
+        cluster = {}
+
         pg_data = self._mon_command("pg stat")
         health_data = self._mon_command("health")
         health_text = health_data.get('status',
@@ -299,9 +305,12 @@ class Mon(BaseCollector):
 
         return cluster, health_data
 
-    def _mon_health(self):
+    def get_cluster_state(self):
+        return self._admin_socket().get('cluster', {})
 
-        cluster, health_data = self._mon_health_common()
+    def _mon_health(self, cluster_data):
+
+        cluster, health_data = self._mon_health_common(cluster_data)
 
         services = health_data.get('health').get('health_services')
         mon_status = {}
@@ -401,6 +410,8 @@ class Mon(BaseCollector):
                                    '"data":"{}"}}'.format(tag_name,
                                                           event_message))
         except requests.ConnectionError:
+            # if we hit this, the endpoint wasn't there (graphite web was not
+            # accessible) so identify that issue as a server error (500)
             return 500
 
         else:
@@ -503,8 +514,13 @@ class Mon(BaseCollector):
 
         return pools_to_scan
 
-    def get_pools(self):
-        skip_pools = ('default.rgw')
+    def get_rbd_pools(self):
+        """
+        Look at the rados pools to filter out pools that would normally not
+        be associated with rbd images
+        :return: (list) of pools that may contain rbd images
+        """
+        skip_pools = ('default.rgw', '.rgw.')
 
         start = time.time()
         conf_file = "/etc/ceph/{}.conf".format(self.cluster_name)
@@ -520,8 +536,15 @@ class Mon(BaseCollector):
         return filtered_pools
 
     def _get_rbds(self, monitors):
+        """
+        Scan a subset of the rados pools for rbd images. Each mon collector
+        will scan a subset of the pools to distribute the load using the
+        RBSScanner class
+        :param monitors: (dict) monitor names and states
+        :return total_rbs: (int) total rbd images found across pools
+        """
 
-        pool_list = self.get_pools()
+        pool_list = self.get_rbd_pools()
         mon_list = sorted(monitors.keys())
         my_pools = Mon._select_pools(pool_list, mon_list)
         self.logger.debug("Pools to be scanned on this mon"
@@ -553,19 +576,36 @@ class Mon(BaseCollector):
     def get_stats(self):
         """
         method associated with the plugin callback to gather the metrics
-        :return: (dict) metadata describing the state of the mon/osd's
+        :return: (dict) metadata describing the state of the mon/osd's etc
         """
 
         start = time.time()
 
-        pool_stats = self._get_pool_stats()
-        num_osd_hosts, osd_states = self._get_osd_states()
-        cluster_state = self.get_mon_health()
-        cluster_state['num_osd_hosts'] = num_osd_hosts
-        cluster_state['num_rbds'] = self._get_rbds(cluster_state['mon_status'])
+        # Attempt to read the admin socket for cluster data
+        cluster_data = self.get_cluster_state()
 
-        all_stats = merge_dicts(cluster_state, {"pools": pool_stats,
-                                                "osd_state": osd_states})
+        if cluster_data:
+
+            # read from the admin socket was OK, so process the data
+            cluster_state = self.get_mon_health(cluster_data)
+            pool_stats = self._get_pool_stats()
+            num_osd_hosts, osd_states = self._get_osd_states()
+
+            cluster_state['num_osd_hosts'] = num_osd_hosts
+            cluster_state['num_rbds'] = self._get_rbds(cluster_state['mon_status'])
+
+            all_stats = merge_dicts(cluster_state, {"pools": pool_stats,
+                                                    "osd_state": osd_states})
+        else:
+            # problem reading from the admin socket, record it in cephmetrics
+            # log and set the object's error flag so it can be picked up at the
+            # layer above the Mon instance (Ceph instance -> collectd log)
+            all_stats = {}
+            self.error = True
+            msg = 'MON socket is not available...is ceph-mon active?'
+            self.error_msgs = [msg]
+            self.logger.warning(msg)
+
         all_stats['ceph_version'] = self.version
 
         end = time.time()

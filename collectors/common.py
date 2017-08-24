@@ -18,11 +18,12 @@ def os_cmd(command):
     Issue a command to the OS and return the output. NB. check_output default
     is shell=False
     :param command: (str) OS command
-    :return: (list) command response
+    :return: (str) command response (lines terminated with \n)
     """
     cmd_list = command.split(' ')
     if cmd_exists(cmd_list[0]):
-        cmd_output = subprocess.check_output(cmd_list).rstrip()
+        cmd_output = subprocess.check_output(cmd_list,
+                                             stderr=subprocess.STDOUT).rstrip()
         return cmd_output
     else:
         return ''
