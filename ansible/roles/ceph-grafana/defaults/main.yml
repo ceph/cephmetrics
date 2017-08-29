@@ -1,71 +1,10 @@
 ---
 defaults:
-  containerized_deployment: false
-  use_epel: false
-  devel_mode: true
+  # graphite defaults are now in the cephmetrics-common role since the
+  # ceph-collectd role needs access to them
   replace_dashboards: true
   grafana:
     datasource: Local
     # Note: changing this value won't update the password in Grafana itself;
     # change it via the web UI and then override this value to reflect.
     admin_password: admin
-  graphite:
-    service: graphite-web
-    web_port: "{{ graphite_port | default('8080') }}"
-    api_port: 8888
-    user: admin
-    password: admin
-    # The unix account running the graphite-web process
-    unix_user:
-      yum: apache
-      apt: _graphite
-    build_index:
-      yum: '/usr/bin/graphite-build-index'
-      apt: '/usr/bin/graphite-build-search-index'
-    apache_name:
-      yum: 'httpd'
-      apt: 'apache2'
-    apache_conf:
-      yum: '/etc/httpd/conf/httpd.conf'
-      apt: '/etc/apache2/apache2.conf'
-    site_conf:
-      yum: '/etc/httpd/conf.d/graphite-web.conf'
-      apt: '/etc/apache2/sites-available/graphite-web.conf'
-  carbon:
-    unix_user:
-      yum: carbon
-      apt: _graphite
-    storage_dir:
-      yum: /var/lib/carbon
-      apt: /var/lib/graphite
-  whisper:
-    retention:
-      - ['10s', '7d']
-      - ['1m', '30d']
-      - ['15m', '5y']
-  # The firewalld zone that carbon and grafana will use
-  firewalld_zone: public
-  # RHEL repos that need to be enabled with subscription-manager
-  rhsm_repos:
-    - rhel-7-server-rhscon-2-installer-rpms
-    - rhel-7-server-optional-rpms
-  devel_packages:
-    yum:
-      # unzip is needed to extract the Vonage plugin
-      - unzip
-      - graphite-web
-      - python-carbon
-      - grafana
-      # PyYAML is required by dashUpdater.py
-      - PyYAML
-    apt:
-      # unzip is needed to extract the Vonage plugin
-      - unzip
-      - graphite-web
-      - apache2
-      - libapache2-mod-wsgi
-      - graphite-carbon
-      - grafana
-      # for dashUpdater.py
-      - python-yaml
-      - python-requests

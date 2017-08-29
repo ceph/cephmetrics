@@ -47,6 +47,14 @@
     replace: 'ClusterName "{{ cluster }}"'
   notify: Restart collectd
 
+- name: Set EventURL in cephmetrics.conf
+  lineinfile:
+    dest: "{{ collectd_conf_d }}/cephmetrics.conf"
+    regexp: 'EventURL ".*"'
+    insertafter: 'ClusterName ".*"'
+    line: "        EventURL \"http://{{ groups['ceph-grafana'][0] }}:{{ graphite.web_port if graphite.service == 'graphite-web' else graphite.api_port }}/events/\""
+  notify: Restart collectd
+
 - name: Set ModulePath in cephmetrics.conf
   replace:
     dest: "{{ collectd_conf_d }}/cephmetrics.conf"
