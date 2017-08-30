@@ -1,1477 +1,1562 @@
 {
-   "meta" : {
-      "createdBy" : "admin",
-      "created" : "2017-08-03T21:42:28Z",
-      "canSave" : true,
-      "canEdit" : true,
-      "canStar" : true,
-      "updatedBy" : "admin",
-      "slug" : "ceph-pools",
-      "version" : 4,
-      "expires" : "0001-01-01T00:00:00Z",
-      "type" : "db",
-      "updated" : "2017-08-18T04:52:43Z"
-   },
-   "dashboard" : {
-      "gnetId" : null,
-      "id" : 27,
-      "title" : "Ceph Pools",
-      "timepicker" : {
-         "refresh_intervals" : [
-            "5s",
-            "10s",
-            "30s",
-            "1m",
-            "5m",
-            "15m",
-            "30m",
-            "1h",
-            "2h",
-            "1d"
-         ],
-         "time_options" : [
-            "5m",
-            "15m",
-            "1h",
-            "6h",
-            "12h",
-            "24h",
-            "2d",
-            "7d",
-            "30d"
-         ]
-      },
-      "rows" : [
+   "meta": {
+      "canSave": true, 
+      "created": "2017-08-03T21:42:28Z", 
+      "canStar": true, 
+      "expires": "0001-01-01T00:00:00Z", 
+      "updated": "2017-08-18T04:52:43Z", 
+      "canEdit": true, 
+      "version": 4, 
+      "createdBy": "admin", 
+      "updatedBy": "admin", 
+      "type": "db", 
+      "slug": "ceph-pools"
+   }, 
+   "dashboard": {
+      "style": "dark", 
+      "rows": [
          {
-            "repeatIteration" : null,
-            "repeat" : null,
-            "collapse" : false,
-            "height" : "400px",
-            "showTitle" : true,
-            "panels" : [
+            "repeat": null, 
+            "titleSize": "h5", 
+            "repeatIteration": null, 
+            "title": "Pool Overview", 
+            "height": "250px", 
+            "repeatRowId": null, 
+            "panels": [
                {
-                  "percentage" : false,
-                  "span" : 4,
-                  "dashLength" : 10,
-                  "fill" : 5,
-                  "stack" : true,
-                  "yaxes" : [
+                  "bars": false, 
+                  "timeFrom": null, 
+                  "links": [], 
+                  "thresholds": [], 
+                  "spaceLength": 10, 
+                  "nullPointMode": "connected", 
+                  "renderer": "flot", 
+                  "linewidth": 2, 
+                  "steppedLine": false, 
+                  "id": 1, 
+                  "fill": 5, 
+                  "span": 4, 
+                  "title": "Client IOPS by Pool", 
+                  "tooltip": {
+                     "sort": 0, 
+                     "shared": true, 
+                     "value_type": "individual"
+                  }, 
+                  "targets": [
                      {
-                        "label" : null,
-                        "logBase" : 1,
-                        "show" : true,
-                        "min" : "0",
-                        "format" : "none",
-                        "max" : null
-                     },
-                     {
-                        "label" : null,
-                        "logBase" : 1,
-                        "min" : null,
-                        "show" : false,
-                        "format" : "short",
-                        "max" : null
+                        "textEditor": true, 
+                        "refId": "A", 
+                        "target": "groupByNode(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.op_per_sec,-2,\"maxSeries\")"
                      }
-                  ],
-                  "dashes" : false,
-                  "spaceLength" : 10,
-                  "datasource" : "Local",
-                  "type" : "graph",
-                  "linewidth" : 2,
-                  "thresholds" : [],
-                  "pointradius" : 5,
-                  "aliasColors" : {},
-                  "links" : [],
-                  "seriesOverrides" : [],
-                  "renderer" : "flot",
-                  "tooltip" : {
-                     "shared" : true,
-                     "sort" : 0,
-                     "value_type" : "individual"
-                  },
-                  "lines" : true,
-                  "xaxis" : {
-                     "values" : [],
-                     "name" : null,
-                     "mode" : "time",
-                     "buckets" : null,
-                     "show" : true
-                  },
-                  "points" : false,
-                  "steppedLine" : false,
-                  "title" : "Client IOPS by Pool",
-                  "timeShift" : null,
-                  "id" : 1,
-                  "nullPointMode" : "connected",
-                  "targets" : [
+                  ], 
+                  "points": false, 
+                  "xaxis": {
+                     "buckets": null, 
+                     "values": [], 
+                     "mode": "time", 
+                     "name": null, 
+                     "show": true
+                  }, 
+                  "seriesOverrides": [], 
+                  "percentage": false, 
+                  "type": "graph", 
+                  "dashes": false, 
+                  "dashLength": 10, 
+                  "stack": true, 
+                  "timeShift": null, 
+                  "aliasColors": {}, 
+                  "lines": true, 
+                  "legend": {
+                     "avg": false, 
+                     "min": false, 
+                     "max": false, 
+                     "show": true, 
+                     "current": false, 
+                     "values": false, 
+                     "total": false
+                  }, 
+                  "yaxes": [
                      {
-                        "target" : "groupByNode(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.op_per_sec,-2,\"maxSeries\")",
-                        "refId" : "A",
-                        "textEditor" : true
+                        "logBase": 1, 
+                        "format": "none", 
+                        "max": null, 
+                        "min": "0", 
+                        "label": null, 
+                        "show": true
+                     }, 
+                     {
+                        "logBase": 1, 
+                        "format": "short", 
+                        "max": null, 
+                        "min": null, 
+                        "label": null, 
+                        "show": false
                      }
-                  ],
-                  "timeFrom" : null,
-                  "minSpan" : 6,
-                  "bars" : false,
-                  "legend" : {
-                     "total" : false,
-                     "max" : false,
-                     "current" : false,
-                     "avg" : false,
-                     "values" : false,
-                     "min" : false,
-                     "show" : true
-                  }
-               },
+                  ], 
+                  "datasource": "Local", 
+                  "pointradius": 5, 
+                  "minSpan": 6
+               }, 
                {
-                  "bars" : false,
-                  "timeFrom" : null,
-                  "minSpan" : 6,
-                  "targets" : [
+                  "bars": false, 
+                  "timeFrom": null, 
+                  "links": [], 
+                  "thresholds": [], 
+                  "spaceLength": 10, 
+                  "nullPointMode": "connected", 
+                  "renderer": "flot", 
+                  "linewidth": 2, 
+                  "steppedLine": false, 
+                  "id": 2, 
+                  "fill": 5, 
+                  "span": 4, 
+                  "title": "Throughput by Pool", 
+                  "tooltip": {
+                     "sort": 0, 
+                     "shared": true, 
+                     "value_type": "individual"
+                  }, 
+                  "targets": [
                      {
-                        "target" : "groupByNode(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.bytes_sec,-2,\"maxSeries\")",
-                        "textEditor" : true,
-                        "refId" : "A"
+                        "textEditor": true, 
+                        "refId": "A", 
+                        "target": "groupByNode(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.bytes_sec,-2,\"maxSeries\")"
                      }
-                  ],
-                  "legend" : {
-                     "min" : false,
-                     "show" : true,
-                     "total" : false,
-                     "max" : false,
-                     "avg" : false,
-                     "current" : false,
-                     "values" : false
-                  },
-                  "id" : 2,
-                  "nullPointMode" : "connected",
-                  "title" : "Throughput by Pool",
-                  "steppedLine" : false,
-                  "timeShift" : null,
-                  "lines" : true,
-                  "xaxis" : {
-                     "name" : null,
-                     "values" : [],
-                     "show" : true,
-                     "mode" : "time",
-                     "buckets" : null
-                  },
-                  "points" : false,
-                  "seriesOverrides" : [],
-                  "tooltip" : {
-                     "value_type" : "individual",
-                     "shared" : true,
-                     "sort" : 0
-                  },
-                  "renderer" : "flot",
-                  "links" : [],
-                  "aliasColors" : {},
-                  "dashes" : false,
-                  "spaceLength" : 10,
-                  "datasource" : "Local",
-                  "pointradius" : 5,
-                  "linewidth" : 2,
-                  "type" : "graph",
-                  "thresholds" : [],
-                  "stack" : true,
-                  "yaxes" : [
+                  ], 
+                  "points": false, 
+                  "xaxis": {
+                     "buckets": null, 
+                     "values": [], 
+                     "mode": "time", 
+                     "name": null, 
+                     "show": true
+                  }, 
+                  "seriesOverrides": [], 
+                  "percentage": false, 
+                  "type": "graph", 
+                  "dashes": false, 
+                  "dashLength": 10, 
+                  "stack": true, 
+                  "timeShift": null, 
+                  "aliasColors": {}, 
+                  "lines": true, 
+                  "legend": {
+                     "avg": false, 
+                     "min": false, 
+                     "max": false, 
+                     "show": true, 
+                     "current": false, 
+                     "values": false, 
+                     "total": false
+                  }, 
+                  "yaxes": [
                      {
-                        "min" : "0",
-                        "show" : true,
-                        "logBase" : 1,
-                        "label" : null,
-                        "max" : null,
-                        "format" : "bytes"
-                     },
+                        "logBase": 1, 
+                        "format": "bytes", 
+                        "max": null, 
+                        "min": "0", 
+                        "label": null, 
+                        "show": true
+                     }, 
                      {
-                        "format" : "short",
-                        "max" : null,
-                        "logBase" : 1,
-                        "label" : null,
-                        "min" : null,
-                        "show" : false
+                        "logBase": 1, 
+                        "format": "short", 
+                        "max": null, 
+                        "min": null, 
+                        "label": null, 
+                        "show": false
                      }
-                  ],
-                  "percentage" : false,
-                  "dashLength" : 10,
-                  "span" : 4,
-                  "fill" : 5
-               },
+                  ], 
+                  "datasource": "Local", 
+                  "pointradius": 5, 
+                  "minSpan": 6
+               }, 
                {
-                  "stack" : true,
-                  "yaxes" : [
+                  "bars": false, 
+                  "timeFrom": null, 
+                  "links": [], 
+                  "thresholds": [], 
+                  "spaceLength": 10, 
+                  "nullPointMode": "connected", 
+                  "renderer": "flot", 
+                  "linewidth": 1, 
+                  "steppedLine": false, 
+                  "id": 52, 
+                  "fill": 3, 
+                  "span": 4, 
+                  "title": "Recovery Workload by Pool", 
+                  "tooltip": {
+                     "sort": 0, 
+                     "shared": true, 
+                     "value_type": "individual"
+                  }, 
+                  "targets": [
                      {
-                        "min" : "0",
-                        "show" : true,
-                        "label" : null,
-                        "logBase" : 1,
-                        "max" : null,
-                        "format" : "bytes"
-                     },
-                     {
-                        "label" : null,
-                        "logBase" : 1,
-                        "min" : null,
-                        "show" : false,
-                        "format" : "short",
-                        "max" : null
+                        "textEditor": true, 
+                        "refId": "A", 
+                        "target": "groupByNode(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.*.recovering_bytes_per_sec,-2,\"maxSeries\")"
                      }
-                  ],
-                  "percentage" : false,
-                  "dashLength" : 10,
-                  "span" : 4,
-                  "fill" : 3,
-                  "aliasColors" : {},
-                  "links" : [],
-                  "datasource" : "Local",
-                  "spaceLength" : 10,
-                  "dashes" : false,
-                  "pointradius" : 5,
-                  "thresholds" : [],
-                  "type" : "graph",
-                  "linewidth" : 1,
-                  "lines" : true,
-                  "xaxis" : {
-                     "name" : null,
-                     "values" : [],
-                     "show" : true,
-                     "mode" : "time",
-                     "buckets" : null
-                  },
-                  "points" : false,
-                  "seriesOverrides" : [],
-                  "tooltip" : {
-                     "shared" : true,
-                     "sort" : 0,
-                     "value_type" : "individual"
-                  },
-                  "renderer" : "flot",
-                  "bars" : false,
-                  "targets" : [
+                  ], 
+                  "points": false, 
+                  "xaxis": {
+                     "buckets": null, 
+                     "values": [], 
+                     "mode": "time", 
+                     "name": null, 
+                     "show": true
+                  }, 
+                  "seriesOverrides": [], 
+                  "percentage": false, 
+                  "type": "graph", 
+                  "dashes": false, 
+                  "dashLength": 10, 
+                  "stack": true, 
+                  "timeShift": null, 
+                  "aliasColors": {}, 
+                  "lines": true, 
+                  "legend": {
+                     "avg": false, 
+                     "min": false, 
+                     "max": false, 
+                     "show": true, 
+                     "current": false, 
+                     "values": false, 
+                     "total": false
+                  }, 
+                  "yaxes": [
                      {
-                        "target" : "groupByNode(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.*.recovering_bytes_per_sec,-2,\"maxSeries\")",
-                        "refId" : "A",
-                        "textEditor" : true
+                        "logBase": 1, 
+                        "format": "bytes", 
+                        "max": null, 
+                        "min": "0", 
+                        "label": null, 
+                        "show": true
+                     }, 
+                     {
+                        "logBase": 1, 
+                        "format": "short", 
+                        "max": null, 
+                        "min": null, 
+                        "label": null, 
+                        "show": false
                      }
-                  ],
-                  "timeFrom" : null,
-                  "minSpan" : 6,
-                  "legend" : {
-                     "total" : false,
-                     "current" : false,
-                     "max" : false,
-                     "avg" : false,
-                     "values" : false,
-                     "min" : false,
-                     "show" : true
-                  },
-                  "nullPointMode" : "connected",
-                  "id" : 52,
-                  "title" : "Recovery Workload by Pool",
-                  "timeShift" : null,
-                  "steppedLine" : false
+                  ], 
+                  "datasource": "Local", 
+                  "pointradius": 5, 
+                  "minSpan": 6
                }
-            ],
-            "titleSize" : "h5",
-            "repeatRowId" : null,
-            "title" : "Pool Overview"
-         },
+            ], 
+            "showTitle": true, 
+            "collapse": false
+         }, 
          {
-            "showTitle" : true,
-            "height" : 250,
-            "title" : "Top 5",
-            "titleSize" : "h5",
-            "repeatRowId" : null,
-            "panels" : [
+            "repeat": null, 
+            "titleSize": "h5", 
+            "repeatIteration": null, 
+            "title": "Top 5", 
+            "height": 250, 
+            "repeatRowId": null, 
+            "panels": [
                {
-                  "minSpan" : 6,
-                  "targets" : [
+                  "sort": {
+                     "col": 1, 
+                     "desc": true
+                  }, 
+                  "styles": [
                      {
-                        "refId" : "A",
-                        "textEditor" : true,
-                        "target" : "limit(groupByNode(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.*.op_per_sec,-2,\"maxSeries\"),5)"
-                     }
-                  ],
-                  "fontSize" : "100%",
-                  "links" : [],
-                  "pageSize" : null,
-                  "sort" : {
-                     "desc" : true,
-                     "col" : 1
-                  },
-                  "transform" : "timeseries_aggregations",
-                  "id" : 3,
-                  "styles" : [
+                        "alias": "Time", 
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+                        "type": "date", 
+                        "pattern": "Time"
+                     }, 
                      {
-                        "pattern" : "Time",
-                        "alias" : "Time",
-                        "dateFormat" : "YYYY-MM-DD HH:mm:ss",
-                        "type" : "date"
-                     },
-                     {
-                        "unit" : "short",
-                        "alias" : "Pool Name",
-                        "pattern" : "Metric",
-                        "colors" : [
-                           "rgba(245, 54, 54, 0.9)",
-                           "rgba(237, 129, 40, 0.89)",
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+                        "pattern": "Metric", 
+                        "thresholds": [], 
+                        "alias": "Pool Name", 
+                        "colors": [
+                           "rgba(245, 54, 54, 0.9)", 
+                           "rgba(237, 129, 40, 0.89)", 
                            "rgba(50, 172, 45, 0.97)"
-                        ],
-                        "type" : "number",
-                        "thresholds" : [],
-                        "dateFormat" : "YYYY-MM-DD HH:mm:ss",
-                        "colorMode" : null,
-                        "decimals" : 2
-                     },
+                        ], 
+                        "decimals": 2, 
+                        "colorMode": null, 
+                        "type": "number", 
+                        "unit": "short"
+                     }, 
                      {
-                        "alias" : "IOPS",
-                        "unit" : "none",
-                        "pattern" : "Current",
-                        "dateFormat" : "YYYY-MM-DD HH:mm:ss",
-                        "type" : "number",
-                        "thresholds" : [],
-                        "colors" : [
-                           "rgba(245, 54, 54, 0.9)",
-                           "rgba(237, 129, 40, 0.89)",
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+                        "pattern": "Current", 
+                        "thresholds": [], 
+                        "alias": "IOPS", 
+                        "colors": [
+                           "rgba(245, 54, 54, 0.9)", 
+                           "rgba(237, 129, 40, 0.89)", 
                            "rgba(50, 172, 45, 0.97)"
-                        ],
-                        "decimals" : 0,
-                        "colorMode" : null
-                     },
+                        ], 
+                        "decimals": 0, 
+                        "colorMode": null, 
+                        "type": "number", 
+                        "unit": "none"
+                     }, 
                      {
-                        "colorMode" : null,
-                        "decimals" : 2,
-                        "type" : "number",
-                        "thresholds" : [],
-                        "colors" : [
-                           "rgba(245, 54, 54, 0.9)",
-                           "rgba(237, 129, 40, 0.89)",
+                        "pattern": "/.*/", 
+                        "thresholds": [], 
+                        "alias": "", 
+                        "colors": [
+                           "rgba(245, 54, 54, 0.9)", 
+                           "rgba(237, 129, 40, 0.89)", 
                            "rgba(50, 172, 45, 0.97)"
-                        ],
-                        "pattern" : "/.*/",
-                        "unit" : "short",
-                        "alias" : ""
+                        ], 
+                        "decimals": 2, 
+                        "colorMode": null, 
+                        "type": "number", 
+                        "unit": "short"
                      }
-                  ],
-                  "type" : "table",
-                  "title" : "Top 5 Pools by Client IOPS",
-                  "columns" : [
+                  ], 
+                  "span": 4, 
+                  "links": [], 
+                  "pageSize": null, 
+                  "title": "Top 5 Pools by Client IOPS", 
+                  "transform": "timeseries_aggregations", 
+                  "showHeader": true, 
+                  "id": 3, 
+                  "targets": [
                      {
-                        "value" : "current",
-                        "text" : "Current"
+                        "textEditor": true, 
+                        "refId": "A", 
+                        "target": "limit(groupByNode(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.*.op_per_sec,-2,\"maxSeries\"),5)"
                      }
-                  ],
-                  "scroll" : true,
-                  "showHeader" : true,
-                  "span" : 6
-               },
+                  ], 
+                  "fontSize": "100%", 
+                  "minSpan": 6, 
+                  "type": "table", 
+                  "scroll": true, 
+                  "columns": [
+                     {
+                        "text": "Current", 
+                        "value": "current"
+                     }
+                  ]
+               }, 
                {
-                  "id" : 4,
-                  "transform" : "timeseries_aggregations",
-                  "styles" : [
+                  "sort": {
+                     "col": 1, 
+                     "desc": true
+                  }, 
+                  "styles": [
                      {
-                        "type" : "date",
-                        "alias" : "Time",
-                        "dateFormat" : "YYYY-MM-DD HH:mm:ss",
-                        "pattern" : "Time"
-                     },
+                        "alias": "Time", 
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+                        "type": "date", 
+                        "pattern": "Time"
+                     }, 
                      {
-                        "dateFormat" : "YYYY-MM-DD HH:mm:ss",
-                        "colors" : [
-                           "rgba(245, 54, 54, 0.9)",
-                           "rgba(237, 129, 40, 0.89)",
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+                        "pattern": "Metric", 
+                        "thresholds": [], 
+                        "alias": "Pool Name", 
+                        "colors": [
+                           "rgba(245, 54, 54, 0.9)", 
+                           "rgba(237, 129, 40, 0.89)", 
                            "rgba(50, 172, 45, 0.97)"
-                        ],
-                        "thresholds" : [],
-                        "type" : "number",
-                        "decimals" : 2,
-                        "colorMode" : null,
-                        "alias" : "Pool Name",
-                        "unit" : "short",
-                        "pattern" : "Metric"
-                     },
+                        ], 
+                        "decimals": 2, 
+                        "colorMode": null, 
+                        "type": "number", 
+                        "unit": "short"
+                     }, 
                      {
-                        "decimals" : 2,
-                        "colorMode" : null,
-                        "dateFormat" : "YYYY-MM-DD HH:mm:ss",
-                        "thresholds" : [],
-                        "type" : "number",
-                        "colors" : [
-                           "rgba(245, 54, 54, 0.9)",
-                           "rgba(237, 129, 40, 0.89)",
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+                        "pattern": "Current", 
+                        "thresholds": [], 
+                        "alias": "Throughput", 
+                        "colors": [
+                           "rgba(245, 54, 54, 0.9)", 
+                           "rgba(237, 129, 40, 0.89)", 
                            "rgba(50, 172, 45, 0.97)"
-                        ],
-                        "pattern" : "Current",
-                        "alias" : "Throughput",
-                        "unit" : "bytes"
-                     },
+                        ], 
+                        "decimals": 2, 
+                        "colorMode": null, 
+                        "type": "number", 
+                        "unit": "bytes"
+                     }, 
                      {
-                        "decimals" : 2,
-                        "colorMode" : null,
-                        "type" : "number",
-                        "thresholds" : [],
-                        "colors" : [
-                           "rgba(245, 54, 54, 0.9)",
-                           "rgba(237, 129, 40, 0.89)",
+                        "pattern": "/.*/", 
+                        "thresholds": [], 
+                        "alias": "", 
+                        "colors": [
+                           "rgba(245, 54, 54, 0.9)", 
+                           "rgba(237, 129, 40, 0.89)", 
                            "rgba(50, 172, 45, 0.97)"
-                        ],
-                        "pattern" : "/.*/",
-                        "alias" : "",
-                        "unit" : "bytes"
+                        ], 
+                        "decimals": 2, 
+                        "colorMode": null, 
+                        "type": "number", 
+                        "unit": "bytes"
                      }
-                  ],
-                  "type" : "table",
-                  "title" : "Top 5 Pools by Throughput",
-                  "sort" : {
-                     "col" : 1,
-                     "desc" : true
-                  },
-                  "links" : [],
-                  "pageSize" : null,
-                  "targets" : [
+                  ], 
+                  "span": 4, 
+                  "links": [], 
+                  "pageSize": null, 
+                  "title": "Top 5 Pools by Throughput", 
+                  "transform": "timeseries_aggregations", 
+                  "showHeader": true, 
+                  "id": 4, 
+                  "targets": [
                      {
-                        "textEditor" : true,
-                        "refId" : "A",
-                        "target" : "limit(groupByNode(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.*.bytes_sec,-2,\"maxSeries\"),5)"
+                        "textEditor": true, 
+                        "refId": "A", 
+                        "target": "limit(groupByNode(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.*.bytes_sec,-2,\"maxSeries\"),5)"
                      }
-                  ],
-                  "fontSize" : "100%",
-                  "minSpan" : 6,
-                  "span" : 6,
-                  "scroll" : true,
-                  "showHeader" : true,
-                  "columns" : [
+                  ], 
+                  "fontSize": "100%", 
+                  "minSpan": 6, 
+                  "type": "table", 
+                  "scroll": true, 
+                  "columns": [
                      {
-                        "text" : "Current",
-                        "value" : "current"
+                        "text": "Current", 
+                        "value": "current"
+                     }
+                  ]
+               }, 
+               {
+                  "sort": {
+                     "col": 1, 
+                     "desc": true
+                  }, 
+                  "styles": [
+                     {
+                        "alias": "Time", 
+                        "type": "date", 
+                        "pattern": "Time", 
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss"
+                     }, 
+                     {
+                        "type": "number", 
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+                        "pattern": "Metric", 
+                        "thresholds": [], 
+                        "alias": "Pool Name", 
+                        "colors": [
+                           "rgba(245, 54, 54, 0.9)", 
+                           "rgba(237, 129, 40, 0.89)", 
+                           "rgba(50, 172, 45, 0.97)"
+                        ], 
+                        "colorMode": null, 
+                        "decimals": 2, 
+                        "unit": "short"
+                     }, 
+                     {
+                        "type": "number", 
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+                        "pattern": "Current", 
+                        "thresholds": [
+                           "70", 
+                           "85"
+                        ], 
+                        "alias": "Capacity Used", 
+                        "colors": [
+                           "rgba(50, 172, 45, 0.97)", 
+                           "rgba(237, 129, 40, 0.89)", 
+                           "rgba(245, 54, 54, 0.9)"
+                        ], 
+                        "colorMode": "value", 
+                        "decimals": 2, 
+                        "unit": "percent"
+                     }, 
+                     {
+                        "type": "number", 
+                        "pattern": "/.*/", 
+                        "thresholds": [], 
+                        "alias": "", 
+                        "colors": [
+                           "rgba(245, 54, 54, 0.9)", 
+                           "rgba(237, 129, 40, 0.89)", 
+                           "rgba(50, 172, 45, 0.97)"
+                        ], 
+                        "colorMode": null, 
+                        "decimals": 2, 
+                        "unit": "bytes"
+                     }
+                  ], 
+                  "span": 4, 
+                  "links": [], 
+                  "pageSize": null, 
+                  "title": "Top 5 Pools by Capacity Used", 
+                  "scroll": true, 
+                  "transform": "timeseries_aggregations", 
+                  "showHeader": true, 
+                  "id": 59, 
+                  "fontSize": "100%", 
+                  "minSpan": 6, 
+                  "type": "table", 
+                  "targets": [
+                     {
+                        "textEditor": true, 
+                        "refId": "A", 
+                        "target": "limit(groupByNode(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.*.percent_used,-2,'maxSeries'),5)"
+                     }
+                  ], 
+                  "columns": [
+                     {
+                        "text": "Current", 
+                        "value": "current"
                      }
                   ]
                }
-            ],
-            "repeatIteration" : null,
-            "collapse" : true,
-            "repeat" : null
-         },
+            ], 
+            "showTitle": true, 
+            "collapse": true
+         }, 
          {
-            "repeat" : "pool_name",
-            "collapse" : true,
-            "repeatIteration" : null,
-            "panels" : [
+            "repeat": "pool_name", 
+            "titleSize": "h5", 
+            "repeatIteration": null, 
+            "title": "Pool '$pool_name' Performance Details", 
+            "height": 250, 
+            "repeatRowId": null, 
+            "panels": [
                {
-                  "tooltip" : {
-                     "sort" : 0,
-                     "shared" : true,
-                     "value_type" : "individual"
-                  },
-                  "seriesOverrides" : [],
-                  "title" : "Pool '$pool_name' Client IOPS",
-                  "id" : 5,
-                  "nullPointMode" : "null as zero",
-                  "timeFrom" : null,
-                  "minSpan" : 6,
-                  "dashLength" : 10,
-                  "percentage" : false,
-                  "thresholds" : [],
-                  "linewidth" : 1,
-                  "type" : "graph",
-                  "pointradius" : 5,
-                  "datasource" : "Local",
-                  "dashes" : false,
-                  "spaceLength" : 10,
-                  "renderer" : "flot",
-                  "scopedVars" : {
-                     "pool_name" : {
-                        "text" : "data",
-                        "selected" : false,
-                        "value" : "data"
+                  "bars": false, 
+                  "timeFrom": null, 
+                  "links": [], 
+                  "thresholds": [], 
+                  "spaceLength": 10, 
+                  "nullPointMode": "null as zero", 
+                  "renderer": "flot", 
+                  "scopedVars": {
+                     "pool_name": {
+                        "text": "data", 
+                        "selected": false, 
+                        "value": "data"
                      }
-                  },
-                  "points" : false,
-                  "lines" : true,
-                  "xaxis" : {
-                     "values" : [],
-                     "name" : null,
-                     "mode" : "time",
-                     "buckets" : null,
-                     "show" : true
-                  },
-                  "timeShift" : null,
-                  "steppedLine" : false,
-                  "legend" : {
-                     "values" : false,
-                     "avg" : false,
-                     "max" : false,
-                     "current" : false,
-                     "total" : false,
-                     "show" : true,
-                     "min" : false
-                  },
-                  "targets" : [
+                  }, 
+                  "linewidth": 1, 
+                  "steppedLine": false, 
+                  "id": 5, 
+                  "fill": 1, 
+                  "span": 6, 
+                  "title": "Pool '$pool_name' Client IOPS", 
+                  "tooltip": {
+                     "sort": 0, 
+                     "shared": true, 
+                     "value_type": "individual"
+                  }, 
+                  "targets": [
                      {
-                        "refId" : "A",
-                        "target" : "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.read_op_per_sec), -1)"
-                     },
+                        "refId": "A", 
+                        "target": "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.read_op_per_sec), -1)"
+                     }, 
                      {
-                        "target" : "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.write_op_per_sec), -1)",
-                        "refId" : "B"
+                        "refId": "B", 
+                        "target": "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.write_op_per_sec), -1)"
                      }
-                  ],
-                  "bars" : false,
-                  "span" : 6,
-                  "fill" : 1,
-                  "yaxes" : [
+                  ], 
+                  "points": false, 
+                  "xaxis": {
+                     "buckets": null, 
+                     "values": [], 
+                     "mode": "time", 
+                     "name": null, 
+                     "show": true
+                  }, 
+                  "seriesOverrides": [], 
+                  "percentage": false, 
+                  "type": "graph", 
+                  "dashes": false, 
+                  "dashLength": 10, 
+                  "stack": true, 
+                  "timeShift": null, 
+                  "aliasColors": {
+                     "read_op_per_sec": "#3F6833", 
+                     "write_op_per_sec": "#E5AC0E"
+                  }, 
+                  "lines": true, 
+                  "legend": {
+                     "avg": false, 
+                     "min": false, 
+                     "max": false, 
+                     "show": true, 
+                     "current": false, 
+                     "values": false, 
+                     "total": false
+                  }, 
+                  "yaxes": [
                      {
-                        "format" : "short",
-                        "max" : null,
-                        "logBase" : 1,
-                        "label" : "",
-                        "show" : true,
-                        "min" : "0"
-                     },
+                        "logBase": 1, 
+                        "format": "short", 
+                        "max": null, 
+                        "min": "0", 
+                        "label": "", 
+                        "show": true
+                     }, 
                      {
-                        "label" : null,
-                        "logBase" : 1,
-                        "show" : true,
-                        "min" : null,
-                        "format" : "short",
-                        "max" : null
+                        "logBase": 1, 
+                        "format": "short", 
+                        "max": null, 
+                        "min": null, 
+                        "label": null, 
+                        "show": true
                      }
-                  ],
-                  "stack" : true,
-                  "links" : [],
-                  "aliasColors" : {
-                     "write_op_per_sec" : "#E5AC0E",
-                     "read_op_per_sec" : "#3F6833"
-                  }
-               },
+                  ], 
+                  "datasource": "Local", 
+                  "pointradius": 5, 
+                  "minSpan": 6
+               }, 
                {
-                  "title" : "Pool '$pool_name' Client Throughput",
-                  "nullPointMode" : "null as zero",
-                  "id" : 7,
-                  "timeFrom" : null,
-                  "minSpan" : 6,
-                  "tooltip" : {
-                     "value_type" : "individual",
-                     "sort" : 0,
-                     "shared" : true
-                  },
-                  "seriesOverrides" : [],
-                  "thresholds" : [],
-                  "linewidth" : 1,
-                  "type" : "graph",
-                  "pointradius" : 5,
-                  "spaceLength" : 10,
-                  "datasource" : "Local",
-                  "dashes" : false,
-                  "dashLength" : 10,
-                  "percentage" : false,
-                  "timeShift" : null,
-                  "steppedLine" : false,
-                  "legend" : {
-                     "show" : true,
-                     "min" : false,
-                     "max" : false,
-                     "avg" : false,
-                     "current" : false,
-                     "total" : false,
-                     "values" : false
-                  },
-                  "targets" : [
-                     {
-                        "refId" : "A",
-                        "target" : "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.read_bytes_sec), -1)"
-                     },
-                     {
-                        "refId" : "B",
-                        "target" : "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.write_bytes_sec), -1)"
+                  "bars": false, 
+                  "timeFrom": null, 
+                  "links": [], 
+                  "thresholds": [], 
+                  "spaceLength": 10, 
+                  "nullPointMode": "null as zero", 
+                  "renderer": "flot", 
+                  "scopedVars": {
+                     "pool_name": {
+                        "text": "data", 
+                        "selected": false, 
+                        "value": "data"
                      }
-                  ],
-                  "bars" : false,
-                  "renderer" : "flot",
-                  "scopedVars" : {
-                     "pool_name" : {
-                        "value" : "data",
-                        "text" : "data",
-                        "selected" : false
-                     }
-                  },
-                  "points" : false,
-                  "xaxis" : {
-                     "buckets" : null,
-                     "mode" : "time",
-                     "show" : true,
-                     "values" : [],
-                     "name" : null
-                  },
-                  "lines" : true,
-                  "aliasColors" : {
-                     "read_op_per_sec" : "#3F6833",
-                     "write_op_per_sec" : "#E5AC0E"
-                  },
-                  "links" : [],
-                  "span" : 6,
-                  "fill" : 1,
-                  "yaxes" : [
+                  }, 
+                  "linewidth": 1, 
+                  "steppedLine": false, 
+                  "id": 7, 
+                  "fill": 1, 
+                  "span": 6, 
+                  "title": "Pool '$pool_name' Client Throughput", 
+                  "tooltip": {
+                     "sort": 0, 
+                     "shared": true, 
+                     "value_type": "individual"
+                  }, 
+                  "targets": [
                      {
-                        "logBase" : 1,
-                        "label" : "",
-                        "show" : true,
-                        "min" : "0",
-                        "format" : "decbytes",
-                        "max" : null
-                     },
+                        "refId": "A", 
+                        "target": "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.read_bytes_sec), -1)"
+                     }, 
                      {
-                        "show" : true,
-                        "min" : null,
-                        "logBase" : 1,
-                        "label" : null,
-                        "max" : null,
-                        "format" : "short"
+                        "refId": "B", 
+                        "target": "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.write_bytes_sec), -1)"
                      }
-                  ],
-                  "stack" : true
+                  ], 
+                  "points": false, 
+                  "xaxis": {
+                     "buckets": null, 
+                     "values": [], 
+                     "mode": "time", 
+                     "name": null, 
+                     "show": true
+                  }, 
+                  "seriesOverrides": [], 
+                  "percentage": false, 
+                  "type": "graph", 
+                  "dashes": false, 
+                  "dashLength": 10, 
+                  "stack": true, 
+                  "timeShift": null, 
+                  "aliasColors": {
+                     "read_op_per_sec": "#3F6833", 
+                     "write_op_per_sec": "#E5AC0E"
+                  }, 
+                  "lines": true, 
+                  "legend": {
+                     "avg": false, 
+                     "min": false, 
+                     "max": false, 
+                     "show": true, 
+                     "current": false, 
+                     "values": false, 
+                     "total": false
+                  }, 
+                  "yaxes": [
+                     {
+                        "logBase": 1, 
+                        "format": "decbytes", 
+                        "max": null, 
+                        "min": "0", 
+                        "label": "", 
+                        "show": true
+                     }, 
+                     {
+                        "logBase": 1, 
+                        "format": "short", 
+                        "max": null, 
+                        "min": null, 
+                        "label": null, 
+                        "show": true
+                     }
+                  ], 
+                  "datasource": "Local", 
+                  "pointradius": 5, 
+                  "minSpan": 6
                }
-            ],
-            "titleSize" : "h5",
-            "repeatRowId" : null,
-            "title" : "Pool '$pool_name' Performance Details",
-            "height" : 250,
-            "showTitle" : true
-         },
+            ], 
+            "showTitle": true, 
+            "collapse": true
+         }, 
          {
-            "repeat" : null,
-            "collapse" : true,
-            "repeatIteration" : 1503031934304,
-            "repeatRowId" : 3,
-            "titleSize" : "h5",
-            "title" : "Pool '$pool_name' Performance Details",
-            "panels" : [
+            "repeat": null, 
+            "titleSize": "h5", 
+            "repeatIteration": 1503031934304, 
+            "title": "Pool '$pool_name' Performance Details", 
+            "height": 250, 
+            "repeatRowId": 3, 
+            "panels": [
                {
-                  "dashLength" : 10,
-                  "percentage" : false,
-                  "thresholds" : [],
-                  "linewidth" : 1,
-                  "type" : "graph",
-                  "pointradius" : 5,
-                  "datasource" : "Local",
-                  "dashes" : false,
-                  "spaceLength" : 10,
-                  "tooltip" : {
-                     "value_type" : "individual",
-                     "sort" : 0,
-                     "shared" : true
-                  },
-                  "seriesOverrides" : [],
-                  "minSpan" : 6,
-                  "timeFrom" : null,
-                  "title" : "Pool '$pool_name' Client IOPS",
-                  "nullPointMode" : "null as zero",
-                  "id" : 53,
-                  "yaxes" : [
-                     {
-                        "min" : "0",
-                        "show" : true,
-                        "label" : "",
-                        "logBase" : 1,
-                        "max" : null,
-                        "format" : "short"
-                     },
-                     {
-                        "max" : null,
-                        "format" : "short",
-                        "min" : null,
-                        "show" : true,
-                        "logBase" : 1,
-                        "label" : null
+                  "bars": false, 
+                  "timeFrom": null, 
+                  "links": [], 
+                  "thresholds": [], 
+                  "spaceLength": 10, 
+                  "nullPointMode": "null as zero", 
+                  "renderer": "flot", 
+                  "scopedVars": {
+                     "pool_name": {
+                        "text": "ec", 
+                        "selected": false, 
+                        "value": "ec"
                      }
-                  ],
-                  "stack" : true,
-                  "span" : 6,
-                  "fill" : 1,
-                  "aliasColors" : {
-                     "read_op_per_sec" : "#3F6833",
-                     "write_op_per_sec" : "#E5AC0E"
-                  },
-                  "links" : [],
-                  "points" : false,
-                  "lines" : true,
-                  "xaxis" : {
-                     "name" : null,
-                     "values" : [],
-                     "show" : true,
-                     "mode" : "time",
-                     "buckets" : null
-                  },
-                  "renderer" : "flot",
-                  "scopedVars" : {
-                     "pool_name" : {
-                        "value" : "ec",
-                        "selected" : false,
-                        "text" : "ec"
-                     }
-                  },
-                  "legend" : {
-                     "min" : false,
-                     "show" : true,
-                     "values" : false,
-                     "total" : false,
-                     "avg" : false,
-                     "max" : false,
-                     "current" : false
-                  },
-                  "targets" : [
+                  }, 
+                  "linewidth": 1, 
+                  "steppedLine": false, 
+                  "id": 53, 
+                  "fill": 1, 
+                  "span": 6, 
+                  "title": "Pool '$pool_name' Client IOPS", 
+                  "tooltip": {
+                     "sort": 0, 
+                     "shared": true, 
+                     "value_type": "individual"
+                  }, 
+                  "targets": [
                      {
-                        "refId" : "A",
-                        "target" : "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.read_op_per_sec), -1)"
-                     },
+                        "refId": "A", 
+                        "target": "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.read_op_per_sec), -1)"
+                     }, 
                      {
-                        "target" : "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.write_op_per_sec), -1)",
-                        "refId" : "B"
+                        "refId": "B", 
+                        "target": "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.write_op_per_sec), -1)"
                      }
-                  ],
-                  "bars" : false,
-                  "steppedLine" : false,
-                  "timeShift" : null
-               },
+                  ], 
+                  "points": false, 
+                  "xaxis": {
+                     "buckets": null, 
+                     "values": [], 
+                     "mode": "time", 
+                     "name": null, 
+                     "show": true
+                  }, 
+                  "seriesOverrides": [], 
+                  "percentage": false, 
+                  "type": "graph", 
+                  "dashes": false, 
+                  "dashLength": 10, 
+                  "stack": true, 
+                  "timeShift": null, 
+                  "aliasColors": {
+                     "read_op_per_sec": "#3F6833", 
+                     "write_op_per_sec": "#E5AC0E"
+                  }, 
+                  "lines": true, 
+                  "legend": {
+                     "avg": false, 
+                     "min": false, 
+                     "max": false, 
+                     "show": true, 
+                     "current": false, 
+                     "values": false, 
+                     "total": false
+                  }, 
+                  "yaxes": [
+                     {
+                        "logBase": 1, 
+                        "format": "short", 
+                        "max": null, 
+                        "min": "0", 
+                        "label": "", 
+                        "show": true
+                     }, 
+                     {
+                        "logBase": 1, 
+                        "format": "short", 
+                        "max": null, 
+                        "min": null, 
+                        "label": null, 
+                        "show": true
+                     }
+                  ], 
+                  "datasource": "Local", 
+                  "pointradius": 5, 
+                  "minSpan": 6
+               }, 
                {
-                  "dashes" : false,
-                  "spaceLength" : 10,
-                  "datasource" : "Local",
-                  "pointradius" : 5,
-                  "linewidth" : 1,
-                  "thresholds" : [],
-                  "type" : "graph",
-                  "percentage" : false,
-                  "dashLength" : 10,
-                  "minSpan" : 6,
-                  "timeFrom" : null,
-                  "nullPointMode" : "null as zero",
-                  "id" : 54,
-                  "title" : "Pool '$pool_name' Client Throughput",
-                  "seriesOverrides" : [],
-                  "tooltip" : {
-                     "value_type" : "individual",
-                     "shared" : true,
-                     "sort" : 0
-                  },
-                  "links" : [],
-                  "aliasColors" : {
-                     "read_op_per_sec" : "#3F6833",
-                     "write_op_per_sec" : "#E5AC0E"
-                  },
-                  "stack" : true,
-                  "yaxes" : [
-                     {
-                        "label" : "",
-                        "logBase" : 1,
-                        "min" : "0",
-                        "show" : true,
-                        "format" : "decbytes",
-                        "max" : null
-                     },
-                     {
-                        "format" : "short",
-                        "max" : null,
-                        "logBase" : 1,
-                        "label" : null,
-                        "min" : null,
-                        "show" : true
+                  "bars": false, 
+                  "timeFrom": null, 
+                  "links": [], 
+                  "thresholds": [], 
+                  "spaceLength": 10, 
+                  "nullPointMode": "null as zero", 
+                  "renderer": "flot", 
+                  "scopedVars": {
+                     "pool_name": {
+                        "text": "ec", 
+                        "selected": false, 
+                        "value": "ec"
                      }
-                  ],
-                  "span" : 6,
-                  "fill" : 1,
-                  "bars" : false,
-                  "targets" : [
+                  }, 
+                  "linewidth": 1, 
+                  "steppedLine": false, 
+                  "id": 54, 
+                  "fill": 1, 
+                  "span": 6, 
+                  "title": "Pool '$pool_name' Client Throughput", 
+                  "tooltip": {
+                     "sort": 0, 
+                     "shared": true, 
+                     "value_type": "individual"
+                  }, 
+                  "targets": [
                      {
-                        "refId" : "A",
-                        "target" : "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.read_bytes_sec), -1)"
-                     },
+                        "refId": "A", 
+                        "target": "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.read_bytes_sec), -1)"
+                     }, 
                      {
-                        "refId" : "B",
-                        "target" : "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.write_bytes_sec), -1)"
+                        "refId": "B", 
+                        "target": "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.write_bytes_sec), -1)"
                      }
-                  ],
-                  "legend" : {
-                     "min" : false,
-                     "show" : true,
-                     "total" : false,
-                     "max" : false,
-                     "avg" : false,
-                     "current" : false,
-                     "values" : false
-                  },
-                  "timeShift" : null,
-                  "steppedLine" : false,
-                  "lines" : true,
-                  "xaxis" : {
-                     "mode" : "time",
-                     "buckets" : null,
-                     "show" : true,
-                     "values" : [],
-                     "name" : null
-                  },
-                  "points" : false,
-                  "scopedVars" : {
-                     "pool_name" : {
-                        "value" : "ec",
-                        "selected" : false,
-                        "text" : "ec"
+                  ], 
+                  "points": false, 
+                  "xaxis": {
+                     "buckets": null, 
+                     "values": [], 
+                     "mode": "time", 
+                     "name": null, 
+                     "show": true
+                  }, 
+                  "seriesOverrides": [], 
+                  "percentage": false, 
+                  "type": "graph", 
+                  "dashes": false, 
+                  "dashLength": 10, 
+                  "stack": true, 
+                  "timeShift": null, 
+                  "aliasColors": {
+                     "read_op_per_sec": "#3F6833", 
+                     "write_op_per_sec": "#E5AC0E"
+                  }, 
+                  "lines": true, 
+                  "legend": {
+                     "avg": false, 
+                     "min": false, 
+                     "max": false, 
+                     "show": true, 
+                     "current": false, 
+                     "values": false, 
+                     "total": false
+                  }, 
+                  "yaxes": [
+                     {
+                        "logBase": 1, 
+                        "format": "decbytes", 
+                        "max": null, 
+                        "min": "0", 
+                        "label": "", 
+                        "show": true
+                     }, 
+                     {
+                        "logBase": 1, 
+                        "format": "short", 
+                        "max": null, 
+                        "min": null, 
+                        "label": null, 
+                        "show": true
                      }
-                  },
-                  "renderer" : "flot"
+                  ], 
+                  "datasource": "Local", 
+                  "pointradius": 5, 
+                  "minSpan": 6
                }
-            ],
-            "height" : 250,
-            "showTitle" : true
-         },
+            ], 
+            "showTitle": true, 
+            "collapse": true
+         }, 
          {
-            "panels" : [
+            "repeat": null, 
+            "titleSize": "h5", 
+            "repeatIteration": 1503031934304, 
+            "title": "Pool '$pool_name' Performance Details", 
+            "height": 250, 
+            "repeatRowId": 3, 
+            "panels": [
                {
-                  "legend" : {
-                     "show" : true,
-                     "min" : false,
-                     "current" : false,
-                     "max" : false,
-                     "avg" : false,
-                     "total" : false,
-                     "values" : false
-                  },
-                  "targets" : [
-                     {
-                        "target" : "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.read_op_per_sec), -1)",
-                        "refId" : "A"
-                     },
-                     {
-                        "target" : "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.write_op_per_sec), -1)",
-                        "refId" : "B"
+                  "bars": false, 
+                  "timeFrom": null, 
+                  "links": [], 
+                  "thresholds": [], 
+                  "spaceLength": 10, 
+                  "nullPointMode": "null as zero", 
+                  "renderer": "flot", 
+                  "scopedVars": {
+                     "pool_name": {
+                        "text": "iscsi", 
+                        "selected": false, 
+                        "value": "iscsi"
                      }
-                  ],
-                  "bars" : false,
-                  "timeShift" : null,
-                  "steppedLine" : false,
-                  "points" : false,
-                  "xaxis" : {
-                     "values" : [],
-                     "name" : null,
-                     "mode" : "time",
-                     "buckets" : null,
-                     "show" : true
-                  },
-                  "lines" : true,
-                  "renderer" : "flot",
-                  "scopedVars" : {
-                     "pool_name" : {
-                        "value" : "iscsi",
-                        "selected" : false,
-                        "text" : "iscsi"
-                     }
-                  },
-                  "aliasColors" : {
-                     "write_op_per_sec" : "#E5AC0E",
-                     "read_op_per_sec" : "#3F6833"
-                  },
-                  "links" : [],
-                  "yaxes" : [
+                  }, 
+                  "linewidth": 1, 
+                  "steppedLine": false, 
+                  "id": 55, 
+                  "fill": 1, 
+                  "span": 6, 
+                  "title": "Pool '$pool_name' Client IOPS", 
+                  "tooltip": {
+                     "sort": 0, 
+                     "shared": true, 
+                     "value_type": "individual"
+                  }, 
+                  "targets": [
                      {
-                        "format" : "short",
-                        "max" : null,
-                        "logBase" : 1,
-                        "label" : "",
-                        "show" : true,
-                        "min" : "0"
-                     },
+                        "refId": "A", 
+                        "target": "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.read_op_per_sec), -1)"
+                     }, 
                      {
-                        "show" : true,
-                        "min" : null,
-                        "label" : null,
-                        "logBase" : 1,
-                        "max" : null,
-                        "format" : "short"
+                        "refId": "B", 
+                        "target": "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.write_op_per_sec), -1)"
                      }
-                  ],
-                  "stack" : true,
-                  "span" : 6,
-                  "fill" : 1,
-                  "timeFrom" : null,
-                  "minSpan" : 6,
-                  "title" : "Pool '$pool_name' Client IOPS",
-                  "id" : 55,
-                  "nullPointMode" : "null as zero",
-                  "tooltip" : {
-                     "value_type" : "individual",
-                     "sort" : 0,
-                     "shared" : true
-                  },
-                  "seriesOverrides" : [],
-                  "linewidth" : 1,
-                  "type" : "graph",
-                  "thresholds" : [],
-                  "pointradius" : 5,
-                  "dashes" : false,
-                  "datasource" : "Local",
-                  "spaceLength" : 10,
-                  "dashLength" : 10,
-                  "percentage" : false
-               },
+                  ], 
+                  "points": false, 
+                  "xaxis": {
+                     "buckets": null, 
+                     "values": [], 
+                     "mode": "time", 
+                     "name": null, 
+                     "show": true
+                  }, 
+                  "seriesOverrides": [], 
+                  "percentage": false, 
+                  "type": "graph", 
+                  "dashes": false, 
+                  "dashLength": 10, 
+                  "stack": true, 
+                  "timeShift": null, 
+                  "aliasColors": {
+                     "read_op_per_sec": "#3F6833", 
+                     "write_op_per_sec": "#E5AC0E"
+                  }, 
+                  "lines": true, 
+                  "legend": {
+                     "avg": false, 
+                     "min": false, 
+                     "max": false, 
+                     "show": true, 
+                     "current": false, 
+                     "values": false, 
+                     "total": false
+                  }, 
+                  "yaxes": [
+                     {
+                        "logBase": 1, 
+                        "format": "short", 
+                        "max": null, 
+                        "min": "0", 
+                        "label": "", 
+                        "show": true
+                     }, 
+                     {
+                        "logBase": 1, 
+                        "format": "short", 
+                        "max": null, 
+                        "min": null, 
+                        "label": null, 
+                        "show": true
+                     }
+                  ], 
+                  "datasource": "Local", 
+                  "pointradius": 5, 
+                  "minSpan": 6
+               }, 
                {
-                  "id" : 56,
-                  "nullPointMode" : "null as zero",
-                  "title" : "Pool '$pool_name' Client Throughput",
-                  "minSpan" : 6,
-                  "timeFrom" : null,
-                  "tooltip" : {
-                     "value_type" : "individual",
-                     "sort" : 0,
-                     "shared" : true
-                  },
-                  "seriesOverrides" : [],
-                  "pointradius" : 5,
-                  "type" : "graph",
-                  "thresholds" : [],
-                  "linewidth" : 1,
-                  "spaceLength" : 10,
-                  "datasource" : "Local",
-                  "dashes" : false,
-                  "dashLength" : 10,
-                  "percentage" : false,
-                  "steppedLine" : false,
-                  "timeShift" : null,
-                  "legend" : {
-                     "values" : false,
-                     "max" : false,
-                     "current" : false,
-                     "avg" : false,
-                     "total" : false,
-                     "show" : true,
-                     "min" : false
-                  },
-                  "bars" : false,
-                  "targets" : [
-                     {
-                        "refId" : "A",
-                        "target" : "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.read_bytes_sec), -1)"
-                     },
-                     {
-                        "refId" : "B",
-                        "target" : "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.write_bytes_sec), -1)"
+                  "bars": false, 
+                  "timeFrom": null, 
+                  "links": [], 
+                  "thresholds": [], 
+                  "spaceLength": 10, 
+                  "nullPointMode": "null as zero", 
+                  "renderer": "flot", 
+                  "scopedVars": {
+                     "pool_name": {
+                        "text": "iscsi", 
+                        "selected": false, 
+                        "value": "iscsi"
                      }
-                  ],
-                  "renderer" : "flot",
-                  "scopedVars" : {
-                     "pool_name" : {
-                        "text" : "iscsi",
-                        "selected" : false,
-                        "value" : "iscsi"
-                     }
-                  },
-                  "points" : false,
-                  "xaxis" : {
-                     "buckets" : null,
-                     "mode" : "time",
-                     "show" : true,
-                     "values" : [],
-                     "name" : null
-                  },
-                  "lines" : true,
-                  "links" : [],
-                  "aliasColors" : {
-                     "write_op_per_sec" : "#E5AC0E",
-                     "read_op_per_sec" : "#3F6833"
-                  },
-                  "span" : 6,
-                  "fill" : 1,
-                  "yaxes" : [
+                  }, 
+                  "linewidth": 1, 
+                  "steppedLine": false, 
+                  "id": 56, 
+                  "fill": 1, 
+                  "span": 6, 
+                  "title": "Pool '$pool_name' Client Throughput", 
+                  "tooltip": {
+                     "sort": 0, 
+                     "shared": true, 
+                     "value_type": "individual"
+                  }, 
+                  "targets": [
                      {
-                        "max" : null,
-                        "format" : "decbytes",
-                        "min" : "0",
-                        "show" : true,
-                        "label" : "",
-                        "logBase" : 1
-                     },
+                        "refId": "A", 
+                        "target": "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.read_bytes_sec), -1)"
+                     }, 
                      {
-                        "min" : null,
-                        "show" : true,
-                        "logBase" : 1,
-                        "label" : null,
-                        "max" : null,
-                        "format" : "short"
+                        "refId": "B", 
+                        "target": "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.write_bytes_sec), -1)"
                      }
-                  ],
-                  "stack" : true
+                  ], 
+                  "points": false, 
+                  "xaxis": {
+                     "buckets": null, 
+                     "values": [], 
+                     "mode": "time", 
+                     "name": null, 
+                     "show": true
+                  }, 
+                  "seriesOverrides": [], 
+                  "percentage": false, 
+                  "type": "graph", 
+                  "dashes": false, 
+                  "dashLength": 10, 
+                  "stack": true, 
+                  "timeShift": null, 
+                  "aliasColors": {
+                     "read_op_per_sec": "#3F6833", 
+                     "write_op_per_sec": "#E5AC0E"
+                  }, 
+                  "lines": true, 
+                  "legend": {
+                     "avg": false, 
+                     "min": false, 
+                     "max": false, 
+                     "show": true, 
+                     "current": false, 
+                     "values": false, 
+                     "total": false
+                  }, 
+                  "yaxes": [
+                     {
+                        "logBase": 1, 
+                        "format": "decbytes", 
+                        "max": null, 
+                        "min": "0", 
+                        "label": "", 
+                        "show": true
+                     }, 
+                     {
+                        "logBase": 1, 
+                        "format": "short", 
+                        "max": null, 
+                        "min": null, 
+                        "label": null, 
+                        "show": true
+                     }
+                  ], 
+                  "datasource": "Local", 
+                  "pointradius": 5, 
+                  "minSpan": 6
                }
-            ],
-            "titleSize" : "h5",
-            "repeatRowId" : 3,
-            "title" : "Pool '$pool_name' Performance Details",
-            "height" : 250,
-            "showTitle" : true,
-            "repeat" : null,
-            "collapse" : true,
-            "repeatIteration" : 1503031934304
-         },
+            ], 
+            "showTitle": true, 
+            "collapse": true
+         }, 
          {
-            "repeatIteration" : 1503031934304,
-            "repeat" : null,
-            "collapse" : true,
-            "height" : 250,
-            "showTitle" : true,
-            "repeatRowId" : 3,
-            "titleSize" : "h5",
-            "title" : "Pool '$pool_name' Performance Details",
-            "panels" : [
+            "repeat": null, 
+            "titleSize": "h5", 
+            "repeatIteration": 1503031934304, 
+            "title": "Pool '$pool_name' Performance Details", 
+            "height": 250, 
+            "repeatRowId": 3, 
+            "panels": [
                {
-                  "span" : 6,
-                  "fill" : 1,
-                  "stack" : true,
-                  "yaxes" : [
-                     {
-                        "show" : true,
-                        "min" : "0",
-                        "label" : "",
-                        "logBase" : 1,
-                        "max" : null,
-                        "format" : "short"
-                     },
-                     {
-                        "show" : true,
-                        "min" : null,
-                        "logBase" : 1,
-                        "label" : null,
-                        "max" : null,
-                        "format" : "short"
+                  "bars": false, 
+                  "timeFrom": null, 
+                  "links": [], 
+                  "thresholds": [], 
+                  "spaceLength": 10, 
+                  "nullPointMode": "null as zero", 
+                  "renderer": "flot", 
+                  "scopedVars": {
+                     "pool_name": {
+                        "text": "metadata", 
+                        "selected": false, 
+                        "value": "metadata"
                      }
-                  ],
-                  "links" : [],
-                  "aliasColors" : {
-                     "write_op_per_sec" : "#E5AC0E",
-                     "read_op_per_sec" : "#3F6833"
-                  },
-                  "scopedVars" : {
-                     "pool_name" : {
-                        "text" : "metadata",
-                        "selected" : false,
-                        "value" : "metadata"
-                     }
-                  },
-                  "renderer" : "flot",
-                  "xaxis" : {
-                     "values" : [],
-                     "name" : null,
-                     "mode" : "time",
-                     "buckets" : null,
-                     "show" : true
-                  },
-                  "lines" : true,
-                  "points" : false,
-                  "timeShift" : null,
-                  "steppedLine" : false,
-                  "targets" : [
+                  }, 
+                  "linewidth": 1, 
+                  "steppedLine": false, 
+                  "id": 57, 
+                  "fill": 1, 
+                  "span": 6, 
+                  "title": "Pool '$pool_name' Client IOPS", 
+                  "tooltip": {
+                     "sort": 0, 
+                     "shared": true, 
+                     "value_type": "individual"
+                  }, 
+                  "targets": [
                      {
-                        "refId" : "A",
-                        "target" : "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.read_op_per_sec), -1)"
-                     },
+                        "refId": "A", 
+                        "target": "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.read_op_per_sec), -1)"
+                     }, 
                      {
-                        "target" : "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.write_op_per_sec), -1)",
-                        "refId" : "B"
+                        "refId": "B", 
+                        "target": "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.write_op_per_sec), -1)"
                      }
-                  ],
-                  "bars" : false,
-                  "legend" : {
-                     "values" : false,
-                     "total" : false,
-                     "avg" : false,
-                     "max" : false,
-                     "current" : false,
-                     "min" : false,
-                     "show" : true
-                  },
-                  "percentage" : false,
-                  "dashLength" : 10,
-                  "dashes" : false,
-                  "spaceLength" : 10,
-                  "datasource" : "Local",
-                  "linewidth" : 1,
-                  "type" : "graph",
-                  "thresholds" : [],
-                  "pointradius" : 5,
-                  "seriesOverrides" : [],
-                  "tooltip" : {
-                     "sort" : 0,
-                     "shared" : true,
-                     "value_type" : "individual"
-                  },
-                  "title" : "Pool '$pool_name' Client IOPS",
-                  "nullPointMode" : "null as zero",
-                  "id" : 57,
-                  "timeFrom" : null,
-                  "minSpan" : 6
-               },
+                  ], 
+                  "points": false, 
+                  "xaxis": {
+                     "buckets": null, 
+                     "values": [], 
+                     "mode": "time", 
+                     "name": null, 
+                     "show": true
+                  }, 
+                  "seriesOverrides": [], 
+                  "percentage": false, 
+                  "type": "graph", 
+                  "dashes": false, 
+                  "dashLength": 10, 
+                  "stack": true, 
+                  "timeShift": null, 
+                  "aliasColors": {
+                     "read_op_per_sec": "#3F6833", 
+                     "write_op_per_sec": "#E5AC0E"
+                  }, 
+                  "lines": true, 
+                  "legend": {
+                     "avg": false, 
+                     "min": false, 
+                     "max": false, 
+                     "show": true, 
+                     "current": false, 
+                     "values": false, 
+                     "total": false
+                  }, 
+                  "yaxes": [
+                     {
+                        "logBase": 1, 
+                        "format": "short", 
+                        "max": null, 
+                        "min": "0", 
+                        "label": "", 
+                        "show": true
+                     }, 
+                     {
+                        "logBase": 1, 
+                        "format": "short", 
+                        "max": null, 
+                        "min": null, 
+                        "label": null, 
+                        "show": true
+                     }
+                  ], 
+                  "datasource": "Local", 
+                  "pointradius": 5, 
+                  "minSpan": 6
+               }, 
                {
-                  "percentage" : false,
-                  "dashLength" : 10,
-                  "dashes" : false,
-                  "datasource" : "Local",
-                  "spaceLength" : 10,
-                  "pointradius" : 5,
-                  "thresholds" : [],
-                  "linewidth" : 1,
-                  "type" : "graph",
-                  "seriesOverrides" : [],
-                  "tooltip" : {
-                     "value_type" : "individual",
-                     "shared" : true,
-                     "sort" : 0
-                  },
-                  "minSpan" : 6,
-                  "timeFrom" : null,
-                  "id" : 58,
-                  "nullPointMode" : "null as zero",
-                  "title" : "Pool '$pool_name' Client Throughput",
-                  "stack" : true,
-                  "yaxes" : [
-                     {
-                        "max" : null,
-                        "format" : "decbytes",
-                        "show" : true,
-                        "min" : "0",
-                        "logBase" : 1,
-                        "label" : ""
-                     },
-                     {
-                        "label" : null,
-                        "logBase" : 1,
-                        "min" : null,
-                        "show" : true,
-                        "format" : "short",
-                        "max" : null
+                  "bars": false, 
+                  "timeFrom": null, 
+                  "links": [], 
+                  "thresholds": [], 
+                  "spaceLength": 10, 
+                  "nullPointMode": "null as zero", 
+                  "renderer": "flot", 
+                  "scopedVars": {
+                     "pool_name": {
+                        "text": "metadata", 
+                        "selected": false, 
+                        "value": "metadata"
                      }
-                  ],
-                  "fill" : 1,
-                  "span" : 6,
-                  "links" : [],
-                  "aliasColors" : {
-                     "write_op_per_sec" : "#E5AC0E",
-                     "read_op_per_sec" : "#3F6833"
-                  },
-                  "lines" : true,
-                  "xaxis" : {
-                     "values" : [],
-                     "name" : null,
-                     "mode" : "time",
-                     "buckets" : null,
-                     "show" : true
-                  },
-                  "points" : false,
-                  "scopedVars" : {
-                     "pool_name" : {
-                        "value" : "metadata",
-                        "text" : "metadata",
-                        "selected" : false
-                     }
-                  },
-                  "renderer" : "flot",
-                  "bars" : false,
-                  "targets" : [
+                  }, 
+                  "linewidth": 1, 
+                  "steppedLine": false, 
+                  "id": 58, 
+                  "fill": 1, 
+                  "span": 6, 
+                  "title": "Pool '$pool_name' Client Throughput", 
+                  "tooltip": {
+                     "sort": 0, 
+                     "shared": true, 
+                     "value_type": "individual"
+                  }, 
+                  "targets": [
                      {
-                        "refId" : "A",
-                        "target" : "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.read_bytes_sec), -1)"
-                     },
+                        "refId": "A", 
+                        "target": "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.read_bytes_sec), -1)"
+                     }, 
                      {
-                        "target" : "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.write_bytes_sec), -1)",
-                        "refId" : "B"
+                        "refId": "B", 
+                        "target": "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.write_bytes_sec), -1)"
                      }
-                  ],
-                  "legend" : {
-                     "min" : false,
-                     "show" : true,
-                     "total" : false,
-                     "avg" : false,
-                     "max" : false,
-                     "current" : false,
-                     "values" : false
-                  },
-                  "steppedLine" : false,
-                  "timeShift" : null
+                  ], 
+                  "points": false, 
+                  "xaxis": {
+                     "buckets": null, 
+                     "values": [], 
+                     "mode": "time", 
+                     "name": null, 
+                     "show": true
+                  }, 
+                  "seriesOverrides": [], 
+                  "percentage": false, 
+                  "type": "graph", 
+                  "dashes": false, 
+                  "dashLength": 10, 
+                  "stack": true, 
+                  "timeShift": null, 
+                  "aliasColors": {
+                     "read_op_per_sec": "#3F6833", 
+                     "write_op_per_sec": "#E5AC0E"
+                  }, 
+                  "lines": true, 
+                  "legend": {
+                     "avg": false, 
+                     "min": false, 
+                     "max": false, 
+                     "show": true, 
+                     "current": false, 
+                     "values": false, 
+                     "total": false
+                  }, 
+                  "yaxes": [
+                     {
+                        "logBase": 1, 
+                        "format": "decbytes", 
+                        "max": null, 
+                        "min": "0", 
+                        "label": "", 
+                        "show": true
+                     }, 
+                     {
+                        "logBase": 1, 
+                        "format": "short", 
+                        "max": null, 
+                        "min": null, 
+                        "label": null, 
+                        "show": true
+                     }
+                  ], 
+                  "datasource": "Local", 
+                  "pointradius": 5, 
+                  "minSpan": 6
                }
-            ]
-         },
+            ], 
+            "showTitle": true, 
+            "collapse": true
+         }, 
          {
-            "repeatIteration" : 1503031934304,
-            "repeat" : null,
-            "collapse" : true,
-            "height" : 250,
-            "showTitle" : true,
-            "repeatRowId" : 3,
-            "titleSize" : "h5",
-            "title" : "Pool '$pool_name' Performance Details",
-            "panels" : [
+            "repeat": null, 
+            "titleSize": "h5", 
+            "repeatIteration": 1503031934304, 
+            "title": "Pool '$pool_name' Performance Details", 
+            "height": 250, 
+            "repeatRowId": 3, 
+            "panels": [
                {
-                  "seriesOverrides" : [],
-                  "tooltip" : {
-                     "value_type" : "individual",
-                     "shared" : true,
-                     "sort" : 0
-                  },
-                  "title" : "Pool '$pool_name' Client IOPS",
-                  "id" : 59,
-                  "nullPointMode" : "null as zero",
-                  "minSpan" : 6,
-                  "timeFrom" : null,
-                  "percentage" : false,
-                  "dashLength" : 10,
-                  "dashes" : false,
-                  "datasource" : "Local",
-                  "spaceLength" : 10,
-                  "type" : "graph",
-                  "thresholds" : [],
-                  "linewidth" : 1,
-                  "pointradius" : 5,
-                  "scopedVars" : {
-                     "pool_name" : {
-                        "selected" : false,
-                        "text" : "rbd",
-                        "value" : "rbd"
+                  "bars": false, 
+                  "timeFrom": null, 
+                  "links": [], 
+                  "thresholds": [], 
+                  "spaceLength": 10, 
+                  "nullPointMode": "null as zero", 
+                  "renderer": "flot", 
+                  "scopedVars": {
+                     "pool_name": {
+                        "text": "rbd", 
+                        "selected": false, 
+                        "value": "rbd"
                      }
-                  },
-                  "renderer" : "flot",
-                  "xaxis" : {
-                     "show" : true,
-                     "buckets" : null,
-                     "mode" : "time",
-                     "name" : null,
-                     "values" : []
-                  },
-                  "lines" : true,
-                  "points" : false,
-                  "steppedLine" : false,
-                  "timeShift" : null,
-                  "targets" : [
+                  }, 
+                  "linewidth": 1, 
+                  "steppedLine": false, 
+                  "id": 59, 
+                  "fill": 1, 
+                  "span": 6, 
+                  "title": "Pool '$pool_name' Client IOPS", 
+                  "tooltip": {
+                     "sort": 0, 
+                     "shared": true, 
+                     "value_type": "individual"
+                  }, 
+                  "targets": [
                      {
-                        "target" : "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.read_op_per_sec), -1)",
-                        "refId" : "A"
-                     },
+                        "refId": "A", 
+                        "target": "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.read_op_per_sec), -1)"
+                     }, 
                      {
-                        "refId" : "B",
-                        "target" : "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.write_op_per_sec), -1)"
+                        "refId": "B", 
+                        "target": "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.write_op_per_sec), -1)"
                      }
-                  ],
-                  "bars" : false,
-                  "legend" : {
-                     "min" : false,
-                     "show" : true,
-                     "values" : false,
-                     "total" : false,
-                     "max" : false,
-                     "current" : false,
-                     "avg" : false
-                  },
-                  "span" : 6,
-                  "fill" : 1,
-                  "stack" : true,
-                  "yaxes" : [
+                  ], 
+                  "points": false, 
+                  "xaxis": {
+                     "buckets": null, 
+                     "values": [], 
+                     "mode": "time", 
+                     "name": null, 
+                     "show": true
+                  }, 
+                  "seriesOverrides": [], 
+                  "percentage": false, 
+                  "type": "graph", 
+                  "dashes": false, 
+                  "dashLength": 10, 
+                  "stack": true, 
+                  "timeShift": null, 
+                  "aliasColors": {
+                     "read_op_per_sec": "#3F6833", 
+                     "write_op_per_sec": "#E5AC0E"
+                  }, 
+                  "lines": true, 
+                  "legend": {
+                     "avg": false, 
+                     "min": false, 
+                     "max": false, 
+                     "show": true, 
+                     "current": false, 
+                     "values": false, 
+                     "total": false
+                  }, 
+                  "yaxes": [
                      {
-                        "show" : true,
-                        "min" : "0",
-                        "label" : "",
-                        "logBase" : 1,
-                        "max" : null,
-                        "format" : "short"
-                     },
+                        "logBase": 1, 
+                        "format": "short", 
+                        "max": null, 
+                        "min": "0", 
+                        "label": "", 
+                        "show": true
+                     }, 
                      {
-                        "logBase" : 1,
-                        "label" : null,
-                        "show" : true,
-                        "min" : null,
-                        "format" : "short",
-                        "max" : null
+                        "logBase": 1, 
+                        "format": "short", 
+                        "max": null, 
+                        "min": null, 
+                        "label": null, 
+                        "show": true
                      }
-                  ],
-                  "links" : [],
-                  "aliasColors" : {
-                     "write_op_per_sec" : "#E5AC0E",
-                     "read_op_per_sec" : "#3F6833"
-                  }
-               },
+                  ], 
+                  "datasource": "Local", 
+                  "pointradius": 5, 
+                  "minSpan": 6
+               }, 
                {
-                  "dashes" : false,
-                  "datasource" : "Local",
-                  "spaceLength" : 10,
-                  "pointradius" : 5,
-                  "type" : "graph",
-                  "thresholds" : [],
-                  "linewidth" : 1,
-                  "percentage" : false,
-                  "dashLength" : 10,
-                  "minSpan" : 6,
-                  "timeFrom" : null,
-                  "nullPointMode" : "null as zero",
-                  "id" : 60,
-                  "title" : "Pool '$pool_name' Client Throughput",
-                  "seriesOverrides" : [],
-                  "tooltip" : {
-                     "sort" : 0,
-                     "shared" : true,
-                     "value_type" : "individual"
-                  },
-                  "aliasColors" : {
-                     "write_op_per_sec" : "#E5AC0E",
-                     "read_op_per_sec" : "#3F6833"
-                  },
-                  "links" : [],
-                  "stack" : true,
-                  "yaxes" : [
-                     {
-                        "max" : null,
-                        "format" : "decbytes",
-                        "show" : true,
-                        "min" : "0",
-                        "logBase" : 1,
-                        "label" : ""
-                     },
-                     {
-                        "format" : "short",
-                        "max" : null,
-                        "logBase" : 1,
-                        "label" : null,
-                        "show" : true,
-                        "min" : null
+                  "bars": false, 
+                  "timeFrom": null, 
+                  "links": [], 
+                  "thresholds": [], 
+                  "spaceLength": 10, 
+                  "nullPointMode": "null as zero", 
+                  "renderer": "flot", 
+                  "scopedVars": {
+                     "pool_name": {
+                        "text": "rbd", 
+                        "selected": false, 
+                        "value": "rbd"
                      }
-                  ],
-                  "span" : 6,
-                  "fill" : 1,
-                  "bars" : false,
-                  "targets" : [
+                  }, 
+                  "linewidth": 1, 
+                  "steppedLine": false, 
+                  "id": 60, 
+                  "fill": 1, 
+                  "span": 6, 
+                  "title": "Pool '$pool_name' Client Throughput", 
+                  "tooltip": {
+                     "sort": 0, 
+                     "shared": true, 
+                     "value_type": "individual"
+                  }, 
+                  "targets": [
                      {
-                        "target" : "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.read_bytes_sec), -1)",
-                        "refId" : "A"
-                     },
+                        "refId": "A", 
+                        "target": "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.read_bytes_sec), -1)"
+                     }, 
                      {
-                        "target" : "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.write_bytes_sec), -1)",
-                        "refId" : "B"
+                        "refId": "B", 
+                        "target": "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.write_bytes_sec), -1)"
                      }
-                  ],
-                  "legend" : {
-                     "show" : true,
-                     "min" : false,
-                     "current" : false,
-                     "max" : false,
-                     "avg" : false,
-                     "total" : false,
-                     "values" : false
-                  },
-                  "steppedLine" : false,
-                  "timeShift" : null,
-                  "lines" : true,
-                  "xaxis" : {
-                     "values" : [],
-                     "name" : null,
-                     "mode" : "time",
-                     "buckets" : null,
-                     "show" : true
-                  },
-                  "points" : false,
-                  "scopedVars" : {
-                     "pool_name" : {
-                        "text" : "rbd",
-                        "selected" : false,
-                        "value" : "rbd"
+                  ], 
+                  "points": false, 
+                  "xaxis": {
+                     "buckets": null, 
+                     "values": [], 
+                     "mode": "time", 
+                     "name": null, 
+                     "show": true
+                  }, 
+                  "seriesOverrides": [], 
+                  "percentage": false, 
+                  "type": "graph", 
+                  "dashes": false, 
+                  "dashLength": 10, 
+                  "stack": true, 
+                  "timeShift": null, 
+                  "aliasColors": {
+                     "read_op_per_sec": "#3F6833", 
+                     "write_op_per_sec": "#E5AC0E"
+                  }, 
+                  "lines": true, 
+                  "legend": {
+                     "avg": false, 
+                     "min": false, 
+                     "max": false, 
+                     "show": true, 
+                     "current": false, 
+                     "values": false, 
+                     "total": false
+                  }, 
+                  "yaxes": [
+                     {
+                        "logBase": 1, 
+                        "format": "decbytes", 
+                        "max": null, 
+                        "min": "0", 
+                        "label": "", 
+                        "show": true
+                     }, 
+                     {
+                        "logBase": 1, 
+                        "format": "short", 
+                        "max": null, 
+                        "min": null, 
+                        "label": null, 
+                        "show": true
                      }
-                  },
-                  "renderer" : "flot"
+                  ], 
+                  "datasource": "Local", 
+                  "pointradius": 5, 
+                  "minSpan": 6
                }
-            ]
+            ], 
+            "showTitle": true, 
+            "collapse": true
          }
-      ],
-      "editable" : false,
-      "style" : "dark",
-      "version" : 4,
-      "links" : [],
-      "graphTooltip" : 0,
-      "annotations" : {
-         "list" : []
-      },
-      "schemaVersion" : 14,
-      "refresh" : "10s",
-      "timezone" : "browser",
-      "time" : {
-         "to" : "now",
-         "from" : "now-1h"
-      },
-      "templating" : {
-         "list" : [
+      ], 
+      "templating": {
+         "list": [
             {
-               "refresh" : 1,
-               "options" : [],
-               "tags" : [],
-               "allValue" : null,
-               "datasource" : "Local",
-               "useTags" : false,
-               "type" : "query",
-               "includeAll" : false,
-               "tagValuesQuery" : "",
-               "tagsQuery" : "",
-               "current" : {
-                  "value" : "ceph",
-                  "selected" : true,
-                  "text" : "ceph"
-               },
-               "query" : "collectd.*.$domain.cephmetrics.gauge.*",
-               "regex" : "",
-               "hide" : 0,
-               "multi" : false,
-               "sort" : 0,
-               "label" : "Cluster Name",
-               "name" : "cluster_name"
-            },
+               "regex": "", 
+               "sort": 0, 
+               "multi": false, 
+               "hide": 0, 
+               "name": "cluster_name", 
+               "tags": [], 
+               "allValue": null, 
+               "tagsQuery": "", 
+               "current": {
+                  "text": "ceph", 
+                  "selected": true, 
+                  "value": "ceph"
+               }, 
+               "refresh": 1, 
+               "label": "Cluster Name", 
+               "tagValuesQuery": "", 
+               "datasource": "Local", 
+               "query": "collectd.*.$domain.cephmetrics.gauge.*", 
+               "includeAll": false, 
+               "type": "query", 
+               "options": [], 
+               "useTags": false
+            }, 
             {
-               "query" : "test.lab",
-               "options" : [
+               "multi": false, 
+               "hide": 2, 
+               "name": "domain", 
+               "allValue": null, 
+               "label": null, 
+               "current": {
+                  "text": "test.lab", 
+                  "selected": true, 
+                  "value": "test.lab"
+               }, 
+               "query": "test.lab", 
+               "type": "custom", 
+               "options": [
                   {
-                     "text" : "test.lab",
-                     "selected" : true,
-                     "value" : "test.lab"
+                     "text": "test.lab", 
+                     "selected": true, 
+                     "value": "test.lab"
                   }
-               ],
-               "hide" : 2,
-               "type" : "custom",
-               "label" : null,
-               "allValue" : null,
-               "multi" : false,
-               "current" : {
-                  "value" : "test.lab",
-                  "selected" : true,
-                  "text" : "test.lab"
-               },
-               "name" : "domain",
-               "includeAll" : false
-            },
+               ], 
+               "includeAll": false
+            }, 
             {
-               "refresh" : 1,
-               "options" : [],
-               "tags" : [],
-               "tagValuesQuery" : "",
-               "includeAll" : true,
-               "tagsQuery" : "",
-               "current" : {
-                  "value" : "$__all",
-                  "text" : "All"
-               },
-               "datasource" : "Local",
-               "allValue" : null,
-               "useTags" : false,
-               "type" : "query",
-               "regex" : "",
-               "hide" : 0,
-               "query" : "collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.*",
-               "name" : "pool_name",
-               "multi" : true,
-               "sort" : 0,
-               "label" : "Pool Name"
+               "regex": "", 
+               "sort": 0, 
+               "multi": true, 
+               "hide": 0, 
+               "name": "pool_name", 
+               "tags": [], 
+               "allValue": null, 
+               "tagsQuery": "", 
+               "current": {
+                  "text": "All", 
+                  "value": "$__all"
+               }, 
+               "refresh": 1, 
+               "label": "Pool Name", 
+               "tagValuesQuery": "", 
+               "datasource": "Local", 
+               "query": "collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.*", 
+               "includeAll": true, 
+               "type": "query", 
+               "options": [], 
+               "useTags": false
             }
          ]
-      },
-      "hideControls" : true,
-      "tags" : []
+      }, 
+      "links": [], 
+      "tags": [], 
+      "graphTooltip": 0, 
+      "hideControls": true, 
+      "title": "Ceph Pools", 
+      "editable": false, 
+      "refresh": "10s", 
+      "id": 27, 
+      "gnetId": null, 
+      "timepicker": {
+         "time_options": [
+            "5m", 
+            "15m", 
+            "1h", 
+            "6h", 
+            "12h", 
+            "24h", 
+            "2d", 
+            "7d", 
+            "30d"
+         ], 
+         "refresh_intervals": [
+            "5s", 
+            "10s", 
+            "30s", 
+            "1m", 
+            "5m", 
+            "15m", 
+            "30m", 
+            "1h", 
+            "2h", 
+            "1d"
+         ]
+      }, 
+      "version": 4, 
+      "time": {
+         "to": "now", 
+         "from": "now-1h"
+      }, 
+      "timezone": "browser", 
+      "schemaVersion": 14, 
+      "annotations": {
+         "list": []
+      }
    }
 }
