@@ -143,6 +143,6 @@
     - dashboards
 
 - name: Push dashboards to Grafana
-  command: "{{ dashupdate_cmd }} -m {{ dashupdate_mode }} -c /tmp/dashboard.yml -D {{ dashboard_dir }}"
+  command: "{{ dashupdate_cmd }} -m {{ dashupdate_mode }} -c /tmp/dashboard.yml -D {{ dashboard_dir }}{{ ' -A' if update_alerts else '' }}"
   tags:
     - dashboards

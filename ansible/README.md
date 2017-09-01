@@ -60,6 +60,7 @@ You may override certain variables by creating a `vars.yml` file:
         - ['1m', '30d']
         - ['15m', '5y']
     ```
+- `update_alerts`: Whether to update the alerts dashboard along with the rest. Removes any user-defined alerts. Default: false
 
 These variables are only relevent when `devel_mode` is true:
 - `use_epel`: Whether or not to use EPEL and grafana.com instead of ceph.com-sourced packages for dependencies. Default: false
