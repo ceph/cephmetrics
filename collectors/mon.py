@@ -429,6 +429,11 @@ class Mon(BaseCollector):
         return {metric_format[k][0]: metrics[k]
                 for k in metrics} if metrics else {}
 
+    def _get_df_stats(self):
+        """ get 'ceph df' stats from rados """
+        raw_stats = self._mon_command('df')
+        return raw_stats
+
     def _get_pool_stats(self):
         """ get pool stats from rados """
 
@@ -589,6 +594,11 @@ class Mon(BaseCollector):
             # read from the admin socket was OK, so process the data
             cluster_state = self.get_mon_health(cluster_data)
             pool_stats = self._get_pool_stats()
+            df_stats = self._get_df_stats()
+            for df_obj in df_stats['pools']:
+                pool_name = df_obj['name']
+                pool_stats[pool_name] = merge_dicts(
+                    pool_stats[pool_name], df_obj['stats'])
             num_osd_hosts, osd_states = self._get_osd_states()
 
             cluster_state['num_osd_hosts'] = num_osd_hosts

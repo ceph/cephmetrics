@@ -37,6 +37,8 @@ def get_options():
     parser = argparse.ArgumentParser(prog='dashmgr',
                                      description='Manage Ceph Monitoring '
                                                  'dashboards in Grafana')
+    parser.add_argument('-A', '--update-alerts', action='store_true',
+                        default=False)
     parser.add_argument('-c', '--config-file', type=str,
                         help='path of the config file to use',
                         default=os.path.join(os.getcwd(), 'dashboard.yml'))
@@ -379,7 +381,8 @@ def main():
         logger.info("\nProcessing dashboard {}".format(dashname))
 
         http_rc, dashjson = get_dashboard(dashname)
-        if dashname == config.alert_dashboard and http_rc == 200:
+        if (dashname == config.alert_dashboard and http_rc == 200 and not
+                opts.update_alerts):
             logger.info("- existing alert dashboard found, update bypassed")
             continue
 
