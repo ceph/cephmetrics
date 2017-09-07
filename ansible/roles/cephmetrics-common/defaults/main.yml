@@ -25,6 +25,9 @@ defaults:
     site_conf:
       yum: '/etc/httpd/conf.d/graphite-web.conf'
       apt: '/etc/apache2/sites-available/graphite-web.conf'
+    app_conf:
+      yum: '/etc/graphite-web/local_settings.py'
+      apt: '/etc/graphite/local_settings.py'
   carbon:
     unix_user:
       yum: carbon
