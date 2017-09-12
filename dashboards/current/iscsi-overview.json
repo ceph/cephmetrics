@@ -56,6 +56,7 @@
                             "thresholdMarkers": true
                         }, 
                         "height": "100", 
+                        "hideTimeOverride": true, 
                         "id": 1, 
                         "interval": null, 
                         "links": [], 
@@ -101,6 +102,8 @@
                             }
                         ], 
                         "thresholds": "", 
+                        "timeFrom": "1m", 
+                        "timeShift": null, 
                         "title": "Gateways", 
                         "type": "singlestat", 
                         "valueFontSize": "70%", 
@@ -132,6 +135,7 @@
                             "thresholdMarkers": true
                         }, 
                         "height": "100", 
+                        "hideTimeOverride": true, 
                         "id": 2, 
                         "interval": null, 
                         "links": [], 
@@ -177,6 +181,7 @@
                             }
                         ], 
                         "thresholds": "", 
+                        "timeFrom": "1m", 
                         "title": "Clients", 
                         "type": "singlestat", 
                         "valueFontSize": "70%", 
@@ -209,6 +214,7 @@
                             "thresholdMarkers": true
                         }, 
                         "height": "100", 
+                        "hideTimeOverride": true, 
                         "id": 5, 
                         "interval": null, 
                         "links": [], 
@@ -254,6 +260,8 @@
                             }
                         ], 
                         "thresholds": "", 
+                        "timeFrom": "1m", 
+                        "timeShift": null, 
                         "title": "Sessions", 
                         "type": "singlestat", 
                         "valueFontSize": "70%", 
@@ -278,7 +286,7 @@
                         "datasource": null, 
                         "decimals": 0, 
                         "description": "Capacity refers to the total capacity defined within the iSCSI gateway group, and available to iSCSI clients", 
-                        "format": "decbytes", 
+                        "format": "bytes", 
                         "gauge": {
                             "maxValue": 100, 
                             "minValue": 0, 
@@ -287,6 +295,7 @@
                             "thresholdMarkers": true
                         }, 
                         "height": "100", 
+                        "hideTimeOverride": true, 
                         "id": 4, 
                         "interval": null, 
                         "links": [], 
@@ -301,7 +310,7 @@
                                 "value": 2
                             }
                         ], 
-                        "maxDataPoints": "1", 
+                        "maxDataPoints": "", 
                         "minSpan": 2, 
                         "nullPointMode": "connected", 
                         "nullText": null, 
@@ -333,6 +342,8 @@
                             }
                         ], 
                         "thresholds": "", 
+                        "timeFrom": "1m", 
+                        "timeShift": null, 
                         "title": "Defined Capacity", 
                         "type": "singlestat", 
                         "valueFontSize": "70%", 
@@ -364,6 +375,7 @@
                             "thresholdMarkers": true
                         }, 
                         "height": "100", 
+                        "hideTimeOverride": true, 
                         "id": 3, 
                         "interval": null, 
                         "links": [], 
@@ -378,7 +390,7 @@
                                 "value": 2
                             }
                         ], 
-                        "maxDataPoints": "1", 
+                        "maxDataPoints": "", 
                         "minSpan": 1, 
                         "nullPointMode": "connected", 
                         "nullText": null, 
@@ -404,11 +416,13 @@
                         "targets": [
                             {
                                 "refId": "A", 
-                                "target": "maxSeries(consolidateBy(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.iscsi.gw_stats.lun_count), \"max\"))", 
+                                "target": "maxSeries(consolidateBy(collectd.*.$domain.cephmetrics.gauge.$cluster_name.iscsi.gw_stats.lun_count, \"max\"))", 
                                 "textEditor": true
                             }
                         ], 
                         "thresholds": "", 
+                        "timeFrom": "1m", 
+                        "timeShift": null, 
                         "title": "LUNs", 
                         "type": "singlestat", 
                         "valueFontSize": "70%", 
@@ -440,6 +454,7 @@
                             "thresholdMarkers": true
                         }, 
                         "height": "100", 
+                        "hideTimeOverride": true, 
                         "id": 18, 
                         "interval": null, 
                         "links": [], 
@@ -487,17 +502,18 @@
                             {
                                 "hide": true, 
                                 "refId": "B", 
-                                "target": "countSeries(groupByNode(keepLastValue(collectd.$iscsi_gateways.$domain.cephmetrics.gauge.$cluster_name.iscsi.gw_clients.$clients.luns.*.size),-2,\"maxSeries\"))", 
+                                "target": "alias(countSeries(groupByNode(currentAbove(collectd.$iscsi_gateways.$domain.cephmetrics.gauge.$cluster_name.iscsi.gw_clients.$clients.luns.*.size,0.5),-2,\"maxSeries\")),\"mapped\")", 
                                 "textEditor": true
                             }, 
                             {
                                 "refId": "C", 
                                 "target": "diffSeries(#A,#B)", 
-                                "targetFull": "diffSeries(maxSeries(consolidateBy(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.iscsi.gw_stats.lun_count), \"max\")),countSeries(groupByNode(keepLastValue(collectd.$iscsi_gateways.$domain.cephmetrics.gauge.$cluster_name.iscsi.gw_clients.$clients.luns.*.size),-2,\"maxSeries\")))", 
+                                "targetFull": "diffSeries(maxSeries(consolidateBy(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.iscsi.gw_stats.lun_count), \"max\")),alias(countSeries(groupByNode(currentAbove(collectd.$iscsi_gateways.$domain.cephmetrics.gauge.$cluster_name.iscsi.gw_clients.$clients.luns.*.size,0.5),-2,\"maxSeries\")),\"mapped\"))", 
                                 "textEditor": true
                             }
                         ], 
                         "thresholds": "", 
+                        "timeFrom": "1m", 
                         "title": "Unused LUNs", 
                         "type": "singlestat", 
                         "valueFontSize": "70%", 
@@ -776,6 +792,7 @@
                         "fontSize": "80%", 
                         "format": "short", 
                         "height": "200", 
+                        "hideTimeOverride": true, 
                         "id": 26, 
                         "interval": null, 
                         "legend": {
@@ -794,16 +811,17 @@
                             {
                                 "hide": true, 
                                 "refId": "A", 
-                                "target": "keepLastValue(collectd.$iscsi_gateways.$domain.cephmetrics.gauge.$cluster_name.iscsi.gw_clients.*.luns.*.active_path)", 
+                                "target": "currentAbove(keepLastValue(collectd.$iscsi_gateways.$domain.cephmetrics.gauge.$cluster_name.iscsi.gw_clients.*.luns.*.active_path),0.5)", 
                                 "textEditor": true
                             }, 
                             {
                                 "refId": "B", 
                                 "target": "groupByNode(#A,1,\"sumSeries\")", 
-                                "targetFull": "groupByNode(keepLastValue(collectd.$iscsi_gateways.$domain.cephmetrics.gauge.$cluster_name.iscsi.gw_clients.*.luns.*.active_path),1,\"sumSeries\")", 
+                                "targetFull": "groupByNode(currentAbove(keepLastValue(collectd.$iscsi_gateways.$domain.cephmetrics.gauge.$cluster_name.iscsi.gw_clients.*.luns.*.active_path),0.5),1,\"sumSeries\")", 
                                 "textEditor": true
                             }
                         ], 
+                        "timeFrom": "1m", 
                         "title": "Primary LUN Paths Per Gateway", 
                         "type": "grafana-piechart-panel", 
                         "valueName": "current"
@@ -1166,7 +1184,7 @@
                         "targets": [
                             {
                                 "refId": "A", 
-                                "target": "groupByNode(collectd.*.$domain.cephmetrics.derive.$cluster_name.iscsi.gw_clients.$clients.luns.*.iops,-4,\"sum\")", 
+                                "target": "currentAbove(groupByNode(collectd.*.$domain.cephmetrics.derive.$cluster_name.iscsi.gw_clients.$clients.luns.*.iops,-4,\"sum\"),0)", 
                                 "textEditor": true
                             }
                         ], 
@@ -1240,7 +1258,7 @@
                         "targets": [
                             {
                                 "refId": "A", 
-                                "target": "groupByNode(collectd.*.$domain.cephmetrics.derive.$cluster_name.iscsi.gw_clients.$clients.luns.*.total_bytes_per_sec,-4,\"sum\")", 
+                                "target": "currentAbove(groupByNode(collectd.*.$domain.cephmetrics.derive.$cluster_name.iscsi.gw_clients.$clients.luns.*.total_bytes_per_sec,-4,\"sum\"),0)", 
                                 "textEditor": true
                             }
                         ], 
@@ -1314,7 +1332,7 @@
                         "targets": [
                             {
                                 "refId": "A", 
-                                "target": "limit(groupByNode(collectd.*.$domain.cephmetrics.derive.$cluster_name.iscsi.gw_clients.$clients.luns.*.iops,-2,\"sum\"),10)", 
+                                "target": "limit(groupByNode(currentAbove(collectd.*.$domain.cephmetrics.derive.$cluster_name.iscsi.gw_clients.$clients.luns.*.iops,0),-2,\"sum\"),10)", 
                                 "textEditor": true
                             }
                         ], 
@@ -1388,7 +1406,7 @@
                         "targets": [
                             {
                                 "refId": "A", 
-                                "target": "limit(groupByNode(collectd.*.$domain.cephmetrics.derive.$cluster_name.iscsi.gw_clients.$clients.luns.*.total_bytes_per_sec,-2,\"sum\"),10)", 
+                                "target": "limit(groupByNode(currentAbove(collectd.*.$domain.cephmetrics.derive.$cluster_name.iscsi.gw_clients.$clients.luns.*.total_bytes_per_sec,0),-2,\"sum\"),10)", 
                                 "textEditor": true
                             }
                         ], 
@@ -1596,7 +1614,7 @@
                         "targets": [
                             {
                                 "refId": "A", 
-                                "target": "groupByNode(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.iscsi.gw_clients.$clients.lun_count),-2,\"maxSeries\")", 
+                                "target": "groupByNode(currentAbove(collectd.*.$domain.cephmetrics.gauge.$cluster_name.iscsi.gw_clients.$clients.lun_count,0),-2,\"maxSeries\")", 
                                 "textEditor": true
                             }
                         ], 
@@ -1749,7 +1767,6 @@
                 {
                     "allValue": null, 
                     "current": {
-                        "tags": [], 
                         "text": "All", 
                         "value": "$__all"
                     }, 
@@ -1859,7 +1876,7 @@
         }, 
         "timezone": "browser", 
         "title": "iSCSI Overview", 
-        "version": 41
+        "version": 51
     }, 
     "meta": {
         "canEdit": true, 
@@ -1870,8 +1887,8 @@
         "expires": "0001-01-01T00:00:00Z", 
         "slug": "iscsi-overview", 
         "type": "db", 
-        "updated": "2017-08-07T23:20:49Z", 
+        "updated": "2017-09-12T04:50:03Z", 
         "updatedBy": "admin", 
-        "version": 41
+        "version": 51
     }
 }
