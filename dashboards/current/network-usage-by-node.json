@@ -7,7 +7,7 @@
         "gnetId": null, 
         "graphTooltip": 0, 
         "hideControls": true, 
-        "id": 73, 
+        "id": 20, 
         "links": [
             {
                 "asDropdown": true, 
@@ -71,17 +71,17 @@
                         "targets": [
                             {
                                 "refId": "A", 
-                                "target": "alias(sumSeries(groupByNode(collectd.$osd_servers.$domain.interface.*.if_octets.*,1,\"sumSeries\")),\"OSD Hosts\")", 
+                                "target": "alias(sumSeries(groupByNode(collectd.$osd_servers.$domain.interface.{bond,en,eth}*.if_octets.*,1,\"sumSeries\")),\"OSD Hosts\")", 
                                 "textEditor": true
                             }, 
                             {
                                 "refId": "B", 
-                                "target": "alias(sumSeries(groupByNode(collectd.$rgw_servers.$domain.interface.*.if_octets.*,1,\"sumSeries\")),\"RadosGW Hosts\")", 
+                                "target": "alias(sumSeries(groupByNode(collectd.$rgw_servers.$domain.interface.{bond,en,eth}*.if_octets.*,1,\"sumSeries\")),\"RadosGW Hosts\")", 
                                 "textEditor": true
                             }, 
                             {
                                 "refId": "C", 
-                                "target": "alias(sumSeries(groupByNode(collectd.$mon_servers.$domain.interface.*.if_octets.*,1,\"sumSeries\")),\"MON Hosts\")", 
+                                "target": "alias(sumSeries(groupByNode(collectd.$mon_servers.$domain.interface.{bond,en,eth}*.if_octets.*,1,\"sumSeries\")),\"MON Hosts\")", 
                                 "textEditor": true
                             }
                         ], 
@@ -166,7 +166,7 @@
                         "targets": [
                             {
                                 "refId": "A", 
-                                "target": "groupByNode(collectd.$mon_servers.$domain.interface.*.if_octets.*,1,\"sumSeries\")", 
+                                "target": "groupByNode(collectd.$mon_servers.$domain.interface.{bond,en,eth}*.if_octets.*,1,\"sumSeries\")", 
                                 "textEditor": true
                             }
                         ], 
@@ -251,7 +251,7 @@
                         "targets": [
                             {
                                 "refId": "A", 
-                                "target": "groupByNode(collectd.$osd_servers.$domain.interface.*.if_octets.*,1,\"sumSeries\")", 
+                                "target": "groupByNode(collectd.$osd_servers.$domain.interface.{bond,en,eth}*.if_octets.*,1,\"sumSeries\")", 
                                 "textEditor": true
                             }
                         ], 
@@ -336,7 +336,7 @@
                         "targets": [
                             {
                                 "refId": "A", 
-                                "target": "groupByNode(collectd.$rgw_servers.$domain.interface.*.if_octets.*,1,\"sumSeries\")", 
+                                "target": "groupByNode(collectd.$rgw_servers.$domain.interface.{bond,en,eth}*.if_octets.*,1,\"sumSeries\")", 
                                 "textEditor": true
                             }
                         ], 
@@ -412,28 +412,29 @@
                         }, 
                         {
                             "selected": false, 
-                            "text": "obj-osd-1", 
-                            "value": "obj-osd-1"
+                            "text": "ceph-1", 
+                            "value": "ceph-1"
                         }, 
                         {
                             "selected": false, 
-                            "text": "obj-osd-2", 
-                            "value": "obj-osd-2"
+                            "text": "ceph-2", 
+                            "value": "ceph-2"
                         }, 
                         {
                             "selected": false, 
-                            "text": "obj-osd-3", 
-                            "value": "obj-osd-3"
+                            "text": "ceph-3", 
+                            "value": "ceph-3"
                         }
                     ], 
-                    "query": "obj-osd-1,obj-osd-2,obj-osd-3", 
+                    "query": "ceph-1,ceph-2,ceph-3", 
                     "type": "custom"
                 }, 
                 {
                     "allValue": null, 
                     "current": {
-                        "text": "storage.lab", 
-                        "value": "storage.lab"
+                        "selected": true, 
+                        "text": "test.lab", 
+                        "value": "test.lab"
                     }, 
                     "hide": 2, 
                     "includeAll": false, 
@@ -443,16 +444,17 @@
                     "options": [
                         {
                             "selected": true, 
-                            "text": "storage.lab", 
-                            "value": "storage.lab"
+                            "text": "test.lab", 
+                            "value": "test.lab"
                         }
                     ], 
-                    "query": "storage.lab", 
+                    "query": "test.lab", 
                     "type": "custom"
                 }, 
                 {
                     "allValue": null, 
                     "current": {
+                        "selected": true, 
                         "text": "ceph", 
                         "value": "ceph"
                     }, 
@@ -476,6 +478,7 @@
                 {
                     "allValue": null, 
                     "current": {
+                        "selected": false, 
                         "text": "All", 
                         "value": "$__all"
                     }, 
@@ -499,8 +502,8 @@
                 {
                     "allValue": null, 
                     "current": {
-                        "text": "obj-rgw-1", 
-                        "value": "obj-rgw-1"
+                        "text": "All", 
+                        "value": "All"
                     }, 
                     "hide": 0, 
                     "includeAll": true, 
@@ -509,7 +512,7 @@
                     "name": "rgw_servers", 
                     "options": [
                         {
-                            "selected": true, 
+                            "selected": false, 
                             "text": "obj-rgw-1", 
                             "value": "obj-rgw-1"
                         }
@@ -550,19 +553,19 @@
         }, 
         "timezone": "browser", 
         "title": "Network Usage by Node", 
-        "version": 1
+        "version": 5
     }, 
     "meta": {
         "canEdit": true, 
         "canSave": true, 
         "canStar": true, 
-        "created": "2017-08-02T01:47:18Z", 
-        "createdBy": "admin@localhost", 
+        "created": "2017-08-03T21:42:28Z", 
+        "createdBy": "admin", 
         "expires": "0001-01-01T00:00:00Z", 
         "slug": "network-usage-by-node", 
         "type": "db", 
-        "updated": "2017-08-03T04:16:09Z", 
-        "updatedBy": "admin@localhost", 
-        "version": 1
+        "updated": "2017-09-12T23:49:40Z", 
+        "updatedBy": "admin", 
+        "version": 5
     }
 }
