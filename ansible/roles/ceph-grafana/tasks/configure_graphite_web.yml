@@ -58,3 +58,16 @@
     state: present
   when: ansible_pkg_mgr == "yum"
   notify: Restart graphite-web
+
+- name: Get timezone
+  shell: "timedatectl | grep 'Time zone'"
+  register: timezone
+
+- name: Set timezone in local_settings.py
+  lineinfile:
+    dest: "{{ graphite.app_conf[ansible_pkg_mgr] }}"
+    line: "TIME_ZONE = '{{ timezone.stdout.strip().split(' ')[2] }}'"
+    regexp: "^TIME_ZONE = .*"
+    insertafter: '^#TIME_ZONE = .*'
+    state: present
+  notify: Restart graphite-web
