@@ -432,6 +432,8 @@ class Mon(BaseCollector):
     def _get_df_stats(self):
         """ get 'ceph df' stats from rados """
         raw_stats = self._mon_command('df')
+        for pool in raw_stats['pools']:
+            pool['name'] = pool['name'].replace('.', '_')
         return raw_stats
 
     def _get_pool_stats(self):
