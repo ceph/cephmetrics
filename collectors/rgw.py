@@ -42,8 +42,8 @@ class RGW(BaseCollector):
     def _get_rgw_data(self):
 
         rgw_sockets = glob.glob('/var/run/ceph/{}-client.rgw.'
-                                '{}.*.asok'.format(self.cluster_name,
-                                                   self.host_name))
+                                '{}.*asok'.format(self.cluster_name,
+                                                  self.host_name))
         if rgw_sockets:
 
             if len(rgw_sockets) > 1:
