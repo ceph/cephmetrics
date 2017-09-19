@@ -7,7 +7,7 @@
         "gnetId": null, 
         "graphTooltip": 0, 
         "hideControls": true, 
-        "id": 13, 
+        "id": 65, 
         "links": [
             {
                 "asDropdown": true, 
@@ -28,6 +28,94 @@
                 "collapse": false, 
                 "height": 250, 
                 "panels": [
+                    {
+                        "columns": [
+                            {
+                                "text": "Current", 
+                                "value": "current"
+                            }
+                        ], 
+                        "fontSize": "100%", 
+                        "height": "250", 
+                        "hideTimeOverride": true, 
+                        "id": 60, 
+                        "links": [], 
+                        "minSpan": 2, 
+                        "pageSize": 50, 
+                        "scroll": true, 
+                        "showHeader": true, 
+                        "sort": {
+                            "col": 0, 
+                            "desc": true
+                        }, 
+                        "span": 2, 
+                        "styles": [
+                            {
+                                "alias": "Time", 
+                                "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+                                "pattern": "Time", 
+                                "type": "date"
+                            }, 
+                            {
+                                "alias": "RGW Host", 
+                                "colorMode": null, 
+                                "colors": [
+                                    "rgba(245, 54, 54, 0.9)", 
+                                    "rgba(237, 129, 40, 0.89)", 
+                                    "rgba(50, 172, 45, 0.97)"
+                                ], 
+                                "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+                                "decimals": 2, 
+                                "pattern": "Metric", 
+                                "sanitize": false, 
+                                "thresholds": [], 
+                                "type": "string", 
+                                "unit": "short"
+                            }, 
+                            {
+                                "alias": "", 
+                                "colorMode": null, 
+                                "colors": [
+                                    "rgba(245, 54, 54, 0.9)", 
+                                    "rgba(237, 129, 40, 0.89)", 
+                                    "rgba(50, 172, 45, 0.97)"
+                                ], 
+                                "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+                                "decimals": 2, 
+                                "pattern": "Current", 
+                                "thresholds": [], 
+                                "type": "hidden", 
+                                "unit": "short"
+                            }, 
+                            {
+                                "alias": "", 
+                                "colorMode": null, 
+                                "colors": [
+                                    "rgba(245, 54, 54, 0.9)", 
+                                    "rgba(237, 129, 40, 0.89)", 
+                                    "rgba(50, 172, 45, 0.97)"
+                                ], 
+                                "decimals": 2, 
+                                "pattern": "/.*/", 
+                                "thresholds": [], 
+                                "type": "number", 
+                                "unit": "short"
+                            }
+                        ], 
+                        "targets": [
+                            {
+                                "refId": "A", 
+                                "target": "aliasByNode(currentBelow(transformNull(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.num_osds),-666),-0.5),1)", 
+                                "textEditor": true
+                            }
+                        ], 
+                        "timeFrom": "60s", 
+                        "timeShift": null, 
+                        "title": "OSD Hosts Down", 
+                        "transform": "timeseries_aggregations", 
+                        "transparent": false, 
+                        "type": "table"
+                    }, 
                     {
                         "columns": [
                             {
@@ -873,7 +961,7 @@
                 "titleSize": "h5"
             }, 
             {
-                "collapse": false, 
+                "collapse": true, 
                 "height": 250, 
                 "panels": [
                     {
@@ -1106,8 +1194,8 @@
                     "allValue": null, 
                     "current": {
                         "selected": true, 
-                        "text": "test.lab", 
-                        "value": "test.lab"
+                        "text": "storage.lab", 
+                        "value": "storage.lab"
                     }, 
                     "hide": 2, 
                     "includeAll": false, 
@@ -1117,11 +1205,11 @@
                     "options": [
                         {
                             "selected": true, 
-                            "text": "test.lab", 
-                            "value": "test.lab"
+                            "text": "storage.lab", 
+                            "value": "storage.lab"
                         }
                     ], 
-                    "query": "test.lab", 
+                    "query": "storage.lab", 
                     "type": "custom"
                 }, 
                 {
@@ -1186,21 +1274,21 @@
                         }, 
                         {
                             "selected": false, 
-                            "text": "ceph-1", 
-                            "value": "ceph-1"
+                            "text": "obj-osd-1", 
+                            "value": "obj-osd-1"
                         }, 
                         {
                             "selected": false, 
-                            "text": "ceph-2", 
-                            "value": "ceph-2"
+                            "text": "obj-osd-2", 
+                            "value": "obj-osd-2"
                         }, 
                         {
                             "selected": false, 
-                            "text": "ceph-3", 
-                            "value": "ceph-3"
+                            "text": "obj-osd-3", 
+                            "value": "obj-osd-3"
                         }
                     ], 
-                    "query": "ceph-1,ceph-2,ceph-3", 
+                    "query": "obj-osd-1,obj-osd-2,obj-osd-3", 
                     "type": "custom"
                 }, 
                 {
@@ -1258,19 +1346,19 @@
         }, 
         "timezone": "browser", 
         "title": "Ceph Backend Storage", 
-        "version": 26
+        "version": 4
     }, 
     "meta": {
         "canEdit": true, 
         "canSave": true, 
         "canStar": true, 
-        "created": "2017-08-03T21:42:28Z", 
-        "createdBy": "admin", 
+        "created": "2017-09-19T01:06:14Z", 
+        "createdBy": "admin@localhost", 
         "expires": "0001-01-01T00:00:00Z", 
         "slug": "ceph-backend-storage", 
         "type": "db", 
-        "updated": "2017-09-12T23:43:51Z", 
-        "updatedBy": "admin", 
-        "version": 26
+        "updated": "2017-09-19T21:57:08Z", 
+        "updatedBy": "admin@localhost", 
+        "version": 4
     }
 }
