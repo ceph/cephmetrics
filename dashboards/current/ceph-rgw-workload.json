@@ -3,11 +3,11 @@
         "annotations": {
             "list": []
         }, 
-        "editable": true, 
+        "editable": false, 
         "gnetId": null, 
         "graphTooltip": 0, 
-        "hideControls": false, 
-        "id": 18, 
+        "hideControls": true, 
+        "id": 69, 
         "links": [
             {
                 "asDropdown": true, 
@@ -29,6 +29,94 @@
                 "height": 267, 
                 "panels": [
                     {
+                        "columns": [
+                            {
+                                "text": "Current", 
+                                "value": "current"
+                            }
+                        ], 
+                        "fontSize": "100%", 
+                        "height": "250", 
+                        "hideTimeOverride": true, 
+                        "id": 153, 
+                        "links": [], 
+                        "minSpan": 2, 
+                        "pageSize": 50, 
+                        "scroll": true, 
+                        "showHeader": true, 
+                        "sort": {
+                            "col": 0, 
+                            "desc": true
+                        }, 
+                        "span": 2, 
+                        "styles": [
+                            {
+                                "alias": "Time", 
+                                "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+                                "pattern": "Time", 
+                                "type": "date"
+                            }, 
+                            {
+                                "alias": "RGW Host", 
+                                "colorMode": null, 
+                                "colors": [
+                                    "rgba(245, 54, 54, 0.9)", 
+                                    "rgba(237, 129, 40, 0.89)", 
+                                    "rgba(50, 172, 45, 0.97)"
+                                ], 
+                                "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+                                "decimals": 2, 
+                                "pattern": "Metric", 
+                                "sanitize": false, 
+                                "thresholds": [], 
+                                "type": "string", 
+                                "unit": "short"
+                            }, 
+                            {
+                                "alias": "", 
+                                "colorMode": null, 
+                                "colors": [
+                                    "rgba(245, 54, 54, 0.9)", 
+                                    "rgba(237, 129, 40, 0.89)", 
+                                    "rgba(50, 172, 45, 0.97)"
+                                ], 
+                                "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+                                "decimals": 2, 
+                                "pattern": "Current", 
+                                "thresholds": [], 
+                                "type": "hidden", 
+                                "unit": "short"
+                            }, 
+                            {
+                                "alias": "", 
+                                "colorMode": null, 
+                                "colors": [
+                                    "rgba(245, 54, 54, 0.9)", 
+                                    "rgba(237, 129, 40, 0.89)", 
+                                    "rgba(50, 172, 45, 0.97)"
+                                ], 
+                                "decimals": 2, 
+                                "pattern": "/.*/", 
+                                "thresholds": [], 
+                                "type": "number", 
+                                "unit": "short"
+                            }
+                        ], 
+                        "targets": [
+                            {
+                                "refId": "A", 
+                                "target": "aliasByNode(currentBelow(transformNull(keepLastValue(collectd.*.$domain.cephmetrics.derive.$cluster_name.rgw.put),-666),-0.5),1)", 
+                                "textEditor": true
+                            }
+                        ], 
+                        "timeFrom": "60s", 
+                        "timeShift": null, 
+                        "title": "RGWs Down", 
+                        "transform": "timeseries_aggregations", 
+                        "transparent": false, 
+                        "type": "table"
+                    }, 
+                    {
                         "aliasColors": {}, 
                         "bars": false, 
                         "dashLength": 10, 
@@ -49,7 +137,7 @@
                         "lines": true, 
                         "linewidth": 1, 
                         "links": [], 
-                        "minSpan": 6, 
+                        "minSpan": 5, 
                         "nullPointMode": "null as zero", 
                         "percentage": false, 
                         "pointradius": 5, 
@@ -57,7 +145,7 @@
                         "renderer": "flot", 
                         "seriesOverrides": [], 
                         "spaceLength": 10, 
-                        "span": 6, 
+                        "span": 5, 
                         "stack": false, 
                         "steppedLine": false, 
                         "targets": [
@@ -515,7 +603,7 @@
                         "lines": true, 
                         "linewidth": 1, 
                         "links": [], 
-                        "minSpan": 6, 
+                        "minSpan": 5, 
                         "nullPointMode": "connected", 
                         "percentage": false, 
                         "pointradius": 5, 
@@ -523,7 +611,7 @@
                         "renderer": "flot", 
                         "seriesOverrides": [], 
                         "spaceLength": 10, 
-                        "span": 6, 
+                        "span": 5, 
                         "stack": true, 
                         "steppedLine": false, 
                         "targets": [
@@ -593,7 +681,7 @@
                         "lines": true, 
                         "linewidth": 1, 
                         "links": [], 
-                        "minSpan": 6, 
+                        "minSpan": 4, 
                         "nullPointMode": "connected", 
                         "percentage": false, 
                         "pointradius": 5, 
@@ -601,7 +689,7 @@
                         "renderer": "flot", 
                         "seriesOverrides": [], 
                         "spaceLength": 10, 
-                        "span": 6, 
+                        "span": 4, 
                         "stack": true, 
                         "steppedLine": false, 
                         "targets": [
@@ -1599,6 +1687,7 @@
                 {
                     "allValue": null, 
                     "current": {
+                        "selected": true, 
                         "text": "ceph", 
                         "value": "ceph"
                     }, 
@@ -1622,6 +1711,7 @@
                 {
                     "allValue": null, 
                     "current": {
+                        "selected": true, 
                         "text": "storage.lab", 
                         "value": "storage.lab"
                     }, 
@@ -1643,6 +1733,7 @@
                 {
                     "allValue": null, 
                     "current": {
+                        "selected": true, 
                         "text": "obj-rgw-1", 
                         "value": "obj-rgw-1"
                     }, 
@@ -1726,19 +1817,19 @@
         }, 
         "timezone": "browser", 
         "title": "Ceph RGW Workload", 
-        "version": 1
+        "version": 4
     }, 
     "meta": {
         "canEdit": true, 
         "canSave": true, 
         "canStar": true, 
-        "created": "2017-08-01T05:18:58Z", 
+        "created": "2017-09-19T01:06:14Z", 
         "createdBy": "admin@localhost", 
         "expires": "0001-01-01T00:00:00Z", 
         "slug": "ceph-rgw-workload", 
         "type": "db", 
-        "updated": "2017-08-01T20:58:52Z", 
+        "updated": "2017-09-19T21:47:51Z", 
         "updatedBy": "admin@localhost", 
-        "version": 1
+        "version": 4
     }
 }
