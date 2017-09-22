@@ -1,12 +1,4 @@
 ---
-- name: Set collectd_dir
-  set_fact:
-    collectd_dir: "/usr/lib{{ '64' if ansible_pkg_mgr == 'yum' else '' }}/collectd"
-
-- name: Set collectd_cephmetrics_dir
-  set_fact:
-    collectd_cephmetrics_dir: "{{ collectd_dir }}/cephmetrics"
-
 - name: Create collectors directory
   file:
     name: "{{ collectd_cephmetrics_dir }}/collectors"
