@@ -61,6 +61,13 @@ You may override certain variables by creating a `vars.yml` file:
         - ['15m', '5y']
     ```
 - `update_alerts`: Whether to update the alerts dashboard along with the rest. Removes any user-defined alerts. Default: false
+- `custom_repos`: A list of custom package repositories to enable. Currently supports yum systems only. Format:
+    ```
+    custom_repos:
+      yum:
+      - name: my_repo
+        baseurl: http://example.com/my/repo
+    ```
 
 These variables are only relevent when `devel_mode` is true:
 - `use_epel`: Whether or not to use EPEL and grafana.com instead of ceph.com-sourced packages for dependencies. Default: false
