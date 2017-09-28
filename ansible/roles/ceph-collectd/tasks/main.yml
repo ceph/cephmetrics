@@ -15,6 +15,10 @@
   tags:
     - packages
 
+- include: set_collectd_vars.yml
+  tags:
+    - collectors
+
 - include: install_collectd_plugins.yml
   when:
     - not containerized_deployment
