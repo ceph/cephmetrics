@@ -42,10 +42,6 @@ defaults:
       - ['15m', '5y']
   # The firewalld zone that carbon and grafana will use
   firewalld_zone: public
-  # RHEL repos that need to be enabled with subscription-manager
-  rhsm_repos:
-    - rhel-7-server-rhscon-2-installer-rpms
-    - rhel-7-server-optional-rpms
   devel_packages:
     yum:
       # unzip is needed to extract the Vonage plugin
