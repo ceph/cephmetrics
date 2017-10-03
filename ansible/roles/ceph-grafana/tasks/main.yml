@@ -3,6 +3,11 @@
   tags:
     - always
 
+
+- include: sanity.yml
+  tags:
+    - sanity
+
 - include: setup_repos.yml
   when:
     - not containerized_deployment
