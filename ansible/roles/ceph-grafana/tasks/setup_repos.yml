@@ -68,12 +68,6 @@
     - ansible_pkg_mgr == 'apt'
     - devel_mode
 
-- name: Enable subscription-manager repos
-  command: "subscription-manager repos{% for repo in rhsm_repos %} --enable={{ repo }}{% endfor %}"
-  when:
-    - ansible_pkg_mgr == "yum"
-    - not devel_mode
-
 - name: Remove old cephmetrics production repo
   file:
     path: /etc/yum.repos.d/cephmetrics.repo
