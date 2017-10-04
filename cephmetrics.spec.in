@@ -25,6 +25,7 @@ Requires(postun): policycoreutils
 Requires:	PyYAML
 Requires:	graphite-web
 Requires:	python-carbon
+Requires:	prometheus
 Requires:       cephmetrics-grafana-plugins = %{version}-%{release}
 
 %description
@@ -43,6 +44,7 @@ The vonage status panel and piechart panel for grafana web server.
 Summary:	Ceph metrics collectors
 Requires:	collectd
 Requires:	collectd-python
+Requires:	collectd-write_prometheus
 Requires:	libsemanage-python
 %description collectors
 The collectors for Ceph implemented with help of statistics collection daemon collectd.
