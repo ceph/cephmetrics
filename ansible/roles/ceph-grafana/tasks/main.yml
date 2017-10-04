@@ -34,6 +34,11 @@
   tags:
     - graphite
 
+- include: configure_prometheus.yml
+  when: not containerized_deployment
+  tags:
+    - prometheus
+
 - include: configure_grafana.yml
   when: not containerized_deployment
   tags:

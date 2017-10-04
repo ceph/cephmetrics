@@ -2,6 +2,18 @@
 - hosts:
   - ceph-grafana
   become: true
+  vars:
+    - ceph_collectd: "{{ ((groups['mons']       | default([])) +
+                          (groups['agents']     | default([])) +
+                          (groups['osds']       | default([])) +
+                          (groups['mdss']       | default([])) +
+                          (groups['rgws']       | default([])) +
+                          (groups['nfss']       | default([])) +
+                          (groups['restapis']   | default([])) +
+                          (groups['rbdmirrors'] | default([])) +
+                          (groups['clients']    | default([])) +
+                          (groups['mgrs']       | default([])) +
+                          (groups['cluster']    | default([]))) | unique }}"
   roles:
   - ceph-grafana
 

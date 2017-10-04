@@ -40,6 +40,8 @@ defaults:
       - ['10s', '7d']
       - ['1m', '30d']
       - ['15m', '5y']
+  prometheus:
+    port: 9090
   # The firewalld zone that carbon and grafana will use
   firewalld_zone: public
   devel_packages:
@@ -48,6 +50,7 @@ defaults:
       - unzip
       - graphite-web
       - python-carbon
+      - prometheus
       - grafana
       # for dashUpdater.py
       - PyYAML
@@ -56,6 +59,7 @@ defaults:
       # unzip is needed to extract the Vonage plugin
       - unzip
       - graphite-web
+      - prometheus
       - apache2
       - libapache2-mod-wsgi
       - graphite-carbon
