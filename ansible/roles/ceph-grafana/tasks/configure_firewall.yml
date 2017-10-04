@@ -4,6 +4,8 @@
   register: firewalld_status
   failed_when: false
   changed_when: false
+  tags:
+    - skip_ansible_lint
 
 - name: Open ports for Grafana and Carbon
   firewalld:
