@@ -18,3 +18,5 @@
 
 - name: Update status-panel for readability within the 'light' theme
   command: "sed -i.bak -e 's/green/rgb(1,167,1)/g' /var/lib/grafana/plugins/vonage-status-panel/dist/css/status_panel.css"
+  tags:
+    - skip_ansible_lint
