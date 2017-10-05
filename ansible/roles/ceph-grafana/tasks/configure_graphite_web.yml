@@ -2,6 +2,13 @@
 - name: Create Graphite DB tables
   command: /usr/bin/graphite-manage migrate --noinput
   become_user: "{{ graphite.unix_user[ansible_pkg_mgr] }}"
+  register: migrate_cmd
+  failed_when: migrate_cmd.rc != 0 and 'table "django_content_type" already exists' not in migrate_cmd.stderr
+
+- name: Run Graphite migrations if necessary
+  command: /usr/bin/graphite-manage migrate --noinput --fake-initial
+  become_user: "{{ graphite.unix_user[ansible_pkg_mgr] }}"
+  when: migrate_cmd.rc != 0
 
 - name: Build Graphite index
   command: "{{ graphite.build_index[ansible_pkg_mgr] }}"
