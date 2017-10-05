@@ -1,6 +1,6 @@
 ---
 - name: Create Graphite DB tables
-  command: /usr/bin/graphite-manage syncdb --noinput
+  command: /usr/bin/graphite-manage migrate --noinput
   become_user: "{{ graphite.unix_user[ansible_pkg_mgr] }}"
 
 - name: Build Graphite index
