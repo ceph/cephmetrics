@@ -53,3 +53,21 @@
     regexp: 'ModulePath ".*"'
     replace: 'ModulePath "{{ collectd_cephmetrics_dir }}"'
   notify: Restart collectd
+
+- name: Check firewalld status
+  shell: "systemctl show firewalld | grep UnitFileState"
+  register: firewalld_status
+  failed_when: false
+  changed_when: false
+  tags:
+    - skip_ansible_lint
+
+- name: Open collectd http export server port for prometheus
+  firewalld:
+    port: "9103"
+    zone: "{{ firewalld_zone }}"
+    state: enabled
+    immediate: true
+    permanent: true
+  when: "'enabled' in firewalld_status.stdout"
+  notify: Restart collectd

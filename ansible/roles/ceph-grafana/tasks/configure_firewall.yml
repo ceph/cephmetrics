@@ -7,7 +7,7 @@
   tags:
     - skip_ansible_lint
 
-- name: Open ports for Grafana and Carbon
+- name: Open ports for Grafana, Carbon and Prometheus
   firewalld:
     port: "{{ item }}"
     zone: "{{ firewalld_zone }}"
@@ -17,4 +17,5 @@
   with_items:
     - 3000/tcp
     - 2003/tcp
+    - "{{ prometheus.port }}/tcp"
   when: "'enabled' in firewalld_status.stdout"
