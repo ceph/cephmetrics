@@ -1,0 +1,28 @@
+From 49ffd15645a8b377b600f44102cad613a71fdd2b Mon Sep 17 00:00:00 2001
+From: Boris Ranto <branto@redhat.com>
+Date: Fri, 6 Oct 2017 12:22:37 +0200
+Subject: [PATCH] ansible: Disable devel_mode
+
+Signed-off-by: Boris Ranto <branto@redhat.com>
+---
+ ansible/roles/cephmetrics-common/tasks/merge_vars.yml | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/ansible/roles/cephmetrics-common/tasks/merge_vars.yml b/ansible/roles/cephmetrics-common/tasks/merge_vars.yml
+index f8dbcd0..15d2a6b 100644
+--- a/ansible/roles/cephmetrics-common/tasks/merge_vars.yml
++++ b/ansible/roles/cephmetrics-common/tasks/merge_vars.yml
+@@ -3,3 +3,10 @@
+   set_fact: {"{{ item }}": "{% if vars[item] is not defined %}{{ defaults[item] }}{% elif vars[item] is mapping %}{{ defaults[item]|combine(vars[item]|default({})) }}{% else %}{{ vars[item] }}{% endif %}"}
+   with_items: "{{ defaults.keys() }}"
+   no_log: true
++
++- name: Make sure devel_mode is not on
++  assert:
++    that:
++      - devel_mode == False
++      - use_epel == False
++    msg: "Devel mode is not supported in the downstream builds"
+-- 
+2.9.5
+
