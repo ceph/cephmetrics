@@ -49,6 +49,7 @@ The collectors for Ceph implemented with help of statistics collection daemon co
 %package ansible
 Summary:	Ansible playbooks for Ceph metrics
 Requires:	ceph-ansible
+Requires:	python-netaddr
 %description ansible
 Ansible playbooks for Ceph metrics
 
