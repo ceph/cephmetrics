@@ -7,7 +7,7 @@
         "gnetId": null, 
         "graphTooltip": 0, 
         "hideControls": true, 
-        "id": 1, 
+        "id": 64, 
         "links": [
             {
                 "asDropdown": true, 
@@ -1057,7 +1057,16 @@
                         "hideTimeOverride": true, 
                         "id": 38, 
                         "interval": null, 
-                        "links": [], 
+                        "links": [
+                            {
+                                "dashUri": "db/ceph-cluster", 
+                                "dashboard": "Ceph Cluster", 
+                                "params": "panelId=3&fullscreen&orgId=1", 
+                                "targetBlank": true, 
+                                "title": "Cluster Capacity Information", 
+                                "type": "dashboard"
+                            }
+                        ], 
                         "mappingType": 1, 
                         "mappingTypes": [
                             {
@@ -2843,8 +2852,8 @@
                 {
                     "allValue": null, 
                     "current": {
-                        "text": "front.sepia.ceph.com", 
-                        "value": "front.sepia.ceph.com"
+                        "text": "storage.lab", 
+                        "value": "storage.lab"
                     }, 
                     "hide": 2, 
                     "includeAll": false, 
@@ -2854,11 +2863,11 @@
                     "options": [
                         {
                             "selected": true, 
-                            "text": "front.sepia.ceph.com", 
-                            "value": "front.sepia.ceph.com"
+                            "text": "storage.lab", 
+                            "value": "storage.lab"
                         }
                     ], 
-                    "query": "front.sepia.ceph.com", 
+                    "query": "storage.lab", 
                     "type": "custom"
                 }, 
                 {
@@ -2923,89 +2932,28 @@
                         }, 
                         {
                             "selected": false, 
-                            "text": "mira019", 
-                            "value": "mira019"
+                            "text": "obj-osd-1", 
+                            "value": "obj-osd-1"
                         }, 
                         {
                             "selected": false, 
-                            "text": "mira021", 
-                            "value": "mira021"
+                            "text": "obj-osd-2", 
+                            "value": "obj-osd-2"
                         }, 
                         {
                             "selected": false, 
-                            "text": "mira031", 
-                            "value": "mira031"
-                        }, 
-                        {
-                            "selected": false, 
-                            "text": "mira049", 
-                            "value": "mira049"
-                        }, 
-                        {
-                            "selected": false, 
-                            "text": "mira055", 
-                            "value": "mira055"
-                        }, 
-                        {
-                            "selected": false, 
-                            "text": "mira060", 
-                            "value": "mira060"
-                        }, 
-                        {
-                            "selected": false, 
-                            "text": "mira070", 
-                            "value": "mira070"
-                        }, 
-                        {
-                            "selected": false, 
-                            "text": "mira076", 
-                            "value": "mira076"
-                        }, 
-                        {
-                            "selected": false, 
-                            "text": "mira087", 
-                            "value": "mira087"
-                        }, 
-                        {
-                            "selected": false, 
-                            "text": "mira093", 
-                            "value": "mira093"
-                        }, 
-                        {
-                            "selected": false, 
-                            "text": "mira099", 
-                            "value": "mira099"
-                        }, 
-                        {
-                            "selected": false, 
-                            "text": "mira116", 
-                            "value": "mira116"
-                        }, 
-                        {
-                            "selected": false, 
-                            "text": "mira120", 
-                            "value": "mira120"
-                        }, 
-                        {
-                            "selected": false, 
-                            "text": "mira122", 
-                            "value": "mira122"
-                        }, 
-                        {
-                            "selected": false, 
-                            "text": "apama002", 
-                            "value": "apama002"
+                            "text": "obj-osd-3", 
+                            "value": "obj-osd-3"
                         }
                     ], 
-                    "query": "mira019,mira021,mira031,mira049,mira055,mira060,mira070,mira076,mira087,mira093,mira099,mira116,mira120,mira122,apama002", 
+                    "query": "obj-osd-1,obj-osd-2,obj-osd-3", 
                     "type": "custom"
                 }, 
                 {
                     "allValue": null, 
                     "current": {
-                        "selected": true, 
-                        "text": "All", 
-                        "value": "$__all"
+                        "text": "obj-rgw-1", 
+                        "value": "obj-rgw-1"
                     }, 
                     "hide": 2, 
                     "includeAll": false, 
@@ -3015,11 +2963,11 @@
                     "options": [
                         {
                             "selected": true, 
-                            "text": "All", 
-                            "value": "$__all"
+                            "text": "obj-rgw-1", 
+                            "value": "obj-rgw-1"
                         }
                     ], 
-                    "query": "", 
+                    "query": "obj-rgw-1", 
                     "type": "custom"
                 }, 
                 {
@@ -3120,20 +3068,20 @@
         }, 
         "timezone": "browser", 
         "title": "Ceph - At A Glance", 
-        "version": 80
+        "version": 3
     }, 
     "meta": {
         "canEdit": true, 
         "canSave": true, 
         "canStar": true, 
-        "created": "2017-09-05T14:36:14-04:00", 
-        "createdBy": "admin", 
+        "created": "2017-10-06T01:14:08Z", 
+        "createdBy": "admin@localhost", 
         "expires": "0001-01-01T00:00:00Z", 
         "isStarred": true, 
         "slug": "ceph-at-a-glance", 
         "type": "db", 
-        "updated": "2017-09-12T15:16:24-04:00", 
-        "updatedBy": "admin", 
-        "version": 80
+        "updated": "2017-10-06T01:22:41Z", 
+        "updatedBy": "admin@localhost", 
+        "version": 3
     }
 }
