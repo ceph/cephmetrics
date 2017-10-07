@@ -295,8 +295,12 @@ class OSDs(BaseCollector):
             if osd_type in OSDs.supported_object_stores:
 
                 osd_stats = self._fetch_osd_stats(osd_id, osd_type)
-                osd_device = self.osd[osd_id]
-                osd_device.update(osd_stats)
+                if osd_stats:
+                    osd_device = self.osd[osd_id]
+                    osd_device.update(osd_stats)
+                else:
+                    self.logger.warning("OSD stats for osd.{} not "
+                                        "available".format(osd_id))
 
             else:
                 self.logger.warning("Unknown OSD type encountered for "
