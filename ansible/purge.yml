@@ -13,6 +13,7 @@
       - grafana-server
       - carbon-cache
       - httpd
+      - cephmetrics-prometheus
     failed_when: false
 
   - name: Remove packages
@@ -23,6 +24,7 @@
       - graphite-web
       - python-carbon
       - grafana
+      - prometheus
       - cephmetrics
 
   - name: Remove files
@@ -34,11 +36,14 @@
       - /var/lig/graphite-web
       - /var/lib/grafana
       - /var/lib/carbon
+      - /var/lib/cephmetrics
       - /etc/grafana/grafana.ini
       - /etc/carbon/storage-schemas.conf
       - /etc/httpd/conf.d/graphite-web.conf
       - /etc/yum.repos.d/cephmetrics.repo
       - /etc/yum.repos.d/grafana.repo
+      - /etc/cephmetrics
+      - /etc/systemd/system/cephmetrics-prometheus.service
       - /tmp/dashboard.yml
       - /tmp/dashUpdater.py
       - /tmp/dashboards
