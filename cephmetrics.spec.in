@@ -57,7 +57,7 @@ Ansible playbooks for Ceph metrics
 %prep
 %setup -q
 # Disable devel_mode in the rpms
-patch -p1 < 0001-ansible-Disable-devel_mode.patch
+patch -p1 < patches/0001-ansible-Disable-devel_mode.patch
 # Unzip grafana plugins
 unzip %SOURCE1
 mv -f Vonage* cephmetrics-vonage
