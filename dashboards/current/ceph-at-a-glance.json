@@ -833,6 +833,133 @@
                         "type": "vonage-status-panel"
                     }, 
                     {
+                        "clusterName": "OSD Hosts", 
+                        "displayName": "OSD Hosts", 
+                        "flipTime": 5, 
+                        "hideTimeOverride": true, 
+                        "id": 100, 
+                        "links": [], 
+                        "minSpan": 1, 
+                        "span": 1, 
+                        "targets": [
+                            {
+                                "aggregation": "Last", 
+                                "alias": "total", 
+                                "displayType": "Regular", 
+                                "refId": "A", 
+                                "target": "alias(countSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.num_osds),\"total\")", 
+                                "textEditor": true, 
+                                "valueHandler": "Text Only"
+                            }, 
+                            {
+                                "aggregation": "Last", 
+                                "alias": "up", 
+                                "displayType": "Regular", 
+                                "refId": "B", 
+                                "target": "alias(countSeries(currentAbove(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.num_osds,0)),\"up\")", 
+                                "textEditor": true, 
+                                "valueHandler": "Text Only"
+                            }, 
+                            {
+                                "aggregation": "Last", 
+                                "alias": "down", 
+                                "crit": "2", 
+                                "display": true, 
+                                "displayType": "Regular", 
+                                "refId": "C", 
+                                "target": "alias(diffSeries(#A, #B), \"down\")", 
+                                "targetFull": "alias(diffSeries(alias(countSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.num_osds),\"total\"), alias(countSeries(currentAbove(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.num_osds,0)),\"up\")), \"down\")", 
+                                "textEditor": true, 
+                                "valueHandler": "Threshold", 
+                                "warn": "1"
+                            }
+                        ], 
+                        "timeFrom": "30s", 
+                        "timeShift": null, 
+                        "title": "", 
+                        "type": "vonage-status-panel"
+                    }, 
+                    {
+                        "clusterName": "RGWs", 
+                        "displayName": "RGWs", 
+                        "flipTime": 5, 
+                        "hideTimeOverride": true, 
+                        "id": 101, 
+                        "isGrayOnNoData": false, 
+                        "links": [], 
+                        "span": 1, 
+                        "targets": [
+                            {
+                                "aggregation": "Last", 
+                                "alias": "total", 
+                                "displayType": "Regular", 
+                                "hide": true, 
+                                "refId": "A", 
+                                "target": "constantLine(0)", 
+                                "textEditor": true, 
+                                "valueHandler": "Text Only"
+                            }, 
+                            {
+                                "aggregation": "Last", 
+                                "displayType": "Regular", 
+                                "hide": true, 
+                                "refId": "B", 
+                                "target": "countSeries(collectd.*.$domain.cephmetrics.derive.$cluster_name.rgw.put)", 
+                                "textEditor": true, 
+                                "valueHandler": "Regular"
+                            }, 
+                            {
+                                "aggregation": "Last", 
+                                "alias": "total", 
+                                "displayType": "Regular", 
+                                "hide": false, 
+                                "refId": "C", 
+                                "target": "alias(limit(sortByMaxima(group(#A,#B)),1),\"total\")", 
+                                "targetFull": "alias(limit(sortByMaxima(group(constantLine(0),countSeries(collectd.*.$domain.cephmetrics.derive.$cluster_name.rgw.put))),1),\"total\")", 
+                                "textEditor": true, 
+                                "valueHandler": "Text Only"
+                            }, 
+                            {
+                                "displayType": "Regular", 
+                                "hide": true, 
+                                "refId": "D", 
+                                "target": "countSeries(currentAbove(collectd.*.$domain.cephmetrics.derive.$cluster_name.rgw.put,0))", 
+                                "textEditor": true, 
+                                "valueHandler": "Regular"
+                            }, 
+                            {
+                                "aggregation": "Last", 
+                                "alias": "up", 
+                                "displayType": "Regular", 
+                                "hide": false, 
+                                "refId": "E", 
+                                "target": "alias(limit(sortByMaxima(group(#A,#D)),1), \"up\")", 
+                                "targetFull": "alias(limit(sortByMaxima(group(constantLine(0),countSeries(currentAbove(collectd.*.$domain.cephmetrics.derive.$cluster_name.rgw.put,0)))),1), \"up\")", 
+                                "textEditor": true, 
+                                "valueHandler": "Text Only"
+                            }, 
+                            {
+                                "aggregation": "Last", 
+                                "alias": "down", 
+                                "crit": "6", 
+                                "display": true, 
+                                "displayType": "Regular", 
+                                "hide": false, 
+                                "refId": "F", 
+                                "target": "alias(diffSeries(#B, #D),\"down\")", 
+                                "targetFull": "alias(diffSeries(countSeries(collectd.*.$domain.cephmetrics.derive.$cluster_name.rgw.put), countSeries(currentAbove(collectd.*.$domain.cephmetrics.derive.$cluster_name.rgw.put,0))),\"down\")", 
+                                "textEditor": true, 
+                                "valueHandler": "Threshold", 
+                                "warn": "1"
+                            }
+                        ], 
+                        "timeFrom": "30s", 
+                        "timeShift": null, 
+                        "title": "", 
+                        "transparent": false, 
+                        "type": "vonage-status-panel"
+                    }, 
+                    {
                         "clusterName": "MDS", 
                         "displayName": "MDS", 
                         "flipCard": false, 
@@ -882,158 +1009,6 @@
                         "timeShift": null, 
                         "title": "", 
                         "type": "vonage-status-panel"
-                    }, 
-                    {
-                        "cacheTimeout": null, 
-                        "colorBackground": false, 
-                        "colorValue": false, 
-                        "colors": [
-                            "rgba(245, 54, 54, 0.9)", 
-                            "rgba(237, 129, 40, 0.89)", 
-                            "rgba(50, 172, 45, 0.97)"
-                        ], 
-                        "datasource": "Local", 
-                        "decimals": 0, 
-                        "format": "short", 
-                        "gauge": {
-                            "maxValue": 100, 
-                            "minValue": 0, 
-                            "show": false, 
-                            "thresholdLabels": false, 
-                            "thresholdMarkers": true
-                        }, 
-                        "id": 35, 
-                        "interval": null, 
-                        "links": [], 
-                        "mappingType": 1, 
-                        "mappingTypes": [
-                            {
-                                "name": "value to text", 
-                                "value": 1
-                            }, 
-                            {
-                                "name": "range to text", 
-                                "value": 2
-                            }
-                        ], 
-                        "maxDataPoints": "", 
-                        "minSpan": 1, 
-                        "nullPointMode": "connected", 
-                        "nullText": null, 
-                        "postfix": "", 
-                        "postfixFontSize": "50%", 
-                        "prefix": "", 
-                        "prefixFontSize": "50%", 
-                        "rangeMaps": [
-                            {
-                                "from": "null", 
-                                "text": "N/A", 
-                                "to": "null"
-                            }
-                        ], 
-                        "span": 1, 
-                        "sparkline": {
-                            "fillColor": "rgba(31, 118, 189, 0.18)", 
-                            "full": false, 
-                            "lineColor": "rgb(31, 120, 193)", 
-                            "show": false
-                        }, 
-                        "tableColumn": "", 
-                        "targets": [
-                            {
-                                "refId": "A", 
-                                "target": "maxSeries(consolidateBy(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.num_osd_hosts, \"max\"))", 
-                                "textEditor": true
-                            }
-                        ], 
-                        "thresholds": "", 
-                        "title": "OSD Hosts", 
-                        "type": "singlestat", 
-                        "valueFontSize": "80%", 
-                        "valueMaps": [
-                            {
-                                "op": "=", 
-                                "text": "N/A", 
-                                "value": "null"
-                            }
-                        ], 
-                        "valueName": "current"
-                    }, 
-                    {
-                        "cacheTimeout": null, 
-                        "colorBackground": false, 
-                        "colorValue": false, 
-                        "colors": [
-                            "rgba(245, 54, 54, 0.9)", 
-                            "rgba(237, 129, 40, 0.89)", 
-                            "rgba(50, 172, 45, 0.97)"
-                        ], 
-                        "datasource": "Local", 
-                        "decimals": 0, 
-                        "format": "short", 
-                        "gauge": {
-                            "maxValue": 100, 
-                            "minValue": 0, 
-                            "show": false, 
-                            "thresholdLabels": false, 
-                            "thresholdMarkers": true
-                        }, 
-                        "id": 33, 
-                        "interval": null, 
-                        "links": [], 
-                        "mappingType": 1, 
-                        "mappingTypes": [
-                            {
-                                "name": "value to text", 
-                                "value": 1
-                            }, 
-                            {
-                                "name": "range to text", 
-                                "value": 2
-                            }
-                        ], 
-                        "maxDataPoints": "", 
-                        "minSpan": 1, 
-                        "nullPointMode": "connected", 
-                        "nullText": null, 
-                        "postfix": "", 
-                        "postfixFontSize": "50%", 
-                        "prefix": "", 
-                        "prefixFontSize": "50%", 
-                        "rangeMaps": [
-                            {
-                                "from": "null", 
-                                "text": "N/A", 
-                                "to": "null"
-                            }
-                        ], 
-                        "span": 1, 
-                        "sparkline": {
-                            "fillColor": "rgba(31, 118, 189, 0.18)", 
-                            "full": false, 
-                            "lineColor": "rgb(31, 120, 193)", 
-                            "show": false
-                        }, 
-                        "tableColumn": "", 
-                        "targets": [
-                            {
-                                "refId": "A", 
-                                "target": "countSeries(collectd.*.$domain.cephmetrics.derive.$cluster_name.rgw.put)", 
-                                "textEditor": true
-                            }
-                        ], 
-                        "thresholds": "", 
-                        "title": "RGW Hosts", 
-                        "type": "singlestat", 
-                        "valueFontSize": "80%", 
-                        "valueMaps": [
-                            {
-                                "op": "=", 
-                                "text": "0", 
-                                "value": "null"
-                            }
-                        ], 
-                        "valueName": "current"
                     }, 
                     {
                         "cacheTimeout": null, 
@@ -3074,13 +3049,13 @@
         "canEdit": true, 
         "canSave": true, 
         "canStar": true, 
-        "created": "2017-10-06T01:14:08Z", 
+        "created": "2017-10-11T02:45:33Z", 
         "createdBy": "admin@localhost", 
         "expires": "0001-01-01T00:00:00Z", 
         "isStarred": true, 
         "slug": "ceph-at-a-glance", 
         "type": "db", 
-        "updated": "2017-10-06T01:22:41Z", 
+        "updated": "2017-10-11T02:51:00Z", 
         "updatedBy": "admin@localhost", 
         "version": 3
     }
