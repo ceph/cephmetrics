@@ -411,7 +411,7 @@
                                 "textEditor": true
                             }
                         ], 
-                        "timeFrom": "30s", 
+                        "timeFrom": "2m", 
                         "timeShift": null, 
                         "title": "OSD Disk Size Summary", 
                         "type": "grafana-piechart-panel", 
@@ -497,7 +497,7 @@
                                 "textEditor": true
                             }
                         ], 
-                        "timeFrom": "30s", 
+                        "timeFrom": "1m", 
                         "timeShift": null, 
                         "title": "OSD Size", 
                         "transform": "timeseries_aggregations", 
@@ -2166,12 +2166,12 @@
         "canEdit": true, 
         "canSave": true, 
         "canStar": true, 
-        "created": "2017-10-06T01:14:09Z", 
+        "created": "2017-10-11T02:45:33Z", 
         "createdBy": "admin@localhost", 
         "expires": "0001-01-01T00:00:00Z", 
         "slug": "ceph-osd-information", 
         "type": "db", 
-        "updated": "2017-10-06T01:17:19Z", 
+        "updated": "2017-10-11T03:22:46Z", 
         "updatedBy": "admin@localhost", 
         "version": 3
     }
