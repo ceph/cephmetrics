@@ -1,0 +1,944 @@
+{
+  "annotations": {
+    "list": []
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "hideControls": false,
+  "id": 31,
+  "links": [],
+  "refresh": "10s",
+  "rows": [
+    {
+      "collapse": false,
+      "height": "250px",
+      "panels": [
+        {
+          "id": 1,
+          "limit": "20",
+          "links": [],
+          "onlyAlertsOnDashboard": true,
+          "show": "current",
+          "sortOrder": 3,
+          "span": 12,
+          "stateFilter": [
+            "alerting"
+          ],
+          "title": "Active Ceph Alert List",
+          "type": "alertlist"
+        }
+      ],
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "Dashboard Row",
+      "titleSize": "h6"
+    },
+    {
+      "collapse": false,
+      "height": 250,
+      "panels": [
+        {
+          "aliasColors": {
+            "Ceph Health": "#890F02",
+            "Ceph Health (0:OK, 4:Warning,8:Error)": "#DEDAF7",
+            "ceph health": "#890F02"
+          },
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "description": "The chart plots the clusters health, over time. Health is depicted as a integer; 0, 4 or 8 where 0 is OK, 4 is WARN and 8 represents an ERROR state.",
+          "fill": 1,
+          "hideTimeOverride": false,
+          "id": 2,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "maxDataPoints": "360",
+          "minSpan": 2,
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 2,
+          "stack": false,
+          "steppedLine": true,
+          "targets": [
+            {
+              "expr": "max(collectd_cephmetrics_gauge{cephmetrics=~\".*.mon.health\"})",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "Ceph Health",
+              "refId": "A",
+              "step": 20,
+              "target": "alias(maxSeries(consolidateBy(keepLastValue(transformNull(collectd.*.fedex.lan.cephmetrics.gauge.*.mon.health,0)),\"max\")),\"Ceph Health\")",
+              "textEditor": true
+            }
+          ],
+          "thresholds": [
+            {
+              "colorMode": "critical",
+              "fill": true,
+              "line": true,
+              "op": "gt",
+              "value": 0
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Overall Ceph Health",
+          "tooltip": {
+            "shared": false,
+            "sort": 1,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": "",
+              "logBase": 1,
+              "max": "10",
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "description": "This shows how many disks are at or above 80% full. Performance may degrade beyond this threshold on filestore (XFS) backed OSD's.",
+          "fill": 1,
+          "id": 3,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "hideEmpty": false,
+            "max": false,
+            "min": false,
+            "show": false,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "minSpan": 2,
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 2,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "count(collectd_cephmetrics_gauge{cephmetrics=~\".*.osd..*.osd_percent_used\"} > 85)",
+              "format": "time_series",
+              "hide": false,
+              "intervalFactor": 2,
+              "legendFormat": "OSDs near full",
+              "refId": "A",
+              "step": 40,
+              "target": "currentAbove(transformNull(keepLastValue(collectd.*.fedex.lan.cephmetrics.gauge.*.osd.*.osd_percent_used),0),85)",
+              "textEditor": true
+            }
+          ],
+          "thresholds": [
+            {
+              "colorMode": "critical",
+              "fill": true,
+              "line": true,
+              "op": "gt",
+              "value": 0
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Disks Near Full",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": true,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "description": "Count of OSDs currently in a DOWN state",
+          "fill": 2,
+          "hideTimeOverride": true,
+          "id": 4,
+          "legend": {
+            "alignAsTable": false,
+            "avg": false,
+            "current": false,
+            "hideZero": false,
+            "max": false,
+            "min": false,
+            "rightSide": false,
+            "show": false,
+            "total": false,
+            "values": false
+          },
+          "lines": false,
+          "linewidth": 2,
+          "links": [],
+          "minSpan": 2,
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 2,
+          "stack": false,
+          "steppedLine": true,
+          "targets": [
+            {
+              "expr": "max(collectd_cephmetrics_gauge{cephmetrics=~\".*.mon.num_osd\"}) - max(collectd_cephmetrics_gauge{cephmetrics=~\".*.mon.num_osd_up\"})",
+              "format": "time_series",
+              "hide": false,
+              "intervalFactor": 2,
+              "legendFormat": "down",
+              "refId": "A",
+              "step": 4,
+              "target": "alias(keepLastValue(consolidateBy(maxSeries(collectd.*.fedex.lan.cephmetrics.gauge.*.mon.num_osd), \"max\")),\"total\")",
+              "textEditor": true
+            }
+          ],
+          "thresholds": [
+            {
+              "colorMode": "critical",
+              "fill": true,
+              "line": true,
+              "op": "gt",
+              "value": 0
+            }
+          ],
+          "timeFrom": "5m",
+          "timeShift": null,
+          "title": "OSDs Down",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "description": "This trigger raises a notification if the raw used crosses the 85% capacity threshold of the ceph cluster",
+          "fill": 1,
+          "id": 5,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "minSpan": 2,
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 2,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "max(collectd_cephmetrics_gauge{cephmetrics=~\".*.mon.osd_bytes_used\"})/max(collectd_cephmetrics_gauge{cephmetrics=~\".*.mon.osd_bytes\"})*100",
+              "format": "time_series",
+              "hide": false,
+              "intervalFactor": 2,
+              "legendFormat": "Raw Capacity Used %",
+              "refId": "A",
+              "step": 40,
+              "target": "alias(maxSeries(groupByNode(collectd.*.fedex.lan.cephmetrics.gauge.*.mon.osd_bytes,1, \"maxSeries\")), \"Raw Capacity\")",
+              "textEditor": true
+            },
+            {
+              "expr": "",
+              "format": "time_series",
+              "hide": true,
+              "intervalFactor": 2,
+              "refId": "B",
+              "target": "alias(maxSeries(groupByNode(collectd.*.fedex.lan.cephmetrics.gauge.*.mon.osd_bytes_used,1, \"maxSeries\")), \"Used Raw\")",
+              "textEditor": true
+            },
+            {
+              "expr": "",
+              "format": "time_series",
+              "hide": true,
+              "intervalFactor": 2,
+              "refId": "C",
+              "target": "alias(asPercent(#B, #A), \"Raw Capacity Used %\")",
+              "targetFull": "alias(asPercent(alias(maxSeries(groupByNode(collectd.*.fedex.lan.cephmetrics.gauge.*.mon.osd_bytes_used,1, \"maxSeries\")), \"Used Raw\"), alias(maxSeries(groupByNode(collectd.*.fedex.lan.cephmetrics.gauge.*.mon.osd_bytes,1, \"maxSeries\")), \"Raw Capacity\")), \"Raw Capacity Used %\")",
+              "textEditor": true
+            }
+          ],
+          "thresholds": [
+            {
+              "colorMode": "critical",
+              "fill": true,
+              "line": true,
+              "op": "gt",
+              "value": 85
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Cluster Capacity",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "percent",
+              "label": "",
+              "logBase": 1,
+              "max": "100",
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "description": "This chart shows whether there are pg's in a stuck state, that need manual intervention to resolve.",
+          "fill": 2,
+          "hideTimeOverride": true,
+          "id": 8,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "minSpan": 2,
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 2,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "max(collectd_cephmetrics_gauge{cephmetrics=~\".*.mon.num_pgs_stuck\"})",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "# pg's stuck inactive",
+              "refId": "A",
+              "step": 240,
+              "target": "alias(maxSeries(consolidateBy(collectd.*.fedex.lan.cephmetrics.gauge.*.mon.num_pgs_stuck, \"maxSeries\")), \"# pg's stuck inactive\")",
+              "textEditor": true
+            }
+          ],
+          "thresholds": [
+            {
+              "colorMode": "critical",
+              "fill": true,
+              "line": true,
+              "op": "gt",
+              "value": 0
+            }
+          ],
+          "timeFrom": "6h",
+          "timeShift": null,
+          "title": "PG's Stuck",
+          "tooltip": {
+            "shared": false,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": [
+              "total"
+            ]
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ]
+        },
+        {
+          "aliasColors": {
+            "Largest OSD Host": "#890F02"
+          },
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "description": "This graph checks the cluster @ 90% full is enough to support the loss of the largest OSD host",
+          "fill": 1,
+          "id": 9,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": false,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "minSpan": 2,
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 2,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "max(max(collectd_cephmetrics_gauge{cephmetrics=~\".*.mon.osd_bytes_avail\"}) by (instance) * 0.9) - max(sum(collectd_cephmetrics_gauge{cephmetrics=~\".*.osd..*.stat_bytes\"}) by (instance))",
+              "format": "time_series",
+              "hide": false,
+              "intervalFactor": 2,
+              "legendFormat": "name",
+              "refId": "A",
+              "step": 40,
+              "target": "alias(scale(maxSeries(groupByNode(collectd.*.fedex.lan.cephmetrics.gauge.*.mon.osd_bytes_avail,1, \"maxSeries\")),0.9), \"Raw Freespace\")alias(maxSeries(groupByNode(keepLastValue(collectd.*.fedex.lan.cephmetrics.gauge.*.osd.*.stat_bytes),1,\"sumSeries\")), \"Largest OSD Host\")",
+              "textEditor": true
+            },
+            {
+              "expr": "",
+              "format": "time_series",
+              "hide": true,
+              "intervalFactor": 2,
+              "refId": "B",
+              "target": "alias(maxSeries(groupByNode(keepLastValue(collectd.*.fedex.lan.cephmetrics.gauge.*.osd.*.stat_bytes),1,\"sumSeries\")), \"Largest OSD Host\")",
+              "textEditor": true
+            },
+            {
+              "expr": "",
+              "format": "time_series",
+              "hide": true,
+              "intervalFactor": 2,
+              "refId": "C",
+              "target": "alias(diffSeries(#A,#B),\"freespace after Node loss\")",
+              "targetFull": "alias(diffSeries(alias(scale(maxSeries(groupByNode(collectd.*.fedex.lan.cephmetrics.gauge.*.mon.osd_bytes_avail,1, \"maxSeries\")),0.9), \"Raw Freespace\")alias(maxSeries(groupByNode(keepLastValue(collectd.*.fedex.lan.cephmetrics.gauge.*.osd.*.stat_bytes),1,\"sumSeries\")), \"Largest OSD Host\"),alias(maxSeries(groupByNode(keepLastValue(collectd.*.fedex.lan.cephmetrics.gauge.*.osd.*.stat_bytes),1,\"sumSeries\")), \"Largest OSD Host\")),\"freespace after Node loss\")",
+              "textEditor": true
+            }
+          ],
+          "thresholds": [
+            {
+              "colorMode": "critical",
+              "fill": true,
+              "line": true,
+              "op": "lt",
+              "value": 0
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "OSD Host Loss Check",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "decbytes",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {
+            "Largest OSD Host": "#890F02"
+          },
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "description": "Graph checking for OSD Latencies that are above 1s.",
+          "fill": 1,
+          "hideTimeOverride": true,
+          "id": 10,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "maxDataPoints": "",
+          "minSpan": 2,
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 2,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "max(label_replace(collectd_cephmetrics_gauge{cephmetrics=~\".*.osd..*.perf.await\"}, \"node\", \"$1\", \"instance\", \"(.*):.*\")) by (node) > 1000",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "{{node}}",
+              "refId": "A",
+              "step": 40,
+              "target": "aliasByNode(currentAbove(keepLastValue(transformNull(collectd.*.fedex.lan.cephmetrics.gauge.*.osd.*.perf.await,-1)),1000),1,-3)",
+              "textEditor": true
+            }
+          ],
+          "thresholds": [
+            {
+              "colorMode": "critical",
+              "fill": true,
+              "line": true,
+              "op": "gt",
+              "value": 1000
+            }
+          ],
+          "timeFrom": "1h",
+          "timeShift": null,
+          "title": "Slow OSD responses",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "none",
+              "label": "ms",
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "description": "Checks all interfaces for dropped/error packets, and alerts if more than 10 are seen in a 5m interval",
+          "fill": 1,
+          "id": 11,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": false,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "minSpan": 2,
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 2,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "sum(label_replace(irate(collectd_interface_if_dropped_rx_total{interface!=\"lo\"}[5m]) + irate(collectd_interface_if_dropped_tx_total{interface!=\"lo\"}[5m]) + irate(collectd_interface_if_errors_rx_total{interface!=\"lo\"}[5m]) + irate(collectd_interface_if_errors_tx_total{interface!=\"lo\"}[5m]), \"node\", \"$1\", \"instance\", \"(.*):.*\")) by (node)",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "{{node}}",
+              "refId": "A",
+              "step": 40,
+              "target": "groupByNode(collectd.*.fedex.lan.interface.*.if_{dropped,errors}.*,1,\"sumSeries\")",
+              "textEditor": true
+            }
+          ],
+          "thresholds": [
+            {
+              "colorMode": "critical",
+              "fill": true,
+              "line": true,
+              "op": "gt",
+              "value": 10
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Network Errors",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "none",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "fill": 5,
+          "id": 12,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "minSpan": 2,
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "repeat": null,
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 2,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "max(label_replace(collectd_cephmetrics_gauge{cephmetrics=~\".*.mon.pools..*.percent_used\"}, \"pool\", \"$1\", \"cephmetrics\", \".*.mon.pools.(.*).percent_used\")) by (pool)",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "{{pool}}",
+              "refId": "A",
+              "step": 40,
+              "target": "groupByNode(collectd.*.fedex.lan.cephmetrics.gauge.*.mon.pools.*.percent_used,-2,'maxSeries')",
+              "textEditor": true
+            }
+          ],
+          "thresholds": [
+            {
+              "colorMode": "critical",
+              "fill": true,
+              "line": true,
+              "op": "gt",
+              "value": 85
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Pool Capacity",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "percent",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        }
+      ],
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": true,
+      "title": "Health Checks",
+      "titleSize": "h5"
+    }
+  ],
+  "schemaVersion": 14,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ],
+    "time_options": [
+      "5m",
+      "15m",
+      "1h",
+      "6h",
+      "12h",
+      "24h",
+      "2d",
+      "7d",
+      "30d"
+    ]
+  },
+  "timezone": "browser",
+  "title": "Alert Status - Prometheus",
+  "version": 2
+}
