@@ -22,6 +22,7 @@ Requires:       policycoreutils, libselinux-utils
 Requires(post): selinux-policy >= %{_selinux_policy_version}, policycoreutils
 Requires(postun): policycoreutils
 
+Requires:	PyYAML
 Requires:	graphite-web
 Requires:	python-carbon
 Requires:       cephmetrics-grafana-plugins = %{version}-%{release}
