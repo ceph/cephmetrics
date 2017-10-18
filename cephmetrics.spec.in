@@ -84,7 +84,10 @@ sed -i -e 's/green/rgb(1,167,1)/g' cephmetrics-vonage/dist/css/status_panel.css
 install -d %{buildroot}%{_libexecdir}/cephmetrics
 install -m 755 dashUpdater.py %{buildroot}%{_libexecdir}/cephmetrics/
 install -d %{buildroot}%{_datadir}/cephmetrics/dashboards
-install -m 644 dashboards/current/* %{buildroot}%{_datadir}/cephmetrics/dashboards/
+install -d %{buildroot}%{_datadir}/cephmetrics/dashboards/current
+install -m 644 dashboards/current/* %{buildroot}%{_datadir}/cephmetrics/dashboards/current/
+install -d %{buildroot}%{_datadir}/cephmetrics/dashboards/prometheus
+install -m 644 dashboards/prometheus/* %{buildroot}%{_datadir}/cephmetrics/dashboards/prometheus/
 
 # Install vonage and piechart plugin
 install -d %{buildroot}%{_localstatedir}/lib/grafana/plugins/

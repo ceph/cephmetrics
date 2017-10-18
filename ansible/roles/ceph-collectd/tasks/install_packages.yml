@@ -17,6 +17,16 @@
     - not use_epel
   notify: Restart collectd
 
+- name: Install collectd-write_prometheus
+  package:
+    name: collectd-python
+    state: latest
+  when:
+    - backend == "prometheus"
+    - ansible_pkg_mgr == "yum"
+    - devel_mode
+  notify: Restart collectd
+
 - name: Install cephmetrics-collectors
   package:
     name: cephmetrics-collectors

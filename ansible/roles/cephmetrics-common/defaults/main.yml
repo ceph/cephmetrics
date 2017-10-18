@@ -3,7 +3,9 @@ defaults:
   containerized_deployment: false
   use_epel: false
   devel_mode: true
+  backend: graphite
   graphite:
+    dashboards: current
     service: graphite-web
     web_port: "{{ graphite_port | default('8080') }}"
     api_port: 8888
@@ -41,6 +43,7 @@ defaults:
       - ['1m', '30d']
       - ['15m', '5y']
   prometheus:
+    dashboards: prometheus
     port: 9090
   # The firewalld zone that carbon and grafana will use
   firewalld_zone: public

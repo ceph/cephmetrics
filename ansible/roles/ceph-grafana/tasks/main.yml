@@ -3,7 +3,6 @@
   tags:
     - always
 
-
 - include: sanity.yml
   tags:
     - sanity
@@ -25,17 +24,23 @@
     - firewall
 
 - include: configure_carbon.yml
-  when: not containerized_deployment
+  when:
+    - backend == "graphite"
+    - not containerized_deployment
   tags:
     - carbon
 
 - include: configure_graphite.yml
-  when: not containerized_deployment
+  when:
+    - backend == "graphite"
+    - not containerized_deployment
   tags:
     - graphite
 
 - include: configure_prometheus.yml
-  when: not containerized_deployment
+  when:
+    - backend == "prometheus"
+    - not containerized_deployment
   tags:
     - prometheus
 

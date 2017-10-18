@@ -30,6 +30,7 @@
     dest: "{{ collectd_conf_d }}/write_graphite.conf"
     regexp: 'Host ".*"'
     replace: "Host \"{{ groups['ceph-grafana'][0] }}\""
+  when: backend == 'graphite'
   notify: Restart collectd
 
 - name: Set cluster name in cephmetrics.conf
@@ -45,6 +46,7 @@
     regexp: 'EventURL ".*"'
     insertafter: 'ClusterName ".*"'
     line: "        EventURL \"http://{{ groups['ceph-grafana'][0] }}:{{ graphite.web_port if graphite.service == 'graphite-web' else graphite.api_port }}/events/\""
+  when: backend == 'graphite'
   notify: Restart collectd
 
 - name: Set ModulePath in cephmetrics.conf
@@ -69,5 +71,7 @@
     state: enabled
     immediate: true
     permanent: true
-  when: "'enabled' in firewalld_status.stdout"
+  when:
+    - "'enabled' in firewalld_status.stdout"
+    - backend == 'prometheus'
   notify: Restart collectd

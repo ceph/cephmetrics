@@ -1,5 +1,5 @@
 ---
-- name: Enable and start services
+- name: Enable and start services (graphite)
   service:
     name: "{{ item }}"
     state: started
@@ -8,5 +8,15 @@
     - carbon-cache
     # graphite-web is served by apache
     - "{{ graphite.apache_name[ansible_pkg_mgr] }}"
+    - grafana-server
+  when: backend == "graphite"
+
+- name: Enable and start services (prometheus)
+  service:
+    name: "{{ item }}"
+    state: started
+    enabled: true
+  with_items:
     - cephmetrics-prometheus
     - grafana-server
+  when: backend == "prometheus"
