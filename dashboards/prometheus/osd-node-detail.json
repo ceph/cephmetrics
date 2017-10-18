@@ -1,1008 +1,1011 @@
 {
-  "annotations": {
-    "list": []
-  },
-  "editable": true,
-  "gnetId": null,
-  "graphTooltip": 0,
-  "hideControls": true,
-  "id": 21,
-  "links": [
-    {
-      "asDropdown": true,
-      "icon": "external link",
+   "meta": {}, 
+   "dashboard": {
+      "style": "dark", 
+      "rows": [
+         {
+            "repeat": null, 
+            "titleSize": "h5", 
+            "repeatIteration": null, 
+            "title": "'$osd_servers' OSD Overview", 
+            "height": 125, 
+            "repeatRowId": null, 
+            "panels": [
+               {
+                  "mappingTypes": [
+                     {
+                        "name": "value to text", 
+                        "value": 1
+                     }, 
+                     {
+                        "name": "range to text", 
+                        "value": 2
+                     }
+                  ], 
+                  "links": [], 
+                  "valueMaps": [
+                     {
+                        "text": "N/A", 
+                        "value": "null", 
+                        "op": "="
+                     }
+                  ], 
+                  "tableColumn": "", 
+                  "thresholds": "", 
+                  "rangeMaps": [
+                     {
+                        "text": "N/A", 
+                        "from": "null", 
+                        "to": "null"
+                     }
+                  ], 
+                  "height": "160", 
+                  "prefix": "", 
+                  "gauge": {
+                     "thresholdLabels": false, 
+                     "show": false, 
+                     "thresholdMarkers": true, 
+                     "maxValue": 100, 
+                     "minValue": 0
+                  }, 
+                  "id": 9, 
+                  "maxDataPoints": "", 
+                  "mappingType": 1, 
+                  "span": 2, 
+                  "colorBackground": false, 
+                  "title": "OSDs", 
+                  "sparkline": {
+                     "full": false, 
+                     "fillColor": "rgba(31, 118, 189, 0.18)", 
+                     "lineColor": "rgb(31, 120, 193)", 
+                     "show": false
+                  }, 
+                  "targets": [
+                     {
+                        "intervalFactor": 2, 
+                        "expr": "sum(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.osd.num_osds\", instance=~\"($osd_servers):.*\"})", 
+                        "step": 40, 
+                        "refId": "A", 
+                        "format": "time_series"
+                     }
+                  ], 
+                  "prefixFontSize": "50%", 
+                  "valueName": "current", 
+                  "type": "singlestat", 
+                  "valueFontSize": "80%", 
+                  "format": "none", 
+                  "cacheTimeout": null, 
+                  "nullPointMode": "connected", 
+                  "postfix": "", 
+                  "interval": null, 
+                  "colors": [
+                     "rgba(245, 54, 54, 0.9)", 
+                     "rgba(237, 129, 40, 0.89)", 
+                     "rgba(50, 172, 45, 0.97)"
+                  ], 
+                  "datasource": "Prometheus", 
+                  "nullText": null, 
+                  "minSpan": 2, 
+                  "postfixFontSize": "50%", 
+                  "colorValue": false
+               }, 
+               {
+                  "mappingTypes": [
+                     {
+                        "name": "value to text", 
+                        "value": 1
+                     }, 
+                     {
+                        "name": "range to text", 
+                        "value": 2
+                     }
+                  ], 
+                  "colorBackground": false, 
+                  "valueMaps": [
+                     {
+                        "text": "N/A", 
+                        "value": "null", 
+                        "op": "="
+                     }
+                  ], 
+                  "tableColumn": "", 
+                  "thresholds": "", 
+                  "rangeMaps": [
+                     {
+                        "text": "N/A", 
+                        "from": "null", 
+                        "to": "null"
+                     }
+                  ], 
+                  "height": "160", 
+                  "prefix": "", 
+                  "gauge": {
+                     "thresholdLabels": false, 
+                     "show": false, 
+                     "thresholdMarkers": true, 
+                     "maxValue": 100, 
+                     "minValue": 0
+                  }, 
+                  "id": 15, 
+                  "maxDataPoints": "1", 
+                  "mappingType": 1, 
+                  "span": 2, 
+                  "links": [], 
+                  "title": "Raw Capacity", 
+                  "sparkline": {
+                     "full": false, 
+                     "fillColor": "rgba(31, 118, 189, 0.18)", 
+                     "lineColor": "rgb(31, 120, 193)", 
+                     "show": false
+                  }, 
+                  "targets": [
+                     {
+                        "intervalFactor": 2, 
+                        "expr": "sum(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.*stat_bytes$\", instance=~\"($osd_servers):.*\"})", 
+                        "step": 7200, 
+                        "refId": "A", 
+                        "format": "time_series"
+                     }
+                  ], 
+                  "prefixFontSize": "50%", 
+                  "valueName": "current", 
+                  "type": "singlestat", 
+                  "valueFontSize": "80%", 
+                  "description": "Show the raw capacity across all OSD's on the selected Hosts.", 
+                  "format": "decbytes", 
+                  "cacheTimeout": null, 
+                  "nullPointMode": "connected", 
+                  "postfix": "", 
+                  "decimals": 0, 
+                  "interval": null, 
+                  "colors": [
+                     "rgba(245, 54, 54, 0.9)", 
+                     "rgba(237, 129, 40, 0.89)", 
+                     "rgba(50, 172, 45, 0.97)"
+                  ], 
+                  "datasource": "Prometheus", 
+                  "nullText": null, 
+                  "minSpan": 2, 
+                  "postfixFontSize": "50%", 
+                  "colorValue": false
+               }, 
+               {
+                  "sort": {
+                     "col": 0, 
+                     "desc": false
+                  }, 
+                  "styles": [
+                     {
+                        "alias": "Time", 
+                        "type": "date", 
+                        "pattern": "Time", 
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss"
+                     }, 
+                     {
+                        "type": "number", 
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+                        "pattern": "Metric", 
+                        "thresholds": [], 
+                        "alias": "Host:Disk", 
+                        "colors": [
+                           "rgba(245, 54, 54, 0.9)", 
+                           "rgba(237, 129, 40, 0.89)", 
+                           "rgba(50, 172, 45, 0.97)"
+                        ], 
+                        "colorMode": null, 
+                        "decimals": 2, 
+                        "unit": "short"
+                     }, 
+                     {
+                        "type": "number", 
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+                        "pattern": "Current", 
+                        "thresholds": [], 
+                        "alias": "OSD ID", 
+                        "colors": [
+                           "rgba(245, 54, 54, 0.9)", 
+                           "rgba(237, 129, 40, 0.89)", 
+                           "rgba(50, 172, 45, 0.97)"
+                        ], 
+                        "colorMode": null, 
+                        "decimals": 0, 
+                        "unit": "short"
+                     }
+                  ], 
+                  "span": 3, 
+                  "description": "", 
+                  "links": [], 
+                  "title": "", 
+                  "scroll": true, 
+                  "transform": "timeseries_aggregations", 
+                  "showHeader": true, 
+                  "height": "160", 
+                  "targets": [
+                     {
+                        "format": "time_series", 
+                        "expr": "label_replace(label_replace(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.($device_id).osd_id\", instance=~\"($osd_servers):.*\"}, \"node\", \"$1\", \"instance\", \"(.*):.*\"), \"device\", \"$1\", \"cephmetrics\", \"$cluster_name.osd.(.*).osd_id\")", 
+                        "step": 20, 
+                        "legendFormat": "{{node}}:{{device}}", 
+                        "intervalFactor": 2, 
+                        "refId": "A"
+                     }
+                  ], 
+                  "fontSize": "100%", 
+                  "datasource": "Prometheus", 
+                  "pageSize": 1000, 
+                  "minSpan": 3, 
+                  "type": "table", 
+                  "id": 14, 
+                  "columns": [
+                     {
+                        "text": "Current", 
+                        "value": "current"
+                     }
+                  ]
+               }, 
+               {
+                  "styles": [
+                     {
+                        "alias": "Time", 
+                        "type": "date", 
+                        "pattern": "Time", 
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss"
+                     }, 
+                     {
+                        "type": "number", 
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+                        "pattern": "Metric", 
+                        "thresholds": [], 
+                        "alias": "Host:Disk", 
+                        "colors": [
+                           "rgba(245, 54, 54, 0.9)", 
+                           "rgba(237, 129, 40, 0.89)", 
+                           "rgba(50, 172, 45, 0.97)"
+                        ], 
+                        "colorMode": null, 
+                        "decimals": 2, 
+                        "unit": "short"
+                     }, 
+                     {
+                        "type": "number", 
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+                        "pattern": "Current", 
+                        "thresholds": [], 
+                        "alias": "Disk Size", 
+                        "colors": [
+                           "rgba(245, 54, 54, 0.9)", 
+                           "rgba(237, 129, 40, 0.89)", 
+                           "rgba(50, 172, 45, 0.97)"
+                        ], 
+                        "colorMode": null, 
+                        "decimals": 0, 
+                        "unit": "bytes"
+                     }
+                  ], 
+                  "timeFrom": "2m", 
+                  "links": [], 
+                  "height": "160", 
+                  "targets": [
+                     {
+                        "format": "time_series", 
+                        "expr": "label_replace(label_replace(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.($device_id).disk_size\", instance=~\"($osd_servers):.*\"}, \"node\", \"$1\", \"instance\", \"(.*):.*\"), \"device\", \"$1\", \"cephmetrics\", \"$cluster_name.osd.(.*).disk_size\")", 
+                        "step": 240, 
+                        "legendFormat": "{{node}}:{{device}}", 
+                        "intervalFactor": 2, 
+                        "refId": "A"
+                     }
+                  ], 
+                  "maxDataPoints": "1", 
+                  "span": 3, 
+                  "pageSize": 1000, 
+                  "title": "", 
+                  "transform": "timeseries_aggregations", 
+                  "showHeader": true, 
+                  "id": 16, 
+                  "fontSize": "100%", 
+                  "type": "table", 
+                  "columns": [
+                     {
+                        "text": "Current", 
+                        "value": "current"
+                     }
+                  ], 
+                  "sort": {
+                     "col": 0, 
+                     "desc": false
+                  }, 
+                  "description": "", 
+                  "hideTimeOverride": true, 
+                  "timeShift": null, 
+                  "datasource": "Prometheus", 
+                  "minSpan": 3, 
+                  "scroll": true
+               }
+            ], 
+            "showTitle": true, 
+            "collapse": false
+         }, 
+         {
+            "repeat": null, 
+            "titleSize": "h5", 
+            "repeatIteration": null, 
+            "title": "'$osd_servers' Performance Statistics", 
+            "height": 250, 
+            "repeatRowId": null, 
+            "panels": [
+               {
+                  "bars": false, 
+                  "timeFrom": null, 
+                  "links": [], 
+                  "thresholds": [], 
+                  "spaceLength": 10, 
+                  "nullPointMode": "connected", 
+                  "renderer": "flot", 
+                  "linewidth": 1, 
+                  "steppedLine": false, 
+                  "id": 1, 
+                  "fill": 1, 
+                  "span": 6, 
+                  "title": "$osd_servers Disk utilisation", 
+                  "tooltip": {
+                     "sort": 0, 
+                     "shared": true, 
+                     "value_type": "individual"
+                  }, 
+                  "legend": {
+                     "total": false, 
+                     "show": true, 
+                     "max": false, 
+                     "min": false, 
+                     "current": false, 
+                     "values": false, 
+                     "avg": false
+                  }, 
+                  "targets": [
+                     {
+                        "format": "time_series", 
+                        "expr": "label_replace(label_replace(topk($max_devices, collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.($device_id).perf.util\", instance=~\"($osd_servers):.*\"}) by (instance), \"node\", \"$1\", \"instance\", \"(.*):.*\"), \"device\", \"$1\", \"cephmetrics\", \"$cluster_name.osd.(.*).perf.util\")", 
+                        "step": 10, 
+                        "legendFormat": "{{node}}:{{device}}", 
+                        "intervalFactor": 2, 
+                        "refId": "A"
+                     }
+                  ], 
+                  "yaxes": [
+                     {
+                        "logBase": 1, 
+                        "show": true, 
+                        "max": "100", 
+                        "format": "short", 
+                        "min": "0", 
+                        "label": "%Util"
+                     }, 
+                     {
+                        "logBase": 1, 
+                        "show": false, 
+                        "max": null, 
+                        "format": "short", 
+                        "min": null, 
+                        "label": null
+                     }
+                  ], 
+                  "xaxis": {
+                     "buckets": null, 
+                     "show": true, 
+                     "values": [], 
+                     "mode": "time", 
+                     "name": null
+                  }, 
+                  "seriesOverrides": [], 
+                  "percentage": false, 
+                  "type": "graph", 
+                  "dashes": false, 
+                  "dashLength": 10, 
+                  "stack": false, 
+                  "timeShift": null, 
+                  "aliasColors": {}, 
+                  "lines": true, 
+                  "points": false, 
+                  "datasource": "Prometheus", 
+                  "pointradius": 5, 
+                  "minSpan": 6
+               }, 
+               {
+                  "bars": false, 
+                  "timeFrom": null, 
+                  "links": [], 
+                  "thresholds": [], 
+                  "spaceLength": 10, 
+                  "nullPointMode": "connected", 
+                  "renderer": "flot", 
+                  "linewidth": 1, 
+                  "steppedLine": false, 
+                  "id": 5, 
+                  "fill": 1, 
+                  "span": 6, 
+                  "title": "$osd_servers Disk IOPS", 
+                  "tooltip": {
+                     "sort": 0, 
+                     "shared": true, 
+                     "value_type": "individual"
+                  }, 
+                  "legend": {
+                     "total": false, 
+                     "show": true, 
+                     "max": false, 
+                     "min": false, 
+                     "current": false, 
+                     "values": false, 
+                     "avg": false
+                  }, 
+                  "targets": [
+                     {
+                        "format": "time_series", 
+                        "expr": "label_replace(label_replace(topk($max_devices, collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.($device_id).perf.iops\", instance=~\"($osd_servers):.*\"}), \"node\", \"$1\", \"instance\", \"(.*):.*\"), \"device\", \"$1\", \"cephmetrics\", \"$cluster_name.osd.(.*).perf.iops\")", 
+                        "step": 10, 
+                        "legendFormat": "{{node}}:{{device}}", 
+                        "intervalFactor": 2, 
+                        "refId": "A"
+                     }
+                  ], 
+                  "yaxes": [
+                     {
+                        "logBase": 1, 
+                        "show": true, 
+                        "max": null, 
+                        "format": "short", 
+                        "min": "0", 
+                        "label": "IOPS"
+                     }, 
+                     {
+                        "logBase": 1, 
+                        "show": false, 
+                        "max": null, 
+                        "format": "short", 
+                        "min": null, 
+                        "label": null
+                     }
+                  ], 
+                  "xaxis": {
+                     "buckets": null, 
+                     "show": true, 
+                     "values": [], 
+                     "mode": "time", 
+                     "name": null
+                  }, 
+                  "seriesOverrides": [], 
+                  "percentage": false, 
+                  "type": "graph", 
+                  "dashes": false, 
+                  "dashLength": 10, 
+                  "stack": false, 
+                  "timeShift": null, 
+                  "aliasColors": {}, 
+                  "lines": true, 
+                  "points": false, 
+                  "datasource": "Prometheus", 
+                  "pointradius": 5, 
+                  "minSpan": 6
+               }, 
+               {
+                  "bars": false, 
+                  "timeFrom": null, 
+                  "links": [], 
+                  "thresholds": [], 
+                  "spaceLength": 10, 
+                  "nullPointMode": "connected", 
+                  "renderer": "flot", 
+                  "linewidth": 1, 
+                  "steppedLine": false, 
+                  "id": 2, 
+                  "fill": 1, 
+                  "span": 6, 
+                  "title": "$osd_servers Disk Latency", 
+                  "tooltip": {
+                     "sort": 0, 
+                     "shared": true, 
+                     "value_type": "individual"
+                  }, 
+                  "legend": {
+                     "total": false, 
+                     "show": true, 
+                     "max": false, 
+                     "min": false, 
+                     "current": false, 
+                     "values": false, 
+                     "avg": false
+                  }, 
+                  "targets": [
+                     {
+                        "format": "time_series", 
+                        "expr": "label_replace(label_replace(topk($max_devices, collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.($device_id).perf.await\", instance=~\"($osd_servers):.*\"}), \"node\", \"$1\", \"instance\", \"(.*):.*\"), \"device\", \"$1\", \"cephmetrics\", \"$cluster_name.osd.(.*).perf.await\")", 
+                        "step": 10, 
+                        "legendFormat": "{{node}}:{{device}}", 
+                        "intervalFactor": 2, 
+                        "refId": "A"
+                     }
+                  ], 
+                  "yaxes": [
+                     {
+                        "logBase": 1, 
+                        "show": true, 
+                        "max": null, 
+                        "format": "none", 
+                        "min": "0", 
+                        "label": "ms"
+                     }, 
+                     {
+                        "logBase": 1, 
+                        "show": false, 
+                        "max": null, 
+                        "format": "short", 
+                        "min": null, 
+                        "label": null
+                     }
+                  ], 
+                  "xaxis": {
+                     "buckets": null, 
+                     "show": true, 
+                     "values": [], 
+                     "mode": "time", 
+                     "name": null
+                  }, 
+                  "seriesOverrides": [], 
+                  "percentage": false, 
+                  "type": "graph", 
+                  "dashes": false, 
+                  "dashLength": 10, 
+                  "stack": false, 
+                  "timeShift": null, 
+                  "aliasColors": {}, 
+                  "lines": true, 
+                  "points": false, 
+                  "datasource": "Prometheus", 
+                  "pointradius": 5, 
+                  "minSpan": 6
+               }, 
+               {
+                  "bars": false, 
+                  "timeFrom": null, 
+                  "links": [], 
+                  "thresholds": [], 
+                  "spaceLength": 10, 
+                  "nullPointMode": "connected", 
+                  "renderer": "flot", 
+                  "linewidth": 1, 
+                  "steppedLine": false, 
+                  "id": 3, 
+                  "fill": 1, 
+                  "span": 6, 
+                  "title": "$osd_servers Throughput by Disk", 
+                  "tooltip": {
+                     "sort": 0, 
+                     "shared": true, 
+                     "value_type": "individual"
+                  }, 
+                  "legend": {
+                     "total": false, 
+                     "show": true, 
+                     "max": false, 
+                     "min": false, 
+                     "current": false, 
+                     "values": false, 
+                     "avg": false
+                  }, 
+                  "targets": [
+                     {
+                        "format": "time_series", 
+                        "expr": "label_replace(label_replace(topk($max_devices, collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.($device_id).perf.bytes_per_sec\", instance=~\"($osd_servers):.*\"}), \"node\", \"$1\", \"instance\", \"(.*):.*\"), \"device\", \"$1\", \"cephmetrics\", \"$cluster_name.osd.(.*).perf.bytes_per_sec\")", 
+                        "step": 10, 
+                        "legendFormat": "{{node}}:{{device}}", 
+                        "intervalFactor": 2, 
+                        "refId": "A"
+                     }
+                  ], 
+                  "yaxes": [
+                     {
+                        "logBase": 1, 
+                        "show": true, 
+                        "max": null, 
+                        "format": "Bps", 
+                        "min": "0", 
+                        "label": ""
+                     }, 
+                     {
+                        "logBase": 1, 
+                        "show": false, 
+                        "max": null, 
+                        "format": "short", 
+                        "min": null, 
+                        "label": null
+                     }
+                  ], 
+                  "xaxis": {
+                     "buckets": null, 
+                     "show": true, 
+                     "values": [], 
+                     "mode": "time", 
+                     "name": null
+                  }, 
+                  "seriesOverrides": [], 
+                  "percentage": false, 
+                  "type": "graph", 
+                  "dashes": false, 
+                  "dashLength": 10, 
+                  "stack": false, 
+                  "timeShift": null, 
+                  "aliasColors": {}, 
+                  "lines": true, 
+                  "points": false, 
+                  "datasource": "Prometheus", 
+                  "pointradius": 5, 
+                  "minSpan": 6
+               }, 
+               {
+                  "bars": false, 
+                  "timeFrom": null, 
+                  "links": [], 
+                  "thresholds": [], 
+                  "spaceLength": 10, 
+                  "nullPointMode": "connected", 
+                  "renderer": "flot", 
+                  "linewidth": 1, 
+                  "steppedLine": false, 
+                  "id": 6, 
+                  "fill": 3, 
+                  "span": 6, 
+                  "title": "$osd_servers CPU Utilisation", 
+                  "tooltip": {
+                     "sort": 0, 
+                     "shared": true, 
+                     "value_type": "individual"
+                  }, 
+                  "stack": true, 
+                  "targets": [
+                     {
+                        "format": "time_series", 
+                        "expr": "sum(collectd_cpu_percent{cpu!=\"idle\"}) by (cpu)", 
+                        "step": 10, 
+                        "legendFormat": "{{cpu}}", 
+                        "intervalFactor": 2, 
+                        "refId": "A"
+                     }
+                  ], 
+                  "yaxes": [
+                     {
+                        "logBase": 1, 
+                        "show": true, 
+                        "max": "100", 
+                        "format": "short", 
+                        "min": "0", 
+                        "label": ""
+                     }, 
+                     {
+                        "logBase": 1, 
+                        "show": false, 
+                        "max": null, 
+                        "format": "short", 
+                        "min": null, 
+                        "label": null
+                     }
+                  ], 
+                  "xaxis": {
+                     "buckets": null, 
+                     "show": true, 
+                     "values": [], 
+                     "mode": "time", 
+                     "name": null
+                  }, 
+                  "seriesOverrides": [], 
+                  "percentage": false, 
+                  "type": "graph", 
+                  "dashes": false, 
+                  "repeat": null, 
+                  "description": "Shows the CPU breakdown. When multiple servers are selected, only the first host's cpu data is shown", 
+                  "dashLength": 10, 
+                  "legend": {
+                     "total": false, 
+                     "show": true, 
+                     "max": false, 
+                     "min": false, 
+                     "current": false, 
+                     "values": false, 
+                     "alignAsTable": false, 
+                     "avg": false
+                  }, 
+                  "timeShift": null, 
+                  "aliasColors": {
+                     "interrupt": "#447EBC", 
+                     "wait": "#C15C17", 
+                     "steal": "#6D1F62", 
+                     "system": "#890F02", 
+                     "user": "#3F6833"
+                  }, 
+                  "lines": true, 
+                  "points": false, 
+                  "datasource": "Prometheus", 
+                  "pointradius": 5, 
+                  "minSpan": 6
+               }, 
+               {
+                  "bars": false, 
+                  "timeFrom": null, 
+                  "links": [], 
+                  "thresholds": [], 
+                  "spaceLength": 10, 
+                  "nullPointMode": "connected", 
+                  "renderer": "flot", 
+                  "linewidth": 1, 
+                  "steppedLine": false, 
+                  "id": 7, 
+                  "fill": 1, 
+                  "span": 6, 
+                  "title": "$osd_servers Network Load", 
+                  "tooltip": {
+                     "sort": 0, 
+                     "shared": true, 
+                     "value_type": "individual"
+                  }, 
+                  "legend": {
+                     "rightSide": false, 
+                     "total": false, 
+                     "min": false, 
+                     "max": false, 
+                     "show": true, 
+                     "current": false, 
+                     "values": false, 
+                     "alignAsTable": false, 
+                     "avg": false, 
+                     "hideZero": true
+                  }, 
+                  "targets": [
+                     {
+                        "format": "time_series", 
+                        "expr": "label_replace(max(topk($max_devices, irate(collectd_interface_if_octets_rx_total{instance=~\"($osd_servers):.*\", interface!=\"lo\"}[5m]))) by (instance, interface), \"node\", \"$1\", \"instance\", \"(.*):.*\")", 
+                        "step": 10, 
+                        "legendFormat": "{{node}}:{{interface}}.rx", 
+                        "intervalFactor": 2, 
+                        "refId": "A"
+                     }, 
+                     {
+                        "format": "time_series", 
+                        "expr": "label_replace(max(topk($max_devices, irate(collectd_interface_if_octets_tx_total{instance=~\"($osd_servers):.*\", interface!=\"lo\"}[5m]))) by (instance, interface), \"node\", \"$1\", \"instance\", \"(.*):.*\")", 
+                        "step": 10, 
+                        "legendFormat": "{{node}}:{{interface}}.tx", 
+                        "intervalFactor": 2, 
+                        "refId": "B"
+                     }
+                  ], 
+                  "yaxes": [
+                     {
+                        "logBase": 1, 
+                        "show": true, 
+                        "max": null, 
+                        "format": "bytes", 
+                        "min": "0", 
+                        "label": null
+                     }, 
+                     {
+                        "logBase": 1, 
+                        "show": false, 
+                        "max": null, 
+                        "format": "short", 
+                        "min": null, 
+                        "label": null
+                     }
+                  ], 
+                  "xaxis": {
+                     "buckets": null, 
+                     "show": true, 
+                     "values": [], 
+                     "mode": "time", 
+                     "name": null
+                  }, 
+                  "seriesOverrides": [], 
+                  "percentage": false, 
+                  "type": "graph", 
+                  "dashes": false, 
+                  "dashLength": 10, 
+                  "stack": true, 
+                  "timeShift": null, 
+                  "aliasColors": {}, 
+                  "lines": true, 
+                  "points": false, 
+                  "datasource": "Prometheus", 
+                  "pointradius": 5, 
+                  "minSpan": 6
+               }
+            ], 
+            "showTitle": true, 
+            "collapse": false
+         }
+      ], 
+      "templating": {
+         "list": [
+            {
+               "multi": false, 
+               "hide": 0, 
+               "name": "osd_servers", 
+               "allValue": null, 
+               "label": "OSD Host Name", 
+               "current": {
+                  "text": "All", 
+                  "selected": true, 
+                  "value": "$__all"
+               }, 
+               "query": "node1,node2,node3", 
+               "type": "custom", 
+               "options": [
+                  {
+                     "text": "All", 
+                     "selected": true, 
+                     "value": "$__all"
+                  }, 
+                  {
+                     "text": "node1", 
+                     "selected": false, 
+                     "value": "node1"
+                  }, 
+                  {
+                     "text": "node2", 
+                     "selected": false, 
+                     "value": "node2"
+                  }, 
+                  {
+                     "text": "node3", 
+                     "selected": false, 
+                     "value": "node3"
+                  }
+               ], 
+               "includeAll": true
+            }, 
+            {
+               "multi": false, 
+               "hide": 2, 
+               "name": "domain", 
+               "allValue": null, 
+               "label": null, 
+               "current": {
+                  "text": "fedex.lan", 
+                  "selected": true, 
+                  "value": "fedex.lan"
+               }, 
+               "query": "fedex.lan", 
+               "type": "custom", 
+               "options": [
+                  {
+                     "text": "fedex.lan", 
+                     "selected": true, 
+                     "value": "fedex.lan"
+                  }
+               ], 
+               "includeAll": false
+            }, 
+            {
+               "regex": "/\\{cephmetrics=\"([^.]*)\\./", 
+               "sort": 0, 
+               "multi": false, 
+               "hide": 2, 
+               "name": "cluster_name", 
+               "tags": [], 
+               "allValue": null, 
+               "tagValuesQuery": "", 
+               "refresh": 1, 
+               "label": null, 
+               "current": {
+                  "text": "ceph", 
+                  "value": "ceph"
+               }, 
+               "datasource": "Prometheus", 
+               "type": "query", 
+               "query": "collectd_cephmetrics_gauge{}", 
+               "useTags": false, 
+               "tagsQuery": "", 
+               "options": [], 
+               "includeAll": false
+            }, 
+            {
+               "regex": "/$cluster_name.osd.([^.]*).osd_id/", 
+               "sort": 0, 
+               "multi": true, 
+               "hide": 0, 
+               "name": "device_id", 
+               "tags": [], 
+               "allValue": null, 
+               "tagValuesQuery": "", 
+               "refresh": 1, 
+               "label": "Disk Name", 
+               "current": {
+                  "text": "All", 
+                  "value": "$__all"
+               }, 
+               "datasource": "Prometheus", 
+               "type": "query", 
+               "query": "collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd..*.osd_id\", instance=~\"($osd_servers):.*\"}", 
+               "useTags": false, 
+               "tagsQuery": "", 
+               "options": [], 
+               "includeAll": true
+            }, 
+            {
+               "multi": false, 
+               "hide": 2, 
+               "name": "max_devices", 
+               "allValue": null, 
+               "label": null, 
+               "current": {
+                  "text": "60", 
+                  "selected": true, 
+                  "value": "60"
+               }, 
+               "query": "60", 
+               "type": "custom", 
+               "options": [
+                  {
+                     "text": "60", 
+                     "selected": true, 
+                     "value": "60"
+                  }
+               ], 
+               "includeAll": false
+            }
+         ]
+      }, 
+      "links": [
+         {
+            "title": "Shortcuts", 
+            "tags": [
+               "overview"
+            ], 
+            "type": "dashboards", 
+            "asDropdown": true, 
+            "icon": "external link"
+         }
+      ], 
       "tags": [
-        "overview"
-      ],
-      "title": "Shortcuts",
-      "type": "dashboards"
-    }
-  ],
-  "refresh": "10s",
-  "rows": [
-    {
-      "collapse": false,
-      "height": 125,
-      "panels": [
-        {
-          "cacheTimeout": null,
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "datasource": "Prometheus",
-          "format": "none",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "height": "160",
-          "id": 9,
-          "interval": null,
-          "links": [],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": "",
-          "minSpan": 2,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "",
-          "postfixFontSize": "50%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 2,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-          },
-          "tableColumn": "",
-          "targets": [
-            {
-              "expr": "sum(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.osd.num_osds\", instance=~\"($osd_servers):.*\"})",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "A",
-              "step": 40
-            }
-          ],
-          "thresholds": "",
-          "title": "OSDs",
-          "type": "singlestat",
-          "valueFontSize": "80%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "N/A",
-              "value": "null"
-            }
-          ],
-          "valueName": "current"
-        },
-        {
-          "cacheTimeout": null,
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "datasource": "Prometheus",
-          "decimals": 0,
-          "description": "Show the raw capacity across all OSD's on the selected Hosts.",
-          "format": "decbytes",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "height": "160",
-          "id": 15,
-          "interval": null,
-          "links": [],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": "1",
-          "minSpan": 2,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "",
-          "postfixFontSize": "50%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 2,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-          },
-          "tableColumn": "",
-          "targets": [
-            {
-              "expr": "sum(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.*stat_bytes$\", instance=~\"($osd_servers):.*\"})",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "A",
-              "step": 7200
-            }
-          ],
-          "thresholds": "",
-          "title": "Raw Capacity",
-          "type": "singlestat",
-          "valueFontSize": "80%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "N/A",
-              "value": "null"
-            }
-          ],
-          "valueName": "current"
-        },
-        {
-          "columns": [
-            {
-              "text": "Current",
-              "value": "current"
-            }
-          ],
-          "datasource": "Prometheus",
-          "description": "",
-          "fontSize": "100%",
-          "height": "160",
-          "id": 14,
-          "links": [],
-          "minSpan": 3,
-          "pageSize": 1000,
-          "scroll": true,
-          "showHeader": true,
-          "sort": {
-            "col": 0,
-            "desc": false
-          },
-          "span": 3,
-          "styles": [
-            {
-              "alias": "Time",
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "pattern": "Time",
-              "type": "date"
-            },
-            {
-              "alias": "Host:Disk",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "pattern": "Metric",
-              "thresholds": [],
-              "type": "number",
-              "unit": "short"
-            },
-            {
-              "alias": "OSD ID",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 0,
-              "pattern": "Current",
-              "thresholds": [],
-              "type": "number",
-              "unit": "short"
-            }
-          ],
-          "targets": [
-            {
-              "expr": "label_replace(label_replace(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.($device_id).osd_id\", instance=~\"($osd_servers):.*\"}, \"node\", \"$1\", \"instance\", \"(.*):.*\"), \"device\", \"$1\", \"cephmetrics\", \"$cluster_name.osd.(.*).osd_id\")",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "{{node}}:{{device}}",
-              "refId": "A",
-              "step": 20
-            }
-          ],
-          "title": "",
-          "transform": "timeseries_aggregations",
-          "type": "table"
-        },
-        {
-          "columns": [
-            {
-              "text": "Current",
-              "value": "current"
-            }
-          ],
-          "datasource": "Prometheus",
-          "description": "",
-          "fontSize": "100%",
-          "height": "160",
-          "hideTimeOverride": true,
-          "id": 16,
-          "links": [],
-          "maxDataPoints": "1",
-          "minSpan": 3,
-          "pageSize": 1000,
-          "scroll": true,
-          "showHeader": true,
-          "sort": {
-            "col": 0,
-            "desc": false
-          },
-          "span": 3,
-          "styles": [
-            {
-              "alias": "Time",
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "pattern": "Time",
-              "type": "date"
-            },
-            {
-              "alias": "Host:Disk",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "pattern": "Metric",
-              "thresholds": [],
-              "type": "number",
-              "unit": "short"
-            },
-            {
-              "alias": "Disk Size",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 0,
-              "pattern": "Current",
-              "thresholds": [],
-              "type": "number",
-              "unit": "bytes"
-            }
-          ],
-          "targets": [
-            {
-              "expr": "label_replace(label_replace(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.($device_id).disk_size\", instance=~\"($osd_servers):.*\"}, \"node\", \"$1\", \"instance\", \"(.*):.*\"), \"device\", \"$1\", \"cephmetrics\", \"$cluster_name.osd.(.*).disk_size\")",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "{{node}}:{{device}}",
-              "refId": "A",
-              "step": 240
-            }
-          ],
-          "timeFrom": "2m",
-          "timeShift": null,
-          "title": "",
-          "transform": "timeseries_aggregations",
-          "type": "table"
-        }
-      ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": true,
-      "title": "'$osd_servers' OSD Overview",
-      "titleSize": "h5"
-    },
-    {
-      "collapse": false,
-      "height": 250,
-      "panels": [
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "Prometheus",
-          "fill": 1,
-          "id": 1,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "minSpan": 6,
-          "nullPointMode": "connected",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 6,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "label_replace(label_replace(topk($max_devices, collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.($device_id).perf.util\", instance=~\"($osd_servers):.*\"}) by (instance), \"node\", \"$1\", \"instance\", \"(.*):.*\"), \"device\", \"$1\", \"cephmetrics\", \"$cluster_name.osd.(.*).perf.util\")",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "{{node}}:{{device}}",
-              "refId": "A",
-              "step": 10
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "$osd_servers Disk utilisation",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": "%Util",
-              "logBase": 1,
-              "max": "100",
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": false
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "Prometheus",
-          "fill": 1,
-          "id": 5,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "minSpan": 6,
-          "nullPointMode": "connected",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 6,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "label_replace(label_replace(topk($max_devices, collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.($device_id).perf.iops\", instance=~\"($osd_servers):.*\"}), \"node\", \"$1\", \"instance\", \"(.*):.*\"), \"device\", \"$1\", \"cephmetrics\", \"$cluster_name.osd.(.*).perf.iops\")",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "{{node}}:{{device}}",
-              "refId": "A",
-              "step": 10
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "$osd_servers Disk IOPS",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": "IOPS",
-              "logBase": 1,
-              "max": null,
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": false
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "Prometheus",
-          "fill": 1,
-          "id": 2,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "minSpan": 6,
-          "nullPointMode": "connected",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 6,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "label_replace(label_replace(topk($max_devices, collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.($device_id).perf.await\", instance=~\"($osd_servers):.*\"}), \"node\", \"$1\", \"instance\", \"(.*):.*\"), \"device\", \"$1\", \"cephmetrics\", \"$cluster_name.osd.(.*).perf.await\")",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "{{node}}:{{device}}",
-              "refId": "A",
-              "step": 10
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "$osd_servers Disk Latency",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "none",
-              "label": "ms",
-              "logBase": 1,
-              "max": null,
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": false
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "Prometheus",
-          "fill": 1,
-          "id": 3,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "minSpan": 6,
-          "nullPointMode": "connected",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 6,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "label_replace(label_replace(topk($max_devices, collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.($device_id).perf.bytes_per_sec\", instance=~\"($osd_servers):.*\"}), \"node\", \"$1\", \"instance\", \"(.*):.*\"), \"device\", \"$1\", \"cephmetrics\", \"$cluster_name.osd.(.*).perf.bytes_per_sec\")",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "{{node}}:{{device}}",
-              "refId": "A",
-              "step": 10
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "$osd_servers Throughput by Disk",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "Bps",
-              "label": "",
-              "logBase": 1,
-              "max": null,
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": false
-            }
-          ]
-        },
-        {
-          "aliasColors": {
-            "interrupt": "#447EBC",
-            "steal": "#6D1F62",
-            "system": "#890F02",
-            "user": "#3F6833",
-            "wait": "#C15C17"
-          },
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "Prometheus",
-          "description": "Shows the CPU breakdown. When multiple servers are selected, only the first host's cpu data is shown",
-          "fill": 3,
-          "id": 6,
-          "legend": {
-            "alignAsTable": false,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "minSpan": 6,
-          "nullPointMode": "connected",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 6,
-          "stack": true,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(collectd_cpu_percent{cpu!=\"idle\"}) by (cpu)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "{{cpu}}",
-              "refId": "A",
-              "step": 10
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "$osd_servers CPU Utilisation",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": "",
-              "logBase": 1,
-              "max": "100",
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": false
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "Prometheus",
-          "fill": 1,
-          "id": 7,
-          "legend": {
-            "alignAsTable": false,
-            "avg": false,
-            "current": false,
-            "hideZero": true,
-            "max": false,
-            "min": false,
-            "rightSide": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "minSpan": 6,
-          "nullPointMode": "connected",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 6,
-          "stack": true,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "label_replace(max(topk($max_devices, irate(collectd_interface_if_octets_rx_total{instance=~\"($osd_servers):.*\", interface!=\"lo\"}[5m]))) by (instance, interface), \"node\", \"$1\", \"instance\", \"(.*):.*\")",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "{{node}}:{{interface}}.rx",
-              "refId": "A",
-              "step": 10
-            },
-            {
-              "expr": "label_replace(max(topk($max_devices, irate(collectd_interface_if_octets_tx_total{instance=~\"($osd_servers):.*\", interface!=\"lo\"}[5m]))) by (instance, interface), \"node\", \"$1\", \"instance\", \"(.*):.*\")",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "{{node}}:{{interface}}.tx",
-              "refId": "B",
-              "step": 10
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "$osd_servers Network Load",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "bytes",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": false
-            }
-          ]
-        }
-      ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": true,
-      "title": "'$osd_servers' Performance Statistics",
-      "titleSize": "h5"
-    }
-  ],
-  "schemaVersion": 14,
-  "style": "dark",
-  "tags": [
-    "overview"
-  ],
-  "templating": {
-    "list": [
-      {
-        "allValue": null,
-        "current": {
-          "selected": true,
-          "text": "All",
-          "value": "$__all"
-        },
-        "hide": 0,
-        "includeAll": true,
-        "label": "OSD Host Name",
-        "multi": false,
-        "name": "osd_servers",
-        "options": [
-          {
-            "selected": true,
-            "text": "All",
-            "value": "$__all"
-          },
-          {
-            "selected": false,
-            "text": "node1",
-            "value": "node1"
-          },
-          {
-            "selected": false,
-            "text": "node2",
-            "value": "node2"
-          },
-          {
-            "selected": false,
-            "text": "node3",
-            "value": "node3"
-          }
-        ],
-        "query": "node1,node2,node3",
-        "type": "custom"
-      },
-      {
-        "allValue": null,
-        "current": {
-          "selected": true,
-          "text": "fedex.lan",
-          "value": "fedex.lan"
-        },
-        "hide": 2,
-        "includeAll": false,
-        "label": null,
-        "multi": false,
-        "name": "domain",
-        "options": [
-          {
-            "selected": true,
-            "text": "fedex.lan",
-            "value": "fedex.lan"
-          }
-        ],
-        "query": "fedex.lan",
-        "type": "custom"
-      },
-      {
-        "allValue": null,
-        "current": {
-          "text": "ceph",
-          "value": "ceph"
-        },
-        "datasource": "Prometheus",
-        "hide": 2,
-        "includeAll": false,
-        "label": null,
-        "multi": false,
-        "name": "cluster_name",
-        "options": [],
-        "query": "collectd_cephmetrics_gauge{}",
-        "refresh": 1,
-        "regex": "/\\{cephmetrics=\"([^.]*)\\./",
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
-      },
-      {
-        "allValue": null,
-        "current": {
-          "text": "All",
-          "value": "$__all"
-        },
-        "datasource": "Prometheus",
-        "hide": 0,
-        "includeAll": true,
-        "label": "Disk Name",
-        "multi": true,
-        "name": "device_id",
-        "options": [],
-        "query": "collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd..*.osd_id\", instance=~\"($osd_servers):.*\"}",
-        "refresh": 1,
-        "regex": "/$cluster_name.osd.([^.]*).osd_id/",
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
-      },
-      {
-        "allValue": null,
-        "current": {
-          "selected": true,
-          "text": "60",
-          "value": "60"
-        },
-        "hide": 2,
-        "includeAll": false,
-        "label": null,
-        "multi": false,
-        "name": "max_devices",
-        "options": [
-          {
-            "selected": true,
-            "text": "60",
-            "value": "60"
-          }
-        ],
-        "query": "60",
-        "type": "custom"
-      }
-    ]
-  },
-  "time": {
-    "from": "now-1h",
-    "to": "now"
-  },
-  "timepicker": {
-    "refresh_intervals": [
-      "5s",
-      "10s",
-      "30s",
-      "1m",
-      "5m",
-      "15m",
-      "30m",
-      "1h",
-      "2h",
-      "1d"
-    ],
-    "time_options": [
-      "5m",
-      "15m",
-      "1h",
-      "6h",
-      "12h",
-      "24h",
-      "2d",
-      "7d",
-      "30d"
-    ]
-  },
-  "timezone": "browser",
-  "title": "OSD Node Detail",
-  "version": 14
+         "overview"
+      ], 
+      "graphTooltip": 0, 
+      "hideControls": true, 
+      "title": "OSD Node Detail", 
+      "editable": true, 
+      "refresh": "10s", 
+      "annotations": {
+         "list": []
+      }, 
+      "gnetId": null, 
+      "timepicker": {
+         "time_options": [
+            "5m", 
+            "15m", 
+            "1h", 
+            "6h", 
+            "12h", 
+            "24h", 
+            "2d", 
+            "7d", 
+            "30d"
+         ], 
+         "refresh_intervals": [
+            "5s", 
+            "10s", 
+            "30s", 
+            "1m", 
+            "5m", 
+            "15m", 
+            "30m", 
+            "1h", 
+            "2h", 
+            "1d"
+         ]
+      }, 
+      "version": 14, 
+      "time": {
+         "to": "now", 
+         "from": "now-1h"
+      }, 
+      "timezone": "browser", 
+      "schemaVersion": 14, 
+      "id": 21
+   }
 }

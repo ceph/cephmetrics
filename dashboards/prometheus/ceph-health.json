@@ -1,2001 +1,2004 @@
 {
-  "annotations": {
-    "list": [
-      {
-        "datasource": "Prometheus",
-        "enable": true,
-        "hide": false,
-        "iconColor": "rgba(255, 96, 96, 1)",
-        "limit": 100,
-        "name": "health_alert",
-        "showIn": 0,
-        "tagKeys": "health_alert",
-        "tags": "health_alert",
-        "type": "alert"
-      },
-      {
-        "datasource": "Prometheus",
-        "enable": true,
-        "hide": false,
-        "iconColor": "rgb(1, 195, 0)",
-        "limit": 100,
-        "name": "health_ok",
-        "showIn": 0,
-        "tagKeys": "health_ok",
-        "tags": "health_ok",
-        "type": "alert"
-      }
-    ]
-  },
-  "editable": true,
-  "gnetId": null,
-  "graphTooltip": 0,
-  "hideControls": false,
-  "id": 27,
-  "links": [
-    {
-      "asDropdown": true,
-      "icon": "external link",
-      "includeVars": true,
-      "keepTime": true,
+   "meta": {}, 
+   "dashboard": {
+      "style": "dark", 
+      "rows": [
+         {
+            "repeat": null, 
+            "titleSize": "h6", 
+            "repeatIteration": null, 
+            "title": "Dashboard Row", 
+            "height": "70", 
+            "repeatRowId": null, 
+            "panels": [
+               {
+                  "mappingTypes": [
+                     {
+                        "name": "value to text", 
+                        "value": 1
+                     }, 
+                     {
+                        "name": "range to text", 
+                        "value": 2
+                     }
+                  ], 
+                  "timeFrom": "1m", 
+                  "colorBackground": true, 
+                  "valueMaps": [
+                     {
+                        "text": "OK", 
+                        "value": "0", 
+                        "op": "="
+                     }, 
+                     {
+                        "text": "WARN", 
+                        "value": "4", 
+                        "op": "="
+                     }, 
+                     {
+                        "text": "ERROR", 
+                        "value": "8", 
+                        "op": "="
+                     }
+                  ], 
+                  "tableColumn": "", 
+                  "thresholds": "1,5", 
+                  "rangeMaps": [
+                     {
+                        "text": "HEALTH OK", 
+                        "from": "0", 
+                        "to": "1"
+                     }, 
+                     {
+                        "text": "HEALTH WARNING", 
+                        "from": "1", 
+                        "to": "4"
+                     }, 
+                     {
+                        "text": "HEALTH ERROR", 
+                        "from": "5", 
+                        "to": "99"
+                     }, 
+                     {
+                        "text": "NODATA", 
+                        "from": "-10", 
+                        "to": "0"
+                     }
+                  ], 
+                  "height": "70", 
+                  "prefix": "", 
+                  "gauge": {
+                     "thresholdLabels": false, 
+                     "show": false, 
+                     "thresholdMarkers": true, 
+                     "maxValue": 100, 
+                     "minValue": 0
+                  }, 
+                  "id": 76, 
+                  "maxDataPoints": "", 
+                  "mappingType": 2, 
+                  "span": 12, 
+                  "links": [], 
+                  "title": "", 
+                  "sparkline": {
+                     "full": false, 
+                     "fillColor": "rgba(31, 118, 189, 0.18)", 
+                     "lineColor": "rgb(31, 120, 193)", 
+                     "show": false
+                  }, 
+                  "targets": [
+                     {
+                        "intervalFactor": 2, 
+                        "expr": "max(collectd_cephmetrics_gauge{cephmetrics=~\"ceph.mon.health\"})", 
+                        "step": 2, 
+                        "refId": "A", 
+                        "format": "time_series"
+                     }
+                  ], 
+                  "prefixFontSize": "50%", 
+                  "valueName": "current", 
+                  "type": "singlestat", 
+                  "valueFontSize": "50%", 
+                  "description": "Shows the overall health of the ceph cluster. To see specific health messages hover over the annotation in the health chart below.", 
+                  "format": "none", 
+                  "hideTimeOverride": true, 
+                  "nullPointMode": "connected", 
+                  "postfix": "", 
+                  "interval": null, 
+                  "colors": [
+                     "rgba(1, 167, 1, 1)", 
+                     "rgba(255,165,0, 1)", 
+                     "rgba(255, 0, 0, 1)"
+                  ], 
+                  "timeShift": null, 
+                  "cacheTimeout": null, 
+                  "datasource": "Prometheus", 
+                  "nullText": null, 
+                  "minSpan": 1, 
+                  "postfixFontSize": "50%", 
+                  "colorValue": false
+               }
+            ], 
+            "showTitle": false, 
+            "collapse": false
+         }, 
+         {
+            "repeat": null, 
+            "titleSize": "h5", 
+            "repeatIteration": null, 
+            "title": "Cluster Health", 
+            "height": "350", 
+            "repeatRowId": null, 
+            "panels": [
+               {
+                  "bars": false, 
+                  "timeFrom": "3d", 
+                  "links": [], 
+                  "thresholds": [
+                     {
+                        "colorMode": "custom", 
+                        "value": 3, 
+                        "fillColor": "rgba(222, 226, 0, 0.47)", 
+                        "lineColor": "rgb(247, 172, 0)", 
+                        "line": true, 
+                        "fill": false, 
+                        "op": "gt"
+                     }, 
+                     {
+                        "colorMode": "custom", 
+                        "value": 7, 
+                        "fillColor": "rgba(246, 3, 3, 0.5)", 
+                        "lineColor": "rgb(203, 0, 0)", 
+                        "line": true, 
+                        "fill": false, 
+                        "op": "gt"
+                     }
+                  ], 
+                  "spaceLength": 10, 
+                  "height": "350", 
+                  "renderer": "flot", 
+                  "linewidth": 2, 
+                  "steppedLine": true, 
+                  "id": 55, 
+                  "maxDataPoints": "", 
+                  "fill": 1, 
+                  "span": 12, 
+                  "title": "Health History - Last 3 days", 
+                  "tooltip": {
+                     "sort": 1, 
+                     "shared": false, 
+                     "value_type": "individual"
+                  }, 
+                  "stack": false, 
+                  "targets": [
+                     {
+                        "format": "time_series", 
+                        "expr": "max(max_over_time(collectd_cephmetrics_gauge{cephmetrics=~\"ceph.mon.health\"}[5m]))", 
+                        "step": 600, 
+                        "legendFormat": "Ceph Health", 
+                        "intervalFactor": 2, 
+                        "refId": "A"
+                     }
+                  ], 
+                  "yaxes": [
+                     {
+                        "logBase": 1, 
+                        "show": false, 
+                        "max": "10", 
+                        "format": "short", 
+                        "min": "-1", 
+                        "label": ""
+                     }, 
+                     {
+                        "logBase": 1, 
+                        "show": false, 
+                        "max": null, 
+                        "format": "short", 
+                        "min": null, 
+                        "label": null
+                     }
+                  ], 
+                  "xaxis": {
+                     "buckets": null, 
+                     "show": true, 
+                     "values": [], 
+                     "mode": "time", 
+                     "name": null
+                  }, 
+                  "seriesOverrides": [], 
+                  "percentage": false, 
+                  "type": "graph", 
+                  "dashes": false, 
+                  "description": "The chart plots the clusters health, over time. Health is depicted as a integer; 0, 4 or 8 where 0 is OK, 4 is WARN and 8 represents an ERROR state. Horizontal thresholds (drawn in yellow and red) indicate when the cluster's health transitions to 'warning' or 'error'. Annotations describing the details of the clusters health may also be shown if the \"EventURL\" setting is defined to the collectd plugin on the mon hosts.", 
+                  "hideTimeOverride": true, 
+                  "dashLength": 10, 
+                  "nullPointMode": "null", 
+                  "legend": {
+                     "total": false, 
+                     "show": true, 
+                     "max": false, 
+                     "min": false, 
+                     "current": false, 
+                     "values": false, 
+                     "avg": false
+                  }, 
+                  "timeShift": null, 
+                  "aliasColors": {
+                     "Ceph Health (0:OK, 4:Warning,8:Error)": "#DEDAF7", 
+                     "Ceph Health": "#3F6833", 
+                     "collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.health": "#DEDAF7"
+                  }, 
+                  "lines": true, 
+                  "points": false, 
+                  "datasource": "Prometheus", 
+                  "pointradius": 5, 
+                  "minSpan": 3
+               }
+            ], 
+            "showTitle": true, 
+            "collapse": false
+         }, 
+         {
+            "repeat": null, 
+            "titleSize": "h5", 
+            "repeatIteration": null, 
+            "title": "Cluster State", 
+            "height": "200", 
+            "repeatRowId": null, 
+            "panels": [
+               {
+                  "span": 1, 
+                  "links": [], 
+                  "title": "", 
+                  "transparent": true, 
+                  "content": "", 
+                  "mode": "html", 
+                  "minSpan": 1, 
+                  "type": "text", 
+                  "id": 69
+               }, 
+               {
+                  "sort": {
+                     "col": null, 
+                     "desc": false
+                  }, 
+                  "styles": [
+                     {
+                        "alias": "Time", 
+                        "type": "date", 
+                        "pattern": "Time", 
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss"
+                     }, 
+                     {
+                        "type": "number", 
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+                        "pattern": "Metric", 
+                        "thresholds": [], 
+                        "alias": "Hostname", 
+                        "colors": [
+                           "rgba(245, 54, 54, 0.9)", 
+                           "rgba(237, 129, 40, 0.89)", 
+                           "rgba(50, 172, 45, 0.97)"
+                        ], 
+                        "sanitize": false, 
+                        "colorMode": null, 
+                        "decimals": 2, 
+                        "unit": "short"
+                     }, 
+                     {
+                        "type": "number", 
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+                        "pattern": "Current", 
+                        "thresholds": [
+                           "0", 
+                           "3", 
+                           "7"
+                        ], 
+                        "alias": "Status", 
+                        "colors": [
+                           "rgba(245, 54, 54, 0.9)", 
+                           "rgba(0, 169, 3, 0.89)", 
+                           "rgba(249, 190, 0, 0.97)"
+                        ], 
+                        "colorMode": "row", 
+                        "decimals": 0, 
+                        "unit": "short"
+                     }, 
+                     {
+                        "type": "number", 
+                        "pattern": "/.*/", 
+                        "thresholds": [], 
+                        "alias": "", 
+                        "colors": [
+                           "rgba(245, 54, 54, 0.9)", 
+                           "rgba(237, 129, 40, 0.89)", 
+                           "rgba(50, 172, 45, 0.97)"
+                        ], 
+                        "colorMode": null, 
+                        "decimals": 2, 
+                        "unit": "short"
+                     }
+                  ], 
+                  "timeFrom": "1m", 
+                  "span": 3, 
+                  "pageSize": null, 
+                  "links": [], 
+                  "title": "Monitor Status", 
+                  "timeShift": null, 
+                  "transform": "timeseries_aggregations", 
+                  "maxDataPoints": "", 
+                  "scroll": true, 
+                  "targets": [
+                     {
+                        "format": "time_series", 
+                        "expr": "max(label_replace(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.mon.mon_status..*\"}, \"node\", \"$1\", \"instance\", \"(.*):.*\")) by (node)", 
+                        "step": 2, 
+                        "legendFormat": "{{node}}", 
+                        "intervalFactor": 2, 
+                        "refId": "B"
+                     }
+                  ], 
+                  "hideTimeOverride": true, 
+                  "fontSize": "100%", 
+                  "datasource": "Prometheus", 
+                  "minSpan": 2, 
+                  "type": "table", 
+                  "id": 56, 
+                  "columns": [
+                     {
+                        "text": "Current", 
+                        "value": "current"
+                     }
+                  ], 
+                  "showHeader": true
+               }, 
+               {
+                  "span": 2, 
+                  "links": [], 
+                  "title": "", 
+                  "transparent": true, 
+                  "content": "", 
+                  "mode": "html", 
+                  "minSpan": 2, 
+                  "type": "text", 
+                  "id": 68
+               }, 
+               {
+                  "span": 1, 
+                  "links": [], 
+                  "title": "", 
+                  "transparent": true, 
+                  "content": "<h2 style=\"text-align: center;\">Cluster Flags:</h2>", 
+                  "mode": "html", 
+                  "minSpan": 1, 
+                  "type": "text", 
+                  "id": 58
+               }, 
+               {
+                  "mappingTypes": [
+                     {
+                        "name": "value to text", 
+                        "value": 1
+                     }, 
+                     {
+                        "name": "range to text", 
+                        "value": 2
+                     }
+                  ], 
+                  "timeFrom": "1m", 
+                  "colorBackground": true, 
+                  "valueMaps": [
+                     {
+                        "text": "N/A", 
+                        "value": "null", 
+                        "op": "="
+                     }, 
+                     {
+                        "text": "ENABLED", 
+                        "value": "0", 
+                        "op": "="
+                     }, 
+                     {
+                        "text": "ACTIVE", 
+                        "value": "1", 
+                        "op": "="
+                     }, 
+                     {
+                        "text": "DISABLED", 
+                        "value": "2", 
+                        "op": "="
+                     }
+                  ], 
+                  "tableColumn": "", 
+                  "thresholds": "1,2", 
+                  "rangeMaps": [
+                     {
+                        "text": "N/A", 
+                        "from": "null", 
+                        "to": "null"
+                     }
+                  ], 
+                  "height": "95", 
+                  "prefix": "", 
+                  "gauge": {
+                     "thresholdLabels": false, 
+                     "show": false, 
+                     "thresholdMarkers": true, 
+                     "maxValue": 100, 
+                     "minValue": 0
+                  }, 
+                  "id": 57, 
+                  "maxDataPoints": "", 
+                  "mappingType": 1, 
+                  "span": 1, 
+                  "links": [], 
+                  "title": "SCRUB", 
+                  "sparkline": {
+                     "full": false, 
+                     "fillColor": "rgba(31, 118, 189, 0.18)", 
+                     "lineColor": "rgb(31, 120, 193)", 
+                     "show": false
+                  }, 
+                  "targets": [
+                     {
+                        "intervalFactor": 2, 
+                        "expr": "max(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.mon.features.scrub\"})", 
+                        "step": 2, 
+                        "refId": "A", 
+                        "format": "time_series"
+                     }
+                  ], 
+                  "prefixFontSize": "50%", 
+                  "valueName": "current", 
+                  "type": "singlestat", 
+                  "valueFontSize": "40%", 
+                  "description": "Scrub activity takes place daily basis across the OSD's and performs object size and attribute checks. Scrub activity can be controlled with the \"ceph osd scrub\" command.", 
+                  "format": "none", 
+                  "hideTimeOverride": true, 
+                  "nullPointMode": "connected", 
+                  "postfix": "", 
+                  "interval": null, 
+                  "colors": [
+                     "rgba(50, 172, 45, 0.97)", 
+                     "rgba(237, 129, 40, 0.89)", 
+                     "rgba(245, 54, 54, 0.9)"
+                  ], 
+                  "cacheTimeout": null, 
+                  "datasource": "Prometheus", 
+                  "nullText": null, 
+                  "minSpan": 1, 
+                  "postfixFontSize": "50%", 
+                  "colorValue": false
+               }, 
+               {
+                  "mappingTypes": [
+                     {
+                        "name": "value to text", 
+                        "value": 1
+                     }, 
+                     {
+                        "name": "range to text", 
+                        "value": 2
+                     }
+                  ], 
+                  "timeFrom": "1m", 
+                  "colorBackground": true, 
+                  "valueMaps": [
+                     {
+                        "text": "N/A", 
+                        "value": "null", 
+                        "op": "="
+                     }, 
+                     {
+                        "text": "ENABLED", 
+                        "value": "0", 
+                        "op": "="
+                     }, 
+                     {
+                        "text": "ACTIVE", 
+                        "value": "1", 
+                        "op": "="
+                     }, 
+                     {
+                        "text": "DISABLED", 
+                        "value": "2", 
+                        "op": "="
+                     }
+                  ], 
+                  "tableColumn": "", 
+                  "thresholds": "1,2", 
+                  "rangeMaps": [
+                     {
+                        "text": "N/A", 
+                        "from": "null", 
+                        "to": "null"
+                     }
+                  ], 
+                  "height": "95", 
+                  "prefix": "", 
+                  "gauge": {
+                     "thresholdLabels": false, 
+                     "show": false, 
+                     "thresholdMarkers": true, 
+                     "maxValue": 100, 
+                     "minValue": 0
+                  }, 
+                  "id": 59, 
+                  "maxDataPoints": "", 
+                  "mappingType": 1, 
+                  "span": 1, 
+                  "links": [], 
+                  "title": "DEEP SCRUB", 
+                  "sparkline": {
+                     "full": false, 
+                     "fillColor": "rgba(31, 118, 189, 0.18)", 
+                     "lineColor": "rgb(31, 120, 193)", 
+                     "show": false
+                  }, 
+                  "targets": [
+                     {
+                        "intervalFactor": 2, 
+                        "expr": "max(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.mon.features.deep_scrub\"})", 
+                        "step": 2, 
+                        "refId": "A", 
+                        "format": "time_series"
+                     }
+                  ], 
+                  "prefixFontSize": "50%", 
+                  "valueName": "current", 
+                  "type": "singlestat", 
+                  "valueFontSize": "40%", 
+                  "description": "Deep scrub acts on the objects within placement groups (PGs). Objects are read, and checksum's compared to protect against silent bit-rot events. Although a weekly activity, in large clusters is normal to see deep-scrub active on a daily basis. Scrub activity can be controlled with the \"ceph osd scrub\" command.", 
+                  "format": "none", 
+                  "hideTimeOverride": true, 
+                  "nullPointMode": "connected", 
+                  "postfix": "", 
+                  "interval": null, 
+                  "colors": [
+                     "rgba(50, 172, 45, 0.97)", 
+                     "rgba(237, 129, 40, 0.89)", 
+                     "rgba(245, 54, 54, 0.9)"
+                  ], 
+                  "cacheTimeout": null, 
+                  "datasource": "Prometheus", 
+                  "nullText": null, 
+                  "minSpan": 1, 
+                  "postfixFontSize": "50%", 
+                  "colorValue": false
+               }, 
+               {
+                  "mappingTypes": [
+                     {
+                        "name": "value to text", 
+                        "value": 1
+                     }, 
+                     {
+                        "name": "range to text", 
+                        "value": 2
+                     }
+                  ], 
+                  "timeFrom": "1m", 
+                  "colorBackground": true, 
+                  "valueMaps": [
+                     {
+                        "text": "N/A", 
+                        "value": "null", 
+                        "op": "="
+                     }, 
+                     {
+                        "text": "ENABLED", 
+                        "value": "0", 
+                        "op": "="
+                     }, 
+                     {
+                        "text": "ACTIVE", 
+                        "value": "1", 
+                        "op": "="
+                     }, 
+                     {
+                        "text": "DISABLED", 
+                        "value": "2", 
+                        "op": "="
+                     }
+                  ], 
+                  "tableColumn": "", 
+                  "thresholds": "1,2", 
+                  "rangeMaps": [
+                     {
+                        "text": "N/A", 
+                        "from": "null", 
+                        "to": "null"
+                     }
+                  ], 
+                  "height": "95", 
+                  "prefix": "", 
+                  "gauge": {
+                     "thresholdLabels": false, 
+                     "show": false, 
+                     "thresholdMarkers": true, 
+                     "maxValue": 100, 
+                     "minValue": 0
+                  }, 
+                  "id": 60, 
+                  "maxDataPoints": "", 
+                  "mappingType": 1, 
+                  "span": 1, 
+                  "links": [], 
+                  "title": "RECOVERY", 
+                  "sparkline": {
+                     "full": false, 
+                     "fillColor": "rgba(31, 118, 189, 0.18)", 
+                     "lineColor": "rgb(31, 120, 193)", 
+                     "show": false
+                  }, 
+                  "targets": [
+                     {
+                        "intervalFactor": 2, 
+                        "expr": "max(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.mon.features.recovery\"})", 
+                        "step": 2, 
+                        "refId": "A", 
+                        "format": "time_series"
+                     }
+                  ], 
+                  "prefixFontSize": "50%", 
+                  "valueName": "current", 
+                  "type": "singlestat", 
+                  "valueFontSize": "40%", 
+                  "description": "With the recovery flag enabled, disruption in the cluster will result in data being recreated to freespace within the cluster to honor the pool's protection schema. Under some circumstances, you may use the norecover flag to prevent automatic recovery.", 
+                  "format": "none", 
+                  "hideTimeOverride": true, 
+                  "nullPointMode": "connected", 
+                  "postfix": "", 
+                  "interval": null, 
+                  "colors": [
+                     "rgba(50, 172, 45, 0.97)", 
+                     "rgba(237, 129, 40, 0.89)", 
+                     "rgba(245, 54, 54, 0.9)"
+                  ], 
+                  "cacheTimeout": null, 
+                  "datasource": "Prometheus", 
+                  "nullText": null, 
+                  "minSpan": 1, 
+                  "postfixFontSize": "50%", 
+                  "colorValue": false
+               }, 
+               {
+                  "mappingTypes": [
+                     {
+                        "name": "value to text", 
+                        "value": 1
+                     }, 
+                     {
+                        "name": "range to text", 
+                        "value": 2
+                     }
+                  ], 
+                  "timeFrom": "1m", 
+                  "links": [], 
+                  "valueMaps": [
+                     {
+                        "text": "N/A", 
+                        "value": "null", 
+                        "op": "="
+                     }, 
+                     {
+                        "text": "ENABLED", 
+                        "value": "0", 
+                        "op": "="
+                     }, 
+                     {
+                        "text": "ACTIVE", 
+                        "value": "1", 
+                        "op": "="
+                     }, 
+                     {
+                        "text": "DISABLED", 
+                        "value": "2", 
+                        "op": "="
+                     }
+                  ], 
+                  "tableColumn": "", 
+                  "thresholds": "1,2", 
+                  "rangeMaps": [
+                     {
+                        "text": "N/A", 
+                        "from": "null", 
+                        "to": "null"
+                     }
+                  ], 
+                  "height": "95", 
+                  "prefix": "", 
+                  "gauge": {
+                     "thresholdLabels": false, 
+                     "show": false, 
+                     "thresholdMarkers": true, 
+                     "maxValue": 100, 
+                     "minValue": 0
+                  }, 
+                  "id": 64, 
+                  "maxDataPoints": "", 
+                  "mappingType": 1, 
+                  "span": 1, 
+                  "colorBackground": true, 
+                  "title": "BACKFILL", 
+                  "sparkline": {
+                     "full": false, 
+                     "fillColor": "rgba(31, 118, 189, 0.18)", 
+                     "lineColor": "rgb(31, 120, 193)", 
+                     "show": false
+                  }, 
+                  "targets": [
+                     {
+                        "intervalFactor": 2, 
+                        "expr": "max(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.mon.features.backfill\"})", 
+                        "step": 2, 
+                        "refId": "A", 
+                        "format": "time_series"
+                     }
+                  ], 
+                  "prefixFontSize": "50%", 
+                  "valueName": "current", 
+                  "type": "singlestat", 
+                  "valueFontSize": "40%", 
+                  "format": "none", 
+                  "hideTimeOverride": true, 
+                  "nullPointMode": "connected", 
+                  "postfix": "", 
+                  "interval": null, 
+                  "colors": [
+                     "rgba(50, 172, 45, 0.97)", 
+                     "rgba(237, 129, 40, 0.89)", 
+                     "rgba(245, 54, 54, 0.9)"
+                  ], 
+                  "cacheTimeout": null, 
+                  "datasource": "Prometheus", 
+                  "nullText": null, 
+                  "minSpan": 1, 
+                  "postfixFontSize": "50%", 
+                  "colorValue": false
+               }, 
+               {
+                  "mappingTypes": [
+                     {
+                        "name": "value to text", 
+                        "value": 1
+                     }, 
+                     {
+                        "name": "range to text", 
+                        "value": 2
+                     }
+                  ], 
+                  "timeFrom": "1m", 
+                  "links": [], 
+                  "valueMaps": [
+                     {
+                        "text": "N/A", 
+                        "value": "null", 
+                        "op": "="
+                     }, 
+                     {
+                        "text": "ENABLED", 
+                        "value": "0", 
+                        "op": "="
+                     }, 
+                     {
+                        "text": "ACTIVE", 
+                        "value": "1", 
+                        "op": "="
+                     }, 
+                     {
+                        "text": "DISABLED", 
+                        "value": "2", 
+                        "op": "="
+                     }
+                  ], 
+                  "tableColumn": "", 
+                  "thresholds": "1,2", 
+                  "rangeMaps": [
+                     {
+                        "text": "N/A", 
+                        "from": "null", 
+                        "to": "null"
+                     }
+                  ], 
+                  "height": "95", 
+                  "prefix": "", 
+                  "gauge": {
+                     "thresholdLabels": false, 
+                     "show": false, 
+                     "thresholdMarkers": true, 
+                     "maxValue": 100, 
+                     "minValue": 0
+                  }, 
+                  "id": 61, 
+                  "maxDataPoints": "", 
+                  "mappingType": 1, 
+                  "span": 1, 
+                  "colorBackground": true, 
+                  "title": "REBALANCE", 
+                  "sparkline": {
+                     "full": false, 
+                     "fillColor": "rgba(31, 118, 189, 0.18)", 
+                     "lineColor": "rgb(31, 120, 193)", 
+                     "show": false
+                  }, 
+                  "targets": [
+                     {
+                        "intervalFactor": 2, 
+                        "expr": "max(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.mon.features.rebalance\"})", 
+                        "step": 2, 
+                        "refId": "A", 
+                        "format": "time_series"
+                     }
+                  ], 
+                  "prefixFontSize": "50%", 
+                  "valueName": "current", 
+                  "type": "singlestat", 
+                  "valueFontSize": "40%", 
+                  "format": "none", 
+                  "hideTimeOverride": true, 
+                  "nullPointMode": "connected", 
+                  "postfix": "", 
+                  "interval": null, 
+                  "colors": [
+                     "rgba(50, 172, 45, 0.97)", 
+                     "rgba(237, 129, 40, 0.89)", 
+                     "rgba(245, 54, 54, 0.9)"
+                  ], 
+                  "cacheTimeout": null, 
+                  "datasource": "Prometheus", 
+                  "nullText": null, 
+                  "minSpan": 1, 
+                  "postfixFontSize": "50%", 
+                  "colorValue": false
+               }, 
+               {
+                  "mappingTypes": [
+                     {
+                        "name": "value to text", 
+                        "value": 1
+                     }, 
+                     {
+                        "name": "range to text", 
+                        "value": 2
+                     }
+                  ], 
+                  "timeFrom": "1m", 
+                  "colorBackground": true, 
+                  "valueMaps": [
+                     {
+                        "text": "N/A", 
+                        "value": "null", 
+                        "op": "="
+                     }, 
+                     {
+                        "text": "ENABLED", 
+                        "value": "0", 
+                        "op": "="
+                     }, 
+                     {
+                        "text": "ACTIVE", 
+                        "value": "1", 
+                        "op": "="
+                     }, 
+                     {
+                        "text": "DISABLED", 
+                        "value": "2", 
+                        "op": "="
+                     }, 
+                     {
+                        "text": "NODATA", 
+                        "value": "-1", 
+                        "op": "="
+                     }
+                  ], 
+                  "tableColumn": "", 
+                  "thresholds": "1,2", 
+                  "rangeMaps": [
+                     {
+                        "text": "N/A", 
+                        "from": "null", 
+                        "to": "null"
+                     }
+                  ], 
+                  "height": "95", 
+                  "prefix": "", 
+                  "gauge": {
+                     "thresholdLabels": false, 
+                     "show": false, 
+                     "thresholdMarkers": true, 
+                     "maxValue": 100, 
+                     "minValue": 0
+                  }, 
+                  "id": 62, 
+                  "maxDataPoints": "", 
+                  "mappingType": 1, 
+                  "span": 1, 
+                  "links": [], 
+                  "title": "OUT", 
+                  "sparkline": {
+                     "full": false, 
+                     "fillColor": "rgba(31, 118, 189, 0.18)", 
+                     "lineColor": "rgb(31, 120, 193)", 
+                     "show": false
+                  }, 
+                  "targets": [
+                     {
+                        "intervalFactor": 2, 
+                        "expr": "max(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.mon.features.out\"})", 
+                        "step": 2, 
+                        "refId": "A", 
+                        "format": "time_series"
+                     }
+                  ], 
+                  "prefixFontSize": "50%", 
+                  "valueName": "current", 
+                  "type": "singlestat", 
+                  "valueFontSize": "40%", 
+                  "description": "The OUT flag setting allows the mon's to mark OSD's as out of the configuration when they stop sending hearbeats to the mon's. By marking them OUT, recovery takes place. However, for planned maintenance you can set the cluster to noout to disable this behavior.", 
+                  "format": "none", 
+                  "hideTimeOverride": true, 
+                  "nullPointMode": "connected", 
+                  "postfix": "", 
+                  "interval": null, 
+                  "colors": [
+                     "rgba(50, 172, 45, 0.97)", 
+                     "rgba(237, 129, 40, 0.89)", 
+                     "rgba(245, 54, 54, 0.9)"
+                  ], 
+                  "timeShift": null, 
+                  "cacheTimeout": null, 
+                  "datasource": "Prometheus", 
+                  "nullText": null, 
+                  "minSpan": 1, 
+                  "postfixFontSize": "50%", 
+                  "colorValue": false
+               }, 
+               {
+                  "mappingTypes": [
+                     {
+                        "name": "value to text", 
+                        "value": 1
+                     }, 
+                     {
+                        "name": "range to text", 
+                        "value": 2
+                     }
+                  ], 
+                  "timeFrom": "1m", 
+                  "colorBackground": true, 
+                  "valueMaps": [
+                     {
+                        "text": "N/A", 
+                        "value": "null", 
+                        "op": "="
+                     }, 
+                     {
+                        "text": "ENABLED", 
+                        "value": "0", 
+                        "op": "="
+                     }, 
+                     {
+                        "text": "ACTIVE", 
+                        "value": "1", 
+                        "op": "="
+                     }, 
+                     {
+                        "text": "DISABLED", 
+                        "value": "2", 
+                        "op": "="
+                     }
+                  ], 
+                  "tableColumn": "", 
+                  "thresholds": "1,2", 
+                  "rangeMaps": [
+                     {
+                        "text": "N/A", 
+                        "from": "null", 
+                        "to": "null"
+                     }
+                  ], 
+                  "height": "95", 
+                  "prefix": "", 
+                  "gauge": {
+                     "thresholdLabels": false, 
+                     "show": false, 
+                     "thresholdMarkers": true, 
+                     "maxValue": 100, 
+                     "minValue": 0
+                  }, 
+                  "id": 63, 
+                  "maxDataPoints": "", 
+                  "mappingType": 1, 
+                  "span": 1, 
+                  "links": [], 
+                  "title": "DOWN", 
+                  "sparkline": {
+                     "full": false, 
+                     "fillColor": "rgba(31, 118, 189, 0.18)", 
+                     "lineColor": "rgb(31, 120, 193)", 
+                     "show": false
+                  }, 
+                  "targets": [
+                     {
+                        "intervalFactor": 2, 
+                        "expr": "max(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.mon.features.down\"})", 
+                        "step": 2, 
+                        "refId": "A", 
+                        "format": "time_series"
+                     }
+                  ], 
+                  "prefixFontSize": "50%", 
+                  "valueName": "current", 
+                  "type": "singlestat", 
+                  "valueFontSize": "40%", 
+                  "description": "The down feature allows OSD's to mark their peers as DOWN when they are not reachable. However, if there is a poor network or planned outages, you may want to set this flag to nodown to prevent OSD's flapping between up/down states", 
+                  "format": "none", 
+                  "hideTimeOverride": true, 
+                  "nullPointMode": "connected", 
+                  "postfix": "", 
+                  "interval": null, 
+                  "colors": [
+                     "rgba(50, 172, 45, 0.97)", 
+                     "rgba(237, 129, 40, 0.89)", 
+                     "rgba(245, 54, 54, 0.9)"
+                  ], 
+                  "timeShift": null, 
+                  "cacheTimeout": null, 
+                  "datasource": "Prometheus", 
+                  "nullText": null, 
+                  "minSpan": 1, 
+                  "postfixFontSize": "50%", 
+                  "colorValue": false
+               }
+            ], 
+            "showTitle": true, 
+            "collapse": false
+         }, 
+         {
+            "repeat": null, 
+            "titleSize": "h5", 
+            "repeatIteration": null, 
+            "title": "Storage Information", 
+            "height": 250, 
+            "repeatRowId": null, 
+            "panels": [
+               {
+                  "sort": {
+                     "col": 0, 
+                     "desc": true
+                  }, 
+                  "styles": [
+                     {
+                        "alias": "Time", 
+                        "type": "date", 
+                        "pattern": "Time", 
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss"
+                     }, 
+                     {
+                        "type": "hidden", 
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+                        "pattern": "Current", 
+                        "thresholds": [], 
+                        "alias": "% Full", 
+                        "colors": [
+                           "rgba(245, 54, 54, 0.9)", 
+                           "rgba(237, 129, 40, 0.89)", 
+                           "rgba(50, 172, 45, 0.97)"
+                        ], 
+                        "colorMode": null, 
+                        "decimals": 0, 
+                        "unit": "none"
+                     }, 
+                     {
+                        "type": "number", 
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+                        "pattern": "Metric", 
+                        "thresholds": [], 
+                        "alias": "Host.OSD Id", 
+                        "colors": [
+                           "rgba(245, 54, 54, 0.9)", 
+                           "rgba(237, 129, 40, 0.89)", 
+                           "rgba(50, 172, 45, 0.97)"
+                        ], 
+                        "colorMode": null, 
+                        "decimals": 2, 
+                        "unit": "short"
+                     }, 
+                     {
+                        "type": "number", 
+                        "pattern": "/.*/", 
+                        "thresholds": [], 
+                        "alias": "", 
+                        "colors": [
+                           "rgba(245, 54, 54, 0.9)", 
+                           "rgba(237, 129, 40, 0.89)", 
+                           "rgba(50, 172, 45, 0.97)"
+                        ], 
+                        "colorMode": null, 
+                        "decimals": 2, 
+                        "unit": "short"
+                     }
+                  ], 
+                  "span": 1, 
+                  "pageSize": null, 
+                  "links": [], 
+                  "title": "Disks Near Full", 
+                  "transform": "timeseries_aggregations", 
+                  "showHeader": true, 
+                  "scroll": true, 
+                  "targets": [
+                     {
+                        "format": "time_series", 
+                        "expr": "avg(label_replace(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.[0-9]*.osd_percent_used\"}, \"osd\", \"$1\", \"cephmetrics\", \"$cluster_name.osd.([0-9]*).osd_percent_used\")) by (osd) > $disk_full_threshold", 
+                        "step": 60, 
+                        "legendFormat": "{{osd}}", 
+                        "intervalFactor": 2, 
+                        "refId": "A"
+                     }
+                  ], 
+                  "fontSize": "100%", 
+                  "datasource": "Prometheus", 
+                  "minSpan": 1, 
+                  "type": "table", 
+                  "id": 75, 
+                  "columns": [
+                     {
+                        "text": "Current", 
+                        "value": "current"
+                     }
+                  ]
+               }, 
+               {
+                  "sort": {
+                     "col": null, 
+                     "desc": false
+                  }, 
+                  "styles": [
+                     {
+                        "type": "number", 
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+                        "pattern": "Metric", 
+                        "thresholds": [
+                           ""
+                        ], 
+                        "alias": "OSD Id", 
+                        "colors": [
+                           "rgba(50, 172, 45, 0.97)", 
+                           "rgba(237, 129, 40, 0.89)", 
+                           "rgba(245, 54, 54, 0.9)"
+                        ], 
+                        "sanitize": false, 
+                        "colorMode": null, 
+                        "decimals": 0, 
+                        "unit": "short"
+                     }, 
+                     {
+                        "type": "hidden", 
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+                        "pattern": "Current", 
+                        "thresholds": [
+                           "0"
+                        ], 
+                        "alias": "Status", 
+                        "colors": [
+                           "rgba(50, 172, 45, 0.97)", 
+                           "rgba(237, 129, 40, 0.89)", 
+                           "rgba(245, 54, 54, 0.9)"
+                        ], 
+                        "colorMode": "cell", 
+                        "decimals": 0, 
+                        "unit": "short"
+                     }
+                  ], 
+                  "timeFrom": "1m", 
+                  "span": 1, 
+                  "pageSize": 100, 
+                  "links": [], 
+                  "title": "OSD's Down", 
+                  "timeShift": null, 
+                  "transform": "timeseries_aggregations", 
+                  "showHeader": true, 
+                  "scroll": true, 
+                  "targets": [
+                     {
+                        "hide": false, 
+                        "format": "time_series", 
+                        "expr": "avg(label_replace(collectd_cephmetrics_gauge{cephmetrics=~\"ceph.mon.osd_state.[0-9]*.up\"}, \"osd\", \"$1\", \"cephmetrics\", \"ceph.mon.osd_state.([0-9]*).up\")) by (osd) < 0.5", 
+                        "step": 2, 
+                        "legendFormat": "{{osd}}", 
+                        "intervalFactor": 2, 
+                        "refId": "B"
+                     }
+                  ], 
+                  "hideTimeOverride": true, 
+                  "fontSize": "100%", 
+                  "datasource": "Prometheus", 
+                  "minSpan": 1, 
+                  "type": "table", 
+                  "id": 71, 
+                  "columns": [
+                     {
+                        "text": "Current", 
+                        "value": "current"
+                     }
+                  ]
+               }, 
+               {
+                  "sort": {
+                     "col": 0, 
+                     "desc": true
+                  }, 
+                  "styles": [
+                     {
+                        "alias": "Time", 
+                        "type": "date", 
+                        "pattern": "Time", 
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss"
+                     }, 
+                     {
+                        "type": "hidden", 
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+                        "pattern": "Current", 
+                        "thresholds": [], 
+                        "alias": "", 
+                        "colors": [
+                           "rgba(245, 54, 54, 0.9)", 
+                           "rgba(237, 129, 40, 0.89)", 
+                           "rgba(50, 172, 45, 0.97)"
+                        ], 
+                        "colorMode": null, 
+                        "decimals": 0, 
+                        "unit": "none"
+                     }, 
+                     {
+                        "type": "number", 
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+                        "pattern": "Metric", 
+                        "thresholds": [], 
+                        "alias": "OSD Id", 
+                        "colors": [
+                           "rgba(245, 54, 54, 0.9)", 
+                           "rgba(237, 129, 40, 0.89)", 
+                           "rgba(50, 172, 45, 0.97)"
+                        ], 
+                        "colorMode": null, 
+                        "decimals": 2, 
+                        "unit": "short"
+                     }, 
+                     {
+                        "type": "number", 
+                        "pattern": "/.*/", 
+                        "thresholds": [], 
+                        "alias": "", 
+                        "colors": [
+                           "rgba(245, 54, 54, 0.9)", 
+                           "rgba(237, 129, 40, 0.89)", 
+                           "rgba(50, 172, 45, 0.97)"
+                        ], 
+                        "colorMode": null, 
+                        "decimals": 2, 
+                        "unit": "short"
+                     }
+                  ], 
+                  "timeFrom": "5m", 
+                  "span": 1, 
+                  "pageSize": null, 
+                  "links": [], 
+                  "title": "OSDs Out", 
+                  "timeShift": null, 
+                  "transform": "timeseries_aggregations", 
+                  "showHeader": true, 
+                  "scroll": true, 
+                  "targets": [
+                     {
+                        "hide": false, 
+                        "format": "time_series", 
+                        "expr": "avg(label_replace(collectd_cephmetrics_gauge{cephmetrics=~\"ceph.mon.osd_state.[0-9]*.in\"}, \"osd\", \"$1\", \"cephmetrics\", \"ceph.mon.osd_state.([0-9]*).in\")) by (osd) < 0.5", 
+                        "step": 4, 
+                        "legendFormat": "{{osd}}", 
+                        "intervalFactor": 2, 
+                        "refId": "B"
+                     }
+                  ], 
+                  "hideTimeOverride": true, 
+                  "fontSize": "100%", 
+                  "datasource": "Prometheus", 
+                  "minSpan": 1, 
+                  "type": "table", 
+                  "id": 74, 
+                  "columns": [
+                     {
+                        "text": "Current", 
+                        "value": "current"
+                     }
+                  ]
+               }, 
+               {
+                  "span": 1, 
+                  "links": [], 
+                  "title": "", 
+                  "transparent": true, 
+                  "content": "", 
+                  "mode": "html", 
+                  "minSpan": 1, 
+                  "type": "text", 
+                  "id": 73
+               }, 
+               {
+                  "sort": {
+                     "col": null, 
+                     "desc": false
+                  }, 
+                  "styles": [
+                     {
+                        "pattern": "Time", 
+                        "type": "date", 
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss"
+                     }, 
+                     {
+                        "type": "number", 
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+                        "pattern": "Metric", 
+                        "thresholds": [], 
+                        "alias": "Object State", 
+                        "colors": [
+                           "rgba(245, 54, 54, 0.9)", 
+                           "rgba(237, 129, 40, 0.89)", 
+                           "rgba(50, 172, 45, 0.97)"
+                        ], 
+                        "colorMode": null, 
+                        "decimals": 2, 
+                        "unit": "short"
+                     }, 
+                     {
+                        "type": "number", 
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+                        "pattern": "Current", 
+                        "thresholds": [], 
+                        "alias": "Count", 
+                        "colors": [
+                           "rgba(245, 54, 54, 0.9)", 
+                           "rgba(237, 129, 40, 0.89)", 
+                           "rgba(50, 172, 45, 0.97)"
+                        ], 
+                        "colorMode": null, 
+                        "decimals": 0, 
+                        "unit": "none"
+                     }, 
+                     {
+                        "colorMode": null, 
+                        "thresholds": [], 
+                        "colors": [
+                           "rgba(245, 54, 54, 0.9)", 
+                           "rgba(237, 129, 40, 0.89)", 
+                           "rgba(50, 172, 45, 0.97)"
+                        ], 
+                        "type": "number", 
+                        "pattern": "/.*/", 
+                        "decimals": 0, 
+                        "unit": "none"
+                     }
+                  ], 
+                  "minSpan": 3, 
+                  "span": 4, 
+                  "pageSize": null, 
+                  "links": [], 
+                  "title": "Object Summary", 
+                  "transform": "timeseries_aggregations", 
+                  "showHeader": true, 
+                  "scroll": true, 
+                  "targets": [
+                     {
+                        "format": "time_series", 
+                        "expr": "max(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.mon.num_object\"})", 
+                        "tags": [], 
+                        "refId": "A", 
+                        "alias": "Objects", 
+                        "step": 20, 
+                        "select": [
+                           [
+                              {
+                                 "type": "field", 
+                                 "params": [
+                                    "value"
+                                 ]
+                              }, 
+                              {
+                                 "type": "mean", 
+                                 "params": []
+                              }
+                           ]
+                        ], 
+                        "legendFormat": "Total Objects", 
+                        "intervalFactor": 2, 
+                        "groupBy": [
+                           {
+                              "type": "time", 
+                              "params": [
+                                 "$__interval"
+                              ]
+                           }, 
+                           {
+                              "type": "fill", 
+                              "params": [
+                                 "null"
+                              ]
+                           }
+                        ], 
+                        "resultFormat": "time_series"
+                     }, 
+                     {
+                        "policy": "default", 
+                        "format": "time_series", 
+                        "expr": "max(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.mon.num_object_degraded\"})", 
+                        "tags": [], 
+                        "refId": "B", 
+                        "alias": "Objects", 
+                        "step": 20, 
+                        "select": [
+                           [
+                              {
+                                 "type": "field", 
+                                 "params": [
+                                    "value"
+                                 ]
+                              }, 
+                              {
+                                 "type": "mean", 
+                                 "params": []
+                              }
+                           ]
+                        ], 
+                        "legendFormat": "Objects degraded", 
+                        "intervalFactor": 2, 
+                        "groupBy": [
+                           {
+                              "type": "time", 
+                              "params": [
+                                 "$__interval"
+                              ]
+                           }, 
+                           {
+                              "type": "fill", 
+                              "params": [
+                                 "null"
+                              ]
+                           }
+                        ], 
+                        "resultFormat": "time_series"
+                     }, 
+                     {
+                        "policy": "default", 
+                        "format": "time_series", 
+                        "expr": "max(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.mon.num_object_misplaced\"})", 
+                        "tags": [], 
+                        "refId": "C", 
+                        "alias": "Objects", 
+                        "step": 20, 
+                        "select": [
+                           [
+                              {
+                                 "type": "field", 
+                                 "params": [
+                                    "value"
+                                 ]
+                              }, 
+                              {
+                                 "type": "mean", 
+                                 "params": []
+                              }
+                           ]
+                        ], 
+                        "legendFormat": "Objects misplaced", 
+                        "intervalFactor": 2, 
+                        "groupBy": [
+                           {
+                              "type": "time", 
+                              "params": [
+                                 "$__interval"
+                              ]
+                           }, 
+                           {
+                              "type": "fill", 
+                              "params": [
+                                 "null"
+                              ]
+                           }
+                        ], 
+                        "resultFormat": "time_series"
+                     }, 
+                     {
+                        "format": "time_series", 
+                        "expr": "max(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.mon.num_object_unfound\"})", 
+                        "tags": [], 
+                        "refId": "D", 
+                        "alias": "Objects", 
+                        "step": 20, 
+                        "select": [
+                           [
+                              {
+                                 "type": "field", 
+                                 "params": [
+                                    "value"
+                                 ]
+                              }, 
+                              {
+                                 "type": "mean", 
+                                 "params": []
+                              }
+                           ]
+                        ], 
+                        "legendFormat": "Objects unfound", 
+                        "intervalFactor": 2, 
+                        "groupBy": [
+                           {
+                              "type": "time", 
+                              "params": [
+                                 "$__interval"
+                              ]
+                           }, 
+                           {
+                              "type": "fill", 
+                              "params": [
+                                 "null"
+                              ]
+                           }
+                        ], 
+                        "resultFormat": "time_series"
+                     }
+                  ], 
+                  "fontSize": "100%", 
+                  "datasource": "Prometheus", 
+                  "filterNull": false, 
+                  "type": "table", 
+                  "id": 10, 
+                  "columns": [
+                     {
+                        "text": "Current", 
+                        "value": "current"
+                     }
+                  ]
+               }, 
+               {
+                  "span": 1, 
+                  "links": [], 
+                  "title": "", 
+                  "transparent": true, 
+                  "content": "", 
+                  "mode": "markdown", 
+                  "minSpan": 1, 
+                  "type": "text", 
+                  "id": 67
+               }, 
+               {
+                  "sort": {
+                     "col": null, 
+                     "desc": false
+                  }, 
+                  "styles": [
+                     {
+                        "pattern": "Time", 
+                        "type": "date", 
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss"
+                     }, 
+                     {
+                        "type": "number", 
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+                        "pattern": "Metric", 
+                        "thresholds": [], 
+                        "alias": "PG State", 
+                        "colors": [
+                           "rgba(245, 54, 54, 0.9)", 
+                           "rgba(237, 129, 40, 0.89)", 
+                           "rgba(50, 172, 45, 0.97)"
+                        ], 
+                        "colorMode": null, 
+                        "decimals": 2, 
+                        "unit": "short"
+                     }, 
+                     {
+                        "type": "number", 
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+                        "pattern": "Current", 
+                        "thresholds": [], 
+                        "alias": "Count", 
+                        "colors": [
+                           "rgba(245, 54, 54, 0.9)", 
+                           "rgba(237, 129, 40, 0.89)", 
+                           "rgba(50, 172, 45, 0.97)"
+                        ], 
+                        "colorMode": null, 
+                        "decimals": 0, 
+                        "unit": "none"
+                     }, 
+                     {
+                        "colorMode": null, 
+                        "thresholds": [], 
+                        "colors": [
+                           "rgba(245, 54, 54, 0.9)", 
+                           "rgba(237, 129, 40, 0.89)", 
+                           "rgba(50, 172, 45, 0.97)"
+                        ], 
+                        "type": "number", 
+                        "pattern": "/.*/", 
+                        "decimals": 0, 
+                        "unit": "none"
+                     }
+                  ], 
+                  "minSpan": 3, 
+                  "span": 3, 
+                  "pageSize": null, 
+                  "links": [], 
+                  "title": "PG Summary", 
+                  "transform": "timeseries_aggregations", 
+                  "showHeader": true, 
+                  "scroll": true, 
+                  "targets": [
+                     {
+                        "format": "time_series", 
+                        "expr": "max(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.mon.num_pg\"})", 
+                        "tags": [], 
+                        "refId": "A", 
+                        "alias": "PG's", 
+                        "step": 20, 
+                        "select": [
+                           [
+                              {
+                                 "type": "field", 
+                                 "params": [
+                                    "value"
+                                 ]
+                              }, 
+                              {
+                                 "type": "mean", 
+                                 "params": []
+                              }
+                           ]
+                        ], 
+                        "legendFormat": "PGs", 
+                        "intervalFactor": 2, 
+                        "groupBy": [
+                           {
+                              "type": "time", 
+                              "params": [
+                                 "$__interval"
+                              ]
+                           }, 
+                           {
+                              "type": "fill", 
+                              "params": [
+                                 "null"
+                              ]
+                           }
+                        ], 
+                        "resultFormat": "time_series"
+                     }, 
+                     {
+                        "format": "time_series", 
+                        "expr": "max(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.mon.num_pg_active\"})", 
+                        "tags": [], 
+                        "refId": "B", 
+                        "alias": "PG's", 
+                        "step": 20, 
+                        "select": [
+                           [
+                              {
+                                 "type": "field", 
+                                 "params": [
+                                    "value"
+                                 ]
+                              }, 
+                              {
+                                 "type": "mean", 
+                                 "params": []
+                              }
+                           ]
+                        ], 
+                        "legendFormat": "Active PGs", 
+                        "intervalFactor": 2, 
+                        "groupBy": [
+                           {
+                              "type": "time", 
+                              "params": [
+                                 "$__interval"
+                              ]
+                           }, 
+                           {
+                              "type": "fill", 
+                              "params": [
+                                 "null"
+                              ]
+                           }
+                        ], 
+                        "resultFormat": "time_series"
+                     }, 
+                     {
+                        "format": "time_series", 
+                        "expr": "max(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.mon.num_pg_active_clean\"})", 
+                        "tags": [], 
+                        "refId": "C", 
+                        "alias": "PG's", 
+                        "step": 20, 
+                        "select": [
+                           [
+                              {
+                                 "type": "field", 
+                                 "params": [
+                                    "value"
+                                 ]
+                              }, 
+                              {
+                                 "type": "mean", 
+                                 "params": []
+                              }
+                           ]
+                        ], 
+                        "legendFormat": "Active+clean PGs", 
+                        "intervalFactor": 2, 
+                        "groupBy": [
+                           {
+                              "type": "time", 
+                              "params": [
+                                 "$__interval"
+                              ]
+                           }, 
+                           {
+                              "type": "fill", 
+                              "params": [
+                                 "null"
+                              ]
+                           }
+                        ], 
+                        "resultFormat": "time_series"
+                     }, 
+                     {
+                        "format": "time_series", 
+                        "expr": "max(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.mon.num_pg_peering\"})", 
+                        "tags": [], 
+                        "refId": "D", 
+                        "alias": "PG's", 
+                        "step": 20, 
+                        "select": [
+                           [
+                              {
+                                 "type": "field", 
+                                 "params": [
+                                    "value"
+                                 ]
+                              }, 
+                              {
+                                 "type": "mean", 
+                                 "params": []
+                              }
+                           ]
+                        ], 
+                        "legendFormat": "PGs peering", 
+                        "intervalFactor": 2, 
+                        "groupBy": [
+                           {
+                              "type": "time", 
+                              "params": [
+                                 "$__interval"
+                              ]
+                           }, 
+                           {
+                              "type": "fill", 
+                              "params": [
+                                 "null"
+                              ]
+                           }
+                        ], 
+                        "resultFormat": "time_series"
+                     }
+                  ], 
+                  "fontSize": "100%", 
+                  "datasource": "Prometheus", 
+                  "filterNull": false, 
+                  "type": "table", 
+                  "id": 13, 
+                  "columns": [
+                     {
+                        "text": "Current", 
+                        "value": "current"
+                     }
+                  ]
+               }
+            ], 
+            "showTitle": true, 
+            "collapse": false
+         }
+      ], 
+      "templating": {
+         "list": [
+            {
+               "regex": "/cephmetrics=\"([^.]*)\\./", 
+               "sort": 0, 
+               "multi": false, 
+               "hide": 2, 
+               "name": "cluster_name", 
+               "tags": [], 
+               "allValue": null, 
+               "tagValuesQuery": "", 
+               "refresh": 1, 
+               "label": null, 
+               "current": {
+                  "text": "ceph", 
+                  "value": "ceph"
+               }, 
+               "datasource": "Prometheus", 
+               "type": "query", 
+               "query": "collectd_cephmetrics_gauge{}", 
+               "useTags": false, 
+               "tagsQuery": "", 
+               "options": [], 
+               "includeAll": false
+            }, 
+            {
+               "multi": false, 
+               "hide": 2, 
+               "name": "domain", 
+               "allValue": null, 
+               "label": null, 
+               "current": {
+                  "text": "fedex.lan", 
+                  "value": "fedex.lan"
+               }, 
+               "query": "fedex.lan", 
+               "type": "custom", 
+               "options": [
+                  {
+                     "text": "fedex.lan", 
+                     "selected": true, 
+                     "value": "fedex.lan"
+                  }
+               ], 
+               "includeAll": false
+            }, 
+            {
+               "multi": true, 
+               "hide": 2, 
+               "name": "osd_servers", 
+               "allValue": null, 
+               "label": null, 
+               "current": {
+                  "text": "All", 
+                  "selected": true, 
+                  "value": "$__all"
+               }, 
+               "query": "node1,node2,node3", 
+               "type": "custom", 
+               "options": [
+                  {
+                     "text": "All", 
+                     "selected": true, 
+                     "value": "$__all"
+                  }, 
+                  {
+                     "text": "node1", 
+                     "selected": false, 
+                     "value": "node1"
+                  }, 
+                  {
+                     "text": "node2", 
+                     "selected": false, 
+                     "value": "node2"
+                  }, 
+                  {
+                     "text": "node3", 
+                     "selected": false, 
+                     "value": "node3"
+                  }
+               ], 
+               "includeAll": true
+            }, 
+            {
+               "multi": false, 
+               "hide": 2, 
+               "name": "disk_full_threshold", 
+               "allValue": null, 
+               "label": null, 
+               "current": {
+                  "text": "85", 
+                  "selected": true, 
+                  "value": "85"
+               }, 
+               "query": "85", 
+               "type": "custom", 
+               "options": [
+                  {
+                     "text": "85", 
+                     "selected": true, 
+                     "value": "85"
+                  }
+               ], 
+               "includeAll": false
+            }
+         ]
+      }, 
+      "links": [
+         {
+            "keepTime": true, 
+            "tags": [
+               "overview"
+            ], 
+            "title": "Shortcuts", 
+            "includeVars": true, 
+            "targetBlank": true, 
+            "asDropdown": true, 
+            "type": "dashboards", 
+            "icon": "external link"
+         }
+      ], 
       "tags": [
-        "overview"
-      ],
-      "targetBlank": true,
-      "title": "Shortcuts",
-      "type": "dashboards"
-    }
-  ],
-  "refresh": "10s",
-  "rows": [
-    {
-      "collapse": false,
-      "height": "70",
-      "panels": [
-        {
-          "cacheTimeout": null,
-          "colorBackground": true,
-          "colorValue": false,
-          "colors": [
-            "rgba(1, 167, 1, 1)",
-            "rgba(255,165,0, 1)",
-            "rgba(255, 0, 0, 1)"
-          ],
-          "datasource": "Prometheus",
-          "description": "Shows the overall health of the ceph cluster. To see specific health messages hover over the annotation in the health chart below.",
-          "format": "none",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "height": "70",
-          "hideTimeOverride": true,
-          "id": 76,
-          "interval": null,
-          "links": [],
-          "mappingType": 2,
-          "mappingTypes": [
+         "overview"
+      ], 
+      "graphTooltip": 0, 
+      "hideControls": false, 
+      "title": "Ceph Health", 
+      "editable": true, 
+      "refresh": "10s", 
+      "annotations": {
+         "list": [
             {
-              "name": "value to text",
-              "value": 1
-            },
+               "enable": true, 
+               "hide": false, 
+               "name": "health_alert", 
+               "tags": "health_alert", 
+               "showIn": 0, 
+               "limit": 100, 
+               "datasource": "Prometheus", 
+               "tagKeys": "health_alert", 
+               "type": "alert", 
+               "iconColor": "rgba(255, 96, 96, 1)"
+            }, 
             {
-              "name": "range to text",
-              "value": 2
+               "enable": true, 
+               "hide": false, 
+               "name": "health_ok", 
+               "tags": "health_ok", 
+               "showIn": 0, 
+               "limit": 100, 
+               "datasource": "Prometheus", 
+               "tagKeys": "health_ok", 
+               "type": "alert", 
+               "iconColor": "rgb(1, 195, 0)"
             }
-          ],
-          "maxDataPoints": "",
-          "minSpan": 1,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "",
-          "postfixFontSize": "50%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "0",
-              "text": "HEALTH OK",
-              "to": "1"
-            },
-            {
-              "from": "1",
-              "text": "HEALTH WARNING",
-              "to": "4"
-            },
-            {
-              "from": "5",
-              "text": "HEALTH ERROR",
-              "to": "99"
-            },
-            {
-              "from": "-10",
-              "text": "NODATA",
-              "to": "0"
-            }
-          ],
-          "span": 12,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-          },
-          "tableColumn": "",
-          "targets": [
-            {
-              "expr": "max(collectd_cephmetrics_gauge{cephmetrics=~\"ceph.mon.health\"})",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "A",
-              "step": 2
-            }
-          ],
-          "thresholds": "1,5",
-          "timeFrom": "1m",
-          "timeShift": null,
-          "title": "",
-          "type": "singlestat",
-          "valueFontSize": "50%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "OK",
-              "value": "0"
-            },
-            {
-              "op": "=",
-              "text": "WARN",
-              "value": "4"
-            },
-            {
-              "op": "=",
-              "text": "ERROR",
-              "value": "8"
-            }
-          ],
-          "valueName": "current"
-        }
-      ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": false,
-      "title": "Dashboard Row",
-      "titleSize": "h6"
-    },
-    {
-      "collapse": false,
-      "height": "350",
-      "panels": [
-        {
-          "aliasColors": {
-            "Ceph Health": "#3F6833",
-            "Ceph Health (0:OK, 4:Warning,8:Error)": "#DEDAF7",
-            "collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.health": "#DEDAF7"
-          },
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "Prometheus",
-          "description": "The chart plots the clusters health, over time. Health is depicted as a integer; 0, 4 or 8 where 0 is OK, 4 is WARN and 8 represents an ERROR state. Horizontal thresholds (drawn in yellow and red) indicate when the cluster's health transitions to 'warning' or 'error'. Annotations describing the details of the clusters health may also be shown if the \"EventURL\" setting is defined to the collectd plugin on the mon hosts.",
-          "fill": 1,
-          "height": "350",
-          "hideTimeOverride": true,
-          "id": 55,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 2,
-          "links": [],
-          "maxDataPoints": "",
-          "minSpan": 3,
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 12,
-          "stack": false,
-          "steppedLine": true,
-          "targets": [
-            {
-              "expr": "max(max_over_time(collectd_cephmetrics_gauge{cephmetrics=~\"ceph.mon.health\"}[5m]))",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "Ceph Health",
-              "refId": "A",
-              "step": 600
-            }
-          ],
-          "thresholds": [
-            {
-              "colorMode": "custom",
-              "fill": false,
-              "fillColor": "rgba(222, 226, 0, 0.47)",
-              "line": true,
-              "lineColor": "rgb(247, 172, 0)",
-              "op": "gt",
-              "value": 3
-            },
-            {
-              "colorMode": "custom",
-              "fill": false,
-              "fillColor": "rgba(246, 3, 3, 0.5)",
-              "line": true,
-              "lineColor": "rgb(203, 0, 0)",
-              "op": "gt",
-              "value": 7
-            }
-          ],
-          "timeFrom": "3d",
-          "timeShift": null,
-          "title": "Health History - Last 3 days",
-          "tooltip": {
-            "shared": false,
-            "sort": 1,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": "",
-              "logBase": 1,
-              "max": "10",
-              "min": "-1",
-              "show": false
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": false
-            }
-          ]
-        }
-      ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": true,
-      "title": "Cluster Health",
-      "titleSize": "h5"
-    },
-    {
-      "collapse": false,
-      "height": "200",
-      "panels": [
-        {
-          "content": "",
-          "id": 69,
-          "links": [],
-          "minSpan": 1,
-          "mode": "html",
-          "span": 1,
-          "title": "",
-          "transparent": true,
-          "type": "text"
-        },
-        {
-          "columns": [
-            {
-              "text": "Current",
-              "value": "current"
-            }
-          ],
-          "datasource": "Prometheus",
-          "fontSize": "100%",
-          "hideTimeOverride": true,
-          "id": 56,
-          "links": [],
-          "maxDataPoints": "",
-          "minSpan": 2,
-          "pageSize": null,
-          "scroll": true,
-          "showHeader": true,
-          "sort": {
-            "col": null,
-            "desc": false
-          },
-          "span": 3,
-          "styles": [
-            {
-              "alias": "Time",
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "pattern": "Time",
-              "type": "date"
-            },
-            {
-              "alias": "Hostname",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "pattern": "Metric",
-              "sanitize": false,
-              "thresholds": [],
-              "type": "number",
-              "unit": "short"
-            },
-            {
-              "alias": "Status",
-              "colorMode": "row",
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(0, 169, 3, 0.89)",
-                "rgba(249, 190, 0, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 0,
-              "pattern": "Current",
-              "thresholds": [
-                "0",
-                "3",
-                "7"
-              ],
-              "type": "number",
-              "unit": "short"
-            },
-            {
-              "alias": "",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "decimals": 2,
-              "pattern": "/.*/",
-              "thresholds": [],
-              "type": "number",
-              "unit": "short"
-            }
-          ],
-          "targets": [
-            {
-              "expr": "max(label_replace(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.mon.mon_status..*\"}, \"node\", \"$1\", \"instance\", \"(.*):.*\")) by (node)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "{{node}}",
-              "refId": "B",
-              "step": 2
-            }
-          ],
-          "timeFrom": "1m",
-          "timeShift": null,
-          "title": "Monitor Status",
-          "transform": "timeseries_aggregations",
-          "type": "table"
-        },
-        {
-          "content": "",
-          "id": 68,
-          "links": [],
-          "minSpan": 2,
-          "mode": "html",
-          "span": 2,
-          "title": "",
-          "transparent": true,
-          "type": "text"
-        },
-        {
-          "content": "<h2 style=\"text-align: center;\">Cluster Flags:</h2>",
-          "id": 58,
-          "links": [],
-          "minSpan": 1,
-          "mode": "html",
-          "span": 1,
-          "title": "",
-          "transparent": true,
-          "type": "text"
-        },
-        {
-          "cacheTimeout": null,
-          "colorBackground": true,
-          "colorValue": false,
-          "colors": [
-            "rgba(50, 172, 45, 0.97)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(245, 54, 54, 0.9)"
-          ],
-          "datasource": "Prometheus",
-          "description": "Scrub activity takes place daily basis across the OSD's and performs object size and attribute checks. Scrub activity can be controlled with the \"ceph osd scrub\" command.",
-          "format": "none",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "height": "95",
-          "hideTimeOverride": true,
-          "id": 57,
-          "interval": null,
-          "links": [],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": "",
-          "minSpan": 1,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "",
-          "postfixFontSize": "50%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 1,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-          },
-          "tableColumn": "",
-          "targets": [
-            {
-              "expr": "max(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.mon.features.scrub\"})",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "A",
-              "step": 2
-            }
-          ],
-          "thresholds": "1,2",
-          "timeFrom": "1m",
-          "title": "SCRUB",
-          "type": "singlestat",
-          "valueFontSize": "40%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "N/A",
-              "value": "null"
-            },
-            {
-              "op": "=",
-              "text": "ENABLED",
-              "value": "0"
-            },
-            {
-              "op": "=",
-              "text": "ACTIVE",
-              "value": "1"
-            },
-            {
-              "op": "=",
-              "text": "DISABLED",
-              "value": "2"
-            }
-          ],
-          "valueName": "current"
-        },
-        {
-          "cacheTimeout": null,
-          "colorBackground": true,
-          "colorValue": false,
-          "colors": [
-            "rgba(50, 172, 45, 0.97)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(245, 54, 54, 0.9)"
-          ],
-          "datasource": "Prometheus",
-          "description": "Deep scrub acts on the objects within placement groups (PGs). Objects are read, and checksum's compared to protect against silent bit-rot events. Although a weekly activity, in large clusters is normal to see deep-scrub active on a daily basis. Scrub activity can be controlled with the \"ceph osd scrub\" command.",
-          "format": "none",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "height": "95",
-          "hideTimeOverride": true,
-          "id": 59,
-          "interval": null,
-          "links": [],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": "",
-          "minSpan": 1,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "",
-          "postfixFontSize": "50%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 1,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-          },
-          "tableColumn": "",
-          "targets": [
-            {
-              "expr": "max(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.mon.features.deep_scrub\"})",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "A",
-              "step": 2
-            }
-          ],
-          "thresholds": "1,2",
-          "timeFrom": "1m",
-          "title": "DEEP SCRUB",
-          "type": "singlestat",
-          "valueFontSize": "40%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "N/A",
-              "value": "null"
-            },
-            {
-              "op": "=",
-              "text": "ENABLED",
-              "value": "0"
-            },
-            {
-              "op": "=",
-              "text": "ACTIVE",
-              "value": "1"
-            },
-            {
-              "op": "=",
-              "text": "DISABLED",
-              "value": "2"
-            }
-          ],
-          "valueName": "current"
-        },
-        {
-          "cacheTimeout": null,
-          "colorBackground": true,
-          "colorValue": false,
-          "colors": [
-            "rgba(50, 172, 45, 0.97)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(245, 54, 54, 0.9)"
-          ],
-          "datasource": "Prometheus",
-          "description": "With the recovery flag enabled, disruption in the cluster will result in data being recreated to freespace within the cluster to honor the pool's protection schema. Under some circumstances, you may use the norecover flag to prevent automatic recovery.",
-          "format": "none",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "height": "95",
-          "hideTimeOverride": true,
-          "id": 60,
-          "interval": null,
-          "links": [],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": "",
-          "minSpan": 1,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "",
-          "postfixFontSize": "50%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 1,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-          },
-          "tableColumn": "",
-          "targets": [
-            {
-              "expr": "max(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.mon.features.recovery\"})",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "A",
-              "step": 2
-            }
-          ],
-          "thresholds": "1,2",
-          "timeFrom": "1m",
-          "title": "RECOVERY",
-          "type": "singlestat",
-          "valueFontSize": "40%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "N/A",
-              "value": "null"
-            },
-            {
-              "op": "=",
-              "text": "ENABLED",
-              "value": "0"
-            },
-            {
-              "op": "=",
-              "text": "ACTIVE",
-              "value": "1"
-            },
-            {
-              "op": "=",
-              "text": "DISABLED",
-              "value": "2"
-            }
-          ],
-          "valueName": "current"
-        },
-        {
-          "cacheTimeout": null,
-          "colorBackground": true,
-          "colorValue": false,
-          "colors": [
-            "rgba(50, 172, 45, 0.97)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(245, 54, 54, 0.9)"
-          ],
-          "datasource": "Prometheus",
-          "format": "none",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "height": "95",
-          "hideTimeOverride": true,
-          "id": 64,
-          "interval": null,
-          "links": [],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": "",
-          "minSpan": 1,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "",
-          "postfixFontSize": "50%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 1,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-          },
-          "tableColumn": "",
-          "targets": [
-            {
-              "expr": "max(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.mon.features.backfill\"})",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "A",
-              "step": 2
-            }
-          ],
-          "thresholds": "1,2",
-          "timeFrom": "1m",
-          "title": "BACKFILL",
-          "type": "singlestat",
-          "valueFontSize": "40%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "N/A",
-              "value": "null"
-            },
-            {
-              "op": "=",
-              "text": "ENABLED",
-              "value": "0"
-            },
-            {
-              "op": "=",
-              "text": "ACTIVE",
-              "value": "1"
-            },
-            {
-              "op": "=",
-              "text": "DISABLED",
-              "value": "2"
-            }
-          ],
-          "valueName": "current"
-        },
-        {
-          "cacheTimeout": null,
-          "colorBackground": true,
-          "colorValue": false,
-          "colors": [
-            "rgba(50, 172, 45, 0.97)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(245, 54, 54, 0.9)"
-          ],
-          "datasource": "Prometheus",
-          "format": "none",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "height": "95",
-          "hideTimeOverride": true,
-          "id": 61,
-          "interval": null,
-          "links": [],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": "",
-          "minSpan": 1,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "",
-          "postfixFontSize": "50%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 1,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-          },
-          "tableColumn": "",
-          "targets": [
-            {
-              "expr": "max(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.mon.features.rebalance\"})",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "A",
-              "step": 2
-            }
-          ],
-          "thresholds": "1,2",
-          "timeFrom": "1m",
-          "title": "REBALANCE",
-          "type": "singlestat",
-          "valueFontSize": "40%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "N/A",
-              "value": "null"
-            },
-            {
-              "op": "=",
-              "text": "ENABLED",
-              "value": "0"
-            },
-            {
-              "op": "=",
-              "text": "ACTIVE",
-              "value": "1"
-            },
-            {
-              "op": "=",
-              "text": "DISABLED",
-              "value": "2"
-            }
-          ],
-          "valueName": "current"
-        },
-        {
-          "cacheTimeout": null,
-          "colorBackground": true,
-          "colorValue": false,
-          "colors": [
-            "rgba(50, 172, 45, 0.97)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(245, 54, 54, 0.9)"
-          ],
-          "datasource": "Prometheus",
-          "description": "The OUT flag setting allows the mon's to mark OSD's as out of the configuration when they stop sending hearbeats to the mon's. By marking them OUT, recovery takes place. However, for planned maintenance you can set the cluster to noout to disable this behavior.",
-          "format": "none",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "height": "95",
-          "hideTimeOverride": true,
-          "id": 62,
-          "interval": null,
-          "links": [],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": "",
-          "minSpan": 1,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "",
-          "postfixFontSize": "50%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 1,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-          },
-          "tableColumn": "",
-          "targets": [
-            {
-              "expr": "max(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.mon.features.out\"})",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "A",
-              "step": 2
-            }
-          ],
-          "thresholds": "1,2",
-          "timeFrom": "1m",
-          "timeShift": null,
-          "title": "OUT",
-          "type": "singlestat",
-          "valueFontSize": "40%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "N/A",
-              "value": "null"
-            },
-            {
-              "op": "=",
-              "text": "ENABLED",
-              "value": "0"
-            },
-            {
-              "op": "=",
-              "text": "ACTIVE",
-              "value": "1"
-            },
-            {
-              "op": "=",
-              "text": "DISABLED",
-              "value": "2"
-            },
-            {
-              "op": "=",
-              "text": "NODATA",
-              "value": "-1"
-            }
-          ],
-          "valueName": "current"
-        },
-        {
-          "cacheTimeout": null,
-          "colorBackground": true,
-          "colorValue": false,
-          "colors": [
-            "rgba(50, 172, 45, 0.97)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(245, 54, 54, 0.9)"
-          ],
-          "datasource": "Prometheus",
-          "description": "The down feature allows OSD's to mark their peers as DOWN when they are not reachable. However, if there is a poor network or planned outages, you may want to set this flag to nodown to prevent OSD's flapping between up/down states",
-          "format": "none",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "height": "95",
-          "hideTimeOverride": true,
-          "id": 63,
-          "interval": null,
-          "links": [],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": "",
-          "minSpan": 1,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "",
-          "postfixFontSize": "50%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 1,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-          },
-          "tableColumn": "",
-          "targets": [
-            {
-              "expr": "max(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.mon.features.down\"})",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "A",
-              "step": 2
-            }
-          ],
-          "thresholds": "1,2",
-          "timeFrom": "1m",
-          "timeShift": null,
-          "title": "DOWN",
-          "type": "singlestat",
-          "valueFontSize": "40%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "N/A",
-              "value": "null"
-            },
-            {
-              "op": "=",
-              "text": "ENABLED",
-              "value": "0"
-            },
-            {
-              "op": "=",
-              "text": "ACTIVE",
-              "value": "1"
-            },
-            {
-              "op": "=",
-              "text": "DISABLED",
-              "value": "2"
-            }
-          ],
-          "valueName": "current"
-        }
-      ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": true,
-      "title": "Cluster State",
-      "titleSize": "h5"
-    },
-    {
-      "collapse": false,
-      "height": 250,
-      "panels": [
-        {
-          "columns": [
-            {
-              "text": "Current",
-              "value": "current"
-            }
-          ],
-          "datasource": "Prometheus",
-          "fontSize": "100%",
-          "id": 75,
-          "links": [],
-          "minSpan": 1,
-          "pageSize": null,
-          "scroll": true,
-          "showHeader": true,
-          "sort": {
-            "col": 0,
-            "desc": true
-          },
-          "span": 1,
-          "styles": [
-            {
-              "alias": "Time",
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "pattern": "Time",
-              "type": "date"
-            },
-            {
-              "alias": "% Full",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 0,
-              "pattern": "Current",
-              "thresholds": [],
-              "type": "hidden",
-              "unit": "none"
-            },
-            {
-              "alias": "Host.OSD Id",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "pattern": "Metric",
-              "thresholds": [],
-              "type": "number",
-              "unit": "short"
-            },
-            {
-              "alias": "",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "decimals": 2,
-              "pattern": "/.*/",
-              "thresholds": [],
-              "type": "number",
-              "unit": "short"
-            }
-          ],
-          "targets": [
-            {
-              "expr": "avg(label_replace(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.[0-9]*.osd_percent_used\"}, \"osd\", \"$1\", \"cephmetrics\", \"$cluster_name.osd.([0-9]*).osd_percent_used\")) by (osd) > $disk_full_threshold",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "{{osd}}",
-              "refId": "A",
-              "step": 60
-            }
-          ],
-          "title": "Disks Near Full",
-          "transform": "timeseries_aggregations",
-          "type": "table"
-        },
-        {
-          "columns": [
-            {
-              "text": "Current",
-              "value": "current"
-            }
-          ],
-          "datasource": "Prometheus",
-          "fontSize": "100%",
-          "hideTimeOverride": true,
-          "id": 71,
-          "links": [],
-          "minSpan": 1,
-          "pageSize": 100,
-          "scroll": true,
-          "showHeader": true,
-          "sort": {
-            "col": null,
-            "desc": false
-          },
-          "span": 1,
-          "styles": [
-            {
-              "alias": "OSD Id",
-              "colorMode": null,
-              "colors": [
-                "rgba(50, 172, 45, 0.97)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(245, 54, 54, 0.9)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 0,
-              "pattern": "Metric",
-              "sanitize": false,
-              "thresholds": [
-                ""
-              ],
-              "type": "number",
-              "unit": "short"
-            },
-            {
-              "alias": "Status",
-              "colorMode": "cell",
-              "colors": [
-                "rgba(50, 172, 45, 0.97)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(245, 54, 54, 0.9)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 0,
-              "pattern": "Current",
-              "thresholds": [
-                "0"
-              ],
-              "type": "hidden",
-              "unit": "short"
-            }
-          ],
-          "targets": [
-            {
-              "expr": "avg(label_replace(collectd_cephmetrics_gauge{cephmetrics=~\"ceph.mon.osd_state.[0-9]*.up\"}, \"osd\", \"$1\", \"cephmetrics\", \"ceph.mon.osd_state.([0-9]*).up\")) by (osd) < 0.5",
-              "format": "time_series",
-              "hide": false,
-              "intervalFactor": 2,
-              "legendFormat": "{{osd}}",
-              "refId": "B",
-              "step": 2
-            }
-          ],
-          "timeFrom": "1m",
-          "timeShift": null,
-          "title": "OSD's Down",
-          "transform": "timeseries_aggregations",
-          "type": "table"
-        },
-        {
-          "columns": [
-            {
-              "text": "Current",
-              "value": "current"
-            }
-          ],
-          "datasource": "Prometheus",
-          "fontSize": "100%",
-          "hideTimeOverride": true,
-          "id": 74,
-          "links": [],
-          "minSpan": 1,
-          "pageSize": null,
-          "scroll": true,
-          "showHeader": true,
-          "sort": {
-            "col": 0,
-            "desc": true
-          },
-          "span": 1,
-          "styles": [
-            {
-              "alias": "Time",
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "pattern": "Time",
-              "type": "date"
-            },
-            {
-              "alias": "",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 0,
-              "pattern": "Current",
-              "thresholds": [],
-              "type": "hidden",
-              "unit": "none"
-            },
-            {
-              "alias": "OSD Id",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "pattern": "Metric",
-              "thresholds": [],
-              "type": "number",
-              "unit": "short"
-            },
-            {
-              "alias": "",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "decimals": 2,
-              "pattern": "/.*/",
-              "thresholds": [],
-              "type": "number",
-              "unit": "short"
-            }
-          ],
-          "targets": [
-            {
-              "expr": "avg(label_replace(collectd_cephmetrics_gauge{cephmetrics=~\"ceph.mon.osd_state.[0-9]*.in\"}, \"osd\", \"$1\", \"cephmetrics\", \"ceph.mon.osd_state.([0-9]*).in\")) by (osd) < 0.5",
-              "format": "time_series",
-              "hide": false,
-              "intervalFactor": 2,
-              "legendFormat": "{{osd}}",
-              "refId": "B",
-              "step": 4
-            }
-          ],
-          "timeFrom": "5m",
-          "timeShift": null,
-          "title": "OSDs Out",
-          "transform": "timeseries_aggregations",
-          "type": "table"
-        },
-        {
-          "content": "",
-          "id": 73,
-          "links": [],
-          "minSpan": 1,
-          "mode": "html",
-          "span": 1,
-          "title": "",
-          "transparent": true,
-          "type": "text"
-        },
-        {
-          "columns": [
-            {
-              "text": "Current",
-              "value": "current"
-            }
-          ],
-          "datasource": "Prometheus",
-          "filterNull": false,
-          "fontSize": "100%",
-          "id": 10,
-          "links": [],
-          "minSpan": 3,
-          "pageSize": null,
-          "scroll": true,
-          "showHeader": true,
-          "sort": {
-            "col": null,
-            "desc": false
-          },
-          "span": 4,
-          "styles": [
-            {
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "pattern": "Time",
-              "type": "date"
-            },
-            {
-              "alias": "Object State",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "pattern": "Metric",
-              "thresholds": [],
-              "type": "number",
-              "unit": "short"
-            },
-            {
-              "alias": "Count",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 0,
-              "pattern": "Current",
-              "thresholds": [],
-              "type": "number",
-              "unit": "none"
-            },
-            {
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "decimals": 0,
-              "pattern": "/.*/",
-              "thresholds": [],
-              "type": "number",
-              "unit": "none"
-            }
-          ],
-          "targets": [
-            {
-              "alias": "Objects",
-              "expr": "max(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.mon.num_object\"})",
-              "format": "time_series",
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "intervalFactor": 2,
-              "legendFormat": "Total Objects",
-              "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "value"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "step": 20,
-              "tags": []
-            },
-            {
-              "alias": "Objects",
-              "expr": "max(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.mon.num_object_degraded\"})",
-              "format": "time_series",
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "intervalFactor": 2,
-              "legendFormat": "Objects degraded",
-              "policy": "default",
-              "refId": "B",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "value"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "step": 20,
-              "tags": []
-            },
-            {
-              "alias": "Objects",
-              "expr": "max(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.mon.num_object_misplaced\"})",
-              "format": "time_series",
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "intervalFactor": 2,
-              "legendFormat": "Objects misplaced",
-              "policy": "default",
-              "refId": "C",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "value"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "step": 20,
-              "tags": []
-            },
-            {
-              "alias": "Objects",
-              "expr": "max(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.mon.num_object_unfound\"})",
-              "format": "time_series",
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "intervalFactor": 2,
-              "legendFormat": "Objects unfound",
-              "refId": "D",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "value"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "step": 20,
-              "tags": []
-            }
-          ],
-          "title": "Object Summary",
-          "transform": "timeseries_aggregations",
-          "type": "table"
-        },
-        {
-          "content": "",
-          "id": 67,
-          "links": [],
-          "minSpan": 1,
-          "mode": "markdown",
-          "span": 1,
-          "title": "",
-          "transparent": true,
-          "type": "text"
-        },
-        {
-          "columns": [
-            {
-              "text": "Current",
-              "value": "current"
-            }
-          ],
-          "datasource": "Prometheus",
-          "filterNull": false,
-          "fontSize": "100%",
-          "id": 13,
-          "links": [],
-          "minSpan": 3,
-          "pageSize": null,
-          "scroll": true,
-          "showHeader": true,
-          "sort": {
-            "col": null,
-            "desc": false
-          },
-          "span": 3,
-          "styles": [
-            {
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "pattern": "Time",
-              "type": "date"
-            },
-            {
-              "alias": "PG State",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "pattern": "Metric",
-              "thresholds": [],
-              "type": "number",
-              "unit": "short"
-            },
-            {
-              "alias": "Count",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 0,
-              "pattern": "Current",
-              "thresholds": [],
-              "type": "number",
-              "unit": "none"
-            },
-            {
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "decimals": 0,
-              "pattern": "/.*/",
-              "thresholds": [],
-              "type": "number",
-              "unit": "none"
-            }
-          ],
-          "targets": [
-            {
-              "alias": "PG's",
-              "expr": "max(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.mon.num_pg\"})",
-              "format": "time_series",
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "intervalFactor": 2,
-              "legendFormat": "PGs",
-              "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "value"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "step": 20,
-              "tags": []
-            },
-            {
-              "alias": "PG's",
-              "expr": "max(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.mon.num_pg_active\"})",
-              "format": "time_series",
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "intervalFactor": 2,
-              "legendFormat": "Active PGs",
-              "refId": "B",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "value"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "step": 20,
-              "tags": []
-            },
-            {
-              "alias": "PG's",
-              "expr": "max(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.mon.num_pg_active_clean\"})",
-              "format": "time_series",
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "intervalFactor": 2,
-              "legendFormat": "Active+clean PGs",
-              "refId": "C",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "value"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "step": 20,
-              "tags": []
-            },
-            {
-              "alias": "PG's",
-              "expr": "max(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.mon.num_pg_peering\"})",
-              "format": "time_series",
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "intervalFactor": 2,
-              "legendFormat": "PGs peering",
-              "refId": "D",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "value"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "step": 20,
-              "tags": []
-            }
-          ],
-          "title": "PG Summary",
-          "transform": "timeseries_aggregations",
-          "type": "table"
-        }
-      ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": true,
-      "title": "Storage Information",
-      "titleSize": "h5"
-    }
-  ],
-  "schemaVersion": 14,
-  "style": "dark",
-  "tags": [
-    "overview"
-  ],
-  "templating": {
-    "list": [
-      {
-        "allValue": null,
-        "current": {
-          "text": "ceph",
-          "value": "ceph"
-        },
-        "datasource": "Prometheus",
-        "hide": 2,
-        "includeAll": false,
-        "label": null,
-        "multi": false,
-        "name": "cluster_name",
-        "options": [],
-        "query": "collectd_cephmetrics_gauge{}",
-        "refresh": 1,
-        "regex": "/cephmetrics=\"([^.]*)\\./",
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
-      },
-      {
-        "allValue": null,
-        "current": {
-          "text": "fedex.lan",
-          "value": "fedex.lan"
-        },
-        "hide": 2,
-        "includeAll": false,
-        "label": null,
-        "multi": false,
-        "name": "domain",
-        "options": [
-          {
-            "selected": true,
-            "text": "fedex.lan",
-            "value": "fedex.lan"
-          }
-        ],
-        "query": "fedex.lan",
-        "type": "custom"
-      },
-      {
-        "allValue": null,
-        "current": {
-          "selected": true,
-          "text": "All",
-          "value": "$__all"
-        },
-        "hide": 2,
-        "includeAll": true,
-        "label": null,
-        "multi": true,
-        "name": "osd_servers",
-        "options": [
-          {
-            "selected": true,
-            "text": "All",
-            "value": "$__all"
-          },
-          {
-            "selected": false,
-            "text": "node1",
-            "value": "node1"
-          },
-          {
-            "selected": false,
-            "text": "node2",
-            "value": "node2"
-          },
-          {
-            "selected": false,
-            "text": "node3",
-            "value": "node3"
-          }
-        ],
-        "query": "node1,node2,node3",
-        "type": "custom"
-      },
-      {
-        "allValue": null,
-        "current": {
-          "selected": true,
-          "text": "85",
-          "value": "85"
-        },
-        "hide": 2,
-        "includeAll": false,
-        "label": null,
-        "multi": false,
-        "name": "disk_full_threshold",
-        "options": [
-          {
-            "selected": true,
-            "text": "85",
-            "value": "85"
-          }
-        ],
-        "query": "85",
-        "type": "custom"
-      }
-    ]
-  },
-  "time": {
-    "from": "now-1h",
-    "to": "now"
-  },
-  "timepicker": {
-    "refresh_intervals": [
-      "5s",
-      "10s",
-      "30s",
-      "1m",
-      "5m",
-      "15m",
-      "30m",
-      "1h",
-      "2h",
-      "1d"
-    ],
-    "time_options": [
-      "5m",
-      "15m",
-      "1h",
-      "6h",
-      "12h",
-      "24h",
-      "2d",
-      "7d",
-      "30d"
-    ]
-  },
-  "timezone": "browser",
-  "title": "Ceph Health",
-  "version": 8
+         ]
+      }, 
+      "gnetId": null, 
+      "timepicker": {
+         "time_options": [
+            "5m", 
+            "15m", 
+            "1h", 
+            "6h", 
+            "12h", 
+            "24h", 
+            "2d", 
+            "7d", 
+            "30d"
+         ], 
+         "refresh_intervals": [
+            "5s", 
+            "10s", 
+            "30s", 
+            "1m", 
+            "5m", 
+            "15m", 
+            "30m", 
+            "1h", 
+            "2h", 
+            "1d"
+         ]
+      }, 
+      "version": 8, 
+      "time": {
+         "to": "now", 
+         "from": "now-1h"
+      }, 
+      "timezone": "browser", 
+      "schemaVersion": 14, 
+      "id": 27
+   }
 }

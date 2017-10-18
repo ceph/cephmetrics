@@ -1,556 +1,559 @@
 {
-  "annotations": {
-    "list": []
-  },
-  "editable": true,
-  "gnetId": null,
-  "graphTooltip": 0,
-  "hideControls": false,
-  "id": 18,
-  "links": [
-    {
-      "asDropdown": true,
-      "icon": "external link",
+   "meta": {}, 
+   "dashboard": {
+      "style": "dark", 
+      "rows": [
+         {
+            "repeat": null, 
+            "titleSize": "h5", 
+            "repeatIteration": null, 
+            "title": "All OSD Hosts", 
+            "height": 250, 
+            "repeatRowId": null, 
+            "panels": [
+               {
+                  "bars": false, 
+                  "timeFrom": null, 
+                  "links": [], 
+                  "thresholds": [], 
+                  "spaceLength": 10, 
+                  "nullPointMode": "connected", 
+                  "renderer": "flot", 
+                  "linewidth": 1, 
+                  "steppedLine": false, 
+                  "id": 1, 
+                  "fill": 1, 
+                  "span": 12, 
+                  "title": "All OSD Hosts - Highest Latency", 
+                  "tooltip": {
+                     "sort": 0, 
+                     "shared": true, 
+                     "value_type": "individual"
+                  }, 
+                  "legend": {
+                     "total": false, 
+                     "show": true, 
+                     "max": false, 
+                     "min": false, 
+                     "current": false, 
+                     "values": false, 
+                     "avg": false
+                  }, 
+                  "targets": [
+                     {
+                        "format": "time_series", 
+                        "expr": "label_replace(max(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.*.perf.await\" }) by (instance), \"node\", \"$1\", \"instance\", \"(.*):.*\")", 
+                        "step": 4, 
+                        "legendFormat": "{{node}}", 
+                        "intervalFactor": 2, 
+                        "refId": "A"
+                     }
+                  ], 
+                  "yaxes": [
+                     {
+                        "logBase": 1, 
+                        "show": true, 
+                        "max": null, 
+                        "format": "ms", 
+                        "min": "0", 
+                        "label": null
+                     }, 
+                     {
+                        "logBase": 1, 
+                        "show": false, 
+                        "max": null, 
+                        "format": "short", 
+                        "min": null, 
+                        "label": null
+                     }
+                  ], 
+                  "xaxis": {
+                     "buckets": null, 
+                     "show": true, 
+                     "values": [], 
+                     "mode": "time", 
+                     "name": null
+                  }, 
+                  "seriesOverrides": [], 
+                  "percentage": false, 
+                  "type": "graph", 
+                  "dashes": false, 
+                  "repeat": null, 
+                  "dashLength": 10, 
+                  "stack": false, 
+                  "timeShift": null, 
+                  "aliasColors": {}, 
+                  "lines": true, 
+                  "points": false, 
+                  "datasource": "Prometheus", 
+                  "pointradius": 5, 
+                  "minSpan": 12
+               }
+            ], 
+            "showTitle": true, 
+            "collapse": false
+         }, 
+         {
+            "repeat": null, 
+            "titleSize": "h5", 
+            "repeatIteration": null, 
+            "title": "Each OSD Host's Max Disk Latency", 
+            "height": 250, 
+            "repeatRowId": null, 
+            "panels": [
+               {
+                  "bars": false, 
+                  "timeFrom": null, 
+                  "links": [
+                     {
+                        "keepTime": true, 
+                        "title": "$osd_servers Node Details", 
+                        "includeVars": true, 
+                        "targetBlank": true, 
+                        "dashUri": "db/osd-node-detail", 
+                        "type": "dashboard", 
+                        "dashboard": "OSD Node Detail"
+                     }
+                  ], 
+                  "thresholds": [], 
+                  "spaceLength": 10, 
+                  "nullPointMode": "null", 
+                  "renderer": "flot", 
+                  "scopedVars": {
+                     "osd_servers": {
+                        "text": "node1", 
+                        "selected": false, 
+                        "value": "node1"
+                     }
+                  }, 
+                  "linewidth": 1, 
+                  "steppedLine": false, 
+                  "id": 2, 
+                  "fill": 1, 
+                  "span": 4, 
+                  "title": "$osd_servers Max Latency", 
+                  "tooltip": {
+                     "sort": 0, 
+                     "shared": true, 
+                     "value_type": "individual"
+                  }, 
+                  "stack": false, 
+                  "targets": [
+                     {
+                        "format": "time_series", 
+                        "expr": "max(label_replace(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.*.perf.await\", exported_instance=\"$osd_servers.$domain\" }, \"node\", \"$1\", \"instance\", \"(.*):.*\")) by (node)", 
+                        "step": 20, 
+                        "legendFormat": "{{node}} Max Latency", 
+                        "intervalFactor": 2, 
+                        "refId": "A"
+                     }
+                  ], 
+                  "yaxes": [
+                     {
+                        "logBase": 1, 
+                        "show": true, 
+                        "max": null, 
+                        "format": "ms", 
+                        "min": "0", 
+                        "label": null
+                     }, 
+                     {
+                        "logBase": 1, 
+                        "show": true, 
+                        "max": null, 
+                        "format": "short", 
+                        "min": null, 
+                        "label": null
+                     }
+                  ], 
+                  "xaxis": {
+                     "buckets": null, 
+                     "show": true, 
+                     "values": [], 
+                     "mode": "time", 
+                     "name": null
+                  }, 
+                  "seriesOverrides": [], 
+                  "percentage": false, 
+                  "type": "graph", 
+                  "dashes": false, 
+                  "repeat": "osd_servers", 
+                  "dashLength": 10, 
+                  "legend": {
+                     "total": false, 
+                     "show": false, 
+                     "max": false, 
+                     "min": false, 
+                     "current": false, 
+                     "values": false, 
+                     "avg": false
+                  }, 
+                  "timeShift": null, 
+                  "aliasColors": {}, 
+                  "lines": true, 
+                  "points": false, 
+                  "datasource": "Prometheus", 
+                  "pointradius": 5, 
+                  "minSpan": 3
+               }, 
+               {
+                  "bars": false, 
+                  "repeatPanelId": 2, 
+                  "links": [
+                     {
+                        "keepTime": true, 
+                        "title": "$osd_servers Node Details", 
+                        "includeVars": true, 
+                        "targetBlank": true, 
+                        "dashUri": "db/osd-node-detail", 
+                        "type": "dashboard", 
+                        "dashboard": "OSD Node Detail"
+                     }
+                  ], 
+                  "thresholds": [], 
+                  "spaceLength": 10, 
+                  "nullPointMode": "null", 
+                  "timeFrom": null, 
+                  "renderer": "flot", 
+                  "scopedVars": {
+                     "osd_servers": {
+                        "text": "node2", 
+                        "selected": false, 
+                        "value": "node2"
+                     }
+                  }, 
+                  "linewidth": 1, 
+                  "steppedLine": false, 
+                  "id": 3, 
+                  "fill": 1, 
+                  "span": 4, 
+                  "repeatIteration": 1507673870675, 
+                  "title": "$osd_servers Max Latency", 
+                  "tooltip": {
+                     "sort": 0, 
+                     "shared": true, 
+                     "value_type": "individual"
+                  }, 
+                  "stack": false, 
+                  "targets": [
+                     {
+                        "format": "time_series", 
+                        "expr": "max(label_replace(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.*.perf.await\", exported_instance=\"$osd_servers.$domain\" }, \"node\", \"$1\", \"instance\", \"(.*):.*\")) by (node)", 
+                        "step": 20, 
+                        "legendFormat": "{{node}} Max Latency", 
+                        "intervalFactor": 2, 
+                        "refId": "A"
+                     }
+                  ], 
+                  "yaxes": [
+                     {
+                        "logBase": 1, 
+                        "show": true, 
+                        "max": null, 
+                        "format": "ms", 
+                        "min": "0", 
+                        "label": null
+                     }, 
+                     {
+                        "logBase": 1, 
+                        "show": true, 
+                        "max": null, 
+                        "format": "short", 
+                        "min": null, 
+                        "label": null
+                     }
+                  ], 
+                  "xaxis": {
+                     "buckets": null, 
+                     "show": true, 
+                     "values": [], 
+                     "mode": "time", 
+                     "name": null
+                  }, 
+                  "seriesOverrides": [], 
+                  "percentage": false, 
+                  "type": "graph", 
+                  "dashes": false, 
+                  "repeat": null, 
+                  "dashLength": 10, 
+                  "legend": {
+                     "total": false, 
+                     "show": false, 
+                     "max": false, 
+                     "min": false, 
+                     "current": false, 
+                     "values": false, 
+                     "avg": false
+                  }, 
+                  "timeShift": null, 
+                  "aliasColors": {}, 
+                  "lines": true, 
+                  "points": false, 
+                  "datasource": "Prometheus", 
+                  "pointradius": 5, 
+                  "minSpan": 3
+               }, 
+               {
+                  "bars": false, 
+                  "repeatPanelId": 2, 
+                  "links": [
+                     {
+                        "keepTime": true, 
+                        "title": "$osd_servers Node Details", 
+                        "includeVars": true, 
+                        "targetBlank": true, 
+                        "dashUri": "db/osd-node-detail", 
+                        "type": "dashboard", 
+                        "dashboard": "OSD Node Detail"
+                     }
+                  ], 
+                  "thresholds": [], 
+                  "spaceLength": 10, 
+                  "nullPointMode": "null", 
+                  "timeFrom": null, 
+                  "renderer": "flot", 
+                  "scopedVars": {
+                     "osd_servers": {
+                        "text": "node3", 
+                        "selected": false, 
+                        "value": "node3"
+                     }
+                  }, 
+                  "linewidth": 1, 
+                  "steppedLine": false, 
+                  "id": 4, 
+                  "fill": 1, 
+                  "span": 4, 
+                  "repeatIteration": 1507673870675, 
+                  "title": "$osd_servers Max Latency", 
+                  "tooltip": {
+                     "sort": 0, 
+                     "shared": true, 
+                     "value_type": "individual"
+                  }, 
+                  "stack": false, 
+                  "targets": [
+                     {
+                        "format": "time_series", 
+                        "expr": "max(label_replace(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.*.perf.await\", exported_instance=\"$osd_servers.$domain\" }, \"node\", \"$1\", \"instance\", \"(.*):.*\")) by (node)", 
+                        "step": 20, 
+                        "legendFormat": "{{node}} Max Latency", 
+                        "intervalFactor": 2, 
+                        "refId": "A"
+                     }
+                  ], 
+                  "yaxes": [
+                     {
+                        "logBase": 1, 
+                        "show": true, 
+                        "max": null, 
+                        "format": "ms", 
+                        "min": "0", 
+                        "label": null
+                     }, 
+                     {
+                        "logBase": 1, 
+                        "show": true, 
+                        "max": null, 
+                        "format": "short", 
+                        "min": null, 
+                        "label": null
+                     }
+                  ], 
+                  "xaxis": {
+                     "buckets": null, 
+                     "show": true, 
+                     "values": [], 
+                     "mode": "time", 
+                     "name": null
+                  }, 
+                  "seriesOverrides": [], 
+                  "percentage": false, 
+                  "type": "graph", 
+                  "dashes": false, 
+                  "repeat": null, 
+                  "dashLength": 10, 
+                  "legend": {
+                     "total": false, 
+                     "show": false, 
+                     "max": false, 
+                     "min": false, 
+                     "current": false, 
+                     "values": false, 
+                     "avg": false
+                  }, 
+                  "timeShift": null, 
+                  "aliasColors": {}, 
+                  "lines": true, 
+                  "points": false, 
+                  "datasource": "Prometheus", 
+                  "pointradius": 5, 
+                  "minSpan": 3
+               }
+            ], 
+            "showTitle": true, 
+            "collapse": false
+         }
+      ], 
+      "templating": {
+         "list": [
+            {
+               "multi": false, 
+               "hide": 2, 
+               "name": "domain", 
+               "allValue": null, 
+               "label": null, 
+               "current": {
+                  "text": "fedex.lan", 
+                  "value": "fedex.lan"
+               }, 
+               "query": "fedex.lan", 
+               "type": "custom", 
+               "options": [
+                  {
+                     "text": "fedex.lan", 
+                     "selected": true, 
+                     "value": "fedex.lan"
+                  }
+               ], 
+               "includeAll": false
+            }, 
+            {
+               "multi": false, 
+               "hide": 2, 
+               "name": "cluster_name", 
+               "allValue": null, 
+               "label": null, 
+               "current": {
+                  "text": "ceph", 
+                  "value": "ceph"
+               }, 
+               "query": "ceph", 
+               "type": "custom", 
+               "options": [
+                  {
+                     "text": "ceph", 
+                     "selected": true, 
+                     "value": "ceph"
+                  }
+               ], 
+               "includeAll": false
+            }, 
+            {
+               "multi": true, 
+               "hide": 2, 
+               "name": "osd_servers", 
+               "allValue": null, 
+               "label": null, 
+               "current": {
+                  "text": "All", 
+                  "selected": true, 
+                  "value": "$__all"
+               }, 
+               "query": "node1,node2,node3", 
+               "type": "custom", 
+               "options": [
+                  {
+                     "text": "All", 
+                     "selected": true, 
+                     "value": "$__all"
+                  }, 
+                  {
+                     "text": "node1", 
+                     "selected": false, 
+                     "value": "node1"
+                  }, 
+                  {
+                     "text": "node2", 
+                     "selected": false, 
+                     "value": "node2"
+                  }, 
+                  {
+                     "text": "node3", 
+                     "selected": false, 
+                     "value": "node3"
+                  }
+               ], 
+               "includeAll": true
+            }, 
+            {
+               "multi": false, 
+               "hide": 2, 
+               "name": "percentile", 
+               "allValue": null, 
+               "label": null, 
+               "current": {
+                  "text": "95", 
+                  "value": "95"
+               }, 
+               "query": "95", 
+               "type": "custom", 
+               "options": [
+                  {
+                     "text": "95", 
+                     "selected": true, 
+                     "value": "95"
+                  }
+               ], 
+               "includeAll": false
+            }
+         ]
+      }, 
+      "links": [
+         {
+            "title": "Shortcuts", 
+            "tags": [
+               "overview"
+            ], 
+            "type": "dashboards", 
+            "asDropdown": true, 
+            "icon": "external link"
+         }
+      ], 
       "tags": [
-        "overview"
-      ],
-      "title": "Shortcuts",
-      "type": "dashboards"
-    }
-  ],
-  "refresh": false,
-  "rows": [
-    {
-      "collapse": false,
-      "height": 250,
-      "panels": [
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "Prometheus",
-          "fill": 1,
-          "id": 1,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "minSpan": 12,
-          "nullPointMode": "connected",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 12,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "label_replace(max(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.*.perf.await\" }) by (instance), \"node\", \"$1\", \"instance\", \"(.*):.*\")",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "{{node}}",
-              "refId": "A",
-              "step": 4
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "All OSD Hosts - Highest Latency",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "ms",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": false
-            }
-          ]
-        }
-      ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": true,
-      "title": "All OSD Hosts",
-      "titleSize": "h5"
-    },
-    {
-      "collapse": false,
-      "height": 250,
-      "panels": [
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "Prometheus",
-          "fill": 1,
-          "id": 2,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": false,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [
-            {
-              "dashUri": "db/osd-node-detail",
-              "dashboard": "OSD Node Detail",
-              "includeVars": true,
-              "keepTime": true,
-              "targetBlank": true,
-              "title": "$osd_servers Node Details",
-              "type": "dashboard"
-            }
-          ],
-          "minSpan": 3,
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": "osd_servers",
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "node1",
-              "value": "node1"
-            }
-          },
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 4,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "max(label_replace(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.*.perf.await\", exported_instance=\"$osd_servers.$domain\" }, \"node\", \"$1\", \"instance\", \"(.*):.*\")) by (node)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "{{node}} Max Latency",
-              "refId": "A",
-              "step": 20
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "$osd_servers Max Latency",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "ms",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "Prometheus",
-          "fill": 1,
-          "id": 3,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": false,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [
-            {
-              "dashUri": "db/osd-node-detail",
-              "dashboard": "OSD Node Detail",
-              "includeVars": true,
-              "keepTime": true,
-              "targetBlank": true,
-              "title": "$osd_servers Node Details",
-              "type": "dashboard"
-            }
-          ],
-          "minSpan": 3,
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "repeatIteration": 1507673870675,
-          "repeatPanelId": 2,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "node2",
-              "value": "node2"
-            }
-          },
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 4,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "max(label_replace(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.*.perf.await\", exported_instance=\"$osd_servers.$domain\" }, \"node\", \"$1\", \"instance\", \"(.*):.*\")) by (node)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "{{node}} Max Latency",
-              "refId": "A",
-              "step": 20
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "$osd_servers Max Latency",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "ms",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "Prometheus",
-          "fill": 1,
-          "id": 4,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": false,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [
-            {
-              "dashUri": "db/osd-node-detail",
-              "dashboard": "OSD Node Detail",
-              "includeVars": true,
-              "keepTime": true,
-              "targetBlank": true,
-              "title": "$osd_servers Node Details",
-              "type": "dashboard"
-            }
-          ],
-          "minSpan": 3,
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "repeatIteration": 1507673870675,
-          "repeatPanelId": 2,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "node3",
-              "value": "node3"
-            }
-          },
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 4,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "max(label_replace(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.*.perf.await\", exported_instance=\"$osd_servers.$domain\" }, \"node\", \"$1\", \"instance\", \"(.*):.*\")) by (node)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "{{node}} Max Latency",
-              "refId": "A",
-              "step": 20
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "$osd_servers Max Latency",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "ms",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        }
-      ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": true,
-      "title": "Each OSD Host's Max Disk Latency",
-      "titleSize": "h5"
-    }
-  ],
-  "schemaVersion": 14,
-  "style": "dark",
-  "tags": [
-    "overview"
-  ],
-  "templating": {
-    "list": [
-      {
-        "allValue": null,
-        "current": {
-          "text": "fedex.lan",
-          "value": "fedex.lan"
-        },
-        "hide": 2,
-        "includeAll": false,
-        "label": null,
-        "multi": false,
-        "name": "domain",
-        "options": [
-          {
-            "selected": true,
-            "text": "fedex.lan",
-            "value": "fedex.lan"
-          }
-        ],
-        "query": "fedex.lan",
-        "type": "custom"
-      },
-      {
-        "allValue": null,
-        "current": {
-          "text": "ceph",
-          "value": "ceph"
-        },
-        "hide": 2,
-        "includeAll": false,
-        "label": null,
-        "multi": false,
-        "name": "cluster_name",
-        "options": [
-          {
-            "selected": true,
-            "text": "ceph",
-            "value": "ceph"
-          }
-        ],
-        "query": "ceph",
-        "type": "custom"
-      },
-      {
-        "allValue": null,
-        "current": {
-          "selected": true,
-          "text": "All",
-          "value": "$__all"
-        },
-        "hide": 2,
-        "includeAll": true,
-        "label": null,
-        "multi": true,
-        "name": "osd_servers",
-        "options": [
-          {
-            "selected": true,
-            "text": "All",
-            "value": "$__all"
-          },
-          {
-            "selected": false,
-            "text": "node1",
-            "value": "node1"
-          },
-          {
-            "selected": false,
-            "text": "node2",
-            "value": "node2"
-          },
-          {
-            "selected": false,
-            "text": "node3",
-            "value": "node3"
-          }
-        ],
-        "query": "node1,node2,node3",
-        "type": "custom"
-      },
-      {
-        "allValue": null,
-        "current": {
-          "text": "95",
-          "value": "95"
-        },
-        "hide": 2,
-        "includeAll": false,
-        "label": null,
-        "multi": false,
-        "name": "percentile",
-        "options": [
-          {
-            "selected": true,
-            "text": "95",
-            "value": "95"
-          }
-        ],
-        "query": "95",
-        "type": "custom"
-      }
-    ]
-  },
-  "time": {
-    "from": "now-1h",
-    "to": "now"
-  },
-  "timepicker": {
-    "refresh_intervals": [
-      "5s",
-      "10s",
-      "30s",
-      "1m",
-      "5m",
-      "15m",
-      "30m",
-      "1h",
-      "2h",
-      "1d"
-    ],
-    "time_options": [
-      "5m",
-      "15m",
-      "1h",
-      "6h",
-      "12h",
-      "24h",
-      "2d",
-      "7d",
-      "30d"
-    ]
-  },
-  "timezone": "browser",
-  "title": "Latency by Server",
-  "version": 4
+         "overview"
+      ], 
+      "graphTooltip": 0, 
+      "hideControls": false, 
+      "title": "Latency by Server", 
+      "editable": true, 
+      "refresh": false, 
+      "annotations": {
+         "list": []
+      }, 
+      "gnetId": null, 
+      "timepicker": {
+         "time_options": [
+            "5m", 
+            "15m", 
+            "1h", 
+            "6h", 
+            "12h", 
+            "24h", 
+            "2d", 
+            "7d", 
+            "30d"
+         ], 
+         "refresh_intervals": [
+            "5s", 
+            "10s", 
+            "30s", 
+            "1m", 
+            "5m", 
+            "15m", 
+            "30m", 
+            "1h", 
+            "2h", 
+            "1d"
+         ]
+      }, 
+      "version": 4, 
+      "time": {
+         "to": "now", 
+         "from": "now-1h"
+      }, 
+      "timezone": "browser", 
+      "schemaVersion": 14, 
+      "id": 18
+   }
 }
