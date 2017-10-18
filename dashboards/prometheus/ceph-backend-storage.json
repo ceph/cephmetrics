@@ -93,9 +93,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{osd}}",
               "refId": "B",
-              "step": 2,
-              "target": "currentBelow(groupByNode(transformNull(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.osd_state.*.up,99),-2,\"maxSeries\"),0.5)",
-              "textEditor": true
+              "step": 2
             }
           ],
           "timeFrom": "1m",
@@ -198,9 +196,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{osd}}",
               "refId": "A",
-              "step": 40,
-              "target": "aliasByNode(currentAbove(transformNull(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.osd_percent_used),0),$disk_full_threshold),1,-2)",
-              "textEditor": true
+              "step": 40
             }
           ],
           "title": "Disks Near Full",
@@ -287,9 +283,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{node}}",
               "refId": "A",
-              "step": 7200,
-              "target": "groupByNode(keepLastValue(collectd.$osd_servers.$domain.cephmetrics.gauge.$cluster_name.osd.*.stat_bytes),1,\"sumSeries\")",
-              "textEditor": true
+              "step": 7200
             }
           ],
           "title": "Host OSD Raw Capacity",
@@ -376,9 +370,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{node}}",
               "refId": "A",
-              "step": 600,
-              "target": "aliasByNode(keepLastValue(collectd.$osd_servers.$domain.cephmetrics.gauge.$cluster_name.osd.num_osds,6),1)",
-              "textEditor": true
+              "step": 600
             }
           ],
           "title": "Host OSD Capacity Breakdown",
@@ -424,9 +416,7 @@
               "format": "time_series",
               "intervalFactor": 2,
               "refId": "A",
-              "step": 10,
-              "target": "collectd.$osd_servers.$domain.cephmetrics.gauge.$cluster_name.osd.*.perf.util",
-              "textEditor": true
+              "step": 10
             }
           ],
           "title": "Disk Drive Utilization Heatmap - $osd_servers",
@@ -493,9 +483,7 @@
               "intervalFactor": 2,
               "legendFormat": "Read Throughput",
               "refId": "A",
-              "step": 10,
-              "target": "alias(sumSeries(collectd.$osd_servers.$domain.cephmetrics.gauge.$cluster_name.osd.*.perf.r_bytes_per_sec), \"Read Throughput\")",
-              "textEditor": true
+              "step": 10
             },
             {
               "expr": "sum(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd..*.perf.w_bytes_per_sec\"})",
@@ -503,9 +491,7 @@
               "intervalFactor": 2,
               "legendFormat": "Write Throughtput",
               "refId": "B",
-              "step": 10,
-              "target": "alias(sumSeries(collectd.$osd_servers.$domain.cephmetrics.gauge.$cluster_name.osd.*.perf.w_bytes_per_sec), \"Write Throughput\")",
-              "textEditor": true
+              "step": 10
             }
           ],
           "thresholds": [],
@@ -595,9 +581,7 @@
               "intervalFactor": 2,
               "legendFormat": "Read Latency",
               "refId": "A",
-              "step": 10,
-              "target": "alias(percentileOfSeries(group(collectd.$osd_servers.$domain.cephmetrics.gauge.$cluster_name.osd.*.perf.r_await),$percentile), \"Read Latency\")",
-              "textEditor": true
+              "step": 10
             },
             {
               "expr": "quantile($percentile/100.0, collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd..*.perf.w_await\"})",
@@ -605,9 +589,7 @@
               "intervalFactor": 2,
               "legendFormat": "Write Latency",
               "refId": "C",
-              "step": 10,
-              "target": "alias(percentileOfSeries(group(collectd.$osd_servers.$domain.cephmetrics.gauge.$cluster_name.osd.*.perf.w_await),$percentile), \"Write Latency\")",
-              "textEditor": true
+              "step": 10
             }
           ],
           "thresholds": [
@@ -705,9 +687,7 @@
               "intervalFactor": 2,
               "legendFormat": "disk busy %",
               "refId": "A",
-              "step": 10,
-              "target": "alias(percentileOfSeries(group(collectd.$osd_servers.$domain.cephmetrics.gauge.$cluster_name.osd.*.perf.util),$percentile), \"disk busy %\")",
-              "textEditor": true
+              "step": 10
             }
           ],
           "thresholds": [
@@ -795,9 +775,7 @@
               "intervalFactor": 2,
               "legendFormat": "IOPS/spindle",
               "refId": "A",
-              "step": 10,
-              "target": "alias(percentileOfSeries(group(collectd.$osd_servers.$domain.cephmetrics.gauge.$cluster_name.osd.*.perf.iops),$percentile),\"IOPS/spindle\")",
-              "textEditor": true
+              "step": 10
             }
           ],
           "thresholds": [],
@@ -886,9 +864,7 @@
               "intervalFactor": 2,
               "legendFormat": "IOPS",
               "refId": "A",
-              "step": 10,
-              "target": "alias(sumSeries(collectd.$osd_servers.$domain.cephmetrics.gauge.$cluster_name.osd.*.perf.iops),\"IOPS\")",
-              "textEditor": true
+              "step": 10
             }
           ],
           "thresholds": [],
@@ -988,9 +964,7 @@
               "intervalFactor": 2,
               "legendFormat": "Cluster-wide CPU Busy @ $percentile%ile",
               "refId": "A",
-              "step": 10,
-              "target": "alias(percentileOfSeries(groupByNode(collectd.*.$domain.cpu.percent.{wait,interrupt,nice,user,system}, 1, \"sumSeries\"),$percentile),\"Cluster-wide CPU Busy @ $percentile%ile\")",
-              "textEditor": true
+              "step": 10
             },
             {
               "expr": "avg(sum(collectd_cpu_percent{cpu=~\"(wait|interrupt|nice|user|system)\", instance=~\"($osd_servers):.*\"}) by (instance))",
@@ -999,9 +973,7 @@
               "intervalFactor": 2,
               "legendFormat": "Average OSD Host(s) CPU Busy",
               "refId": "B",
-              "step": 10,
-              "target": "alias(averageSeries(groupByNode(collectd.$osd_servers.$domain.cpu.percent.{wait,interrupt,nice,user,system}, 1, \"sumSeries\")),\"Average OSD Host(s) CPU Busy\")",
-              "textEditor": true
+              "step": 10
             }
           ],
           "thresholds": [],
@@ -1090,8 +1062,7 @@
               "hide": false,
               "intervalFactor": 2,
               "refId": "A",
-              "step": 10,
-              "target": "collectd.$osd_servers.$domain.interface.{en,eth,bond}*.if_octets.rx"
+              "step": 10
             }
           ],
           "thresholds": [],
@@ -1321,6 +1292,6 @@
     ]
   },
   "timezone": "browser",
-  "title": "Ceph Backend Storage - Prometheus",
+  "title": "Ceph Backend Storage",
   "version": 5
 }

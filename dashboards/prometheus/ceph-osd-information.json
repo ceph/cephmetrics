@@ -86,9 +86,7 @@
               "format": "time_series",
               "intervalFactor": 2,
               "refId": "A",
-              "step": 2,
-              "target": "keepLastValue(consolidateBy(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.num_osd), \"max\"))",
-              "textEditor": true
+              "step": 2
             }
           ],
           "thresholds": "",
@@ -167,9 +165,7 @@
               "format": "time_series",
               "intervalFactor": 2,
               "refId": "A",
-              "step": 2,
-              "target": "keepLastValue(consolidateBy(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.num_osd_up),\"max\"))",
-              "textEditor": true
+              "step": 2
             }
           ],
           "thresholds": "",
@@ -250,9 +246,7 @@
               "hide": false,
               "intervalFactor": 2,
               "refId": "A",
-              "step": 2,
-              "target": "keepLastValue(consolidateBy(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.num_osd_up),\"max\"))",
-              "textEditor": true
+              "step": 2
             }
           ],
           "thresholds": "1,3",
@@ -306,9 +300,7 @@
               "intervalFactor": 2,
               "legendFormat": "<1TB",
               "refId": "A",
-              "step": 2,
-              "target": "currentAbove(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.stat_bytes),0)",
-              "textEditor": true
+              "step": 2
             },
             {
               "expr": "count(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.*.stat_bytes\"} >= 1099511627776 < 2199023255552)",
@@ -317,10 +309,7 @@
               "intervalFactor": 2,
               "legendFormat": "2TB",
               "refId": "B",
-              "step": 2,
-              "target": "alias(currentBelow(#A,1099511627776),\"<1TB\")",
-              "targetFull": "alias(currentBelow(currentAbove(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.stat_bytes),0),1099511627776),\"<1TB\")",
-              "textEditor": true
+              "step": 2
             },
             {
               "expr": "count(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.*.stat_bytes\"} >= 2199023255552 < 3298534883328)",
@@ -329,10 +318,7 @@
               "intervalFactor": 2,
               "legendFormat": "3TB",
               "refId": "C",
-              "step": 2,
-              "target": "alias(currentBelow(currentAbove(#A,1099511627776),2199023255552),\"2TB\")",
-              "targetFull": "alias(currentBelow(currentAbove(currentAbove(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.stat_bytes),0),1099511627776),2199023255552),\"2TB\")",
-              "textEditor": true
+              "step": 2
             },
             {
               "expr": "count(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.*.stat_bytes\"} >= 3298534883328 < 4398046511104)",
@@ -341,10 +327,7 @@
               "intervalFactor": 2,
               "legendFormat": "4TB",
               "refId": "D",
-              "step": 2,
-              "target": "alias(currentBelow(currentAbove(#A,3298534883328),4398046511104),\"4TB\")",
-              "targetFull": "alias(currentBelow(currentAbove(currentAbove(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.stat_bytes),0),3298534883328),4398046511104),\"4TB\")",
-              "textEditor": true
+              "step": 2
             },
             {
               "expr": "count(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.*.stat_bytes\"} >= 4398046511104 < 6597069766656)",
@@ -353,10 +336,7 @@
               "intervalFactor": 2,
               "legendFormat": "6TB",
               "refId": "E",
-              "step": 2,
-              "target": "alias(currentBelow(currentAbove(#A,4398046511104),6597069766656),\"6TB\")",
-              "targetFull": "alias(currentBelow(currentAbove(currentAbove(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.stat_bytes),0),4398046511104),6597069766656),\"6TB\")",
-              "textEditor": true
+              "step": 2
             },
             {
               "expr": "count(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.*.stat_bytes\"} >=  6597069766656 < 8796093022208)",
@@ -365,10 +345,7 @@
               "intervalFactor": 2,
               "legendFormat": "8TB",
               "refId": "F",
-              "step": 2,
-              "target": "alias(currentBelow(currentAbove(#A,6597069766656),8796093022208),\"8TB\")",
-              "targetFull": "alias(currentBelow(currentAbove(currentAbove(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.stat_bytes),0),6597069766656),8796093022208),\"8TB\")",
-              "textEditor": true
+              "step": 2
             },
             {
               "expr": "count(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.*.stat_bytes\"} >= 8796093022208 < 10995116277760)",
@@ -377,10 +354,7 @@
               "intervalFactor": 2,
               "legendFormat": "10TB",
               "refId": "G",
-              "step": 2,
-              "target": "alias(currentBelow(currentAbove(#A,8796093022208),10995116277760),\"10TB\")",
-              "targetFull": "alias(currentBelow(currentAbove(currentAbove(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.stat_bytes),0),8796093022208),10995116277760),\"10TB\")",
-              "textEditor": true
+              "step": 2
             },
             {
               "expr": "count(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.*.stat_bytes\"} >= 10995116277760 < 13194139533312)",
@@ -389,10 +363,7 @@
               "intervalFactor": 2,
               "legendFormat": "12TB",
               "refId": "H",
-              "step": 2,
-              "target": "alias(currentBelow(currentAbove(#A,10995116277760),13194139533312),\"12TB\")",
-              "targetFull": "alias(currentBelow(currentAbove(currentAbove(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.stat_bytes),0),10995116277760),13194139533312),\"12TB\")",
-              "textEditor": true
+              "step": 2
             },
             {
               "expr": "count(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.*.stat_bytes\"} >= 13194139533312)",
@@ -400,10 +371,7 @@
               "intervalFactor": 2,
               "legendFormat": ">12TB",
               "refId": "I",
-              "step": 2,
-              "target": "alias(countSeries(#B), \"<1TB\")",
-              "targetFull": "alias(countSeries(alias(currentBelow(currentAbove(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.stat_bytes),0),1099511627776),\"<1TB\")), \"<1TB\")",
-              "textEditor": true
+              "step": 2
             }
           ],
           "timeFrom": "30s",
@@ -493,9 +461,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{node}}.{{osd}}",
               "refId": "A",
-              "step": 2,
-              "target": "aliasByNode(currentAbove(transformNull(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.$osd_id.stat_bytes),0),1),1,-2)",
-              "textEditor": true
+              "step": 2
             }
           ],
           "timeFrom": "30s",
@@ -730,9 +696,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{osd}}",
               "refId": "A",
-              "step": 2,
-              "target": "aliasByNode(currentBelow(transformNull(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.$osd_id.osd_type),-1),0.5),-2)",
-              "textEditor": true
+              "step": 2
             }
           ],
           "timeFrom": "2m",
@@ -826,9 +790,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{osd}}",
               "refId": "A",
-              "step": 2,
-              "target": "aliasByNode(limit(transformNull(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.queue_transaction_latency_avg),0),$max_devices),-2)",
-              "textEditor": true
+              "step": 2
             }
           ],
           "timeFrom": "2m",
@@ -921,9 +883,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{osd}}",
               "refId": "A",
-              "step": 2,
-              "target": "aliasByNode(limit(transformNull(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.journal_latency),0),$max_devices),-2)",
-              "textEditor": true
+              "step": 2
             }
           ],
           "timeFrom": "2m",
@@ -1016,9 +976,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{osd}}",
               "refId": "A",
-              "step": 2,
-              "target": "aliasByNode(limit(transformNull(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.apply_latency),0),$max_devices),-2)",
-              "textEditor": true
+              "step": 2
             }
           ],
           "timeFrom": "2m",
@@ -1111,9 +1069,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{osd}}",
               "refId": "A",
-              "step": 2,
-              "target": "aliasByNode(limit(transformNull(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.commitcycle_latency),0),$max_devices),-2)",
-              "textEditor": true
+              "step": 2
             }
           ],
           "timeFrom": "2m",
@@ -1174,9 +1130,7 @@
               "intervalFactor": 2,
               "legendFormat": "Journal queue avg",
               "refId": "A",
-              "step": 10,
-              "target": "alias(limit(transformNull(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.$osd_id.queue_transaction_latency_avg),0),1),\"Journal queue avg\")",
-              "textEditor": true
+              "step": 10
             },
             {
               "expr": "avg(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.($osd_id).journal_latency\"})",
@@ -1184,9 +1138,7 @@
               "intervalFactor": 2,
               "legendFormat": "Journal latency avg",
               "refId": "B",
-              "step": 10,
-              "target": "alias(limit(transformNull(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.$osd_id.journal_latency),0),1),\"Journal latency avg\")",
-              "textEditor": true
+              "step": 10
             },
             {
               "expr": "avg(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.($osd_id).apply_latency\"})",
@@ -1194,9 +1146,7 @@
               "intervalFactor": 2,
               "legendFormat": "Apply latency avg",
               "refId": "C",
-              "step": 10,
-              "target": "alias(limit(transformNull(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.$osd_id.apply_latency),0),1), \"Apply latency avg\")",
-              "textEditor": true
+              "step": 10
             },
             {
               "expr": "avg(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.($osd_id).commitcycle_latency\"})",
@@ -1204,9 +1154,7 @@
               "intervalFactor": 2,
               "legendFormat": "Commit latency avg",
               "refId": "D",
-              "step": 10,
-              "target": "alias(limit(transformNull(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.$osd_id.commitcycle_latency),0),1),\"Commit latency avg\")",
-              "textEditor": true
+              "step": 10
             }
           ],
           "thresholds": [],
@@ -1284,9 +1232,7 @@
               "intervalFactor": 2,
               "legendFormat": "journal Queue time",
               "refId": "A",
-              "step": 10,
-              "target": "alias(percentileOfSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.queue_transaction_latency_avg,$percentile), \"journal Queue time\")",
-              "textEditor": true
+              "step": 10
             },
             {
               "expr": "quantile($percentile/100, collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd..*.journal_latency\"})",
@@ -1294,9 +1240,7 @@
               "intervalFactor": 2,
               "legendFormat": "journal Latency",
               "refId": "B",
-              "step": 10,
-              "target": "alias(percentileOfSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.journal_latency,$percentile), \"journal Latency\")",
-              "textEditor": true
+              "step": 10
             },
             {
               "expr": "quantile($percentile/100, collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd..*.apply_latency\"})",
@@ -1304,9 +1248,7 @@
               "intervalFactor": 2,
               "legendFormat": "apply Latency",
               "refId": "C",
-              "step": 10,
-              "target": "alias(percentileOfSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.apply_latency,$percentile), \"apply Latency\")",
-              "textEditor": true
+              "step": 10
             },
             {
               "expr": "quantile($percentile/100, collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd..*.commitcycle_latency\"})",
@@ -1314,9 +1256,7 @@
               "intervalFactor": 2,
               "legendFormat": "commit/flush Latency",
               "refId": "D",
-              "step": 10,
-              "target": "alias(percentileOfSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.commitcycle_latency,$percentile), \"commit/flush Latency\")",
-              "textEditor": true
+              "step": 10
             }
           ],
           "thresholds": [],
@@ -1475,9 +1415,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{osd}}",
               "refId": "A",
-              "step": 2,
-              "target": "aliasByNode(currentAbove(transformNull(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.$osd_id.osd_type),-1),0.5),-2)",
-              "textEditor": true
+              "step": 2
             }
           ],
           "timeFrom": "2m",
@@ -1571,9 +1509,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{osd}}",
               "refId": "A",
-              "step": 2,
-              "target": "aliasByNode(limit(transformNull(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.submit_lat),0),$max_devices),-2)",
-              "textEditor": true
+              "step": 2
             }
           ],
           "timeFrom": "2m",
@@ -1668,9 +1604,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{osd}}",
               "refId": "A",
-              "step": 2,
-              "target": "aliasByNode(limit(transformNull(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.throttle_lat),0),$max_devices),-2)",
-              "textEditor": true
+              "step": 2
             }
           ],
           "timeFrom": "2m",
@@ -1763,9 +1697,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{osd}}",
               "refId": "A",
-              "step": 2,
-              "target": "aliasByNode(limit(transformNull(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.state_aio_wait_lat),0),$max_devices),-2)",
-              "textEditor": true
+              "step": 2
             }
           ],
           "timeFrom": "2m",
@@ -1858,9 +1790,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{osd}}",
               "refId": "A",
-              "step": 2,
-              "target": "aliasByNode(limit(transformNull(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.kv_commit_lat),0),$max_devices),-2)",
-              "textEditor": true
+              "step": 2
             }
           ],
           "timeFrom": "2m",
@@ -1906,36 +1836,28 @@
               "format": "time_series",
               "intervalFactor": 2,
               "refId": "A",
-              "step": 10,
-              "target": "alias(limit(transformNull(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.$osd_id.submit_lat),0),$max_devices),\"submit latency\")",
-              "textEditor": true
+              "step": 10
             },
             {
               "expr": "avg(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.($osd_id).throttle_lat\"})",
               "format": "time_series",
               "intervalFactor": 2,
               "refId": "B",
-              "step": 10,
-              "target": "alias(limit(transformNull(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.$osd_id.throttle_lat),0),$max_devices),\"throttle latency\")",
-              "textEditor": true
+              "step": 10
             },
             {
               "expr": "avg(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.($osd_id).state_aio_wait_lat\"})",
               "format": "time_series",
               "intervalFactor": 2,
               "refId": "C",
-              "step": 10,
-              "target": "alias(limit(transformNull(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.$osd_id.state_aio_wait_lat),0),$max_devices),\"AIO Wait latency\")",
-              "textEditor": true
+              "step": 10
             },
             {
               "expr": "avg(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.($osd_id).kv_commit_lat\"})",
               "format": "time_series",
               "intervalFactor": 2,
               "refId": "D",
-              "step": 10,
-              "target": "alias(limit(transformNull(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.$osd_id.kv_commit_lat),0),$max_devices),\"KV Commit Latency\")",
-              "textEditor": true
+              "step": 10
             }
           ],
           "thresholds": [],
@@ -2014,9 +1936,7 @@
               "intervalFactor": 2,
               "legendFormat": "Submit Latency",
               "refId": "A",
-              "step": 10,
-              "target": "alias(percentileOfSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.submit_lat,$percentile), \"Submit Latency\")",
-              "textEditor": true
+              "step": 10
             },
             {
               "expr": "quantile($percentile/100, collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd..*.throttle_lat\"})",
@@ -2024,9 +1944,7 @@
               "intervalFactor": 2,
               "legendFormat": "Throttle Latency",
               "refId": "B",
-              "step": 10,
-              "target": "alias(percentileOfSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.throttle_lat,$percentile), \"Throttle Latency\")",
-              "textEditor": true
+              "step": 10
             },
             {
               "expr": "quantile($percentile/100, collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd..*.state_aio_wait_lat\"})",
@@ -2034,9 +1952,7 @@
               "intervalFactor": 2,
               "legendFormat": "IO Wait Latency",
               "refId": "C",
-              "step": 10,
-              "target": "alias(percentileOfSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.state_aio_wait_lat,$percentile), \"IO Wait Latency\")",
-              "textEditor": true
+              "step": 10
             },
             {
               "expr": "quantile($percentile/100, collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd..*.kv_commit_lat\"})",
@@ -2044,9 +1960,7 @@
               "intervalFactor": 2,
               "legendFormat": "KV Commit Latency",
               "refId": "D",
-              "step": 10,
-              "target": "alias(percentileOfSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.kv_commit_lat,$percentile), \"KV Commit Latency\")",
-              "textEditor": true
+              "step": 10
             }
           ],
           "thresholds": [],
@@ -2288,6 +2202,6 @@
     ]
   },
   "timezone": "browser",
-  "title": "Ceph OSD Information - Prometheus",
+  "title": "Ceph OSD Information",
   "version": 7
 }

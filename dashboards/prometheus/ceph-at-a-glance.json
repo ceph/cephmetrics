@@ -98,8 +98,7 @@
               "expr": "",
               "format": "time_series",
               "intervalFactor": 2,
-              "refId": "A",
-              "target": ""
+              "refId": "A"
             }
           ],
           "thresholds": "",
@@ -187,8 +186,7 @@
               "expr": "",
               "format": "time_series",
               "intervalFactor": 2,
-              "refId": "A",
-              "target": ""
+              "refId": "A"
             }
           ],
           "thresholds": "",
@@ -276,8 +274,7 @@
               "expr": "",
               "format": "time_series",
               "intervalFactor": 2,
-              "refId": "A",
-              "target": ""
+              "refId": "A"
             }
           ],
           "thresholds": "",
@@ -365,8 +362,7 @@
               "expr": "",
               "format": "time_series",
               "intervalFactor": 2,
-              "refId": "A",
-              "target": ""
+              "refId": "A"
             }
           ],
           "thresholds": "",
@@ -454,8 +450,7 @@
               "expr": "",
               "format": "time_series",
               "intervalFactor": 2,
-              "refId": "A",
-              "target": ""
+              "refId": "A"
             }
           ],
           "thresholds": "",
@@ -543,8 +538,7 @@
               "expr": "",
               "format": "time_series",
               "intervalFactor": 2,
-              "refId": "A",
-              "target": ""
+              "refId": "A"
             }
           ],
           "thresholds": "",
@@ -695,9 +689,7 @@
               "format": "time_series",
               "intervalFactor": 2,
               "refId": "A",
-              "step": 2,
-              "target": "consolidateBy(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.health),\"max\")",
-              "textEditor": true
+              "step": 2
             }
           ],
           "thresholds": "1,5",
@@ -749,8 +741,6 @@
               "legendFormat": "total",
               "refId": "D",
               "step": 2,
-              "target": "alias(keepLastValue(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_mon), \"max\")),\"total\")",
-              "textEditor": true,
               "valueHandler": "Text Only"
             },
             {
@@ -764,8 +754,6 @@
               "legendFormat": "quorum",
               "refId": "E",
               "step": 2,
-              "target": "alias(keepLastValue(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_mon_quorum), \"max\")),\"quorum\")",
-              "textEditor": true,
               "valueHandler": "Threshold",
               "warn": "1"
             },
@@ -780,9 +768,6 @@
               "legendFormat": "down",
               "refId": "A",
               "step": 2,
-              "target": "alias(diffSeries(#D,#E), \"down\")",
-              "targetFull": "alias(diffSeries(alias(keepLastValue(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_mon), \"max\")),\"total\"),alias(keepLastValue(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_mon_quorum), \"max\")),\"quorum\")), \"down\")",
-              "textEditor": true,
               "valueHandler": "Threshold",
               "warn": "1"
             }
@@ -824,8 +809,6 @@
               "legendFormat": "total",
               "refId": "E",
               "step": 2,
-              "target": "alias(keepLastValue(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_osd), \"max\")),\"total\")",
-              "textEditor": true,
               "valueHandler": "Text Only"
             },
             {
@@ -839,8 +822,6 @@
               "legendFormat": "up",
               "refId": "F",
               "step": 2,
-              "target": "alias(keepLastValue(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_osd_up), \"max\")),\"up\")",
-              "textEditor": true,
               "valueHandler": "Text Only"
             },
             {
@@ -854,8 +835,6 @@
               "legendFormat": "in",
               "refId": "A",
               "step": 2,
-              "target": "alias(keepLastValue(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_osd_in), \"max\")),\"in\")",
-              "textEditor": true,
               "valueHandler": "Text Only"
             },
             {
@@ -868,8 +847,6 @@
               "legendFormat": "out",
               "refId": "C",
               "step": 2,
-              "target": "alias(countSeries(currentBelow(groupByNode(transformNull(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.osd_state.*.in,99),-2,\"maxSeries\"),0.5)),\"out\")",
-              "textEditor": true,
               "valueHandler": "Text Only"
             },
             {
@@ -884,8 +861,6 @@
               "legendFormat": "down",
               "refId": "B",
               "step": 2,
-              "target": "alias(countSeries(currentBelow(groupByNode(transformNull(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.osd_state.*.up,99),-2,\"maxSeries\"),0.5)),\"down\")",
-              "textEditor": true,
               "valueHandler": "Threshold",
               "warn": "1"
             }
@@ -919,8 +894,6 @@
               "legendFormat": "up",
               "refId": "A",
               "step": 2,
-              "target": "alias(keepLastValue(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_mds_up), \"max\")),\"up\")",
-              "textEditor": true,
               "valueHandler": "Text Only"
             },
             {
@@ -934,8 +907,6 @@
               "legendFormat": "in",
               "refId": "E",
               "step": 2,
-              "target": "alias(keepLastValue(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_mds_in), \"max\")),\"in\")",
-              "textEditor": true,
               "valueHandler": "Text Only"
             },
             {
@@ -951,8 +922,6 @@
               "legendFormat": "down",
               "refId": "B",
               "step": 2,
-              "target": "alias(keepLastValue(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_mds_failed), \"max\")),\"down\")",
-              "textEditor": true,
               "valueHandler": "Threshold",
               "warn": "1"
             }
@@ -1024,9 +993,7 @@
               "format": "time_series",
               "intervalFactor": 2,
               "refId": "A",
-              "step": 60,
-              "target": "maxSeries(consolidateBy(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.num_osd_hosts, \"max\"))",
-              "textEditor": true
+              "step": 60
             }
           ],
           "thresholds": "",
@@ -1104,8 +1071,7 @@
               "format": "time_series",
               "intervalFactor": 2,
               "refId": "A",
-              "target": "countSeries(collectd.*.$domain.cephmetrics.derive.$cluster_name.rgw.put)",
-              "textEditor": true
+              "target": "countSeries(collectd.*.$domain.cephmetrics.derive.$cluster_name.rgw.put)"
             }
           ],
           "thresholds": "",
@@ -1194,9 +1160,7 @@
               "hide": false,
               "intervalFactor": 2,
               "refId": "A",
-              "step": 2,
-              "target": "alias(maxSeries(groupByNode(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.osd_bytes, 1,\"maxSeries\")), \"raw capacity\")",
-              "textEditor": true
+              "step": 2
             }
           ],
           "thresholds": "70,90",
@@ -1363,9 +1327,7 @@
               "hide": false,
               "intervalFactor": 2,
               "refId": "A",
-              "step": 60,
-              "target": "alias(consolidateBy(maxSeries(timeShift(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.osd_bytes_used,\"7d\")), \"max\"),\"-$growth_window ago\")",
-              "textEditor": true
+              "step": 60
             }
           ],
           "thresholds": "",
@@ -1431,9 +1393,7 @@
               "intervalFactor": 2,
               "legendFormat": "active + clean",
               "refId": "A",
-              "step": 120,
-              "target": "alias(keepLastValue(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_pg_active_clean), \"max\")),\"active + clean\")",
-              "textEditor": true
+              "step": 120
             },
             {
               "expr": "max(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.mon.num_pg_active_clean\"}) - max(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.mon.num_pg_active\"})",
@@ -1442,9 +1402,7 @@
               "intervalFactor": 2,
               "legendFormat": "active + degraded",
               "refId": "B",
-              "step": 120,
-              "target": "alias(keepLastValue(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_pg_active), \"max\")),\"active\")",
-              "textEditor": true
+              "step": 120
             },
             {
               "expr": "max(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.mon.num_pg_peering\"})",
@@ -1452,10 +1410,7 @@
               "intervalFactor": 2,
               "legendFormat": "peering",
               "refId": "C",
-              "step": 120,
-              "target": "alias(diffSeries(#B,#A),\"active + degraded\")",
-              "targetFull": "alias(diffSeries(alias(keepLastValue(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_pg_active), \"max\")),\"active\"),alias(keepLastValue(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_pg_active_clean), \"max\")),\"active + clean\")),\"active + degraded\")",
-              "textEditor": true
+              "step": 120
             }
           ],
           "timeFrom": "1m",
@@ -1549,9 +1504,7 @@
               "hide": false,
               "intervalFactor": 2,
               "refId": "A",
-              "step": 60,
-              "target": "consolidateBy(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.features.deep_scrub),\"max\")",
-              "textEditor": true
+              "step": 60
             }
           ],
           "thresholds": "2",
@@ -1654,9 +1607,7 @@
               "format": "time_series",
               "intervalFactor": 2,
               "refId": "A",
-              "step": 60,
-              "target": "sumSeries(groupByNode(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.*.recovering_bytes_per_sec,-2,\"avg\"))",
-              "textEditor": true
+              "step": 60
             }
           ],
           "thresholds": "1,2",
@@ -1740,16 +1691,11 @@
           "tableColumn": "",
           "targets": [
             {
-              "dsType": "influxdb",
               "expr": "sum(max(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.mon.pools..*.op_per_sec\"}) by (instance))",
               "format": "time_series",
               "groupBy": [],
               "hide": false,
               "intervalFactor": 2,
-              "measurement": "collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.pools._all_.read_op_per_sec",
-              "policy": "default",
-              "query": "SELECT mean(\"value\") FROM \"measurement\" WHERE $timeFilter GROUP BY time($__interval) fill(null)",
-              "rawQuery": false,
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -1763,9 +1709,7 @@
                 ]
               ],
               "step": 60,
-              "tags": [],
-              "target": "sumSeries(groupByNode(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.*.op_per_sec,-2,\"maxSeries\"))",
-              "textEditor": true
+              "tags": []
             }
           ],
           "thresholds": "",
@@ -1849,16 +1793,11 @@
           "tableColumn": "",
           "targets": [
             {
-              "dsType": "influxdb",
               "expr": "sum(max(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.mon.pools..*.bytes_sec\"}) by (instance))",
               "format": "time_series",
               "groupBy": [],
               "hide": false,
               "intervalFactor": 2,
-              "measurement": "collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.pools._all_.read_op_per_sec",
-              "policy": "default",
-              "query": "SELECT \"value\" FROM \"collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.pools._all_.read_bytes_sec\" WHERE $timeFilter",
-              "rawQuery": true,
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -1872,9 +1811,7 @@
                 ]
               ],
               "step": 60,
-              "tags": [],
-              "target": "sumSeries(groupByNode(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.*.bytes_sec,-2,\"maxSeries\"))",
-              "textEditor": true
+              "tags": []
             }
           ],
           "thresholds": "",
@@ -1948,13 +1885,10 @@
           "tableColumn": "",
           "targets": [
             {
-              "dsType": "influxdb",
               "expr": "max(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.mon.num_pool\"})",
               "format": "time_series",
               "groupBy": [],
               "intervalFactor": 2,
-              "measurement": "collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.num_pool",
-              "policy": "default",
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -1968,9 +1902,7 @@
                 ]
               ],
               "step": 60,
-              "tags": [],
-              "target": "maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.num_pool)",
-              "textEditor": true
+              "tags": []
             }
           ],
           "thresholds": "",
@@ -2048,9 +1980,7 @@
               "format": "time_series",
               "intervalFactor": 2,
               "refId": "B",
-              "step": 60,
-              "target": "alias(sumSeries(consolidateBy(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.num_rbds,6),\"max\")),\"# rbds\")",
-              "textEditor": true
+              "step": 60
             }
           ],
           "thresholds": "",
@@ -2097,9 +2027,7 @@
               "intervalFactor": 2,
               "legendFormat": "Reads",
               "refId": "A",
-              "step": 60,
-              "target": "alias(sumSeries(groupByNode(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.*.read_op_per_sec,-2,\"maxSeries\")), \"Reads\")",
-              "textEditor": true
+              "step": 60
             },
             {
               "expr": "sum(max(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.mon.pools..*.write_op_per_sec\"}) by (instance))",
@@ -2107,9 +2035,7 @@
               "intervalFactor": 2,
               "legendFormat": "Writes",
               "refId": "B",
-              "step": 60,
-              "target": "alias(sumSeries(groupByNode(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.*.write_op_per_sec,-2,\"maxSeries\")), \"Writes\")",
-              "textEditor": true
+              "step": 60
             }
           ],
           "title": "Client Read/Write Ratio",
@@ -2172,9 +2098,7 @@
               "intervalFactor": 2,
               "legendFormat": "Apply Latency",
               "refId": "A",
-              "step": 10,
-              "target": "alias(percentileOfSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.apply_latency,$percentile), \"Apply Latency\")",
-              "textEditor": true
+              "step": 10
             },
             {
               "expr": "quantile($percentile/100, collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.*.commitcycle_latency\"})",
@@ -2182,9 +2106,7 @@
               "intervalFactor": 2,
               "legendFormat": "Commit Latency",
               "refId": "B",
-              "step": 10,
-              "target": "alias(percentileOfSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.commitcycle_latency, $percentile), \"Commit Latency\")",
-              "textEditor": true
+              "step": 10
             }
           ],
           "thresholds": [],
@@ -2298,9 +2220,7 @@
               "format": "time_series",
               "intervalFactor": 2,
               "refId": "A",
-              "step": 60,
-              "target": "percentileOfSeries(groupByNode(collectd.$osd_servers.$domain.cpu.percent.{system,user,wait},1,\"sumSeries\"),$percentile)",
-              "textEditor": true
+              "step": 60
             }
           ],
           "thresholds": "70,90",
@@ -2385,17 +2305,12 @@
           "tableColumn": "",
           "targets": [
             {
-              "dsType": "influxdb",
               "expr": "sum(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd..*.perf.iops\"})",
               "format": "time_series",
               "groupBy": [],
               "hide": false,
               "intervalFactor": 2,
               "legendFormat": "IOPS",
-              "measurement": "collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.pools._all_.read_op_per_sec",
-              "policy": "default",
-              "query": "SELECT \"value\" FROM \"collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.pools._all_.read_bytes_sec\" WHERE $timeFilter",
-              "rawQuery": true,
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -2409,9 +2324,7 @@
                 ]
               ],
               "step": 60,
-              "tags": [],
-              "target": "alias(sumSeries(collectd.$osd_servers.$domain.cephmetrics.gauge.$cluster_name.osd.*.perf.iops),\"IOPS\")",
-              "textEditor": true
+              "tags": []
             }
           ],
           "thresholds": "",
@@ -2495,16 +2408,11 @@
           "tableColumn": "",
           "targets": [
             {
-              "dsType": "influxdb",
               "expr": "sum(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd..*.perf.bytes_per_sec\"})",
               "format": "time_series",
               "groupBy": [],
               "hide": false,
               "intervalFactor": 2,
-              "measurement": "collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.pools._all_.read_op_per_sec",
-              "policy": "default",
-              "query": "SELECT \"value\" FROM \"collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.pools._all_.read_bytes_sec\" WHERE $timeFilter",
-              "rawQuery": true,
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -2518,9 +2426,7 @@
                 ]
               ],
               "step": 60,
-              "tags": [],
-              "target": "sumSeries(collectd.$osd_servers.$domain.cephmetrics.gauge.$cluster_name.osd.*.perf.bytes_per_sec)",
-              "textEditor": true
+              "tags": []
             }
           ],
           "thresholds": "",
@@ -2609,9 +2515,7 @@
               "format": "time_series",
               "intervalFactor": 2,
               "refId": "A",
-              "step": 60,
-              "target": "countSeries(currentAbove(transformNull(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.osd_percent_used),0),$disk_full_threshold))",
-              "textEditor": true
+              "step": 60
             }
           ],
           "thresholds": "",
@@ -2696,16 +2600,11 @@
           "tableColumn": "",
           "targets": [
             {
-              "dsType": "influxdb",
               "expr": "quantile($percentile/100, collectd_memory_percent{memory=\"used\"})",
               "format": "time_series",
               "groupBy": [],
               "hide": false,
               "intervalFactor": 2,
-              "measurement": "collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.pools._all_.read_op_per_sec",
-              "policy": "default",
-              "query": "SELECT \"value\" FROM \"collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.pools._all_.read_bytes_sec\" WHERE $timeFilter",
-              "rawQuery": true,
               "refId": "A",
               "resultFormat": "time_series",
               "select": [
@@ -2719,9 +2618,7 @@
                 ]
               ],
               "step": 60,
-              "tags": [],
-              "target": "percentileOfSeries(collectd.$osd_servers.$domain.memory.percent.used,$percentile)",
-              "textEditor": true
+              "tags": []
             }
           ],
           "thresholds": "",
@@ -2809,9 +2706,7 @@
               "format": "time_series",
               "intervalFactor": 2,
               "refId": "A",
-              "step": 60,
-              "target": "percentileOfSeries(group(collectd.$osd_servers.$domain.cephmetrics.gauge.$cluster_name.osd.*.perf.await),$percentile)",
-              "textEditor": true
+              "step": 60
             }
           ],
           "thresholds": "20,60",
@@ -2883,9 +2778,7 @@
               "intervalFactor": 2,
               "legendFormat": "average %util",
               "refId": "A",
-              "step": 10,
-              "target": "alias(averageSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.perf.util), 'average %util')",
-              "textEditor": true
+              "step": 10
             },
             {
               "expr": "quantile($percentile/100, collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd..*.perf.util\"})",
@@ -2893,9 +2786,7 @@
               "intervalFactor": 2,
               "legendFormat": "%util @ $percentile%ile",
               "refId": "B",
-              "step": 10,
-              "target": "alias(percentileOfSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.perf.util, $percentile, 'false'), '%util @ $percentile%ile')",
-              "textEditor": true
+              "step": 10
             }
           ],
           "thresholds": [],
@@ -3192,6 +3083,6 @@
     ]
   },
   "timezone": "browser",
-  "title": "Ceph - At A Glance - Prometheus",
+  "title": "Ceph - At A Glance",
   "version": 21
 }

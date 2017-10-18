@@ -61,8 +61,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{node}}",
               "refId": "A",
-              "step": 4,
-              "target": ""
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -169,8 +168,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{node}} Total OSD IOPS",
               "refId": "A",
-              "step": 20,
-              "target": ""
+              "step": 20
             }
           ],
           "thresholds": [],
@@ -267,8 +265,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{node}} Total OSD IOPS",
               "refId": "A",
-              "step": 20,
-              "target": ""
+              "step": 20
             }
           ],
           "thresholds": [],
@@ -365,8 +362,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{node}} Total OSD IOPS",
               "refId": "A",
-              "step": 20,
-              "target": ""
+              "step": 20
             }
           ],
           "thresholds": [],
@@ -532,6 +528,6 @@
     ]
   },
   "timezone": "browser",
-  "title": "IOPS by Server - Prometheus",
+  "title": "IOPS by Server",
   "version": 3
 }

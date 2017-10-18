@@ -63,8 +63,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{node}}",
               "refId": "A",
-              "step": 4,
-              "target": ""
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -171,8 +170,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{node}} Disk Utilisation @ $percentile%ile",
               "refId": "A",
-              "step": 20,
-              "target": ""
+              "step": 20
             }
           ],
           "thresholds": [],
@@ -269,8 +267,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{node}} Disk Utilisation @ $percentile%ile",
               "refId": "A",
-              "step": 20,
-              "target": ""
+              "step": 20
             }
           ],
           "thresholds": [],
@@ -367,8 +364,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{node}} Disk Utilisation @ $percentile%ile",
               "refId": "A",
-              "step": 20,
-              "target": ""
+              "step": 20
             }
           ],
           "thresholds": [],
@@ -577,6 +573,6 @@
     ]
   },
   "timezone": "browser",
-  "title": "Disk Busy by Server - Prometheus",
+  "title": "Disk Busy by Server",
   "version": 4
 }

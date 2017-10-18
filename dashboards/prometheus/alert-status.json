@@ -85,9 +85,7 @@
               "intervalFactor": 2,
               "legendFormat": "Ceph Health",
               "refId": "A",
-              "step": 20,
-              "target": "alias(maxSeries(consolidateBy(keepLastValue(transformNull(collectd.*.fedex.lan.cephmetrics.gauge.*.mon.health,0)),\"max\")),\"Ceph Health\")",
-              "textEditor": true
+              "step": 20
             }
           ],
           "thresholds": [
@@ -175,9 +173,7 @@
               "intervalFactor": 2,
               "legendFormat": "OSDs near full",
               "refId": "A",
-              "step": 40,
-              "target": "currentAbove(transformNull(keepLastValue(collectd.*.fedex.lan.cephmetrics.gauge.*.osd.*.osd_percent_used),0),85)",
-              "textEditor": true
+              "step": 40
             }
           ],
           "thresholds": [
@@ -268,9 +264,7 @@
               "intervalFactor": 2,
               "legendFormat": "down",
               "refId": "A",
-              "step": 4,
-              "target": "alias(keepLastValue(consolidateBy(maxSeries(collectd.*.fedex.lan.cephmetrics.gauge.*.mon.num_osd), \"max\")),\"total\")",
-              "textEditor": true
+              "step": 4
             }
           ],
           "thresholds": [
@@ -357,28 +351,7 @@
               "intervalFactor": 2,
               "legendFormat": "Raw Capacity Used %",
               "refId": "A",
-              "step": 40,
-              "target": "alias(maxSeries(groupByNode(collectd.*.fedex.lan.cephmetrics.gauge.*.mon.osd_bytes,1, \"maxSeries\")), \"Raw Capacity\")",
-              "textEditor": true
-            },
-            {
-              "expr": "",
-              "format": "time_series",
-              "hide": true,
-              "intervalFactor": 2,
-              "refId": "B",
-              "target": "alias(maxSeries(groupByNode(collectd.*.fedex.lan.cephmetrics.gauge.*.mon.osd_bytes_used,1, \"maxSeries\")), \"Used Raw\")",
-              "textEditor": true
-            },
-            {
-              "expr": "",
-              "format": "time_series",
-              "hide": true,
-              "intervalFactor": 2,
-              "refId": "C",
-              "target": "alias(asPercent(#B, #A), \"Raw Capacity Used %\")",
-              "targetFull": "alias(asPercent(alias(maxSeries(groupByNode(collectd.*.fedex.lan.cephmetrics.gauge.*.mon.osd_bytes_used,1, \"maxSeries\")), \"Used Raw\"), alias(maxSeries(groupByNode(collectd.*.fedex.lan.cephmetrics.gauge.*.mon.osd_bytes,1, \"maxSeries\")), \"Raw Capacity\")), \"Raw Capacity Used %\")",
-              "textEditor": true
+              "step": 40
             }
           ],
           "thresholds": [
@@ -465,9 +438,7 @@
               "intervalFactor": 2,
               "legendFormat": "# pg's stuck inactive",
               "refId": "A",
-              "step": 240,
-              "target": "alias(maxSeries(consolidateBy(collectd.*.fedex.lan.cephmetrics.gauge.*.mon.num_pgs_stuck, \"maxSeries\")), \"# pg's stuck inactive\")",
-              "textEditor": true
+              "step": 240
             }
           ],
           "thresholds": [
@@ -558,28 +529,7 @@
               "intervalFactor": 2,
               "legendFormat": "name",
               "refId": "A",
-              "step": 40,
-              "target": "alias(scale(maxSeries(groupByNode(collectd.*.fedex.lan.cephmetrics.gauge.*.mon.osd_bytes_avail,1, \"maxSeries\")),0.9), \"Raw Freespace\")alias(maxSeries(groupByNode(keepLastValue(collectd.*.fedex.lan.cephmetrics.gauge.*.osd.*.stat_bytes),1,\"sumSeries\")), \"Largest OSD Host\")",
-              "textEditor": true
-            },
-            {
-              "expr": "",
-              "format": "time_series",
-              "hide": true,
-              "intervalFactor": 2,
-              "refId": "B",
-              "target": "alias(maxSeries(groupByNode(keepLastValue(collectd.*.fedex.lan.cephmetrics.gauge.*.osd.*.stat_bytes),1,\"sumSeries\")), \"Largest OSD Host\")",
-              "textEditor": true
-            },
-            {
-              "expr": "",
-              "format": "time_series",
-              "hide": true,
-              "intervalFactor": 2,
-              "refId": "C",
-              "target": "alias(diffSeries(#A,#B),\"freespace after Node loss\")",
-              "targetFull": "alias(diffSeries(alias(scale(maxSeries(groupByNode(collectd.*.fedex.lan.cephmetrics.gauge.*.mon.osd_bytes_avail,1, \"maxSeries\")),0.9), \"Raw Freespace\")alias(maxSeries(groupByNode(keepLastValue(collectd.*.fedex.lan.cephmetrics.gauge.*.osd.*.stat_bytes),1,\"sumSeries\")), \"Largest OSD Host\"),alias(maxSeries(groupByNode(keepLastValue(collectd.*.fedex.lan.cephmetrics.gauge.*.osd.*.stat_bytes),1,\"sumSeries\")), \"Largest OSD Host\")),\"freespace after Node loss\")",
-              "textEditor": true
+              "step": 40
             }
           ],
           "thresholds": [
@@ -669,9 +619,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{node}}",
               "refId": "A",
-              "step": 40,
-              "target": "aliasByNode(currentAbove(keepLastValue(transformNull(collectd.*.fedex.lan.cephmetrics.gauge.*.osd.*.perf.await,-1)),1000),1,-3)",
-              "textEditor": true
+              "step": 40
             }
           ],
           "thresholds": [
@@ -757,9 +705,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{node}}",
               "refId": "A",
-              "step": 40,
-              "target": "groupByNode(collectd.*.fedex.lan.interface.*.if_{dropped,errors}.*,1,\"sumSeries\")",
-              "textEditor": true
+              "step": 40
             }
           ],
           "thresholds": [
@@ -845,9 +791,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{pool}}",
               "refId": "A",
-              "step": 40,
-              "target": "groupByNode(collectd.*.fedex.lan.cephmetrics.gauge.*.mon.pools.*.percent_used,-2,'maxSeries')",
-              "textEditor": true
+              "step": 40
             }
           ],
           "thresholds": [
@@ -939,6 +883,6 @@
     ]
   },
   "timezone": "browser",
-  "title": "Alert Status - Prometheus",
+  "title": "Alert Status",
   "version": 2
 }

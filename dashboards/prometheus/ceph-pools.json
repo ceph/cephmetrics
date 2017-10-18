@@ -52,9 +52,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{pool}}",
               "refId": "A",
-              "step": 20,
-              "target": "groupByNode(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.op_per_sec,-2,\"maxSeries\")",
-              "textEditor": true
+              "step": 20
             }
           ],
           "thresholds": [],
@@ -131,9 +129,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{pool}}",
               "refId": "A",
-              "step": 20,
-              "target": "groupByNode(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.bytes_sec,-2,\"maxSeries\")",
-              "textEditor": true
+              "step": 20
             }
           ],
           "thresholds": [],
@@ -210,9 +206,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{pool}}",
               "refId": "A",
-              "step": 20,
-              "target": "groupByNode(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.*.recovering_bytes_per_sec,-2,\"maxSeries\")",
-              "textEditor": true
+              "step": 20
             }
           ],
           "thresholds": [],
@@ -342,9 +336,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{pool}}",
               "refId": "A",
-              "step": 20,
-              "target": "limit(groupByNode(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.*.op_per_sec,-2,\"maxSeries\"),5)",
-              "textEditor": true
+              "step": 20
             }
           ],
           "title": "Top 5 Pools by Client IOPS",
@@ -430,9 +422,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{pool}}",
               "refId": "A",
-              "step": 20,
-              "target": "limit(groupByNode(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.*.bytes_sec,-2,\"maxSeries\"),5)",
-              "textEditor": true
+              "step": 20
             }
           ],
           "title": "Top 5 Pools by Throughput",
@@ -521,9 +511,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{pool}}",
               "refId": "A",
-              "step": 20,
-              "target": "limit(groupByNode(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.*.percent_used,-2,'maxSeries'),5)",
-              "textEditor": true
+              "step": 20
             }
           ],
           "title": "Top 5 Pools by Capacity Used",
@@ -590,9 +578,7 @@
               "intervalFactor": 2,
               "legendFormat": "read_op_per_sec",
               "refId": "A",
-              "step": 10,
-              "target": "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.read_op_per_sec), -1)",
-              "textEditor": true
+              "step": 10
             },
             {
               "expr": "max(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.mon.pools.$pool_name.write_op_per_sec\"})",
@@ -600,9 +586,7 @@
               "intervalFactor": 2,
               "legendFormat": "write_op_per_sec",
               "refId": "B",
-              "step": 10,
-              "target": "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.write_op_per_sec), -1)",
-              "textEditor": true
+              "step": 10
             }
           ],
           "thresholds": [],
@@ -689,9 +673,7 @@
               "intervalFactor": 2,
               "legendFormat": "read_bytes_sec",
               "refId": "A",
-              "step": 10,
-              "target": "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.read_bytes_sec), -1)",
-              "textEditor": true
+              "step": 10
             },
             {
               "expr": "max(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.mon.pools.$pool_name.write_bytes_sec\"})",
@@ -699,9 +681,7 @@
               "intervalFactor": 2,
               "legendFormat": "write_bytes_sec",
               "refId": "B",
-              "step": 10,
-              "target": "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.write_bytes_sec), -1)",
-              "textEditor": true
+              "step": 10
             }
           ],
           "thresholds": [],
@@ -853,6 +833,6 @@
     ]
   },
   "timezone": "browser",
-  "title": "Ceph Pools - Prometheus",
+  "title": "Ceph Pools",
   "version": 4
 }

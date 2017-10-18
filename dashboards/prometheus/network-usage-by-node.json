@@ -73,8 +73,7 @@
               "intervalFactor": 2,
               "legendFormat": "OSD Hosts",
               "refId": "A",
-              "step": 4,
-              "target": ""
+              "step": 4
             },
             {
               "expr": "sum(irate(collectd_interface_if_octets_rx_total{instance=~\"($rgw_servers):.*\", interface!=\"lo\"}[5m])) + sum(irate(collectd_interface_if_octets_tx_total{instance=~\"($rgw_servers):.*\", interface!=\"lo\"}[5m]))",
@@ -178,8 +177,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{node}}",
               "refId": "A",
-              "step": 4,
-              "target": ""
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -267,8 +265,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{node}}",
               "refId": "A",
-              "step": 4,
-              "target": ""
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -356,8 +353,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{node}}",
               "refId": "A",
-              "step": 4,
-              "target": ""
+              "step": 4
             }
           ],
           "thresholds": [],
@@ -579,6 +575,6 @@
     ]
   },
   "timezone": "browser",
-  "title": "Network Usage by Node - Prometheus",
+  "title": "Network Usage by Node",
   "version": 14
 }

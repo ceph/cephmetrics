@@ -86,9 +86,7 @@
               "format": "time_series",
               "intervalFactor": 2,
               "refId": "A",
-              "step": 40,
-              "target": "sumSeries(keepLastValue(collectd.$osd_servers.$domain.cephmetrics.gauge.$cluster_name.osd.num_osds,6))",
-              "textEditor": true
+              "step": 40
             }
           ],
           "thresholds": "",
@@ -168,9 +166,7 @@
               "format": "time_series",
               "intervalFactor": 2,
               "refId": "A",
-              "step": 7200,
-              "target": "",
-              "textEditor": true
+              "step": 7200
             }
           ],
           "thresholds": "",
@@ -253,9 +249,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{node}}:{{device}}",
               "refId": "A",
-              "step": 20,
-              "target": "aliasByNode(collectd.$osd_servers.$domain.cephmetrics.gauge.$cluster_name.osd.$device_id.osd_id,1,-2)",
-              "textEditor": true
+              "step": 20
             }
           ],
           "title": "",
@@ -331,9 +325,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{node}}:{{device}}",
               "refId": "A",
-              "step": 240,
-              "target": "aliasByNode(keepLastValue(collectd.$osd_servers.$domain.cephmetrics.gauge.$cluster_name.osd.$device_id.disk_size),1,-2)",
-              "textEditor": true
+              "step": 240
             }
           ],
           "timeFrom": "2m",
@@ -392,9 +384,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{node}}:{{device}}",
               "refId": "A",
-              "step": 10,
-              "target": "aliasByNode(limit(collectd.$osd_servers.$domain.cephmetrics.gauge.$cluster_name.osd.$device_id.perf.util, $max_devices), -3)",
-              "textEditor": true
+              "step": 10
             }
           ],
           "thresholds": [],
@@ -471,9 +461,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{node}}:{{device}}",
               "refId": "A",
-              "step": 10,
-              "target": "aliasByNode(limit(collectd.$osd_servers.$domain.cephmetrics.gauge.$cluster_name.osd.$device_id.perf.iops, $max_devices), -3)",
-              "textEditor": true
+              "step": 10
             }
           ],
           "thresholds": [],
@@ -550,9 +538,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{node}}:{{device}}",
               "refId": "A",
-              "step": 10,
-              "target": "aliasByNode(limit(collectd.$osd_servers.$domain.cephmetrics.gauge.$cluster_name.osd.$device_id.perf.await, $max_devices), -3)",
-              "textEditor": true
+              "step": 10
             }
           ],
           "thresholds": [],
@@ -629,9 +615,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{node}}:{{device}}",
               "refId": "A",
-              "step": 10,
-              "target": "aliasByNode(limit(collectd.$osd_servers.$domain.cephmetrics.gauge.$cluster_name.osd.$device_id.perf.bytes_per_sec, $max_devices), -3)",
-              "textEditor": true
+              "step": 10
             }
           ],
           "thresholds": [],
@@ -717,9 +701,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{cpu}}",
               "refId": "A",
-              "step": 10,
-              "target": "limit(aliasByMetric(collectd.$osd_servers.$domain.cpu.percent.{system,user,wait,steal,nice,interrupt,softirq}),7)",
-              "textEditor": true
+              "step": 10
             }
           ],
           "thresholds": [],
@@ -799,9 +781,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{node}}:{{interface}}.rx",
               "refId": "A",
-              "step": 10,
-              "target": "aliasByNode(limit(collectd.$osd_servers.$domain.interface.{eth,en,bond}*.if_octets.*, 40), -3, -1)",
-              "textEditor": true
+              "step": 10
             },
             {
               "expr": "label_replace(max(topk($max_devices, irate(collectd_interface_if_octets_tx_total{instance=~\"($osd_servers):.*\", interface!=\"lo\"}[5m]))) by (instance, interface), \"node\", \"$1\", \"instance\", \"(.*):.*\")",
@@ -1023,6 +1003,6 @@
     ]
   },
   "timezone": "browser",
-  "title": "OSD Node Detail - Prometheus",
+  "title": "OSD Node Detail",
   "version": 14
 }
