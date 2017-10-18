@@ -85,7 +85,7 @@
                   "aliasColors": {}, 
                   "lines": true, 
                   "points": false, 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "pointradius": 5, 
                   "minSpan": 12
                }
@@ -192,7 +192,7 @@
                   "aliasColors": {}, 
                   "lines": true, 
                   "points": false, 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "pointradius": 5, 
                   "minSpan": 3
                }, 
@@ -289,7 +289,7 @@
                   "aliasColors": {}, 
                   "lines": true, 
                   "points": false, 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "pointradius": 5, 
                   "minSpan": 3
                }, 
@@ -386,7 +386,7 @@
                   "aliasColors": {}, 
                   "lines": true, 
                   "points": false, 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "pointradius": 5, 
                   "minSpan": 3
                }

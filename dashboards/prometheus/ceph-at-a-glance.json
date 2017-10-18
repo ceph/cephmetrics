@@ -93,7 +93,7 @@
                      "rgba(237, 129, 40, 0.89)", 
                      "rgba(50, 172, 45, 0.97)"
                   ], 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "nullText": null, 
                   "minSpan": 1, 
                   "postfixFontSize": "10%", 
@@ -181,7 +181,7 @@
                      "rgba(237, 129, 40, 0.89)", 
                      "rgba(50, 172, 45, 0.97)"
                   ], 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "nullText": null, 
                   "minSpan": 1, 
                   "postfixFontSize": "10%", 
@@ -269,7 +269,7 @@
                      "rgba(237, 129, 40, 0.89)", 
                      "rgba(50, 172, 45, 0.97)"
                   ], 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "nullText": null, 
                   "minSpan": 1, 
                   "postfixFontSize": "10%", 
@@ -357,7 +357,7 @@
                      "rgba(237, 129, 40, 0.89)", 
                      "rgba(50, 172, 45, 0.97)"
                   ], 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "nullText": null, 
                   "minSpan": 1, 
                   "postfixFontSize": "10%", 
@@ -445,7 +445,7 @@
                      "rgba(237, 129, 40, 0.89)", 
                      "rgba(50, 172, 45, 0.97)"
                   ], 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "nullText": null, 
                   "minSpan": 1, 
                   "postfixFontSize": "10%", 
@@ -533,7 +533,7 @@
                      "rgba(237, 129, 40, 0.89)", 
                      "rgba(50, 172, 45, 0.97)"
                   ], 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "nullText": null, 
                   "minSpan": 1, 
                   "postfixFontSize": "10%", 
@@ -695,7 +695,7 @@
                   ], 
                   "timeShift": null, 
                   "cacheTimeout": null, 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "nullText": null, 
                   "minSpan": 1, 
                   "postfixFontSize": "50%", 
@@ -754,7 +754,7 @@
                   ], 
                   "timeShift": null, 
                   "hideTimeOverride": true, 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "flipCard": false, 
                   "span": 1, 
                   "minSpan": 1, 
@@ -847,7 +847,7 @@
                   ], 
                   "timeShift": null, 
                   "hideTimeOverride": true, 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "flipCard": false, 
                   "span": 1, 
                   "minSpan": 1, 
@@ -908,7 +908,7 @@
                   ], 
                   "timeShift": null, 
                   "hideTimeOverride": true, 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "flipCard": false, 
                   "span": 1, 
                   "minSpan": 1, 
@@ -987,7 +987,7 @@
                      "rgba(237, 129, 40, 0.89)", 
                      "rgba(50, 172, 45, 0.97)"
                   ], 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "nullText": null, 
                   "minSpan": 1, 
                   "postfixFontSize": "50%", 
@@ -1065,7 +1065,7 @@
                      "rgba(237, 129, 40, 0.89)", 
                      "rgba(50, 172, 45, 0.97)"
                   ], 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "nullText": null, 
                   "minSpan": 1, 
                   "postfixFontSize": "50%", 
@@ -1156,7 +1156,7 @@
                   ], 
                   "timeShift": null, 
                   "cacheTimeout": null, 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "nullText": null, 
                   "minSpan": 2, 
                   "postfixFontSize": "40%", 
@@ -1236,7 +1236,7 @@
                      "rgba(237, 129, 40, 0.89)", 
                      "rgba(50, 172, 45, 0.97)"
                   ], 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "nullText": null, 
                   "minSpan": 1, 
                   "postfixFontSize": "50%", 
@@ -1321,7 +1321,7 @@
                      "rgba(237, 129, 40, 0.89)", 
                      "rgba(50, 172, 45, 0.97)"
                   ], 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "nullText": null, 
                   "minSpan": 1, 
                   "postfixFontSize": "50%", 
@@ -1400,7 +1400,7 @@
                   "timeShift": null, 
                   "interval": null, 
                   "cacheTimeout": null, 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "minSpan": 2
                }
             ], 
@@ -1513,7 +1513,7 @@
                      "rgba(255,0,0,1)", 
                      "rgba(255, 0, 0, 1)"
                   ], 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "nullText": null, 
                   "minSpan": 1, 
                   "postfixFontSize": "50%", 
@@ -1601,7 +1601,7 @@
                      "rgba(255,165,0, 0.89)", 
                      "rgba(255, 0, 0, 1)"
                   ], 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "nullText": null, 
                   "minSpan": 1, 
                   "postfixFontSize": "50%", 
@@ -1703,7 +1703,7 @@
                      "rgba(237, 129, 40, 0.89)", 
                      "rgba(50, 172, 45, 0.97)"
                   ], 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "nullText": null, 
                   "minSpan": 2, 
                   "postfixFontSize": "50%", 
@@ -1805,7 +1805,7 @@
                      "rgba(237, 129, 40, 0.89)", 
                      "rgba(50, 172, 45, 0.97)"
                   ], 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "nullText": null, 
                   "minSpan": 2, 
                   "postfixFontSize": "50%", 
@@ -1896,7 +1896,7 @@
                      "rgba(237, 129, 40, 0.89)", 
                      "rgba(50, 172, 45, 0.97)"
                   ], 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "nullText": null, 
                   "minSpan": 1, 
                   "postfixFontSize": "50%", 
@@ -1968,7 +1968,7 @@
                      "rgba(237, 129, 40, 0.89)", 
                      "rgba(50, 172, 45, 0.97)"
                   ], 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "nullText": null, 
                   "minSpan": 1, 
                   "postfixFontSize": "50%", 
@@ -2023,7 +2023,7 @@
                      "show": true
                   }, 
                   "interval": null, 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "minSpan": 2
                }, 
                {
@@ -2125,7 +2125,7 @@
                   }, 
                   "lines": true, 
                   "points": false, 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "pointradius": 5, 
                   "minSpan": 2
                }
@@ -2214,7 +2214,7 @@
                      "rgba(237, 129, 40, 0.89)", 
                      "rgba(245, 54, 54, 0.9)"
                   ], 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "nullText": null, 
                   "minSpan": 2, 
                   "postfixFontSize": "50%", 
@@ -2318,7 +2318,7 @@
                      "rgba(237, 129, 40, 0.89)", 
                      "rgba(50, 172, 45, 0.97)"
                   ], 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "nullText": null, 
                   "minSpan": 2, 
                   "postfixFontSize": "50%", 
@@ -2420,7 +2420,7 @@
                      "rgba(237, 129, 40, 0.89)", 
                      "rgba(50, 172, 45, 0.97)"
                   ], 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "nullText": null, 
                   "minSpan": 2, 
                   "postfixFontSize": "50%", 
@@ -2509,7 +2509,7 @@
                      "rgba(237, 129, 40, 0.89)", 
                      "rgba(50, 172, 45, 0.97)"
                   ], 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "nullText": null, 
                   "minSpan": 1, 
                   "postfixFontSize": "50%", 
@@ -2612,7 +2612,7 @@
                      "rgba(237, 129, 40, 0.89)", 
                      "rgba(50, 172, 45, 0.97)"
                   ], 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "nullText": null, 
                   "minSpan": 1, 
                   "postfixFontSize": "50%", 
@@ -2700,7 +2700,7 @@
                      "rgba(255,165,0,1)", 
                      "rgba(245, 54, 54, 0.9)"
                   ], 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "nullText": null, 
                   "minSpan": 2, 
                   "postfixFontSize": "50%", 
@@ -2805,7 +2805,7 @@
                   }, 
                   "lines": true, 
                   "points": false, 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "pointradius": 5, 
                   "minSpan": 2
                }
@@ -2831,7 +2831,7 @@
                   "text": "ceph", 
                   "value": "ceph"
                }, 
-               "datasource": "Prometheus", 
+               "datasource": "Local", 
                "type": "query", 
                "query": "collectd_cephmetrics_gauge{}", 
                "useTags": false, 
@@ -2976,7 +2976,7 @@
                   "text": "All", 
                   "value": "$__all"
                }, 
-               "datasource": "Prometheus", 
+               "datasource": "Local", 
                "type": "query", 
                "query": "collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.mon.mon_status.*\"}", 
                "useTags": false, 

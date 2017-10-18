@@ -84,7 +84,7 @@
                   "aliasColors": {}, 
                   "lines": true, 
                   "points": false, 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "pointradius": 5, 
                   "minSpan": 6
                }, 
@@ -161,7 +161,7 @@
                   "aliasColors": {}, 
                   "lines": true, 
                   "points": false, 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "pointradius": 5, 
                   "minSpan": 6
                }, 
@@ -238,7 +238,7 @@
                   "aliasColors": {}, 
                   "lines": true, 
                   "points": false, 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "pointradius": 5, 
                   "minSpan": 6
                }
@@ -329,7 +329,7 @@
                      }
                   ], 
                   "fontSize": "100%", 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "minSpan": 6, 
                   "type": "table", 
                   "id": 3, 
@@ -415,7 +415,7 @@
                      }
                   ], 
                   "fontSize": "100%", 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "minSpan": 6, 
                   "type": "table", 
                   "id": 4, 
@@ -504,7 +504,7 @@
                      }
                   ], 
                   "fontSize": "100%", 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "minSpan": 6, 
                   "type": "table", 
                   "id": 59, 
@@ -618,7 +618,7 @@
                   }, 
                   "lines": true, 
                   "points": false, 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "pointradius": 5, 
                   "minSpan": 6
                }, 
@@ -713,7 +713,7 @@
                   }, 
                   "lines": true, 
                   "points": false, 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "pointradius": 5, 
                   "minSpan": 6
                }
@@ -739,7 +739,7 @@
                   "text": "ceph", 
                   "value": "ceph"
                }, 
-               "datasource": "Prometheus", 
+               "datasource": "Local", 
                "type": "query", 
                "query": "collectd_cephmetrics_gauge{}", 
                "useTags": false, 
@@ -783,7 +783,7 @@
                   "text": "All", 
                   "value": "$__all"
                }, 
-               "datasource": "Prometheus", 
+               "datasource": "Local", 
                "type": "query", 
                "query": "collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.mon.pools.*\"}", 
                "useTags": false, 

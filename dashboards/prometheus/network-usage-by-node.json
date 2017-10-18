@@ -112,7 +112,7 @@
                   "aliasColors": {}, 
                   "lines": true, 
                   "points": false, 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "pointradius": 5, 
                   "minSpan": 12
                }
@@ -201,7 +201,7 @@
                   "aliasColors": {}, 
                   "lines": true, 
                   "points": false, 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "pointradius": 5
                }
             ], 
@@ -289,7 +289,7 @@
                   "aliasColors": {}, 
                   "lines": true, 
                   "points": false, 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "pointradius": 5
                }
             ], 
@@ -377,7 +377,7 @@
                   "aliasColors": {}, 
                   "lines": true, 
                   "points": false, 
-                  "datasource": "Prometheus", 
+                  "datasource": "Local", 
                   "pointradius": 5
                }
             ], 
@@ -464,7 +464,7 @@
                   "text": "ceph", 
                   "value": "ceph"
                }, 
-               "datasource": "Prometheus", 
+               "datasource": "Local", 
                "type": "query", 
                "query": "collectd_cephmetrics_gauge{}", 
                "useTags": false, 
@@ -487,7 +487,7 @@
                   "text": "All", 
                   "value": "$__all"
                }, 
-               "datasource": "Prometheus", 
+               "datasource": "Local", 
                "type": "query", 
                "query": "collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.mon.mon_status..*\"}", 
                "useTags": false, 
