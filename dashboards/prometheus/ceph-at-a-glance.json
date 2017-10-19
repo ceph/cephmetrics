@@ -1045,8 +1045,7 @@
                   "targets": [
                      {
                         "intervalFactor": 2, 
-                        "expr": "", 
-                        "target": "countSeries(collectd.*.$domain.cephmetrics.derive.$cluster_name.rgw.put)", 
+                        "expr": "count(collectd_cephmetrics_derive_total{cephmetrics=\"$cluster_name.rgw.put\"})", 
                         "refId": "A", 
                         "format": "time_series"
                      }
