@@ -1,0 +1,1963 @@
+{
+   "meta": {}, 
+   "dashboard": {
+      "style": "dark", 
+      "rows": [
+         {
+            "repeat": null, 
+            "titleSize": "h5", 
+            "repeatIteration": null, 
+            "title": "iSCSI Gateway Group : $gw_name", 
+            "height": "200px", 
+            "repeatRowId": null, 
+            "panels": [
+               {
+                  "span": 2, 
+                  "links": [], 
+                  "title": "", 
+                  "height": "100", 
+                  "content": "", 
+                  "mode": "markdown", 
+                  "minSpan": 2, 
+                  "type": "text", 
+                  "id": 19, 
+                  "transparent": true
+               }, 
+               {
+                  "mappingTypes": [
+                     {
+                        "name": "value to text", 
+                        "value": 1
+                     }, 
+                     {
+                        "name": "range to text", 
+                        "value": 2
+                     }
+                  ], 
+                  "timeFrom": "1m", 
+                  "links": [], 
+                  "valueMaps": [
+                     {
+                        "text": "N/A", 
+                        "value": "null", 
+                        "op": "="
+                     }
+                  ], 
+                  "tableColumn": "", 
+                  "thresholds": "", 
+                  "rangeMaps": [
+                     {
+                        "text": "N/A", 
+                        "from": "null", 
+                        "to": "null"
+                     }
+                  ], 
+                  "height": "100", 
+                  "prefix": "", 
+                  "gauge": {
+                     "thresholdLabels": false, 
+                     "show": false, 
+                     "thresholdMarkers": true, 
+                     "maxValue": 100, 
+                     "minValue": 0
+                  }, 
+                  "id": 1, 
+                  "maxDataPoints": "1", 
+                  "mappingType": 1, 
+                  "span": 1, 
+                  "colorBackground": false, 
+                  "title": "Gateways", 
+                  "sparkline": {
+                     "full": false, 
+                     "fillColor": "rgba(31, 118, 189, 0.18)", 
+                     "lineColor": "rgb(31, 120, 193)", 
+                     "show": false
+                  }, 
+                  "targets": [
+                     {
+                        "target": "maxSeries(consolidateBy(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.iscsi.gw_stats.tpg_count), \"max\"))", 
+                        "format": "time_series", 
+                        "expr": "max(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.iscsi.gw_stats.tpg_count\"})", 
+                        "step": 120, 
+                        "textEditor": true, 
+                        "intervalFactor": 2, 
+                        "refId": "A"
+                     }
+                  ], 
+                  "prefixFontSize": "50%", 
+                  "valueName": "current", 
+                  "type": "singlestat", 
+                  "valueFontSize": "70%", 
+                  "format": "none", 
+                  "hideTimeOverride": true, 
+                  "nullPointMode": "connected", 
+                  "postfix": "", 
+                  "interval": null, 
+                  "colors": [
+                     "rgba(245, 54, 54, 0.9)", 
+                     "rgba(237, 129, 40, 0.89)", 
+                     "rgba(50, 172, 45, 0.97)"
+                  ], 
+                  "timeShift": null, 
+                  "cacheTimeout": null, 
+                  "datasource": "Prometheus", 
+                  "nullText": null, 
+                  "minSpan": 1, 
+                  "postfixFontSize": "50%", 
+                  "colorValue": false
+               }, 
+               {
+                  "mappingTypes": [
+                     {
+                        "name": "value to text", 
+                        "value": 1
+                     }, 
+                     {
+                        "name": "range to text", 
+                        "value": 2
+                     }
+                  ], 
+                  "timeFrom": "1m", 
+                  "links": [], 
+                  "valueMaps": [
+                     {
+                        "text": "N/A", 
+                        "value": "null", 
+                        "op": "="
+                     }
+                  ], 
+                  "tableColumn": "", 
+                  "thresholds": "", 
+                  "rangeMaps": [
+                     {
+                        "text": "N/A", 
+                        "from": "null", 
+                        "to": "null"
+                     }
+                  ], 
+                  "height": "100", 
+                  "prefix": "", 
+                  "gauge": {
+                     "thresholdLabels": false, 
+                     "show": false, 
+                     "thresholdMarkers": true, 
+                     "maxValue": 100, 
+                     "minValue": 0
+                  }, 
+                  "id": 2, 
+                  "maxDataPoints": "1", 
+                  "mappingType": 1, 
+                  "span": 1, 
+                  "colorBackground": false, 
+                  "title": "Clients", 
+                  "sparkline": {
+                     "full": false, 
+                     "fillColor": "rgba(31, 118, 189, 0.18)", 
+                     "lineColor": "rgb(31, 120, 193)", 
+                     "show": false
+                  }, 
+                  "targets": [
+                     {
+                        "target": "maxSeries(consolidateBy(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.iscsi.gw_stats.client_count), \"max\"))", 
+                        "format": "time_series", 
+                        "expr": "max(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.iscsi.gw_stats.client_count\"})", 
+                        "step": 120, 
+                        "textEditor": true, 
+                        "intervalFactor": 2, 
+                        "refId": "A"
+                     }
+                  ], 
+                  "prefixFontSize": "50%", 
+                  "valueName": "current", 
+                  "type": "singlestat", 
+                  "valueFontSize": "70%", 
+                  "format": "none", 
+                  "hideTimeOverride": true, 
+                  "nullPointMode": "connected", 
+                  "postfix": "", 
+                  "interval": null, 
+                  "colors": [
+                     "rgba(245, 54, 54, 0.9)", 
+                     "rgba(237, 129, 40, 0.89)", 
+                     "rgba(50, 172, 45, 0.97)"
+                  ], 
+                  "cacheTimeout": null, 
+                  "datasource": "Prometheus", 
+                  "nullText": null, 
+                  "minSpan": 1, 
+                  "postfixFontSize": "50%", 
+                  "colorValue": false
+               }, 
+               {
+                  "mappingTypes": [
+                     {
+                        "name": "value to text", 
+                        "value": 1
+                     }, 
+                     {
+                        "name": "range to text", 
+                        "value": 2
+                     }
+                  ], 
+                  "timeFrom": "1m", 
+                  "colorBackground": false, 
+                  "valueMaps": [
+                     {
+                        "text": "N/A", 
+                        "value": "null", 
+                        "op": "="
+                     }
+                  ], 
+                  "tableColumn": "", 
+                  "thresholds": "", 
+                  "rangeMaps": [
+                     {
+                        "text": "N/A", 
+                        "from": "null", 
+                        "to": "null"
+                     }
+                  ], 
+                  "height": "100", 
+                  "prefix": "", 
+                  "gauge": {
+                     "thresholdLabels": false, 
+                     "show": false, 
+                     "thresholdMarkers": true, 
+                     "maxValue": 100, 
+                     "minValue": 0
+                  }, 
+                  "id": 5, 
+                  "maxDataPoints": "", 
+                  "mappingType": 1, 
+                  "span": 1, 
+                  "links": [], 
+                  "title": "Sessions", 
+                  "sparkline": {
+                     "full": false, 
+                     "fillColor": "rgba(31, 118, 189, 0.18)", 
+                     "lineColor": "rgb(31, 120, 193)", 
+                     "show": false
+                  }, 
+                  "targets": [
+                     {
+                        "target": "maxSeries(keepLastValue(consolidateBy(collectd.*.$domain.cephmetrics.gauge.$cluster_name.iscsi.gw_stats.sessions, \"max\")))", 
+                        "format": "time_series", 
+                        "expr": "max(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.iscsi.gw_stats.sessions\"})", 
+                        "step": 2, 
+                        "textEditor": true, 
+                        "intervalFactor": 2, 
+                        "refId": "A"
+                     }
+                  ], 
+                  "prefixFontSize": "50%", 
+                  "valueName": "current", 
+                  "type": "singlestat", 
+                  "valueFontSize": "70%", 
+                  "description": "Sessions shows the number of iSCSI clients currently logged in to the gateway group", 
+                  "format": "none", 
+                  "hideTimeOverride": true, 
+                  "nullPointMode": "connected", 
+                  "postfix": "", 
+                  "interval": null, 
+                  "colors": [
+                     "rgba(245, 54, 54, 0.9)", 
+                     "rgba(237, 129, 40, 0.89)", 
+                     "rgba(50, 172, 45, 0.97)"
+                  ], 
+                  "timeShift": null, 
+                  "cacheTimeout": null, 
+                  "datasource": "Prometheus", 
+                  "nullText": null, 
+                  "minSpan": 1, 
+                  "postfixFontSize": "50%", 
+                  "colorValue": false
+               }, 
+               {
+                  "mappingTypes": [
+                     {
+                        "name": "value to text", 
+                        "value": 1
+                     }, 
+                     {
+                        "name": "range to text", 
+                        "value": 2
+                     }
+                  ], 
+                  "timeFrom": "1m", 
+                  "colorBackground": false, 
+                  "valueMaps": [
+                     {
+                        "text": "N/A", 
+                        "value": "null", 
+                        "op": "="
+                     }
+                  ], 
+                  "tableColumn": "", 
+                  "thresholds": "", 
+                  "rangeMaps": [
+                     {
+                        "text": "N/A", 
+                        "from": "null", 
+                        "to": "null"
+                     }
+                  ], 
+                  "height": "100", 
+                  "colors": [
+                     "rgba(245, 54, 54, 0.9)", 
+                     "rgba(237, 129, 40, 0.89)", 
+                     "rgba(50, 172, 45, 0.97)"
+                  ], 
+                  "gauge": {
+                     "thresholdLabels": false, 
+                     "show": false, 
+                     "thresholdMarkers": true, 
+                     "maxValue": 100, 
+                     "minValue": 0
+                  }, 
+                  "id": 4, 
+                  "maxDataPoints": "", 
+                  "mappingType": 1, 
+                  "span": 2, 
+                  "links": [], 
+                  "title": "Defined Capacity", 
+                  "sparkline": {
+                     "full": false, 
+                     "fillColor": "rgba(31, 118, 189, 0.18)", 
+                     "lineColor": "rgb(31, 120, 193)", 
+                     "show": false
+                  }, 
+                  "targets": [
+                     {
+                        "hide": false, 
+                        "target": "maxSeries(consolidateBy(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.iscsi.gw_stats.capacity), \"max\"))", 
+                        "format": "time_series", 
+                        "expr": "max(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.iscsi.gw_stats.capacity\"})", 
+                        "step": 2, 
+                        "textEditor": true, 
+                        "intervalFactor": 2, 
+                        "refId": "A"
+                     }
+                  ], 
+                  "prefixFontSize": "50%", 
+                  "valueName": "current", 
+                  "type": "singlestat", 
+                  "valueFontSize": "70%", 
+                  "description": "Capacity refers to the total capacity defined within the iSCSI gateway group, and available to iSCSI clients", 
+                  "format": "bytes", 
+                  "hideTimeOverride": true, 
+                  "nullPointMode": "connected", 
+                  "postfix": "", 
+                  "decimals": 0, 
+                  "interval": null, 
+                  "prefix": "", 
+                  "timeShift": null, 
+                  "cacheTimeout": null, 
+                  "datasource": "Prometheus", 
+                  "nullText": null, 
+                  "minSpan": 2, 
+                  "postfixFontSize": "50%", 
+                  "colorValue": false
+               }, 
+               {
+                  "mappingTypes": [
+                     {
+                        "name": "value to text", 
+                        "value": 1
+                     }, 
+                     {
+                        "name": "range to text", 
+                        "value": 2
+                     }
+                  ], 
+                  "timeFrom": "1m", 
+                  "links": [], 
+                  "valueMaps": [
+                     {
+                        "text": "N/A", 
+                        "value": "null", 
+                        "op": "="
+                     }
+                  ], 
+                  "tableColumn": "", 
+                  "thresholds": "", 
+                  "rangeMaps": [
+                     {
+                        "text": "N/A", 
+                        "from": "null", 
+                        "to": "null"
+                     }
+                  ], 
+                  "height": "100", 
+                  "prefix": "", 
+                  "gauge": {
+                     "thresholdLabels": false, 
+                     "show": false, 
+                     "thresholdMarkers": true, 
+                     "maxValue": 100, 
+                     "minValue": 0
+                  }, 
+                  "id": 3, 
+                  "maxDataPoints": "", 
+                  "mappingType": 1, 
+                  "span": 1, 
+                  "colorBackground": false, 
+                  "title": "LUNs", 
+                  "sparkline": {
+                     "full": false, 
+                     "fillColor": "rgba(31, 118, 189, 0.18)", 
+                     "lineColor": "rgb(31, 120, 193)", 
+                     "show": false
+                  }, 
+                  "targets": [
+                     {
+                        "target": "maxSeries(consolidateBy(collectd.*.$domain.cephmetrics.gauge.$cluster_name.iscsi.gw_stats.lun_count, \"max\"))", 
+                        "format": "time_series", 
+                        "expr": "max(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.iscsi.gw_stats.lun_count\"})", 
+                        "step": 2, 
+                        "textEditor": true, 
+                        "intervalFactor": 2, 
+                        "refId": "A"
+                     }
+                  ], 
+                  "prefixFontSize": "50%", 
+                  "valueName": "current", 
+                  "type": "singlestat", 
+                  "valueFontSize": "70%", 
+                  "format": "none", 
+                  "hideTimeOverride": true, 
+                  "nullPointMode": "connected", 
+                  "postfix": "", 
+                  "interval": null, 
+                  "colors": [
+                     "rgba(245, 54, 54, 0.9)", 
+                     "rgba(237, 129, 40, 0.89)", 
+                     "rgba(50, 172, 45, 0.97)"
+                  ], 
+                  "timeShift": null, 
+                  "cacheTimeout": null, 
+                  "datasource": "Prometheus", 
+                  "nullText": null, 
+                  "minSpan": 1, 
+                  "postfixFontSize": "50%", 
+                  "colorValue": false
+               }, 
+               {
+                  "mappingTypes": [
+                     {
+                        "name": "value to text", 
+                        "value": 1
+                     }, 
+                     {
+                        "name": "range to text", 
+                        "value": 2
+                     }
+                  ], 
+                  "timeFrom": "1m", 
+                  "links": [], 
+                  "valueMaps": [
+                     {
+                        "text": "N/A", 
+                        "value": "null", 
+                        "op": "="
+                     }
+                  ], 
+                  "tableColumn": "", 
+                  "thresholds": "", 
+                  "rangeMaps": [
+                     {
+                        "text": "N/A", 
+                        "from": "null", 
+                        "to": "null"
+                     }
+                  ], 
+                  "height": "100", 
+                  "prefix": "", 
+                  "gauge": {
+                     "thresholdLabels": false, 
+                     "show": false, 
+                     "thresholdMarkers": true, 
+                     "maxValue": 100, 
+                     "minValue": 0
+                  }, 
+                  "id": 18, 
+                  "maxDataPoints": "", 
+                  "mappingType": 1, 
+                  "span": 1, 
+                  "colorBackground": false, 
+                  "title": "Unused LUNs", 
+                  "sparkline": {
+                     "full": false, 
+                     "fillColor": "rgba(31, 118, 189, 0.18)", 
+                     "lineColor": "rgb(31, 120, 193)", 
+                     "show": false
+                  }, 
+                  "targets": [
+                     {
+                        "hide": false, 
+                        "target": "maxSeries(consolidateBy(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.iscsi.gw_stats.lun_count), \"max\"))", 
+                        "format": "time_series", 
+                        "expr": "max(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.iscsi.gw_stats.lun_count\"}) - count(max by (client)(label_replace(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.iscsigw_clients.($clients).luns..*.size\", exported_instance=~\"($iscsi_gateways).$domain\"}, \"client\", \"$1\", \"cephmetrics\", \"$cluster_name.iscsigw_clients.(.*).luns..*.size\")) > 0.5)", 
+                        "step": 2, 
+                        "textEditor": true, 
+                        "legendFormat": "{{lun}}", 
+                        "intervalFactor": 2, 
+                        "refId": "A"
+                     }
+                  ], 
+                  "prefixFontSize": "50%", 
+                  "valueName": "current", 
+                  "type": "singlestat", 
+                  "valueFontSize": "70%", 
+                  "format": "none", 
+                  "hideTimeOverride": true, 
+                  "nullPointMode": "connected", 
+                  "postfix": "", 
+                  "interval": null, 
+                  "colors": [
+                     "rgba(245, 54, 54, 0.9)", 
+                     "rgba(237, 129, 40, 0.89)", 
+                     "rgba(50, 172, 45, 0.97)"
+                  ], 
+                  "cacheTimeout": null, 
+                  "datasource": "Prometheus", 
+                  "nullText": null, 
+                  "minSpan": 1, 
+                  "postfixFontSize": "50%", 
+                  "colorValue": false
+               }, 
+               {
+                  "span": 3, 
+                  "links": [], 
+                  "title": "", 
+                  "height": "100", 
+                  "content": "", 
+                  "mode": "markdown", 
+                  "minSpan": 3, 
+                  "type": "text", 
+                  "id": 22, 
+                  "transparent": true
+               }, 
+               {
+                  "span": 1, 
+                  "links": [], 
+                  "title": "", 
+                  "height": "100", 
+                  "content": "", 
+                  "mode": "markdown", 
+                  "minSpan": 1, 
+                  "type": "text", 
+                  "id": 23, 
+                  "transparent": true
+               }, 
+               {
+                  "mappingTypes": [
+                     {
+                        "name": "value to text", 
+                        "value": 1
+                     }, 
+                     {
+                        "name": "range to text", 
+                        "value": 2
+                     }
+                  ], 
+                  "colorBackground": false, 
+                  "valueMaps": [
+                     {
+                        "text": "N/A", 
+                        "value": "null", 
+                        "op": "="
+                     }
+                  ], 
+                  "tableColumn": "", 
+                  "thresholds": "", 
+                  "rangeMaps": [
+                     {
+                        "text": "N/A", 
+                        "from": "null", 
+                        "to": "null"
+                     }
+                  ], 
+                  "height": "200", 
+                  "prefix": "", 
+                  "gauge": {
+                     "thresholdLabels": false, 
+                     "show": false, 
+                     "thresholdMarkers": true, 
+                     "maxValue": 100, 
+                     "minValue": 0
+                  }, 
+                  "id": 6, 
+                  "maxDataPoints": "", 
+                  "mappingType": 1, 
+                  "span": 2, 
+                  "links": [], 
+                  "title": "IOPS", 
+                  "sparkline": {
+                     "full": false, 
+                     "fillColor": "rgba(31, 118, 189, 0.18)", 
+                     "lineColor": "rgb(31, 120, 193)", 
+                     "show": true
+                  }, 
+                  "targets": [
+                     {
+                        "target": "sumSeries(consolidateBy(keepLastValue(collectd.*.$domain.cephmetrics.derive.$cluster_name.iscsi.gw_stats.iops), \"max\"))", 
+                        "format": "time_series", 
+                        "expr": "sum(collectd_cephmetrics_derive_total{cephmetrics=\"$cluster_name.iscsi.gw_stats.iops\"})", 
+                        "step": 40, 
+                        "textEditor": true, 
+                        "intervalFactor": 2, 
+                        "refId": "A"
+                     }
+                  ], 
+                  "prefixFontSize": "50%", 
+                  "valueName": "current", 
+                  "type": "singlestat", 
+                  "valueFontSize": "70%", 
+                  "description": "Total IOPS across all iSCSI gateways", 
+                  "format": "none", 
+                  "cacheTimeout": null, 
+                  "nullPointMode": "connected", 
+                  "postfix": "", 
+                  "decimals": 0, 
+                  "interval": null, 
+                  "colors": [
+                     "rgba(245, 54, 54, 0.9)", 
+                     "rgba(237, 129, 40, 0.89)", 
+                     "rgba(50, 172, 45, 0.97)"
+                  ], 
+                  "datasource": "Prometheus", 
+                  "nullText": null, 
+                  "minSpan": 2, 
+                  "postfixFontSize": "50%", 
+                  "colorValue": false
+               }, 
+               {
+                  "mappingTypes": [
+                     {
+                        "name": "value to text", 
+                        "value": 1
+                     }, 
+                     {
+                        "name": "range to text", 
+                        "value": 2
+                     }
+                  ], 
+                  "colorBackground": false, 
+                  "valueMaps": [
+                     {
+                        "text": "N/A", 
+                        "value": "null", 
+                        "op": "="
+                     }
+                  ], 
+                  "tableColumn": "", 
+                  "thresholds": "", 
+                  "rangeMaps": [
+                     {
+                        "text": "N/A", 
+                        "from": "null", 
+                        "to": "null"
+                     }
+                  ], 
+                  "height": "200", 
+                  "prefix": "", 
+                  "gauge": {
+                     "thresholdLabels": false, 
+                     "show": false, 
+                     "thresholdMarkers": true, 
+                     "maxValue": 100, 
+                     "minValue": 0
+                  }, 
+                  "id": 7, 
+                  "maxDataPoints": "", 
+                  "mappingType": 1, 
+                  "span": 2, 
+                  "links": [], 
+                  "title": "Throughput", 
+                  "sparkline": {
+                     "full": false, 
+                     "fillColor": "rgba(31, 118, 189, 0.18)", 
+                     "lineColor": "rgb(31, 120, 193)", 
+                     "show": true
+                  }, 
+                  "targets": [
+                     {
+                        "target": "sumSeries(consolidateBy(keepLastValue(collectd.*.$domain.cephmetrics.derive.$cluster_name.iscsi.gw_stats.total_bytes_per_sec), \"max\"))", 
+                        "format": "time_series", 
+                        "expr": "sum(collectd_cephmetrics_derive_total{cephmetrics=\"$cluster_name.iscsi.gw_stats.total_bytes_per_sec\"})", 
+                        "step": 40, 
+                        "textEditor": true, 
+                        "intervalFactor": 2, 
+                        "refId": "A"
+                     }
+                  ], 
+                  "prefixFontSize": "50%", 
+                  "valueName": "current", 
+                  "type": "singlestat", 
+                  "valueFontSize": "70%", 
+                  "description": "Total read/write throughput across all iSCSI gateways", 
+                  "format": "decbytes", 
+                  "cacheTimeout": null, 
+                  "nullPointMode": "connected", 
+                  "postfix": "", 
+                  "decimals": 0, 
+                  "interval": null, 
+                  "colors": [
+                     "rgba(245, 54, 54, 0.9)", 
+                     "rgba(237, 129, 40, 0.89)", 
+                     "rgba(50, 172, 45, 0.97)"
+                  ], 
+                  "datasource": "Prometheus", 
+                  "nullText": null, 
+                  "minSpan": 2, 
+                  "postfixFontSize": "50%", 
+                  "colorValue": false
+               }, 
+               {
+                  "bars": false, 
+                  "timeFrom": null, 
+                  "links": [], 
+                  "thresholds": [], 
+                  "spaceLength": 10, 
+                  "height": "", 
+                  "renderer": "flot", 
+                  "linewidth": 2, 
+                  "steppedLine": false, 
+                  "id": 14, 
+                  "fill": 1, 
+                  "span": 3, 
+                  "title": "Network Load by Gateway", 
+                  "tooltip": {
+                     "sort": 0, 
+                     "shared": true, 
+                     "value_type": "individual"
+                  }, 
+                  "legend": {
+                     "total": false, 
+                     "show": true, 
+                     "max": false, 
+                     "min": false, 
+                     "current": false, 
+                     "values": false, 
+                     "avg": false
+                  }, 
+                  "targets": [
+                     {
+                        "target": "groupByNode(collectd.$iscsi_gateways.$domain.interface.{bond,en,eth}*.if_octets.{tx,rx},1, \"sum\")", 
+                        "format": "time_series", 
+                        "expr": "sum(label_replace(collectd_interface_if_octets_rx_total{interface!=\"lo\", exported_instance=~\"$(iscsi_gateways).$domain\"}, \"node\", \"$1\", \"instance\", \"(.*):.*\")) by (node) + sum(label_replace(collectd_interface_if_octets_tx_total{interface!=\"lo\", exported_instance=~\"$(iscsi_gateways).$domain\"}, \"node\", \"$1\", \"instance\", \"(.*):.*\")) by (node)", 
+                        "step": 20, 
+                        "textEditor": true, 
+                        "legendFormat": "{{node}}", 
+                        "intervalFactor": 2, 
+                        "refId": "A"
+                     }
+                  ], 
+                  "yaxes": [
+                     {
+                        "logBase": 1, 
+                        "show": true, 
+                        "max": null, 
+                        "format": "decbytes", 
+                        "min": "0", 
+                        "label": ""
+                     }, 
+                     {
+                        "logBase": 1, 
+                        "show": false, 
+                        "max": null, 
+                        "format": "short", 
+                        "min": null, 
+                        "label": null
+                     }
+                  ], 
+                  "xaxis": {
+                     "buckets": null, 
+                     "show": true, 
+                     "values": [], 
+                     "mode": "time", 
+                     "name": null
+                  }, 
+                  "seriesOverrides": [], 
+                  "percentage": false, 
+                  "type": "graph", 
+                  "dashes": false, 
+                  "dashLength": 10, 
+                  "nullPointMode": "null", 
+                  "stack": true, 
+                  "timeShift": null, 
+                  "aliasColors": {}, 
+                  "lines": true, 
+                  "points": false, 
+                  "datasource": "Prometheus", 
+                  "pointradius": 5, 
+                  "minSpan": 3
+               }, 
+               {
+                  "aliasColors": {}, 
+                  "links": [], 
+                  "pieType": "pie", 
+                  "height": "200", 
+                  "timeFrom": "1m", 
+                  "legendType": "Right side", 
+                  "id": 26, 
+                  "maxDataPoints": 3, 
+                  "span": 3, 
+                  "title": "Primary LUN Paths Per Gateway", 
+                  "targets": [
+                     {
+                        "hide": false, 
+                        "target": "currentAbove(keepLastValue(collectd.$iscsi_gateways.$domain.cephmetrics.gauge.$cluster_name.iscsi.gw_clients.*.luns.*.active_path),0.5)", 
+                        "format": "time_series", 
+                        "expr": "sum(label_replace(collectd_cephmetrics_gauge{cephemtrics=~\"$cluster_name.iscsi.gw_clients.*.luns.*.active_path\", exported_instance=~\"($iscsi_gateways).$domain\"}, \"node\", \"$1\", \"instance\", \"(.*):.*\")) by (node)", 
+                        "step": 40, 
+                        "textEditor": true, 
+                        "legendFormat": "{{node}}", 
+                        "intervalFactor": 2, 
+                        "refId": "A"
+                     }
+                  ], 
+                  "fontSize": "80%", 
+                  "valueName": "current", 
+                  "combine": {
+                     "threshold": 0, 
+                     "label": "Others"
+                  }, 
+                  "type": "grafana-piechart-panel", 
+                  "strokeWidth": 1, 
+                  "format": "short", 
+                  "hideTimeOverride": true, 
+                  "nullPointMode": "connected", 
+                  "legend": {
+                     "values": true, 
+                     "show": true
+                  }, 
+                  "interval": null, 
+                  "cacheTimeout": null, 
+                  "datasource": "Prometheus", 
+                  "minSpan": 3
+               }
+            ], 
+            "showTitle": true, 
+            "collapse": false
+         }, 
+         {
+            "repeat": null, 
+            "titleSize": "h5", 
+            "repeatIteration": null, 
+            "title": "Gateway Load", 
+            "height": 250, 
+            "repeatRowId": null, 
+            "panels": [
+               {
+                  "bars": false, 
+                  "timeFrom": null, 
+                  "links": [], 
+                  "thresholds": [], 
+                  "spaceLength": 10, 
+                  "height": "", 
+                  "renderer": "flot", 
+                  "linewidth": 2, 
+                  "steppedLine": false, 
+                  "id": 21, 
+                  "fill": 0, 
+                  "span": 6, 
+                  "title": "IOPS Load by Gateway", 
+                  "tooltip": {
+                     "sort": 0, 
+                     "shared": true, 
+                     "value_type": "individual"
+                  }, 
+                  "legend": {
+                     "total": false, 
+                     "show": true, 
+                     "max": false, 
+                     "min": false, 
+                     "current": false, 
+                     "values": false, 
+                     "avg": false
+                  }, 
+                  "targets": [
+                     {
+                        "target": "groupByNode(collectd.$iscsi_gateways.$domain.cephmetrics.derive.$cluster_name.iscsi.gw_stats.iops,1, \"sum\")", 
+                        "format": "time_series", 
+                        "expr": "sum(label_replace(collectd_cephmetrics_derive_total{cephmetrics=\"$cluster_name.iscsi.gw_stats.iops\", exported_instance=~\"($iscsi_gateways).$domain\"}, \"node\", \"$1\", \"instance\", \"(.*):.*\")) by (node)", 
+                        "step": 10, 
+                        "textEditor": true, 
+                        "legendFormat": "{{node}}", 
+                        "intervalFactor": 2, 
+                        "refId": "A"
+                     }
+                  ], 
+                  "yaxes": [
+                     {
+                        "logBase": 1, 
+                        "show": true, 
+                        "max": null, 
+                        "format": "none", 
+                        "min": "0", 
+                        "label": "IOPS"
+                     }, 
+                     {
+                        "logBase": 1, 
+                        "show": false, 
+                        "max": null, 
+                        "format": "short", 
+                        "min": null, 
+                        "label": null
+                     }
+                  ], 
+                  "xaxis": {
+                     "buckets": null, 
+                     "show": true, 
+                     "values": [], 
+                     "mode": "time", 
+                     "name": null
+                  }, 
+                  "seriesOverrides": [], 
+                  "percentage": false, 
+                  "type": "graph", 
+                  "dashes": false, 
+                  "dashLength": 10, 
+                  "nullPointMode": "null", 
+                  "stack": false, 
+                  "timeShift": null, 
+                  "aliasColors": {}, 
+                  "lines": true, 
+                  "points": false, 
+                  "datasource": "Prometheus", 
+                  "pointradius": 5, 
+                  "minSpan": 6
+               }, 
+               {
+                  "bars": false, 
+                  "timeFrom": null, 
+                  "links": [], 
+                  "thresholds": [], 
+                  "spaceLength": 10, 
+                  "height": "", 
+                  "renderer": "flot", 
+                  "linewidth": 2, 
+                  "steppedLine": false, 
+                  "id": 27, 
+                  "fill": 0, 
+                  "span": 6, 
+                  "title": "Throughput by Gateway", 
+                  "tooltip": {
+                     "sort": 0, 
+                     "shared": true, 
+                     "value_type": "individual"
+                  }, 
+                  "legend": {
+                     "total": false, 
+                     "show": true, 
+                     "max": false, 
+                     "min": false, 
+                     "current": false, 
+                     "values": false, 
+                     "avg": false
+                  }, 
+                  "targets": [
+                     {
+                        "target": "groupByNode(collectd.$iscsi_gateways.$domain.cephmetrics.derive.$cluster_name.iscsi.gw_stats.total_bytes_per_sec,1, \"sum\")", 
+                        "format": "time_series", 
+                        "expr": "sum(label_replace(collectd_cephmetrics_derive_total{cephmetrics=\"$cluster_name.iscsi.gw_stats.total\", exported_instance=~\"($iscsi_gateways).$domain\"}, \"node\", \"$1\", \"instance\", \"(.*):.*\")) by (node)", 
+                        "step": 10, 
+                        "textEditor": true, 
+                        "legendFormat": "{{node}}", 
+                        "intervalFactor": 2, 
+                        "refId": "A"
+                     }
+                  ], 
+                  "yaxes": [
+                     {
+                        "logBase": 1, 
+                        "show": true, 
+                        "max": null, 
+                        "format": "decbytes", 
+                        "min": "0", 
+                        "label": "Throughput"
+                     }, 
+                     {
+                        "logBase": 1, 
+                        "show": false, 
+                        "max": null, 
+                        "format": "short", 
+                        "min": null, 
+                        "label": null
+                     }
+                  ], 
+                  "xaxis": {
+                     "buckets": null, 
+                     "show": true, 
+                     "values": [], 
+                     "mode": "time", 
+                     "name": null
+                  }, 
+                  "seriesOverrides": [], 
+                  "percentage": false, 
+                  "type": "graph", 
+                  "dashes": false, 
+                  "dashLength": 10, 
+                  "nullPointMode": "null", 
+                  "stack": false, 
+                  "timeShift": null, 
+                  "aliasColors": {}, 
+                  "lines": true, 
+                  "points": false, 
+                  "datasource": "Prometheus", 
+                  "pointradius": 5, 
+                  "minSpan": 6
+               }, 
+               {
+                  "bars": false, 
+                  "timeFrom": null, 
+                  "links": [], 
+                  "thresholds": [], 
+                  "spaceLength": 10, 
+                  "height": "", 
+                  "renderer": "flot", 
+                  "linewidth": 2, 
+                  "steppedLine": false, 
+                  "id": 12, 
+                  "fill": 0, 
+                  "span": 6, 
+                  "title": "Gateway CPU Load", 
+                  "tooltip": {
+                     "sort": 0, 
+                     "shared": true, 
+                     "value_type": "individual"
+                  }, 
+                  "legend": {
+                     "total": false, 
+                     "show": true, 
+                     "max": false, 
+                     "min": false, 
+                     "current": false, 
+                     "values": false, 
+                     "avg": false
+                  }, 
+                  "targets": [
+                     {
+                        "target": "groupByNode(collectd.$iscsi_gateways.$domain.cpu.percent.{interrupt,steal,system,user,wait},1, \"sum\")", 
+                        "format": "time_series", 
+                        "expr": "sum(label_replace(collectd_cpu_percent{cpu=~\"(interrupt|steal|system|user|wait)\", exported_instance=~\"($iscsi_gateways).$domain\"}, \"node\", \"$1\", \"instance\", \"(.*):.*\")) by (node)", 
+                        "step": 10, 
+                        "textEditor": true, 
+                        "legendFormat": "{{node}}", 
+                        "intervalFactor": 2, 
+                        "refId": "A"
+                     }
+                  ], 
+                  "yaxes": [
+                     {
+                        "logBase": 1, 
+                        "show": true, 
+                        "max": "100", 
+                        "format": "percent", 
+                        "min": "0", 
+                        "label": ""
+                     }, 
+                     {
+                        "logBase": 1, 
+                        "show": false, 
+                        "max": null, 
+                        "format": "short", 
+                        "min": null, 
+                        "label": null
+                     }
+                  ], 
+                  "xaxis": {
+                     "buckets": null, 
+                     "show": true, 
+                     "values": [], 
+                     "mode": "time", 
+                     "name": null
+                  }, 
+                  "seriesOverrides": [], 
+                  "percentage": false, 
+                  "type": "graph", 
+                  "dashes": false, 
+                  "dashLength": 10, 
+                  "nullPointMode": "null", 
+                  "stack": false, 
+                  "timeShift": null, 
+                  "aliasColors": {}, 
+                  "lines": true, 
+                  "points": false, 
+                  "datasource": "Prometheus", 
+                  "pointradius": 5, 
+                  "minSpan": 6
+               }, 
+               {
+                  "bars": false, 
+                  "timeFrom": null, 
+                  "links": [], 
+                  "thresholds": [], 
+                  "spaceLength": 10, 
+                  "height": "", 
+                  "renderer": "flot", 
+                  "linewidth": 2, 
+                  "steppedLine": false, 
+                  "id": 24, 
+                  "fill": 0, 
+                  "span": 6, 
+                  "title": "Gateway Memory Usage", 
+                  "tooltip": {
+                     "sort": 0, 
+                     "shared": true, 
+                     "value_type": "individual"
+                  }, 
+                  "legend": {
+                     "total": false, 
+                     "show": true, 
+                     "max": false, 
+                     "min": false, 
+                     "current": false, 
+                     "values": false, 
+                     "avg": false
+                  }, 
+                  "targets": [
+                     {
+                        "target": "groupByNode(collectd.$iscsi_gateways.$domain.memory.percent.used,1, \"sum\")", 
+                        "format": "time_series", 
+                        "expr": "sum(label_replace(collectd_memory_percent{memory=\"used\", exported_instance=~\"($iscsi_gateways).$domain\"}, \"node\", \"$1\", \"instance\", \"(.*):.*\")) by (node)", 
+                        "step": 10, 
+                        "textEditor": true, 
+                        "legendFormat": "{{node}}", 
+                        "intervalFactor": 2, 
+                        "refId": "A"
+                     }
+                  ], 
+                  "yaxes": [
+                     {
+                        "logBase": 1, 
+                        "show": true, 
+                        "max": "100", 
+                        "format": "percent", 
+                        "min": "0", 
+                        "label": ""
+                     }, 
+                     {
+                        "logBase": 1, 
+                        "show": false, 
+                        "max": null, 
+                        "format": "short", 
+                        "min": null, 
+                        "label": null
+                     }
+                  ], 
+                  "xaxis": {
+                     "buckets": null, 
+                     "show": true, 
+                     "values": [], 
+                     "mode": "time", 
+                     "name": null
+                  }, 
+                  "seriesOverrides": [], 
+                  "percentage": false, 
+                  "type": "graph", 
+                  "dashes": false, 
+                  "dashLength": 10, 
+                  "nullPointMode": "null", 
+                  "stack": false, 
+                  "timeShift": null, 
+                  "aliasColors": {}, 
+                  "lines": true, 
+                  "points": false, 
+                  "datasource": "Prometheus", 
+                  "pointradius": 5, 
+                  "minSpan": 6
+               }
+            ], 
+            "showTitle": true, 
+            "collapse": true
+         }, 
+         {
+            "repeat": null, 
+            "titleSize": "h5", 
+            "repeatIteration": null, 
+            "title": "Client Load : '$clients'", 
+            "height": 250, 
+            "repeatRowId": null, 
+            "panels": [
+               {
+                  "bars": false, 
+                  "timeFrom": null, 
+                  "links": [], 
+                  "thresholds": [], 
+                  "spaceLength": 10, 
+                  "nullPointMode": "null", 
+                  "renderer": "flot", 
+                  "linewidth": 1, 
+                  "steppedLine": false, 
+                  "id": 8, 
+                  "fill": 0, 
+                  "span": 6, 
+                  "title": "IOPS by Client", 
+                  "tooltip": {
+                     "sort": 0, 
+                     "shared": true, 
+                     "value_type": "individual"
+                  }, 
+                  "legend": {
+                     "total": false, 
+                     "show": true, 
+                     "max": false, 
+                     "min": false, 
+                     "current": false, 
+                     "values": false, 
+                     "avg": false
+                  }, 
+                  "targets": [
+                     {
+                        "target": "currentAbove(groupByNode(collectd.*.$domain.cephmetrics.derive.$cluster_name.iscsi.gw_clients.$clients.luns.*.iops,-4,\"sum\"),0)", 
+                        "format": "time_series", 
+                        "expr": "sum(label_replace(collectd_cephmetrics_derive_total{cephmetrics=~\"$cluster_name.iscsi.gw_clients.($clients).luns..*.iops\"}, \"client\", \"$1\", \"cephmetrics\", \"$cluster_name.iscsi.gw_clients.(.*).luns..*.iops\")) by (client) > 0", 
+                        "step": 10, 
+                        "textEditor": true, 
+                        "legendFormat": "{{client}}", 
+                        "intervalFactor": 2, 
+                        "refId": "A"
+                     }
+                  ], 
+                  "yaxes": [
+                     {
+                        "logBase": 1, 
+                        "show": true, 
+                        "max": null, 
+                        "format": "none", 
+                        "min": "0", 
+                        "label": null
+                     }, 
+                     {
+                        "logBase": 1, 
+                        "show": false, 
+                        "max": null, 
+                        "format": "short", 
+                        "min": null, 
+                        "label": null
+                     }
+                  ], 
+                  "xaxis": {
+                     "buckets": null, 
+                     "show": true, 
+                     "values": [], 
+                     "mode": "time", 
+                     "name": null
+                  }, 
+                  "seriesOverrides": [], 
+                  "percentage": false, 
+                  "type": "graph", 
+                  "dashes": false, 
+                  "dashLength": 10, 
+                  "stack": false, 
+                  "timeShift": null, 
+                  "aliasColors": {}, 
+                  "lines": true, 
+                  "points": false, 
+                  "datasource": "Prometheus", 
+                  "pointradius": 5, 
+                  "minSpan": 6
+               }, 
+               {
+                  "bars": false, 
+                  "timeFrom": null, 
+                  "links": [], 
+                  "thresholds": [], 
+                  "spaceLength": 10, 
+                  "nullPointMode": "null", 
+                  "renderer": "flot", 
+                  "linewidth": 1, 
+                  "steppedLine": false, 
+                  "id": 11, 
+                  "fill": 0, 
+                  "span": 6, 
+                  "title": "Throughput by Client", 
+                  "tooltip": {
+                     "sort": 0, 
+                     "shared": true, 
+                     "value_type": "individual"
+                  }, 
+                  "legend": {
+                     "total": false, 
+                     "show": true, 
+                     "max": false, 
+                     "min": false, 
+                     "current": false, 
+                     "values": false, 
+                     "avg": false
+                  }, 
+                  "targets": [
+                     {
+                        "target": "currentAbove(groupByNode(collectd.*.$domain.cephmetrics.derive.$cluster_name.iscsi.gw_clients.$clients.luns.*.total_bytes_per_sec,-4,\"sum\"),0)", 
+                        "format": "time_series", 
+                        "expr": "sum(label_replace(collectd_cephmetrics_derive_total{cephmetrics=~\"$cluster_name.iscsi.gw_clients.($clients).luns..*.total\"}, \"client\", \"$1\", \"cephmetrics\", \"$cluster_name.iscsi.gw_clients.(.*).luns..*.total\")) by (client) > 0", 
+                        "step": 10, 
+                        "textEditor": true, 
+                        "legendFormat": "{{client}}", 
+                        "intervalFactor": 2, 
+                        "refId": "A"
+                     }
+                  ], 
+                  "yaxes": [
+                     {
+                        "logBase": 1, 
+                        "show": true, 
+                        "max": null, 
+                        "format": "decbytes", 
+                        "min": "0", 
+                        "label": null
+                     }, 
+                     {
+                        "logBase": 1, 
+                        "show": false, 
+                        "max": null, 
+                        "format": "short", 
+                        "min": null, 
+                        "label": null
+                     }
+                  ], 
+                  "xaxis": {
+                     "buckets": null, 
+                     "show": true, 
+                     "values": [], 
+                     "mode": "time", 
+                     "name": null
+                  }, 
+                  "seriesOverrides": [], 
+                  "percentage": false, 
+                  "type": "graph", 
+                  "dashes": false, 
+                  "dashLength": 10, 
+                  "stack": false, 
+                  "timeShift": null, 
+                  "aliasColors": {}, 
+                  "lines": true, 
+                  "points": false, 
+                  "datasource": "Prometheus", 
+                  "pointradius": 5, 
+                  "minSpan": 6
+               }, 
+               {
+                  "bars": false, 
+                  "timeFrom": null, 
+                  "links": [], 
+                  "thresholds": [], 
+                  "spaceLength": 10, 
+                  "nullPointMode": "null", 
+                  "renderer": "flot", 
+                  "linewidth": 1, 
+                  "steppedLine": false, 
+                  "id": 30, 
+                  "fill": 0, 
+                  "span": 6, 
+                  "title": "IOPS by RBD Image for Client '$clients'", 
+                  "tooltip": {
+                     "sort": 0, 
+                     "shared": true, 
+                     "value_type": "individual"
+                  }, 
+                  "legend": {
+                     "total": false, 
+                     "show": true, 
+                     "max": false, 
+                     "min": false, 
+                     "current": false, 
+                     "values": false, 
+                     "avg": false
+                  }, 
+                  "targets": [
+                     {
+                        "target": "limit(groupByNode(currentAbove(collectd.*.$domain.cephmetrics.derive.$cluster_name.iscsi.gw_clients.$clients.luns.*.iops,0),-2,\"sum\"),10)", 
+                        "format": "time_series", 
+                        "expr": "topk(10, sum(label_replace(collectd_cephmetrics_derive_total{cephmetrics=~\"$cluster_name.iscsi.gw_clients.($clients).luns..*.iops\"} > 0, \"lun\", \"$1\", \"cephmetrics\", \"$cluster_name.iscsi.gw_clients..*.luns.(.*).iops\")) by (lun))", 
+                        "step": 10, 
+                        "textEditor": true, 
+                        "legendFormat": "{{lun}}", 
+                        "intervalFactor": 2, 
+                        "refId": "A"
+                     }
+                  ], 
+                  "yaxes": [
+                     {
+                        "logBase": 1, 
+                        "show": true, 
+                        "max": null, 
+                        "format": "none", 
+                        "min": "0", 
+                        "label": null
+                     }, 
+                     {
+                        "logBase": 1, 
+                        "show": false, 
+                        "max": null, 
+                        "format": "short", 
+                        "min": null, 
+                        "label": null
+                     }
+                  ], 
+                  "xaxis": {
+                     "buckets": null, 
+                     "show": true, 
+                     "values": [], 
+                     "mode": "time", 
+                     "name": null
+                  }, 
+                  "seriesOverrides": [], 
+                  "percentage": false, 
+                  "type": "graph", 
+                  "dashes": false, 
+                  "dashLength": 10, 
+                  "stack": false, 
+                  "timeShift": null, 
+                  "aliasColors": {}, 
+                  "lines": true, 
+                  "points": false, 
+                  "datasource": "Prometheus", 
+                  "pointradius": 5, 
+                  "minSpan": 6
+               }, 
+               {
+                  "bars": false, 
+                  "timeFrom": null, 
+                  "links": [], 
+                  "thresholds": [], 
+                  "spaceLength": 10, 
+                  "nullPointMode": "null", 
+                  "renderer": "flot", 
+                  "linewidth": 1, 
+                  "steppedLine": false, 
+                  "id": 31, 
+                  "fill": 0, 
+                  "span": 6, 
+                  "title": "Throughput by RBD Image for Client '$clients'", 
+                  "tooltip": {
+                     "sort": 0, 
+                     "shared": true, 
+                     "value_type": "individual"
+                  }, 
+                  "legend": {
+                     "total": false, 
+                     "show": true, 
+                     "max": false, 
+                     "min": false, 
+                     "current": false, 
+                     "values": false, 
+                     "avg": false
+                  }, 
+                  "targets": [
+                     {
+                        "target": "limit(groupByNode(currentAbove(collectd.*.$domain.cephmetrics.derive.$cluster_name.iscsi.gw_clients.$clients.luns.*.total_bytes_per_sec,0),-2,\"sum\"),10)", 
+                        "format": "time_series", 
+                        "expr": "topk(10, sum(label_replace(collectd_cephmetrics_derive_total{cephmetrics=~\"$cluster_name.iscsi.gw_clients.($clients).luns..*.total_bytes_per_sec\"} > 0, \"lun\", \"$1\", \"cephmetrics\", \"$cluster_name.iscsi.gw_clients..*.luns.(.*).total_bytes_per_sec\")) by (lun))", 
+                        "step": 10, 
+                        "textEditor": true, 
+                        "intervalFactor": 2, 
+                        "refId": "A"
+                     }
+                  ], 
+                  "yaxes": [
+                     {
+                        "logBase": 1, 
+                        "show": true, 
+                        "max": null, 
+                        "format": "decbytes", 
+                        "min": "0", 
+                        "label": null
+                     }, 
+                     {
+                        "logBase": 1, 
+                        "show": false, 
+                        "max": null, 
+                        "format": "short", 
+                        "min": null, 
+                        "label": null
+                     }
+                  ], 
+                  "xaxis": {
+                     "buckets": null, 
+                     "show": true, 
+                     "values": [], 
+                     "mode": "time", 
+                     "name": null
+                  }, 
+                  "seriesOverrides": [], 
+                  "percentage": false, 
+                  "type": "graph", 
+                  "dashes": false, 
+                  "dashLength": 10, 
+                  "stack": false, 
+                  "timeShift": null, 
+                  "aliasColors": {}, 
+                  "lines": true, 
+                  "points": false, 
+                  "datasource": "Prometheus", 
+                  "pointradius": 5, 
+                  "minSpan": 6
+               }
+            ], 
+            "showTitle": true, 
+            "collapse": true
+         }, 
+         {
+            "repeat": null, 
+            "titleSize": "h5", 
+            "repeatIteration": null, 
+            "title": "Client Configuration : '$clients'", 
+            "height": 250, 
+            "repeatRowId": null, 
+            "panels": [
+               {
+                  "sort": {
+                     "col": 0, 
+                     "desc": true
+                  }, 
+                  "styles": [
+                     {
+                        "alias": "Time", 
+                        "type": "date", 
+                        "pattern": "Time", 
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss"
+                     }, 
+                     {
+                        "type": "number", 
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+                        "pattern": "Metric", 
+                        "thresholds": [], 
+                        "alias": "Disk (pool-image)", 
+                        "colors": [
+                           "rgba(245, 54, 54, 0.9)", 
+                           "rgba(237, 129, 40, 0.89)", 
+                           "rgba(50, 172, 45, 0.97)"
+                        ], 
+                        "colorMode": null, 
+                        "decimals": 2, 
+                        "unit": "short"
+                     }, 
+                     {
+                        "type": "number", 
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+                        "pattern": "Current", 
+                        "thresholds": [], 
+                        "alias": "Size", 
+                        "colors": [
+                           "rgba(245, 54, 54, 0.9)", 
+                           "rgba(237, 129, 40, 0.89)", 
+                           "rgba(50, 172, 45, 0.97)"
+                        ], 
+                        "colorMode": null, 
+                        "decimals": 2, 
+                        "unit": "bytes"
+                     }, 
+                     {
+                        "type": "number", 
+                        "pattern": "/.*/", 
+                        "thresholds": [], 
+                        "alias": "", 
+                        "colors": [
+                           "rgba(245, 54, 54, 0.9)", 
+                           "rgba(237, 129, 40, 0.89)", 
+                           "rgba(50, 172, 45, 0.97)"
+                        ], 
+                        "colorMode": null, 
+                        "decimals": 2, 
+                        "unit": "short"
+                     }
+                  ], 
+                  "span": 4, 
+                  "pageSize": 10, 
+                  "links": [], 
+                  "title": "RBD Images Masked to '$clients'", 
+                  "transform": "table", 
+                  "showHeader": true, 
+                  "scroll": false, 
+                  "targets": [
+                     {
+                        "target": "groupByNode(maximumAbove(collectd.*.$domain.cephmetrics.gauge.$cluster_name.iscsi.gw_clients.$clients.luns.*.size,0),-2,\"maxSeries\")", 
+                        "format": "table", 
+                        "expr": "max(label_replace(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.iscsi.gw_clients.($clients).luns..*.size\"}, \"lun\", \"$1\", \"cephmetrics\", \"$cluster_name.iscsi.gw_clients..*.luns.(.*).size\")) by (lun) > 0", 
+                        "step": 20, 
+                        "textEditor": true, 
+                        "legendFormat": "{{lun}}", 
+                        "intervalFactor": 2, 
+                        "refId": "A"
+                     }
+                  ], 
+                  "fontSize": "100%", 
+                  "datasource": "Prometheus", 
+                  "minSpan": 4, 
+                  "type": "table", 
+                  "id": 15, 
+                  "columns": [
+                     {
+                        "text": "Current", 
+                        "value": "current"
+                     }
+                  ]
+               }, 
+               {
+                  "sort": {
+                     "col": 0, 
+                     "desc": true
+                  }, 
+                  "styles": [
+                     {
+                        "alias": "Time", 
+                        "type": "date", 
+                        "pattern": "Time", 
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss"
+                     }, 
+                     {
+                        "type": "number", 
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+                        "pattern": "Metric", 
+                        "thresholds": [], 
+                        "alias": "Client", 
+                        "colors": [
+                           "rgba(245, 54, 54, 0.9)", 
+                           "rgba(237, 129, 40, 0.89)", 
+                           "rgba(50, 172, 45, 0.97)"
+                        ], 
+                        "colorMode": null, 
+                        "decimals": 2, 
+                        "unit": "short"
+                     }, 
+                     {
+                        "type": "number", 
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+                        "pattern": "Current", 
+                        "thresholds": [], 
+                        "alias": "# Luns Masked", 
+                        "colors": [
+                           "rgba(245, 54, 54, 0.9)", 
+                           "rgba(237, 129, 40, 0.89)", 
+                           "rgba(50, 172, 45, 0.97)"
+                        ], 
+                        "colorMode": null, 
+                        "decimals": 0, 
+                        "unit": "none"
+                     }, 
+                     {
+                        "type": "number", 
+                        "pattern": "/.*/", 
+                        "thresholds": [], 
+                        "alias": "", 
+                        "colors": [
+                           "rgba(245, 54, 54, 0.9)", 
+                           "rgba(237, 129, 40, 0.89)", 
+                           "rgba(50, 172, 45, 0.97)"
+                        ], 
+                        "colorMode": null, 
+                        "decimals": 2, 
+                        "unit": "short"
+                     }
+                  ], 
+                  "span": 4, 
+                  "pageSize": 10, 
+                  "links": [], 
+                  "title": "Luns Per Client", 
+                  "transform": "table", 
+                  "showHeader": true, 
+                  "scroll": false, 
+                  "targets": [
+                     {
+                        "target": "groupByNode(currentAbove(collectd.*.$domain.cephmetrics.gauge.$cluster_name.iscsi.gw_clients.$clients.lun_count,0),-2,\"maxSeries\")", 
+                        "format": "table", 
+                        "expr": "max by (client)(label_replace(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.iscsi.gw_clients.($clients).lun_count\"} > 0, \"client\", \"$1\", \"cephmetrics\", \"$cluster_name.iscsi.gw_clients.(.*).lun_count\"))", 
+                        "step": 20, 
+                        "textEditor": true, 
+                        "legendFormat": "{{client}}", 
+                        "intervalFactor": 2, 
+                        "refId": "A"
+                     }
+                  ], 
+                  "fontSize": "100%", 
+                  "datasource": "Prometheus", 
+                  "minSpan": 4, 
+                  "type": "table", 
+                  "id": 16, 
+                  "columns": [
+                     {
+                        "text": "Current", 
+                        "value": "current"
+                     }
+                  ]
+               }, 
+               {
+                  "sort": {
+                     "col": 0, 
+                     "desc": true
+                  }, 
+                  "styles": [
+                     {
+                        "alias": "Time", 
+                        "type": "date", 
+                        "pattern": "Time", 
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss"
+                     }, 
+                     {
+                        "type": "hidden", 
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+                        "pattern": "Metric", 
+                        "thresholds": [], 
+                        "alias": "Client", 
+                        "colors": [
+                           "rgba(245, 54, 54, 0.9)", 
+                           "rgba(237, 129, 40, 0.89)", 
+                           "rgba(50, 172, 45, 0.97)"
+                        ], 
+                        "colorMode": null, 
+                        "decimals": 2, 
+                        "unit": "short"
+                     }, 
+                     {
+                        "type": "number", 
+                        "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+                        "pattern": "Current", 
+                        "thresholds": [], 
+                        "alias": "Capacity", 
+                        "colors": [
+                           "rgba(245, 54, 54, 0.9)", 
+                           "rgba(237, 129, 40, 0.89)", 
+                           "rgba(50, 172, 45, 0.97)"
+                        ], 
+                        "colorMode": null, 
+                        "decimals": 2, 
+                        "unit": "bytes"
+                     }, 
+                     {
+                        "type": "number", 
+                        "pattern": "/.*/", 
+                        "thresholds": [], 
+                        "alias": "", 
+                        "colors": [
+                           "rgba(245, 54, 54, 0.9)", 
+                           "rgba(237, 129, 40, 0.89)", 
+                           "rgba(50, 172, 45, 0.97)"
+                        ], 
+                        "colorMode": null, 
+                        "decimals": 2, 
+                        "unit": "short"
+                     }
+                  ], 
+                  "span": 4, 
+                  "pageSize": 10, 
+                  "links": [], 
+                  "title": "Client '$clients' - Masked Capacity", 
+                  "columns": [
+                     {
+                        "text": "Current", 
+                        "value": "current"
+                     }
+                  ], 
+                  "transform": "table", 
+                  "showHeader": true, 
+                  "scroll": false, 
+                  "targets": [
+                     {
+                        "target": "sumSeries(groupByNode(keepLastValue(collectd.$iscsi_gateways.$domain.cephmetrics.gauge.$cluster_name.iscsi.gw_clients.$clients.luns.*.size),-2,\"maxSeries\"))", 
+                        "format": "table", 
+                        "expr": "sum(max(label_replace(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.iscsi.gw_clients.($clients).luns..*.size\", exported_instance=~\"($iscsi_gateways).$domain\"}, \"lun\", \"$1\", \"cephmetrics\", \"$cluster_name.iscsi.gw_clients..*.luns.(.*).size\")) by (lun))", 
+                        "step": 7200, 
+                        "textEditor": true, 
+                        "intervalFactor": 2, 
+                        "refId": "A"
+                     }
+                  ], 
+                  "fontSize": "100%", 
+                  "datasource": "Prometheus", 
+                  "minSpan": 4, 
+                  "type": "table", 
+                  "id": 17, 
+                  "maxDataPoints": "1"
+               }
+            ], 
+            "showTitle": true, 
+            "collapse": true
+         }
+      ], 
+      "templating": {
+         "list": [
+            {
+               "multi": false, 
+               "hide": 2, 
+               "name": "domain", 
+               "allValue": null, 
+               "label": null, 
+               "current": {
+                  "text": "fedex.lan", 
+                  "value": "fedex.lan"
+               }, 
+               "query": "fedex.lan", 
+               "type": "custom", 
+               "options": [
+                  {
+                     "text": "fedex.lan", 
+                     "selected": true, 
+                     "value": "fedex.lan"
+                  }
+               ], 
+               "includeAll": false
+            }, 
+            {
+               "regex": "/cephmetrics=\"([^.]*)\\./", 
+               "sort": 0, 
+               "multi": false, 
+               "hide": 0, 
+               "name": "cluster_name", 
+               "tags": [], 
+               "allValue": null, 
+               "tagValuesQuery": "", 
+               "refresh": 1, 
+               "label": null, 
+               "current": {
+                  "text": "ceph", 
+                  "value": "ceph"
+               }, 
+               "datasource": "Prometheus", 
+               "type": "query", 
+               "query": "collectd_cephmetrics_gauge{}", 
+               "useTags": false, 
+               "tagsQuery": "", 
+               "options": [], 
+               "includeAll": false
+            }, 
+            {
+               "regex": "/$cluster_name.iscsi.gw_clients.([^.]*)\\./", 
+               "sort": 0, 
+               "multi": false, 
+               "hide": 0, 
+               "name": "clients", 
+               "tags": [], 
+               "allValue": null, 
+               "tagValuesQuery": "", 
+               "refresh": 1, 
+               "label": "iSCSI Client", 
+               "current": {
+                  "text": "All", 
+                  "value": "$__all"
+               }, 
+               "datasource": "Prometheus", 
+               "type": "query", 
+               "query": "collectd_cephmetrics_gauge{}", 
+               "useTags": false, 
+               "tagsQuery": "", 
+               "options": [], 
+               "includeAll": true
+            }, 
+            {
+               "regex": "/cephmetrics=\"$cluster_name.iscsi.gw_name.([^.]*)\\./", 
+               "sort": 0, 
+               "multi": false, 
+               "hide": 2, 
+               "name": "gw_name", 
+               "tags": [], 
+               "allValue": null, 
+               "tagValuesQuery": "", 
+               "refresh": 1, 
+               "label": null, 
+               "current": {
+                  "isNone": true, 
+                  "text": "None", 
+                  "value": ""
+               }, 
+               "datasource": "Prometheus", 
+               "type": "query", 
+               "query": "collectd_cephmetrics_gauge{}", 
+               "useTags": false, 
+               "tagsQuery": "", 
+               "options": [], 
+               "includeAll": false
+            }, 
+            {
+               "multi": true, 
+               "hide": 2, 
+               "name": "iscsi_gateways", 
+               "allValue": null, 
+               "label": null, 
+               "current": {
+                  "text": "All", 
+                  "value": [
+                     "$__all"
+                  ]
+               }, 
+               "query": "rh7-gw1, rh7-gw2", 
+               "type": "custom", 
+               "options": [
+                  {
+                     "text": "All", 
+                     "selected": true, 
+                     "value": "$__all"
+                  }, 
+                  {
+                     "text": "rh7-gw1", 
+                     "selected": false, 
+                     "value": "rh7-gw1"
+                  }, 
+                  {
+                     "text": "rh7-gw2", 
+                     "selected": false, 
+                     "value": "rh7-gw2"
+                  }
+               ], 
+               "includeAll": true
+            }
+         ]
+      }, 
+      "links": [
+         {
+            "title": "Shortcuts", 
+            "tags": [
+               "overview"
+            ], 
+            "type": "dashboards", 
+            "asDropdown": true, 
+            "icon": "external link"
+         }
+      ], 
+      "tags": [], 
+      "graphTooltip": 0, 
+      "hideControls": false, 
+      "title": "iSCSI Overview - Prometheus", 
+      "editable": true, 
+      "refresh": "10s", 
+      "annotations": {
+         "list": []
+      }, 
+      "gnetId": null, 
+      "timepicker": {
+         "time_options": [
+            "5m", 
+            "15m", 
+            "1h", 
+            "6h", 
+            "12h", 
+            "24h", 
+            "2d", 
+            "7d", 
+            "30d"
+         ], 
+         "refresh_intervals": [
+            "5s", 
+            "10s", 
+            "30s", 
+            "1m", 
+            "5m", 
+            "15m", 
+            "30m", 
+            "1h", 
+            "2h", 
+            "1d"
+         ]
+      }, 
+      "version": 6, 
+      "time": {
+         "to": "now", 
+         "from": "now-1h"
+      }, 
+      "timezone": "browser", 
+      "schemaVersion": 14, 
+      "id": 17
+   }
+}
