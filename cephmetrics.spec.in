@@ -43,6 +43,7 @@ The vonage status panel and piechart panel for grafana web server.
 Summary:	Ceph metrics collectors
 Requires:	collectd
 Requires:	collectd-python
+Requires:	libsemanage-python
 %description collectors
 The collectors for Ceph implemented with help of statistics collection daemon collectd.
 
