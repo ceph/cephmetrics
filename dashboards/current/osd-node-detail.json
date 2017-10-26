@@ -905,7 +905,7 @@
                     "multi": true, 
                     "name": "device_id", 
                     "options": [], 
-                    "query": "collectd.$osd_servers.$domain.cephmetrics.gauge.ceph.osd.*", 
+                    "query": "collectd.$osd_servers.$domain.cephmetrics.gauge.$cluster_name.osd.*", 
                     "refresh": 1, 
                     "regex": "(?!ceph_version|num_osds|\\d).*", 
                     "sort": 0, 
