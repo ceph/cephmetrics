@@ -1,6 +1,18 @@
 ---
+# Older versions of Django use the 'syncdb' method for DB creation/migration.
+# Newer versions use 'migrate' but still have 'syncdb' available and
+# deprecated. We should be able to auto-discover the correct method.
+- name: Determine how to initialize Django DB
+  command: django-admin --help
+  register: django_cmd
+  no_log: true
+
+- name: Set django_init_method
+  set_fact:
+    django_init_method: "{% if 'migrate' in django_cmd.stdout_lines|map('trim')|list %}migrate{% else %}syncdb{% endif %}"
+
 - name: Create Graphite DB tables
-  command: /usr/bin/graphite-manage migrate --noinput
+  command: "/usr/bin/graphite-manage {{ django_init_method }} --noinput"
   become_user: "{{ graphite.unix_user[ansible_pkg_mgr] }}"
   register: migrate_cmd
   failed_when: migrate_cmd.rc != 0 and 'table "django_content_type" already exists' not in migrate_cmd.stderr
@@ -8,7 +20,9 @@
 - name: Run Graphite migrations if necessary
   command: /usr/bin/graphite-manage migrate --noinput --fake-initial
   become_user: "{{ graphite.unix_user[ansible_pkg_mgr] }}"
-  when: migrate_cmd.rc != 0
+  when:
+    - django_init_method == 'migrate'
+    - migrate_cmd.rc != 0
 
 - name: Build Graphite index
   command: "{{ graphite.build_index[ansible_pkg_mgr] }}"
