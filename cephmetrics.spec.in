@@ -25,7 +25,7 @@ Requires(postun): policycoreutils
 Requires:	PyYAML
 Requires:	graphite-web
 Requires:	python-carbon
-Requires:	prometheus
+Requires:	prometheus >= 2.0.0
 Requires:       cephmetrics-grafana-plugins = %{version}-%{release}
 
 %description

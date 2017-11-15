@@ -2,7 +2,7 @@
 Description=Cephmetrics prometheus service
 
 [Service]
-ExecStart=/usr/bin/prometheus -log.level error -config.file /etc/cephmetrics/prometheus.yml -storage.local.path /var/lib/cephmetrics/prometheus
+ExecStart=/usr/bin/prometheus --log.level error --config.file /etc/cephmetrics/prometheus.yml --storage.tsdb.path /var/lib/cephmetrics/prometheus
 Restart=on-failure
 ExecReload=/bin/kill -s HUP $MAINPID
 ExecStop=/bin/kill -s TERM $MAINPID
