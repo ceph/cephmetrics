@@ -78,6 +78,10 @@ sed -i -e 's/devel_mode: true/devel_mode: false/' ansible/roles/*/defaults/main.
 # Support light mode better
 sed -i -e 's/green/rgb(1,167,1)/g' cephmetrics-vonage/dist/css/status_panel.css
 
+# Generate the full prometheus dashboards
+for dash in $(ls dashboards/current/|egrep '.json$'); do
+	./tools/merge.py "dashboards/current/$dash" "dashboards/prometheus/$dash" "dashboards/prometheus/$dash"
+done
 
 %install
 # Install dashUpdater.py
