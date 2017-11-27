@@ -1,67 +1,10 @@
 {
-   "meta": {}, 
    "dashboard": {
-      "style": "dark", 
       "rows": [
          {
-            "repeat": null, 
-            "titleSize": "h5", 
-            "repeatIteration": null, 
-            "title": "Disk/OSD Host Summary", 
-            "height": 250, 
-            "repeatRowId": null, 
             "panels": [
                {
-                  "sort": {
-                     "col": null, 
-                     "desc": false
-                  }, 
-                  "styles": [
-                     {
-                        "type": "number", 
-                        "dateFormat": "YYYY-MM-DD HH:mm:ss", 
-                        "pattern": "Metric", 
-                        "thresholds": [
-                           ""
-                        ], 
-                        "alias": "OSD Id", 
-                        "colors": [
-                           "rgba(50, 172, 45, 0.97)", 
-                           "rgba(237, 129, 40, 0.89)", 
-                           "rgba(245, 54, 54, 0.9)"
-                        ], 
-                        "sanitize": false, 
-                        "colorMode": null, 
-                        "decimals": 0, 
-                        "unit": "short"
-                     }, 
-                     {
-                        "type": "hidden", 
-                        "dateFormat": "YYYY-MM-DD HH:mm:ss", 
-                        "pattern": "Current", 
-                        "thresholds": [
-                           "0"
-                        ], 
-                        "alias": "Status", 
-                        "colors": [
-                           "rgba(50, 172, 45, 0.97)", 
-                           "rgba(237, 129, 40, 0.89)", 
-                           "rgba(245, 54, 54, 0.9)"
-                        ], 
-                        "colorMode": "cell", 
-                        "decimals": 0, 
-                        "unit": "short"
-                     }
-                  ], 
-                  "timeFrom": "1m", 
-                  "span": 1, 
-                  "pageSize": 100, 
-                  "links": [], 
-                  "title": "OSD's Down", 
-                  "timeShift": null, 
-                  "transform": "timeseries_aggregations", 
-                  "showHeader": true, 
-                  "scroll": true, 
+                  "datasource": "Prometheus", 
                   "targets": [
                      {
                         "hide": false, 
@@ -73,98 +16,10 @@
                         "refId": "B"
                      }
                   ], 
-                  "hideTimeOverride": true, 
-                  "fontSize": "100%", 
-                  "datasource": "Local", 
-                  "minSpan": 1, 
-                  "type": "table", 
-                  "id": 56, 
-                  "columns": [
-                     {
-                        "text": "Current", 
-                        "value": "current"
-                     }
-                  ]
+                  "title": "OSD's Down"
                }, 
                {
-                  "sort": {
-                     "col": 0, 
-                     "desc": true
-                  }, 
-                  "styles": [
-                     {
-                        "alias": "Time", 
-                        "type": "date", 
-                        "pattern": "Time", 
-                        "dateFormat": "YYYY-MM-DD HH:mm:ss"
-                     }, 
-                     {
-                        "type": "number", 
-                        "dateFormat": "YYYY-MM-DD HH:mm:ss", 
-                        "pattern": "Host and Disk", 
-                        "thresholds": [], 
-                        "alias": "% Full", 
-                        "colors": [
-                           "rgba(245, 54, 54, 0.9)", 
-                           "rgba(237, 129, 40, 0.89)", 
-                           "rgba(50, 172, 45, 0.97)"
-                        ], 
-                        "colorMode": null, 
-                        "decimals": 0, 
-                        "unit": "short"
-                     }, 
-                     {
-                        "type": "number", 
-                        "dateFormat": "YYYY-MM-DD HH:mm:ss", 
-                        "pattern": "Current", 
-                        "thresholds": [], 
-                        "alias": "% Full", 
-                        "colors": [
-                           "rgba(245, 54, 54, 0.9)", 
-                           "rgba(237, 129, 40, 0.89)", 
-                           "rgba(50, 172, 45, 0.97)"
-                        ], 
-                        "colorMode": null, 
-                        "decimals": 0, 
-                        "unit": "none"
-                     }, 
-                     {
-                        "type": "number", 
-                        "dateFormat": "YYYY-MM-DD HH:mm:ss", 
-                        "pattern": "Metric", 
-                        "thresholds": [], 
-                        "alias": "Host.OSD Id", 
-                        "colors": [
-                           "rgba(245, 54, 54, 0.9)", 
-                           "rgba(237, 129, 40, 0.89)", 
-                           "rgba(50, 172, 45, 0.97)"
-                        ], 
-                        "colorMode": null, 
-                        "decimals": 2, 
-                        "unit": "short"
-                     }, 
-                     {
-                        "type": "number", 
-                        "pattern": "/.*/", 
-                        "thresholds": [], 
-                        "alias": "", 
-                        "colors": [
-                           "rgba(245, 54, 54, 0.9)", 
-                           "rgba(237, 129, 40, 0.89)", 
-                           "rgba(50, 172, 45, 0.97)"
-                        ], 
-                        "colorMode": null, 
-                        "decimals": 2, 
-                        "unit": "short"
-                     }
-                  ], 
-                  "span": 2, 
-                  "pageSize": null, 
-                  "links": [], 
-                  "title": "Disks Near Full", 
-                  "transform": "timeseries_aggregations", 
-                  "showHeader": true, 
-                  "scroll": true, 
+                  "datasource": "Prometheus", 
                   "targets": [
                      {
                         "format": "time_series", 
@@ -175,88 +30,10 @@
                         "refId": "A"
                      }
                   ], 
-                  "fontSize": "100%", 
-                  "datasource": "Local", 
-                  "minSpan": 2, 
-                  "type": "table", 
-                  "id": 57, 
-                  "columns": [
-                     {
-                        "text": "Current", 
-                        "value": "current"
-                     }
-                  ]
+                  "title": "Disks Near Full"
                }, 
                {
-                  "sort": {
-                     "col": 0, 
-                     "desc": false
-                  }, 
-                  "styles": [
-                     {
-                        "alias": "Time", 
-                        "type": "date", 
-                        "pattern": "Time", 
-                        "dateFormat": "YYYY-MM-DD HH:mm:ss"
-                     }, 
-                     {
-                        "type": "number", 
-                        "dateFormat": "YYYY-MM-DD HH:mm:ss", 
-                        "pattern": "Current", 
-                        "thresholds": [], 
-                        "alias": "Total OSD Capacity", 
-                        "colors": [
-                           "rgba(245, 54, 54, 0.9)", 
-                           "rgba(237, 129, 40, 0.89)", 
-                           "rgba(50, 172, 45, 0.97)"
-                        ], 
-                        "colorMode": null, 
-                        "decimals": 2, 
-                        "unit": "decbytes"
-                     }, 
-                     {
-                        "type": "number", 
-                        "dateFormat": "YYYY-MM-DD HH:mm:ss", 
-                        "pattern": "Metric", 
-                        "thresholds": [], 
-                        "alias": "Host Name", 
-                        "colors": [
-                           "rgba(245, 54, 54, 0.9)", 
-                           "rgba(237, 129, 40, 0.89)", 
-                           "rgba(50, 172, 45, 0.97)"
-                        ], 
-                        "colorMode": null, 
-                        "decimals": 2, 
-                        "unit": "short"
-                     }, 
-                     {
-                        "type": "number", 
-                        "pattern": "/.*/", 
-                        "thresholds": [], 
-                        "alias": "", 
-                        "colors": [
-                           "rgba(245, 54, 54, 0.9)", 
-                           "rgba(237, 129, 40, 0.89)", 
-                           "rgba(50, 172, 45, 0.97)"
-                        ], 
-                        "colorMode": null, 
-                        "decimals": 2, 
-                        "unit": "short"
-                     }
-                  ], 
-                  "span": 3, 
-                  "pageSize": null, 
-                  "links": [], 
-                  "title": "Host OSD Raw Capacity", 
-                  "columns": [
-                     {
-                        "text": "Current", 
-                        "value": "current"
-                     }
-                  ], 
-                  "transform": "timeseries_aggregations", 
-                  "showHeader": true, 
-                  "scroll": true, 
+                  "datasource": "Prometheus", 
                   "targets": [
                      {
                         "format": "time_series", 
@@ -267,83 +44,10 @@
                         "refId": "A"
                      }
                   ], 
-                  "fontSize": "100%", 
-                  "datasource": "Local", 
-                  "minSpan": 3, 
-                  "type": "table", 
-                  "id": 58, 
-                  "maxDataPoints": "1"
+                  "title": "Host OSD Raw Capacity"
                }, 
                {
-                  "sort": {
-                     "col": 0, 
-                     "desc": false
-                  }, 
-                  "styles": [
-                     {
-                        "alias": "Time", 
-                        "type": "date", 
-                        "pattern": "Time", 
-                        "dateFormat": "YYYY-MM-DD HH:mm:ss"
-                     }, 
-                     {
-                        "type": "number", 
-                        "dateFormat": "YYYY-MM-DD HH:mm:ss", 
-                        "pattern": "Current", 
-                        "thresholds": [], 
-                        "alias": "# OSDs", 
-                        "colors": [
-                           "rgba(245, 54, 54, 0.9)", 
-                           "rgba(237, 129, 40, 0.89)", 
-                           "rgba(50, 172, 45, 0.97)"
-                        ], 
-                        "colorMode": null, 
-                        "decimals": 0, 
-                        "unit": "none"
-                     }, 
-                     {
-                        "type": "number", 
-                        "dateFormat": "YYYY-MM-DD HH:mm:ss", 
-                        "pattern": "Metric", 
-                        "thresholds": [], 
-                        "alias": "Host Name", 
-                        "colors": [
-                           "rgba(245, 54, 54, 0.9)", 
-                           "rgba(237, 129, 40, 0.89)", 
-                           "rgba(50, 172, 45, 0.97)"
-                        ], 
-                        "colorMode": null, 
-                        "decimals": 2, 
-                        "unit": "short"
-                     }, 
-                     {
-                        "type": "number", 
-                        "pattern": "/.*/", 
-                        "thresholds": [], 
-                        "alias": "", 
-                        "colors": [
-                           "rgba(245, 54, 54, 0.9)", 
-                           "rgba(237, 129, 40, 0.89)", 
-                           "rgba(50, 172, 45, 0.97)"
-                        ], 
-                        "colorMode": null, 
-                        "decimals": 2, 
-                        "unit": "short"
-                     }
-                  ], 
-                  "span": 3, 
-                  "pageSize": null, 
-                  "links": [], 
-                  "title": "Host OSD Capacity Breakdown", 
-                  "columns": [
-                     {
-                        "text": "Current", 
-                        "value": "current"
-                     }
-                  ], 
-                  "transform": "timeseries_aggregations", 
-                  "showHeader": true, 
-                  "scroll": true, 
+                  "datasource": "Prometheus", 
                   "targets": [
                      {
                         "format": "time_series", 
@@ -354,53 +58,15 @@
                         "refId": "A"
                      }
                   ], 
-                  "fontSize": "100%", 
-                  "datasource": "Local", 
-                  "minSpan": 3, 
-                  "type": "table", 
-                  "id": 59, 
-                  "maxDataPoints": "10"
+                  "title": "Host OSD Capacity Breakdown"
                }
             ], 
-            "showTitle": true, 
-            "collapse": false
+            "title": "Disk/OSD Host Summary"
          }, 
          {
-            "repeat": null, 
-            "titleSize": "h5", 
-            "repeatIteration": null, 
-            "title": "Disk/OSD Load Summary", 
-            "height": "300", 
-            "repeatRowId": null, 
             "panels": [
                {
-                  "xBucketSize": "", 
-                  "highlightCards": true, 
-                  "span": 6, 
-                  "heatmap": {}, 
-                  "links": [], 
-                  "title": "Disk Drive Utilization Heatmap - $osd_servers", 
-                  "color": {
-                     "mode": "spectrum", 
-                     "cardColor": "#b4ff00", 
-                     "colorScheme": "interpolateRdYlGn", 
-                     "exponent": 0.5, 
-                     "colorScale": "sqrt"
-                  }, 
-                  "xBucketNumber": 180, 
-                  "yAxis": {
-                     "logBase": 1, 
-                     "show": true, 
-                     "max": "100", 
-                     "format": "short", 
-                     "min": "0", 
-                     "decimals": null, 
-                     "splitFactor": null
-                  }, 
-                  "tooltip": {
-                     "showHistogram": false, 
-                     "show": true
-                  }, 
+                  "datasource": "Prometheus", 
                   "targets": [
                      {
                         "intervalFactor": 2, 
@@ -410,50 +76,10 @@
                         "format": "time_series"
                      }
                   ], 
-                  "yBucketSize": 5, 
-                  "dataFormat": "timeseries", 
-                  "datasource": "Local", 
-                  "xAxis": {
-                     "show": true
-                  }, 
-                  "cards": {
-                     "cardRound": null, 
-                     "cardPadding": null
-                  }, 
-                  "yBucketNumber": null, 
-                  "minSpan": 6, 
-                  "type": "heatmap", 
-                  "id": 53, 
-                  "description": "The heatmap categorizes disk utilization into discrete buckets (e.g util 0-5) and shows the frequency of the number of disks that fall within that range as a color. The color chosen depends on the number of disks in the 'bucket', ranging from green (low) to red (high). Hover over a colored block to show the count of disk utilization observations at that point."
+                  "title": "Disk Drive Utilization Heatmap - $osd_servers"
                }, 
                {
-                  "bars": false, 
-                  "timeFrom": null, 
-                  "links": [], 
-                  "thresholds": [], 
-                  "spaceLength": 10, 
-                  "nullPointMode": "null", 
-                  "renderer": "flot", 
-                  "linewidth": 1, 
-                  "steppedLine": false, 
-                  "id": 24, 
-                  "fill": 1, 
-                  "span": 6, 
-                  "title": "Disk Throughput - $osd_servers", 
-                  "tooltip": {
-                     "sort": 0, 
-                     "shared": true, 
-                     "value_type": "individual"
-                  }, 
-                  "legend": {
-                     "total": false, 
-                     "show": true, 
-                     "max": false, 
-                     "min": false, 
-                     "current": false, 
-                     "values": false, 
-                     "avg": false
-                  }, 
+                  "datasource": "Prometheus", 
                   "targets": [
                      {
                         "format": "time_series", 
@@ -472,95 +98,10 @@
                         "refId": "B"
                      }
                   ], 
-                  "yaxes": [
-                     {
-                        "logBase": 1, 
-                        "show": true, 
-                        "max": null, 
-                        "format": "decbytes", 
-                        "min": "0", 
-                        "label": null
-                     }, 
-                     {
-                        "logBase": 1, 
-                        "show": true, 
-                        "max": null, 
-                        "format": "short", 
-                        "min": null, 
-                        "label": null
-                     }
-                  ], 
-                  "xaxis": {
-                     "buckets": null, 
-                     "show": true, 
-                     "values": [], 
-                     "mode": "time", 
-                     "name": null
-                  }, 
-                  "seriesOverrides": [], 
-                  "percentage": false, 
-                  "type": "graph", 
-                  "dashes": false, 
-                  "dashLength": 10, 
-                  "stack": true, 
-                  "timeShift": null, 
-                  "aliasColors": {
-                     "Read Throughput": "#629E51", 
-                     "Write Throughput": "#E0752D"
-                  }, 
-                  "lines": true, 
-                  "points": false, 
-                  "datasource": "Local", 
-                  "pointradius": 5, 
-                  "minSpan": 6
+                  "title": "Disk Throughput - $osd_servers"
                }, 
                {
-                  "bars": false, 
-                  "timeFrom": null, 
-                  "links": [
-                     {
-                        "keepTime": true, 
-                        "title": "Latency by Server", 
-                        "includeVars": true, 
-                        "targetBlank": true, 
-                        "dashUri": "db/latency-by-server", 
-                        "type": "dashboard", 
-                        "dashboard": "Latency by Server"
-                     }
-                  ], 
-                  "thresholds": [
-                     {
-                        "colorMode": "custom", 
-                        "value": 50, 
-                        "lineColor": "rgba(178, 0, 0, 0.29)", 
-                        "line": true, 
-                        "fill": false, 
-                        "op": "gt"
-                     }
-                  ], 
-                  "spaceLength": 10, 
-                  "nullPointMode": "null as zero", 
-                  "renderer": "flot", 
-                  "linewidth": 1, 
-                  "steppedLine": false, 
-                  "id": 40, 
-                  "fill": 1, 
-                  "span": 6, 
-                  "title": "Disk Latency - $osd_servers OSDs @ $percentile%ile", 
-                  "tooltip": {
-                     "sort": 0, 
-                     "shared": true, 
-                     "value_type": "individual"
-                  }, 
-                  "legend": {
-                     "total": false, 
-                     "show": true, 
-                     "max": false, 
-                     "min": false, 
-                     "current": false, 
-                     "values": false, 
-                     "avg": false
-                  }, 
+                  "datasource": "Prometheus", 
                   "targets": [
                      {
                         "format": "time_series", 
@@ -579,95 +120,10 @@
                         "refId": "C"
                      }
                   ], 
-                  "yaxes": [
-                     {
-                        "logBase": 1, 
-                        "show": true, 
-                        "max": null, 
-                        "format": "ms", 
-                        "min": "0", 
-                        "label": null
-                     }, 
-                     {
-                        "logBase": 1, 
-                        "show": true, 
-                        "max": null, 
-                        "format": "short", 
-                        "min": null, 
-                        "label": null
-                     }
-                  ], 
-                  "xaxis": {
-                     "buckets": null, 
-                     "show": true, 
-                     "values": [], 
-                     "mode": "time", 
-                     "name": null
-                  }, 
-                  "seriesOverrides": [], 
-                  "percentage": false, 
-                  "type": "graph", 
-                  "dashes": false, 
-                  "dashLength": 10, 
-                  "stack": true, 
-                  "timeShift": null, 
-                  "aliasColors": {
-                     "Write Latency": "#E0752D", 
-                     "Read Latency": "#629E51"
-                  }, 
-                  "lines": true, 
-                  "points": false, 
-                  "datasource": "Local", 
-                  "pointradius": 5, 
-                  "minSpan": 6
+                  "title": "Disk Latency - $osd_servers OSDs @ $percentile%ile"
                }, 
                {
-                  "bars": false, 
-                  "timeFrom": null, 
-                  "links": [
-                     {
-                        "keepTime": true, 
-                        "title": "Disk Busy by Server", 
-                        "includeVars": true, 
-                        "targetBlank": true, 
-                        "dashUri": "db/disk-busy-by-server", 
-                        "type": "dashboard", 
-                        "dashboard": "Disk Busy by Server"
-                     }
-                  ], 
-                  "thresholds": [
-                     {
-                        "colorMode": "custom", 
-                        "value": 80, 
-                        "lineColor": "rgba(178, 0, 0, 0.29)", 
-                        "line": true, 
-                        "fill": false, 
-                        "op": "gt"
-                     }
-                  ], 
-                  "spaceLength": 10, 
-                  "nullPointMode": "null", 
-                  "renderer": "flot", 
-                  "linewidth": 1, 
-                  "steppedLine": false, 
-                  "id": 43, 
-                  "fill": 1, 
-                  "span": 6, 
-                  "title": "Disk Utilization - $osd_servers OSDs at $percentile%ile", 
-                  "tooltip": {
-                     "sort": 0, 
-                     "shared": true, 
-                     "value_type": "individual"
-                  }, 
-                  "legend": {
-                     "total": false, 
-                     "show": true, 
-                     "max": false, 
-                     "min": false, 
-                     "current": true, 
-                     "values": true, 
-                     "avg": false
-                  }, 
+                  "datasource": "Prometheus", 
                   "targets": [
                      {
                         "format": "time_series", 
@@ -678,75 +134,10 @@
                         "refId": "A"
                      }
                   ], 
-                  "yaxes": [
-                     {
-                        "logBase": 1, 
-                        "show": true, 
-                        "max": "100", 
-                        "format": "short", 
-                        "min": "0", 
-                        "label": ""
-                     }, 
-                     {
-                        "logBase": 1, 
-                        "show": false, 
-                        "max": null, 
-                        "format": "short", 
-                        "min": null, 
-                        "label": null
-                     }
-                  ], 
-                  "xaxis": {
-                     "buckets": null, 
-                     "show": true, 
-                     "values": [], 
-                     "mode": "time", 
-                     "name": null
-                  }, 
-                  "seriesOverrides": [], 
-                  "percentage": false, 
-                  "type": "graph", 
-                  "dashes": false, 
-                  "dashLength": 10, 
-                  "stack": false, 
-                  "timeShift": null, 
-                  "aliasColors": {
-                     "disk busy %": "#3F6833"
-                  }, 
-                  "lines": true, 
-                  "points": false, 
-                  "datasource": "Local", 
-                  "pointradius": 5, 
-                  "minSpan": 6
+                  "title": "Disk Utilization - $osd_servers OSDs at $percentile%ile"
                }, 
                {
-                  "bars": false, 
-                  "timeFrom": null, 
-                  "links": [], 
-                  "thresholds": [], 
-                  "spaceLength": 10, 
-                  "nullPointMode": "null", 
-                  "renderer": "flot", 
-                  "linewidth": 1, 
-                  "steppedLine": false, 
-                  "id": 46, 
-                  "fill": 1, 
-                  "span": 6, 
-                  "title": "IOPS per Disk @ $percentile%ile - $osd_servers OSDs", 
-                  "tooltip": {
-                     "sort": 0, 
-                     "shared": true, 
-                     "value_type": "individual"
-                  }, 
-                  "legend": {
-                     "total": false, 
-                     "show": false, 
-                     "max": false, 
-                     "min": false, 
-                     "current": false, 
-                     "values": false, 
-                     "avg": false
-                  }, 
+                  "datasource": "Prometheus", 
                   "targets": [
                      {
                         "format": "time_series", 
@@ -757,85 +148,10 @@
                         "refId": "A"
                      }
                   ], 
-                  "yaxes": [
-                     {
-                        "logBase": 1, 
-                        "show": true, 
-                        "max": null, 
-                        "format": "short", 
-                        "min": "0", 
-                        "label": null
-                     }, 
-                     {
-                        "logBase": 1, 
-                        "show": true, 
-                        "max": null, 
-                        "format": "short", 
-                        "min": null, 
-                        "label": null
-                     }
-                  ], 
-                  "xaxis": {
-                     "buckets": null, 
-                     "show": true, 
-                     "values": [], 
-                     "mode": "time", 
-                     "name": null
-                  }, 
-                  "seriesOverrides": [], 
-                  "percentage": false, 
-                  "type": "graph", 
-                  "dashes": false, 
-                  "dashLength": 10, 
-                  "stack": false, 
-                  "timeShift": null, 
-                  "aliasColors": {
-                     "IOPS/spindle": "#3F6833"
-                  }, 
-                  "lines": true, 
-                  "points": false, 
-                  "datasource": "Local", 
-                  "pointradius": 5, 
-                  "minSpan": 6
+                  "title": "IOPS per Disk @ $percentile%ile - $osd_servers OSDs"
                }, 
                {
-                  "bars": false, 
-                  "timeFrom": null, 
-                  "links": [
-                     {
-                        "keepTime": true, 
-                        "title": "IOPS by Server", 
-                        "includeVars": true, 
-                        "targetBlank": true, 
-                        "dashUri": "db/iops-by-server", 
-                        "type": "dashboard", 
-                        "dashboard": "IOPS by Server"
-                     }
-                  ], 
-                  "thresholds": [], 
-                  "spaceLength": 10, 
-                  "nullPointMode": "null", 
-                  "renderer": "flot", 
-                  "linewidth": 1, 
-                  "steppedLine": false, 
-                  "id": 47, 
-                  "fill": 1, 
-                  "span": 6, 
-                  "title": "Total Disk IOPS - $osd_servers OSDs", 
-                  "tooltip": {
-                     "sort": 0, 
-                     "shared": true, 
-                     "value_type": "individual"
-                  }, 
-                  "legend": {
-                     "total": false, 
-                     "show": false, 
-                     "max": false, 
-                     "min": false, 
-                     "current": false, 
-                     "values": false, 
-                     "avg": false
-                  }, 
+                  "datasource": "Prometheus", 
                   "targets": [
                      {
                         "format": "time_series", 
@@ -846,87 +162,15 @@
                         "refId": "A"
                      }
                   ], 
-                  "yaxes": [
-                     {
-                        "logBase": 1, 
-                        "show": true, 
-                        "max": null, 
-                        "format": "short", 
-                        "min": "0", 
-                        "label": null
-                     }, 
-                     {
-                        "logBase": 1, 
-                        "show": false, 
-                        "max": null, 
-                        "format": "short", 
-                        "min": null, 
-                        "label": null
-                     }
-                  ], 
-                  "xaxis": {
-                     "buckets": null, 
-                     "show": true, 
-                     "values": [], 
-                     "mode": "time", 
-                     "name": null
-                  }, 
-                  "seriesOverrides": [], 
-                  "percentage": false, 
-                  "type": "graph", 
-                  "dashes": false, 
-                  "dashLength": 10, 
-                  "stack": false, 
-                  "timeShift": null, 
-                  "aliasColors": {
-                     "IOPS": "#3F6833"
-                  }, 
-                  "lines": true, 
-                  "points": false, 
-                  "datasource": "Local", 
-                  "pointradius": 5, 
-                  "minSpan": 6
+                  "title": "Total Disk IOPS - $osd_servers OSDs"
                }
             ], 
-            "showTitle": true, 
-            "collapse": true
+            "title": "Disk/OSD Load Summary"
          }, 
          {
-            "repeat": null, 
-            "titleSize": "h5", 
-            "repeatIteration": null, 
-            "title": "OSD Host CPU and Network Load", 
-            "height": 250, 
-            "repeatRowId": null, 
             "panels": [
                {
-                  "bars": false, 
-                  "timeFrom": null, 
-                  "links": [], 
-                  "thresholds": [], 
-                  "spaceLength": 10, 
-                  "nullPointMode": "null as zero", 
-                  "renderer": "flot", 
-                  "linewidth": 1, 
-                  "steppedLine": false, 
-                  "id": 44, 
-                  "fill": 3, 
-                  "span": 6, 
-                  "title": "CPU Utilization - $osd_servers", 
-                  "tooltip": {
-                     "sort": 0, 
-                     "shared": true, 
-                     "value_type": "individual"
-                  }, 
-                  "legend": {
-                     "total": false, 
-                     "show": true, 
-                     "max": false, 
-                     "min": false, 
-                     "current": false, 
-                     "values": false, 
-                     "avg": false
-                  }, 
+                  "datasource": "Prometheus", 
                   "targets": [
                      {
                         "format": "time_series", 
@@ -946,94 +190,10 @@
                         "refId": "B"
                      }
                   ], 
-                  "yaxes": [
-                     {
-                        "logBase": 1, 
-                        "show": true, 
-                        "max": "100", 
-                        "format": "short", 
-                        "min": "0", 
-                        "label": ""
-                     }, 
-                     {
-                        "logBase": 1, 
-                        "show": true, 
-                        "max": null, 
-                        "format": "short", 
-                        "min": null, 
-                        "label": null
-                     }
-                  ], 
-                  "xaxis": {
-                     "buckets": null, 
-                     "show": true, 
-                     "values": [], 
-                     "mode": "time", 
-                     "name": null
-                  }, 
-                  "seriesOverrides": [
-                     {
-                        "alias": "Cluster-wide CPU Busy @ 95%ile", 
-                        "fill": 0
-                     }
-                  ], 
-                  "percentage": false, 
-                  "type": "graph", 
-                  "dashes": false, 
-                  "dashLength": 10, 
-                  "stack": false, 
-                  "timeShift": null, 
-                  "aliasColors": {
-                     "Max CPU Busy - all OSD Hosts": "#BF1B00", 
-                     "CPU Busy": "#447EBC", 
-                     "Max CPU Busy": "#BF1B00", 
-                     "Cluster-wide CPU Busy @ 95%ile": "#890F02", 
-                     "CPU Busy @ 95%ile": "#890F02"
-                  }, 
-                  "lines": true, 
-                  "points": false, 
-                  "datasource": "Local", 
-                  "pointradius": 5, 
-                  "minSpan": 6
+                  "title": "CPU Utilization - $osd_servers"
                }, 
                {
-                  "bars": false, 
-                  "timeFrom": null, 
-                  "links": [
-                     {
-                        "keepTime": true, 
-                        "title": "Network Load by Node", 
-                        "includeVars": true, 
-                        "targetBlank": true, 
-                        "dashUri": "db/network-usage-by-node", 
-                        "type": "dashboard", 
-                        "dashboard": "Network Usage by Node"
-                     }
-                  ], 
-                  "thresholds": [], 
-                  "spaceLength": 10, 
-                  "nullPointMode": "null", 
-                  "renderer": "flot", 
-                  "linewidth": 1, 
-                  "steppedLine": false, 
-                  "id": 49, 
-                  "fill": 1, 
-                  "span": 6, 
-                  "title": "Network Load - $osd_servers", 
-                  "tooltip": {
-                     "sort": 0, 
-                     "shared": true, 
-                     "value_type": "individual"
-                  }, 
-                  "legend": {
-                     "total": false, 
-                     "show": true, 
-                     "max": false, 
-                     "min": false, 
-                     "current": false, 
-                     "values": false, 
-                     "avg": false
-                  }, 
+                  "datasource": "Prometheus", 
                   "targets": [
                      {
                         "hide": false, 
@@ -1044,50 +204,10 @@
                         "refId": "A"
                      }
                   ], 
-                  "yaxes": [
-                     {
-                        "logBase": 1, 
-                        "show": true, 
-                        "max": null, 
-                        "format": "bytes", 
-                        "min": null, 
-                        "label": null
-                     }, 
-                     {
-                        "logBase": 1, 
-                        "show": true, 
-                        "max": null, 
-                        "format": "short", 
-                        "min": null, 
-                        "label": null
-                     }
-                  ], 
-                  "xaxis": {
-                     "buckets": null, 
-                     "show": true, 
-                     "values": [], 
-                     "mode": "time", 
-                     "name": null
-                  }, 
-                  "seriesOverrides": [], 
-                  "percentage": false, 
-                  "type": "graph", 
-                  "dashes": false, 
-                  "dashLength": 10, 
-                  "stack": false, 
-                  "timeShift": null, 
-                  "aliasColors": {
-                     "Network load (rx+tx)": "#3F6833"
-                  }, 
-                  "lines": true, 
-                  "points": false, 
-                  "datasource": "Local", 
-                  "pointradius": 5, 
-                  "minSpan": 6
+                  "title": "Network Load - $osd_servers"
                }
             ], 
-            "showTitle": true, 
-            "collapse": false
+            "title": "OSD Host CPU and Network Load"
          }
       ], 
       "templating": {
@@ -1100,20 +220,20 @@
                "name": "cluster_name", 
                "tags": [], 
                "allValue": null, 
-               "tagValuesQuery": "", 
-               "refresh": 1, 
-               "label": null, 
+               "tagsQuery": "", 
                "current": {
                   "text": "ceph", 
                   "value": "ceph"
                }, 
+               "refresh": 1, 
+               "label": null, 
+               "tagValuesQuery": "", 
                "datasource": "Local", 
-               "type": "query", 
                "query": "collectd_cephmetrics_gauge{}", 
-               "useTags": false, 
-               "tagsQuery": "", 
+               "includeAll": false, 
+               "type": "query", 
                "options": [], 
-               "includeAll": false
+               "useTags": false
             }, 
             {
                "multi": false, 
@@ -1238,63 +358,6 @@
                "includeAll": false
             }
          ]
-      }, 
-      "links": [
-         {
-            "keepTime": true, 
-            "tags": [
-               "overview"
-            ], 
-            "title": "Shortcuts", 
-            "includeVars": true, 
-            "targetBlank": true, 
-            "asDropdown": true, 
-            "type": "dashboards", 
-            "icon": "external link"
-         }
-      ], 
-      "tags": [], 
-      "graphTooltip": 0, 
-      "hideControls": false, 
-      "title": "Ceph Backend Storage", 
-      "editable": true, 
-      "refresh": "10s", 
-      "annotations": {
-         "list": []
-      }, 
-      "gnetId": null, 
-      "timepicker": {
-         "time_options": [
-            "5m", 
-            "15m", 
-            "1h", 
-            "6h", 
-            "12h", 
-            "24h", 
-            "2d", 
-            "7d", 
-            "30d"
-         ], 
-         "refresh_intervals": [
-            "5s", 
-            "10s", 
-            "30s", 
-            "1m", 
-            "5m", 
-            "15m", 
-            "30m", 
-            "1h", 
-            "2h", 
-            "1d"
-         ]
-      }, 
-      "version": 5, 
-      "time": {
-         "to": "now", 
-         "from": "now-1h"
-      }, 
-      "timezone": "browser", 
-      "schemaVersion": 14, 
-      "id": 26
+      }
    }
 }

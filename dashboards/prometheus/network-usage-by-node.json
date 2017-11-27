@@ -1,54 +1,10 @@
 {
-   "meta": {}, 
    "dashboard": {
-      "style": "dark", 
       "rows": [
          {
-            "repeat": null, 
-            "titleSize": "h5", 
-            "repeatIteration": null, 
-            "title": "Aggregated Network Load", 
-            "height": "250px", 
-            "repeatRowId": null, 
             "panels": [
                {
-                  "bars": false, 
-                  "timeFrom": null, 
-                  "links": [
-                     {
-                        "keepTime": true, 
-                        "title": "OSD Node Detail", 
-                        "includeVars": true, 
-                        "targetBlank": true, 
-                        "dashUri": "db/osd-node-detail", 
-                        "type": "dashboard", 
-                        "dashboard": "OSD Node Detail"
-                     }
-                  ], 
-                  "thresholds": [], 
-                  "spaceLength": 10, 
-                  "nullPointMode": "connected", 
-                  "renderer": "flot", 
-                  "linewidth": 1, 
-                  "steppedLine": false, 
-                  "id": 1, 
-                  "fill": 1, 
-                  "span": 12, 
-                  "title": "Cluster Network Load Across MON, OSD and RADOSGW Hosts", 
-                  "tooltip": {
-                     "sort": 0, 
-                     "shared": true, 
-                     "value_type": "individual"
-                  }, 
-                  "legend": {
-                     "total": false, 
-                     "show": true, 
-                     "max": false, 
-                     "min": false, 
-                     "current": false, 
-                     "values": false, 
-                     "avg": false
-                  }, 
+                  "datasource": "Prometheus", 
                   "targets": [
                      {
                         "hide": false, 
@@ -76,69 +32,15 @@
                         "refId": "C"
                      }
                   ], 
-                  "yaxes": [
-                     {
-                        "logBase": 1, 
-                        "show": true, 
-                        "max": null, 
-                        "format": "decbytes", 
-                        "min": "0", 
-                        "label": null
-                     }, 
-                     {
-                        "logBase": 1, 
-                        "show": false, 
-                        "max": null, 
-                        "format": "short", 
-                        "min": null, 
-                        "label": null
-                     }
-                  ], 
-                  "xaxis": {
-                     "buckets": null, 
-                     "show": true, 
-                     "values": [], 
-                     "mode": "time", 
-                     "name": null
-                  }, 
-                  "seriesOverrides": [], 
-                  "percentage": false, 
-                  "type": "graph", 
-                  "dashes": false, 
-                  "description": "Shows the total transmit and receive throughput to all interfaces across the Ceph hosts.", 
-                  "dashLength": 10, 
-                  "stack": true, 
-                  "timeShift": null, 
-                  "aliasColors": {}, 
-                  "lines": true, 
-                  "points": false, 
-                  "datasource": "Local", 
-                  "pointradius": 5, 
-                  "minSpan": 12
+                  "title": "Cluster Network Load Across MON, OSD and RADOSGW Hosts"
                }
             ], 
-            "showTitle": true, 
-            "collapse": false
+            "title": "Aggregated Network Load"
          }, 
          {
-            "repeat": null, 
-            "titleSize": "h5", 
-            "repeatIteration": null, 
-            "title": "MON Hosts", 
-            "height": 239, 
-            "repeatRowId": null, 
             "panels": [
                {
-                  "bars": false, 
-                  "timeFrom": null, 
-                  "links": [], 
-                  "thresholds": [], 
-                  "spaceLength": 10, 
-                  "nullPointMode": "null", 
-                  "renderer": "flot", 
-                  "id": 2, 
-                  "linewidth": 1, 
-                  "steppedLine": false, 
+                  "datasource": "Prometheus", 
                   "targets": [
                      {
                         "format": "time_series", 
@@ -149,84 +51,15 @@
                         "refId": "A"
                      }
                   ], 
-                  "fill": 1, 
-                  "span": 12, 
-                  "title": "Ceph MON Network Load", 
-                  "tooltip": {
-                     "sort": 0, 
-                     "shared": true, 
-                     "value_type": "individual"
-                  }, 
-                  "legend": {
-                     "total": false, 
-                     "show": true, 
-                     "max": false, 
-                     "min": false, 
-                     "current": false, 
-                     "values": false, 
-                     "avg": false
-                  }, 
-                  "yaxes": [
-                     {
-                        "logBase": 1, 
-                        "show": true, 
-                        "max": null, 
-                        "format": "bytes", 
-                        "min": "0", 
-                        "label": null
-                     }, 
-                     {
-                        "logBase": 1, 
-                        "show": true, 
-                        "max": null, 
-                        "format": "short", 
-                        "min": null, 
-                        "label": null
-                     }
-                  ], 
-                  "xaxis": {
-                     "buckets": null, 
-                     "show": true, 
-                     "values": [], 
-                     "mode": "time", 
-                     "name": null
-                  }, 
-                  "seriesOverrides": [], 
-                  "percentage": false, 
-                  "type": "graph", 
-                  "dashes": false, 
-                  "dashLength": 10, 
-                  "stack": true, 
-                  "timeShift": null, 
-                  "aliasColors": {}, 
-                  "lines": true, 
-                  "points": false, 
-                  "datasource": "Local", 
-                  "pointradius": 5
+                  "title": "Ceph MON Network Load"
                }
             ], 
-            "showTitle": true, 
-            "collapse": false
+            "title": "MON Hosts"
          }, 
          {
-            "repeat": null, 
-            "titleSize": "h5", 
-            "repeatIteration": null, 
-            "title": "OSD Hosts", 
-            "height": 250, 
-            "repeatRowId": null, 
             "panels": [
                {
-                  "bars": false, 
-                  "timeFrom": null, 
-                  "links": [], 
-                  "thresholds": [], 
-                  "spaceLength": 10, 
-                  "nullPointMode": "null", 
-                  "renderer": "flot", 
-                  "id": 3, 
-                  "linewidth": 1, 
-                  "steppedLine": false, 
+                  "datasource": "Prometheus", 
                   "targets": [
                      {
                         "format": "time_series", 
@@ -237,84 +70,15 @@
                         "refId": "A"
                      }
                   ], 
-                  "fill": 1, 
-                  "span": 12, 
-                  "title": "OSD Host Network Load", 
-                  "tooltip": {
-                     "sort": 0, 
-                     "shared": true, 
-                     "value_type": "individual"
-                  }, 
-                  "legend": {
-                     "total": false, 
-                     "show": true, 
-                     "max": false, 
-                     "min": false, 
-                     "current": false, 
-                     "values": false, 
-                     "avg": false
-                  }, 
-                  "yaxes": [
-                     {
-                        "logBase": 1, 
-                        "show": true, 
-                        "max": null, 
-                        "format": "bytes", 
-                        "min": "0", 
-                        "label": null
-                     }, 
-                     {
-                        "logBase": 1, 
-                        "show": true, 
-                        "max": null, 
-                        "format": "short", 
-                        "min": null, 
-                        "label": null
-                     }
-                  ], 
-                  "xaxis": {
-                     "buckets": null, 
-                     "show": true, 
-                     "values": [], 
-                     "mode": "time", 
-                     "name": null
-                  }, 
-                  "seriesOverrides": [], 
-                  "percentage": false, 
-                  "type": "graph", 
-                  "dashes": false, 
-                  "dashLength": 10, 
-                  "stack": true, 
-                  "timeShift": null, 
-                  "aliasColors": {}, 
-                  "lines": true, 
-                  "points": false, 
-                  "datasource": "Local", 
-                  "pointradius": 5
+                  "title": "OSD Host Network Load"
                }
             ], 
-            "showTitle": true, 
-            "collapse": false
+            "title": "OSD Hosts"
          }, 
          {
-            "repeat": null, 
-            "titleSize": "h5", 
-            "repeatIteration": null, 
-            "title": "RadosGW Hosts", 
-            "height": 250, 
-            "repeatRowId": null, 
             "panels": [
                {
-                  "bars": false, 
-                  "timeFrom": null, 
-                  "links": [], 
-                  "thresholds": [], 
-                  "spaceLength": 10, 
-                  "nullPointMode": "null", 
-                  "renderer": "flot", 
-                  "id": 4, 
-                  "linewidth": 1, 
-                  "steppedLine": false, 
+                  "datasource": "Prometheus", 
                   "targets": [
                      {
                         "format": "time_series", 
@@ -325,64 +89,10 @@
                         "refId": "A"
                      }
                   ], 
-                  "fill": 1, 
-                  "span": 12, 
-                  "title": "RadosGW Network Load", 
-                  "tooltip": {
-                     "sort": 0, 
-                     "shared": true, 
-                     "value_type": "individual"
-                  }, 
-                  "legend": {
-                     "total": false, 
-                     "show": true, 
-                     "max": false, 
-                     "min": false, 
-                     "current": false, 
-                     "values": false, 
-                     "avg": false
-                  }, 
-                  "yaxes": [
-                     {
-                        "logBase": 1, 
-                        "show": true, 
-                        "max": null, 
-                        "format": "decbytes", 
-                        "min": "0", 
-                        "label": null
-                     }, 
-                     {
-                        "logBase": 1, 
-                        "show": true, 
-                        "max": null, 
-                        "format": "short", 
-                        "min": null, 
-                        "label": null
-                     }
-                  ], 
-                  "xaxis": {
-                     "buckets": null, 
-                     "show": true, 
-                     "values": [], 
-                     "mode": "time", 
-                     "name": null
-                  }, 
-                  "seriesOverrides": [], 
-                  "percentage": false, 
-                  "type": "graph", 
-                  "dashes": false, 
-                  "dashLength": 10, 
-                  "stack": true, 
-                  "timeShift": null, 
-                  "aliasColors": {}, 
-                  "lines": true, 
-                  "points": false, 
-                  "datasource": "Local", 
-                  "pointradius": 5
+                  "title": "RadosGW Network Load"
                }
             ], 
-            "showTitle": true, 
-            "collapse": false
+            "title": "RadosGW Hosts"
          }
       ], 
       "templating": {
@@ -457,20 +167,20 @@
                "name": "cluster_name", 
                "tags": [], 
                "allValue": null, 
-               "tagValuesQuery": "", 
-               "refresh": 1, 
-               "label": null, 
+               "tagsQuery": "", 
                "current": {
                   "text": "ceph", 
                   "value": "ceph"
                }, 
+               "refresh": 1, 
+               "label": null, 
+               "tagValuesQuery": "", 
                "datasource": "Local", 
-               "type": "query", 
                "query": "collectd_cephmetrics_gauge{}", 
-               "useTags": false, 
-               "tagsQuery": "", 
+               "includeAll": false, 
+               "type": "query", 
                "options": [], 
-               "includeAll": false
+               "useTags": false
             }, 
             {
                "regex": "/\"$cluster_name.mon.mon.status.([^\"]*)/", 
@@ -480,20 +190,20 @@
                "name": "mon_servers", 
                "tags": [], 
                "allValue": "", 
-               "tagValuesQuery": "", 
-               "refresh": 1, 
-               "label": "Monitor Host", 
+               "tagsQuery": "", 
                "current": {
                   "text": "All", 
                   "value": "$__all"
                }, 
+               "refresh": 1, 
+               "label": "Monitor Host", 
+               "tagValuesQuery": "", 
                "datasource": "Local", 
-               "type": "query", 
                "query": "collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.mon.mon_status..*\"}", 
-               "useTags": false, 
-               "tagsQuery": "", 
+               "includeAll": true, 
+               "type": "query", 
                "options": [], 
-               "includeAll": true
+               "useTags": false
             }, 
             {
                "multi": false, 
@@ -523,61 +233,6 @@
                "includeAll": true
             }
          ]
-      }, 
-      "links": [
-         {
-            "title": "Shortcuts", 
-            "tags": [
-               "overview"
-            ], 
-            "type": "dashboards", 
-            "asDropdown": true, 
-            "icon": "external link"
-         }
-      ], 
-      "tags": [
-         "overview"
-      ], 
-      "graphTooltip": 0, 
-      "hideControls": false, 
-      "title": "Network Usage by Node", 
-      "editable": true, 
-      "annotations": {
-         "list": []
-      }, 
-      "gnetId": null, 
-      "timepicker": {
-         "time_options": [
-            "5m", 
-            "15m", 
-            "1h", 
-            "6h", 
-            "12h", 
-            "24h", 
-            "2d", 
-            "7d", 
-            "30d"
-         ], 
-         "refresh_intervals": [
-            "5s", 
-            "10s", 
-            "30s", 
-            "1m", 
-            "5m", 
-            "15m", 
-            "30m", 
-            "1h", 
-            "2h", 
-            "1d"
-         ]
-      }, 
-      "version": 14, 
-      "time": {
-         "to": "now", 
-         "from": "now-1h"
-      }, 
-      "timezone": "browser", 
-      "schemaVersion": 14, 
-      "id": 17
+      }
    }
 }
