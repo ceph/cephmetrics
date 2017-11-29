@@ -65,7 +65,7 @@
   set_fact:
     grafana_data_source: >
       {
-        "name":"Local",
+        "name":"Prometheus",
         "type":"prometheus",
         "url":"http://localhost:{{ prometheus.port }}",
         "access":"proxy",
