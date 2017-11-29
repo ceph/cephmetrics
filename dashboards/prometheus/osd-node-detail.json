@@ -34,9 +34,9 @@
                   "targets": [
                      {
                         "format": "time_series", 
-                        "expr": "label_replace(label_replace(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.($device_id).osd_id\", instance=~\"($osd_servers):.*\"}, \"node\", \"$1\", \"instance\", \"(.*):.*\"), \"device\", \"$1\", \"cephmetrics\", \"$cluster_name.osd.(.*).osd_id\")", 
+                        "expr": "label_replace(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.($device_id).osd_id\", instance=~\"($osd_servers):.*\"}, \"device\", \"$1\", \"cephmetrics\", \"$cluster_name.osd.(.*).osd_id\")", 
                         "step": 20, 
-                        "legendFormat": "{{node}}:{{device}}", 
+                        "legendFormat": "{{instance}}:{{device}}", 
                         "intervalFactor": 2, 
                         "refId": "A"
                      }
@@ -48,9 +48,9 @@
                   "targets": [
                      {
                         "format": "time_series", 
-                        "expr": "label_replace(label_replace(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.($device_id).disk_size\", instance=~\"($osd_servers):.*\"}, \"node\", \"$1\", \"instance\", \"(.*):.*\"), \"device\", \"$1\", \"cephmetrics\", \"$cluster_name.osd.(.*).disk_size\")", 
+                        "expr": "label_replace(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.($device_id).disk_size\", instance=~\"($osd_servers):.*\"}, \"device\", \"$1\", \"cephmetrics\", \"$cluster_name.osd.(.*).disk_size\")", 
                         "step": 240, 
-                        "legendFormat": "{{node}}:{{device}}", 
+                        "legendFormat": "{{instance}}:{{device}}", 
                         "intervalFactor": 2, 
                         "refId": "A"
                      }
@@ -67,9 +67,9 @@
                   "targets": [
                      {
                         "format": "time_series", 
-                        "expr": "label_replace(label_replace(topk($max_devices, collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.($device_id).perf.util\", instance=~\"($osd_servers):.*\"}) by (instance), \"node\", \"$1\", \"instance\", \"(.*):.*\"), \"device\", \"$1\", \"cephmetrics\", \"$cluster_name.osd.(.*).perf.util\")", 
+                        "expr": "label_replace(topk($max_devices, collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.($device_id).perf.util\", instance=~\"($osd_servers):.*\"}) by (instance), \"device\", \"$1\", \"cephmetrics\", \"$cluster_name.osd.(.*).perf.util\")", 
                         "step": 10, 
-                        "legendFormat": "{{node}}:{{device}}", 
+                        "legendFormat": "{{instance}}:{{device}}", 
                         "intervalFactor": 2, 
                         "refId": "A"
                      }
@@ -81,9 +81,9 @@
                   "targets": [
                      {
                         "format": "time_series", 
-                        "expr": "label_replace(label_replace(topk($max_devices, collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.($device_id).perf.iops\", instance=~\"($osd_servers):.*\"}), \"node\", \"$1\", \"instance\", \"(.*):.*\"), \"device\", \"$1\", \"cephmetrics\", \"$cluster_name.osd.(.*).perf.iops\")", 
+                        "expr": "label_replace(topk($max_devices, collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.($device_id).perf.iops\", instance=~\"($osd_servers):.*\"}), \"device\", \"$1\", \"cephmetrics\", \"$cluster_name.osd.(.*).perf.iops\")", 
                         "step": 10, 
-                        "legendFormat": "{{node}}:{{device}}", 
+                        "legendFormat": "{{instance}}:{{device}}", 
                         "intervalFactor": 2, 
                         "refId": "A"
                      }
@@ -95,9 +95,9 @@
                   "targets": [
                      {
                         "format": "time_series", 
-                        "expr": "label_replace(label_replace(topk($max_devices, collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.($device_id).perf.await\", instance=~\"($osd_servers):.*\"}), \"node\", \"$1\", \"instance\", \"(.*):.*\"), \"device\", \"$1\", \"cephmetrics\", \"$cluster_name.osd.(.*).perf.await\")", 
+                        "expr": "label_replace(topk($max_devices, collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.($device_id).perf.await\", instance=~\"($osd_servers):.*\"}), \"device\", \"$1\", \"cephmetrics\", \"$cluster_name.osd.(.*).perf.await\")", 
                         "step": 10, 
-                        "legendFormat": "{{node}}:{{device}}", 
+                        "legendFormat": "{{instance}}:{{device}}", 
                         "intervalFactor": 2, 
                         "refId": "A"
                      }
@@ -109,9 +109,9 @@
                   "targets": [
                      {
                         "format": "time_series", 
-                        "expr": "label_replace(label_replace(topk($max_devices, collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.($device_id).perf.bytes_per_sec\", instance=~\"($osd_servers):.*\"}), \"node\", \"$1\", \"instance\", \"(.*):.*\"), \"device\", \"$1\", \"cephmetrics\", \"$cluster_name.osd.(.*).perf.bytes_per_sec\")", 
+                        "expr": "label_replace(topk($max_devices, collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.($device_id).perf.bytes_per_sec\", instance=~\"($osd_servers):.*\"}), \"device\", \"$1\", \"cephmetrics\", \"$cluster_name.osd.(.*).perf.bytes_per_sec\")", 
                         "step": 10, 
-                        "legendFormat": "{{node}}:{{device}}", 
+                        "legendFormat": "{{instance}}:{{device}}", 
                         "intervalFactor": 2, 
                         "refId": "A"
                      }
@@ -137,17 +137,17 @@
                   "targets": [
                      {
                         "format": "time_series", 
-                        "expr": "label_replace(max(topk($max_devices, irate(collectd_interface_if_octets_rx_total{instance=~\"($osd_servers):.*\", interface!=\"lo\"}[5m]))) by (instance, interface), \"node\", \"$1\", \"instance\", \"(.*):.*\")", 
+                        "expr": "max(topk($max_devices, irate(collectd_interface_if_octets_rx_total{instance=~\"($osd_servers):.*\", interface!=\"lo\"}[5m]))) by (instance, interface)", 
                         "step": 10, 
-                        "legendFormat": "{{node}}:{{interface}}.rx", 
+                        "legendFormat": "{{instance}}:{{interface}}.rx", 
                         "intervalFactor": 2, 
                         "refId": "A"
                      }, 
                      {
                         "format": "time_series", 
-                        "expr": "label_replace(max(topk($max_devices, irate(collectd_interface_if_octets_tx_total{instance=~\"($osd_servers):.*\", interface!=\"lo\"}[5m]))) by (instance, interface), \"node\", \"$1\", \"instance\", \"(.*):.*\")", 
+                        "expr": "max(topk($max_devices, irate(collectd_interface_if_octets_tx_total{instance=~\"($osd_servers):.*\", interface!=\"lo\"}[5m]))) by (instance, interface)", 
                         "step": 10, 
-                        "legendFormat": "{{node}}:{{interface}}.tx", 
+                        "legendFormat": "{{instance}}:{{interface}}.tx", 
                         "intervalFactor": 2, 
                         "refId": "B"
                      }

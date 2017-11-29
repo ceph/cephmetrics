@@ -44,9 +44,9 @@
                   "targets": [
                      {
                         "format": "time_series", 
-                        "expr": "label_replace(sum(irate(collectd_interface_if_octets_rx_total{instance=~\"($mon_servers):.*\", interface!=\"lo\"}[5m])) by (instance) + sum(irate(collectd_interface_if_octets_tx_total{instance=~\"($mon_servers):.*\", interface!=\"lo\"}[5m])) by (instance), \"node\", \"$1\", \"instance\", \"(.*):.*\")", 
+                        "expr": "sum(irate(collectd_interface_if_octets_rx_total{instance=~\"($mon_servers):.*\", interface!=\"lo\"}[5m])) by (instance) + sum(irate(collectd_interface_if_octets_tx_total{instance=~\"($mon_servers):.*\", interface!=\"lo\"}[5m])) by (instance)", 
                         "step": 4, 
-                        "legendFormat": "{{node}}", 
+                        "legendFormat": "{{instance}}", 
                         "intervalFactor": 2, 
                         "refId": "A"
                      }
@@ -63,9 +63,9 @@
                   "targets": [
                      {
                         "format": "time_series", 
-                        "expr": "label_replace(sum(irate(collectd_interface_if_octets_rx_total{instance=~\"($osd_servers):.*\", interface!=\"lo\"}[5m])) by (instance) + sum(irate(collectd_interface_if_octets_tx_total{instance=~\"($osd_servers):.*\", interface!=\"lo\"}[5m])) by (instance), \"node\", \"$1\", \"instance\", \"(.*):.*\")", 
+                        "expr": "sum(irate(collectd_interface_if_octets_rx_total{instance=~\"($osd_servers):.*\", interface!=\"lo\"}[5m])) by (instance) + sum(irate(collectd_interface_if_octets_tx_total{instance=~\"($osd_servers):.*\", interface!=\"lo\"}[5m])) by (instance)", 
                         "step": 4, 
-                        "legendFormat": "{{node}}", 
+                        "legendFormat": "{{instance}}", 
                         "intervalFactor": 2, 
                         "refId": "A"
                      }
@@ -82,9 +82,9 @@
                   "targets": [
                      {
                         "format": "time_series", 
-                        "expr": "label_replace(sum(irate(collectd_interface_if_octets_rx_total{instance=~\"($rgw_servers):.*\", interface!=\"lo\"}[5m])) by (instance) + sum(irate(collectd_interface_if_octets_tx_total{instance=~\"($rgw_servers):.*\", interface!=\"lo\"}[5m])) by (instance), \"node\", \"$1\", \"instance\", \"(.*):.*\")", 
+                        "expr": "sum(irate(collectd_interface_if_octets_rx_total{instance=~\"($rgw_servers):.*\", interface!=\"lo\"}[5m])) by (instance) + sum(irate(collectd_interface_if_octets_tx_total{instance=~\"($rgw_servers):.*\", interface!=\"lo\"}[5m])) by (instance)", 
                         "step": 4, 
-                        "legendFormat": "{{node}}", 
+                        "legendFormat": "{{instance}}", 
                         "intervalFactor": 2, 
                         "refId": "A"
                      }

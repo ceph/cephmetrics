@@ -104,9 +104,9 @@
                   "targets": [
                      {
                         "format": "time_series", 
-                        "expr": "max(label_replace(collectd_cephmetrics_gauge{cephmetrics=~\".*.osd..*.perf.await\"}, \"node\", \"$1\", \"instance\", \"(.*):.*\")) by (node) > 1000", 
+                        "expr": "max(collectd_cephmetrics_gauge{cephmetrics=~\".*.osd..*.perf.await\"}) by (instance) > 1000", 
                         "step": 40, 
-                        "legendFormat": "{{node}}", 
+                        "legendFormat": "{{instance}}", 
                         "intervalFactor": 2, 
                         "refId": "A"
                      }
@@ -118,9 +118,9 @@
                   "targets": [
                      {
                         "format": "time_series", 
-                        "expr": "sum(label_replace(irate(collectd_interface_if_dropped_rx_total{interface!=\"lo\"}[5m]) + irate(collectd_interface_if_dropped_tx_total{interface!=\"lo\"}[5m]) + irate(collectd_interface_if_errors_rx_total{interface!=\"lo\"}[5m]) + irate(collectd_interface_if_errors_tx_total{interface!=\"lo\"}[5m]), \"node\", \"$1\", \"instance\", \"(.*):.*\")) by (node)", 
+                        "expr": "sum(irate(collectd_interface_if_dropped_rx_total{interface!=\"lo\"}[5m]) + irate(collectd_interface_if_dropped_tx_total{interface!=\"lo\"}[5m]) + irate(collectd_interface_if_errors_rx_total{interface!=\"lo\"}[5m]) + irate(collectd_interface_if_errors_tx_total{interface!=\"lo\"}[5m])) by (instance)", 
                         "step": 40, 
-                        "legendFormat": "{{node}}", 
+                        "legendFormat": "{{instance}}", 
                         "intervalFactor": 2, 
                         "refId": "A"
                      }

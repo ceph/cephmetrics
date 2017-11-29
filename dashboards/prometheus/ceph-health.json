@@ -48,9 +48,9 @@
                   "targets": [
                      {
                         "format": "time_series", 
-                        "expr": "max(label_replace(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.mon.mon_status..*\"}, \"node\", \"$1\", \"instance\", \"(.*):.*\")) by (node)", 
+                        "expr": "max(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.mon.mon_status..*\"}) by (instance)", 
                         "step": 2, 
-                        "legendFormat": "{{node}}", 
+                        "legendFormat": "{{instance}}", 
                         "intervalFactor": 2, 
                         "refId": "B"
                      }

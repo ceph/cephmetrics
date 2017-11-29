@@ -8,9 +8,9 @@
                   "targets": [
                      {
                         "format": "time_series", 
-                        "expr": "label_replace(max(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.*.perf.await\" }) by (instance), \"node\", \"$1\", \"instance\", \"(.*):.*\")", 
+                        "expr": "max(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.*.perf.await\" }) by (instance)", 
                         "step": 4, 
-                        "legendFormat": "{{node}}", 
+                        "legendFormat": "{{instance}}", 
                         "intervalFactor": 2, 
                         "refId": "A"
                      }
@@ -27,9 +27,9 @@
                   "targets": [
                      {
                         "format": "time_series", 
-                        "expr": "max(label_replace(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.*.perf.await\", exported_instance=\"$osd_servers.$domain\" }, \"node\", \"$1\", \"instance\", \"(.*):.*\")) by (node)", 
+                        "expr": "max(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.*.perf.await\", exported_instance=\"$osd_servers.$domain\" }) by (instance)", 
                         "step": 20, 
-                        "legendFormat": "{{node}} Max Latency", 
+                        "legendFormat": "{{instance}} Max Latency", 
                         "intervalFactor": 2, 
                         "refId": "A"
                      }
@@ -41,9 +41,9 @@
                   "targets": [
                      {
                         "format": "time_series", 
-                        "expr": "max(label_replace(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.*.perf.await\", exported_instance=\"$osd_servers.$domain\" }, \"node\", \"$1\", \"instance\", \"(.*):.*\")) by (node)", 
+                        "expr": "max(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.*.perf.await\", exported_instance=\"$osd_servers.$domain\" }) by (instance)", 
                         "step": 20, 
-                        "legendFormat": "{{node}} Max Latency", 
+                        "legendFormat": "{{instance}} Max Latency", 
                         "intervalFactor": 2, 
                         "refId": "A"
                      }
@@ -55,9 +55,9 @@
                   "targets": [
                      {
                         "format": "time_series", 
-                        "expr": "max(label_replace(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.*.perf.await\", exported_instance=\"$osd_servers.$domain\" }, \"node\", \"$1\", \"instance\", \"(.*):.*\")) by (node)", 
+                        "expr": "max(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.*.perf.await\", exported_instance=\"$osd_servers.$domain\" }) by (instance)", 
                         "step": 20, 
-                        "legendFormat": "{{node}} Max Latency", 
+                        "legendFormat": "{{instance}} Max Latency", 
                         "intervalFactor": 2, 
                         "refId": "A"
                      }

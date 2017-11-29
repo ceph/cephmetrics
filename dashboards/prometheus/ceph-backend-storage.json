@@ -37,9 +37,9 @@
                   "targets": [
                      {
                         "format": "time_series", 
-                        "expr": "sum(label_replace(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd..*.stat_bytes\", instance=~\"($osd_servers):.*\"}, \"node\", \"$1\", \"instance\", \"(.*):.*\")) by (node)", 
+                        "expr": "sum(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd..*.stat_bytes\", instance=~\"($osd_servers):.*\"}) by (instance)", 
                         "step": 7200, 
-                        "legendFormat": "{{node}}", 
+                        "legendFormat": "{{instance}}", 
                         "intervalFactor": 2, 
                         "refId": "A"
                      }
@@ -51,9 +51,9 @@
                   "targets": [
                      {
                         "format": "time_series", 
-                        "expr": "sum(label_replace(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.num_osds\", instance=~\"($osd_servers):.*\"}, \"node\", \"$1\", \"instance\", \"(.*):.*\")) by (node)", 
+                        "expr": "sum(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.num_osds\", instance=~\"($osd_servers):.*\"}) by (instance)", 
                         "step": 600, 
-                        "legendFormat": "{{node}}", 
+                        "legendFormat": "{{instance}}", 
                         "intervalFactor": 2, 
                         "refId": "A"
                      }

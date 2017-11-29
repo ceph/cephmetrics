@@ -141,10 +141,10 @@
                      {
                         "target": "groupByNode(collectd.$iscsi_gateways.$domain.interface.{bond,en,eth}*.if_octets.{tx,rx},1, \"sum\")", 
                         "format": "time_series", 
-                        "expr": "sum(label_replace(collectd_interface_if_octets_rx_total{interface!=\"lo\", exported_instance=~\"$(iscsi_gateways).$domain\"}, \"node\", \"$1\", \"instance\", \"(.*):.*\")) by (node) + sum(label_replace(collectd_interface_if_octets_tx_total{interface!=\"lo\", exported_instance=~\"$(iscsi_gateways).$domain\"}, \"node\", \"$1\", \"instance\", \"(.*):.*\")) by (node)", 
+                        "expr": "sum(collectd_interface_if_octets_rx_total{interface!=\"lo\", exported_instance=~\"$(iscsi_gateways).$domain\"}) by (instance) + sum(collectd_interface_if_octets_tx_total{interface!=\"lo\", exported_instance=~\"$(iscsi_gateways).$domain\"}) by (instance)", 
                         "step": 20, 
                         "textEditor": true, 
-                        "legendFormat": "{{node}}", 
+                        "legendFormat": "{{instance}}", 
                         "intervalFactor": 2, 
                         "refId": "A"
                      }
@@ -158,10 +158,10 @@
                         "hide": false, 
                         "target": "currentAbove(keepLastValue(collectd.$iscsi_gateways.$domain.cephmetrics.gauge.$cluster_name.iscsi.gw_clients.*.luns.*.active_path),0.5)", 
                         "format": "time_series", 
-                        "expr": "sum(label_replace(collectd_cephmetrics_gauge{cephemtrics=~\"$cluster_name.iscsi.gw_clients.*.luns.*.active_path\", exported_instance=~\"($iscsi_gateways).$domain\"}, \"node\", \"$1\", \"instance\", \"(.*):.*\")) by (node)", 
+                        "expr": "sum(collectd_cephmetrics_gauge{cephemtrics=~\"$cluster_name.iscsi.gw_clients.*.luns.*.active_path\", exported_instance=~\"($iscsi_gateways).$domain\"}) by (instance)", 
                         "step": 40, 
                         "textEditor": true, 
-                        "legendFormat": "{{node}}", 
+                        "legendFormat": "{{instance}}", 
                         "intervalFactor": 2, 
                         "refId": "A"
                      }
@@ -179,10 +179,10 @@
                      {
                         "target": "groupByNode(collectd.$iscsi_gateways.$domain.cephmetrics.derive.$cluster_name.iscsi.gw_stats.iops,1, \"sum\")", 
                         "format": "time_series", 
-                        "expr": "sum(label_replace(collectd_cephmetrics_derive_total{cephmetrics=\"$cluster_name.iscsi.gw_stats.iops\", exported_instance=~\"($iscsi_gateways).$domain\"}, \"node\", \"$1\", \"instance\", \"(.*):.*\")) by (node)", 
+                        "expr": "sum(collectd_cephmetrics_derive_total{cephmetrics=\"$cluster_name.iscsi.gw_stats.iops\", exported_instance=~\"($iscsi_gateways).$domain\"}) by (instance)", 
                         "step": 10, 
                         "textEditor": true, 
-                        "legendFormat": "{{node}}", 
+                        "legendFormat": "{{instance}}", 
                         "intervalFactor": 2, 
                         "refId": "A"
                      }
@@ -195,10 +195,10 @@
                      {
                         "target": "groupByNode(collectd.$iscsi_gateways.$domain.cephmetrics.derive.$cluster_name.iscsi.gw_stats.total_bytes_per_sec,1, \"sum\")", 
                         "format": "time_series", 
-                        "expr": "sum(label_replace(collectd_cephmetrics_derive_total{cephmetrics=\"$cluster_name.iscsi.gw_stats.total\", exported_instance=~\"($iscsi_gateways).$domain\"}, \"node\", \"$1\", \"instance\", \"(.*):.*\")) by (node)", 
+                        "expr": "sum(collectd_cephmetrics_derive_total{cephmetrics=\"$cluster_name.iscsi.gw_stats.total\", exported_instance=~\"($iscsi_gateways).$domain\"}) by (instance)", 
                         "step": 10, 
                         "textEditor": true, 
-                        "legendFormat": "{{node}}", 
+                        "legendFormat": "{{instance}}", 
                         "intervalFactor": 2, 
                         "refId": "A"
                      }
@@ -211,10 +211,10 @@
                      {
                         "target": "groupByNode(collectd.$iscsi_gateways.$domain.cpu.percent.{interrupt,steal,system,user,wait},1, \"sum\")", 
                         "format": "time_series", 
-                        "expr": "sum(label_replace(collectd_cpu_percent{cpu=~\"(interrupt|steal|system|user|wait)\", exported_instance=~\"($iscsi_gateways).$domain\"}, \"node\", \"$1\", \"instance\", \"(.*):.*\")) by (node)", 
+                        "expr": "sum(collectd_cpu_percent{cpu=~\"(interrupt|steal|system|user|wait)\", exported_instance=~\"($iscsi_gateways).$domain\"}) by (instance)", 
                         "step": 10, 
                         "textEditor": true, 
-                        "legendFormat": "{{node}}", 
+                        "legendFormat": "{{instance}}", 
                         "intervalFactor": 2, 
                         "refId": "A"
                      }
@@ -227,10 +227,10 @@
                      {
                         "target": "groupByNode(collectd.$iscsi_gateways.$domain.memory.percent.used,1, \"sum\")", 
                         "format": "time_series", 
-                        "expr": "sum(label_replace(collectd_memory_percent{memory=\"used\", exported_instance=~\"($iscsi_gateways).$domain\"}, \"node\", \"$1\", \"instance\", \"(.*):.*\")) by (node)", 
+                        "expr": "sum(collectd_memory_percent{memory=\"used\", exported_instance=~\"($iscsi_gateways).$domain\"}) by (instance)", 
                         "step": 10, 
                         "textEditor": true, 
-                        "legendFormat": "{{node}}", 
+                        "legendFormat": "{{instance}}", 
                         "intervalFactor": 2, 
                         "refId": "A"
                      }

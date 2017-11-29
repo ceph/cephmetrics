@@ -134,9 +134,9 @@
                   "targets": [
                      {
                         "format": "time_series", 
-                        "expr": "label_replace(label_replace(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.($osd_id).stat_bytes\"} >= 0, \"node\", \"$1\", \"instance\", \"(.*):,*\"), \"osd\", \"$1\", \"cephmetrics\", \"$cluster_name.osd.([0-9]*).stat_bytes\")", 
+                        "expr": "label_replace(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.($osd_id).stat_bytes\"} >= 0, \"osd\", \"$1\", \"cephmetrics\", \"$cluster_name.osd.([0-9]*).stat_bytes\")", 
                         "step": 2, 
-                        "legendFormat": "{{node}}.{{osd}}", 
+                        "legendFormat": "{{instance}}.{{osd}}", 
                         "intervalFactor": 2, 
                         "refId": "A"
                      }

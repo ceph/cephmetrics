@@ -383,9 +383,9 @@
                   "targets": [
                      {
                         "format": "time_series", 
-                        "expr": "max(label_replace(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.mon.ceph_version\"}, \"node\", \"$1\", \"instance\", \"(.*):.*\")) by (node)", 
+                        "expr": "max(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.mon.ceph_version\"}) by (instance)", 
                         "step": 2, 
-                        "legendFormat": "{{node}}", 
+                        "legendFormat": "{{instance}}", 
                         "intervalFactor": 2, 
                         "refId": "A"
                      }
@@ -400,9 +400,9 @@
                   "targets": [
                      {
                         "format": "time_series", 
-                        "expr": "max(label_replace(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.osd.ceph_version\"}, \"node\", \"$1\", \"instance\", \"(.*):.*\")) by (node)", 
+                        "expr": "max(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.osd.ceph_version\"}) by (instance)", 
                         "step": 2, 
-                        "legendFormat": "{{node}}", 
+                        "legendFormat": "{{instance}}", 
                         "intervalFactor": 2, 
                         "refId": "A"
                      }
@@ -417,9 +417,9 @@
                   "targets": [
                      {
                         "format": "time_series", 
-                        "expr": "max(label_replace(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.rgw.ceph_version\"}, \"node\", \"$1\", \"instance\", \"(.*):.*\")) by (node)", 
+                        "expr": "max(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.rgw.ceph_version\"}) by (instance)", 
                         "step": 2, 
-                        "legendFormat": "{{node}}", 
+                        "legendFormat": "{{instance}}", 
                         "intervalFactor": 2, 
                         "refId": "A"
                      }
@@ -434,9 +434,9 @@
                   "targets": [
                      {
                         "format": "time_series", 
-                        "expr": "max(label_replace(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.iscsi.ceph_version\"}, \"node\", \"$1\", \"instance\", \"(.*):.*\")) by (node)", 
+                        "expr": "max(collectd_cephmetrics_gauge{cephmetrics=\"$cluster_name.iscsi.ceph_version\"}) by (instance)", 
                         "step": 2, 
-                        "legendFormat": "{{node}}", 
+                        "legendFormat": "{{instance}}", 
                         "intervalFactor": 2, 
                         "refId": "A"
                      }

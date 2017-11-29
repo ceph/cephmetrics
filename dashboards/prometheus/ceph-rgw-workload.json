@@ -43,9 +43,9 @@
                   "targets": [
                      {
                         "format": "time_series", 
-                        "expr": "max(label_replace(collectd_cephmetrics_derive_total{cephmetrics=\"$cluster_name.rgw.failed_req\", instance=~\"($rgw_servers):.*\"}, \"node\", \"$1\", \"instance\", \"(.*):.*\")) by (node)", 
+                        "expr": "max(collectd_cephmetrics_derive_total{cephmetrics=\"$cluster_name.rgw.failed_req\", instance=~\"($rgw_servers):.*\"}) by (instance)", 
                         "step": 40, 
-                        "legendFormat": "{{node}}", 
+                        "legendFormat": "{{instance}}", 
                         "intervalFactor": 2, 
                         "refId": "A"
                      }
@@ -70,9 +70,9 @@
                   "targets": [
                      {
                         "format": "time_series", 
-                        "expr": "sum(label_replace(collectd_cephmetrics_derive_total{cephmetrics=~\"$cluster_name.rgw.(get|put)\"}, \"node\", \"$1\", \"instance\", \"(.*):.*\")) by (node)", 
+                        "expr": "sum(collectd_cephmetrics_derive_total{cephmetrics=~\"$cluster_name.rgw.(get|put)\"}) by (instance)", 
                         "step": 10, 
-                        "legendFormat": "{{node}}", 
+                        "legendFormat": "{{instance}}", 
                         "intervalFactor": 2, 
                         "refId": "A"
                      }
@@ -84,9 +84,9 @@
                   "targets": [
                      {
                         "format": "time_series", 
-                        "expr": "sum(label_replace(collectd_cephmetrics_derive_total{cephmetrics=~\"$cluster_name.rgw.(get_b|put_b)\"}, \"node\", \"$1\", \"instance\", \"(.*):.*\")) by (node)", 
+                        "expr": "sum(collectd_cephmetrics_derive_total{cephmetrics=~\"$cluster_name.rgw.(get_b|put_b)\"}) by (instance)", 
                         "step": 10, 
-                        "legendFormat": "{{node}}", 
+                        "legendFormat": "{{instance}}", 
                         "intervalFactor": 2, 
                         "refId": "A"
                      }

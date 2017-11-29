@@ -8,9 +8,9 @@
                   "targets": [
                      {
                         "format": "time_series", 
-                        "expr": "label_replace(max(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.*.perf.util\", instance=~\"($osd_servers):.*\"}) by (instance), \"node\", \"$1\", \"instance\", \"(.*):.*\")", 
+                        "expr": "max(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.*.perf.util\", instance=~\"($osd_servers):.*\"}) by (instance)", 
                         "step": 4, 
-                        "legendFormat": "{{node}}", 
+                        "legendFormat": "{{instance}}", 
                         "intervalFactor": 2, 
                         "refId": "A"
                      }
@@ -27,9 +27,9 @@
                   "targets": [
                      {
                         "format": "time_series", 
-                        "expr": "quantile($percentile/100.0, label_replace(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.*.perf.util\", exported_instance=\"$osd_servers.$domain\"}, \"node\", \"$1\", \"instance\", \"(.*):.*\"))", 
+                        "expr": "quantile($percentile/100.0, collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.*.perf.util\", exported_instance=\"$osd_servers.$domain\"})", 
                         "step": 20, 
-                        "legendFormat": "{{node}} Disk Utilisation @ $percentile%ile", 
+                        "legendFormat": "{{instance}} Disk Utilisation @ $percentile%ile", 
                         "intervalFactor": 2, 
                         "refId": "A"
                      }
@@ -41,9 +41,9 @@
                   "targets": [
                      {
                         "format": "time_series", 
-                        "expr": "label_replace(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.*.perf.util\", exported_instance=\"$osd_servers.$domain\"}, \"node\", \"$1\", \"instance\", \"(.*):.*\")", 
+                        "expr": "collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.*.perf.util\", exported_instance=\"$osd_servers.$domain\"}", 
                         "step": 20, 
-                        "legendFormat": "{{node}} Disk Utilisation @ $percentile%ile", 
+                        "legendFormat": "{{instance}} Disk Utilisation @ $percentile%ile", 
                         "intervalFactor": 2, 
                         "refId": "A"
                      }
@@ -55,9 +55,9 @@
                   "targets": [
                      {
                         "format": "time_series", 
-                        "expr": "label_replace(collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.*.perf.util\", exported_instance=\"$osd_servers.$domain\"}, \"node\", \"$1\", \"instance\", \"(.*):.*\")", 
+                        "expr": "collectd_cephmetrics_gauge{cephmetrics=~\"$cluster_name.osd.*.perf.util\", exported_instance=\"$osd_servers.$domain\"}", 
                         "step": 20, 
-                        "legendFormat": "{{node}} Disk Utilisation @ $percentile%ile", 
+                        "legendFormat": "{{instance}} Disk Utilisation @ $percentile%ile", 
                         "intervalFactor": 2, 
                         "refId": "A"
                      }
