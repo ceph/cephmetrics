@@ -46,7 +46,7 @@
                   "title": "Recovery Workload by Pool"
                }
             ], 
-            "title": "Pool Overview"
+            "title": "Pool Overview : $pool_name"
          }, 
          {
             "panels": [
