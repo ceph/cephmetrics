@@ -48,31 +48,29 @@
   wait_for:
     port: 3000
 
-- name: Set grafana_data_source (graphite)
+- name: Set grafana data source facts (graphite)
   set_fact:
-    grafana_data_source: >
-      {
-        "name":"Local",
-        "type":"graphite",
-        "url":"http://localhost:{{ graphite.web_port if graphite.service == 'graphite-web' else graphite.api_port }}",
-        "access":"proxy",
-        "basicAuth":false,
-        "isDefault":true
-      }
+    grafana_data_source_name: "Local"
+    grafana_data_source_port: "{{ graphite.web_port if graphite.service == 'graphite-web' else graphite.api_port }}"
   when: backend == "graphite"
 
-- name: Set grafana_data_source (prometheus)
+- name: Set grafana data source facts (prometheus)
+  set_fact:
+    grafana_data_source_name: "Prometheus"
+    grafana_data_source_port: "{{ prometheus.port }}"
+  when: backend == "prometheus"
+
+- name: Set grafana_data_source
   set_fact:
     grafana_data_source: >
       {
-        "name":"Prometheus",
+        "name":"{{ grafana_data_source_name }}",
         "type":"prometheus",
-        "url":"http://localhost:{{ prometheus.port }}",
+        "url":"http://localhost:{{ grafana_data_source_port }}",
         "access":"proxy",
         "basicAuth":false,
         "isDefault":true
       }
-  when: backend == "prometheus"
 
 - name: Add data source to grafana
   uri:
@@ -90,7 +88,7 @@
 
 - name: Get datasource ID
   uri:
-    url: "http://localhost:3000/api/datasources/id/Local"
+    url: "http://localhost:3000/api/datasources/id/{{ grafana_data_source_name }}"
     method: GET
     user: admin
     password: "{{ grafana.admin_password }}"
