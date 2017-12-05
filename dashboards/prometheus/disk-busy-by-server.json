@@ -111,7 +111,7 @@
                "refresh": 1, 
                "label": null, 
                "tagValuesQuery": "", 
-               "datasource": "Local", 
+               "datasource": "Prometheus", 
                "query": "collectd_cephmetrics_gauge{}", 
                "includeAll": false, 
                "type": "query", 
