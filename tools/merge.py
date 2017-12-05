@@ -18,6 +18,19 @@ def compatibility_check(a, b):
             tb = b['rows'][row_nr]['panels'][panel_nr]['title']
             assert ta == tb, 'row %d panel %d title assertion failed (%s, %s)' % (row_nr, panel_nr, ta, tb)
 
+def update(a, b):
+    a = a['dashboard']
+    b = b['dashboard']
+    a['templating'] = b['templating']
+    for row_nr in range(len(a['rows'])):
+        ra = a['rows'][row_nr]
+        rb = b['rows'][row_nr]
+        for panel_nr in range(len(ra['panels'])):
+            if 'targets' not in ra['panels'][panel_nr]:
+                continue
+            if 'targets' in rb['panels'][panel_nr]:
+                ra['panels'][panel_nr]['targets'] = rb['panels'][panel_nr]['targets']
+
 if len(sys.argv) != 4:
     print "Usage: %s <primary.json> <secondary.json> <out.json>"
     sys.exit(1)
@@ -32,7 +45,7 @@ fin.close()
 
 compatibility_check(a, b)
 
-a.update(b)
+update(a, b)
 
 fout = open(sys.argv[3], "w")
 fout.write(json.dumps(a, indent=4))
