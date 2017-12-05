@@ -48,31 +48,19 @@
   wait_for:
     port: 3000
 
-- name: Set grafana data source facts (graphite)
-  set_fact:
-    grafana_data_source_name: "Local"
-    grafana_data_source_port: "{{ graphite.web_port if graphite.service == 'graphite-web' else graphite.api_port }}"
-  when: backend == "graphite"
-
-- name: Set grafana data source facts (prometheus)
-  set_fact:
-    grafana_data_source_name: "Prometheus"
-    grafana_data_source_port: "{{ prometheus.port }}"
-  when: backend == "prometheus"
-
-- name: Set grafana_data_source
+- name: Set grafana_data_source (Local)
   set_fact:
     grafana_data_source: >
       {
-        "name":"{{ grafana_data_source_name }}",
-        "type":"prometheus",
-        "url":"http://localhost:{{ grafana_data_source_port }}",
+        "name":"Local",
+        "type":"graphite",
+        "url":"http://localhost:{{ graphite.web_port if graphite.service == 'graphite-web' else graphite.api_port }}",
         "access":"proxy",
         "basicAuth":false,
         "isDefault":true
       }
 
-- name: Add data source to grafana
+- name: Add data source to grafana (Local)
   uri:
     url: http://localhost:3000/api/datasources
     method: POST
@@ -86,9 +74,9 @@
     status_code: 200,409
   register: grafana_data_source_result
 
-- name: Get datasource ID
+- name: Get datasource ID (Local)
   uri:
-    url: "http://localhost:3000/api/datasources/id/{{ grafana_data_source_name }}"
+    url: "http://localhost:3000/api/datasources/id/Local"
     method: GET
     user: admin
     password: "{{ grafana.admin_password }}"
@@ -96,7 +84,7 @@
   register: grafana_data_source_id
   when: grafana_data_source_result is defined and grafana_data_source_result.status == 409
 
-- name: Update datasource
+- name: Update datasource (Local)
   uri:
     url: "http://localhost:3000/api/datasources/{{ grafana_data_source_id.json.id }}"
     method: PUT
@@ -107,6 +95,58 @@
     body: "{{ grafana_data_source }}"
     status_code: 200
   when: grafana_data_source_result is defined and grafana_data_source_result.status == 409
+
+- name: Set grafana_data_source (Prometheus)
+  set_fact:
+    grafana_data_source_prom: >
+      {
+        "name":"Prometheus",
+        "type":"prometheus",
+        "url":"http://localhost:{{ prometheus.port }}",
+        "access":"proxy",
+        "basicAuth":false,
+        "isDefault":false
+      }
+  when:
+    - backend == "prometheus"
+
+- name: Add data source to grafana (Prometheus)
+  uri:
+    url: http://localhost:3000/api/datasources
+    method: POST
+    user: admin
+    password: "{{ grafana.admin_password }}"
+    force_basic_auth: yes
+    body_format: json
+    body: "{{ grafana_data_source_prom }}"
+    # If we get a 409 Conflict, it means we're already set up. We'll update
+    # after this.
+    status_code: 200,409
+  register: grafana_data_source_result_prom
+  when:
+    - backend == "prometheus"
+
+- name: Get datasource ID (Prometheus)
+  uri:
+    url: "http://localhost:3000/api/datasources/id/Prometheus"
+    method: GET
+    user: admin
+    password: "{{ grafana.admin_password }}"
+    force_basic_auth: yes
+  register: grafana_data_source_id_prom
+  when: backend == "prometheus" and grafana_data_source_result_prom is defined and grafana_data_source_result_prom.status == 409
+
+- name: Update datasource (Prometheus)
+  uri:
+    url: "http://localhost:3000/api/datasources/{{ grafana_data_source_id_prom.json.id }}"
+    method: PUT
+    user: admin
+    password: "{{ grafana.admin_password }}"
+    force_basic_auth: yes
+    body_format: json
+    body: "{{ grafana_data_source_prom }}"
+    status_code: 200
+  when: backend == "prometheus" and grafana_data_source_result_prom is defined and grafana_data_source_result_prom.status == 409
 
 - name: Ship dashboard templates
   copy:
