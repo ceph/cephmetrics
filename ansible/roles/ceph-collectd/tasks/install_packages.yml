@@ -19,7 +19,7 @@
 
 - name: Install collectd-write_prometheus
   package:
-    name: collectd-python
+    name: collectd-write_prometheus
     state: latest
   when:
     - backend == "prometheus"

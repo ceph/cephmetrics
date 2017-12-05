@@ -9,7 +9,6 @@
     # graphite-web is served by apache
     - "{{ graphite.apache_name[ansible_pkg_mgr] }}"
     - grafana-server
-  when: backend == "graphite"
 
 - name: Enable and start services (prometheus)
   service:

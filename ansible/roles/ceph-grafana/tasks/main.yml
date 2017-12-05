@@ -25,14 +25,12 @@
 
 - include: configure_carbon.yml
   when:
-    - backend == "graphite"
     - not containerized_deployment
   tags:
     - carbon
 
 - include: configure_graphite.yml
   when:
-    - backend == "graphite"
     - not containerized_deployment
   tags:
     - graphite
