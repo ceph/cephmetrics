@@ -26,7 +26,7 @@ for row in a['dashboard']['rows']:
             np['targets'] = panel['targets']
 
         if 'datasource' in panel.keys():
-            np['datasource'] = 'Prometheus'
+            np['datasource'] = panel['datasource']
 
         b['dashboard']['rows'][-1]['panels'].append(np)
 
