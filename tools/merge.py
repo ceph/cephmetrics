@@ -26,7 +26,7 @@ def update(a, b):
         ra = a['rows'][row_nr]
         rb = b['rows'][row_nr]
         for panel_nr in range(len(ra['panels'])):
-            if 'datasource' in ra['panels'][panel_nr].keys():
+            if 'datasource' in rb['panels'][panel_nr].keys():
                 ra['panels'][panel_nr]['datasource'] = rb['panels'][panel_nr]['datasource']
             if 'targets' not in ra['panels'][panel_nr]:
                 continue
