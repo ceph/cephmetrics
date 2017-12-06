@@ -50,7 +50,7 @@
                         "step": 4, 
                         "legendFormat": "down", 
                         "intervalFactor": 2, 
-                        "refId": "A"
+                        "refId": "C"
                      }
                   ], 
                   "title": "OSDs Down"
@@ -65,7 +65,7 @@
                         "step": 40, 
                         "legendFormat": "Raw Capacity Used %", 
                         "intervalFactor": 2, 
-                        "refId": "A"
+                        "refId": "C"
                      }
                   ], 
                   "title": "Cluster Capacity"
