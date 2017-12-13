@@ -31,7 +31,7 @@
       state: absent
     with_items:
       - /var/lib/graphite
-      - /var/lig/graphite-web
+      - /var/lib/graphite-web
       - /var/lib/grafana
       - /var/lib/carbon
       - /etc/grafana/grafana.ini
