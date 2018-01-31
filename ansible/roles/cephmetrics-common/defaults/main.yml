@@ -46,8 +46,6 @@ defaults:
     yum:
       # unzip is needed to extract the Vonage plugin
       - unzip
-      - graphite-web
-      - python-carbon
       - grafana
       # for dashUpdater.py
       - PyYAML
@@ -55,10 +53,6 @@ defaults:
     apt:
       # unzip is needed to extract the Vonage plugin
       - unzip
-      - graphite-web
-      - apache2
-      - libapache2-mod-wsgi
-      - graphite-carbon
       - grafana
       # for dashUpdater.py
       - python-yaml

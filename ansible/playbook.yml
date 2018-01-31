@@ -3,6 +3,7 @@
   - ceph-grafana
   become: true
   roles:
+  - ceph-graphite
   - ceph-grafana
 
 - hosts:

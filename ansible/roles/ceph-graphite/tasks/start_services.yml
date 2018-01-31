@@ -5,4 +5,6 @@
     state: started
     enabled: true
   with_items:
-    - grafana-server
+    - carbon-cache
+    # graphite-web is served by apache
+    - "{{ graphite.apache_name[ansible_pkg_mgr] }}"
