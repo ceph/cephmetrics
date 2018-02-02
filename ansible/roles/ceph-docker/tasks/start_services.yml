@@ -1,0 +1,12 @@
+---
+- name: Reload systemd
+  systemd:
+    daemon_reload: yes
+  tags:
+    - services
+
+- name: Enable and start services
+  service:
+    name: "{{ docker.service_name }}"
+    state: started
+    enabled: true

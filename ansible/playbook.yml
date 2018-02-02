@@ -1,5 +1,11 @@
 ---
 - hosts:
+  - docker-hosts
+  become: true
+  roles:
+  - ceph-docker
+
+- hosts:
   - ceph-grafana
   become: true
   roles:
