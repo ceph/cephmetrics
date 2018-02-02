@@ -15,6 +15,12 @@
   - ceph-grafana
   become: true
   roles:
+  - ceph-prometheus
+
+- hosts:
+  - ceph-grafana
+  become: true
+  roles:
   - ceph-graphite
 
 - hosts:
