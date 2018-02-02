@@ -3,6 +3,10 @@
   tags:
     - always
 
+- name: Skip if not configured
+  meta: end_play
+  when: backend.storage != 'graphite'
+
 - include: install_packages.yml
   when: not containerized_deployment
   tags:
