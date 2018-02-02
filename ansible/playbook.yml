@@ -4,6 +4,11 @@
   become: true
   roles:
   - ceph-graphite
+
+- hosts:
+  - ceph-grafana
+  become: true
+  roles:
   - ceph-grafana
 
 - hosts:
