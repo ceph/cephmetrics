@@ -1,5 +1,11 @@
 ---
 - hosts:
+  - mgrs
+  become: true
+  roles:
+  - ceph-mgr
+
+- hosts:
   - docker-hosts
   become: true
   roles:
