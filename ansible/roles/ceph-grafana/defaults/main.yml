@@ -5,7 +5,9 @@ defaults:
   replace_dashboards: true
   update_alerts: false
   grafana:
+    containerized: false
     datasource: Local
     # Note: changing this value won't update the password in Grafana itself;
     # change it via the web UI and then override this value to reflect.
+    user: admin
     admin_password: admin

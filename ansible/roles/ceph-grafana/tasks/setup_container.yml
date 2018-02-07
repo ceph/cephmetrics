@@ -1,0 +1,37 @@
+---
+- name: Create /etc/grafana
+  file:
+    path: /etc/grafana
+    state: directory
+    owner: root
+
+- name: Create /var/lib/grafana
+  file:
+    path: /var/lib/grafana
+    state: directory
+    owner: root
+
+- name: Create docker container
+  docker_container:
+    name: grafana-server
+    image: grafana/grafana
+    state: present
+    restart_policy: no
+    published_ports: '3000:3000'
+    detach: true
+    volumes:
+      - "/etc/grafana:/etc/grafana:Z"
+      - "/var/lib/grafana:/var/lib/grafana:Z"
+    networks:
+      - name: "{{ docker.network_name }}"
+    keep_volumes: true
+    pull: true
+
+- name: Ship systemd service
+  copy:
+    src: grafana-server.service
+    dest: "/etc/systemd/system/"
+    owner: root
+    group: root
+    mode: 0644
+  notify: Enable service

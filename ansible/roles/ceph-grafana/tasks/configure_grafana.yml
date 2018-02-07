@@ -18,6 +18,16 @@
     mode: 0640
   tags: [ini]
 
+- name: Set owner on grafana.ini
+  file:
+    path: /etc/grafana
+    state: directory
+    # This is the UID used by the grafana/grafana container
+    owner: 104
+    recurse: true
+  when:
+    - grafana.containerized
+
 - name: Set domain in grafana.ini
   lineinfile:
     dest: /etc/grafana/grafana.ini
@@ -35,13 +45,21 @@
   no_log: true
   tags: [ini]
 
+- name: Start grafana
+  service:
+    name: grafana-server
+    state: started
+    enabled: true
+  when:
+    - grafana.containerized
+
 - include: grafana_plugins.yml
   when: devel_mode
 
 - name: Enable and start grafana
   service:
     name: grafana-server
-    state: started
+    state: restarted
     enabled: true
 
 - name: Wait for grafana to start
@@ -59,6 +77,20 @@
         "basicAuth":false,
         "isDefault":true
       }
+  when: backend.storage == 'graphite'
+
+- name: Set grafana_data_source
+  set_fact:
+    grafana_data_source: >
+      {
+        "name":"{{ grafana.datasource }}",
+        "type":"prometheus",
+        "url":"http://cephmetrics-prometheus:9090",
+        "access":"proxy",
+        "basicAuth":false,
+        "isDefault":true
+      }
+  when: backend.storage == 'prometheus'
 
 - name: Add data source
   uri:
@@ -78,7 +110,7 @@
   uri:
     url: "http://localhost:3000/api/datasources/id/{{ grafana.datasource }}"
     method: GET
-    user: "{{ graphite.user }}"
+    user: "{{ grafana.user }}"
     password: "{{ grafana.admin_password }}"
     force_basic_auth: yes
   register: grafana_data_source_id
@@ -88,7 +120,7 @@
   uri:
     url: "http://localhost:3000/api/datasources/{{ grafana_data_source_id.json.id }}"
     method: PUT
-    user: "{{ graphite.user }}"
+    user: "{{ grafana.user }}"
     password: "{{ grafana.admin_password }}"
     force_basic_auth: yes
     body_format: json
@@ -100,7 +132,9 @@
   copy:
     src: files/dashboards
     dest: /tmp/
-  when: devel_mode
+  when:
+    - devel_mode
+    - not grafana.containerized
   tags:
     - dashboards
 
@@ -108,7 +142,9 @@
   copy:
     src: files/dashUpdater.py
     dest: /tmp/dashUpdater.py
-  when: devel_mode
+  when:
+    - devel_mode
+    - not grafana.containerized
   tags:
     - dashboards
 
@@ -117,6 +153,8 @@
     src: dashboard.yml
     dest: /tmp/dashboard.yml
     mode: 0600
+  when:
+    - not grafana.containerized
   tags:
     - dashboards
 
@@ -124,7 +162,9 @@
   set_fact:
     dashupdate_cmd: "python /tmp/dashUpdater.py"
     dashboard_dir: "/tmp/dashboards"
-  when: devel_mode
+  when:
+    - devel_mode
+    - not grafana.containerized
   tags:
     - dashboards
 
@@ -132,13 +172,17 @@
   set_fact:
     dashupdate_cmd: "/usr/libexec/cephmetrics/dashUpdater.py"
     dashboard_dir: "/usr/share/cephmetrics/dashboards"
-  when: not devel_mode
+  when:
+    - not devel_mode
+    - not grafana.containerized
   tags:
     - dashboards
 
 - name: Set dashupdate_mode
   set_fact:
     dashupdate_mode: "{{ 'refresh' if replace_dashboards else 'update' }}"
+  when:
+    - not grafana.containerized
   tags:
     - dashboards
 
@@ -146,3 +190,5 @@
   command: "{{ dashupdate_cmd }} -m {{ dashupdate_mode }} -c /tmp/dashboard.yml -D {{ dashboard_dir }}{{ ' -A' if update_alerts else '' }}"
   tags:
     - dashboards
+  when:
+    - not grafana.containerized
