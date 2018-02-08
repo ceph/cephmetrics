@@ -11,3 +11,6 @@ defaults:
     # change it via the web UI and then override this value to reflect.
     user: admin
     admin_password: admin
+    plugins:
+      - vonage-status-panel
+      - grafana-piechart-panel
