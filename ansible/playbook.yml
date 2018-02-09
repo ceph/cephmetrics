@@ -45,6 +45,24 @@
   - cluster
   become: true
   roles:
+  - ceph-node-exporter
+
+- hosts:
+  # These are roles used by ceph-ansible
+  - mons
+  - agents
+  - osds
+  - mdss
+  - rgws
+  - nfss
+  - restapis
+  - rbdmirrors
+  - clients
+  - mgrs
+  # This role is (so far) only used for testing
+  - cluster
+  become: true
+  roles:
   - ceph-collectd
 
 - hosts: localhost

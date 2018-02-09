@@ -1,0 +1,7 @@
+---
+- name: Create user
+  user:
+    name: node_exporter
+    shell: '/bin/false'
+    createhome: false
+    system: true
