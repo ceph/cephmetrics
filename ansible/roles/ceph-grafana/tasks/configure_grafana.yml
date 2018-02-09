@@ -45,16 +45,10 @@
   no_log: true
   tags: [ini]
 
-- name: Start grafana
-  service:
-    name: grafana-server
-    state: started
-    enabled: true
-  when:
-    - grafana.containerized
-
 - include: grafana_plugins.yml
-  when: devel_mode
+  when:
+    - devel_mode
+    - not grafana.containerized
 
 - name: Enable and start grafana
   service:
