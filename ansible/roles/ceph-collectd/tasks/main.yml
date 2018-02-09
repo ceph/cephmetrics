@@ -3,6 +3,10 @@
   tags:
     - always
 
+- name: Skip if not configured
+  meta: end_play
+  when: backend.metrics != 'cephmetrics'
+
 - include: setup_repos.yml
   when:
     - not containerized_deployment
