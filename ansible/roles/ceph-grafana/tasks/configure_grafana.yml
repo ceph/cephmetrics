@@ -99,6 +99,11 @@
     # after this.
     status_code: 200,409
   register: grafana_data_source_result
+  # If grafana is containerized, it may take a few more seconds to start after
+  # the port is open.
+  until: grafana_data_source_result.status != -1
+  retries: 6
+  delay: 5
 
 - name: Get datasource ID
   uri:
