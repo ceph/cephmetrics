@@ -14,7 +14,7 @@
 - name: Create docker container
   docker_container:
     name: grafana-server
-    image: grafana/grafana
+    image: "{{ grafana.container_name }}:{{ grafana.version }}"
     state: present
     restart_policy: no
     published_ports: '3000:3000'
