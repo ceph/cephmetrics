@@ -1,4 +1,9 @@
 ---
+- hosts: all
+  gather_facts: true
+  tags:
+  - always
+
 - hosts:
   - mgrs
   become: true
@@ -10,12 +15,16 @@
   become: true
   roles:
   - ceph-docker
+  tags:
+  - docker
 
 - hosts:
   - ceph-grafana
   become: true
   roles:
   - ceph-prometheus
+  tags:
+  - prometheus
 
 - hosts:
   - ceph-grafana
@@ -28,6 +37,8 @@
   become: true
   roles:
   - ceph-grafana
+  tags:
+  - grafana
 
 - hosts:
   # These are roles used by ceph-ansible
