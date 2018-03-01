@@ -134,3 +134,10 @@
     - backend.storage == "graphite"
   tags:
     - dashboards
+
+- include: push_dashboards.yml
+  when:
+    - backend.metrics == "mgr"
+    - backend.storage == "prometheus"
+  tags:
+    - dashboards
