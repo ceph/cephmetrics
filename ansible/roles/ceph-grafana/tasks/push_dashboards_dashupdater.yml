@@ -1,12 +1,10 @@
 ---
 - name: Ship dashboard templates
   copy:
-    src: files/dashboards
-    dest: /tmp/
+    src: files/dashboards/cephmetrics-graphite
+    dest: /tmp/dashboards
   when:
     - devel_mode
-  tags:
-    - dashboards
 
 - name: Ship dashUpdater.py
   copy:
@@ -14,16 +12,12 @@
     dest: /tmp/dashUpdater.py
   when:
     - devel_mode
-  tags:
-    - dashboards
 
 - name: Write dashboard.yml
   template:
     src: dashboard.yml
     dest: /tmp/dashboard.yml
     mode: 0600
-  tags:
-    - dashboards
 
 - name: Set dashupdate_cmd and dashboard_dir
   set_fact:
@@ -31,25 +25,17 @@
     dashboard_dir: "/tmp/dashboards"
   when:
     - devel_mode
-  tags:
-    - dashboards
 
 - name: Set dashupdate_cmd and dashboard_dir
   set_fact:
     dashupdate_cmd: "/usr/libexec/cephmetrics/dashUpdater.py"
-    dashboard_dir: "/usr/share/cephmetrics/dashboards"
+    dashboard_dir: "/usr/share/cephmetrics/dashboards/cephmetrics-graphite"
   when:
     - not devel_mode
-  tags:
-    - dashboards
 
 - name: Set dashupdate_mode
   set_fact:
     dashupdate_mode: "{{ 'refresh' if replace_dashboards else 'update' }}"
-  tags:
-    - dashboards
 
 - name: Push dashboards to Grafana
   command: "{{ dashupdate_cmd }} -m {{ dashupdate_mode }} -c /tmp/dashboard.yml -D {{ dashboard_dir }}{{ ' -A' if update_alerts else '' }}"
-  tags:
-    - dashboards
