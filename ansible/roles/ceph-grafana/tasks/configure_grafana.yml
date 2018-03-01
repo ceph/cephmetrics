@@ -127,67 +127,10 @@
     status_code: 200
   when: grafana_data_source_result is defined and grafana_data_source_result.status == 409
 
-- name: Ship dashboard templates
-  copy:
-    src: files/dashboards
-    dest: /tmp/
-  when:
-    - devel_mode
-    - not grafana.containerized
-  tags:
-    - dashboards
-
-- name: Ship dashUpdater.py
-  copy:
-    src: files/dashUpdater.py
-    dest: /tmp/dashUpdater.py
-  when:
-    - devel_mode
-    - not grafana.containerized
-  tags:
-    - dashboards
-
-- name: Write dashboard.yml
-  template:
-    src: dashboard.yml
-    dest: /tmp/dashboard.yml
-    mode: 0600
+- include: push_dashboards_dashupdater.yml
   when:
     - not grafana.containerized
+    - backend.metrics == "cephmetrics"
+    - backend.storage == "graphite"
   tags:
     - dashboards
-
-- name: Set dashupdate_cmd and dashboard_dir
-  set_fact:
-    dashupdate_cmd: "python /tmp/dashUpdater.py"
-    dashboard_dir: "/tmp/dashboards"
-  when:
-    - devel_mode
-    - not grafana.containerized
-  tags:
-    - dashboards
-
-- name: Set dashupdate_cmd and dashboard_dir
-  set_fact:
-    dashupdate_cmd: "/usr/libexec/cephmetrics/dashUpdater.py"
-    dashboard_dir: "/usr/share/cephmetrics/dashboards"
-  when:
-    - not devel_mode
-    - not grafana.containerized
-  tags:
-    - dashboards
-
-- name: Set dashupdate_mode
-  set_fact:
-    dashupdate_mode: "{{ 'refresh' if replace_dashboards else 'update' }}"
-  when:
-    - not grafana.containerized
-  tags:
-    - dashboards
-
-- name: Push dashboards to Grafana
-  command: "{{ dashupdate_cmd }} -m {{ dashupdate_mode }} -c /tmp/dashboard.yml -D {{ dashboard_dir }}{{ ' -A' if update_alerts else '' }}"
-  tags:
-    - dashboards
-  when:
-    - not grafana.containerized
