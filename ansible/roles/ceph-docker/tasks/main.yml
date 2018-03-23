@@ -3,6 +3,12 @@
   tags:
     - always
 
+- name: End play if no containers are desired
+  meta: end_play
+  when:
+    - not grafana.containerized
+    - not prometheus.containerized
+
 - include: install_packages.yml
   tags:
     - packages

@@ -1,4 +1,11 @@
 ---
+- name: Include ceph-docker
+  include_role:
+    name: ceph-docker
+    allow_duplicates: false
+  when: grafana.containerized
+  tags: docker
+
 - name: Create /etc/grafana
   file:
     path: /etc/grafana

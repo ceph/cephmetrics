@@ -11,14 +11,6 @@
   - ceph-mgr
 
 - hosts:
-  - docker-hosts
-  become: true
-  roles:
-  - ceph-docker
-  tags:
-  - docker
-
-- hosts:
   - ceph-grafana
   become: true
   roles:

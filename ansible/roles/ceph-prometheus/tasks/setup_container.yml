@@ -1,4 +1,11 @@
 ---
+- name: Include ceph-docker
+  include_role:
+    name: ceph-docker
+    allow_duplicates: false
+  when: prometheus.containerized
+  tags: docker
+
 - name: Start docker container
   docker_container:
     name: cephmetrics-prometheus
