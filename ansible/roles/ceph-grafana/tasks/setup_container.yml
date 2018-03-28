@@ -6,6 +6,13 @@
   when: grafana.containerized
   tags: docker
 
+- name: Create grafana user
+  user:
+    name: grafana
+    shell: '/bin/false'
+    createhome: false
+    system: true
+
 - name: Create /etc/grafana
   file:
     path: /etc/grafana
