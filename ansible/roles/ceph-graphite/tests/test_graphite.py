@@ -6,6 +6,11 @@ testinfra_hosts = ['ceph-grafana']
 
 
 class TestGraphite(object):
+    def maybe_skip(self, host):
+        vars = host.ansible.get_variables()
+        if vars.get('backend', dict()).get('storage', 'prometheus') != 'graphite':
+            pytest.skip()
+
     def get_ceph_hosts(self, host):
         """
         Extract a list of FQDNs of Ceph hosts from the Ansible inventory
@@ -25,6 +30,7 @@ class TestGraphite(object):
     )
     def test_service_enabled(self, host, service):
         """ Are the proper services enabled? """
+        self.maybe_skip(host)
         if isinstance(service, dict):
             service = service[
                 host.ansible('setup')['ansible_facts']['ansible_pkg_mgr']]
@@ -42,6 +48,7 @@ class TestGraphite(object):
     )
     def test_ports_open(self, host, proto, iface, port):
         """ Are the proper ports open? """
+        self.maybe_skip(host)
         socket_spec = "%s://%s" % (proto, iface)
         if iface:
             socket_spec += ':'
@@ -50,6 +57,7 @@ class TestGraphite(object):
 
     def test_whisper_data(self, host):
         """ Does whisper data exist for each Ceph host? """
+        self.maybe_skip(host)
         whisper_dirs = [
             '/var/lib/carbon/whisper',
             '/var/lib/graphite/whisper',
@@ -74,6 +82,7 @@ class TestGraphite(object):
 
     def test_metrics_present(self, host):
         """ Does graphite know about each Ceph host? """
+        self.maybe_skip(host)
         ceph_hosts = self.get_ceph_hosts(host)
         out = host.check_output(
             "curl http://localhost:8080/metrics/find?query=collectd.*")
