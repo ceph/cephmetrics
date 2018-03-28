@@ -6,7 +6,7 @@ defaults:
         - docker
         - docker-python
       apt:
-        - docker
+        - docker.io
         - python-docker
     network_name: cephmetrics
     service_name: docker
