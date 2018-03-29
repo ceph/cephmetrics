@@ -90,6 +90,5 @@ class TestGraphite(object):
 
         def extract_hostname(fragment):
             return fragment['text']
-        metric_hosts = map(extract_hostname, obj)
-        assert sorted(map(lambda s: s.split('.')[0], ceph_hosts)) == \
-            sorted(metric_hosts)
+        metric_hosts = set(map(extract_hostname, obj))
+        assert set(map(lambda s: s.split('.')[0], ceph_hosts)).issubset(metric_hosts)
