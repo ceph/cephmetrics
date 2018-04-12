@@ -43,18 +43,3 @@ defaults:
       - ['15m', '5y']
   # The firewalld zone that carbon and grafana will use
   firewalld_zone: public
-  devel_packages:
-    yum:
-      # unzip is needed to extract the Vonage plugin
-      - unzip
-      - grafana
-      # for dashUpdater.py
-      - PyYAML
-      - python-requests
-    apt:
-      # unzip is needed to extract the Vonage plugin
-      - unzip
-      - grafana
-      # for dashUpdater.py
-      - python-yaml
-      - python-requests

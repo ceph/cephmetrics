@@ -17,3 +17,18 @@ defaults:
     plugins:
       - vonage-status-panel
       - grafana-piechart-panel
+devel_packages:
+  yum:
+    # unzip is needed to extract the Vonage plugin
+    - unzip
+    - grafana
+    # for dashUpdater.py
+    - PyYAML
+    - python-requests
+  apt:
+    # unzip is needed to extract the Vonage plugin
+    - unzip
+    - grafana
+    # for dashUpdater.py
+    - python-yaml
+    - python-requests
