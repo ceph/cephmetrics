@@ -22,7 +22,7 @@
 - name: Set dashupdate_cmd and dashboard_dir
   set_fact:
     dashupdate_cmd: "python /tmp/dashUpdater.py"
-    dashboard_dir: "/tmp/dashboards"
+    dashboard_dir: "/tmp/dashboards/cephmetrics-graphite"
   when:
     - devel_mode
 
