@@ -63,5 +63,5 @@
     force_basic_auth: yes
     status_code: 200
     body_format: json
-    body: '{"dashboard": {{ dashboards[item].body|tojson }}, "overwrite": true}'
+    body: '{"dashboard": {{ dashboards[item].body|to_json }}, "overwrite": true}'
   with_items: "{{ dashboards.keys() }}"
