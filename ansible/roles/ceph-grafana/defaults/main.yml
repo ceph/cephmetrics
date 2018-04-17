@@ -8,7 +8,7 @@ defaults:
     containerized: false
     container_name: "grafana/grafana"
     # version currently only applies to containers
-    version: 4.6.3
+    version: 5.0.4
     datasource: Local
     # Note: changing this value won't update the password in Grafana itself;
     # change it via the web UI and then override this value to reflect.
