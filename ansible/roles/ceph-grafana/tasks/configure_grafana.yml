@@ -80,7 +80,7 @@
       {
         "name":"{{ grafana.datasource }}",
         "type":"prometheus",
-        "url":"http://cephmetrics-prometheus:9090",
+        "url":"http://prometheus:9090",
         "access":"proxy",
         "basicAuth":false,
         "isDefault":true

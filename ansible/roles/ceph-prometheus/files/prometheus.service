@@ -1,11 +1,11 @@
 [Unit]
-Description=cephmetrics-prometheus
+Description=prometheus
 After=docker.service
 
 [Service]
 EnvironmentFile=-/etc/environment
-ExecStart=/usr/bin/docker start --attach cephmetrics-prometheus
-ExecStop=-/usr/bin/docker stop cephmetrics-prometheus
+ExecStart=/usr/bin/docker start --attach prometheus
+ExecStop=-/usr/bin/docker stop prometheus
 Restart=always
 RestartSec=10s
 TimeoutStartSec=120

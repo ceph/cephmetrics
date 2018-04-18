@@ -8,7 +8,7 @@
 
 - name: Start docker container
   docker_container:
-    name: cephmetrics-prometheus
+    name: prometheus
     image: "{{ prometheus.container_name }}:{{ prometheus.version }}"
     command: "--config.file=/prometheus/prometheus.yml"
     restart_policy: no

@@ -29,7 +29,7 @@
 
 - name: Ship systemd service
   copy:
-    src: cephmetrics-prometheus.service
+    src: prometheus.service
     dest: "/etc/systemd/system/"
     owner: root
     group: root
