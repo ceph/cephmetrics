@@ -37,7 +37,7 @@
   uri:
     url: "http://localhost:3000/api/dashboards/db/{{ item }}"
     method: GET
-    user: "{{ grafana.user }}"
+    user: "{{ grafana.admin_user }}"
     password: "{{ grafana.admin_password }}"
     force_basic_auth: yes
     status_code: 200,404
@@ -58,7 +58,7 @@
   uri:
     url: "http://localhost:3000/api/dashboards/db"
     method: POST
-    user: "{{ grafana.user }}"
+    user: "{{ grafana.admin_user }}"
     password: "{{ grafana.admin_password }}"
     force_basic_auth: yes
     status_code: 200
@@ -71,7 +71,7 @@
   uri:
     url: "http://localhost:3000/api/dashboards/db/ceph-at-a-glance"
     method: GET
-    user: "{{ grafana.user }}"
+    user: "{{ grafana.admin_user }}"
     password: "{{ grafana.admin_password }}"
     force_basic_auth: yes
     status_code: 200
@@ -82,7 +82,7 @@
   uri:
     url: http://localhost:3000/api/org/preferences
     method: PUT
-    user: "{{ grafana.user }}"
+    user: "{{ grafana.admin_user }}"
     password: "{{ grafana.admin_password }}"
     force_basic_auth: yes
     status_code: 200

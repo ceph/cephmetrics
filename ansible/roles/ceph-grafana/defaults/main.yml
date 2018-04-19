@@ -9,9 +9,9 @@ defaults:
     # version currently only applies to containers
     version: 5.0.4
     datasource: Local
-    # Note: changing this value won't update the password in Grafana itself;
-    # change it via the web UI and then override this value to reflect.
-    user: admin
+    # You need to change these in the web UI on an already deployed machine, first
+    # New deployments work fine
+    admin_user: admin
     admin_password: admin
     plugins:
       - vonage-status-panel

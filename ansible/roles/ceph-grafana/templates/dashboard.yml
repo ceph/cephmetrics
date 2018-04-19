@@ -18,7 +18,7 @@ _dashboards:
   - network-usage-by-node
   - osd-node-detail
 _credentials:
-  user: admin
+  user: {{ grafana.admin_user }}
   password: {{ grafana.admin_password }}
 _grafana_port: 3000
 _home_dashboard: ceph-at-a-glance

@@ -37,6 +37,15 @@
     value: "{{ ansible_fqdn }}"
   tags: [ini]
 
+- name: Set admin_user in grafana.ini
+  ini_file:
+    path: /etc/grafana/grafana.ini
+    section: security
+    option: admin_user
+    value: "{{ grafana.admin_user }}"
+  no_log: true
+  tags: [ini]
+
 - name: Set admin_password in grafana.ini
   ini_file:
     path: /etc/grafana/grafana.ini
@@ -91,7 +100,7 @@
   uri:
     url: http://localhost:3000/api/datasources
     method: POST
-    user: admin
+    user: "{{ grafana.admin_user }}"
     password: "{{ grafana.admin_password }}"
     force_basic_auth: yes
     body_format: json
@@ -110,7 +119,7 @@
   uri:
     url: "http://localhost:3000/api/datasources/id/{{ grafana.datasource }}"
     method: GET
-    user: "{{ grafana.user }}"
+    user: "{{ grafana.admin_user }}"
     password: "{{ grafana.admin_password }}"
     force_basic_auth: yes
   register: grafana_data_source_id
@@ -120,7 +129,7 @@
   uri:
     url: "http://localhost:3000/api/datasources/{{ grafana_data_source_id.json.id }}"
     method: PUT
-    user: "{{ grafana.user }}"
+    user: "{{ grafana.admin_user }}"
     password: "{{ grafana.admin_password }}"
     force_basic_auth: yes
     body_format: json
