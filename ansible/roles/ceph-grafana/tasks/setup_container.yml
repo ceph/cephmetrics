@@ -3,7 +3,7 @@
   include_role:
     name: ceph-docker
     allow_duplicates: false
-  when: grafana.containerized
+  when: containerized
   tags: docker
 
 - name: Create grafana user

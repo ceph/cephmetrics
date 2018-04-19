@@ -26,7 +26,7 @@
     owner: 104
     recurse: true
   when:
-    - grafana.containerized
+    - containerized
   tags: [ini]
 
 - name: Set domain in grafana.ini
@@ -49,7 +49,7 @@
 - include: grafana_plugins.yml
   when:
     - devel_mode
-    - not grafana.containerized
+    - not containerized
 
 - name: Enable and start grafana
   service:
@@ -130,7 +130,7 @@
 
 - include: push_dashboards_dashupdater.yml
   when:
-    - not grafana.containerized
+    - not containerized
     - backend.metrics == "cephmetrics"
     - backend.storage == "graphite"
   tags:

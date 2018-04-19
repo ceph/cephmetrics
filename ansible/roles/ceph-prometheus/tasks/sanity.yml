@@ -1,5 +1,5 @@
 ---
-- name: Fail when prometheus.containerized is False
+- name: Fail when containerized is False
   fail:
     msg: "This role only supports a containerized deployment at this time"
-  when: not prometheus.containerized
+  when: not containerized

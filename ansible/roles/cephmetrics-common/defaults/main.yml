@@ -1,5 +1,6 @@
 ---
 defaults:
+  containerized: false
   backend:
     metrics: mgr  # mgr, cephmetrics
     storage: prometheus  # prometheus, graphite
