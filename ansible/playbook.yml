@@ -1,9 +1,55 @@
 ---
+- hosts: all
+  gather_facts: true
+  any_errors_fatal: true
+  tags:
+  - always
+
+- hosts:
+  - mgrs
+  become: true
+  roles:
+  - ceph-mgr
+
+- hosts:
+  - ceph-grafana
+  become: true
+  roles:
+  - ceph-prometheus
+  tags:
+  - prometheus
+
+- hosts:
+  - ceph-grafana
+  become: true
+  roles:
+  - ceph-graphite
+
 - hosts:
   - ceph-grafana
   become: true
   roles:
   - ceph-grafana
+  tags:
+  - grafana
+
+- hosts:
+  # These are roles used by ceph-ansible
+  - mons
+  - agents
+  - osds
+  - mdss
+  - rgws
+  - nfss
+  - restapis
+  - rbdmirrors
+  - clients
+  - mgrs
+  # This role is (so far) only used for testing
+  - cluster
+  become: true
+  roles:
+  - ceph-node-exporter
 
 - hosts:
   # These are roles used by ceph-ansible

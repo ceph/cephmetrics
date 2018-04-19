@@ -1,0 +1,24 @@
+---
+- name: Include ceph-docker
+  include_role:
+    name: ceph-docker
+    allow_duplicates: false
+  when: prometheus.containerized
+  tags: docker
+
+- name: Start docker container
+  docker_container:
+    name: prometheus
+    image: "{{ prometheus.container_name }}:{{ prometheus.version }}"
+    command: "--config.file=/prometheus/prometheus.yml"
+    restart_policy: no
+    published_ports: '9090:9090'
+    detach: true
+    volumes:
+      - "{{ prometheus.data_dir }}:/prometheus:Z"
+    networks:
+      - name: "{{ docker.network_name }}"
+    user: "{{ prometheus.user_id }}"
+    keep_volumes: true
+    pull: true
+  notify: Service handler

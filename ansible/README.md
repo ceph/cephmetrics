@@ -44,6 +44,7 @@ Notes:
 
 ## Roles
 - [ceph-collectd](./roles/ceph-collectd/): Used for ceph cluster hosts
+- [ceph-graphite](./roles/ceph-graphite/): Used for the dashboard host
 - [ceph-grafana](./roles/ceph-grafana/): Used for the dashboard host
 
 ## Variables

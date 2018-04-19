@@ -2,3 +2,10 @@
 - include: merge_vars.yml
   tags:
     - always
+
+- include: setup_repos.yml
+  when:
+    - not containerized_deployment
+  tags:
+    - packages
+    - repos

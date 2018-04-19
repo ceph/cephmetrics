@@ -1,5 +1,8 @@
 ---
 defaults:
+  backend:
+    metrics: mgr  # mgr, cephmetrics
+    storage: prometheus  # prometheus, graphite
   containerized_deployment: false
   use_epel: false
   devel_mode: true
@@ -7,8 +10,6 @@ defaults:
     service: graphite-web
     web_port: "{{ graphite_port | default('8080') }}"
     api_port: 8888
-    user: admin
-    password: admin
     # The unix account running the graphite-web process
     unix_user:
       yum: apache
@@ -42,24 +43,3 @@ defaults:
       - ['15m', '5y']
   # The firewalld zone that carbon and grafana will use
   firewalld_zone: public
-  devel_packages:
-    yum:
-      # unzip is needed to extract the Vonage plugin
-      - unzip
-      - graphite-web
-      - python-carbon
-      - grafana
-      # for dashUpdater.py
-      - PyYAML
-      - python-requests
-    apt:
-      # unzip is needed to extract the Vonage plugin
-      - unzip
-      - graphite-web
-      - apache2
-      - libapache2-mod-wsgi
-      - graphite-carbon
-      - grafana
-      # for dashUpdater.py
-      - python-yaml
-      - python-requests

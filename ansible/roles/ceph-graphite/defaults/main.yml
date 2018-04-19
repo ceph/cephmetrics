@@ -1,0 +1,10 @@
+---
+devel_packages:
+  yum:
+    - graphite-web
+    - python-carbon
+  apt:
+    - graphite-web
+    - apache2
+    - libapache2-mod-wsgi
+    - graphite-carbon

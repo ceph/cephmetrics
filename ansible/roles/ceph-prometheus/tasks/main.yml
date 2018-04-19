@@ -1,0 +1,37 @@
+---
+- include: merge_vars.yml
+  tags:
+    - always
+
+- name: End play if the prometheus backend isn't desired
+  meta: end_play
+  when: backend.metrics != 'mgr' or backend.storage != 'prometheus'
+
+- include: sanity.yml
+  tags:
+    - sanity
+
+- name: Create prometheus data directory
+  file:
+    path: "{{ prometheus.data_dir }}"
+    state: directory
+    owner: "{{ prometheus.user_id }}"
+
+- name: Write config file
+  template:
+    src: prometheus.yml
+    dest: "{{ prometheus.data_dir }}/"
+    owner: "{{ prometheus.user_id }}"
+  notify: Service handler
+
+- include: setup_container.yml
+  when: prometheus.containerized
+
+- name: Ship systemd service
+  copy:
+    src: prometheus.service
+    dest: "/etc/systemd/system/"
+    owner: root
+    group: root
+    mode: 0644
+  notify: Service handler

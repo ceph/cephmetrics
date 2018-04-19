@@ -7,7 +7,7 @@
   tags:
     - skip_ansible_lint
 
-- name: Open ports for Grafana and Carbon
+- name: Open ports for Grafana
   firewalld:
     port: "{{ item }}"
     zone: "{{ firewalld_zone }}"
@@ -16,5 +16,4 @@
     permanent: true
   with_items:
     - 3000/tcp
-    - 2003/tcp
   when: "'enabled' in firewalld_status.stdout"

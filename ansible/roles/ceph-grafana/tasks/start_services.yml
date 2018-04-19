@@ -1,11 +1,15 @@
 ---
+- name: Reload systemd
+  systemd:
+    daemon_reload: yes
+    # Even when just calling daemon-reload, ansible < 2.4 requires a name for this call
+    name: grafana-server
+  tags:
+    - packages
+    - services
+
 - name: Enable and start services
   service:
-    name: "{{ item }}"
+    name: grafana-server
     state: started
     enabled: true
-  with_items:
-    - carbon-cache
-    # graphite-web is served by apache
-    - "{{ graphite.apache_name[ansible_pkg_mgr] }}"
-    - grafana-server

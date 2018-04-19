@@ -45,7 +45,7 @@ def get_options():
     parser.add_argument('-D', '--dashboard-dir', type=str,
                         help='path to the directory containing dashboards',
                         default=os.path.join(
-                            os.getcwd(), 'dashboards/current'))
+                            os.getcwd(), 'dashboards/cephmetrics-graphite'))
     parser.add_argument('-m', '--mode', type=str,
                         help='run mode',
                         choices=['update', 'refresh'],

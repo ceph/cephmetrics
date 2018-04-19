@@ -5,7 +5,30 @@ defaults:
   replace_dashboards: true
   update_alerts: false
   grafana:
+    containerized: false
+    container_name: "grafana/grafana"
+    # version currently only applies to containers
+    version: 5.0.4
     datasource: Local
     # Note: changing this value won't update the password in Grafana itself;
     # change it via the web UI and then override this value to reflect.
+    user: admin
     admin_password: admin
+    plugins:
+      - vonage-status-panel
+      - grafana-piechart-panel
+devel_packages:
+  yum:
+    # unzip is needed to extract the Vonage plugin
+    - unzip
+    - grafana
+    # for dashUpdater.py
+    - PyYAML
+    - python-requests
+  apt:
+    # unzip is needed to extract the Vonage plugin
+    - unzip
+    - grafana
+    # for dashUpdater.py
+    - python-yaml
+    - python-requests

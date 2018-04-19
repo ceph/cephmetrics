@@ -1,0 +1,12 @@
+---
+defaults:
+  docker:
+    packages:
+      yum:
+        - docker
+        - docker-python
+      apt:
+        - docker.io
+        - python-docker
+    network_name: cephmetrics
+    service_name: docker

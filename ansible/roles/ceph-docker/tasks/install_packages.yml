@@ -1,0 +1,6 @@
+---
+- name: Install packages
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items: "{{ docker.packages[ansible_pkg_mgr] }}"

@@ -1,0 +1,30 @@
+---
+- include: merge_vars.yml
+  tags:
+    - always
+
+- name: End play if the prometheus backend isn't desired
+  meta: end_play
+  when: backend.storage != 'prometheus'
+
+- include: install_packages.yml
+  when:
+    - not devel_mode
+
+- include: create_user.yml
+  when:
+    - devel_mode
+  tags:
+    - node_exporter
+
+- include: download.yml
+  when:
+    - devel_mode
+  tags:
+    - node_exporter
+
+- include: create_service.yml
+  when:
+    - devel_mode
+  tags:
+    - node_exporter

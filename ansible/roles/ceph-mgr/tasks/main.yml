@@ -1,0 +1,21 @@
+---
+- include: merge_vars.yml
+  tags:
+    - always
+
+- name: End play if the mgr prometheus module isn't desired
+  meta: end_play
+  when: backend.metrics != 'mgr' or backend.storage != 'prometheus'
+
+- name: Check to see if the mgr is containerized
+  command: "docker inspect ceph-mgr@{{ ansible_hostname }}"
+  register: mgr_container
+  failed_when: false
+
+- name: Prefix the mgr command with a docker command
+  set_fact:
+    mgr_prefix: "docker exec ceph-mgr@{{ ansible_hostname }}"
+  when: mgr_container.rc == 0
+
+- name: Enable mgr prometheus module
+  command: "{{ mgr_prefix|default('') }} ceph mgr module enable prometheus"

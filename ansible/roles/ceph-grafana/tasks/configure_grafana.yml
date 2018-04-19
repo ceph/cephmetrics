@@ -18,30 +18,43 @@
     mode: 0640
   tags: [ini]
 
+- name: Set owner on /etc/grafana
+  file:
+    path: /etc/grafana
+    state: directory
+    # This is the UID used by the grafana/grafana container
+    owner: 104
+    recurse: true
+  when:
+    - grafana.containerized
+  tags: [ini]
+
 - name: Set domain in grafana.ini
-  lineinfile:
-    dest: /etc/grafana/grafana.ini
-    regexp: "^domain = .*"
-    insertafter: "^;domain = .*"
-    line: "domain = {{ ansible_fqdn }}"
+  ini_file:
+    path: /etc/grafana/grafana.ini
+    section: server
+    option: domain
+    value: "{{ ansible_fqdn }}"
   tags: [ini]
 
 - name: Set admin_password in grafana.ini
-  lineinfile:
-    dest: /etc/grafana/grafana.ini
-    regexp: "^admin_password = .*"
-    insertafter: "^;admin_password = .*"
-    line: "admin_password = {{ grafana.admin_password }}"
+  ini_file:
+    path: /etc/grafana/grafana.ini
+    section: security
+    option: admin_password
+    value: "{{ grafana.admin_password }}"
   no_log: true
   tags: [ini]
 
 - include: grafana_plugins.yml
-  when: devel_mode
+  when:
+    - devel_mode
+    - not grafana.containerized
 
 - name: Enable and start grafana
   service:
     name: grafana-server
-    state: started
+    state: restarted
     enabled: true
 
 - name: Wait for grafana to start
@@ -59,6 +72,20 @@
         "basicAuth":false,
         "isDefault":true
       }
+  when: backend.storage == 'graphite'
+
+- name: Set grafana_data_source
+  set_fact:
+    grafana_data_source: >
+      {
+        "name":"{{ grafana.datasource }}",
+        "type":"prometheus",
+        "url":"http://prometheus:9090",
+        "access":"proxy",
+        "basicAuth":false,
+        "isDefault":true
+      }
+  when: backend.storage == 'prometheus'
 
 - name: Add data source
   uri:
@@ -73,12 +100,17 @@
     # after this.
     status_code: 200,409
   register: grafana_data_source_result
+  # If grafana is containerized, it may take a few more seconds to start after
+  # the port is open.
+  until: grafana_data_source_result.status != -1
+  retries: 6
+  delay: 5
 
 - name: Get datasource ID
   uri:
     url: "http://localhost:3000/api/datasources/id/{{ grafana.datasource }}"
     method: GET
-    user: "{{ graphite.user }}"
+    user: "{{ grafana.user }}"
     password: "{{ grafana.admin_password }}"
     force_basic_auth: yes
   register: grafana_data_source_id
@@ -88,7 +120,7 @@
   uri:
     url: "http://localhost:3000/api/datasources/{{ grafana_data_source_id.json.id }}"
     method: PUT
-    user: "{{ graphite.user }}"
+    user: "{{ grafana.user }}"
     password: "{{ grafana.admin_password }}"
     force_basic_auth: yes
     body_format: json
@@ -96,53 +128,17 @@
     status_code: 200
   when: grafana_data_source_result is defined and grafana_data_source_result.status == 409
 
-- name: Ship dashboard templates
-  copy:
-    src: files/dashboards
-    dest: /tmp/
-  when: devel_mode
+- include: push_dashboards_dashupdater.yml
+  when:
+    - not grafana.containerized
+    - backend.metrics == "cephmetrics"
+    - backend.storage == "graphite"
   tags:
     - dashboards
 
-- name: Ship dashUpdater.py
-  copy:
-    src: files/dashUpdater.py
-    dest: /tmp/dashUpdater.py
-  when: devel_mode
-  tags:
-    - dashboards
-
-- name: Write dashboard.yml
-  template:
-    src: dashboard.yml
-    dest: /tmp/dashboard.yml
-    mode: 0600
-  tags:
-    - dashboards
-
-- name: Set dashupdate_cmd and dashboard_dir
-  set_fact:
-    dashupdate_cmd: "python /tmp/dashUpdater.py"
-    dashboard_dir: "/tmp/dashboards"
-  when: devel_mode
-  tags:
-    - dashboards
-
-- name: Set dashupdate_cmd and dashboard_dir
-  set_fact:
-    dashupdate_cmd: "/usr/libexec/cephmetrics/dashUpdater.py"
-    dashboard_dir: "/usr/share/cephmetrics/dashboards"
-  when: not devel_mode
-  tags:
-    - dashboards
-
-- name: Set dashupdate_mode
-  set_fact:
-    dashupdate_mode: "{{ 'refresh' if replace_dashboards else 'update' }}"
-  tags:
-    - dashboards
-
-- name: Push dashboards to Grafana
-  command: "{{ dashupdate_cmd }} -m {{ dashupdate_mode }} -c /tmp/dashboard.yml -D {{ dashboard_dir }}{{ ' -A' if update_alerts else '' }}"
+- include: push_dashboards.yml
+  when:
+    - backend.metrics == "mgr"
+    - backend.storage == "prometheus"
   tags:
     - dashboards

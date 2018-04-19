@@ -1,0 +1,67 @@
+---
+# First, look at our local filesystem for the dashboards we need to push.
+- name: Stat dashboard files
+  local_action:
+    module: stat
+    path: "{{ item }}"
+    follow: true
+    get_attributes: false
+    get_checksum: false
+    get_md5: false
+    get_mime: false
+  connection: local
+  become: false
+  with_fileglob: "dashboards/{{ backend.metrics }}-{{ backend.storage }}/*.json"
+  register: dashboard_files
+  no_log: true
+
+# Before we do any of the shenanigans further down this file, we need to create
+# an object to popluate with dashboard information
+- name: Create dashboards var
+  set_fact:
+    dashboards: {}
+
+# The below populates the dashboards dict to look like:
+# dashboards:
+#   ceph-at-a-glance:
+#     body: <entire contents of ceph-at-a-glance.json - as a dict>
+#   ... and so on
+- name: Set dashboards var keys
+  set_fact:
+    dashboards: "{% for item in dashboard_files.results %}{{ dashboards.update({item.stat.path.split('/')[-1].split('.')[:-1]|join('.'): {'body': lookup('file', item.stat.path)|from_json }}) }}{% endfor %}{{ dashboards }}"
+  no_log: true
+
+# If the dashboards have been previously deployed, we need the ID so that we
+# can update instead of adding another copy. So first we grab that.
+- name: Get dashboard IDs
+  uri:
+    url: "http://localhost:3000/api/dashboards/db/{{ item }}"
+    method: GET
+    user: "{{ grafana.user }}"
+    password: "{{ grafana.admin_password }}"
+    force_basic_auth: yes
+    status_code: 200,404
+  with_items: "{{ dashboards.keys() }}"
+  register: dashboard_ids
+  no_log: true
+
+# Next, take any IDs we found and set them in each dashboard body.
+# Any dashboards which don't exist on the server will be skipped.
+- name: Add IDs to dashboards var
+  set_fact:
+    dashboards: "{% if item.status == 200 %}{{ dashboards[item.json.meta.slug].body.update({'id': item.json.dashboard.id}) }}{% endif %}{{ dashboards }}"
+  with_items: "{{ dashboard_ids.results }}"
+  no_log: true
+
+# Now we can actually push the dashboards!
+- name: Push updated dashboards
+  uri:
+    url: "http://localhost:3000/api/dashboards/db"
+    method: POST
+    user: "{{ grafana.user }}"
+    password: "{{ grafana.admin_password }}"
+    force_basic_auth: yes
+    status_code: 200
+    body_format: json
+    body: '{"dashboard": {{ dashboards[item].body|to_json }}, "overwrite": true}'
+  with_items: "{{ dashboards.keys() }}"
