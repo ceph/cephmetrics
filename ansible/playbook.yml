@@ -50,6 +50,8 @@
   become: true
   roles:
   - ceph-node-exporter
+  tags:
+  - node-exporter
 
 - hosts:
   # These are roles used by ceph-ansible
