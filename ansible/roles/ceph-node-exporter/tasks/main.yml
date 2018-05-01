@@ -23,6 +23,8 @@
   tags:
     - node_exporter
 
+- include: configure_firewall.yml
+
 - include: create_service.yml
   when:
     - devel_mode
