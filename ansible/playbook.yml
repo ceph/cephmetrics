@@ -34,6 +34,7 @@
   - grafana
 
 - hosts:
+  - ceph-grafana
   # These are roles used by ceph-ansible
   - mons
   - agents
