@@ -41,7 +41,11 @@
     keep_volumes: true
     pull: true
     cpu_period: "{{ grafana.container_cpu_period }}"
+    # As of ansible-2.5.2, this module doesn't support the equivalent of the
+    # --cpus flag, so we must use period/quota for now
     cpu_quota: "{{ grafana.container_cpu_period * grafana.container_cpu_cores }}"
+    memory: "{{ grafana.container_memory }}GB"
+    memory_swap: "{{ grafana.container_memory * 2 }}GB"
     env:
       GF_INSTALL_PLUGINS: "{{ grafana.plugins|join(',') }}"
 
