@@ -1,0 +1,18 @@
+dummy:
+
+#containerized: true
+
+# Set the backend options, mgr+prometheus or cephmetrics+graphite
+#backend:
+#  metrics: mgr  # mgr, cephmetrics
+#  storage: prometheus  # prometheus, graphite
+
+# Turn on/off devel_mode
+#devel_mode: true
+
+# Set grafana admin user and password
+# You need to change these in the web UI on an already deployed machine, first
+# New deployments work fine
+#grafana:
+#  admin_user: admin
+#  admin_password: admin

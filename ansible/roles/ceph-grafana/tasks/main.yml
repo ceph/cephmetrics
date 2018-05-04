@@ -9,17 +9,17 @@
 
 - include: setup_container.yml
   when:
-    - grafana.containerized
+    - containerized
 
 - include: setup_repos.yml
   when:
-    - not grafana.containerized
+    - not containerized
   tags:
     - packages
     - repos
 
 - include: install_packages.yml
-  when: not grafana.containerized
+  when: not containerized
   tags:
     - packages
 

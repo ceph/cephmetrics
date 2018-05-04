@@ -76,7 +76,6 @@ These variables are only relevent when `devel_mode` is true:
 ## Current Limitations
 
 - Currently, metrics are only *displayed* for `osd` and `rgw` hosts.
-- Authentication for grafana and graphite is fixed and creates a user `admin` with password `admin`.
 - Services are deployed on the dashboard host directly; there is not yet support for a containerized deployment.
 
 ## Usage

@@ -25,7 +25,7 @@
   notify: Service handler
 
 - include: setup_container.yml
-  when: prometheus.containerized
+  when: containerized
 
 - name: Ship systemd service
   copy:

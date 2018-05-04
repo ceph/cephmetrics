@@ -24,6 +24,7 @@
       - python-carbon
       - grafana
       - cephmetrics
+      - prometheus
 
   - name: Remove files
     file:
@@ -43,7 +44,15 @@
       - /tmp/dashUpdater.py
       - /tmp/dashboards
 
-- name: purge collectd hosts
+  - name: Remove containers
+    docker_container:
+      name: "{{ item }}"
+      state: absent
+    with_items:
+      - grafana-server
+      - prometheus
+
+- name: purge all the hosts
   hosts:
     # These are roles used by ceph-ansible
     - mons
@@ -74,6 +83,7 @@
     with_items:
       - cephmetrics-collectors
       - collectd
+      - prometheus-node_exporter
 
   - name: Remove files
     file:
@@ -88,3 +98,4 @@
       - /etc/collectd.conf
       - /etc/yum.repos.d/cephmetrics.repo
       - /usr/lib64/collectd
+      - /usr/local/sbin/node_exporter

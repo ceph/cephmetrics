@@ -1,9 +1,9 @@
 ---
 defaults:
+  containerized: true
   backend:
     metrics: mgr  # mgr, cephmetrics
     storage: prometheus  # prometheus, graphite
-  containerized_deployment: false
   use_epel: false
   devel_mode: true
   graphite:

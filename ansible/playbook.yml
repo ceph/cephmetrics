@@ -75,4 +75,4 @@
   tasks:
     - name: Print dashboard URL
       debug:
-        msg: "All done! You may access your dashboard at http://{{ groups['ceph-grafana'][0] }}:3000/ with user 'admin' and password 'admin'. Note that initially the dashboard will be incomplete; after a few minutes it should have enough data collected to function properly."
+        msg: "All done! You may access your dashboard at http://{{ groups['ceph-grafana'][0] }}:3000/ with your pre-defined user and password (admin/admin by default). Note that initially the dashboard will be incomplete; after a few minutes it should have enough data collected to function properly."

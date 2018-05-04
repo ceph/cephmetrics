@@ -3,7 +3,7 @@
   include_role:
     name: ceph-docker
     allow_duplicates: false
-  when: prometheus.containerized
+  when: containerized
   tags: docker
 
 - name: Start docker container

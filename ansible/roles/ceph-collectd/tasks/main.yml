@@ -8,14 +8,11 @@
   when: backend.metrics != 'cephmetrics'
 
 - include: setup_repos.yml
-  when:
-    - not containerized_deployment
   tags:
     - packages
     - repos
 
 - include: install_packages.yml
-  when: not containerized_deployment
   tags:
     - packages
 
@@ -25,19 +22,16 @@
 
 - include: install_collectd_plugins.yml
   when:
-    - not containerized_deployment
     - devel_mode
   tags:
     - collectors
 
 - include: configure_collectd.yml
-  when: not containerized_deployment
   tags:
     - collectors
 
 - include: selinux.yml
   when:
-   - not containerized_deployment
    - ansible_pkg_mgr == "yum"
    - ansible_selinux.status is defined
    - ansible_selinux.status == 'enabled'
@@ -45,6 +39,5 @@
     - selinux
 
 - include: start_collectd.yml
-  when: not containerized_deployment
   tags:
     - services
