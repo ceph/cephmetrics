@@ -40,6 +40,8 @@
       - name: "{{ docker.network_name }}"
     keep_volumes: true
     pull: true
+    cpu_period: "{{ grafana.container_cpu_period }}"
+    cpu_quota: "{{ grafana.container_cpu_period * grafana.container_cpu_cores }}"
     env:
       GF_INSTALL_PLUGINS: "{{ grafana.plugins|join(',') }}"
 
