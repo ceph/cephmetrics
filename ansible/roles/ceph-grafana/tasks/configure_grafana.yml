@@ -151,3 +151,7 @@
     - backend.storage == "prometheus"
   tags:
     - dashboards
+
+- include: add_notification_channel.yml
+  tags:
+    - notification
