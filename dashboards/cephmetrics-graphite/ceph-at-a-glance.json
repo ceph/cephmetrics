@@ -1332,7 +1332,7 @@
                         "legend": {
                             "percentage": false, 
                             "show": true, 
-                            "values": false
+                            "values": true
                         }, 
                         "legendType": "Under graph", 
                         "links": [
@@ -1987,7 +1987,7 @@
                         "legend": {
                             "percentage": false, 
                             "show": true, 
-                            "values": false
+                            "values": true
                         }, 
                         "legendType": "Under graph", 
                         "links": [], 
