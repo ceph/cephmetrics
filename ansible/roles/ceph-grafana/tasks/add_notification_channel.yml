@@ -3,7 +3,7 @@
   uri:
     url: "http://localhost:3000/api/alert-notifications"
     method: GET
-    user: "{{ grafana.user }}"
+    user: "{{ grafana.admin_user }}"
     password: "{{ grafana.admin_password }}"
     force_basic_auth: yes
     status_code: 200
@@ -22,7 +22,7 @@
   uri:
     url: "http://localhost:3000/api/alert-notifications"
     method: POST
-    user: "{{ grafana.user }}"
+    user: "{{ grafana.admin_user }}"
     password: "{{ grafana.admin_password }}"
     force_basic_auth: yes
     status_code: 200
