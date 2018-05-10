@@ -14,17 +14,11 @@
 - include: create_user.yml
   when:
     - devel_mode
-  tags:
-    - node_exporter
 
 - include: download.yml
   when:
     - devel_mode
-  tags:
-    - node_exporter
 
 - include: create_service.yml
   when:
     - devel_mode
-  tags:
-    - node_exporter

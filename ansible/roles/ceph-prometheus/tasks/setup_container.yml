@@ -22,3 +22,12 @@
     keep_volumes: true
     pull: true
   notify: Service handler
+
+- name: Ship systemd service
+  copy:
+    src: prometheus.service
+    dest: "/etc/systemd/system/"
+    owner: root
+    group: root
+    mode: 0644
+  notify: Service handler

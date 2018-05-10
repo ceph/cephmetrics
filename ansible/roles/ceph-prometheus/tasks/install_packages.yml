@@ -1,0 +1,6 @@
+---
+- name: Install prometheus
+  package:
+    name: prometheus
+    state: latest
+  notify: Service handler

@@ -8,4 +8,4 @@ defaults:
       apt:
         - prometheus-node-exporter
       yum:
-        - golang-github-prometheus-node_exporter
+        - prometheus-node_exporter

@@ -1,5 +1,0 @@
----
-- name: Fail when containerized is False
-  fail:
-    msg: "This role only supports a containerized deployment at this time"
-  when: not containerized
