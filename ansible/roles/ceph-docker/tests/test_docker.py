@@ -5,12 +5,8 @@ testinfra_hosts = ['ceph-grafana']
 
 class TestDocker(object):
     def maybe_skip(self, host):
-        services = ['grafana', 'prometheus']
-
-        def is_containerized(service):
-            vars = host.ansible.get_variables()
-            return vars.get(service, dict()).get('containerized')
-        if not any(map(is_containerized, services)):
+        vars = host.ansible.get_variables()
+        if vars.get('containerized', False) is False:
             pytest.skip()
 
     def test_docker_running(self, host):
