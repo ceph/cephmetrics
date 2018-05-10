@@ -4,7 +4,6 @@ defaults:
   backend:
     metrics: mgr  # mgr, cephmetrics
     storage: prometheus  # prometheus, graphite
-  use_epel: false
   devel_mode: true
   graphite:
     service: graphite-web
