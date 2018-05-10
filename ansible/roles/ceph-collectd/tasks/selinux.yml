@@ -6,10 +6,11 @@
     persistent: yes
 
 - name: Restore SELinux context of OSD journals
-  shell: "restorecon -R -v /var/lib/ceph/osd/*/journal"
+  shell: "restorecon -R -v /var/lib/ceph/osd/*/{journal,block.wal}"
   when: "'osds' in group_names"
   register: restorecon
-  changed_when: restorecon.stdout|length != 0 or restorecon.stderr|length != 0
+  changed_when: restorecon.stdout|length != 0
+  failed_when: restorecon.rc != 0 and restorecon.rc != 255
 
 - include: selinux_module.yml
   when:
