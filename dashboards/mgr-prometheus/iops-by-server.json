@@ -1,1535 +1,295 @@
 {
+  "__requires": [
+    {
+      "type": "grafana", 
+      "id": "grafana", 
+      "name": "Grafana", 
+      "version": "4.6.3"
+    }, 
+    {
+      "type": "panel", 
+      "id": "graph", 
+      "name": "Graph", 
+      "version": ""
+    }, 
+    {
+      "type": "datasource", 
+      "id": "prometheus", 
+      "name": "Prometheus", 
+      "version": "1.0.0"
+    }
+  ], 
   "annotations": {
     "list": [
       {
-        "builtIn": 1,
-        "datasource": "-- Grafana --",
-        "enable": true,
-        "hide": true,
-        "iconColor": "rgba(0, 211, 255, 1)",
-        "name": "Annotations & Alerts",
+        "builtIn": 1, 
+        "datasource": "-- Grafana --", 
+        "enable": true, 
+        "hide": true, 
+        "iconColor": "rgba(0, 211, 255, 1)", 
+        "name": "Annotations & Alerts", 
         "type": "dashboard"
       }
     ]
-  },
-  "editable": true,
-  "gnetId": null,
-  "graphTooltip": 0,
-  "hideControls": false,
-  "links": [],
-  "refresh": "15s",
+  }, 
+  "editable": true, 
+  "gnetId": null, 
+  "graphTooltip": 0, 
+  "hideControls": false, 
+  "id": null, 
+  "links": [], 
+  "refresh": "15s", 
   "rows": [
     {
-      "collapse": false,
-      "height": "250px",
+      "collapse": false, 
+      "height": "250px", 
       "panels": [
         {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "fill": 1,
+          "aliasColors": {}, 
+          "bars": false, 
+          "dashLength": 10, 
+          "dashes": false, 
+          "datasource": null, 
+          "fill": 1, 
           "gridPos": {
-            "h": 10,
-            "w": 24,
-            "x": 0,
+            "h": 10, 
+            "w": 24, 
+            "x": 0, 
             "y": 0
-          },
-          "height": "400",
-          "id": 1,
+          }, 
+          "height": "400", 
+          "id": 1, 
           "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
+            "avg": false, 
+            "current": false, 
+            "max": false, 
+            "min": false, 
+            "show": true, 
+            "total": false, 
             "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "minSpan": 12,
-          "nullPointMode": "connected",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 12,
-          "stack": false,
-          "steppedLine": false,
+          }, 
+          "lines": true, 
+          "linewidth": 1, 
+          "links": [], 
+          "minSpan": 12, 
+          "nullPointMode": "connected", 
+          "percentage": false, 
+          "pointradius": 5, 
+          "points": false, 
+          "renderer": "flot", 
+          "repeat": null, 
+          "seriesOverrides": [], 
+          "spaceLength": 10, 
+          "span": 12, 
+          "stack": true, 
+          "steppedLine": false, 
           "targets": [
             {
-              "expr": "sum(label_replace(irate(node_disk_reads_completed[1m]) + irate(node_disk_writes_completed{instance=~\"[[osd_servers]]\"}[1m]),\"host\",\"$1\",\"instance\",\"([^.]*).*\")) by(host)",
-              "format": "time_series",
-              "intervalFactor": 1,
-              "legendFormat": "{{host}}",
+              "expr": "label_replace(irate(node_disk_reads_completed[1m]) + irate(node_disk_writes_completed{instance=~\"[[osd_servers]].*\"}[1m]),\"host\",\"$1\",\"instance\",\"([^.]*).*\")", 
+              "format": "time_series", 
+              "hide": true, 
+              "intervalFactor": 1, 
+              "legendFormat": "{{host}}", 
               "refId": "B"
+            }, 
+            {
+              "expr": "sum(\n  sum(\n    irate(node_disk_reads_completed{job=\"node\" }[1m]) + \n    irate(node_disk_writes_completed{job=\"node\"}[1m]))\n  by(instance, device) + ignoring(ceph_daemon,job) group_right(instance) ceph_disk_occupation)\n  by(instance)", 
+              "format": "time_series", 
+              "intervalFactor": 1, 
+              "legendFormat": "{{instance}}", 
+              "refId": "A"
             }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Disk IOPS Across All OSD Hosts",
+          ], 
+          "thresholds": [], 
+          "timeFrom": null, 
+          "timeShift": null, 
+          "title": "Disk IOPS Across All OSD Hosts", 
           "tooltip": {
-            "shared": true,
-            "sort": 0,
+            "shared": true, 
+            "sort": 0, 
             "value_type": "individual"
-          },
-          "type": "graph",
+          }, 
+          "type": "graph", 
           "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
+            "buckets": null, 
+            "mode": "time", 
+            "name": null, 
+            "show": true, 
             "values": []
-          },
+          }, 
           "yaxes": [
             {
-              "format": "none",
-              "label": "",
-              "logBase": 1,
-              "max": null,
-              "min": "0",
+              "format": "none", 
+              "label": "", 
+              "logBase": 1, 
+              "max": null, 
+              "min": "0", 
               "show": true
-            },
+            }, 
             {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
+              "format": "short", 
+              "label": null, 
+              "logBase": 1, 
+              "max": null, 
+              "min": null, 
               "show": true
             }
           ]
         }
-      ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": true,
-      "title": "All Servers by IOPS",
+      ], 
+      "repeat": null, 
+      "repeatIteration": null, 
+      "repeatRowId": null, 
+      "showTitle": true, 
+      "title": "All Servers by IOPS", 
       "titleSize": "h6"
-    },
+    }, 
     {
-      "collapse": false,
-      "height": 250,
+      "collapse": false, 
+      "height": 250, 
       "panels": [
         {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "fill": 1,
-          "id": 2,
+          "aliasColors": {}, 
+          "bars": false, 
+          "dashLength": 10, 
+          "dashes": false, 
+          "datasource": null, 
+          "fill": 1, 
+          "id": 2, 
           "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
+            "avg": false, 
+            "current": false, 
+            "max": false, 
+            "min": false, 
+            "show": false, 
+            "total": false, 
             "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": "osd_servers",
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "apama002",
-              "value": "apama002"
-            }
-          },
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 4,
-          "stack": false,
-          "steppedLine": false,
+          }, 
+          "lines": true, 
+          "linewidth": 1, 
+          "links": [], 
+          "nullPointMode": "null", 
+          "percentage": false, 
+          "pointradius": 5, 
+          "points": false, 
+          "renderer": "flot", 
+          "repeat": "osd_servers", 
+          "seriesOverrides": [], 
+          "spaceLength": 10, 
+          "span": 4, 
+          "stack": false, 
+          "steppedLine": false, 
           "targets": [
             {
-              "expr": "sum(label_replace(irate(node_disk_reads_completed[1m]) + irate(node_disk_writes_completed{instance=~\"[[osd_servers]].*\"}[1m]),\"host\",\"$1\",\"instance\",\"([^.]*).*\")) by(host)",
-              "format": "time_series",
-              "intervalFactor": 2,
+              "expr": "sum(\n  sum(\n    irate(node_disk_reads_completed{instance=~\"[[osd_servers]].*\"}[1m]) + irate(node_disk_writes_completed[1m]))\n  by(instance,device) +\n  ignoring(ceph_daemon,job) group_right(instance) ceph_disk_occupation)\n    \n  \n", 
+              "format": "time_series", 
+              "intervalFactor": 2, 
               "refId": "A"
             }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Total IOPS for $osd_servers",
+          ], 
+          "thresholds": [], 
+          "timeFrom": null, 
+          "timeShift": null, 
+          "title": "Total IOPS for $osd_servers", 
           "tooltip": {
-            "shared": true,
-            "sort": 0,
+            "shared": true, 
+            "sort": 0, 
             "value_type": "individual"
-          },
-          "type": "graph",
+          }, 
+          "type": "graph", 
           "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
+            "buckets": null, 
+            "mode": "time", 
+            "name": null, 
+            "show": true, 
             "values": []
-          },
+          }, 
           "yaxes": [
             {
-              "format": "none",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
+              "format": "none", 
+              "label": null, 
+              "logBase": 1, 
+              "max": null, 
+              "min": null, 
               "show": true
-            },
+            }, 
             {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "fill": 1,
-          "id": 3,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "repeatIteration": 1519091567712,
-          "repeatPanelId": 2,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "mira019",
-              "value": "mira019"
-            }
-          },
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 4,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(label_replace(irate(node_disk_reads_completed[1m]) + irate(node_disk_writes_completed{instance=~\"[[osd_servers]].*\"}[1m]),\"host\",\"$1\",\"instance\",\"([^.]*).*\")) by(host)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Total IOPS for $osd_servers",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "none",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "fill": 1,
-          "id": 4,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "repeatIteration": 1519091567712,
-          "repeatPanelId": 2,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "mira021",
-              "value": "mira021"
-            }
-          },
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 4,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(label_replace(irate(node_disk_reads_completed[1m]) + irate(node_disk_writes_completed{instance=~\"[[osd_servers]].*\"}[1m]),\"host\",\"$1\",\"instance\",\"([^.]*).*\")) by(host)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Total IOPS for $osd_servers",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "none",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "fill": 1,
-          "id": 5,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "repeatIteration": 1519091567712,
-          "repeatPanelId": 2,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "mira031",
-              "value": "mira031"
-            }
-          },
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 4,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(label_replace(irate(node_disk_reads_completed[1m]) + irate(node_disk_writes_completed{instance=~\"[[osd_servers]].*\"}[1m]),\"host\",\"$1\",\"instance\",\"([^.]*).*\")) by(host)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Total IOPS for $osd_servers",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "none",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "fill": 1,
-          "id": 6,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "repeatIteration": 1519091567712,
-          "repeatPanelId": 2,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "mira049",
-              "value": "mira049"
-            }
-          },
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 4,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(label_replace(irate(node_disk_reads_completed[1m]) + irate(node_disk_writes_completed{instance=~\"[[osd_servers]].*\"}[1m]),\"host\",\"$1\",\"instance\",\"([^.]*).*\")) by(host)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Total IOPS for $osd_servers",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "none",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "fill": 1,
-          "id": 7,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "repeatIteration": 1519091567712,
-          "repeatPanelId": 2,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "mira055",
-              "value": "mira055"
-            }
-          },
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 4,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(label_replace(irate(node_disk_reads_completed[1m]) + irate(node_disk_writes_completed{instance=~\"[[osd_servers]].*\"}[1m]),\"host\",\"$1\",\"instance\",\"([^.]*).*\")) by(host)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Total IOPS for $osd_servers",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "none",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "fill": 1,
-          "id": 8,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "repeatIteration": 1519091567712,
-          "repeatPanelId": 2,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "mira060",
-              "value": "mira060"
-            }
-          },
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 4,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(label_replace(irate(node_disk_reads_completed[1m]) + irate(node_disk_writes_completed{instance=~\"[[osd_servers]].*\"}[1m]),\"host\",\"$1\",\"instance\",\"([^.]*).*\")) by(host)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Total IOPS for $osd_servers",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "none",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "fill": 1,
-          "id": 9,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "repeatIteration": 1519091567712,
-          "repeatPanelId": 2,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "mira070",
-              "value": "mira070"
-            }
-          },
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 4,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(label_replace(irate(node_disk_reads_completed[1m]) + irate(node_disk_writes_completed{instance=~\"[[osd_servers]].*\"}[1m]),\"host\",\"$1\",\"instance\",\"([^.]*).*\")) by(host)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Total IOPS for $osd_servers",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "none",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "fill": 1,
-          "id": 10,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "repeatIteration": 1519091567712,
-          "repeatPanelId": 2,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "mira076",
-              "value": "mira076"
-            }
-          },
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 4,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(label_replace(irate(node_disk_reads_completed[1m]) + irate(node_disk_writes_completed{instance=~\"[[osd_servers]].*\"}[1m]),\"host\",\"$1\",\"instance\",\"([^.]*).*\")) by(host)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Total IOPS for $osd_servers",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "none",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "fill": 1,
-          "id": 11,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "repeatIteration": 1519091567712,
-          "repeatPanelId": 2,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "mira087",
-              "value": "mira087"
-            }
-          },
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 4,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(label_replace(irate(node_disk_reads_completed[1m]) + irate(node_disk_writes_completed{instance=~\"[[osd_servers]].*\"}[1m]),\"host\",\"$1\",\"instance\",\"([^.]*).*\")) by(host)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Total IOPS for $osd_servers",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "none",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "fill": 1,
-          "id": 12,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "repeatIteration": 1519091567712,
-          "repeatPanelId": 2,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "mira093",
-              "value": "mira093"
-            }
-          },
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 4,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(label_replace(irate(node_disk_reads_completed[1m]) + irate(node_disk_writes_completed{instance=~\"[[osd_servers]].*\"}[1m]),\"host\",\"$1\",\"instance\",\"([^.]*).*\")) by(host)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Total IOPS for $osd_servers",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "none",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "fill": 1,
-          "id": 13,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "repeatIteration": 1519091567712,
-          "repeatPanelId": 2,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "mira099",
-              "value": "mira099"
-            }
-          },
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 4,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(label_replace(irate(node_disk_reads_completed[1m]) + irate(node_disk_writes_completed{instance=~\"[[osd_servers]].*\"}[1m]),\"host\",\"$1\",\"instance\",\"([^.]*).*\")) by(host)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Total IOPS for $osd_servers",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "none",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "fill": 1,
-          "id": 14,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "repeatIteration": 1519091567712,
-          "repeatPanelId": 2,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "mira116",
-              "value": "mira116"
-            }
-          },
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 4,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(label_replace(irate(node_disk_reads_completed[1m]) + irate(node_disk_writes_completed{instance=~\"[[osd_servers]].*\"}[1m]),\"host\",\"$1\",\"instance\",\"([^.]*).*\")) by(host)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Total IOPS for $osd_servers",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "none",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "fill": 1,
-          "id": 15,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "repeatIteration": 1519091567712,
-          "repeatPanelId": 2,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "mira120",
-              "value": "mira120"
-            }
-          },
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 4,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(label_replace(irate(node_disk_reads_completed[1m]) + irate(node_disk_writes_completed{instance=~\"[[osd_servers]].*\"}[1m]),\"host\",\"$1\",\"instance\",\"([^.]*).*\")) by(host)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Total IOPS for $osd_servers",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "none",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "fill": 1,
-          "id": 16,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "repeatIteration": 1519091567712,
-          "repeatPanelId": 2,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "mira122",
-              "value": "mira122"
-            }
-          },
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 4,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(label_replace(irate(node_disk_reads_completed[1m]) + irate(node_disk_writes_completed{instance=~\"[[osd_servers]].*\"}[1m]),\"host\",\"$1\",\"instance\",\"([^.]*).*\")) by(host)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Total IOPS for $osd_servers",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "none",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "fill": 1,
-          "id": 17,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "repeatIteration": 1519091567712,
-          "repeatPanelId": 2,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "reesi001",
-              "value": "reesi001"
-            }
-          },
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 4,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(label_replace(irate(node_disk_reads_completed[1m]) + irate(node_disk_writes_completed{instance=~\"[[osd_servers]].*\"}[1m]),\"host\",\"$1\",\"instance\",\"([^.]*).*\")) by(host)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Total IOPS for $osd_servers",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "none",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
+              "format": "short", 
+              "label": null, 
+              "logBase": 1, 
+              "max": null, 
+              "min": null, 
               "show": true
             }
           ]
         }
-      ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": true,
-      "title": "IOPS Load by Server",
+      ], 
+      "repeat": null, 
+      "repeatIteration": null, 
+      "repeatRowId": null, 
+      "showTitle": true, 
+      "title": "IOPS Load by Server", 
       "titleSize": "h6"
     }
-  ],
-  "schemaVersion": 14,
-  "style": "dark",
-  "tags": [],
+  ], 
+  "schemaVersion": 14, 
+  "style": "dark", 
+  "tags": [], 
   "templating": {
     "list": [
       {
-        "allValue": "",
-        "current": {
-          "text": "All",
-          "value": "$__all"
-        },
-        "datasource": null,
-        "hide": 2,
-        "includeAll": true,
-        "label": "OSD Host",
-        "multi": false,
-        "name": "osd_servers",
-        "options": [],
-        "query": "label_values(ceph_disk_occupation, instance)",
-        "refresh": 1,
-        "regex": "([^.]*).*",
-        "sort": 1,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
+        "allValue": "", 
+        "current": {}, 
+        "datasource": null, 
+        "hide": 2, 
+        "includeAll": true, 
+        "label": "OSD Host", 
+        "multi": false, 
+        "name": "osd_servers", 
+        "options": [], 
+        "query": "label_values(ceph_disk_occupation, instance)", 
+        "refresh": 1, 
+        "regex": "([^.]*).*", 
+        "sort": 1, 
+        "tagValuesQuery": "", 
+        "tags": [], 
+        "tagsQuery": "", 
+        "type": "query", 
         "useTags": false
       }
     ]
-  },
+  }, 
   "time": {
-    "from": "now-1h",
+    "from": "now-1h", 
     "to": "now"
-  },
+  }, 
   "timepicker": {
     "refresh_intervals": [
-      "5s",
-      "10s",
-      "15s",
-      "30s",
-      "1m",
-      "5m",
-      "15m",
-      "30m",
-      "1h",
-      "2h",
+      "5s", 
+      "10s", 
+      "15s", 
+      "30s", 
+      "1m", 
+      "5m", 
+      "15m", 
+      "30m", 
+      "1h", 
+      "2h", 
       "1d"
-    ],
+    ], 
     "time_options": [
-      "5m",
-      "15m",
-      "1h",
-      "6h",
-      "12h",
-      "24h",
-      "2d",
-      "7d",
+      "5m", 
+      "15m", 
+      "1h", 
+      "6h", 
+      "12h", 
+      "24h", 
+      "2d", 
+      "7d", 
       "30d"
     ]
-  },
-  "timezone": "",
-  "title": "IOPS by Server"
+  }, 
+  "timezone": "", 
+  "title": "IOPS by Server", 
+  "version": 6
 }

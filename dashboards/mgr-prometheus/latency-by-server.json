@@ -1,1569 +1,305 @@
 {
+  "__requires": [
+    {
+      "type": "grafana", 
+      "id": "grafana", 
+      "name": "Grafana", 
+      "version": "5.0.4"
+    }, 
+    {
+      "type": "panel", 
+      "id": "graph", 
+      "name": "Graph", 
+      "version": "5.0.0"
+    }, 
+    {
+      "type": "datasource", 
+      "id": "prometheus", 
+      "name": "Prometheus", 
+      "version": "5.0.0"
+    }
+  ], 
   "annotations": {
     "list": [
       {
-        "builtIn": 1,
-        "datasource": "-- Grafana --",
-        "enable": true,
-        "hide": true,
-        "iconColor": "rgba(0, 211, 255, 1)",
-        "name": "Annotations & Alerts",
+        "builtIn": 1, 
+        "datasource": "-- Grafana --", 
+        "enable": true, 
+        "hide": true, 
+        "iconColor": "rgba(0, 211, 255, 1)", 
+        "name": "Annotations & Alerts", 
         "type": "dashboard"
       }
     ]
-  },
-  "editable": true,
-  "gnetId": null,
-  "graphTooltip": 0,
-  "hideControls": false,
-  "links": [],
-  "refresh": "15s",
-  "rows": [
+  }, 
+  "editable": true, 
+  "gnetId": null, 
+  "graphTooltip": 0, 
+  "id": null, 
+  "iteration": 1524194437238, 
+  "links": [], 
+  "panels": [
     {
-      "collapse": false,
-      "height": "250px",
-      "panels": [
+      "collapsed": false, 
+      "gridPos": {
+        "h": 1, 
+        "w": 24, 
+        "x": 0, 
+        "y": 0
+      }, 
+      "id": 18, 
+      "panels": [], 
+      "repeat": null, 
+      "title": "All OSD Hosts", 
+      "type": "row"
+    }, 
+    {
+      "aliasColors": {}, 
+      "bars": false, 
+      "dashLength": 10, 
+      "dashes": false, 
+      "datasource": null, 
+      "fill": 1, 
+      "gridPos": {
+        "h": 7, 
+        "w": 24, 
+        "x": 0, 
+        "y": 1
+      }, 
+      "id": 1, 
+      "legend": {
+        "avg": false, 
+        "current": false, 
+        "max": false, 
+        "min": false, 
+        "show": true, 
+        "total": false, 
+        "values": false
+      }, 
+      "lines": true, 
+      "linewidth": 1, 
+      "links": [], 
+      "nullPointMode": "null", 
+      "percentage": false, 
+      "pointradius": 5, 
+      "points": false, 
+      "renderer": "flot", 
+      "seriesOverrides": [], 
+      "spaceLength": 10, 
+      "stack": false, 
+      "steppedLine": false, 
+      "targets": [
         {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "fill": 1,
-          "id": 1,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 12,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "max(label_replace((irate(node_disk_write_time_ms{instance=~\"[[osd_servers]].*\"}[30s]) + irate(node_disk_read_time_ms{instance=~\"[[osd_servers]].*\"}[30s])) / \n(irate(node_disk_writes_completed{instance=~\"[[osd_servers]].*\"}[30s]) + irate(node_disk_reads_completed{instance=~\"[[osd_servers]].*\"}[30s])),\"host\",\"$1\",\"instance\",\"([^.]*).*\")) by(host)",
-              "format": "time_series",
-              "intervalFactor": 1,
-              "legendFormat": "{{host}}",
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "All OSD Hosts - Highest Latency",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
+          "expr": "max(\n    (irate(node_disk_read_time_ms[30s]) + irate(node_disk_write_time_ms[30s]) / \n    (irate(node_disk_reads_completed[30s]) + irate(node_disk_writes_completed[30s])) +\n    ignoring(ceph_daemon,job) ceph_disk_occupation))\n    by(instance)", 
+          "format": "time_series", 
+          "intervalFactor": 1, 
+          "legendFormat": "{{instance}}", 
+          "refId": "B"
         }
-      ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": true,
-      "title": "All OSD Hosts",
-      "titleSize": "h6"
-    },
-    {
-      "collapse": false,
-      "height": 250,
-      "panels": [
+      ], 
+      "thresholds": [], 
+      "timeFrom": null, 
+      "timeShift": null, 
+      "title": "All OSD Hosts - Highest Latency", 
+      "tooltip": {
+        "shared": true, 
+        "sort": 0, 
+        "value_type": "individual"
+      }, 
+      "type": "graph", 
+      "xaxis": {
+        "buckets": null, 
+        "mode": "time", 
+        "name": null, 
+        "show": true, 
+        "values": []
+      }, 
+      "yaxes": [
         {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "fill": 1,
-          "id": 2,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "minSpan": 2,
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": "osd_servers",
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "mira055",
-              "value": "mira055"
-            }
-          },
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 2,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "max(label_replace((irate(node_disk_write_time_ms{instance=~\"[[osd_servers]].*\"}[30s]) + irate(node_disk_read_time_ms{instance=~\"[[osd_servers]].*\"}[30s])) / \n(irate(node_disk_writes_completed{instance=~\"[[osd_servers]].*\"}[30s]) + irate(node_disk_reads_completed{instance=~\"[[osd_servers]].*\"}[30s])),\"host\",\"$1\",\"instance\",\"([^.]*).*\")) by(host)",
-              "format": "time_series",
-              "hide": false,
-              "intervalFactor": 1,
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "$osd_servers Max Latency",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
+          "format": "none", 
+          "label": "ms", 
+          "logBase": 1, 
+          "max": null, 
+          "min": null, 
+          "show": true
+        }, 
         {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "fill": 1,
-          "id": 3,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "minSpan": 2,
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "repeatIteration": 1519090792110,
-          "repeatPanelId": 2,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "mira060",
-              "value": "mira060"
-            }
-          },
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 2,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "max(label_replace((irate(node_disk_write_time_ms{instance=~\"[[osd_servers]].*\"}[30s]) + irate(node_disk_read_time_ms{instance=~\"[[osd_servers]].*\"}[30s])) / \n(irate(node_disk_writes_completed{instance=~\"[[osd_servers]].*\"}[30s]) + irate(node_disk_reads_completed{instance=~\"[[osd_servers]].*\"}[30s])),\"host\",\"$1\",\"instance\",\"([^.]*).*\")) by(host)",
-              "format": "time_series",
-              "hide": false,
-              "intervalFactor": 1,
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "$osd_servers Max Latency",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "fill": 1,
-          "id": 4,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "minSpan": 2,
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "repeatIteration": 1519090792110,
-          "repeatPanelId": 2,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "mira019",
-              "value": "mira019"
-            }
-          },
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 2,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "max(label_replace((irate(node_disk_write_time_ms{instance=~\"[[osd_servers]].*\"}[30s]) + irate(node_disk_read_time_ms{instance=~\"[[osd_servers]].*\"}[30s])) / \n(irate(node_disk_writes_completed{instance=~\"[[osd_servers]].*\"}[30s]) + irate(node_disk_reads_completed{instance=~\"[[osd_servers]].*\"}[30s])),\"host\",\"$1\",\"instance\",\"([^.]*).*\")) by(host)",
-              "format": "time_series",
-              "hide": false,
-              "intervalFactor": 1,
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "$osd_servers Max Latency",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "fill": 1,
-          "id": 5,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "minSpan": 2,
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "repeatIteration": 1519090792110,
-          "repeatPanelId": 2,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "mira021",
-              "value": "mira021"
-            }
-          },
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 2,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "max(label_replace((irate(node_disk_write_time_ms{instance=~\"[[osd_servers]].*\"}[30s]) + irate(node_disk_read_time_ms{instance=~\"[[osd_servers]].*\"}[30s])) / \n(irate(node_disk_writes_completed{instance=~\"[[osd_servers]].*\"}[30s]) + irate(node_disk_reads_completed{instance=~\"[[osd_servers]].*\"}[30s])),\"host\",\"$1\",\"instance\",\"([^.]*).*\")) by(host)",
-              "format": "time_series",
-              "hide": false,
-              "intervalFactor": 1,
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "$osd_servers Max Latency",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "fill": 1,
-          "id": 6,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "minSpan": 2,
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "repeatIteration": 1519090792110,
-          "repeatPanelId": 2,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "mira070",
-              "value": "mira070"
-            }
-          },
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 2,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "max(label_replace((irate(node_disk_write_time_ms{instance=~\"[[osd_servers]].*\"}[30s]) + irate(node_disk_read_time_ms{instance=~\"[[osd_servers]].*\"}[30s])) / \n(irate(node_disk_writes_completed{instance=~\"[[osd_servers]].*\"}[30s]) + irate(node_disk_reads_completed{instance=~\"[[osd_servers]].*\"}[30s])),\"host\",\"$1\",\"instance\",\"([^.]*).*\")) by(host)",
-              "format": "time_series",
-              "hide": false,
-              "intervalFactor": 1,
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "$osd_servers Max Latency",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "fill": 1,
-          "id": 7,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "minSpan": 2,
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "repeatIteration": 1519090792110,
-          "repeatPanelId": 2,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "mira087",
-              "value": "mira087"
-            }
-          },
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 2,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "max(label_replace((irate(node_disk_write_time_ms{instance=~\"[[osd_servers]].*\"}[30s]) + irate(node_disk_read_time_ms{instance=~\"[[osd_servers]].*\"}[30s])) / \n(irate(node_disk_writes_completed{instance=~\"[[osd_servers]].*\"}[30s]) + irate(node_disk_reads_completed{instance=~\"[[osd_servers]].*\"}[30s])),\"host\",\"$1\",\"instance\",\"([^.]*).*\")) by(host)",
-              "format": "time_series",
-              "hide": false,
-              "intervalFactor": 1,
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "$osd_servers Max Latency",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "fill": 1,
-          "id": 8,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "minSpan": 2,
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "repeatIteration": 1519090792110,
-          "repeatPanelId": 2,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "mira049",
-              "value": "mira049"
-            }
-          },
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 2,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "max(label_replace((irate(node_disk_write_time_ms{instance=~\"[[osd_servers]].*\"}[30s]) + irate(node_disk_read_time_ms{instance=~\"[[osd_servers]].*\"}[30s])) / \n(irate(node_disk_writes_completed{instance=~\"[[osd_servers]].*\"}[30s]) + irate(node_disk_reads_completed{instance=~\"[[osd_servers]].*\"}[30s])),\"host\",\"$1\",\"instance\",\"([^.]*).*\")) by(host)",
-              "format": "time_series",
-              "hide": false,
-              "intervalFactor": 1,
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "$osd_servers Max Latency",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "fill": 1,
-          "id": 9,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "minSpan": 2,
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "repeatIteration": 1519090792110,
-          "repeatPanelId": 2,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "mira099",
-              "value": "mira099"
-            }
-          },
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 2,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "max(label_replace((irate(node_disk_write_time_ms{instance=~\"[[osd_servers]].*\"}[30s]) + irate(node_disk_read_time_ms{instance=~\"[[osd_servers]].*\"}[30s])) / \n(irate(node_disk_writes_completed{instance=~\"[[osd_servers]].*\"}[30s]) + irate(node_disk_reads_completed{instance=~\"[[osd_servers]].*\"}[30s])),\"host\",\"$1\",\"instance\",\"([^.]*).*\")) by(host)",
-              "format": "time_series",
-              "hide": false,
-              "intervalFactor": 1,
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "$osd_servers Max Latency",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "fill": 1,
-          "id": 10,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "minSpan": 2,
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "repeatIteration": 1519090792110,
-          "repeatPanelId": 2,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "mira031",
-              "value": "mira031"
-            }
-          },
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 2,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "max(label_replace((irate(node_disk_write_time_ms{instance=~\"[[osd_servers]].*\"}[30s]) + irate(node_disk_read_time_ms{instance=~\"[[osd_servers]].*\"}[30s])) / \n(irate(node_disk_writes_completed{instance=~\"[[osd_servers]].*\"}[30s]) + irate(node_disk_reads_completed{instance=~\"[[osd_servers]].*\"}[30s])),\"host\",\"$1\",\"instance\",\"([^.]*).*\")) by(host)",
-              "format": "time_series",
-              "hide": false,
-              "intervalFactor": 1,
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "$osd_servers Max Latency",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "fill": 1,
-          "id": 11,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "minSpan": 2,
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "repeatIteration": 1519090792110,
-          "repeatPanelId": 2,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "mira116",
-              "value": "mira116"
-            }
-          },
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 2,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "max(label_replace((irate(node_disk_write_time_ms{instance=~\"[[osd_servers]].*\"}[30s]) + irate(node_disk_read_time_ms{instance=~\"[[osd_servers]].*\"}[30s])) / \n(irate(node_disk_writes_completed{instance=~\"[[osd_servers]].*\"}[30s]) + irate(node_disk_reads_completed{instance=~\"[[osd_servers]].*\"}[30s])),\"host\",\"$1\",\"instance\",\"([^.]*).*\")) by(host)",
-              "format": "time_series",
-              "hide": false,
-              "intervalFactor": 1,
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "$osd_servers Max Latency",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "fill": 1,
-          "id": 12,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "minSpan": 2,
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "repeatIteration": 1519090792110,
-          "repeatPanelId": 2,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "mira076",
-              "value": "mira076"
-            }
-          },
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 2,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "max(label_replace((irate(node_disk_write_time_ms{instance=~\"[[osd_servers]].*\"}[30s]) + irate(node_disk_read_time_ms{instance=~\"[[osd_servers]].*\"}[30s])) / \n(irate(node_disk_writes_completed{instance=~\"[[osd_servers]].*\"}[30s]) + irate(node_disk_reads_completed{instance=~\"[[osd_servers]].*\"}[30s])),\"host\",\"$1\",\"instance\",\"([^.]*).*\")) by(host)",
-              "format": "time_series",
-              "hide": false,
-              "intervalFactor": 1,
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "$osd_servers Max Latency",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "fill": 1,
-          "id": 13,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "minSpan": 2,
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "repeatIteration": 1519090792110,
-          "repeatPanelId": 2,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "mira093",
-              "value": "mira093"
-            }
-          },
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 2,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "max(label_replace((irate(node_disk_write_time_ms{instance=~\"[[osd_servers]].*\"}[30s]) + irate(node_disk_read_time_ms{instance=~\"[[osd_servers]].*\"}[30s])) / \n(irate(node_disk_writes_completed{instance=~\"[[osd_servers]].*\"}[30s]) + irate(node_disk_reads_completed{instance=~\"[[osd_servers]].*\"}[30s])),\"host\",\"$1\",\"instance\",\"([^.]*).*\")) by(host)",
-              "format": "time_series",
-              "hide": false,
-              "intervalFactor": 1,
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "$osd_servers Max Latency",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "fill": 1,
-          "id": 14,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "minSpan": 2,
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "repeatIteration": 1519090792110,
-          "repeatPanelId": 2,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "mira120",
-              "value": "mira120"
-            }
-          },
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 2,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "max(label_replace((irate(node_disk_write_time_ms{instance=~\"[[osd_servers]].*\"}[30s]) + irate(node_disk_read_time_ms{instance=~\"[[osd_servers]].*\"}[30s])) / \n(irate(node_disk_writes_completed{instance=~\"[[osd_servers]].*\"}[30s]) + irate(node_disk_reads_completed{instance=~\"[[osd_servers]].*\"}[30s])),\"host\",\"$1\",\"instance\",\"([^.]*).*\")) by(host)",
-              "format": "time_series",
-              "hide": false,
-              "intervalFactor": 1,
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "$osd_servers Max Latency",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "fill": 1,
-          "id": 15,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "minSpan": 2,
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "repeatIteration": 1519090792110,
-          "repeatPanelId": 2,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "apama002",
-              "value": "apama002"
-            }
-          },
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 2,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "max(label_replace((irate(node_disk_write_time_ms{instance=~\"[[osd_servers]].*\"}[30s]) + irate(node_disk_read_time_ms{instance=~\"[[osd_servers]].*\"}[30s])) / \n(irate(node_disk_writes_completed{instance=~\"[[osd_servers]].*\"}[30s]) + irate(node_disk_reads_completed{instance=~\"[[osd_servers]].*\"}[30s])),\"host\",\"$1\",\"instance\",\"([^.]*).*\")) by(host)",
-              "format": "time_series",
-              "hide": false,
-              "intervalFactor": 1,
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "$osd_servers Max Latency",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "fill": 1,
-          "id": 16,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "minSpan": 2,
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "repeatIteration": 1519090792110,
-          "repeatPanelId": 2,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "mira122",
-              "value": "mira122"
-            }
-          },
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 2,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "max(label_replace((irate(node_disk_write_time_ms{instance=~\"[[osd_servers]].*\"}[30s]) + irate(node_disk_read_time_ms{instance=~\"[[osd_servers]].*\"}[30s])) / \n(irate(node_disk_writes_completed{instance=~\"[[osd_servers]].*\"}[30s]) + irate(node_disk_reads_completed{instance=~\"[[osd_servers]].*\"}[30s])),\"host\",\"$1\",\"instance\",\"([^.]*).*\")) by(host)",
-              "format": "time_series",
-              "hide": false,
-              "intervalFactor": 1,
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "$osd_servers Max Latency",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "fill": 1,
-          "id": 17,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "minSpan": 2,
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "repeatIteration": 1519090792110,
-          "repeatPanelId": 2,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "reesi001",
-              "value": "reesi001"
-            }
-          },
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 2,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "max(label_replace((irate(node_disk_write_time_ms{instance=~\"[[osd_servers]].*\"}[30s]) + irate(node_disk_read_time_ms{instance=~\"[[osd_servers]].*\"}[30s])) / \n(irate(node_disk_writes_completed{instance=~\"[[osd_servers]].*\"}[30s]) + irate(node_disk_reads_completed{instance=~\"[[osd_servers]].*\"}[30s])),\"host\",\"$1\",\"instance\",\"([^.]*).*\")) by(host)",
-              "format": "time_series",
-              "hide": false,
-              "intervalFactor": 1,
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "$osd_servers Max Latency",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
+          "format": "short", 
+          "label": null, 
+          "logBase": 1, 
+          "max": null, 
+          "min": null, 
+          "show": true
         }
-      ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": true,
-      "title": "Each OSD Host's Max Disk Latency",
-      "titleSize": "h6"
-    },
+      ]
+    }, 
     {
-      "collapse": false,
-      "height": 250,
-      "panels": [],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": false,
-      "title": "Dashboard Row",
-      "titleSize": "h6"
+      "collapsed": false, 
+      "gridPos": {
+        "h": 1, 
+        "w": 24, 
+        "x": 0, 
+        "y": 8
+      }, 
+      "id": 19, 
+      "panels": [], 
+      "repeat": null, 
+      "title": "Each OSD Host's Max Disk Latency", 
+      "type": "row"
+    }, 
+    {
+      "aliasColors": {}, 
+      "bars": false, 
+      "dashLength": 10, 
+      "dashes": false, 
+      "datasource": null, 
+      "fill": 1, 
+      "gridPos": {
+        "h": 7, 
+        "w": 4, 
+        "x": 0, 
+        "y": 9
+      }, 
+      "id": 2, 
+      "legend": {
+        "avg": false, 
+        "current": false, 
+        "max": false, 
+        "min": false, 
+        "show": false, 
+        "total": false, 
+        "values": false
+      }, 
+      "lines": true, 
+      "linewidth": 1, 
+      "links": [
+        {
+          "dashUri": "db/osd-node-detail", 
+          "dashboard": "OSD Node Detail", 
+          "includeVars": true, 
+          "targetBlank": true, 
+          "title": "OSD Node Detail", 
+          "type": "dashboard"
+        }
+      ], 
+      "minSpan": 4, 
+      "nullPointMode": "null", 
+      "percentage": false, 
+      "pointradius": 5, 
+      "points": false, 
+      "renderer": "flot", 
+      "repeat": "osd_servers", 
+      "repeatDirection": "h", 
+      "seriesOverrides": [], 
+      "spaceLength": 10, 
+      "stack": false, 
+      "steppedLine": false, 
+      "targets": [
+        {
+          "expr": "max(label_replace((irate(node_disk_write_time_ms{instance=~\"[[osd_servers]].*\"}[30s]) + irate(node_disk_read_time_ms{instance=~\"[[osd_servers]].*\"}[30s])) / \n(irate(node_disk_writes_completed{instance=~\"[[osd_servers]].*\"}[30s]) + irate(node_disk_reads_completed{instance=~\"[[osd_servers]].*\"}[30s])),\"host\",\"$1\",\"instance\",\"([^.]*).*\")) by(host)", 
+          "format": "time_series", 
+          "hide": false, 
+          "intervalFactor": 1, 
+          "refId": "A"
+        }
+      ], 
+      "thresholds": [], 
+      "timeFrom": null, 
+      "timeShift": null, 
+      "title": "$osd_servers Max Latency", 
+      "tooltip": {
+        "shared": true, 
+        "sort": 0, 
+        "value_type": "individual"
+      }, 
+      "type": "graph", 
+      "xaxis": {
+        "buckets": null, 
+        "mode": "time", 
+        "name": null, 
+        "show": true, 
+        "values": []
+      }, 
+      "yaxes": [
+        {
+          "format": "none", 
+          "label": "ms", 
+          "logBase": 1, 
+          "max": null, 
+          "min": "0", 
+          "show": true
+        }, 
+        {
+          "format": "short", 
+          "label": null, 
+          "logBase": 1, 
+          "max": null, 
+          "min": null, 
+          "show": false
+        }
+      ]
     }
-  ],
-  "schemaVersion": 14,
-  "style": "dark",
-  "tags": [],
+  ], 
+  "refresh": "15s", 
+  "schemaVersion": 16, 
+  "style": "dark", 
+  "tags": [], 
   "templating": {
     "list": [
       {
-        "allValue": null,
-        "current": {
-          "text": "All",
-          "value": "$__all"
-        },
-        "datasource": null,
-        "hide": 2,
-        "includeAll": true,
-        "label": null,
-        "multi": false,
-        "name": "osd_servers",
-        "options": [],
-        "query": "label_values(ceph_disk_occupation, instance)",
-        "refresh": 1,
-        "regex": "([^.]*).*",
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
+        "allValue": null, 
+        "current": {}, 
+        "datasource": null, 
+        "hide": 2, 
+        "includeAll": true, 
+        "label": null, 
+        "multi": false, 
+        "name": "osd_servers", 
+        "options": [], 
+        "query": "label_values(ceph_disk_occupation, instance)", 
+        "refresh": 1, 
+        "regex": "([^.]*).*", 
+        "sort": 1, 
+        "tagValuesQuery": "", 
+        "tags": [], 
+        "tagsQuery": "", 
+        "type": "query", 
         "useTags": false
       }
     ]
-  },
+  }, 
   "time": {
-    "from": "now-1h",
+    "from": "now-1h", 
     "to": "now"
-  },
+  }, 
   "timepicker": {
     "refresh_intervals": [
-      "5s",
-      "10s",
-      "15s",
-      "30s",
-      "1m",
-      "5m",
-      "15m",
-      "30m",
-      "1h",
-      "2h",
+      "5s", 
+      "10s", 
+      "15s", 
+      "30s", 
+      "1m", 
+      "5m", 
+      "15m", 
+      "30m", 
+      "1h", 
+      "2h", 
       "1d"
-    ],
+    ], 
     "time_options": [
-      "5m",
-      "15m",
-      "1h",
-      "6h",
-      "12h",
-      "24h",
-      "2d",
-      "7d",
+      "5m", 
+      "15m", 
+      "1h", 
+      "6h", 
+      "12h", 
+      "24h", 
+      "2d", 
+      "7d", 
       "30d"
     ]
-  },
-  "timezone": "",
-  "title": "Latency by Server"
+  }, 
+  "timezone": "", 
+  "title": "Latency by Server", 
+  "uid": "000000002", 
+  "version": 11
 }

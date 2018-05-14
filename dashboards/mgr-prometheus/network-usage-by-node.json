@@ -1,399 +1,493 @@
 {
+  "__requires": [
+    {
+      "type": "grafana", 
+      "id": "grafana", 
+      "name": "Grafana", 
+      "version": "5.0.4"
+    }, 
+    {
+      "type": "panel", 
+      "id": "graph", 
+      "name": "Graph", 
+      "version": "5.0.0"
+    }, 
+    {
+      "type": "datasource", 
+      "id": "prometheus", 
+      "name": "Prometheus", 
+      "version": "5.0.0"
+    }
+  ], 
   "annotations": {
     "list": [
       {
-        "builtIn": 1,
-        "datasource": "-- Grafana --",
-        "enable": true,
-        "hide": true,
-        "iconColor": "rgba(0, 211, 255, 1)",
-        "name": "Annotations & Alerts",
+        "builtIn": 1, 
+        "datasource": "-- Grafana --", 
+        "enable": true, 
+        "hide": true, 
+        "iconColor": "rgba(0, 211, 255, 1)", 
+        "name": "Annotations & Alerts", 
         "type": "dashboard"
       }
     ]
-  },
-  "editable": true,
-  "gnetId": null,
-  "graphTooltip": 0,
-  "hideControls": false,
-  "links": [],
-  "refresh": "15s",
-  "rows": [
+  }, 
+  "editable": true, 
+  "gnetId": null, 
+  "graphTooltip": 0, 
+  "id": null, 
+  "iteration": 1525134169600, 
+  "links": [], 
+  "panels": [
     {
-      "collapse": false,
-      "height": "300px",
+      "collapsed": false, 
+      "gridPos": {
+        "h": 1, 
+        "w": 24, 
+        "x": 0, 
+        "y": 0
+      }, 
+      "id": 4, 
+      "panels": [], 
+      "repeat": null, 
+      "title": "Aggregated Network Load", 
+      "type": "row"
+    }, 
+    {
+      "aliasColors": {}, 
+      "bars": false, 
+      "dashLength": 10, 
+      "dashes": false, 
+      "datasource": null, 
+      "fill": 1, 
+      "gridPos": {
+        "h": 8, 
+        "w": 24, 
+        "x": 0, 
+        "y": 1
+      }, 
+      "id": 1, 
+      "legend": {
+        "avg": false, 
+        "current": false, 
+        "max": false, 
+        "min": false, 
+        "show": true, 
+        "total": false, 
+        "values": false
+      }, 
+      "lines": true, 
+      "linewidth": 1, 
+      "links": [], 
+      "nullPointMode": "null", 
+      "percentage": false, 
+      "pointradius": 5, 
+      "points": false, 
+      "renderer": "flot", 
+      "seriesOverrides": [], 
+      "spaceLength": 10, 
+      "stack": true, 
+      "steppedLine": false, 
+      "targets": [
+        {
+          "expr": "sum (irate(node_network_receive_bytes{instance=~\"[[mon_servers]].*\",device=~\"[[interfaces]].*\"}[30s])) + \nsum (irate(node_network_transmit_bytes{instance=~\"[[mon_servers]].*\",device=~\"[[interfaces]].*\"}[30s]))", 
+          "format": "time_series", 
+          "intervalFactor": 2, 
+          "legendFormat": "MONs", 
+          "refId": "A"
+        }, 
+        {
+          "expr": "sum (irate(node_network_receive_bytes{instance=~\"[[osd_servers]].*\",device=~\"[[interfaces]].*\"}[30s])) + \nsum (irate(node_network_transmit_bytes{instance=~\"[[osd_servers]].*\",device=~\"[[interfaces]].*\"}[30s]))", 
+          "format": "time_series", 
+          "intervalFactor": 2, 
+          "legendFormat": "OSDs", 
+          "refId": "B"
+        }
+      ], 
+      "thresholds": [], 
+      "timeFrom": null, 
+      "timeShift": null, 
+      "title": "Cluster Network Load", 
+      "tooltip": {
+        "shared": true, 
+        "sort": 0, 
+        "value_type": "individual"
+      }, 
+      "type": "graph", 
+      "xaxis": {
+        "buckets": null, 
+        "mode": "time", 
+        "name": null, 
+        "show": true, 
+        "values": []
+      }, 
+      "yaxes": [
+        {
+          "format": "bytes", 
+          "label": null, 
+          "logBase": 1, 
+          "max": null, 
+          "min": "0", 
+          "show": true
+        }, 
+        {
+          "format": "short", 
+          "label": null, 
+          "logBase": 1, 
+          "max": null, 
+          "min": null, 
+          "show": true
+        }
+      ]
+    }, 
+    {
+      "collapsed": true, 
+      "gridPos": {
+        "h": 1, 
+        "w": 24, 
+        "x": 0, 
+        "y": 9
+      }, 
+      "id": 5, 
       "panels": [
         {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "fill": 1,
-          "id": 1,
+          "aliasColors": {}, 
+          "bars": false, 
+          "dashLength": 10, 
+          "dashes": false, 
+          "datasource": "Local", 
+          "fill": 1, 
+          "gridPos": {
+            "h": 7, 
+            "w": 24, 
+            "x": 0, 
+            "y": 10
+          }, 
+          "id": 2, 
           "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
+            "avg": false, 
+            "current": false, 
+            "max": false, 
+            "min": false, 
+            "show": true, 
+            "total": false, 
             "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 12,
-          "stack": true,
-          "steppedLine": false,
+          }, 
+          "lines": true, 
+          "linewidth": 1, 
+          "links": [], 
+          "nullPointMode": "null", 
+          "percentage": false, 
+          "pointradius": 5, 
+          "points": false, 
+          "renderer": "flot", 
+          "seriesOverrides": [], 
+          "spaceLength": 10, 
+          "stack": true, 
+          "steppedLine": false, 
           "targets": [
             {
-              "expr": "sum (irate(node_network_receive_bytes{instance=~\"[[mon_servers]]\",device=~\"(eth|en|bond).*\"}[30s])) + \nsum (irate(node_network_transmit_bytes{instance=~\"[[mon_servers]]\",device=~\"(eth|en|bond).*\"}[30s]))",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "MONs",
+              "expr": "sum (irate(node_network_receive_bytes{instance=~\"[[mon_servers]].*\", device=~\"[[interfaces]].*\"}[30s])) by (instance) + \nsum (irate(node_network_transmit_bytes{instance=~\"[[mon_servers]].*\", device=~\"[[interfaces]].*\"}[30s])) by (instance)", 
+              "format": "time_series", 
+              "intervalFactor": 1, 
+              "legendFormat": "{{instance}}", 
               "refId": "A"
-            },
+            }
+          ], 
+          "thresholds": [], 
+          "timeFrom": null, 
+          "timeShift": null, 
+          "title": "MON Network Load", 
+          "tooltip": {
+            "shared": true, 
+            "sort": 0, 
+            "value_type": "individual"
+          }, 
+          "type": "graph", 
+          "xaxis": {
+            "buckets": null, 
+            "mode": "time", 
+            "name": null, 
+            "show": true, 
+            "values": []
+          }, 
+          "yaxes": [
             {
-              "expr": "sum (irate(node_network_receive_bytes{instance=~\"[[only_osds]]\",device=~\"(eth|en|bond).*\"}[30s])) + \nsum (irate(node_network_transmit_bytes{instance=~\"[[only_osds]]\",device=~\"(eth|en|bond).*\"}[30s]))",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "OSDs",
+              "format": "bytes", 
+              "label": null, 
+              "logBase": 1, 
+              "max": null, 
+              "min": "0", 
+              "show": true
+            }, 
+            {
+              "format": "short", 
+              "label": null, 
+              "logBase": 1, 
+              "max": null, 
+              "min": null, 
+              "show": true
+            }
+          ]
+        }
+      ], 
+      "repeat": null, 
+      "title": "MON Hosts", 
+      "type": "row"
+    }, 
+    {
+      "collapsed": true, 
+      "gridPos": {
+        "h": 1, 
+        "w": 24, 
+        "x": 0, 
+        "y": 10
+      }, 
+      "id": 6, 
+      "panels": [
+        {
+          "aliasColors": {}, 
+          "bars": false, 
+          "dashLength": 10, 
+          "dashes": false, 
+          "datasource": "Local", 
+          "fill": 1, 
+          "gridPos": {
+            "h": 7, 
+            "w": 24, 
+            "x": 0, 
+            "y": 11
+          }, 
+          "id": 3, 
+          "legend": {
+            "avg": false, 
+            "current": false, 
+            "max": false, 
+            "min": false, 
+            "show": true, 
+            "total": false, 
+            "values": false
+          }, 
+          "lines": true, 
+          "linewidth": 1, 
+          "links": [], 
+          "nullPointMode": "null", 
+          "percentage": false, 
+          "pointradius": 5, 
+          "points": false, 
+          "renderer": "flot", 
+          "seriesOverrides": [], 
+          "spaceLength": 10, 
+          "stack": true, 
+          "steppedLine": false, 
+          "targets": [
+            {
+              "expr": "sum \n  (irate(node_network_receive_bytes{instance=~\"[[osd_servers]]\", device=~\"[[interfaces]].*\"}[30s]) + \n  irate(node_network_transmit_bytes{instance=~\"[[osd_servers]]\", device=~\"[[interfaces]].*\"}[30s])) by(instance)\n", 
+              "format": "time_series", 
+              "intervalFactor": 2, 
+              "legendFormat": "{{instance}}", 
               "refId": "B"
             }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Cluster Network Load",
+          ], 
+          "thresholds": [], 
+          "timeFrom": null, 
+          "timeShift": null, 
+          "title": "OSD Hosts Network Load", 
           "tooltip": {
-            "shared": true,
-            "sort": 0,
+            "shared": true, 
+            "sort": 0, 
             "value_type": "individual"
-          },
-          "type": "graph",
+          }, 
+          "type": "graph", 
           "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
+            "buckets": null, 
+            "mode": "time", 
+            "name": null, 
+            "show": true, 
             "values": []
-          },
+          }, 
           "yaxes": [
             {
-              "format": "bytes",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": "0",
+              "format": "bytes", 
+              "label": null, 
+              "logBase": 1, 
+              "max": null, 
+              "min": "0", 
               "show": true
-            },
+            }, 
             {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
+              "format": "short", 
+              "label": null, 
+              "logBase": 1, 
+              "max": null, 
+              "min": null, 
               "show": true
             }
           ]
         }
-      ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": true,
-      "title": "Aggregated Network Load",
-      "titleSize": "h6"
-    },
-    {
-      "collapse": false,
-      "height": 250,
-      "panels": [
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "fill": 1,
-          "id": 2,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 12,
-          "stack": true,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum (irate(node_network_receive_bytes{instance=~\"[[mon_servers]].*\", device=~\"(eth|en|bond).*\"}[30s])) by (instance) + \nsum (irate(node_network_transmit_bytes{instance=~\"[[mon_servers]].*\", device=~\"(eth|en|bond).*\"}[30s])) by (instance)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "{{instance}}",
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "MON Network Load",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "bytes",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        }
-      ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": true,
-      "title": "MON Hosts",
-      "titleSize": "h6"
-    },
-    {
-      "collapse": false,
-      "height": 250,
-      "panels": [
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "fill": 1,
-          "id": 3,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 12,
-          "stack": true,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum (irate(node_network_receive_bytes{instance=~\"[[osd_servers]].*\", device=~\"(eth|en|bond).*\"}[30s])) by (instance) + \nsum (irate(node_network_transmit_bytes{instance=~\"[[osd_servers]].*\", device=~\"(eth|en|bond).*\"}[30s])) by (instance)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "{{instance}}",
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "OSD Hosts Network Load",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "bytes",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        }
-      ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": true,
-      "title": "OSD Hosts",
-      "titleSize": "h6"
+      ], 
+      "repeat": null, 
+      "title": "OSD Hosts", 
+      "type": "row"
     }
-  ],
-  "schemaVersion": 14,
-  "style": "dark",
-  "tags": [],
+  ], 
+  "refresh": "15s", 
+  "schemaVersion": 16, 
+  "style": "dark", 
+  "tags": [], 
   "templating": {
     "list": [
       {
-        "allValue": null,
-        "current": {
-          "text": "All",
-          "value": "$__all"
-        },
-        "datasource": "Local",
-        "hide": 2,
-        "includeAll": true,
-        "label": null,
-        "multi": false,
-        "name": "osd_servers",
-        "options": [],
-        "query": "label_values(ceph_server_metadata{services=~\".*osd.*\"}, hostname)",
-        "refresh": 1,
-        "regex": "",
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
+        "allValue": null, 
+        "current": {}, 
+        "datasource": null, 
+        "hide": 2, 
+        "includeAll": true, 
+        "label": null, 
+        "multi": false, 
+        "name": "osd_servers", 
+        "options": [], 
+        "query": "label_values(ceph_disk_occupation, instance)", 
+        "refresh": 1, 
+        "regex": "", 
+        "sort": 1, 
+        "tagValuesQuery": "", 
+        "tags": [], 
+        "tagsQuery": "", 
+        "type": "query", 
         "useTags": false
-      },
+      }, 
       {
-        "allValue": null,
+        "allValue": null, 
         "current": {
-          "text": "All",
+          "text": "All", 
           "value": "$__all"
-        },
-        "datasource": "Local",
-        "hide": 2,
-        "includeAll": true,
-        "label": null,
-        "multi": false,
-        "name": "mon_servers",
-        "options": [],
-        "query": "label_values(ceph_server_metadata{services=~\".*mon.*\"}, hostname)",
-        "refresh": 1,
-        "regex": "",
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
-      },
+        }, 
+        "hide": 2, 
+        "includeAll": true, 
+        "label": "", 
+        "multi": false, 
+        "name": "mon_servers", 
+        "options": [
+          {
+            "selected": true, 
+            "text": "All", 
+            "value": "$__all"
+          }, 
+          {
+            "selected": false, 
+            "text": "rhs-cli-04.ceph-dev.lab.eng.rdu2.redhat.com", 
+            "value": "rhs-cli-04.ceph-dev.lab.eng.rdu2.redhat.com"
+          }, 
+          {
+            "selected": false, 
+            "text": "rhs-cli-05.ceph-dev.lab.eng.rdu2.redhat.com", 
+            "value": "rhs-cli-05.ceph-dev.lab.eng.rdu2.redhat.com"
+          }, 
+          {
+            "selected": false, 
+            "text": "rhs-cli-06.ceph-dev.lab.eng.rdu2.redhat.com", 
+            "value": "rhs-cli-06.ceph-dev.lab.eng.rdu2.redhat.com"
+          }
+        ], 
+        "query": "rhs-cli-04.ceph-dev.lab.eng.rdu2.redhat.com,rhs-cli-05.ceph-dev.lab.eng.rdu2.redhat.com,rhs-cli-06.ceph-dev.lab.eng.rdu2.redhat.com", 
+        "type": "custom"
+      }, 
       {
-        "allValue": null,
-        "current": {
-          "text": "All",
-          "value": "$__all"
-        },
-        "datasource": "Local",
-        "hide": 2,
-        "includeAll": true,
-        "label": null,
-        "multi": false,
-        "name": "only_osds",
-        "options": [],
-        "query": "label_values(ceph_server_metadata{services=\"osd\"}, hostname)",
-        "refresh": 1,
-        "regex": "",
-        "sort": 1,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
+        "allValue": null, 
+        "current": {}, 
+        "datasource": null, 
+        "hide": 2, 
+        "includeAll": true, 
+        "label": null, 
+        "multi": false, 
+        "name": "only_osds", 
+        "options": [], 
+        "query": "label_values(ceph_server_metadata{services=\"osd\"}, hostname)", 
+        "refresh": 1, 
+        "regex": "", 
+        "sort": 1, 
+        "tagValuesQuery": "", 
+        "tags": [], 
+        "tagsQuery": "", 
+        "type": "query", 
         "useTags": false
+      }, 
+      {
+        "allValue": null, 
+        "current": {}, 
+        "datasource": null, 
+        "hide": 2, 
+        "includeAll": true, 
+        "label": null, 
+        "multi": false, 
+        "name": "copy_of_mon_servers", 
+        "options": [], 
+        "query": "label_values(ceph_server_metadata{services=~\".*mon.*\"}, hostname)", 
+        "refresh": 1, 
+        "regex": "", 
+        "sort": 0, 
+        "tagValuesQuery": "", 
+        "tags": [], 
+        "tagsQuery": "", 
+        "type": "query", 
+        "useTags": false
+      }, 
+      {
+        "allValue": null, 
+        "current": {
+          "text": "(eth|en|bond|mlx|ib)", 
+          "value": "(eth|en|bond|mlx|ib)"
+        }, 
+        "hide": 2, 
+        "includeAll": false, 
+        "label": null, 
+        "multi": false, 
+        "name": "interfaces", 
+        "options": [
+          {
+            "selected": true, 
+            "text": "(eth|en|bond|mlx|ib)", 
+            "value": "(eth|en|bond|mlx|ib)"
+          }
+        ], 
+        "query": "(eth|en|bond|mlx|ib)", 
+        "type": "custom"
       }
     ]
-  },
+  }, 
   "time": {
-    "from": "now-1h",
+    "from": "now-1h", 
     "to": "now"
-  },
+  }, 
   "timepicker": {
     "refresh_intervals": [
-      "5s",
-      "10s",
-      "15s",
-      "30s",
-      "1m",
-      "5m",
-      "15m",
-      "30m",
-      "1h",
-      "2h",
+      "5s", 
+      "10s", 
+      "15s", 
+      "30s", 
+      "1m", 
+      "5m", 
+      "15m", 
+      "30m", 
+      "1h", 
+      "2h", 
       "1d"
-    ],
+    ], 
     "time_options": [
-      "5m",
-      "15m",
-      "1h",
-      "6h",
-      "12h",
-      "24h",
-      "2d",
-      "7d",
+      "5m", 
+      "15m", 
+      "1h", 
+      "6h", 
+      "12h", 
+      "24h", 
+      "2d", 
+      "7d", 
       "30d"
     ]
-  },
-  "timezone": "",
-  "title": "Network Usage by Node"
+  }, 
+  "timezone": "", 
+  "title": "Network Usage by Server", 
+  "uid": "000000006", 
+  "version": 18
 }
