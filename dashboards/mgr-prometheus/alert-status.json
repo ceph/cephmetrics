@@ -1,1200 +1,1589 @@
 {
+  "__requires": [
+    {
+      "type": "panel", 
+      "id": "alertlist", 
+      "name": "Alert List", 
+      "version": "5.0.0"
+    }, 
+    {
+      "type": "grafana", 
+      "id": "grafana", 
+      "name": "Grafana", 
+      "version": "5.0.4"
+    }, 
+    {
+      "type": "panel", 
+      "id": "graph", 
+      "name": "Graph", 
+      "version": "5.0.0"
+    }, 
+    {
+      "type": "datasource", 
+      "id": "prometheus", 
+      "name": "Prometheus", 
+      "version": "5.0.0"
+    }
+  ], 
   "annotations": {
     "list": [
       {
-        "builtIn": 1,
-        "datasource": "-- Grafana --",
-        "enable": true,
-        "hide": true,
-        "iconColor": "rgba(0, 211, 255, 1)",
-        "name": "Annotations & Alerts",
+        "builtIn": 1, 
+        "datasource": "-- Grafana --", 
+        "enable": true, 
+        "hide": true, 
+        "iconColor": "rgba(0, 211, 255, 1)", 
+        "name": "Annotations & Alerts", 
         "type": "dashboard"
       }
     ]
-  },
-  "editable": true,
-  "gnetId": null,
-  "graphTooltip": 0,
-  "hideControls": false,
-  "links": [],
-  "refresh": "10s",
-  "rows": [
+  }, 
+  "editable": true, 
+  "gnetId": null, 
+  "graphTooltip": 0, 
+  "id": null, 
+  "links": [], 
+  "panels": [
     {
-      "collapse": false,
-      "height": "250px",
-      "panels": [
-        {
-          "id": 1,
-          "limit": "20",
-          "links": [],
-          "onlyAlertsOnDashboard": true,
-          "show": "current",
-          "sortOrder": 3,
-          "span": 12,
-          "stateFilter": [
-            "alerting"
-          ],
-          "title": "Active Ceph Alert List",
-          "type": "alertlist"
-        }
-      ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": false,
-      "title": "Dashboard Row",
-      "titleSize": "h6"
-    },
+      "collapsed": false, 
+      "gridPos": {
+        "h": 1, 
+        "w": 24, 
+        "x": 0, 
+        "y": 0
+      }, 
+      "id": 11, 
+      "panels": [], 
+      "repeat": null, 
+      "title": "Active Alert List", 
+      "type": "row"
+    }, 
     {
-      "collapse": false,
-      "height": 250,
-      "panels": [
+      "gridPos": {
+        "h": 7, 
+        "w": 24, 
+        "x": 0, 
+        "y": 1
+      }, 
+      "id": 1, 
+      "limit": "20", 
+      "links": [], 
+      "onlyAlertsOnDashboard": true, 
+      "show": "current", 
+      "sortOrder": 3, 
+      "stateFilter": [
+        "alerting"
+      ], 
+      "title": "Active Ceph Alert List", 
+      "type": "alertlist"
+    }, 
+    {
+      "collapsed": false, 
+      "gridPos": {
+        "h": 1, 
+        "w": 24, 
+        "x": 0, 
+        "y": 8
+      }, 
+      "id": 12, 
+      "panels": [], 
+      "repeat": null, 
+      "title": "Health Checks", 
+      "type": "row"
+    }, 
+    {
+      "alert": {
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                0
+              ], 
+              "type": "gt"
+            }, 
+            "operator": {
+              "type": "and"
+            }, 
+            "query": {
+              "params": [
+                "A", 
+                "1m", 
+                "now"
+              ]
+            }, 
+            "reducer": {
+              "params": [], 
+              "type": "max"
+            }, 
+            "type": "query"
+          }
+        ], 
+        "executionErrorState": "alerting", 
+        "frequency": "10s", 
+        "handler": 1, 
+        "name": "Overall Ceph Health alert", 
+        "noDataState": "no_data", 
+        "notifications": [
+          {
+            "id": 1
+          }
+        ]
+      }, 
+      "aliasColors": {
+        "Ceph Health": "#890F02", 
+        "Ceph Health (0:OK, 4:Warning,8:Error)": "#DEDAF7", 
+        "ceph health": "#890F02"
+      }, 
+      "bars": false, 
+      "dashLength": 10, 
+      "dashes": false, 
+      "datasource": null, 
+      "description": "The chart plots the clusters health, over time. Health is depicted as a integer; 0, 1 or 2 where 0 is OK, 1 is WARN and 2 represents an ERROR state.", 
+      "fill": 1, 
+      "gridPos": {
+        "h": 7, 
+        "w": 4, 
+        "x": 0, 
+        "y": 9
+      }, 
+      "hideTimeOverride": false, 
+      "id": 2, 
+      "legend": {
+        "avg": false, 
+        "current": false, 
+        "max": false, 
+        "min": false, 
+        "show": true, 
+        "total": false, 
+        "values": false
+      }, 
+      "lines": true, 
+      "linewidth": 2, 
+      "links": [], 
+      "maxDataPoints": "360", 
+      "minSpan": 4, 
+      "nullPointMode": "null", 
+      "percentage": false, 
+      "pointradius": 5, 
+      "points": false, 
+      "renderer": "flot", 
+      "seriesOverrides": [], 
+      "spaceLength": 10, 
+      "stack": false, 
+      "steppedLine": true, 
+      "targets": [
         {
-          "alert": {
-            "conditions": [
-              {
-                "evaluator": {
-                  "params": [
-                    0
-                  ],
-                  "type": "gt"
-                },
-                "operator": {
-                  "type": "and"
-                },
-                "query": {
-                  "params": [
-                    "A",
-                    "1m",
-                    "now"
-                  ]
-                },
-                "reducer": {
-                  "params": [],
-                  "type": "max"
-                },
-                "type": "query"
-              }
-            ],
-            "executionErrorState": "alerting",
-            "frequency": "10s",
-            "handler": 1,
-            "name": "Overall Ceph Health alert",
-            "noDataState": "no_data",
-            "notifications": []
-          },
-          "aliasColors": {
-            "Ceph Health": "#890F02",
-            "Ceph Health (0:OK, 4:Warning,8:Error)": "#DEDAF7",
-            "ceph health": "#890F02"
-          },
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "description": "The chart plots the clusters health, over time. Health is depicted as a integer; 0, 1 or 2 where 0 is OK, 1 is WARN and 2 represents an ERROR state.",
-          "fill": 1,
-          "hideTimeOverride": false,
-          "id": 2,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 2,
-          "links": [],
-          "maxDataPoints": "360",
-          "minSpan": 2,
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 2,
-          "stack": false,
-          "steppedLine": true,
-          "targets": [
-            {
-              "expr": "ceph_health_status",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "Ceph Health",
-              "refId": "A",
-              "step": 20,
-              "textEditor": true
-            }
-          ],
-          "thresholds": [
-            {
-              "colorMode": "critical",
-              "fill": true,
-              "line": true,
-              "op": "gt",
-              "value": 0
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Overall Ceph Health",
-          "tooltip": {
-            "shared": false,
-            "sort": 1,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": "",
-              "logBase": 1,
-              "max": "2",
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": false
-            }
-          ]
-        },
-        {
-          "alert": {
-            "conditions": [
-              {
-                "evaluator": {
-                  "params": [
-                    0
-                  ],
-                  "type": "gt"
-                },
-                "operator": {
-                  "type": "and"
-                },
-                "query": {
-                  "params": [
-                    "A",
-                    "1m",
-                    "now"
-                  ]
-                },
-                "reducer": {
-                  "params": [],
-                  "type": "max"
-                },
-                "type": "query"
-              }
-            ],
-            "executionErrorState": "alerting",
-            "frequency": "60s",
-            "handler": 1,
-            "name": "Disks Near Full alert",
-            "noDataState": "no_data",
-            "notifications": []
-          },
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "description": "This shows how many disks are at or above 80% full. Performance may degrade beyond this threshold on filestore (XFS) backed OSD's.",
-          "fill": 1,
-          "id": 3,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": false,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "minSpan": 2,
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 2,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "ceph_osd_stat_bytes_used / ceph_osd_stat_bytes * 100 > 100",
-              "format": "time_series",
-              "hide": false,
-              "intervalFactor": 2,
-              "legendFormat": "{{ceph_daemon}}",
-              "refId": "A",
-              "step": 40,
-              "textEditor": true
-            }
-          ],
-          "thresholds": [
-            {
-              "colorMode": "critical",
-              "fill": true,
-              "line": true,
-              "op": "gt",
-              "value": 0
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Disks Near Full",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": "100",
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": false
-            }
-          ]
-        },
-        {
-          "alert": {
-            "conditions": [
-              {
-                "evaluator": {
-                  "params": [
-                    0
-                  ],
-                  "type": "gt"
-                },
-                "operator": {
-                  "type": "and"
-                },
-                "query": {
-                  "params": [
-                    "A",
-                    "30s",
-                    "now"
-                  ]
-                },
-                "reducer": {
-                  "params": [],
-                  "type": "max"
-                },
-                "type": "query"
-              }
-            ],
-            "executionErrorState": "alerting",
-            "frequency": "10s",
-            "handler": 1,
-            "name": "OSDs Down alert",
-            "noDataState": "no_data",
-            "notifications": []
-          },
-          "aliasColors": {},
-          "bars": true,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "description": "Count of OSDs currently in a DOWN state",
-          "fill": 2,
-          "hideTimeOverride": true,
-          "id": 4,
-          "legend": {
-            "alignAsTable": false,
-            "avg": false,
-            "current": false,
-            "hideZero": false,
-            "max": false,
-            "min": false,
-            "rightSide": false,
-            "show": false,
-            "total": false,
-            "values": false
-          },
-          "lines": false,
-          "linewidth": 2,
-          "links": [],
-          "minSpan": 2,
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 2,
-          "stack": false,
-          "steppedLine": true,
-          "targets": [
-            {
-              "expr": "count(ceph_osd_metadata) - count(ceph_osd_up > 0.5)",
-              "format": "time_series",
-              "hide": false,
-              "intervalFactor": 2,
-              "legendFormat": "down",
-              "refId": "A",
-              "step": 4,
-              "textEditor": true
-            }
-          ],
-          "thresholds": [
-            {
-              "colorMode": "critical",
-              "fill": true,
-              "line": true,
-              "op": "gt",
-              "value": 0
-            }
-          ],
-          "timeFrom": "5m",
-          "timeShift": null,
-          "title": "OSDs Down",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": false
-            }
-          ]
-        },
-        {
-          "alert": {
-            "conditions": [
-              {
-                "evaluator": {
-                  "params": [
-                    85
-                  ],
-                  "type": "gt"
-                },
-                "operator": {
-                  "type": "and"
-                },
-                "query": {
-                  "params": [
-                    "A",
-                    "1h",
-                    "now"
-                  ]
-                },
-                "reducer": {
-                  "params": [],
-                  "type": "avg"
-                },
-                "type": "query"
-              }
-            ],
-            "executionErrorState": "alerting",
-            "frequency": "60s",
-            "handler": 1,
-            "name": "Cluster Capacity alert",
-            "noDataState": "no_data",
-            "notifications": []
-          },
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "description": "This trigger raises a notification if the raw used crosses the 85% capacity threshold of the ceph cluster",
-          "fill": 1,
-          "id": 5,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "minSpan": 2,
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 2,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(ceph_osd_stat_bytes_used) / sum(ceph_osd_stat_bytes) * 100 ",
-              "format": "time_series",
-              "hide": false,
-              "intervalFactor": 2,
-              "legendFormat": "Raw Capacity Used %",
-              "refId": "A",
-              "step": 40,
-              "textEditor": true
-            }
-          ],
-          "thresholds": [
-            {
-              "colorMode": "critical",
-              "fill": true,
-              "line": true,
-              "op": "gt",
-              "value": 85
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Cluster Capacity",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "percent",
-              "label": "",
-              "logBase": 1,
-              "max": "100",
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": false
-            }
-          ]
-        },
-        {
-          "alert": {
-            "conditions": [
-              {
-                "evaluator": {
-                  "params": [
-                    0
-                  ],
-                  "type": "gt"
-                },
-                "operator": {
-                  "type": "and"
-                },
-                "query": {
-                  "params": [
-                    "A",
-                    "1m",
-                    "now"
-                  ]
-                },
-                "reducer": {
-                  "params": [],
-                  "type": "last"
-                },
-                "type": "query"
-              }
-            ],
-            "executionErrorState": "alerting",
-            "frequency": "60s",
-            "handler": 1,
-            "name": "PG's Stuck alert",
-            "noDataState": "no_data",
-            "notifications": []
-          },
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "description": "This chart shows whether there are pg's in a stuck state, that need manual intervention to resolve.",
-          "fill": 2,
-          "hideTimeOverride": true,
-          "id": 6,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 2,
-          "links": [],
-          "minSpan": 2,
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 2,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "max(ceph_osd_numpg) - scalar(ceph_pg_active)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "# pg's stuck inactive",
-              "refId": "A",
-              "step": 240,
-              "textEditor": true
-            }
-          ],
-          "thresholds": [
-            {
-              "colorMode": "critical",
-              "fill": true,
-              "line": true,
-              "op": "gt",
-              "value": 0
-            }
-          ],
-          "timeFrom": "6h",
-          "timeShift": null,
-          "title": "PG's Stuck",
-          "tooltip": {
-            "shared": false,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": [
-              "total"
-            ]
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": false
-            }
-          ]
-        },
-        {
-          "alert": {
-            "conditions": [
-              {
-                "evaluator": {
-                  "params": [
-                    0
-                  ],
-                  "type": "lt"
-                },
-                "operator": {
-                  "type": "and"
-                },
-                "query": {
-                  "params": [
-                    "A",
-                    "5m",
-                    "now"
-                  ]
-                },
-                "reducer": {
-                  "params": [],
-                  "type": "min"
-                },
-                "type": "query"
-              }
-            ],
-            "executionErrorState": "alerting",
-            "frequency": "60s",
-            "handler": 1,
-            "name": "OSD Host Loss Check alert",
-            "noDataState": "no_data",
-            "notifications": []
-          },
-          "aliasColors": {
-            "Largest OSD Host": "#890F02"
-          },
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "description": "This graph checks the cluster @ 90% full is enough to support the loss of the largest OSD host",
-          "fill": 1,
-          "id": 7,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": false,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "minSpan": 2,
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 2,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "max(\n  sum(ceph_osd_stat_bytes - ceph_osd_stat_bytes_used)\n) * 0.9 -\nmax(\n  sum by (instance) (\n    ceph_osd_stat_bytes + on (ceph_daemon) group_left (instance) (ceph_disk_occupation*0)\n  )\n)",
-              "format": "time_series",
-              "hide": false,
-              "intervalFactor": 2,
-              "refId": "A",
-              "step": 40,
-              "textEditor": true
-            }
-          ],
-          "thresholds": [
-            {
-              "colorMode": "critical",
-              "fill": true,
-              "line": true,
-              "op": "lt",
-              "value": 0
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "OSD Host Loss Check",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "decbytes",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "alert": {
-            "conditions": [
-              {
-                "evaluator": {
-                  "params": [
-                    1000
-                  ],
-                  "type": "gt"
-                },
-                "operator": {
-                  "type": "and"
-                },
-                "query": {
-                  "params": [
-                    "A",
-                    "1m",
-                    "now"
-                  ]
-                },
-                "reducer": {
-                  "params": [],
-                  "type": "max"
-                },
-                "type": "query"
-              }
-            ],
-            "executionErrorState": "alerting",
-            "frequency": "30s",
-            "handler": 1,
-            "name": "Slow OSD responses alert",
-            "noDataState": "no_data",
-            "notifications": []
-          },
-          "aliasColors": {
-            "Largest OSD Host": "#890F02"
-          },
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "description": "Graph checking for OSD Latencies that are above 1s.",
-          "fill": 1,
-          "hideTimeOverride": true,
-          "id": 8,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "maxDataPoints": "",
-          "minSpan": 2,
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 2,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "(\n  (\n    irate(node_disk_read_time_ms[5m]) / clamp_min(irate(node_disk_reads_completed[5m]), 0.001) +\n    irate(node_disk_write_time_ms[5m]) / clamp_min(irate(node_disk_writes_completed[5m]), 0.001)\n  ) and on (instance, device) ceph_disk_occupation\n) >= 1000",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "{{instance}}.{{device}}",
-              "refId": "A",
-              "step": 40,
-              "textEditor": true
-            }
-          ],
-          "thresholds": [
-            {
-              "colorMode": "critical",
-              "fill": true,
-              "line": true,
-              "op": "gt",
-              "value": 1000
-            }
-          ],
-          "timeFrom": "1h",
-          "timeShift": null,
-          "title": "Slow OSD responses",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "none",
-              "label": "ms",
-              "logBase": 1,
-              "max": null,
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": false
-            }
-          ]
-        },
-        {
-          "alert": {
-            "conditions": [
-              {
-                "evaluator": {
-                  "params": [
-                    10
-                  ],
-                  "type": "gt"
-                },
-                "operator": {
-                  "type": "and"
-                },
-                "query": {
-                  "params": [
-                    "A",
-                    "5m",
-                    "now"
-                  ]
-                },
-                "reducer": {
-                  "params": [],
-                  "type": "max"
-                },
-                "type": "query"
-              }
-            ],
-            "executionErrorState": "alerting",
-            "frequency": "30s",
-            "handler": 1,
-            "name": "Network Errors alert",
-            "noDataState": "no_data",
-            "notifications": []
-          },
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "description": "Checks all interfaces for dropped/error packets, and alerts if more than 10 are seen in a 5m interval",
-          "fill": 1,
-          "id": 9,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": false,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "minSpan": 2,
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 2,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum by (instance) (\n  irate(node_network_receive_drop{device=~\"(eth|en|bond).*\"}[5m]) +\n  irate(node_network_receive_errs{device=~\"(eth|en|bond).*\"}[5m]) +\n  irate(node_network_transmit_drop{device=~\"(eth|en|bond).*\"}[5m]) +\n  irate(node_network_transmit_errs{device=~\"(eth|en|bond).*\"}[5m])\n)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "{{instance}}",
-              "refId": "A",
-              "step": 40,
-              "textEditor": true
-            }
-          ],
-          "thresholds": [
-            {
-              "colorMode": "critical",
-              "fill": true,
-              "line": true,
-              "op": "gt",
-              "value": 10
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Network Errors",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "none",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": false
-            }
-          ]
-        },
-        {
-          "alert": {
-            "conditions": [
-              {
-                "evaluator": {
-                  "params": [
-                    85
-                  ],
-                  "type": "gt"
-                },
-                "operator": {
-                  "type": "and"
-                },
-                "query": {
-                  "params": [
-                    "A",
-                    "5m",
-                    "now"
-                  ]
-                },
-                "reducer": {
-                  "params": [],
-                  "type": "avg"
-                },
-                "type": "query"
-              }
-            ],
-            "executionErrorState": "alerting",
-            "frequency": "60s",
-            "handler": 1,
-            "name": "Pool Capacity alert",
-            "noDataState": "no_data",
-            "notifications": []
-          },
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "fill": 5,
-          "id": 10,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 2,
-          "links": [],
-          "minSpan": 2,
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 2,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "ceph_pool_bytes_used / (ceph_pool_bytes_used + ceph_pool_max_avail) * 100 + on (pool_id) group_left (name) (ceph_pool_metadata*0)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "{{name}}",
-              "refId": "A",
-              "step": 40,
-              "textEditor": true
-            }
-          ],
-          "thresholds": [
-            {
-              "colorMode": "critical",
-              "fill": true,
-              "line": true,
-              "op": "gt",
-              "value": 85
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Pool Capacity",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "percent",
-              "label": null,
-              "logBase": 1,
-              "max": "100",
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
+          "expr": "ceph_health_status", 
+          "format": "time_series", 
+          "intervalFactor": 2, 
+          "legendFormat": "Ceph Health", 
+          "refId": "A", 
+          "step": 20, 
+          "textEditor": true
         }
-      ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": true,
-      "title": "Health Checks",
-      "titleSize": "h5"
+      ], 
+      "thresholds": [
+        {
+          "colorMode": "critical", 
+          "fill": true, 
+          "line": true, 
+          "op": "gt", 
+          "value": 0
+        }
+      ], 
+      "timeFrom": null, 
+      "timeShift": null, 
+      "title": "Overall Ceph Health", 
+      "tooltip": {
+        "shared": false, 
+        "sort": 1, 
+        "value_type": "individual"
+      }, 
+      "type": "graph", 
+      "xaxis": {
+        "buckets": null, 
+        "mode": "time", 
+        "name": null, 
+        "show": true, 
+        "values": []
+      }, 
+      "yaxes": [
+        {
+          "format": "short", 
+          "label": "", 
+          "logBase": 1, 
+          "max": "2", 
+          "min": "0", 
+          "show": true
+        }, 
+        {
+          "format": "short", 
+          "label": null, 
+          "logBase": 1, 
+          "max": null, 
+          "min": null, 
+          "show": false
+        }
+      ]
+    }, 
+    {
+      "alert": {
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                0
+              ], 
+              "type": "gt"
+            }, 
+            "operator": {
+              "type": "and"
+            }, 
+            "query": {
+              "params": [
+                "A", 
+                "1m", 
+                "now"
+              ]
+            }, 
+            "reducer": {
+              "params": [], 
+              "type": "max"
+            }, 
+            "type": "query"
+          }
+        ], 
+        "executionErrorState": "alerting", 
+        "frequency": "60s", 
+        "handler": 1, 
+        "name": "Disks Near Full alert", 
+        "noDataState": "ok", 
+        "notifications": [
+          {
+            "id": 1
+          }
+        ]
+      }, 
+      "aliasColors": {}, 
+      "bars": false, 
+      "dashLength": 10, 
+      "dashes": false, 
+      "datasource": null, 
+      "description": "This shows how many disks are at or above 80% full. Performance may degrade beyond this threshold on filestore (XFS) backed OSD's.", 
+      "fill": 1, 
+      "gridPos": {
+        "h": 7, 
+        "w": 4, 
+        "x": 4, 
+        "y": 9
+      }, 
+      "id": 3, 
+      "legend": {
+        "avg": false, 
+        "current": false, 
+        "max": false, 
+        "min": false, 
+        "show": false, 
+        "total": false, 
+        "values": false
+      }, 
+      "lines": true, 
+      "linewidth": 1, 
+      "links": [], 
+      "minSpan": 4, 
+      "nullPointMode": "null", 
+      "percentage": false, 
+      "pointradius": 5, 
+      "points": false, 
+      "renderer": "flot", 
+      "seriesOverrides": [], 
+      "spaceLength": 10, 
+      "stack": false, 
+      "steppedLine": false, 
+      "targets": [
+        {
+          "expr": "count((ceph_osd_stat_bytes_used / ceph_osd_stat_bytes) * 100 > 85)", 
+          "format": "time_series", 
+          "hide": false, 
+          "instant": false, 
+          "intervalFactor": 1, 
+          "legendFormat": "", 
+          "refId": "A", 
+          "step": 40, 
+          "textEditor": true
+        }
+      ], 
+      "thresholds": [
+        {
+          "colorMode": "critical", 
+          "fill": true, 
+          "line": true, 
+          "op": "gt", 
+          "value": 0
+        }
+      ], 
+      "timeFrom": null, 
+      "timeShift": null, 
+      "title": "Disks Near Full", 
+      "tooltip": {
+        "shared": true, 
+        "sort": 0, 
+        "value_type": "individual"
+      }, 
+      "type": "graph", 
+      "xaxis": {
+        "buckets": null, 
+        "mode": "time", 
+        "name": null, 
+        "show": true, 
+        "values": []
+      }, 
+      "yaxes": [
+        {
+          "format": "short", 
+          "label": null, 
+          "logBase": 1, 
+          "max": null, 
+          "min": "0", 
+          "show": true
+        }, 
+        {
+          "format": "short", 
+          "label": null, 
+          "logBase": 1, 
+          "max": null, 
+          "min": null, 
+          "show": false
+        }
+      ]
+    }, 
+    {
+      "alert": {
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                0
+              ], 
+              "type": "gt"
+            }, 
+            "operator": {
+              "type": "and"
+            }, 
+            "query": {
+              "params": [
+                "A", 
+                "30s", 
+                "now"
+              ]
+            }, 
+            "reducer": {
+              "params": [], 
+              "type": "max"
+            }, 
+            "type": "query"
+          }
+        ], 
+        "executionErrorState": "alerting", 
+        "frequency": "10s", 
+        "handler": 1, 
+        "name": "OSDs Down alert", 
+        "noDataState": "ok", 
+        "notifications": [
+          {
+            "id": 1
+          }
+        ]
+      }, 
+      "aliasColors": {}, 
+      "bars": true, 
+      "dashLength": 10, 
+      "dashes": false, 
+      "datasource": null, 
+      "description": "Count of OSDs currently in a DOWN state", 
+      "fill": 2, 
+      "gridPos": {
+        "h": 7, 
+        "w": 4, 
+        "x": 8, 
+        "y": 9
+      }, 
+      "hideTimeOverride": true, 
+      "id": 4, 
+      "legend": {
+        "alignAsTable": false, 
+        "avg": false, 
+        "current": false, 
+        "hideZero": false, 
+        "max": false, 
+        "min": false, 
+        "rightSide": false, 
+        "show": false, 
+        "total": false, 
+        "values": false
+      }, 
+      "lines": false, 
+      "linewidth": 2, 
+      "links": [], 
+      "minSpan": 4, 
+      "nullPointMode": "null", 
+      "percentage": false, 
+      "pointradius": 5, 
+      "points": false, 
+      "renderer": "flot", 
+      "seriesOverrides": [], 
+      "spaceLength": 10, 
+      "stack": false, 
+      "steppedLine": true, 
+      "targets": [
+        {
+          "expr": "count(ceph_osd_metadata) - count(ceph_osd_up > 0.5)", 
+          "format": "time_series", 
+          "hide": false, 
+          "intervalFactor": 2, 
+          "legendFormat": "down", 
+          "refId": "A", 
+          "step": 4, 
+          "textEditor": true
+        }
+      ], 
+      "thresholds": [
+        {
+          "colorMode": "critical", 
+          "fill": true, 
+          "line": true, 
+          "op": "gt", 
+          "value": 0
+        }
+      ], 
+      "timeFrom": "5m", 
+      "timeShift": null, 
+      "title": "OSDs Down", 
+      "tooltip": {
+        "shared": true, 
+        "sort": 0, 
+        "value_type": "individual"
+      }, 
+      "type": "graph", 
+      "xaxis": {
+        "buckets": null, 
+        "mode": "time", 
+        "name": null, 
+        "show": true, 
+        "values": []
+      }, 
+      "yaxes": [
+        {
+          "format": "short", 
+          "label": null, 
+          "logBase": 1, 
+          "max": null, 
+          "min": "0", 
+          "show": true
+        }, 
+        {
+          "format": "short", 
+          "label": null, 
+          "logBase": 1, 
+          "max": null, 
+          "min": null, 
+          "show": false
+        }
+      ]
+    }, 
+    {
+      "alert": {
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                0
+              ], 
+              "type": "gt"
+            }, 
+            "operator": {
+              "type": "and"
+            }, 
+            "query": {
+              "params": [
+                "A", 
+                "30s", 
+                "now"
+              ]
+            }, 
+            "reducer": {
+              "params": [], 
+              "type": "last"
+            }, 
+            "type": "query"
+          }
+        ], 
+        "executionErrorState": "alerting", 
+        "frequency": "30s", 
+        "handler": 1, 
+        "name": "OSDs Hosts Down alert", 
+        "noDataState": "ok", 
+        "notifications": [
+          {
+            "id": 1
+          }
+        ]
+      }, 
+      "aliasColors": {}, 
+      "bars": true, 
+      "dashLength": 10, 
+      "dashes": false, 
+      "datasource": null, 
+      "description": "Count of OSD Hosts that have all daemons down", 
+      "fill": 2, 
+      "gridPos": {
+        "h": 7, 
+        "w": 4, 
+        "x": 12, 
+        "y": 9
+      }, 
+      "hideTimeOverride": true, 
+      "id": 14, 
+      "legend": {
+        "alignAsTable": false, 
+        "avg": false, 
+        "current": false, 
+        "hideZero": false, 
+        "max": false, 
+        "min": false, 
+        "rightSide": false, 
+        "show": false, 
+        "total": false, 
+        "values": false
+      }, 
+      "lines": false, 
+      "linewidth": 2, 
+      "links": [], 
+      "minSpan": 4, 
+      "nullPointMode": "null", 
+      "percentage": false, 
+      "pointradius": 5, 
+      "points": false, 
+      "renderer": "flot", 
+      "seriesOverrides": [], 
+      "spaceLength": 10, 
+      "stack": false, 
+      "steppedLine": true, 
+      "targets": [
+        {
+          "expr": "count(\n  (count by(instance) (ceph_disk_occupation * \n    on(ceph_daemon) group_right(instance) ceph_osd_up == 0) - \n  count by(instance) (ceph_disk_occupation)) == 0)", 
+          "format": "time_series", 
+          "hide": false, 
+          "intervalFactor": 2, 
+          "legendFormat": "down", 
+          "refId": "A", 
+          "step": 4, 
+          "textEditor": true
+        }
+      ], 
+      "thresholds": [
+        {
+          "colorMode": "critical", 
+          "fill": true, 
+          "line": true, 
+          "op": "gt", 
+          "value": 0
+        }
+      ], 
+      "timeFrom": "5m", 
+      "timeShift": null, 
+      "title": "OSDs Hosts Down", 
+      "tooltip": {
+        "shared": true, 
+        "sort": 0, 
+        "value_type": "individual"
+      }, 
+      "type": "graph", 
+      "xaxis": {
+        "buckets": null, 
+        "mode": "time", 
+        "name": null, 
+        "show": true, 
+        "values": []
+      }, 
+      "yaxes": [
+        {
+          "format": "short", 
+          "label": null, 
+          "logBase": 1, 
+          "max": null, 
+          "min": "0", 
+          "show": true
+        }, 
+        {
+          "format": "short", 
+          "label": null, 
+          "logBase": 1, 
+          "max": null, 
+          "min": null, 
+          "show": false
+        }
+      ]
+    }, 
+    {
+      "alert": {
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                0
+              ], 
+              "type": "gt"
+            }, 
+            "operator": {
+              "type": "and"
+            }, 
+            "query": {
+              "params": [
+                "A", 
+                "1m", 
+                "now"
+              ]
+            }, 
+            "reducer": {
+              "params": [], 
+              "type": "last"
+            }, 
+            "type": "query"
+          }
+        ], 
+        "executionErrorState": "alerting", 
+        "frequency": "60s", 
+        "handler": 1, 
+        "name": "PG's Stuck alert", 
+        "noDataState": "ok", 
+        "notifications": [
+          {
+            "id": 1
+          }
+        ]
+      }, 
+      "aliasColors": {}, 
+      "bars": false, 
+      "dashLength": 10, 
+      "dashes": false, 
+      "datasource": null, 
+      "description": "This chart shows whether there are pg's in a stuck state, that need manual intervention to resolve.", 
+      "fill": 2, 
+      "gridPos": {
+        "h": 7, 
+        "w": 4, 
+        "x": 16, 
+        "y": 9
+      }, 
+      "hideTimeOverride": true, 
+      "id": 6, 
+      "legend": {
+        "avg": false, 
+        "current": false, 
+        "max": false, 
+        "min": false, 
+        "show": true, 
+        "total": false, 
+        "values": false
+      }, 
+      "lines": true, 
+      "linewidth": 2, 
+      "links": [], 
+      "minSpan": 4, 
+      "nullPointMode": "null", 
+      "percentage": false, 
+      "pointradius": 5, 
+      "points": false, 
+      "renderer": "flot", 
+      "seriesOverrides": [], 
+      "spaceLength": 10, 
+      "stack": false, 
+      "steppedLine": false, 
+      "targets": [
+        {
+          "expr": "max(ceph_osd_numpg) - scalar(ceph_pg_active)", 
+          "format": "time_series", 
+          "intervalFactor": 2, 
+          "legendFormat": "# pg's stuck inactive", 
+          "refId": "A", 
+          "step": 240, 
+          "textEditor": true
+        }
+      ], 
+      "thresholds": [
+        {
+          "colorMode": "critical", 
+          "fill": true, 
+          "line": true, 
+          "op": "gt", 
+          "value": 0
+        }
+      ], 
+      "timeFrom": "6h", 
+      "timeShift": null, 
+      "title": "PG's Stuck", 
+      "tooltip": {
+        "shared": false, 
+        "sort": 0, 
+        "value_type": "individual"
+      }, 
+      "type": "graph", 
+      "xaxis": {
+        "buckets": null, 
+        "mode": "time", 
+        "name": null, 
+        "show": true, 
+        "values": [
+          "total"
+        ]
+      }, 
+      "yaxes": [
+        {
+          "format": "short", 
+          "label": null, 
+          "logBase": 1, 
+          "max": null, 
+          "min": "0", 
+          "show": true
+        }, 
+        {
+          "format": "short", 
+          "label": null, 
+          "logBase": 1, 
+          "max": null, 
+          "min": null, 
+          "show": false
+        }
+      ]
+    }, 
+    {
+      "alert": {
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                0
+              ], 
+              "type": "lt"
+            }, 
+            "operator": {
+              "type": "and"
+            }, 
+            "query": {
+              "params": [
+                "A", 
+                "5m", 
+                "now"
+              ]
+            }, 
+            "reducer": {
+              "params": [], 
+              "type": "min"
+            }, 
+            "type": "query"
+          }
+        ], 
+        "executionErrorState": "alerting", 
+        "frequency": "60s", 
+        "handler": 1, 
+        "name": "OSD Host Loss Check alert", 
+        "noDataState": "no_data", 
+        "notifications": [
+          {
+            "id": 1
+          }
+        ]
+      }, 
+      "aliasColors": {
+        "Largest OSD Host": "#890F02"
+      }, 
+      "bars": false, 
+      "dashLength": 10, 
+      "dashes": false, 
+      "datasource": null, 
+      "description": "This graph checks the cluster @ 90% full is enough to support the loss of the largest OSD host", 
+      "fill": 1, 
+      "gridPos": {
+        "h": 7, 
+        "w": 4, 
+        "x": 20, 
+        "y": 9
+      }, 
+      "id": 7, 
+      "legend": {
+        "avg": false, 
+        "current": false, 
+        "max": false, 
+        "min": false, 
+        "show": false, 
+        "total": false, 
+        "values": false
+      }, 
+      "lines": true, 
+      "linewidth": 1, 
+      "links": [], 
+      "minSpan": 4, 
+      "nullPointMode": "null", 
+      "percentage": false, 
+      "pointradius": 5, 
+      "points": false, 
+      "renderer": "flot", 
+      "seriesOverrides": [], 
+      "spaceLength": 10, 
+      "stack": false, 
+      "steppedLine": false, 
+      "targets": [
+        {
+          "expr": "max(\n  sum(ceph_osd_stat_bytes - ceph_osd_stat_bytes_used)\n) * 0.9 -\nmax(\n  sum by (instance) (\n    ceph_osd_stat_bytes + on (ceph_daemon) group_left (instance) (ceph_disk_occupation*0)\n  )\n)", 
+          "format": "time_series", 
+          "hide": false, 
+          "intervalFactor": 2, 
+          "refId": "A", 
+          "step": 40, 
+          "textEditor": true
+        }
+      ], 
+      "thresholds": [
+        {
+          "colorMode": "critical", 
+          "fill": true, 
+          "line": true, 
+          "op": "lt", 
+          "value": 0
+        }
+      ], 
+      "timeFrom": null, 
+      "timeShift": null, 
+      "title": "OSD Host Loss Check", 
+      "tooltip": {
+        "shared": true, 
+        "sort": 0, 
+        "value_type": "individual"
+      }, 
+      "type": "graph", 
+      "xaxis": {
+        "buckets": null, 
+        "mode": "time", 
+        "name": null, 
+        "show": true, 
+        "values": []
+      }, 
+      "yaxes": [
+        {
+          "format": "decbytes", 
+          "label": null, 
+          "logBase": 1, 
+          "max": null, 
+          "min": "0", 
+          "show": true
+        }, 
+        {
+          "format": "short", 
+          "label": null, 
+          "logBase": 1, 
+          "max": null, 
+          "min": null, 
+          "show": true
+        }
+      ]
+    }, 
+    {
+      "alert": {
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                1000
+              ], 
+              "type": "gt"
+            }, 
+            "operator": {
+              "type": "and"
+            }, 
+            "query": {
+              "params": [
+                "A", 
+                "1m", 
+                "now"
+              ]
+            }, 
+            "reducer": {
+              "params": [], 
+              "type": "max"
+            }, 
+            "type": "query"
+          }
+        ], 
+        "executionErrorState": "alerting", 
+        "frequency": "30s", 
+        "handler": 1, 
+        "name": "Slow OSD responses alert", 
+        "noDataState": "ok", 
+        "notifications": [
+          {
+            "id": 1
+          }
+        ]
+      }, 
+      "aliasColors": {
+        "Largest OSD Host": "#890F02"
+      }, 
+      "bars": false, 
+      "dashLength": 10, 
+      "dashes": false, 
+      "datasource": null, 
+      "description": "Graph checking for OSD Latencies that are above 1s.", 
+      "fill": 1, 
+      "gridPos": {
+        "h": 7, 
+        "w": 4, 
+        "x": 0, 
+        "y": 16
+      }, 
+      "hideTimeOverride": true, 
+      "id": 8, 
+      "legend": {
+        "avg": false, 
+        "current": false, 
+        "max": false, 
+        "min": false, 
+        "show": true, 
+        "total": false, 
+        "values": false
+      }, 
+      "lines": true, 
+      "linewidth": 1, 
+      "links": [], 
+      "maxDataPoints": "", 
+      "minSpan": 4, 
+      "nullPointMode": "null", 
+      "percentage": false, 
+      "pointradius": 5, 
+      "points": false, 
+      "renderer": "flot", 
+      "seriesOverrides": [], 
+      "spaceLength": 10, 
+      "stack": false, 
+      "steppedLine": false, 
+      "targets": [
+        {
+          "expr": "(\n  (\n    irate(node_disk_read_time_ms[5m]) / clamp_min(irate(node_disk_reads_completed[5m]), 0.001) +\n    irate(node_disk_write_time_ms[5m]) / clamp_min(irate(node_disk_writes_completed[5m]), 0.001)\n  ) and on (instance, device) ceph_disk_occupation\n) >= 1000", 
+          "format": "time_series", 
+          "intervalFactor": 1, 
+          "legendFormat": "{{instance}}.{{device}}", 
+          "refId": "A", 
+          "step": 40, 
+          "textEditor": true
+        }
+      ], 
+      "thresholds": [
+        {
+          "colorMode": "critical", 
+          "fill": true, 
+          "line": true, 
+          "op": "gt", 
+          "value": 1000
+        }
+      ], 
+      "timeFrom": "1h", 
+      "timeShift": null, 
+      "title": "Slow OSD responses", 
+      "tooltip": {
+        "shared": true, 
+        "sort": 0, 
+        "value_type": "individual"
+      }, 
+      "type": "graph", 
+      "xaxis": {
+        "buckets": null, 
+        "mode": "time", 
+        "name": null, 
+        "show": true, 
+        "values": []
+      }, 
+      "yaxes": [
+        {
+          "format": "none", 
+          "label": "ms", 
+          "logBase": 1, 
+          "max": null, 
+          "min": "0", 
+          "show": true
+        }, 
+        {
+          "format": "short", 
+          "label": null, 
+          "logBase": 1, 
+          "max": null, 
+          "min": null, 
+          "show": false
+        }
+      ]
+    }, 
+    {
+      "alert": {
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                10
+              ], 
+              "type": "gt"
+            }, 
+            "operator": {
+              "type": "and"
+            }, 
+            "query": {
+              "params": [
+                "A", 
+                "5m", 
+                "now"
+              ]
+            }, 
+            "reducer": {
+              "params": [], 
+              "type": "max"
+            }, 
+            "type": "query"
+          }
+        ], 
+        "executionErrorState": "alerting", 
+        "frequency": "30s", 
+        "handler": 1, 
+        "name": "Network Errors alert", 
+        "noDataState": "no_data", 
+        "notifications": [
+          {
+            "id": 1
+          }
+        ]
+      }, 
+      "aliasColors": {}, 
+      "bars": false, 
+      "dashLength": 10, 
+      "dashes": false, 
+      "datasource": null, 
+      "description": "Checks all interfaces for dropped/error packets, and alerts if more than 10 are seen in a 5m interval", 
+      "fill": 1, 
+      "gridPos": {
+        "h": 7, 
+        "w": 4, 
+        "x": 4, 
+        "y": 16
+      }, 
+      "id": 9, 
+      "legend": {
+        "avg": false, 
+        "current": false, 
+        "max": false, 
+        "min": false, 
+        "show": false, 
+        "total": false, 
+        "values": false
+      }, 
+      "lines": true, 
+      "linewidth": 1, 
+      "links": [], 
+      "minSpan": 4, 
+      "nullPointMode": "null", 
+      "percentage": false, 
+      "pointradius": 5, 
+      "points": false, 
+      "renderer": "flot", 
+      "seriesOverrides": [], 
+      "spaceLength": 10, 
+      "stack": false, 
+      "steppedLine": false, 
+      "targets": [
+        {
+          "expr": "sum by (instance, device) (\n  irate(node_network_receive_drop{device=~\"(eth|en|bond|ib|mlx).*\"}[5m]) +\n  irate(node_network_receive_errs{device=~\"(eth|en|bond|ib|mlx).*\"}[5m]) +\n  irate(node_network_transmit_drop{device=~\"(eth|en|bond|ib|mlx).*\"}[5m]) +\n  irate(node_network_transmit_errs{device=~\"(eth|en|bond|ib|mlx).*\"}[5m])\n) > 0", 
+          "format": "time_series", 
+          "intervalFactor": 2, 
+          "legendFormat": "{{instance}} / {{device}}", 
+          "refId": "A", 
+          "step": 40, 
+          "textEditor": true
+        }
+      ], 
+      "thresholds": [
+        {
+          "colorMode": "critical", 
+          "fill": true, 
+          "line": true, 
+          "op": "gt", 
+          "value": 10
+        }
+      ], 
+      "timeFrom": null, 
+      "timeShift": null, 
+      "title": "Network Packet Drops/Errors", 
+      "tooltip": {
+        "shared": true, 
+        "sort": 0, 
+        "value_type": "individual"
+      }, 
+      "type": "graph", 
+      "xaxis": {
+        "buckets": null, 
+        "mode": "time", 
+        "name": null, 
+        "show": true, 
+        "values": []
+      }, 
+      "yaxes": [
+        {
+          "format": "none", 
+          "label": null, 
+          "logBase": 1, 
+          "max": null, 
+          "min": "0", 
+          "show": true
+        }, 
+        {
+          "format": "short", 
+          "label": null, 
+          "logBase": 1, 
+          "max": null, 
+          "min": null, 
+          "show": false
+        }
+      ]
+    }, 
+    {
+      "alert": {
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                85
+              ], 
+              "type": "gt"
+            }, 
+            "operator": {
+              "type": "and"
+            }, 
+            "query": {
+              "params": [
+                "A", 
+                "5m", 
+                "now"
+              ]
+            }, 
+            "reducer": {
+              "params": [], 
+              "type": "avg"
+            }, 
+            "type": "query"
+          }
+        ], 
+        "executionErrorState": "alerting", 
+        "frequency": "60s", 
+        "handler": 1, 
+        "name": "Pool Capacity alert", 
+        "noDataState": "no_data", 
+        "notifications": [
+          {
+            "id": 1
+          }
+        ]
+      }, 
+      "aliasColors": {}, 
+      "bars": false, 
+      "dashLength": 10, 
+      "dashes": false, 
+      "datasource": null, 
+      "fill": 5, 
+      "gridPos": {
+        "h": 7, 
+        "w": 4, 
+        "x": 8, 
+        "y": 16
+      }, 
+      "id": 10, 
+      "legend": {
+        "avg": false, 
+        "current": false, 
+        "max": false, 
+        "min": false, 
+        "show": true, 
+        "total": false, 
+        "values": false
+      }, 
+      "lines": true, 
+      "linewidth": 2, 
+      "links": [], 
+      "minSpan": 4, 
+      "nullPointMode": "null", 
+      "percentage": false, 
+      "pointradius": 5, 
+      "points": false, 
+      "renderer": "flot", 
+      "repeat": null, 
+      "seriesOverrides": [], 
+      "spaceLength": 10, 
+      "stack": false, 
+      "steppedLine": false, 
+      "targets": [
+        {
+          "expr": "ceph_pool_bytes_used / (ceph_pool_bytes_used + ceph_pool_max_avail) * 100 + on (pool_id) group_left (name) (ceph_pool_metadata*0)", 
+          "format": "time_series", 
+          "intervalFactor": 2, 
+          "legendFormat": "{{name}}", 
+          "refId": "A", 
+          "step": 40, 
+          "textEditor": true
+        }
+      ], 
+      "thresholds": [
+        {
+          "colorMode": "critical", 
+          "fill": true, 
+          "line": true, 
+          "op": "gt", 
+          "value": 85
+        }
+      ], 
+      "timeFrom": null, 
+      "timeShift": null, 
+      "title": "Pool Capacity", 
+      "tooltip": {
+        "shared": true, 
+        "sort": 0, 
+        "value_type": "individual"
+      }, 
+      "type": "graph", 
+      "xaxis": {
+        "buckets": null, 
+        "mode": "time", 
+        "name": null, 
+        "show": true, 
+        "values": []
+      }, 
+      "yaxes": [
+        {
+          "format": "percent", 
+          "label": null, 
+          "logBase": 1, 
+          "max": "100", 
+          "min": "0", 
+          "show": true
+        }, 
+        {
+          "format": "short", 
+          "label": null, 
+          "logBase": 1, 
+          "max": null, 
+          "min": null, 
+          "show": true
+        }
+      ]
+    }, 
+    {
+      "alert": {
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                0
+              ], 
+              "type": "gt"
+            }, 
+            "operator": {
+              "type": "and"
+            }, 
+            "query": {
+              "params": [
+                "A", 
+                "10s", 
+                "now"
+              ]
+            }, 
+            "reducer": {
+              "params": [], 
+              "type": "last"
+            }, 
+            "type": "query"
+          }
+        ], 
+        "executionErrorState": "alerting", 
+        "frequency": "30s", 
+        "handler": 1, 
+        "name": "MONs Down alert", 
+        "noDataState": "ok", 
+        "notifications": [
+          {
+            "id": 1
+          }
+        ]
+      }, 
+      "aliasColors": {}, 
+      "bars": false, 
+      "dashLength": 10, 
+      "dashes": false, 
+      "datasource": null, 
+      "description": "Count of MONs currently not in quorum/down", 
+      "fill": 2, 
+      "gridPos": {
+        "h": 7, 
+        "w": 4, 
+        "x": 12, 
+        "y": 16
+      }, 
+      "hideTimeOverride": true, 
+      "id": 13, 
+      "legend": {
+        "alignAsTable": false, 
+        "avg": false, 
+        "current": false, 
+        "hideZero": false, 
+        "max": false, 
+        "min": false, 
+        "rightSide": false, 
+        "show": false, 
+        "total": false, 
+        "values": false
+      }, 
+      "lines": true, 
+      "linewidth": 2, 
+      "links": [], 
+      "minSpan": 4, 
+      "nullPointMode": "null", 
+      "percentage": false, 
+      "pointradius": 5, 
+      "points": false, 
+      "renderer": "flot", 
+      "seriesOverrides": [], 
+      "spaceLength": 10, 
+      "stack": false, 
+      "steppedLine": true, 
+      "targets": [
+        {
+          "expr": "count(ceph_mon_quorum_status != 1)", 
+          "format": "time_series", 
+          "hide": false, 
+          "instant": false, 
+          "intervalFactor": 1, 
+          "legendFormat": "down", 
+          "refId": "A", 
+          "step": 4, 
+          "textEditor": true
+        }
+      ], 
+      "thresholds": [
+        {
+          "colorMode": "critical", 
+          "fill": true, 
+          "line": true, 
+          "op": "gt", 
+          "value": 0
+        }
+      ], 
+      "timeFrom": "5m", 
+      "timeShift": null, 
+      "title": "MONs Down", 
+      "tooltip": {
+        "shared": true, 
+        "sort": 0, 
+        "value_type": "individual"
+      }, 
+      "type": "graph", 
+      "xaxis": {
+        "buckets": null, 
+        "mode": "time", 
+        "name": null, 
+        "show": true, 
+        "values": []
+      }, 
+      "yaxes": [
+        {
+          "format": "short", 
+          "label": null, 
+          "logBase": 1, 
+          "max": "7", 
+          "min": "0", 
+          "show": true
+        }, 
+        {
+          "format": "short", 
+          "label": null, 
+          "logBase": 1, 
+          "max": null, 
+          "min": null, 
+          "show": false
+        }
+      ]
+    }, 
+    {
+      "alert": {
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                85
+              ], 
+              "type": "gt"
+            }, 
+            "operator": {
+              "type": "and"
+            }, 
+            "query": {
+              "params": [
+                "A", 
+                "1h", 
+                "now"
+              ]
+            }, 
+            "reducer": {
+              "params": [], 
+              "type": "avg"
+            }, 
+            "type": "query"
+          }
+        ], 
+        "executionErrorState": "alerting", 
+        "frequency": "60s", 
+        "handler": 1, 
+        "name": "Cluster Capacity alert", 
+        "noDataState": "no_data", 
+        "notifications": [
+          {
+            "id": 1
+          }
+        ]
+      }, 
+      "aliasColors": {}, 
+      "bars": false, 
+      "dashLength": 10, 
+      "dashes": false, 
+      "datasource": null, 
+      "description": "This trigger raises a notification if the raw used crosses the 85% capacity threshold of the ceph cluster", 
+      "fill": 1, 
+      "gridPos": {
+        "h": 7, 
+        "w": 4, 
+        "x": 16, 
+        "y": 16
+      }, 
+      "id": 5, 
+      "legend": {
+        "avg": false, 
+        "current": false, 
+        "max": false, 
+        "min": false, 
+        "show": true, 
+        "total": false, 
+        "values": false
+      }, 
+      "lines": true, 
+      "linewidth": 1, 
+      "links": [], 
+      "minSpan": 4, 
+      "nullPointMode": "null", 
+      "percentage": false, 
+      "pointradius": 5, 
+      "points": false, 
+      "renderer": "flot", 
+      "seriesOverrides": [], 
+      "spaceLength": 10, 
+      "stack": false, 
+      "steppedLine": false, 
+      "targets": [
+        {
+          "expr": "sum(ceph_osd_stat_bytes_used) / sum(ceph_osd_stat_bytes) * 100 ", 
+          "format": "time_series", 
+          "hide": false, 
+          "intervalFactor": 2, 
+          "legendFormat": "Raw Capacity Used %", 
+          "refId": "A", 
+          "step": 40, 
+          "textEditor": true
+        }
+      ], 
+      "thresholds": [
+        {
+          "colorMode": "critical", 
+          "fill": true, 
+          "line": true, 
+          "op": "gt", 
+          "value": 85
+        }
+      ], 
+      "timeFrom": null, 
+      "timeShift": null, 
+      "title": "Cluster Capacity", 
+      "tooltip": {
+        "shared": true, 
+        "sort": 0, 
+        "value_type": "individual"
+      }, 
+      "type": "graph", 
+      "xaxis": {
+        "buckets": null, 
+        "mode": "time", 
+        "name": null, 
+        "show": true, 
+        "values": []
+      }, 
+      "yaxes": [
+        {
+          "format": "percent", 
+          "label": "", 
+          "logBase": 1, 
+          "max": "100", 
+          "min": "0", 
+          "show": true
+        }, 
+        {
+          "format": "short", 
+          "label": null, 
+          "logBase": 1, 
+          "max": null, 
+          "min": null, 
+          "show": false
+        }
+      ]
     }
-  ],
-  "schemaVersion": 14,
-  "style": "dark",
-  "tags": [],
+  ], 
+  "refresh": "15s", 
+  "schemaVersion": 16, 
+  "style": "dark", 
+  "tags": [], 
   "templating": {
     "list": []
-  },
+  }, 
   "time": {
-    "from": "now-1h",
+    "from": "now-1h", 
     "to": "now"
-  },
+  }, 
   "timepicker": {
     "refresh_intervals": [
-      "5s",
-      "10s",
-      "30s",
-      "1m",
-      "5m",
-      "15m",
-      "30m",
-      "1h",
-      "2h",
+      "5s", 
+      "10s", 
+      "15s", 
+      "30s", 
+      "1m", 
+      "5m", 
+      "15m", 
+      "30m", 
+      "1h", 
+      "2h", 
       "1d"
-    ],
+    ], 
     "time_options": [
-      "5m",
-      "15m",
-      "1h",
-      "6h",
-      "12h",
-      "24h",
-      "2d",
-      "7d",
+      "5m", 
+      "15m", 
+      "1h", 
+      "6h", 
+      "12h", 
+      "24h", 
+      "2d", 
+      "7d", 
       "30d"
     ]
-  },
-  "timezone": "browser",
-  "title": "Alert Status"
+  }, 
+  "timezone": "browser", 
+  "title": "Alert Status", 
+  "uid": "000000013", 
+  "version": 13
 }
