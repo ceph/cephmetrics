@@ -1,2189 +1,2141 @@
 {
+  "__requires": [
+    {
+      "type": "grafana", 
+      "id": "grafana", 
+      "name": "Grafana", 
+      "version": "5.0.4"
+    }, 
+    {
+      "type": "panel", 
+      "id": "grafana-piechart-panel", 
+      "name": "Pie Chart", 
+      "version": "1.3.0"
+    }, 
+    {
+      "type": "datasource", 
+      "id": "prometheus", 
+      "name": "Prometheus", 
+      "version": "5.0.0"
+    }, 
+    {
+      "type": "panel", 
+      "id": "singlestat", 
+      "name": "Singlestat", 
+      "version": "5.0.0"
+    }, 
+    {
+      "type": "panel", 
+      "id": "table", 
+      "name": "Table", 
+      "version": "5.0.0"
+    }
+  ], 
   "annotations": {
     "list": [
       {
-        "builtIn": 1,
-        "datasource": "-- Grafana --",
-        "enable": true,
-        "hide": true,
-        "iconColor": "rgba(0, 211, 255, 1)",
-        "name": "Annotations & Alerts",
+        "builtIn": 1, 
+        "datasource": "-- Grafana --", 
+        "enable": true, 
+        "hide": true, 
+        "iconColor": "rgba(0, 211, 255, 1)", 
+        "name": "Annotations & Alerts", 
         "type": "dashboard"
       }
     ]
-  },
-  "editable": true,
-  "gnetId": null,
-  "graphTooltip": 0,
-  "hideControls": true,
+  }, 
+  "editable": true, 
+  "gnetId": null, 
+  "graphTooltip": 0, 
+  "id": null, 
+  "iteration": 1526250090593, 
   "links": [
     {
-      "asDropdown": true,
-      "icon": "external link",
+      "asDropdown": true, 
+      "icon": "external link", 
       "tags": [
         "overview"
-      ],
-      "title": "Shortcuts",
+      ], 
+      "title": "Shortcuts", 
       "type": "dashboards"
     }
-  ],
-  "refresh": "10s",
-  "rows": [
+  ], 
+  "panels": [
     {
-      "collapse": false,
-      "height": "220px",
-      "panels": [
+      "collapsed": false, 
+      "gridPos": {
+        "h": 1, 
+        "w": 24, 
+        "x": 0, 
+        "y": 0
+      }, 
+      "id": 24, 
+      "panels": [], 
+      "repeat": null, 
+      "title": "OSD Summary", 
+      "type": "row"
+    }, 
+    {
+      "cacheTimeout": null, 
+      "colorBackground": false, 
+      "colorValue": false, 
+      "colors": [
+        "rgba(245, 54, 54, 0.9)", 
+        "rgba(237, 129, 40, 0.89)", 
+        "rgba(50, 172, 45, 0.97)"
+      ], 
+      "datasource": null, 
+      "format": "none", 
+      "gauge": {
+        "maxValue": 100, 
+        "minValue": 0, 
+        "show": false, 
+        "thresholdLabels": false, 
+        "thresholdMarkers": true
+      }, 
+      "gridPos": {
+        "h": 6, 
+        "w": 2, 
+        "x": 0, 
+        "y": 1
+      }, 
+      "hideTimeOverride": true, 
+      "id": 1, 
+      "interval": null, 
+      "links": [], 
+      "mappingType": 1, 
+      "mappingTypes": [
         {
-          "cacheTimeout": null,
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "datasource": null,
-          "format": "none",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "hideTimeOverride": true,
-          "id": 1,
-          "interval": null,
-          "links": [],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": "",
-          "minSpan": 1,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "",
-          "postfixFontSize": "50%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 1,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-          },
-          "tableColumn": "",
-          "targets": [
-            {
-              "expr": "count(max by (id) (ceph_osd_metadata))",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "A",
-              "step": 2,
-              "textEditor": true
-            }
-          ],
-          "thresholds": "",
-          "timeFrom": "1m",
-          "title": "OSDs",
-          "type": "singlestat",
-          "valueFontSize": "80%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "N/A",
-              "value": "null"
-            }
-          ],
-          "valueName": "avg"
-        },
+          "name": "value to text", 
+          "value": 1
+        }, 
         {
-          "cacheTimeout": null,
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "datasource": null,
-          "format": "none",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "hideTimeOverride": true,
-          "id": 2,
-          "interval": null,
-          "links": [],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": 100,
-          "minSpan": 1,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "",
-          "postfixFontSize": "50%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 1,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-          },
-          "tableColumn": "",
-          "targets": [
-            {
-              "expr": "count(ceph_osd_up > 0.5)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "A",
-              "step": 2,
-              "textEditor": true
-            }
-          ],
-          "thresholds": "",
-          "timeFrom": "1m",
-          "title": "OSDs UP",
-          "type": "singlestat",
-          "valueFontSize": "80%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "N/A",
-              "value": "null"
-            }
-          ],
-          "valueName": "avg"
-        },
-        {
-          "cacheTimeout": null,
-          "colorBackground": true,
-          "colorValue": false,
-          "colors": [
-            "rgba(251,251,251,0.97)",
-            "rgba(255,165,0, 1)",
-            "rgba(245, 54, 54, 0.9)"
-          ],
-          "datasource": null,
-          "decimals": 0,
-          "format": "none",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "hideTimeOverride": true,
-          "id": 3,
-          "interval": null,
-          "links": [],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": 100,
-          "minSpan": 1,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "",
-          "postfixFontSize": "50%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 1,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-          },
-          "tableColumn": "",
-          "targets": [
-            {
-              "expr": "count(ceph_osd_up < 0.5)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "A",
-              "step": 2
-            }
-          ],
-          "thresholds": "1,3",
-          "timeFrom": "1m",
-          "title": "OSDs DOWN",
-          "type": "singlestat",
-          "valueFontSize": "80%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "0",
-              "value": "null"
-            }
-          ],
-          "valueName": "current"
-        },
-        {
-          "aliasColors": {},
-          "cacheTimeout": null,
-          "combine": {
-            "label": "Others",
-            "threshold": 0
-          },
-          "datasource": null,
-          "description": "The pie chart shows the various OSD sizes used within the cluster",
-          "fontSize": "80%",
-          "format": "none",
-          "height": "220",
-          "hideTimeOverride": true,
-          "id": 4,
-          "interval": null,
-          "legend": {
-            "percentage": false,
-            "show": true,
-            "sortDesc": true,
-            "values": true
-          },
-          "legendType": "Right side",
-          "links": [],
-          "maxDataPoints": "",
-          "minSpan": 3,
-          "nullPointMode": "connected",
-          "pieType": "pie",
-          "span": 3,
-          "strokeWidth": "1",
-          "targets": [
-            {
-              "expr": "count(ceph_osd_stat_bytes < 1099511627776)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "<1 TB",
-              "refId": "A",
-              "step": 2
-            },
-            {
-              "expr": "count(ceph_osd_stat_bytes >= 1099511627776 < 2199023255552)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "<2 TB",
-              "refId": "B",
-              "step": 2
-            },
-            {
-              "expr": "count(ceph_osd_stat_bytes >= 2199023255552 < 3298534883328)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "<3TB",
-              "refId": "C",
-              "step": 2
-            },
-            {
-              "expr": "count(ceph_osd_stat_bytes >= 3298534883328 < 4398046511104)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "<4TB",
-              "refId": "D",
-              "step": 2
-            },
-            {
-              "expr": "count(ceph_osd_stat_bytes >= 4398046511104 < 6597069766656)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "<6TB",
-              "refId": "E",
-              "step": 2
-            },
-            {
-              "expr": "count(ceph_osd_stat_bytes >= 6597069766656 < 8796093022208)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "<8TB",
-              "refId": "F",
-              "step": 2
-            },
-            {
-              "expr": "count(ceph_osd_stat_bytes >= 8796093022208 < 10995116277760)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "<10TB",
-              "refId": "G",
-              "step": 2
-            },
-            {
-              "expr": "count(ceph_osd_stat_bytes >= 10995116277760 < 13194139533312)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "<12TB",
-              "refId": "H",
-              "step": 2
-            },
-            {
-              "expr": "count(ceph_osd_stat_bytes >= 13194139533312)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "12TB+",
-              "refId": "I",
-              "step": 2
-            }
-          ],
-          "timeFrom": "2m",
-          "timeShift": null,
-          "title": "OSD Size Summary",
-          "type": "grafana-piechart-panel",
-          "valueName": "current"
-        },
-        {
-          "columns": [
-            {
-              "text": "Current",
-              "value": "current"
-            }
-          ],
-          "datasource": null,
-          "fontSize": "100%",
-          "hideTimeOverride": true,
-          "id": 5,
-          "links": [],
-          "maxDataPoints": "",
-          "minSpan": 2,
-          "pageSize": 50,
-          "scroll": true,
-          "showHeader": true,
-          "sort": {
-            "col": 0,
-            "desc": false
-          },
-          "span": 2,
-          "styles": [
-            {
-              "alias": "Time",
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "pattern": "Time",
-              "type": "date"
-            },
-            {
-              "alias": "Size",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 0,
-              "pattern": "Current",
-              "thresholds": [],
-              "type": "number",
-              "unit": "decbytes"
-            },
-            {
-              "alias": "Hostname|OSD Id",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "pattern": "Metric",
-              "thresholds": [],
-              "type": "number",
-              "unit": "short"
-            },
-            {
-              "alias": "",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "decimals": 2,
-              "pattern": "/.*/",
-              "thresholds": [],
-              "type": "number",
-              "unit": "short"
-            }
-          ],
-          "targets": [
-            {
-              "expr": "sum by (instance, ceph_daemon) (\n  ceph_disk_occupation*0 + on (ceph_daemon) group_right(instance) ceph_osd_stat_bytes\n)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "{{instance}}|{{ceph_daemon}}",
-              "refId": "A",
-              "step": 2,
-              "textEditor": true
-            }
-          ],
-          "timeFrom": "1m",
-          "timeShift": null,
-          "title": "OSD Size",
-          "transform": "timeseries_aggregations",
-          "type": "table"
-        },
-        {
-          "aliasColors": {
-            "Non-Encrypted": "#E5AC0E"
-          },
-          "cacheTimeout": null,
-          "combine": {
-            "label": "Others",
-            "threshold": 0
-          },
-          "datasource": null,
-          "fontSize": "80%",
-          "format": "none",
-          "height": "200px",
-          "hideTimeOverride": true,
-          "id": 6,
-          "interval": null,
-          "legend": {
-            "percentage": false,
-            "show": true,
-            "values": true
-          },
-          "legendType": "Under graph",
-          "links": [],
-          "maxDataPoints": "1",
-          "minSpan": 2,
-          "nullPointMode": "connected",
-          "pieType": "pie",
-          "span": 2,
-          "strokeWidth": 1,
-          "targets": [
-            {
-              "expr": "",
-              "format": "time_series",
-              "hide": true,
-              "intervalFactor": 2,
-              "refId": "C",
-              "textEditor": true
-            },
-            {
-              "expr": "",
-              "format": "time_series",
-              "hide": false,
-              "intervalFactor": 2,
-              "refId": "D",
-              "targetFull": "alias(countSeries(currentAbove(currentAbove(transformNull(keepLastValue(collectd.*.cephmetrics.gauge.$cluster_name.osd.*.encrypted),-1),0),0.5)),\"Encrypted\")",
-              "textEditor": true
-            },
-            {
-              "expr": "",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "E",
-              "targetFull": "alias(countSeries(currentBelow(currentAbove(transformNull(keepLastValue(collectd.*.cephmetrics.gauge.$cluster_name.osd.*.encrypted),-1),0),0.5)),\"Non-Encrypted\")",
-              "textEditor": true
-            }
-          ],
-          "timeFrom": "2m",
-          "timeShift": null,
-          "title": "OSD Encryption Summary",
-          "type": "grafana-piechart-panel",
-          "valueName": "current"
-        },
-        {
-          "aliasColors": {
-            "Non-Encrypted": "#E5AC0E"
-          },
-          "cacheTimeout": null,
-          "combine": {
-            "label": "Others",
-            "threshold": 0
-          },
-          "datasource": null,
-          "fontSize": "80%",
-          "format": "none",
-          "height": "200px",
-          "hideTimeOverride": true,
-          "id": 7,
-          "interval": null,
-          "legend": {
-            "percentage": false,
-            "show": true,
-            "values": true
-          },
-          "legendType": "Under graph",
-          "links": [],
-          "maxDataPoints": "1",
-          "minSpan": 2,
-          "nullPointMode": "connected",
-          "pieType": "pie",
-          "span": 2,
-          "strokeWidth": 1,
-          "targets": [
-            {
-              "expr": "count(ceph_bluefs_wal_total_bytes)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "bluestore",
-              "refId": "A",
-              "step": 240
-            },
-            {
-              "expr": "count(ceph_osd_metadata) - count(ceph_bluefs_wal_total_bytes)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "filestore",
-              "refId": "B",
-              "step": 240
-            },
-            {
-              "expr": "absent(ceph_bluefs_wal_total_bytes)*count(ceph_osd_metadata)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "filestore",
-              "refId": "C",
-              "step": 240
-            }
-          ],
-          "timeFrom": "2m",
-          "timeShift": null,
-          "title": "Summary of OSD Types",
-          "type": "grafana-piechart-panel",
-          "valueName": "current"
+          "name": "range to text", 
+          "value": 2
         }
-      ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": true,
-      "title": "OSD Summary",
-      "titleSize": "h5"
-    },
+      ], 
+      "maxDataPoints": "", 
+      "minSpan": 2, 
+      "nullPointMode": "connected", 
+      "nullText": null, 
+      "postfix": "", 
+      "postfixFontSize": "50%", 
+      "prefix": "", 
+      "prefixFontSize": "50%", 
+      "rangeMaps": [
+        {
+          "from": "null", 
+          "text": "N/A", 
+          "to": "null"
+        }
+      ], 
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)", 
+        "full": false, 
+        "lineColor": "rgb(31, 120, 193)", 
+        "show": false
+      }, 
+      "tableColumn": "", 
+      "targets": [
+        {
+          "expr": "count(max by (id) (ceph_osd_metadata))", 
+          "format": "time_series", 
+          "intervalFactor": 2, 
+          "refId": "A", 
+          "step": 2, 
+          "textEditor": true
+        }
+      ], 
+      "thresholds": "", 
+      "timeFrom": "1m", 
+      "title": "OSDs", 
+      "type": "singlestat", 
+      "valueFontSize": "80%", 
+      "valueMaps": [
+        {
+          "op": "=", 
+          "text": "N/A", 
+          "value": "null"
+        }
+      ], 
+      "valueName": "avg"
+    }, 
     {
-      "collapse": false,
-      "height": "500",
+      "cacheTimeout": null, 
+      "colorBackground": false, 
+      "colorValue": false, 
+      "colors": [
+        "rgba(245, 54, 54, 0.9)", 
+        "rgba(237, 129, 40, 0.89)", 
+        "rgba(50, 172, 45, 0.97)"
+      ], 
+      "datasource": null, 
+      "format": "none", 
+      "gauge": {
+        "maxValue": 100, 
+        "minValue": 0, 
+        "show": false, 
+        "thresholdLabels": false, 
+        "thresholdMarkers": true
+      }, 
+      "gridPos": {
+        "h": 6, 
+        "w": 2, 
+        "x": 2, 
+        "y": 1
+      }, 
+      "hideTimeOverride": true, 
+      "id": 2, 
+      "interval": null, 
+      "links": [], 
+      "mappingType": 1, 
+      "mappingTypes": [
+        {
+          "name": "value to text", 
+          "value": 1
+        }, 
+        {
+          "name": "range to text", 
+          "value": 2
+        }
+      ], 
+      "maxDataPoints": 100, 
+      "minSpan": 2, 
+      "nullPointMode": "connected", 
+      "nullText": null, 
+      "postfix": "", 
+      "postfixFontSize": "50%", 
+      "prefix": "", 
+      "prefixFontSize": "50%", 
+      "rangeMaps": [
+        {
+          "from": "null", 
+          "text": "N/A", 
+          "to": "null"
+        }
+      ], 
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)", 
+        "full": false, 
+        "lineColor": "rgb(31, 120, 193)", 
+        "show": false
+      }, 
+      "tableColumn": "", 
+      "targets": [
+        {
+          "expr": "count(ceph_osd_up > 0.5)", 
+          "format": "time_series", 
+          "intervalFactor": 2, 
+          "refId": "A", 
+          "step": 2, 
+          "textEditor": true
+        }
+      ], 
+      "thresholds": "", 
+      "timeFrom": "1m", 
+      "title": "OSDs UP", 
+      "type": "singlestat", 
+      "valueFontSize": "80%", 
+      "valueMaps": [
+        {
+          "op": "=", 
+          "text": "N/A", 
+          "value": "null"
+        }
+      ], 
+      "valueName": "avg"
+    }, 
+    {
+      "cacheTimeout": null, 
+      "colorBackground": true, 
+      "colorValue": false, 
+      "colors": [
+        "rgba(251,251,251,0.97)", 
+        "rgba(255,165,0, 1)", 
+        "rgba(245, 54, 54, 0.9)"
+      ], 
+      "datasource": null, 
+      "decimals": 0, 
+      "format": "none", 
+      "gauge": {
+        "maxValue": 100, 
+        "minValue": 0, 
+        "show": false, 
+        "thresholdLabels": false, 
+        "thresholdMarkers": true
+      }, 
+      "gridPos": {
+        "h": 6, 
+        "w": 2, 
+        "x": 4, 
+        "y": 1
+      }, 
+      "hideTimeOverride": true, 
+      "id": 3, 
+      "interval": null, 
+      "links": [
+        {
+          "dashUri": "db/ceph-health", 
+          "dashboard": "Ceph Health", 
+          "targetBlank": true, 
+          "title": "Ceph Health", 
+          "type": "dashboard"
+        }
+      ], 
+      "mappingType": 1, 
+      "mappingTypes": [
+        {
+          "name": "value to text", 
+          "value": 1
+        }, 
+        {
+          "name": "range to text", 
+          "value": 2
+        }
+      ], 
+      "maxDataPoints": 100, 
+      "minSpan": 2, 
+      "nullPointMode": "connected", 
+      "nullText": null, 
+      "postfix": "", 
+      "postfixFontSize": "50%", 
+      "prefix": "", 
+      "prefixFontSize": "50%", 
+      "rangeMaps": [
+        {
+          "from": "null", 
+          "text": "N/A", 
+          "to": "null"
+        }
+      ], 
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)", 
+        "full": false, 
+        "lineColor": "rgb(31, 120, 193)", 
+        "show": false
+      }, 
+      "tableColumn": "", 
+      "targets": [
+        {
+          "expr": "count(ceph_osd_up < 0.5)", 
+          "format": "time_series", 
+          "intervalFactor": 2, 
+          "refId": "A", 
+          "step": 2
+        }
+      ], 
+      "thresholds": "1,3", 
+      "timeFrom": "1m", 
+      "title": "OSDs DOWN", 
+      "type": "singlestat", 
+      "valueFontSize": "80%", 
+      "valueMaps": [
+        {
+          "op": "=", 
+          "text": "0", 
+          "value": "null"
+        }
+      ], 
+      "valueName": "current"
+    }, 
+    {
+      "columns": [
+        {
+          "text": "Current", 
+          "value": "current"
+        }
+      ], 
+      "datasource": null, 
+      "fontSize": "100%", 
+      "gridPos": {
+        "h": 6, 
+        "w": 6, 
+        "x": 6, 
+        "y": 1
+      }, 
+      "hideTimeOverride": true, 
+      "id": 5, 
+      "links": [], 
+      "maxDataPoints": "", 
+      "minSpan": 4, 
+      "pageSize": 50, 
+      "scroll": true, 
+      "showHeader": true, 
+      "sort": {
+        "col": 4, 
+        "desc": false
+      }, 
+      "styles": [
+        {
+          "alias": "Hostname", 
+          "colorMode": null, 
+          "colors": [
+            "rgba(245, 54, 54, 0.9)", 
+            "rgba(237, 129, 40, 0.89)", 
+            "rgba(50, 172, 45, 0.97)"
+          ], 
+          "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+          "decimals": 2, 
+          "pattern": "instance", 
+          "thresholds": [], 
+          "type": "string", 
+          "unit": "short"
+        }, 
+        {
+          "alias": "OSD", 
+          "colorMode": null, 
+          "colors": [
+            "rgba(245, 54, 54, 0.9)", 
+            "rgba(237, 129, 40, 0.89)", 
+            "rgba(50, 172, 45, 0.97)"
+          ], 
+          "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+          "decimals": 2, 
+          "pattern": "ceph_osd", 
+          "thresholds": [], 
+          "type": "number", 
+          "unit": "short"
+        }, 
+        {
+          "alias": "", 
+          "colorMode": null, 
+          "colors": [
+            "rgba(245, 54, 54, 0.9)", 
+            "rgba(237, 129, 40, 0.89)", 
+            "rgba(50, 172, 45, 0.97)"
+          ], 
+          "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+          "decimals": 2, 
+          "pattern": "device", 
+          "thresholds": [], 
+          "type": "number", 
+          "unit": "short"
+        }, 
+        {
+          "alias": "", 
+          "colorMode": null, 
+          "colors": [
+            "rgba(245, 54, 54, 0.9)", 
+            "rgba(237, 129, 40, 0.89)", 
+            "rgba(50, 172, 45, 0.97)"
+          ], 
+          "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+          "decimals": 2, 
+          "pattern": "Value", 
+          "thresholds": [], 
+          "type": "number", 
+          "unit": "bytes"
+        }, 
+        {
+          "alias": "", 
+          "colorMode": null, 
+          "colors": [
+            "rgba(245, 54, 54, 0.9)", 
+            "rgba(237, 129, 40, 0.89)", 
+            "rgba(50, 172, 45, 0.97)"
+          ], 
+          "decimals": 2, 
+          "pattern": "/.*/", 
+          "thresholds": [], 
+          "type": "hidden", 
+          "unit": "short"
+        }
+      ], 
+      "targets": [
+        {
+          "expr": "sum by (instance, ceph_daemon) (\n  ceph_disk_occupation*0 + on (ceph_daemon) group_right(instance,device,osd_id) ceph_osd_stat_bytes\n)", 
+          "format": "time_series", 
+          "hide": true, 
+          "instant": true, 
+          "intervalFactor": 1, 
+          "legendFormat": "", 
+          "refId": "A", 
+          "step": 2, 
+          "textEditor": true
+        }, 
+        {
+          "expr": "label_replace(ceph_disk_occupation,\"ceph_osd\",\"$1\",\"ceph_daemon\",\"osd.(.*)\") * on(ceph_osd) group_right(instance,device) \nlabel_replace(ceph_osd_stat_bytes{ceph_daemon=~\"osd.[[osd_id]]\"},\"ceph_osd\",\"$1\",\"ceph_daemon\",\"osd.(.*)\")", 
+          "format": "table", 
+          "hide": false, 
+          "instant": true, 
+          "intervalFactor": 1, 
+          "refId": "B"
+        }
+      ], 
+      "timeFrom": "1m", 
+      "timeShift": null, 
+      "title": "OSD Size", 
+      "transform": "table", 
+      "type": "table"
+    }, 
+    {
+      "aliasColors": {}, 
+      "breakPoint": "50%", 
+      "cacheTimeout": null, 
+      "combine": {
+        "label": "Others", 
+        "threshold": 0
+      }, 
+      "datasource": null, 
+      "fontSize": "80%", 
+      "format": "none", 
+      "gridPos": {
+        "h": 6, 
+        "w": 4, 
+        "x": 12, 
+        "y": 1
+      }, 
+      "id": 4, 
+      "interval": null, 
+      "legend": {
+        "show": true, 
+        "values": true
+      }, 
+      "legendType": "Under graph", 
+      "links": [], 
+      "maxDataPoints": 3, 
+      "nullPointMode": "connected", 
+      "pieType": "pie", 
+      "strokeWidth": 1, 
+      "targets": [
+        {
+          "expr": "count by(device_class) (ceph_osd_metadata)", 
+          "format": "time_series", 
+          "intervalFactor": 1, 
+          "legendFormat": "{{device_class}}", 
+          "refId": "A"
+        }
+      ], 
+      "title": "OSD Types Summary", 
+      "type": "grafana-piechart-panel", 
+      "valueName": "current"
+    }, 
+    {
+      "aliasColors": {}, 
+      "breakPoint": "50%", 
+      "cacheTimeout": null, 
+      "combine": {
+        "label": "Others", 
+        "threshold": "0.05"
+      }, 
+      "datasource": null, 
+      "description": "The pie chart shows the various OSD sizes used within the cluster", 
+      "fontSize": "80%", 
+      "format": "none", 
+      "gridPos": {
+        "h": 6, 
+        "w": 4, 
+        "x": 16, 
+        "y": 1
+      }, 
+      "height": "220", 
+      "hideTimeOverride": true, 
+      "id": 27, 
+      "interval": null, 
+      "legend": {
+        "header": "", 
+        "percentage": false, 
+        "show": true, 
+        "sideWidth": null, 
+        "sortDesc": true, 
+        "values": false
+      }, 
+      "legendType": "Right side", 
+      "links": [], 
+      "maxDataPoints": "", 
+      "minSpan": 6, 
+      "nullPointMode": "connected", 
+      "pieType": "pie", 
+      "strokeWidth": "1", 
+      "targets": [
+        {
+          "expr": "count(ceph_osd_stat_bytes < 1099511627776)", 
+          "format": "time_series", 
+          "intervalFactor": 2, 
+          "legendFormat": "<1 TB", 
+          "refId": "A", 
+          "step": 2
+        }, 
+        {
+          "expr": "count(ceph_osd_stat_bytes >= 1099511627776 < 2199023255552)", 
+          "format": "time_series", 
+          "intervalFactor": 2, 
+          "legendFormat": "<2 TB", 
+          "refId": "B", 
+          "step": 2
+        }, 
+        {
+          "expr": "count(ceph_osd_stat_bytes >= 2199023255552 < 3298534883328)", 
+          "format": "time_series", 
+          "intervalFactor": 2, 
+          "legendFormat": "<3TB", 
+          "refId": "C", 
+          "step": 2
+        }, 
+        {
+          "expr": "count(ceph_osd_stat_bytes >= 3298534883328 < 4398046511104)", 
+          "format": "time_series", 
+          "intervalFactor": 2, 
+          "legendFormat": "<4TB", 
+          "refId": "D", 
+          "step": 2
+        }, 
+        {
+          "expr": "count(ceph_osd_stat_bytes >= 4398046511104 < 6597069766656)", 
+          "format": "time_series", 
+          "intervalFactor": 2, 
+          "legendFormat": "<6TB", 
+          "refId": "E", 
+          "step": 2
+        }, 
+        {
+          "expr": "count(ceph_osd_stat_bytes >= 6597069766656 < 8796093022208)", 
+          "format": "time_series", 
+          "intervalFactor": 2, 
+          "legendFormat": "<8TB", 
+          "refId": "F", 
+          "step": 2
+        }, 
+        {
+          "expr": "count(ceph_osd_stat_bytes >= 8796093022208 < 10995116277760)", 
+          "format": "time_series", 
+          "intervalFactor": 2, 
+          "legendFormat": "<10TB", 
+          "refId": "G", 
+          "step": 2
+        }, 
+        {
+          "expr": "count(ceph_osd_stat_bytes >= 10995116277760 < 13194139533312)", 
+          "format": "time_series", 
+          "intervalFactor": 2, 
+          "legendFormat": "<12TB", 
+          "refId": "H", 
+          "step": 2
+        }, 
+        {
+          "expr": "count(ceph_osd_stat_bytes >= 13194139533312)", 
+          "format": "time_series", 
+          "intervalFactor": 2, 
+          "legendFormat": "12TB+", 
+          "refId": "I", 
+          "step": 2
+        }
+      ], 
+      "timeFrom": "2m", 
+      "timeShift": null, 
+      "title": "OSD Size Summary", 
+      "type": "grafana-piechart-panel", 
+      "valueName": "current"
+    }, 
+    {
+      "aliasColors": {
+        "Non-Encrypted": "#E5AC0E"
+      }, 
+      "breakPoint": "50%", 
+      "cacheTimeout": null, 
+      "combine": {
+        "label": "Others", 
+        "threshold": 0
+      }, 
+      "datasource": null, 
+      "fontSize": "80%", 
+      "format": "none", 
+      "gridPos": {
+        "h": 6, 
+        "w": 4, 
+        "x": 20, 
+        "y": 1
+      }, 
+      "height": "200px", 
+      "hideTimeOverride": true, 
+      "id": 7, 
+      "interval": null, 
+      "legend": {
+        "percentage": false, 
+        "show": true, 
+        "values": true
+      }, 
+      "legendType": "Under graph", 
+      "links": [], 
+      "maxDataPoints": "1", 
+      "minSpan": 4, 
+      "nullPointMode": "connected", 
+      "pieType": "pie", 
+      "strokeWidth": 1, 
+      "targets": [
+        {
+          "expr": "count(ceph_bluefs_wal_total_bytes)", 
+          "format": "time_series", 
+          "intervalFactor": 2, 
+          "legendFormat": "bluestore", 
+          "refId": "A", 
+          "step": 240
+        }, 
+        {
+          "expr": "count(ceph_osd_metadata) - count(ceph_bluefs_wal_total_bytes)", 
+          "format": "time_series", 
+          "intervalFactor": 2, 
+          "legendFormat": "filestore", 
+          "refId": "B", 
+          "step": 240
+        }, 
+        {
+          "expr": "absent(ceph_bluefs_wal_total_bytes)*count(ceph_osd_metadata)", 
+          "format": "time_series", 
+          "intervalFactor": 2, 
+          "legendFormat": "filestore", 
+          "refId": "C", 
+          "step": 240
+        }
+      ], 
+      "timeFrom": "2m", 
+      "timeShift": null, 
+      "title": "OSD Objectstore Types", 
+      "type": "grafana-piechart-panel", 
+      "valueName": "current"
+    }, 
+    {
+      "collapsed": true, 
+      "gridPos": {
+        "h": 1, 
+        "w": 24, 
+        "x": 0, 
+        "y": 7
+      }, 
+      "id": 25, 
       "panels": [
         {
-          "content": "<h1>Ceph Filestore I/O Process</h1>\n<p style=\"text-align: justify;\">\nA write request is first committed to a journal using direct-io (<i><b>apply</b></i>). Once this write is complete, the data is persisted to HDD by a second 'buffered' write operation (<i><b>commit</b></i>). The commit operation is basically a measure of time taken to perform a <i>syncfs</i> call to flush dirty pages to disk, and is therefore <b>not</b> a time associated with any specific client initiated operation.<p> The tables on the right show the top 10 OSDs with the highest latencies.\n",
-          "height": "300",
-          "id": 8,
-          "links": [],
-          "minSpan": 3,
-          "mode": "html",
-          "span": 3,
-          "title": "",
+          "content": "<h1>Ceph Filestore I/O Process</h1>\n<p style=\"text-align: justify;\">\nA write request is first committed to a journal using direct-io (<i><b>apply</b></i>). Once this write is complete, the data is persisted to HDD by a second 'buffered' write operation (<i><b>commit</b></i>). The commit operation is basically a measure of time taken to perform a <i>syncfs</i> call to flush dirty pages to disk, and is therefore <b>not</b> a time associated with any specific client initiated operation.<p> The tables on the right show commit and apply latencies for all OSDs, or use the pull down above to focus on a specific OSD.\n", 
+          "gridPos": {
+            "h": 5, 
+            "w": 10, 
+            "x": 0, 
+            "y": 8
+          }, 
+          "height": "300", 
+          "id": 8, 
+          "links": [], 
+          "minSpan": 6, 
+          "mode": "html", 
+          "title": "", 
+          "transparent": true, 
           "type": "text"
-        },
+        }, 
         {
           "columns": [
             {
-              "text": "Current",
+              "text": "Current", 
               "value": "current"
             }
-          ],
-          "datasource": null,
-          "description": "Filestore OSDs",
-          "fontSize": "100%",
-          "height": "310",
-          "hideTimeOverride": true,
-          "id": 9,
-          "links": [],
-          "minSpan": 1,
-          "pageSize": null,
-          "scroll": true,
-          "showHeader": true,
+          ], 
+          "datasource": "Local", 
+          "description": "Filestore OSDs", 
+          "fontSize": "100%", 
+          "gridPos": {
+            "h": 8, 
+            "w": 2, 
+            "x": 10, 
+            "y": 8
+          }, 
+          "height": "310", 
+          "hideTimeOverride": true, 
+          "id": 9, 
+          "links": [], 
+          "minSpan": 2, 
+          "pageSize": 50, 
+          "scroll": true, 
+          "showHeader": true, 
           "sort": {
-            "col": null,
+            "col": null, 
             "desc": false
-          },
-          "span": 1,
+          }, 
           "styles": [
             {
-              "alias": "Time",
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "pattern": "Time",
+              "alias": "Time", 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "pattern": "Time", 
               "type": "date"
-            },
+            }, 
             {
-              "alias": "",
-              "colorMode": null,
+              "alias": "", 
+              "colorMode": null, 
               "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
+                "rgba(245, 54, 54, 0.9)", 
+                "rgba(237, 129, 40, 0.89)", 
                 "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "pattern": "",
-              "thresholds": [],
-              "type": "number",
+              ], 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "decimals": 2, 
+              "pattern": "", 
+              "thresholds": [], 
+              "type": "number", 
               "unit": "short"
-            },
+            }, 
             {
-              "alias": "OSD Id",
-              "colorMode": null,
+              "alias": "OSD Id", 
+              "colorMode": null, 
               "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
+                "rgba(245, 54, 54, 0.9)", 
+                "rgba(237, 129, 40, 0.89)", 
                 "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 0,
-              "pattern": "Metric",
-              "thresholds": [],
-              "type": "number",
+              ], 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "decimals": 0, 
+              "pattern": "Metric", 
+              "thresholds": [], 
+              "type": "number", 
               "unit": "none"
-            },
+            }, 
             {
-              "alias": "",
-              "colorMode": null,
+              "alias": "", 
+              "colorMode": null, 
               "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
+                "rgba(245, 54, 54, 0.9)", 
+                "rgba(237, 129, 40, 0.89)", 
                 "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "pattern": "Current",
-              "thresholds": [],
-              "type": "hidden",
+              ], 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "decimals": 2, 
+              "pattern": "Current", 
+              "thresholds": [], 
+              "type": "hidden", 
               "unit": "short"
-            },
+            }, 
             {
-              "alias": "",
-              "colorMode": null,
+              "alias": "", 
+              "colorMode": null, 
               "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
+                "rgba(245, 54, 54, 0.9)", 
+                "rgba(237, 129, 40, 0.89)", 
                 "rgba(50, 172, 45, 0.97)"
-              ],
-              "decimals": 2,
-              "pattern": "/.*/",
-              "thresholds": [],
-              "type": "number",
+              ], 
+              "decimals": 2, 
+              "pattern": "/.*/", 
+              "thresholds": [], 
+              "type": "number", 
               "unit": "short"
             }
-          ],
+          ], 
           "targets": [
             {
-              "expr": "ceph_disk_occupation{ceph_daemon!~\"$bluestore_osd_id\"}",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "{{ceph_daemon}}",
-              "refId": "A",
-              "step": 2,
+              "expr": "label_replace(ceph_disk_occupation{ceph_daemon!~\"$bluestore_osd_id\"},\"osd_num\",\"$1\",\"ceph_daemon\",\"osd.(.*)\")", 
+              "format": "time_series", 
+              "intervalFactor": 2, 
+              "legendFormat": "{{osd_num}}", 
+              "refId": "A", 
+              "step": 2, 
               "textEditor": true
             }
-          ],
-          "timeFrom": "2m",
-          "timeShift": null,
-          "title": "",
-          "transform": "timeseries_aggregations",
+          ], 
+          "timeFrom": "2m", 
+          "timeShift": null, 
+          "title": "", 
+          "transform": "timeseries_aggregations", 
           "type": "table"
-        },
+        }, 
         {
-          "columns": [
-            {
-              "text": "Current",
-              "value": "current"
-            }
-          ],
-          "datasource": null,
-          "description": "Time spent in the queue for the journal. Excessive times here may indicate OSD tthrottling is happening. In this scenario you should review the OSD specific settings in \"ceph.conf\"; filestore_queue_max_ops or filestore_queue_max_bytes",
-          "fontSize": "100%",
-          "height": "310",
-          "hideTimeOverride": true,
-          "id": 10,
-          "links": [],
-          "minSpan": 2,
-          "pageSize": 5,
-          "scroll": false,
-          "showHeader": true,
+          "columns": [], 
+          "datasource": "Local", 
+          "description": "Apply latency covers the time taken to commit to the journal and complete the transaction", 
+          "fontSize": "100%", 
+          "gridPos": {
+            "h": 8, 
+            "w": 5, 
+            "x": 12, 
+            "y": 8
+          }, 
+          "height": "310", 
+          "hideTimeOverride": true, 
+          "id": 12, 
+          "links": [], 
+          "minSpan": 4, 
+          "pageSize": 50, 
+          "scroll": true, 
+          "showHeader": true, 
           "sort": {
-            "col": 1,
+            "col": 6, 
             "desc": true
-          },
-          "span": 2,
+          }, 
           "styles": [
             {
-              "alias": "Time",
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "pattern": "Time",
-              "type": "date"
-            },
-            {
-              "alias": "Journal Queue Time",
-              "colorMode": "row",
+              "alias": "OSD ID", 
+              "colorMode": null, 
               "colors": [
-                "rgba(50, 172, 45, 0.97)",
-                "rgba(237, 129, 40, 0.89)",
+                "rgba(245, 54, 54, 0.9)", 
+                "rgba(237, 129, 40, 0.89)", 
+                "rgba(50, 172, 45, 0.97)"
+              ], 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "decimals": 2, 
+              "pattern": "osd_num", 
+              "thresholds": [], 
+              "type": "string", 
+              "unit": "short"
+            }, 
+            {
+              "alias": "Apply Latency", 
+              "colorMode": "row", 
+              "colors": [
+                "rgba(50, 172, 45, 0.97)", 
+                "rgba(237, 129, 40, 0.89)", 
                 "rgba(245, 54, 54, 0.9)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "pattern": "Current",
+              ], 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "decimals": 2, 
+              "pattern": "Value", 
               "thresholds": [
-                ".001",
-                ".003"
-              ],
-              "type": "number",
-              "unit": "s"
-            },
-            {
-              "alias": "OSD Id",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "pattern": "Metric",
-              "thresholds": [],
-              "type": "number",
-              "unit": "short"
-            },
-            {
-              "alias": "",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "decimals": 2,
-              "pattern": "/.*/",
-              "thresholds": [],
-              "type": "number",
-              "unit": "short"
-            }
-          ],
-          "targets": [
-            {
-              "expr": "",
-              "format": "table",
-              "intervalFactor": 2,
-              "refId": "A",
-              "textEditor": true
-            }
-          ],
-          "timeFrom": "2m",
-          "title": "",
-          "transform": "timeseries_aggregations",
-          "type": "table"
-        },
-        {
-          "columns": [
-            {
-              "text": "Current",
-              "value": "current"
-            }
-          ],
-          "datasource": null,
-          "description": "Time taken for the write request to be safely committed to the journal device",
-          "fontSize": "100%",
-          "height": "310",
-          "hideTimeOverride": true,
-          "id": 11,
-          "links": [],
-          "minSpan": 2,
-          "pageSize": 5,
-          "scroll": false,
-          "showHeader": true,
-          "sort": {
-            "col": 1,
-            "desc": true
-          },
-          "span": 2,
-          "styles": [
-            {
-              "alias": "Time",
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "pattern": "Time",
-              "type": "date"
-            },
-            {
-              "alias": "Journal Latency",
-              "colorMode": "row",
-              "colors": [
-                "rgba(50, 172, 45, 0.97)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(245, 54, 54, 0.9)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "pattern": "Current",
-              "thresholds": [
-                "0.01",
-                "0.1"
-              ],
-              "type": "number",
-              "unit": "s"
-            },
-            {
-              "alias": "OSD Id",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "pattern": "Metric",
-              "thresholds": [],
-              "type": "number",
-              "unit": "short"
-            },
-            {
-              "alias": "",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "decimals": 2,
-              "pattern": "/.*/",
-              "thresholds": [],
-              "type": "number",
-              "unit": "short"
-            }
-          ],
-          "targets": [
-            {
-              "expr": "",
-              "format": "table",
-              "intervalFactor": 2,
-              "refId": "A",
-              "textEditor": true
-            }
-          ],
-          "timeFrom": "2m",
-          "title": "",
-          "transform": "timeseries_aggregations",
-          "type": "table"
-        },
-        {
-          "columns": [
-            {
-              "text": "Current",
-              "value": "current"
-            }
-          ],
-          "datasource": null,
-          "description": "Apply latency covers the time taken to commit to the journal and complete the transaction",
-          "fontSize": "100%",
-          "height": "310",
-          "hideTimeOverride": true,
-          "id": 12,
-          "links": [],
-          "minSpan": 2,
-          "pageSize": 5,
-          "scroll": false,
-          "showHeader": true,
-          "sort": {
-            "col": 1,
-            "desc": true
-          },
-          "span": 2,
-          "styles": [
-            {
-              "alias": "Time",
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "pattern": "Time",
-              "type": "date"
-            },
-            {
-              "alias": "Apply Latency",
-              "colorMode": "row",
-              "colors": [
-                "rgba(50, 172, 45, 0.97)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(245, 54, 54, 0.9)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "pattern": "Current",
-              "thresholds": [
-                "100000",
-                "500000"
-              ],
-              "type": "number",
+                "50", 
+                "150"
+              ], 
+              "type": "number", 
               "unit": "ms"
-            },
+            }, 
             {
-              "alias": "OSD Id",
-              "colorMode": null,
+              "alias": "", 
+              "colorMode": null, 
               "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
+                "rgba(245, 54, 54, 0.9)", 
+                "rgba(237, 129, 40, 0.89)", 
                 "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "pattern": "Metric",
-              "thresholds": [],
-              "type": "number",
-              "unit": "short"
-            },
-            {
-              "alias": "",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "decimals": 2,
-              "pattern": "/.*/",
-              "thresholds": [],
-              "type": "number",
+              ], 
+              "decimals": 2, 
+              "pattern": "/.*/", 
+              "thresholds": [], 
+              "type": "hidden", 
               "unit": "short"
             }
-          ],
+          ], 
           "targets": [
             {
-              "expr": "topk(10, ceph_osd_apply_latency_ms{ceph_daemon!~\"$bluestore_osd_id\"})",
-              "format": "time_series",
-              "instant": true,
-              "intervalFactor": 2,
-              "legendFormat": "{{ceph_daemon}}",
-              "refId": "A",
+              "expr": "label_replace(ceph_osd_apply_latency_ms{ceph_daemon=~\"osd.[[osd_id]]\"},\"osd_num\",\"$1\",\"ceph_daemon\",\"osd.(.*)\")", 
+              "format": "table", 
+              "instant": true, 
+              "intervalFactor": 1, 
+              "legendFormat": "{{ceph_daemon}}", 
+              "refId": "A", 
               "textEditor": true
             }
-          ],
-          "timeFrom": "2m",
-          "title": "",
-          "transform": "timeseries_aggregations",
+          ], 
+          "timeFrom": "2m", 
+          "title": "", 
+          "transform": "table", 
           "type": "table"
-        },
+        }, 
         {
           "columns": [
             {
-              "text": "Current",
+              "text": "Current", 
               "value": "current"
             }
-          ],
-          "datasource": null,
-          "description": "Commit latency is the time taken for writes to be flushed to disk as part of async kernel activity",
-          "fontSize": "100%",
-          "height": "310",
-          "hideTimeOverride": true,
-          "id": 13,
-          "links": [],
-          "minSpan": 2,
-          "pageSize": 5,
-          "scroll": false,
-          "showHeader": true,
+          ], 
+          "datasource": "Local", 
+          "description": "Commit latency is the time taken for writes to be flushed to disk as part of async kernel activity", 
+          "fontSize": "100%", 
+          "gridPos": {
+            "h": 8, 
+            "w": 5, 
+            "x": 17, 
+            "y": 8
+          }, 
+          "height": "310", 
+          "hideTimeOverride": true, 
+          "id": 13, 
+          "links": [], 
+          "minSpan": 4, 
+          "pageSize": 50, 
+          "scroll": true, 
+          "showHeader": true, 
           "sort": {
-            "col": null,
-            "desc": false
-          },
-          "span": 2,
+            "col": 6, 
+            "desc": true
+          }, 
           "styles": [
             {
-              "alias": "Time",
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "pattern": "Time",
-              "type": "date"
-            },
-            {
-              "alias": "Commit Latency",
-              "colorMode": "row",
+              "alias": "OSD ID", 
+              "colorMode": null, 
               "colors": [
-                "rgba(50, 172, 45, 0.97)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(245, 54, 54, 0.9)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "pattern": "Current",
-              "thresholds": [
-                "1000",
-                "3000"
-              ],
-              "type": "number",
-              "unit": "ms"
-            },
-            {
-              "alias": "OSD Id",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
+                "rgba(245, 54, 54, 0.9)", 
+                "rgba(237, 129, 40, 0.89)", 
                 "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "pattern": "Metric",
-              "thresholds": [],
-              "type": "number",
+              ], 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "decimals": 2, 
+              "pattern": "osd_num", 
+              "thresholds": [], 
+              "type": "string", 
               "unit": "short"
-            },
+            }, 
             {
-              "alias": "",
-              "colorMode": null,
+              "alias": "Commit Latency", 
+              "colorMode": "row", 
               "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)", 
+                "rgba(237, 129, 40, 0.89)", 
+                "rgba(245, 54, 54, 0.9)"
+              ], 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "decimals": 2, 
+              "pattern": "Value", 
+              "thresholds": [
+                "50", 
+                "150"
+              ], 
+              "type": "number", 
+              "unit": "ms"
+            }, 
+            {
+              "alias": "", 
+              "colorMode": null, 
+              "colors": [
+                "rgba(245, 54, 54, 0.9)", 
+                "rgba(237, 129, 40, 0.89)", 
                 "rgba(50, 172, 45, 0.97)"
-              ],
-              "decimals": 2,
-              "pattern": "/.*/",
-              "thresholds": [],
-              "type": "number",
+              ], 
+              "decimals": 2, 
+              "pattern": "/.*/", 
+              "thresholds": [], 
+              "type": "hidden", 
               "unit": "short"
             }
-          ],
+          ], 
           "targets": [
             {
-              "expr": "topk(10, ceph_osd_commit_latency_ms{ceph_daemon!~\"$bluestore_osd_id\"})",
-              "format": "time_series",
-              "instant": true,
-              "intervalFactor": 2,
-              "legendFormat": "{{ceph_daemon}}",
-              "refId": "A",
+              "expr": "label_replace(ceph_osd_commit_latency_ms{ceph_daemon=~\"osd.[[osd_id]]\"},\"osd_num\",\"$1\",\"ceph_daemon\",\"osd.(.*)\")", 
+              "format": "table", 
+              "instant": true, 
+              "intervalFactor": 1, 
+              "legendFormat": "{{ceph_daemon}}", 
+              "refId": "A", 
               "textEditor": true
             }
-          ],
-          "timeFrom": "2m",
-          "title": "",
-          "transform": "timeseries_aggregations",
+          ], 
+          "timeFrom": "2m", 
+          "title": "", 
+          "transform": "table", 
           "type": "table"
-        },
+        }, 
         {
           "aliasColors": {
-            "95%ile Commit Latency": "#447EBC",
+            "95%ile Commit Latency": "#447EBC", 
             "Apply Latency Max": "#890F02"
-          },
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "description": "Shows the latency for a given OSD, allowing you to compare a specific OSD against the $percentile%ile graph. Note that when the \"OSD Id\" pull-down shows **ALL**, only the **first** OSD is shown to prevent the graph from being unreadable!",
-          "fill": 0,
-          "height": "300px",
-          "id": 14,
+          }, 
+          "bars": false, 
+          "dashLength": 10, 
+          "dashes": false, 
+          "datasource": "Local", 
+          "description": "Shows the latency for a given OSD, allowing you to compare a specific OSD against the $percentile%ile graph. Note that when the \"OSD Id\" pull-down shows **ALL**, the graph will be empty to avoid the chart being unreadable.", 
+          "fill": 0, 
+          "gridPos": {
+            "h": 8, 
+            "w": 12, 
+            "x": 0, 
+            "y": 16
+          }, 
+          "height": "300px", 
+          "id": 14, 
           "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
+            "avg": false, 
+            "current": false, 
+            "max": false, 
+            "min": false, 
+            "show": true, 
+            "total": false, 
             "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "maxDataPoints": "",
-          "minSpan": 6,
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
+          }, 
+          "lines": true, 
+          "linewidth": 1, 
+          "links": [], 
+          "maxDataPoints": "", 
+          "minSpan": 12, 
+          "nullPointMode": "null", 
+          "percentage": false, 
+          "pointradius": 5, 
+          "points": false, 
+          "renderer": "flot", 
           "seriesOverrides": [
             {
-              "alias": "Apply Latency Max",
+              "alias": "Apply Latency Max", 
               "fill": 0
-            },
+            }, 
             {
-              "alias": "95%ile Apply Latency",
+              "alias": "95%ile Apply Latency", 
               "fill": 2
             }
-          ],
-          "spaceLength": 10,
-          "span": 6,
-          "stack": false,
-          "steppedLine": false,
+          ], 
+          "spaceLength": 10, 
+          "stack": false, 
+          "steppedLine": false, 
           "targets": [
             {
-              "expr": "",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "A",
+              "expr": "ceph_osd_commit_latency_ms{ceph_daemon=\"osd.[[osd_id]]\"}", 
+              "format": "time_series", 
+              "intervalFactor": 1, 
+              "legendFormat": "commit", 
+              "refId": "B", 
               "textEditor": true
-            },
+            }, 
             {
-              "expr": "",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "B",
-              "textEditor": true
-            },
-            {
-              "expr": "",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "C",
-              "textEditor": true
-            },
-            {
-              "expr": "",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "D",
+              "expr": "ceph_osd_apply_latency_ms{ceph_daemon=\"osd.[[osd_id]]\"}", 
+              "format": "time_series", 
+              "interval": "", 
+              "intervalFactor": 1, 
+              "legendFormat": "apply", 
+              "refId": "A", 
               "textEditor": true
             }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Filestore Latency for OSD '$osd_id'",
+          ], 
+          "thresholds": [], 
+          "timeFrom": null, 
+          "timeShift": null, 
+          "title": "Filestore Latency for OSD '$osd_id'", 
           "tooltip": {
-            "shared": true,
-            "sort": 0,
+            "shared": true, 
+            "sort": 0, 
             "value_type": "individual"
-          },
-          "type": "graph",
+          }, 
+          "type": "graph", 
           "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
+            "buckets": null, 
+            "mode": "time", 
+            "name": null, 
+            "show": true, 
             "values": []
-          },
+          }, 
           "yaxes": [
             {
-              "format": "s",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": "0",
+              "format": "ms", 
+              "label": null, 
+              "logBase": 1, 
+              "max": null, 
+              "min": "0", 
               "show": true
-            },
+            }, 
             {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
+              "format": "short", 
+              "label": null, 
+              "logBase": 1, 
+              "max": null, 
+              "min": null, 
               "show": false
             }
           ]
-        },
+        }, 
         {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "fill": 1,
-          "height": "300px",
-          "id": 15,
+          "aliasColors": {}, 
+          "bars": false, 
+          "dashLength": 10, 
+          "dashes": false, 
+          "datasource": "Local", 
+          "fill": 1, 
+          "gridPos": {
+            "h": 8, 
+            "w": 12, 
+            "x": 12, 
+            "y": 16
+          }, 
+          "height": "300px", 
+          "id": 15, 
           "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
+            "avg": false, 
+            "current": false, 
+            "max": false, 
+            "min": false, 
+            "show": true, 
+            "total": false, 
             "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "minSpan": 6,
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 6,
-          "stack": false,
-          "steppedLine": false,
+          }, 
+          "lines": true, 
+          "linewidth": 1, 
+          "links": [], 
+          "minSpan": 12, 
+          "nullPointMode": "null", 
+          "percentage": false, 
+          "pointradius": 5, 
+          "points": false, 
+          "renderer": "flot", 
+          "seriesOverrides": [], 
+          "spaceLength": 10, 
+          "stack": false, 
+          "steppedLine": false, 
           "targets": [
             {
-              "expr": "",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "A",
+              "expr": "quantile($percentile/100,\n         ceph_osd_commit_latency_ms)", 
+              "format": "time_series", 
+              "intervalFactor": 1, 
+              "legendFormat": "commit", 
+              "refId": "B", 
               "textEditor": true
-            },
+            }, 
             {
-              "expr": "",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "B",
+              "expr": "quantile($percentile/100,\n         ceph_osd_apply_latency_ms)", 
+              "format": "time_series", 
+              "intervalFactor": 1, 
+              "legendFormat": "apply", 
+              "refId": "A", 
               "textEditor": true
-            },
+            }, 
             {
-              "expr": "",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "C",
+              "expr": "", 
+              "format": "time_series", 
+              "intervalFactor": 2, 
+              "refId": "C", 
               "textEditor": true
-            },
+            }, 
             {
-              "expr": "",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "D",
+              "expr": "", 
+              "format": "time_series", 
+              "intervalFactor": 2, 
+              "refId": "D", 
               "textEditor": true
             }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Filestore IO Summary - all OSD's @ $percentile%ile",
+          ], 
+          "thresholds": [], 
+          "timeFrom": null, 
+          "timeShift": null, 
+          "title": "Filestore IO Summary - all OSD's @ $percentile%ile", 
           "tooltip": {
-            "shared": true,
-            "sort": 0,
+            "shared": true, 
+            "sort": 0, 
             "value_type": "individual"
-          },
-          "type": "graph",
+          }, 
+          "type": "graph", 
           "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
+            "buckets": null, 
+            "mode": "time", 
+            "name": null, 
+            "show": true, 
             "values": []
-          },
+          }, 
           "yaxes": [
             {
-              "format": "s",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": "0",
+              "format": "ms", 
+              "label": null, 
+              "logBase": 1, 
+              "max": null, 
+              "min": "0", 
               "show": true
-            },
+            }, 
             {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
+              "format": "short", 
+              "label": null, 
+              "logBase": 1, 
+              "max": null, 
+              "min": null, 
               "show": false
             }
           ]
         }
-      ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": true,
-      "title": "Filestore OSD Latencies",
-      "titleSize": "h5"
-    },
+      ], 
+      "repeat": null, 
+      "title": "Filestore OSD Latencies", 
+      "type": "row"
+    }, 
     {
-      "collapse": false,
-      "height": 250,
+      "collapsed": true, 
+      "gridPos": {
+        "h": 1, 
+        "w": 24, 
+        "x": 0, 
+        "y": 8
+      }, 
+      "id": 26, 
       "panels": [
         {
-          "content": "<h1>Ceph Bluestore I/O Process</h1>\n<p style=\"text-align: justify;\">\nUnlike filestore, bluestore does not suffer from a double-write penalty (i.e write to journal then write to HDD). With bluestore, once a write is scheduled (<b>submit</b> and <b>throttle</b> latencies), it is done directly to the disk (<b>AIO wait</b>), and then the metadata relating to the object is changed (<b>kv_commit</b>). Writes are not considered complete until the kv store is updated. <p> The tables on the right focus on  the top 10 Bluestore OSDs with the highest latencies.\n",
-          "height": "300",
-          "id": 16,
-          "links": [],
-          "minSpan": 3,
-          "mode": "html",
-          "span": 3,
-          "title": "",
+          "content": "<h1>Ceph Bluestore I/O Process</h1>\n<p style=\"text-align: justify;\">\nUnlike filestore, bluestore does not suffer from a double-write penalty (i.e write to journal then write to HDD). With bluestore, once a write is scheduled (<b>submit</b> and <b>throttle</b> latencies), it is done directly to the disk (<b>AIO wait</b>), and then the metadata relating to the object is changed (<b>kv_commit</b>). Writes are not considered complete until the kv store is updated. <p> The tables on the right focus on  the top 10 Bluestore OSDs with the highest latencies.\n", 
+          "gridPos": {
+            "h": 8, 
+            "w": 6, 
+            "x": 0, 
+            "y": 9
+          }, 
+          "height": "300", 
+          "id": 16, 
+          "links": [], 
+          "minSpan": 6, 
+          "mode": "html", 
+          "title": "", 
           "type": "text"
-        },
+        }, 
         {
           "columns": [
             {
-              "text": "Current",
+              "text": "Current", 
               "value": "current"
             }
-          ],
-          "datasource": null,
-          "description": "Bluestore OSDs",
-          "fontSize": "100%",
-          "height": "310",
-          "hideTimeOverride": true,
-          "id": 17,
-          "links": [],
-          "minSpan": 1,
-          "pageSize": null,
-          "scroll": true,
-          "showHeader": true,
+          ], 
+          "datasource": "Local", 
+          "description": "Bluestore OSDs", 
+          "fontSize": "100%", 
+          "gridPos": {
+            "h": 8, 
+            "w": 2, 
+            "x": 6, 
+            "y": 9
+          }, 
+          "height": "310", 
+          "hideTimeOverride": true, 
+          "id": 17, 
+          "links": [], 
+          "minSpan": 2, 
+          "pageSize": null, 
+          "scroll": true, 
+          "showHeader": true, 
           "sort": {
-            "col": 0,
+            "col": 0, 
             "desc": true
-          },
-          "span": 1,
+          }, 
           "styles": [
             {
-              "alias": "Time",
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "pattern": "Time",
+              "alias": "Time", 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "pattern": "Time", 
               "type": "date"
-            },
+            }, 
             {
-              "alias": "",
-              "colorMode": null,
+              "alias": "", 
+              "colorMode": null, 
               "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
+                "rgba(245, 54, 54, 0.9)", 
+                "rgba(237, 129, 40, 0.89)", 
                 "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "pattern": "",
-              "thresholds": [],
-              "type": "number",
+              ], 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "decimals": 2, 
+              "pattern": "", 
+              "thresholds": [], 
+              "type": "number", 
               "unit": "short"
-            },
+            }, 
             {
-              "alias": "",
-              "colorMode": null,
+              "alias": "", 
+              "colorMode": null, 
               "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
+                "rgba(245, 54, 54, 0.9)", 
+                "rgba(237, 129, 40, 0.89)", 
                 "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "pattern": "Current",
-              "thresholds": [],
-              "type": "hidden",
+              ], 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "decimals": 2, 
+              "pattern": "Current", 
+              "thresholds": [], 
+              "type": "hidden", 
               "unit": "short"
-            },
+            }, 
             {
-              "alias": "OSD Id",
-              "colorMode": null,
+              "alias": "OSD Id", 
+              "colorMode": null, 
               "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
+                "rgba(245, 54, 54, 0.9)", 
+                "rgba(237, 129, 40, 0.89)", 
                 "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 0,
-              "pattern": "Metric",
-              "thresholds": [],
-              "type": "number",
+              ], 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "decimals": 0, 
+              "pattern": "Metric", 
+              "thresholds": [], 
+              "type": "number", 
               "unit": "none"
-            },
+            }, 
             {
-              "alias": "",
-              "colorMode": null,
+              "alias": "", 
+              "colorMode": null, 
               "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
+                "rgba(245, 54, 54, 0.9)", 
+                "rgba(237, 129, 40, 0.89)", 
                 "rgba(50, 172, 45, 0.97)"
-              ],
-              "decimals": 2,
-              "pattern": "/.*/",
-              "thresholds": [],
-              "type": "number",
+              ], 
+              "decimals": 2, 
+              "pattern": "/.*/", 
+              "thresholds": [], 
+              "type": "number", 
               "unit": "short"
             }
-          ],
+          ], 
           "targets": [
             {
-              "expr": "ceph_disk_occupation{ceph_daemon=~\"($bluestore_osd_id)\"}",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "{{ceph_daemon}}",
-              "refId": "A",
+              "expr": "ceph_disk_occupation{ceph_daemon=~\"($bluestore_osd_id)\"}", 
+              "format": "time_series", 
+              "intervalFactor": 2, 
+              "legendFormat": "{{ceph_daemon}}", 
+              "refId": "A", 
               "textEditor": true
             }
-          ],
-          "timeFrom": "2m",
-          "timeShift": null,
-          "title": "",
-          "transform": "timeseries_aggregations",
+          ], 
+          "timeFrom": "2m", 
+          "timeShift": null, 
+          "title": "", 
+          "transform": "timeseries_aggregations", 
           "type": "table"
-        },
+        }, 
         {
           "columns": [
             {
-              "text": "Current",
+              "text": "Current", 
               "value": "current"
             }
-          ],
-          "datasource": null,
-          "description": "Time spent preparing the request (transaction)",
-          "fontSize": "100%",
-          "height": "310",
-          "hideTimeOverride": true,
-          "id": 18,
-          "links": [],
-          "minSpan": 2,
-          "pageSize": 5,
-          "scroll": false,
-          "showHeader": true,
+          ], 
+          "datasource": "Local", 
+          "description": "Time spent preparing the request (transaction)", 
+          "fontSize": "100%", 
+          "gridPos": {
+            "h": 8, 
+            "w": 4, 
+            "x": 8, 
+            "y": 9
+          }, 
+          "height": "310", 
+          "hideTimeOverride": true, 
+          "id": 18, 
+          "links": [], 
+          "minSpan": 4, 
+          "pageSize": 5, 
+          "scroll": false, 
+          "showHeader": true, 
           "sort": {
-            "col": 1,
+            "col": 1, 
             "desc": false
-          },
-          "span": 2,
+          }, 
           "styles": [
             {
-              "alias": "Time",
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "pattern": "Time",
+              "alias": "Time", 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "pattern": "Time", 
               "type": "date"
-            },
+            }, 
             {
-              "alias": "Submit Latency",
-              "colorMode": "row",
+              "alias": "Submit Latency", 
+              "colorMode": "row", 
               "colors": [
-                "rgba(50, 172, 45, 0.97)",
-                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)", 
+                "rgba(237, 129, 40, 0.89)", 
                 "rgba(245, 54, 54, 0.9)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "pattern": "Current",
+              ], 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "decimals": 2, 
+              "pattern": "Current", 
               "thresholds": [
-                ".001",
+                ".001", 
                 ".003"
-              ],
-              "type": "number",
+              ], 
+              "type": "number", 
               "unit": "s"
-            },
+            }, 
             {
-              "alias": "OSD Id",
-              "colorMode": null,
+              "alias": "OSD Id", 
+              "colorMode": null, 
               "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
+                "rgba(245, 54, 54, 0.9)", 
+                "rgba(237, 129, 40, 0.89)", 
                 "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "pattern": "Metric",
-              "thresholds": [],
-              "type": "number",
+              ], 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "decimals": 2, 
+              "pattern": "Metric", 
+              "thresholds": [], 
+              "type": "number", 
               "unit": "short"
-            },
+            }, 
             {
-              "alias": "",
-              "colorMode": null,
+              "alias": "", 
+              "colorMode": null, 
               "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
+                "rgba(245, 54, 54, 0.9)", 
+                "rgba(237, 129, 40, 0.89)", 
                 "rgba(50, 172, 45, 0.97)"
-              ],
-              "decimals": 2,
-              "pattern": "/.*/",
-              "thresholds": [],
-              "type": "number",
+              ], 
+              "decimals": 2, 
+              "pattern": "/.*/", 
+              "thresholds": [], 
+              "type": "number", 
               "unit": "short"
             }
-          ],
+          ], 
           "targets": [
             {
-              "expr": "",
-              "format": "table",
-              "intervalFactor": 2,
-              "refId": "A",
+              "expr": "", 
+              "format": "table", 
+              "intervalFactor": 2, 
+              "refId": "A", 
               "textEditor": true
             }
-          ],
-          "timeFrom": "2m",
-          "title": "",
-          "transform": "timeseries_aggregations",
+          ], 
+          "timeFrom": "2m", 
+          "title": "", 
+          "transform": "timeseries_aggregations", 
           "type": "table"
-        },
+        }, 
         {
           "columns": [
             {
-              "text": "Current",
+              "text": "Current", 
               "value": "current"
             }
-          ],
-          "datasource": null,
-          "description": "Time requests wait due to throttling or busy conditions",
-          "fontSize": "100%",
-          "height": "310",
-          "hideTimeOverride": true,
-          "id": 19,
-          "links": [],
-          "minSpan": 2,
-          "pageSize": 5,
-          "scroll": false,
-          "showHeader": true,
+          ], 
+          "datasource": "Local", 
+          "description": "Time requests wait due to throttling or busy conditions", 
+          "fontSize": "100%", 
+          "gridPos": {
+            "h": 8, 
+            "w": 4, 
+            "x": 12, 
+            "y": 9
+          }, 
+          "height": "310", 
+          "hideTimeOverride": true, 
+          "id": 19, 
+          "links": [], 
+          "minSpan": 4, 
+          "pageSize": 5, 
+          "scroll": false, 
+          "showHeader": true, 
           "sort": {
-            "col": 1,
+            "col": 1, 
             "desc": true
-          },
-          "span": 2,
+          }, 
           "styles": [
             {
-              "alias": "Time",
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "pattern": "Time",
+              "alias": "Time", 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "pattern": "Time", 
               "type": "date"
-            },
+            }, 
             {
-              "alias": "Throttle Latency",
-              "colorMode": "row",
+              "alias": "Throttle Latency", 
+              "colorMode": "row", 
               "colors": [
-                "rgba(50, 172, 45, 0.97)",
-                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)", 
+                "rgba(237, 129, 40, 0.89)", 
                 "rgba(245, 54, 54, 0.9)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "pattern": "Current",
+              ], 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "decimals": 2, 
+              "pattern": "Current", 
               "thresholds": [
-                ".002",
+                ".002", 
                 ".005"
-              ],
-              "type": "number",
+              ], 
+              "type": "number", 
               "unit": "s"
-            },
+            }, 
             {
-              "alias": "OSD Id",
-              "colorMode": null,
+              "alias": "OSD Id", 
+              "colorMode": null, 
               "colors": [
-                "rgba(50, 172, 45, 0.97)",
-                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)", 
+                "rgba(237, 129, 40, 0.89)", 
                 "rgba(245, 54, 54, 0.9)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "pattern": "Metric",
+              ], 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "decimals": 2, 
+              "pattern": "Metric", 
               "thresholds": [
                 ""
-              ],
-              "type": "number",
+              ], 
+              "type": "number", 
               "unit": "short"
-            },
+            }, 
             {
-              "alias": "",
-              "colorMode": null,
+              "alias": "", 
+              "colorMode": null, 
               "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
+                "rgba(245, 54, 54, 0.9)", 
+                "rgba(237, 129, 40, 0.89)", 
                 "rgba(50, 172, 45, 0.97)"
-              ],
-              "decimals": 2,
-              "pattern": "/.*/",
-              "thresholds": [],
-              "type": "number",
+              ], 
+              "decimals": 2, 
+              "pattern": "/.*/", 
+              "thresholds": [], 
+              "type": "number", 
               "unit": "short"
             }
-          ],
+          ], 
           "targets": [
             {
-              "expr": "",
-              "format": "table",
-              "intervalFactor": 2,
-              "refId": "A",
+              "expr": "", 
+              "format": "table", 
+              "intervalFactor": 2, 
+              "refId": "A", 
               "textEditor": true
             }
-          ],
-          "timeFrom": "2m",
-          "title": "",
-          "transform": "timeseries_aggregations",
+          ], 
+          "timeFrom": "2m", 
+          "title": "", 
+          "transform": "timeseries_aggregations", 
           "type": "table"
-        },
+        }, 
         {
           "columns": [
             {
-              "text": "Current",
+              "text": "Current", 
               "value": "current"
             }
-          ],
-          "datasource": null,
-          "description": "Time spent waiting for the physical I/O request to complete",
-          "fontSize": "100%",
-          "height": "310",
-          "hideTimeOverride": true,
-          "id": 20,
-          "links": [],
-          "minSpan": 2,
-          "pageSize": 5,
-          "scroll": false,
-          "showHeader": true,
+          ], 
+          "datasource": "Local", 
+          "description": "Time spent waiting for the physical I/O request to complete", 
+          "fontSize": "100%", 
+          "gridPos": {
+            "h": 8, 
+            "w": 4, 
+            "x": 16, 
+            "y": 9
+          }, 
+          "height": "310", 
+          "hideTimeOverride": true, 
+          "id": 20, 
+          "links": [], 
+          "minSpan": 4, 
+          "pageSize": 5, 
+          "scroll": false, 
+          "showHeader": true, 
           "sort": {
-            "col": 1,
+            "col": 1, 
             "desc": true
-          },
-          "span": 2,
+          }, 
           "styles": [
             {
-              "alias": "Time",
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "pattern": "Time",
+              "alias": "Time", 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "pattern": "Time", 
               "type": "date"
-            },
+            }, 
             {
-              "alias": "AIO Wait Time",
-              "colorMode": "row",
+              "alias": "AIO Wait Time", 
+              "colorMode": "row", 
               "colors": [
-                "rgba(50, 172, 45, 0.97)",
-                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)", 
+                "rgba(237, 129, 40, 0.89)", 
                 "rgba(245, 54, 54, 0.9)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "pattern": "Current",
+              ], 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "decimals": 2, 
+              "pattern": "Current", 
               "thresholds": [
-                ".020",
+                ".020", 
                 ".050"
-              ],
-              "type": "number",
+              ], 
+              "type": "number", 
               "unit": "s"
-            },
+            }, 
             {
-              "alias": "OSD Id",
-              "colorMode": null,
+              "alias": "OSD Id", 
+              "colorMode": null, 
               "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
+                "rgba(245, 54, 54, 0.9)", 
+                "rgba(237, 129, 40, 0.89)", 
                 "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "pattern": "Metric",
-              "thresholds": [],
-              "type": "number",
+              ], 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "decimals": 2, 
+              "pattern": "Metric", 
+              "thresholds": [], 
+              "type": "number", 
               "unit": "short"
-            },
+            }, 
             {
-              "alias": "",
-              "colorMode": null,
+              "alias": "", 
+              "colorMode": null, 
               "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
+                "rgba(245, 54, 54, 0.9)", 
+                "rgba(237, 129, 40, 0.89)", 
                 "rgba(50, 172, 45, 0.97)"
-              ],
-              "decimals": 2,
-              "pattern": "/.*/",
-              "thresholds": [],
-              "type": "number",
+              ], 
+              "decimals": 2, 
+              "pattern": "/.*/", 
+              "thresholds": [], 
+              "type": "number", 
               "unit": "short"
             }
-          ],
+          ], 
           "targets": [
             {
-              "expr": "",
-              "format": "table",
-              "intervalFactor": 2,
-              "refId": "A",
+              "expr": "", 
+              "format": "table", 
+              "intervalFactor": 2, 
+              "refId": "A", 
               "textEditor": true
             }
-          ],
-          "timeFrom": "2m",
-          "title": "",
-          "transform": "timeseries_aggregations",
+          ], 
+          "timeFrom": "2m", 
+          "title": "", 
+          "transform": "timeseries_aggregations", 
           "type": "table"
-        },
+        }, 
         {
           "columns": [
             {
-              "text": "Current",
+              "text": "Current", 
               "value": "current"
             }
-          ],
-          "datasource": null,
-          "description": "Time spent waiting for rocksdb (metadata store) to commit meta data",
-          "fontSize": "100%",
-          "height": "310",
-          "hideTimeOverride": true,
-          "id": 21,
-          "links": [],
-          "minSpan": 2,
-          "pageSize": 5,
-          "scroll": false,
-          "showHeader": true,
+          ], 
+          "datasource": "Local", 
+          "description": "Time spent waiting for rocksdb (metadata store) to commit meta data", 
+          "fontSize": "100%", 
+          "gridPos": {
+            "h": 8, 
+            "w": 4, 
+            "x": 20, 
+            "y": 9
+          }, 
+          "height": "310", 
+          "hideTimeOverride": true, 
+          "id": 21, 
+          "links": [], 
+          "minSpan": 4, 
+          "pageSize": 5, 
+          "scroll": false, 
+          "showHeader": true, 
           "sort": {
-            "col": 1,
+            "col": 1, 
             "desc": true
-          },
-          "span": 2,
+          }, 
           "styles": [
             {
-              "alias": "Time",
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "pattern": "Time",
+              "alias": "Time", 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "pattern": "Time", 
               "type": "date"
-            },
+            }, 
             {
-              "alias": "KV Commit ",
-              "colorMode": "row",
+              "alias": "KV Commit ", 
+              "colorMode": "row", 
               "colors": [
-                "rgba(50, 172, 45, 0.97)",
-                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)", 
+                "rgba(237, 129, 40, 0.89)", 
                 "rgba(245, 54, 54, 0.9)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "pattern": "Current",
+              ], 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "decimals": 2, 
+              "pattern": "Current", 
               "thresholds": [
-                ".003",
+                ".003", 
                 ".005"
-              ],
-              "type": "number",
+              ], 
+              "type": "number", 
               "unit": "s"
-            },
+            }, 
             {
-              "alias": "OSD Id",
-              "colorMode": null,
+              "alias": "OSD Id", 
+              "colorMode": null, 
               "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
+                "rgba(245, 54, 54, 0.9)", 
+                "rgba(237, 129, 40, 0.89)", 
                 "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "pattern": "Metric",
-              "thresholds": [],
-              "type": "number",
+              ], 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "decimals": 2, 
+              "pattern": "Metric", 
+              "thresholds": [], 
+              "type": "number", 
               "unit": "short"
-            },
+            }, 
             {
-              "alias": "",
-              "colorMode": null,
+              "alias": "", 
+              "colorMode": null, 
               "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
+                "rgba(245, 54, 54, 0.9)", 
+                "rgba(237, 129, 40, 0.89)", 
                 "rgba(50, 172, 45, 0.97)"
-              ],
-              "decimals": 2,
-              "pattern": "/.*/",
-              "thresholds": [],
-              "type": "number",
+              ], 
+              "decimals": 2, 
+              "pattern": "/.*/", 
+              "thresholds": [], 
+              "type": "number", 
               "unit": "short"
             }
-          ],
+          ], 
           "targets": [
             {
-              "expr": "",
-              "format": "table",
-              "intervalFactor": 2,
-              "refId": "A",
+              "expr": "", 
+              "format": "table", 
+              "intervalFactor": 2, 
+              "refId": "A", 
               "textEditor": true
             }
-          ],
-          "timeFrom": "2m",
-          "title": "",
-          "transform": "timeseries_aggregations",
+          ], 
+          "timeFrom": "2m", 
+          "title": "", 
+          "transform": "timeseries_aggregations", 
           "type": "table"
-        },
+        }, 
         {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "fill": 1,
-          "height": "300",
-          "id": 22,
+          "aliasColors": {}, 
+          "bars": false, 
+          "dashLength": 10, 
+          "dashes": false, 
+          "datasource": "Local", 
+          "fill": 1, 
+          "gridPos": {
+            "h": 8, 
+            "w": 12, 
+            "x": 0, 
+            "y": 17
+          }, 
+          "height": "300", 
+          "id": 22, 
           "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
+            "avg": false, 
+            "current": false, 
+            "max": false, 
+            "min": false, 
+            "show": true, 
+            "total": false, 
             "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "minSpan": 6,
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 6,
-          "stack": true,
-          "steppedLine": false,
+          }, 
+          "lines": true, 
+          "linewidth": 1, 
+          "links": [], 
+          "minSpan": 12, 
+          "nullPointMode": "null", 
+          "percentage": false, 
+          "pointradius": 5, 
+          "points": false, 
+          "renderer": "flot", 
+          "seriesOverrides": [], 
+          "spaceLength": 10, 
+          "stack": true, 
+          "steppedLine": false, 
           "targets": [
             {
-              "expr": "",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "A",
+              "expr": "", 
+              "format": "time_series", 
+              "intervalFactor": 2, 
+              "refId": "A", 
               "textEditor": true
-            },
+            }, 
             {
-              "expr": "",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "B",
+              "expr": "", 
+              "format": "time_series", 
+              "intervalFactor": 2, 
+              "refId": "B", 
               "textEditor": true
-            },
+            }, 
             {
-              "expr": "",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "C",
+              "expr": "", 
+              "format": "time_series", 
+              "intervalFactor": 2, 
+              "refId": "C", 
               "textEditor": true
-            },
+            }, 
             {
-              "expr": "",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "D",
+              "expr": "", 
+              "format": "time_series", 
+              "intervalFactor": 2, 
+              "refId": "D", 
               "textEditor": true
             }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Bluestore Latency for OSD '$osd_id'",
+          ], 
+          "thresholds": [], 
+          "timeFrom": null, 
+          "timeShift": null, 
+          "title": "Bluestore Latency for OSD '$osd_id'", 
           "tooltip": {
-            "shared": true,
-            "sort": 0,
+            "shared": true, 
+            "sort": 0, 
             "value_type": "individual"
-          },
-          "type": "graph",
+          }, 
+          "type": "graph", 
           "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
+            "buckets": null, 
+            "mode": "time", 
+            "name": null, 
+            "show": true, 
             "values": []
-          },
+          }, 
           "yaxes": [
             {
-              "format": "s",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": "0",
+              "format": "s", 
+              "label": null, 
+              "logBase": 1, 
+              "max": null, 
+              "min": "0", 
               "show": true
-            },
+            }, 
             {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
+              "format": "short", 
+              "label": null, 
+              "logBase": 1, 
+              "max": null, 
+              "min": null, 
               "show": false
             }
           ]
-        },
+        }, 
         {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "description": "This charts shows the $percentile%ile latencies across all OSDs, which indicates overall performance, but does not represent any specific OSD",
-          "fill": 1,
-          "height": "300px",
-          "id": 23,
+          "aliasColors": {}, 
+          "bars": false, 
+          "dashLength": 10, 
+          "dashes": false, 
+          "datasource": "Local", 
+          "description": "This charts shows the $percentile%ile latencies across all OSDs, which indicates overall performance, but does not represent any specific OSD", 
+          "fill": 1, 
+          "gridPos": {
+            "h": 8, 
+            "w": 12, 
+            "x": 12, 
+            "y": 17
+          }, 
+          "height": "300px", 
+          "id": 23, 
           "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
+            "avg": false, 
+            "current": false, 
+            "max": false, 
+            "min": false, 
+            "show": true, 
+            "total": false, 
             "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "minSpan": 6,
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 6,
-          "stack": false,
-          "steppedLine": false,
+          }, 
+          "lines": true, 
+          "linewidth": 1, 
+          "links": [], 
+          "minSpan": 12, 
+          "nullPointMode": "null", 
+          "percentage": false, 
+          "pointradius": 5, 
+          "points": false, 
+          "renderer": "flot", 
+          "seriesOverrides": [], 
+          "spaceLength": 10, 
+          "stack": false, 
+          "steppedLine": false, 
           "targets": [
             {
-              "expr": "",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "A",
+              "expr": "", 
+              "format": "time_series", 
+              "intervalFactor": 2, 
+              "refId": "A", 
               "textEditor": true
-            },
+            }, 
             {
-              "expr": "",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "B",
+              "expr": "", 
+              "format": "time_series", 
+              "intervalFactor": 2, 
+              "refId": "B", 
               "textEditor": true
-            },
+            }, 
             {
-              "expr": "",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "C",
+              "expr": "", 
+              "format": "time_series", 
+              "intervalFactor": 2, 
+              "refId": "C", 
               "textEditor": true
-            },
+            }, 
             {
-              "expr": "",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "D",
+              "expr": "", 
+              "format": "time_series", 
+              "intervalFactor": 2, 
+              "refId": "D", 
               "textEditor": true
             }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "BlueStore IO Summary - all OSD's @ $percentile%ile",
+          ], 
+          "thresholds": [], 
+          "timeFrom": null, 
+          "timeShift": null, 
+          "title": "BlueStore IO Summary - all OSD's @ $percentile%ile", 
           "tooltip": {
-            "shared": true,
-            "sort": 0,
+            "shared": true, 
+            "sort": 0, 
             "value_type": "individual"
-          },
-          "type": "graph",
+          }, 
+          "type": "graph", 
           "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
+            "buckets": null, 
+            "mode": "time", 
+            "name": null, 
+            "show": true, 
             "values": []
-          },
+          }, 
           "yaxes": [
             {
-              "format": "s",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": "0",
+              "format": "s", 
+              "label": null, 
+              "logBase": 1, 
+              "max": null, 
+              "min": "0", 
               "show": true
-            },
+            }, 
             {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
+              "format": "short", 
+              "label": null, 
+              "logBase": 1, 
+              "max": null, 
+              "min": null, 
               "show": false
             }
           ]
         }
-      ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": true,
-      "title": "Bluestore OSD Latencies",
-      "titleSize": "h5"
+      ], 
+      "repeat": null, 
+      "title": "Bluestore OSD Latencies", 
+      "type": "row"
     }
-  ],
-  "schemaVersion": 14,
-  "style": "dark",
+  ], 
+  "refresh": "15s", 
+  "schemaVersion": 16, 
+  "style": "dark", 
   "tags": [
     "overview"
-  ],
+  ], 
   "templating": {
     "list": [
       {
-        "allValue": null,
+        "allValue": null, 
         "current": {
-          "selected": true,
-          "text": "95",
+          "selected": true, 
+          "text": "95", 
           "value": "95"
-        },
-        "hide": 0,
-        "includeAll": false,
-        "label": null,
-        "multi": false,
-        "name": "percentile",
+        }, 
+        "hide": 0, 
+        "includeAll": false, 
+        "label": null, 
+        "multi": false, 
+        "name": "percentile", 
         "options": [
           {
-            "selected": true,
-            "text": "95",
+            "selected": true, 
+            "text": "95", 
             "value": "95"
-          },
+          }, 
           {
-            "selected": false,
-            "text": "96",
+            "selected": false, 
+            "text": "96", 
             "value": "96"
-          },
+          }, 
           {
-            "selected": false,
-            "text": "97",
+            "selected": false, 
+            "text": "97", 
             "value": "97"
-          },
+          }, 
           {
-            "selected": false,
-            "text": "98",
+            "selected": false, 
+            "text": "98", 
             "value": "98"
-          },
+          }, 
           {
-            "selected": false,
-            "text": "99",
+            "selected": false, 
+            "text": "99", 
             "value": "99"
           }
-        ],
-        "query": "95,96,97,98,99",
+        ], 
+        "query": "95,96,97,98,99", 
         "type": "custom"
-      },
+      }, 
       {
-        "allValue": null,
+        "allValue": null, 
         "current": {
-          "selected": true,
-          "text": "10",
+          "selected": true, 
+          "text": "10", 
           "value": "10"
-        },
-        "hide": 2,
-        "includeAll": false,
-        "label": null,
-        "multi": false,
-        "name": "max_devices",
+        }, 
+        "hide": 2, 
+        "includeAll": false, 
+        "label": null, 
+        "multi": false, 
+        "name": "max_devices", 
         "options": [
           {
-            "selected": true,
-            "text": "10",
+            "selected": true, 
+            "text": "10", 
             "value": "10"
           }
-        ],
-        "query": "10",
+        ], 
+        "query": "10", 
         "type": "custom"
-      },
+      }, 
       {
-        "allValue": null,
-        "current": {
-          "text": "All",
-          "value": "$__all"
-        },
-        "datasource": null,
-        "hide": 0,
-        "includeAll": true,
-        "label": "OSD Id",
-        "multi": false,
-        "name": "osd_id",
-        "options": [],
-        "query": "ceph_osd_metadata",
-        "refresh": 1,
-        "regex": "/id=\"([^\"]*)\"/",
-        "sort": 3,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
+        "allValue": ".*", 
+        "current": {}, 
+        "datasource": null, 
+        "hide": 0, 
+        "includeAll": true, 
+        "label": "OSD Id", 
+        "multi": false, 
+        "name": "osd_id", 
+        "options": [], 
+        "query": "ceph_osd_metadata", 
+        "refresh": 1, 
+        "regex": "/id=\"([^\"]*)\"/", 
+        "sort": 3, 
+        "tagValuesQuery": "", 
+        "tags": [], 
+        "tagsQuery": "", 
+        "type": "query", 
         "useTags": false
-      },
+      }, 
       {
-        "allValue": null,
-        "current": {
-          "text": "All",
-          "value": "$__all"
-        },
-        "datasource": null,
-        "hide": 2,
-        "includeAll": true,
-        "label": "OSD Id",
-        "multi": false,
-        "name": "osd_id_hidden",
-        "options": [],
-        "query": "ceph_osd_metadata",
-        "refresh": 1,
-        "regex": "/id=\"([^\"]*)\"/",
-        "sort": 3,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
+        "allValue": null, 
+        "current": {}, 
+        "datasource": null, 
+        "hide": 2, 
+        "includeAll": true, 
+        "label": "OSD Id", 
+        "multi": false, 
+        "name": "osd_id_hidden", 
+        "options": [], 
+        "query": "ceph_osd_metadata", 
+        "refresh": 1, 
+        "regex": "/id=\"([^\"]*)\"/", 
+        "sort": 3, 
+        "tagValuesQuery": "", 
+        "tags": [], 
+        "tagsQuery": "", 
+        "type": "query", 
         "useTags": false
-      },
+      }, 
       {
-        "allValue": "",
-        "current": {
-          "text": "All",
-          "value": "$__all"
-        },
-        "datasource": "Local",
-        "hide": 2,
-        "includeAll": true,
-        "label": null,
-        "multi": false,
-        "name": "bluestore_osd_id",
-        "options": [],
-        "query": "label_values(ceph_bluefs_bytes_written_wal, ceph_daemon)",
-        "refresh": 2,
-        "regex": "",
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
+        "allValue": "", 
+        "current": {}, 
+        "datasource": null, 
+        "hide": 2, 
+        "includeAll": true, 
+        "label": null, 
+        "multi": false, 
+        "name": "bluestore_osd_id", 
+        "options": [], 
+        "query": "label_values(ceph_bluefs_bytes_written_wal, ceph_daemon)", 
+        "refresh": 2, 
+        "regex": "", 
+        "sort": 0, 
+        "tagValuesQuery": "", 
+        "tags": [], 
+        "tagsQuery": "", 
+        "type": "query", 
         "useTags": false
       }
     ]
-  },
+  }, 
   "time": {
-    "from": "now-1h",
+    "from": "now-1h", 
     "to": "now"
-  },
+  }, 
   "timepicker": {
     "refresh_intervals": [
-      "5s",
-      "10s",
-      "30s",
-      "1m",
-      "5m",
-      "15m",
-      "30m",
-      "1h",
-      "2h",
+      "5s", 
+      "10s", 
+      "15s", 
+      "30s", 
+      "1m", 
+      "5m", 
+      "15m", 
+      "30m", 
+      "1h", 
+      "2h", 
       "1d"
-    ],
+    ], 
     "time_options": [
-      "5m",
-      "15m",
-      "1h",
-      "6h",
-      "12h",
-      "24h",
-      "2d",
-      "7d",
+      "5m", 
+      "15m", 
+      "1h", 
+      "6h", 
+      "12h", 
+      "24h", 
+      "2d", 
+      "7d", 
       "30d"
     ]
-  },
-  "timezone": "browser",
-  "title": "Ceph OSD Information"
+  }, 
+  "timezone": "browser", 
+  "title": "Ceph OSD Information", 
+  "uid": "000000001", 
+  "version": 13
 }
