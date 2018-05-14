@@ -2,6 +2,10 @@
 defaults:
   prometheus:
     container_name: prom/prometheus
+    container_cpu_period: 100000
+    container_cpu_cores: 2
+    # container_memory is in GB
+    container_memory: 4
     version: latest
     data_dir: /var/lib/cephmetrics
     user_id: '65534'  # This is the UID used by the prom/prometheus docker image

@@ -6,6 +6,10 @@ defaults:
   update_alerts: false
   grafana:
     container_name: "grafana/grafana"
+    container_cpu_period: 100000
+    container_cpu_cores: 2
+    # container_memory is in GB
+    container_memory: 4
     # version currently only applies to containers
     version: 5.0.4
     datasource: Local

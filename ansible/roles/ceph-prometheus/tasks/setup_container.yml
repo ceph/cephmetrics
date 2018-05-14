@@ -21,6 +21,14 @@
     user: "{{ prometheus.user_id }}"
     keep_volumes: true
     pull: true
+    cpu_period: "{{ prometheus.container_cpu_period }}"
+    # As of ansible-2.5.2, this module doesn't support the equivalent of the
+    # --cpus flag, so we must use period/quota for now
+    cpu_quota: "{{ prometheus.container_cpu_period * prometheus.container_cpu_cores }}"
+    #memory: 0
+    #memory_swap: 0
+    memory: "{{ prometheus.container_memory }}GB"
+    memory_swap: "{{ prometheus.container_memory * 2 }}GB"
   notify: Service handler
 
 - name: Ship systemd service
