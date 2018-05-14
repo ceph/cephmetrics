@@ -1,3107 +1,3318 @@
 {
+  "__requires": [
+    {
+      "type": "panel", 
+      "id": "alertlist", 
+      "name": "Alert List", 
+      "version": "5.0.0"
+    }, 
+    {
+      "type": "grafana", 
+      "id": "grafana", 
+      "name": "Grafana", 
+      "version": "5.0.4"
+    }, 
+    {
+      "type": "panel", 
+      "id": "grafana-piechart-panel", 
+      "name": "Pie Chart", 
+      "version": "1.3.0"
+    }, 
+    {
+      "type": "panel", 
+      "id": "graph", 
+      "name": "Graph", 
+      "version": "5.0.0"
+    }, 
+    {
+      "type": "datasource", 
+      "id": "prometheus", 
+      "name": "Prometheus", 
+      "version": "5.0.0"
+    }, 
+    {
+      "type": "panel", 
+      "id": "singlestat", 
+      "name": "Singlestat", 
+      "version": "5.0.0"
+    }, 
+    {
+      "type": "panel", 
+      "id": "vonage-status-panel", 
+      "name": "Status Panel", 
+      "version": "1.0.8"
+    }
+  ], 
   "annotations": {
     "list": [
       {
-        "builtIn": 1,
-        "datasource": "-- Grafana --",
-        "enable": true,
-        "hide": true,
-        "iconColor": "rgba(0, 211, 255, 1)",
-        "limit": 100,
-        "name": "Annotations & Alerts",
-        "showIn": 0,
+        "builtIn": 1, 
+        "datasource": "-- Grafana --", 
+        "enable": true, 
+        "hide": true, 
+        "iconColor": "rgba(0, 211, 255, 1)", 
+        "limit": 100, 
+        "name": "Annotations & Alerts", 
+        "showIn": 0, 
         "type": "dashboard"
       }
     ]
-  },
-  "editable": true,
-  "gnetId": null,
-  "graphTooltip": 0,
-  "hideControls": true,
+  }, 
+  "editable": true, 
+  "gnetId": null, 
+  "graphTooltip": 0, 
+  "id": null, 
+  "iteration": 1526262167932, 
   "links": [
     {
-      "asDropdown": true,
-      "icon": "external link",
-      "includeVars": true,
-      "keepTime": true,
+      "asDropdown": true, 
+      "icon": "external link", 
+      "includeVars": true, 
+      "keepTime": true, 
       "tags": [
         "overview"
-      ],
-      "targetBlank": true,
-      "title": "Shortcuts",
+      ], 
+      "targetBlank": true, 
+      "title": "Shortcuts", 
       "type": "dashboards"
     }
-  ],
-  "refresh": "10s",
-  "rows": [
+  ], 
+  "panels": [
     {
-      "collapse": false,
-      "height": "145",
-      "panels": [
+      "cacheTimeout": null, 
+      "colorBackground": false, 
+      "colorValue": false, 
+      "colors": [
+        "rgba(245, 54, 54, 0.9)", 
+        "rgba(237, 129, 40, 0.89)", 
+        "rgba(50, 172, 45, 0.97)"
+      ], 
+      "datasource": null, 
+      "format": "none", 
+      "gauge": {
+        "maxValue": 100, 
+        "minValue": 0, 
+        "show": false, 
+        "thresholdLabels": false, 
+        "thresholdMarkers": true
+      }, 
+      "gridPos": {
+        "h": 2, 
+        "w": 2, 
+        "x": 0, 
+        "y": 0
+      }, 
+      "height": "50px", 
+      "id": 1, 
+      "interval": null, 
+      "links": [
         {
-          "cacheTimeout": null,
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "datasource": null,
-          "format": "none",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "height": "50px",
-          "id": 1,
-          "interval": null,
-          "links": [
-            {
-              "dashUri": "db/ceph-cluster",
-              "dashboard": "Ceph Cluster",
-              "includeVars": true,
-              "keepTime": true,
-              "targetBlank": true,
-              "title": "Ceph Cluster",
-              "type": "dashboard"
-            }
-          ],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": 100,
-          "minSpan": 1,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "",
-          "postfixFontSize": "10%",
-          "prefix": "",
-          "prefixFontSize": "10%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 1,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-          },
-          "tableColumn": "",
-          "targets": [
-            {
-              "expr": "",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "A",
-              "target": ""
-            }
-          ],
-          "thresholds": "",
-          "title": "",
-          "transparent": true,
-          "type": "singlestat",
-          "valueFontSize": "35%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "Cluster",
-              "value": "null"
-            }
-          ],
-          "valueName": "current"
-        },
-        {
-          "cacheTimeout": null,
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "datasource": null,
-          "format": "none",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "height": "50px",
-          "id": 2,
-          "interval": null,
-          "links": [
-            {
-              "dashUri": "db/ceph-pools",
-              "dashboard": "Ceph Pools",
-              "includeVars": true,
-              "keepTime": true,
-              "targetBlank": true,
-              "title": "Ceph Pools",
-              "type": "dashboard"
-            }
-          ],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": 100,
-          "minSpan": 1,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "",
-          "postfixFontSize": "10%",
-          "prefix": "",
-          "prefixFontSize": "10%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 1,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-          },
-          "tableColumn": "",
-          "targets": [
-            {
-              "expr": "",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "A",
-              "target": ""
-            }
-          ],
-          "thresholds": "",
-          "title": "",
-          "transparent": true,
-          "type": "singlestat",
-          "valueFontSize": "35%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "Pools",
-              "value": "null"
-            }
-          ],
-          "valueName": "current"
-        },
-        {
-          "cacheTimeout": null,
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "datasource": null,
-          "format": "none",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "height": "50px",
-          "id": 3,
-          "interval": null,
-          "links": [
-            {
-              "dashUri": "db/ceph-osd-information",
-              "dashboard": "Ceph OSD Information",
-              "includeVars": true,
-              "keepTime": true,
-              "targetBlank": true,
-              "title": "Ceph OSD Information",
-              "type": "dashboard"
-            }
-          ],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": 100,
-          "minSpan": 1,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "",
-          "postfixFontSize": "10%",
-          "prefix": "",
-          "prefixFontSize": "10%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 1,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-          },
-          "tableColumn": "",
-          "targets": [
-            {
-              "expr": "",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "A",
-              "target": ""
-            }
-          ],
-          "thresholds": "",
-          "title": "",
-          "transparent": true,
-          "type": "singlestat",
-          "valueFontSize": "35%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "OSDs",
-              "value": "null"
-            }
-          ],
-          "valueName": "current"
-        },
-        {
-          "cacheTimeout": null,
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "datasource": null,
-          "format": "none",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "height": "50px",
-          "id": 5,
-          "interval": null,
-          "links": [
-            {
-              "dashUri": "db/ceph-backend-storage",
-              "dashboard": "Ceph Backend Storage",
-              "includeVars": true,
-              "keepTime": true,
-              "targetBlank": true,
-              "title": "OSD Host Performance",
-              "type": "dashboard"
-            }
-          ],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": 100,
-          "minSpan": 1,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "",
-          "postfixFontSize": "10%",
-          "prefix": "",
-          "prefixFontSize": "10%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 1,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-          },
-          "tableColumn": "",
-          "targets": [
-            {
-              "expr": "",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "A",
-              "target": ""
-            }
-          ],
-          "thresholds": "",
-          "title": "",
-          "transparent": true,
-          "type": "singlestat",
-          "valueFontSize": "35%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "OSD Hosts",
-              "value": "null"
-            }
-          ],
-          "valueName": "current"
-        },
-        {
-          "cacheTimeout": null,
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "datasource": null,
-          "format": "none",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "height": "50px",
-          "id": 6,
-          "interval": null,
-          "links": [
-            {
-              "dashUri": "db/network-usage-by-node",
-              "dashboard": "Network Usage by Node",
-              "includeVars": true,
-              "keepTime": true,
-              "targetBlank": true,
-              "title": "Network Usage by Host",
-              "type": "dashboard"
-            }
-          ],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": 100,
-          "minSpan": 1,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "",
-          "postfixFontSize": "10%",
-          "prefix": "",
-          "prefixFontSize": "10%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 1,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-          },
-          "tableColumn": "",
-          "targets": [
-            {
-              "expr": "",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "A",
-              "target": ""
-            }
-          ],
-          "thresholds": "",
-          "title": "",
-          "transparent": true,
-          "type": "singlestat",
-          "valueFontSize": "35%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "Network",
-              "value": "null"
-            }
-          ],
-          "valueName": "current"
-        },
-        {
-          "content": "",
-          "id": 7,
-          "links": [],
-          "minSpan": 4,
-          "mode": "markdown",
-          "span": 4,
-          "title": "",
-          "transparent": true,
-          "type": "text"
-        },
-        {
-          "id": 8,
-          "limit": 10,
-          "links": [
-            {
-              "dashUri": "db/alert-status",
-              "dashboard": "Alert Status",
-              "targetBlank": true,
-              "title": "Alert Status",
-              "type": "dashboard"
-            }
-          ],
-          "minSpan": 2,
-          "onlyAlertsOnDashboard": false,
-          "show": "current",
-          "sortOrder": 3,
-          "span": 2,
-          "stateFilter": [
-            "alerting"
-          ],
-          "title": "Active Alerts",
-          "type": "alertlist"
+          "dashUri": "db/ceph-cluster", 
+          "dashboard": "Ceph Cluster", 
+          "includeVars": true, 
+          "keepTime": true, 
+          "targetBlank": true, 
+          "title": "Ceph Cluster", 
+          "type": "dashboard"
         }
-      ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": false,
-      "title": "Dashboard Row",
-      "titleSize": "h6"
-    },
+      ], 
+      "mappingType": 1, 
+      "mappingTypes": [
+        {
+          "name": "value to text", 
+          "value": 1
+        }, 
+        {
+          "name": "range to text", 
+          "value": 2
+        }
+      ], 
+      "maxDataPoints": 100, 
+      "minSpan": 2, 
+      "nullPointMode": "connected", 
+      "nullText": null, 
+      "postfix": "", 
+      "postfixFontSize": "10%", 
+      "prefix": "", 
+      "prefixFontSize": "10%", 
+      "rangeMaps": [
+        {
+          "from": "null", 
+          "text": "N/A", 
+          "to": "null"
+        }
+      ], 
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)", 
+        "full": false, 
+        "lineColor": "rgb(31, 120, 193)", 
+        "show": false
+      }, 
+      "tableColumn": "", 
+      "targets": [
+        {
+          "expr": "", 
+          "format": "time_series", 
+          "intervalFactor": 2, 
+          "refId": "A", 
+          "target": ""
+        }
+      ], 
+      "thresholds": "", 
+      "title": "", 
+      "transparent": true, 
+      "type": "singlestat", 
+      "valueFontSize": "35%", 
+      "valueMaps": [
+        {
+          "op": "=", 
+          "text": "Cluster", 
+          "value": "null"
+        }
+      ], 
+      "valueName": "current"
+    }, 
     {
-      "collapse": false,
-      "height": "225",
-      "panels": [
+      "cacheTimeout": null, 
+      "colorBackground": false, 
+      "colorValue": false, 
+      "colors": [
+        "rgba(245, 54, 54, 0.9)", 
+        "rgba(237, 129, 40, 0.89)", 
+        "rgba(50, 172, 45, 0.97)"
+      ], 
+      "datasource": null, 
+      "format": "none", 
+      "gauge": {
+        "maxValue": 100, 
+        "minValue": 0, 
+        "show": false, 
+        "thresholdLabels": false, 
+        "thresholdMarkers": true
+      }, 
+      "gridPos": {
+        "h": 2, 
+        "w": 2, 
+        "x": 2, 
+        "y": 0
+      }, 
+      "height": "50px", 
+      "id": 2, 
+      "interval": null, 
+      "links": [
         {
-          "cacheTimeout": null,
-          "colorBackground": true,
-          "colorValue": false,
-          "colors": [
-            "rgba(1, 167, 1, 1)",
-            "rgba(255,165,0, 1)",
-            "rgba(255, 0, 0, 1)"
-          ],
-          "datasource": null,
-          "description": "Shows the overall health of the ceph cluster",
-          "format": "none",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "hideTimeOverride": true,
-          "id": 9,
-          "interval": null,
-          "links": [
-            {
-              "dashUri": "db/ceph-health",
-              "dashboard": "Ceph Health",
-              "includeVars": true,
-              "keepTime": false,
-              "targetBlank": true,
-              "title": "Ceph Health",
-              "type": "dashboard"
-            }
-          ],
-          "mappingType": 2,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": "",
-          "minSpan": 1,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "",
-          "postfixFontSize": "50%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "0",
-              "text": "OK",
-              "to": "0"
-            },
-            {
-              "from": "1",
-              "text": "WARN",
-              "to": "4"
-            },
-            {
-              "from": "5",
-              "text": "ERROR",
-              "to": "99"
-            },
-            {
-              "from": "-10",
-              "text": "NODATA",
-              "to": "0"
-            }
-          ],
-          "span": 1,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-          },
-          "tableColumn": "",
-          "targets": [
-            {
-              "expr": "ceph_health_status",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "A",
-              "target": "consolidateBy(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.health),\"max\")",
-              "textEditor": true
-            }
-          ],
-          "thresholds": "1,5",
-          "timeFrom": "1m",
-          "timeShift": null,
-          "title": "Health",
-          "type": "singlestat",
-          "valueFontSize": "50%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "OK",
-              "value": "0"
-            },
-            {
-              "op": "=",
-              "text": "WARN",
-              "value": "4"
-            },
-            {
-              "op": "=",
-              "text": "ERROR",
-              "value": "8"
-            }
-          ],
-          "valueName": "current"
-        },
-        {
-          "clusterName": "MONs",
-          "colorMode": "Panel",
-          "colors": {
-            "crit": "rgba(245, 54, 54, 0.9)",
-            "disable": "rgba(128, 128, 128, 0.9)",
-            "ok": "rgb(1,167,1)",
-            "warn": "rgba(237, 129, 40, 0.9)"
-          },
-          "cornerRadius": 0,
-          "datasource": null,
-          "displayName": "MONs",
-          "flipCard": false,
-          "flipTime": 5,
-          "hideTimeOverride": true,
-          "id": 10,
-          "isGrayOnNoData": true,
-          "isHideAlertsOnDisable": false,
-          "isIgnoreOKColors": false,
-          "links": [],
-          "minSpan": 1,
-          "namePrefix": "",
-          "span": 1,
-          "targets": [
-            {
-              "aggregation": "Last",
-              "alias": "total",
-              "displayType": "Regular",
-              "expr": "count(ceph_mon_election_win)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "total",
-              "refId": "D",
-              "target": "alias(keepLastValue(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_mon), \"max\")),\"total\")",
-              "textEditor": true,
-              "valueHandler": "Text Only"
-            },
-            {
-              "aggregation": "Last",
-              "alias": "quorum",
-              "displayAliasType": "Always",
-              "displayType": "Regular",
-              "displayValueWithAlias": "When Alias Displayed",
-              "expr": "ceph_mon_quorum_count",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "quorum",
-              "refId": "E",
-              "target": "alias(keepLastValue(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_mon_quorum), \"max\")),\"quorum\")",
-              "textEditor": true,
-              "valueHandler": "String Threshold",
-              "warn": "1"
-            },
-            {
-              "aggregation": "Last",
-              "alias": "down",
-              "displayAliasType": "Always",
-              "displayType": "Regular",
-              "displayValueWithAlias": "When Alias Displayed",
-              "expr": "sum(ceph_mon_quorum_count) - count(ceph_mon_election_win)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "down",
-              "refId": "A",
-              "target": "alias(diffSeries(#D,#E), \"down\")",
-              "targetFull": "alias(diffSeries(alias(keepLastValue(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_mon), \"max\")),\"total\"),alias(keepLastValue(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_mon_quorum), \"max\")),\"quorum\")), \"down\")",
-              "textEditor": true,
-              "valueHandler": "String Threshold",
-              "warn": "1"
-            }
-          ],
-          "timeFrom": "1m",
-          "timeShift": null,
-          "title": "",
-          "type": "vonage-status-panel"
-        },
-        {
-          "clusterName": "OSDs",
-          "colorMode": "Panel",
-          "colors": {
-            "crit": "rgba(245, 54, 54, 0.9)",
-            "disable": "rgba(128, 128, 128, 0.9)",
-            "ok": "rgb(1,167,1)",
-            "warn": "rgba(237, 129, 40, 0.9)"
-          },
-          "cornerRadius": 0,
-          "datasource": null,
-          "displayName": "OSDs",
-          "flipCard": false,
-          "flipTime": 5,
-          "hideTimeOverride": true,
-          "id": 11,
-          "isGrayOnNoData": false,
-          "isHideAlertsOnDisable": false,
-          "isIgnoreOKColors": false,
-          "links": [
-            {
-              "dashUri": "db/ceph-osd-information",
-              "dashboard": "Ceph OSD Information",
-              "targetBlank": true,
-              "title": "Ceph OSD Information",
-              "type": "dashboard"
-            }
-          ],
-          "minSpan": 1,
-          "namePrefix": "",
-          "span": 1,
-          "targets": [
-            {
-              "aggregation": "Last",
-              "alias": "total",
-              "displayType": "Regular",
-              "expr": "count(ceph_osd_up)",
-              "format": "time_series",
-              "hide": false,
-              "intervalFactor": 2,
-              "legendFormat": "total",
-              "refId": "E",
-              "target": "alias(keepLastValue(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_osd), \"max\")),\"total\")",
-              "textEditor": true,
-              "valueHandler": "Text Only"
-            },
-            {
-              "aggregation": "Last",
-              "alias": "in",
-              "displayType": "Regular",
-              "expr": "count(ceph_osd_up == 1)",
-              "format": "time_series",
-              "hide": false,
-              "intervalFactor": 2,
-              "legendFormat": "up",
-              "refId": "F",
-              "target": "alias(keepLastValue(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_osd_up), \"max\")),\"up\")",
-              "textEditor": true,
-              "valueHandler": "Text Only"
-            },
-            {
-              "aggregation": "Last",
-              "alias": "up",
-              "displayType": "Regular",
-              "expr": "count(ceph_osd_in == 1)",
-              "format": "time_series",
-              "hide": false,
-              "intervalFactor": 2,
-              "legendFormat": "in",
-              "refId": "A",
-              "target": "alias(keepLastValue(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_osd_in), \"max\")),\"in\")",
-              "textEditor": true,
-              "valueHandler": "Text Only"
-            },
-            {
-              "aggregation": "Last",
-              "alias": "out",
-              "displayType": "Regular",
-              "expr": "count(ceph_osd_in == 0)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "out",
-              "refId": "C",
-              "target": "alias(countSeries(currentBelow(groupByNode(transformNull(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.osd_state.*.in,99),-2,\"maxSeries\"),0.5)),\"out\")",
-              "textEditor": true,
-              "valueHandler": "Text Only"
-            },
-            {
-              "aggregation": "Last",
-              "alias": "down",
-              "crit": 5,
-              "displayAliasType": "Always",
-              "displayType": "Regular",
-              "displayValueWithAlias": "When Alias Displayed",
-              "expr": "count(ceph_osd_up == 0)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "down",
-              "refId": "B",
-              "target": "alias(countSeries(currentBelow(groupByNode(transformNull(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.osd_state.*.up,99),-2,\"maxSeries\"),0.5)),\"down\")",
-              "textEditor": true,
-              "valueHandler": "Number Threshold",
-              "warn": 1
-            }
-          ],
-          "timeFrom": "1m",
-          "timeShift": null,
-          "title": "",
-          "type": "vonage-status-panel"
-        },
-        {
-          "clusterName": "OSD Hosts",
-          "colorMode": "Panel",
-          "colors": {
-            "crit": "rgba(245, 54, 54, 0.9)",
-            "disable": "rgba(128, 128, 128, 0.9)",
-            "ok": "rgb(1,167,1)",
-            "warn": "rgba(237, 129, 40, 0.9)"
-          },
-          "cornerRadius": 0,
-          "datasource": null,
-          "displayName": "OSD Hosts",
-          "flipCard": false,
-          "flipTime": 5,
-          "hideTimeOverride": true,
-          "id": 12,
-          "isGrayOnNoData": false,
-          "isHideAlertsOnDisable": false,
-          "isIgnoreOKColors": false,
-          "links": [],
-          "minSpan": 1,
-          "span": 1,
-          "targets": [
-            {
-              "aggregation": "Last",
-              "alias": "total",
-              "displayType": "Regular",
-              "expr": "count(\n  count(\n    ceph_disk_occupation\n  ) by (instance)\n)",
-              "format": "time_series",
-              "instant": false,
-              "intervalFactor": 2,
-              "legendFormat": "total",
-              "refId": "A",
-              "target": "alias(countSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.num_osds),\"total\")",
-              "textEditor": true,
-              "valueHandler": "Text Only"
-            },
-            {
-              "aggregation": "Last",
-              "alias": "up",
-              "displayType": "Regular",
-              "expr": "count(\n  count(\n    ceph_osd_up + on (ceph_daemon) group_left(instance) ceph_disk_occupation\n  ) by (instance) > 0\n)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "up",
-              "refId": "B",
-              "target": "alias(countSeries(currentAbove(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.num_osds,0)),\"up\")",
-              "textEditor": true,
-              "valueHandler": "Text Only"
-            },
-            {
-              "aggregation": "Last",
-              "alias": "down",
-              "crit": 2,
-              "displayAliasType": "Always",
-              "displayType": "Regular",
-              "displayValueWithAlias": "When Alias Displayed",
-              "expr": "count(\n  count(\n    ceph_osd_up + on (ceph_daemon) group_left(instance) ceph_disk_occupation\n  ) by (instance) == 0\n)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "down",
-              "refId": "C",
-              "target": "alias(diffSeries(#A, #B), \"down\")",
-              "targetFull": "alias(diffSeries(alias(countSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.num_osds),\"total\"), alias(countSeries(currentAbove(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.num_osds,0)),\"up\")), \"down\")",
-              "textEditor": true,
-              "valueHandler": "Number Threshold",
-              "warn": 1
-            }
-          ],
-          "timeFrom": "30s",
-          "timeShift": null,
-          "title": "",
-          "type": "vonage-status-panel"
-        },
-        {
-          "clusterName": "RGWs",
-          "colorMode": "Panel",
-          "colors": {
-            "crit": "rgba(245, 54, 54, 0.9)",
-            "disable": "rgba(128, 128, 128, 0.9)",
-            "ok": "rgb(1,167,1)",
-            "warn": "rgba(237, 129, 40, 0.9)"
-          },
-          "cornerRadius": 0,
-          "datasource": null,
-          "displayName": "RGWs",
-          "flipCard": false,
-          "flipTime": 5,
-          "hideTimeOverride": true,
-          "id": 13,
-          "isGrayOnNoData": false,
-          "isHideAlertsOnDisable": false,
-          "isIgnoreOKColors": false,
-          "links": [],
-          "span": 1,
-          "targets": [
-            {
-              "aggregation": "Last",
-              "alias": "total",
-              "displayType": "Regular",
-              "hide": true,
-              "refId": "A",
-              "target": "constantLine(0)",
-              "textEditor": true,
-              "valueHandler": "Text Only"
-            },
-            {
-              "aggregation": "Last",
-              "displayType": "Regular",
-              "hide": true,
-              "refId": "B",
-              "target": "countSeries(collectd.*.$domain.cephmetrics.derive.$cluster_name.rgw.put)",
-              "textEditor": true,
-              "valueHandler": "Regular"
-            },
-            {
-              "aggregation": "Last",
-              "alias": "total",
-              "displayType": "Regular",
-              "hide": false,
-              "refId": "C",
-              "target": "alias(limit(sortByMaxima(group(#A,#B)),1),\"total\")",
-              "targetFull": "alias(limit(sortByMaxima(group(constantLine(0),countSeries(collectd.*.$domain.cephmetrics.derive.$cluster_name.rgw.put))),1),\"total\")",
-              "textEditor": true,
-              "valueHandler": "Text Only"
-            },
-            {
-              "displayType": "Regular",
-              "hide": true,
-              "refId": "D",
-              "target": "countSeries(currentAbove(collectd.*.$domain.cephmetrics.derive.$cluster_name.rgw.put,0))",
-              "textEditor": true,
-              "valueHandler": "Regular"
-            },
-            {
-              "aggregation": "Last",
-              "alias": "up",
-              "displayType": "Regular",
-              "hide": false,
-              "refId": "E",
-              "target": "alias(limit(sortByMaxima(group(#A,#D)),1), \"up\")",
-              "targetFull": "alias(limit(sortByMaxima(group(constantLine(0),countSeries(currentAbove(collectd.*.$domain.cephmetrics.derive.$cluster_name.rgw.put,0)))),1), \"up\")",
-              "textEditor": true,
-              "valueHandler": "Text Only"
-            },
-            {
-              "aggregation": "Last",
-              "alias": "down",
-              "crit": 6,
-              "displayAliasType": "Always",
-              "displayType": "Regular",
-              "displayValueWithAlias": "When Alias Displayed",
-              "hide": false,
-              "refId": "F",
-              "target": "alias(diffSeries(#B, #D),\"down\")",
-              "targetFull": "alias(diffSeries(countSeries(collectd.*.$domain.cephmetrics.derive.$cluster_name.rgw.put), countSeries(currentAbove(collectd.*.$domain.cephmetrics.derive.$cluster_name.rgw.put,0))),\"down\")",
-              "textEditor": true,
-              "valueHandler": "Number Threshold",
-              "warn": 1
-            }
-          ],
-          "timeFrom": "30s",
-          "timeShift": null,
-          "title": "",
-          "transparent": false,
-          "type": "vonage-status-panel"
-        },
-        {
-          "clusterName": "MDS",
-          "colorMode": "Panel",
-          "colors": {
-            "crit": "rgba(245, 54, 54, 0.9)",
-            "disable": "rgba(128, 128, 128, 0.9)",
-            "ok": "rgb(1,167,1)",
-            "warn": "rgba(237, 129, 40, 0.9)"
-          },
-          "cornerRadius": 0,
-          "datasource": null,
-          "displayName": "MDS",
-          "flipCard": false,
-          "flipTime": 5,
-          "hideTimeOverride": true,
-          "id": 14,
-          "isGrayOnNoData": false,
-          "isHideAlertsOnDisable": false,
-          "isIgnoreOKColors": false,
-          "links": [],
-          "minSpan": 1,
-          "namePrefix": "",
-          "span": 1,
-          "targets": [
-            {
-              "aggregation": "Last",
-              "alias": "up",
-              "displayType": "Regular",
-              "expr": "",
-              "format": "time_series",
-              "hide": false,
-              "intervalFactor": 2,
-              "legendFormat": "up",
-              "refId": "A",
-              "target": "alias(keepLastValue(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_mds_up), \"max\")),\"up\")",
-              "textEditor": true,
-              "valueHandler": "Text Only"
-            },
-            {
-              "aggregation": "Last",
-              "alias": "in",
-              "displayType": "Regular",
-              "expr": "",
-              "format": "time_series",
-              "hide": false,
-              "intervalFactor": 2,
-              "refId": "E",
-              "target": "alias(keepLastValue(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_mds_in), \"max\")),\"in\")",
-              "textEditor": true,
-              "valueHandler": "Text Only"
-            },
-            {
-              "aggregation": "Last",
-              "alias": "down",
-              "crit": 2,
-              "displayAliasType": "Always",
-              "displayType": "Regular",
-              "displayValueWithAlias": "When Alias Displayed",
-              "expr": "",
-              "format": "time_series",
-              "hide": false,
-              "intervalFactor": 2,
-              "refId": "B",
-              "target": "alias(keepLastValue(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_mds_failed), \"max\")),\"down\")",
-              "textEditor": true,
-              "valueHandler": "Number Threshold",
-              "warn": 1
-            }
-          ],
-          "timeFrom": "1m",
-          "timeShift": null,
-          "title": "",
-          "type": "vonage-status-panel"
-        },
-        {
-          "cacheTimeout": null,
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "rgba(1, 167, 1, 1)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(245, 54, 54, 0.9)"
-          ],
-          "datasource": null,
-          "decimals": 0,
-          "format": "short",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": true,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "hideTimeOverride": true,
-          "id": 15,
-          "interval": null,
-          "links": [
-            {
-              "dashUri": "db/ceph-cluster",
-              "dashboard": "Ceph Cluster",
-              "params": "panelId=3&fullscreen&orgId=1",
-              "targetBlank": true,
-              "title": "Cluster Capacity Information",
-              "type": "dashboard"
-            }
-          ],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": 100,
-          "minSpan": 2,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "%",
-          "postfixFontSize": "40%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 2,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-          },
-          "tableColumn": "",
-          "targets": [
-            {
-              "expr": "sum(ceph_osd_stat_bytes_used) / sum(ceph_osd_stat_bytes) * 100",
-              "format": "time_series",
-              "hide": false,
-              "instant": true,
-              "intervalFactor": 2,
-              "refId": "A",
-              "target": "alias(maxSeries(groupByNode(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.osd_bytes, 1,\"maxSeries\")), \"raw capacity\")",
-              "textEditor": true
-            }
-          ],
-          "thresholds": "70,90",
-          "timeFrom": "1m",
-          "timeShift": null,
-          "title": "Capacity Utilization",
-          "type": "singlestat",
-          "valueFontSize": "70%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "N/A",
-              "value": "null"
-            }
-          ],
-          "valueName": "current"
-        },
-        {
-          "cacheTimeout": null,
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "datasource": null,
-          "decimals": 1,
-          "description": "Shows the growth rate based on osd usage over the past $growth_window.",
-          "format": "decbytes",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "id": 16,
-          "interval": null,
-          "links": [],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": 100,
-          "minSpan": 1,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "",
-          "postfixFontSize": "50%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 1,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-          },
-          "tableColumn": "",
-          "targets": [
-            {
-              "expr": "topk(1, ceph_cluster_total_used_bytes offset 1d) - ignoring (instance,job) topk(1, ceph_cluster_total_used_bytes offset 7d)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "A"
-            }
-          ],
-          "thresholds": "",
-          "title": "$growth_window Growth Rate",
-          "type": "singlestat",
-          "valueFontSize": "70%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "N/A",
-              "value": "null"
-            }
-          ],
-          "valueName": "current"
-        },
-        {
-          "cacheTimeout": null,
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "datasource": null,
-          "decimals": 0,
-          "description": "Shows the estimated number of weeks left, based on consumption over the past $growth_window.",
-          "format": "none",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "id": 17,
-          "interval": null,
-          "links": [],
-          "mappingType": 2,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": 100,
-          "minSpan": 1,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "",
-          "postfixFontSize": "50%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            },
-            {
-              "from": "-99999",
-              "text": "N/A",
-              "to": "0"
-            }
-          ],
-          "span": 1,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-          },
-          "tableColumn": "",
-          "targets": [
-            {
-              "expr": "",
-              "format": "time_series",
-              "hide": true,
-              "intervalFactor": 2,
-              "refId": "A",
-              "target": "alias(consolidateBy(maxSeries(timeShift(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.osd_bytes_used,\"7d\")), \"max\"),\"-$growth_window ago\")",
-              "textEditor": true
-            },
-            {
-              "expr": "",
-              "format": "time_series",
-              "hide": true,
-              "intervalFactor": 2,
-              "refId": "B",
-              "target": "alias(consolidateBy(maxSeries(timeShift(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.osd_bytes_used,\"1d\")), \"max\"),\"-1d ago\")",
-              "textEditor": true
-            },
-            {
-              "expr": "",
-              "format": "time_series",
-              "hide": true,
-              "intervalFactor": 2,
-              "refId": "C",
-              "target": "keepLastValue(diffSeries(#B, #A))",
-              "targetFull": "keepLastValue(diffSeries(alias(consolidateBy(maxSeries(timeShift(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.osd_bytes_used,\"1d\")), \"max\"),\"-1d ago\"), alias(consolidateBy(maxSeries(timeShift(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.osd_bytes_used,\"7d\")), \"max\"),\"-$growth_window ago\")))",
-              "textEditor": true
-            },
-            {
-              "expr": "",
-              "format": "time_series",
-              "hide": true,
-              "intervalFactor": 2,
-              "refId": "D",
-              "target": "consolidateBy(minSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.osd_bytes_avail), \"min\")",
-              "textEditor": true
-            },
-            {
-              "expr": "",
-              "format": "time_series",
-              "hide": false,
-              "intervalFactor": 2,
-              "refId": "E",
-              "target": "alias(divideSeries(#D, #C), 'Weeks Left till full')",
-              "targetFull": "alias(divideSeries(consolidateBy(minSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.osd_bytes_avail), \"min\"), keepLastValue(diffSeries(alias(consolidateBy(maxSeries(timeShift(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.osd_bytes_used,\"1d\")), \"max\"),\"-1d ago\"), alias(consolidateBy(maxSeries(timeShift(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.osd_bytes_used,\"7d\")), \"max\"),\"-$growth_window ago\")))), 'Weeks Left till full')",
-              "textEditor": true
-            }
-          ],
-          "thresholds": "",
-          "title": "Weeks Remaining",
-          "type": "singlestat",
-          "valueFontSize": "70%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "N/A",
-              "value": "null"
-            }
-          ],
-          "valueName": "current"
-        },
-        {
-          "aliasColors": {
-            "active + clean": "#01a701",
-            "collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.num_pg_active_clean": "#01a701",
-            "collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.num_pg_peering": "#ffa500",
-            "peering": "#0A50A1"
-          },
-          "cacheTimeout": null,
-          "combine": {
-            "label": "Others",
-            "threshold": ""
-          },
-          "datasource": null,
-          "fontSize": "100%",
-          "format": "none",
-          "height": "",
-          "hideTimeOverride": true,
-          "id": 18,
-          "interval": null,
-          "legend": {
-            "percentage": false,
-            "show": true,
-            "values": true
-          },
-          "legendType": "Under graph",
-          "links": [
-            {
-              "dashUri": "db/ceph-cluster",
-              "dashboard": "Ceph Cluster",
-              "includeVars": false,
-              "keepTime": false,
-              "targetBlank": true,
-              "title": "Ceph Cluster Information",
-              "type": "dashboard"
-            }
-          ],
-          "maxDataPoints": "1",
-          "minSpan": 2,
-          "nullPointMode": "connected",
-          "pieType": "pie",
-          "span": 2,
-          "strokeWidth": "",
-          "targets": [
-            {
-              "expr": "ceph_pg_clean",
-              "format": "time_series",
-              "hide": true,
-              "instant": false,
-              "intervalFactor": 1,
-              "legendFormat": "clean",
-              "refId": "A",
-              "target": "alias(keepLastValue(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_pg_active_clean), \"max\")),\"active + clean\")",
-              "textEditor": true
-            },
-            {
-              "expr": "ceph_pg_active",
-              "format": "time_series",
-              "hide": false,
-              "instant": false,
-              "intervalFactor": 1,
-              "legendFormat": "active",
-              "refId": "B",
-              "target": "alias(keepLastValue(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_pg_active), \"max\")),\"active\")",
-              "textEditor": true
-            },
-            {
-              "expr": "ceph_pg_degraded",
-              "format": "time_series",
-              "hide": false,
-              "instant": false,
-              "intervalFactor": 1,
-              "legendFormat": "degraded",
-              "refId": "C",
-              "target": "alias(diffSeries(#B,#A),\"active + degraded\")",
-              "targetFull": "alias(diffSeries(alias(keepLastValue(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_pg_active), \"max\")),\"active\"),alias(keepLastValue(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_pg_active_clean), \"max\")),\"active + clean\")),\"active + degraded\")",
-              "textEditor": true
-            },
-            {
-              "expr": "ceph_pg_peering",
-              "format": "time_series",
-              "hide": false,
-              "instant": false,
-              "intervalFactor": 1,
-              "legendFormat": "peering",
-              "refId": "D",
-              "target": "alias(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_pg_peering), \"max\"),\"peering\")",
-              "textEditor": true
-            }
-          ],
-          "timeFrom": "1m",
-          "timeShift": null,
-          "title": "Placement Group Status",
-          "type": "grafana-piechart-panel",
-          "valueName": "current"
+          "dashUri": "db/ceph-pools", 
+          "dashboard": "Ceph Pools", 
+          "includeVars": true, 
+          "keepTime": true, 
+          "targetBlank": true, 
+          "title": "Ceph Pools", 
+          "type": "dashboard"
         }
-      ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": true,
-      "title": "At a Glance",
-      "titleSize": "h5"
-    },
+      ], 
+      "mappingType": 1, 
+      "mappingTypes": [
+        {
+          "name": "value to text", 
+          "value": 1
+        }, 
+        {
+          "name": "range to text", 
+          "value": 2
+        }
+      ], 
+      "maxDataPoints": 100, 
+      "minSpan": 2, 
+      "nullPointMode": "connected", 
+      "nullText": null, 
+      "postfix": "", 
+      "postfixFontSize": "10%", 
+      "prefix": "", 
+      "prefixFontSize": "10%", 
+      "rangeMaps": [
+        {
+          "from": "null", 
+          "text": "N/A", 
+          "to": "null"
+        }
+      ], 
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)", 
+        "full": false, 
+        "lineColor": "rgb(31, 120, 193)", 
+        "show": false
+      }, 
+      "tableColumn": "", 
+      "targets": [
+        {
+          "expr": "", 
+          "format": "time_series", 
+          "intervalFactor": 2, 
+          "refId": "A", 
+          "target": ""
+        }
+      ], 
+      "thresholds": "", 
+      "title": "", 
+      "transparent": true, 
+      "type": "singlestat", 
+      "valueFontSize": "35%", 
+      "valueMaps": [
+        {
+          "op": "=", 
+          "text": "Pools", 
+          "value": "null"
+        }
+      ], 
+      "valueName": "current"
+    }, 
     {
-      "collapse": false,
-      "height": "230",
-      "panels": [
+      "cacheTimeout": null, 
+      "colorBackground": false, 
+      "colorValue": false, 
+      "colors": [
+        "rgba(245, 54, 54, 0.9)", 
+        "rgba(237, 129, 40, 0.89)", 
+        "rgba(50, 172, 45, 0.97)"
+      ], 
+      "datasource": null, 
+      "format": "none", 
+      "gauge": {
+        "maxValue": 100, 
+        "minValue": 0, 
+        "show": false, 
+        "thresholdLabels": false, 
+        "thresholdMarkers": true
+      }, 
+      "gridPos": {
+        "h": 2, 
+        "w": 2, 
+        "x": 4, 
+        "y": 0
+      }, 
+      "height": "50px", 
+      "id": 3, 
+      "interval": null, 
+      "links": [
         {
-          "cacheTimeout": null,
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "rgba(251,251,251, 0.97)",
-            "rgba(255,0,0,1)",
-            "rgba(255, 0, 0, 1)"
-          ],
-          "datasource": null,
-          "description": "This panel indicate whether scrub/deep scrub is running within the cluster. NB. If either of these features are turned off, the cluster will enter a WARN state. Click on the panel or the link below to look at cluster information in more detail",
-          "format": "none",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "id": 19,
-          "interval": null,
-          "links": [
-            {
-              "dashUri": "db/ceph-cluster",
-              "dashboard": "Ceph Cluster",
-              "includeVars": false,
-              "keepTime": false,
-              "targetBlank": true,
-              "title": "Ceph Cluster",
-              "type": "dashboard"
-            }
-          ],
-          "mappingType": 2,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": "",
-          "minSpan": 1,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "",
-          "postfixFontSize": "50%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "0",
-              "text": "INACTIVE",
-              "to": "0"
-            },
-            {
-              "from": "1",
-              "text": "ACTIVE",
-              "to": "99999"
-            }
-          ],
-          "span": 1,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-          },
-          "tableColumn": "",
-          "targets": [
-            {
-              "expr": "ceph_pg_scrubbing{job=\"ceph\"}",
-              "format": "time_series",
-              "hide": false,
-              "intervalFactor": 2,
-              "refId": "A",
-              "target": "consolidateBy(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.features.deep_scrub),\"max\")",
-              "textEditor": true
-            }
-          ],
-          "thresholds": "1",
-          "title": "Scrub",
-          "type": "singlestat",
-          "valueFontSize": "50%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "INACTIVE",
-              "value": "0"
-            },
-            {
-              "op": "=",
-              "text": "ACTIVE",
-              "value": "1"
-            },
-            {
-              "op": "=",
-              "text": "DISABLED",
-              "value": "2"
-            },
-            {
-              "op": "=",
-              "text": "",
-              "value": ""
-            }
-          ],
-          "valueName": "current"
-        },
-        {
-          "cacheTimeout": null,
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "rgba(251,251,251, 0.97)",
-            "rgba(255,165,0, 0.89)",
-            "rgba(255, 0, 0, 1)"
-          ],
-          "datasource": null,
-          "decimals": 1,
-          "format": "none",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "id": 20,
-          "interval": null,
-          "links": [
-            {
-              "dashUri": "db/ceph-pools",
-              "dashboard": "Ceph Pools",
-              "includeVars": true,
-              "keepTime": true,
-              "targetBlank": true,
-              "title": "Ceph Pools",
-              "type": "dashboard"
-            }
-          ],
-          "mappingType": 2,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": "90",
-          "minSpan": 1,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "/s",
-          "postfixFontSize": "50%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [],
-          "span": 1,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": true
-          },
-          "tableColumn": "",
-          "targets": [
-            {
-              "expr": "sum(irate(ceph_osd_recovery_ops[1m]))",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "A",
-              "target": "sumSeries(groupByNode(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.*.recovering_bytes_per_sec,-2,\"avg\"))",
-              "textEditor": true
-            }
-          ],
-          "thresholds": "1,2",
-          "title": "Recovery Ops",
-          "type": "singlestat",
-          "valueFontSize": "50%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "N/A",
-              "value": "null"
-            }
-          ],
-          "valueName": "current"
-        },
-        {
-          "cacheTimeout": null,
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "datasource": null,
-          "decimals": 0,
-          "format": "none",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "id": 21,
-          "interval": null,
-          "links": [
-            {
-              "dashUri": "db/ceph-pools",
-              "dashboard": "Ceph Pools",
-              "includeVars": true,
-              "keepTime": true,
-              "targetBlank": true,
-              "title": "Ceph Pools",
-              "type": "dashboard"
-            }
-          ],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": "90",
-          "minSpan": 2,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "",
-          "postfixFontSize": "50%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 2,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": true
-          },
-          "tableColumn": "",
-          "targets": [
-            {
-              "dsType": "influxdb",
-              "expr": "sum(\n  rate(ceph_pool_wr[$__interval])\n)\n+ \nsum(\n  rate(ceph_pool_rd[$__interval])\n)",
-              "format": "time_series",
-              "groupBy": [],
-              "hide": false,
-              "intervalFactor": 1,
-              "legendFormat": "IOPS",
-              "measurement": "collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.pools._all_.read_op_per_sec",
-              "policy": "default",
-              "query": "SELECT mean(\"value\") FROM \"measurement\" WHERE $timeFilter GROUP BY time($__interval) fill(null)",
-              "rawQuery": false,
-              "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "value"
-                    ],
-                    "type": "field"
-                  }
-                ]
-              ],
-              "tags": [],
-              "target": "sumSeries(groupByNode(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.*.op_per_sec,-2,\"maxSeries\"))",
-              "textEditor": true
-            }
-          ],
-          "thresholds": "",
-          "title": "Client IOPS",
-          "type": "singlestat",
-          "valueFontSize": "100%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "N/A",
-              "value": "null"
-            }
-          ],
-          "valueName": "current"
-        },
-        {
-          "cacheTimeout": null,
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "datasource": null,
-          "decimals": 1,
-          "format": "decbytes",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "id": 22,
-          "interval": null,
-          "links": [
-            {
-              "dashUri": "db/ceph-pools",
-              "dashboard": "Ceph Pools",
-              "includeVars": true,
-              "keepTime": true,
-              "targetBlank": true,
-              "title": "Ceph Pools",
-              "type": "dashboard"
-            }
-          ],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": "90",
-          "minSpan": 2,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "/s",
-          "postfixFontSize": "50%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 2,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": true
-          },
-          "tableColumn": "",
-          "targets": [
-            {
-              "dsType": "influxdb",
-              "expr": "sum(rate(ceph_pool_wr_bytes[$__interval]) + rate(ceph_pool_rd_bytes[$__interval]))",
-              "format": "time_series",
-              "groupBy": [],
-              "hide": false,
-              "intervalFactor": 1,
-              "measurement": "collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.pools._all_.read_op_per_sec",
-              "policy": "default",
-              "query": "SELECT \"value\" FROM \"collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.pools._all_.read_bytes_sec\" WHERE $timeFilter",
-              "rawQuery": true,
-              "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "value"
-                    ],
-                    "type": "field"
-                  }
-                ]
-              ],
-              "tags": [],
-              "target": "sumSeries(groupByNode(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.*.bytes_sec,-2,\"maxSeries\"))",
-              "textEditor": true
-            }
-          ],
-          "thresholds": "",
-          "title": "Client Throughput",
-          "type": "singlestat",
-          "valueFontSize": "70%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "N/A",
-              "value": "null"
-            }
-          ],
-          "valueName": "current"
-        },
-        {
-          "cacheTimeout": null,
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "datasource": null,
-          "decimals": 0,
-          "format": "short",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "id": 23,
-          "interval": null,
-          "links": [],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": 100,
-          "minSpan": 1,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "",
-          "postfixFontSize": "50%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 1,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-          },
-          "tableColumn": "",
-          "targets": [
-            {
-              "dsType": "influxdb",
-              "expr": "count(ceph_pool_metadata)",
-              "format": "time_series",
-              "groupBy": [],
-              "intervalFactor": 2,
-              "measurement": "collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.num_pool",
-              "policy": "default",
-              "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "value"
-                    ],
-                    "type": "field"
-                  }
-                ]
-              ],
-              "tags": [],
-              "target": "maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.num_pool)",
-              "textEditor": true
-            }
-          ],
-          "thresholds": "",
-          "title": "Pools",
-          "type": "singlestat",
-          "valueFontSize": "70%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "N/A",
-              "value": "null"
-            }
-          ],
-          "valueName": "current"
-        },
-        {
-          "cacheTimeout": null,
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "datasource": null,
-          "decimals": 0,
-          "format": "short",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "id": 24,
-          "interval": null,
-          "links": [],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": 100,
-          "minSpan": 1,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "",
-          "postfixFontSize": "50%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 1,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-          },
-          "tableColumn": "",
-          "targets": [
-            {
-              "expr": "",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "B",
-              "target": "alias(sumSeries(consolidateBy(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.num_rbds,6),\"max\")),\"# rbds\")",
-              "textEditor": true
-            }
-          ],
-          "thresholds": "",
-          "title": "RBDs",
-          "type": "singlestat",
-          "valueFontSize": "70%",
-          "valueMaps": [],
-          "valueName": "current"
-        },
-        {
-          "aliasColors": {
-            "Reads": "#01a701",
-            "Writes": "#82B5D8"
-          },
-          "cacheTimeout": null,
-          "combine": {
-            "label": "Others",
-            "threshold": 0
-          },
-          "datasource": null,
-          "description": "Shows the read/write threshold of client IOPS serviced by the ceph cluster",
-          "fontSize": "80%",
-          "format": "none",
-          "height": "230",
-          "id": 25,
-          "interval": null,
-          "legend": {
-            "percentage": false,
-            "show": false,
-            "values": false
-          },
-          "legendType": "Under graph",
-          "links": [],
-          "maxDataPoints": "90",
-          "minSpan": 2,
-          "nullPointMode": "connected",
-          "pieType": "pie",
-          "span": 2,
-          "strokeWidth": 1,
-          "targets": [
-            {
-              "expr": "round(sum(irate(ceph_pool_rd[30s])))",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "reads",
-              "refId": "A",
-              "target": "alias(sumSeries(groupByNode(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.*.read_op_per_sec,-2,\"maxSeries\")), \"Reads\")",
-              "textEditor": true
-            },
-            {
-              "expr": "round(sum(irate(ceph_pool_wr[30s])))",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "writes",
-              "refId": "B",
-              "target": "alias(sumSeries(groupByNode(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.*.write_op_per_sec,-2,\"maxSeries\")), \"Writes\")",
-              "textEditor": true
-            }
-          ],
-          "title": "Client Read/Write Ratio",
-          "type": "grafana-piechart-panel",
-          "valueName": "current"
-        },
-        {
-          "aliasColors": {
-            "95%ile Commit Latency": "#447EBC",
-            "Apply Latency Max": "#890F02",
-            "Commit Latency": "#447EBC"
-          },
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "description": "Shows the OSD apply and commit latency at the $percentile%ile across the cluster over the past 15 minutes",
-          "fill": 0,
-          "hideTimeOverride": true,
-          "id": 26,
-          "legend": {
-            "alignAsTable": false,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 2,
-          "links": [
-            {
-              "dashUri": "db/ceph-osd-information",
-              "dashboard": "Ceph OSD Information",
-              "includeVars": true,
-              "keepTime": true,
-              "targetBlank": true,
-              "title": "Ceph OSD Information",
-              "type": "dashboard"
-            }
-          ],
-          "minSpan": 2,
-          "nullPointMode": "null as zero",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "span": 2,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "quantile($percentile / 100, ceph_osd_commit_latency_ms)",
-              "format": "time_series",
-              "intervalFactor": 1,
-              "legendFormat": "commit",
-              "refId": "A",
-              "target": "alias(percentileOfSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.apply_latency,$percentile), \"Apply Latency\")",
-              "textEditor": true
-            },
-            {
-              "expr": "quantile($percentile / 100, ceph_osd_apply_latency_ms)",
-              "format": "time_series",
-              "intervalFactor": 1,
-              "legendFormat": "apply",
-              "refId": "B",
-              "target": "alias(percentileOfSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.commitcycle_latency, $percentile), \"Commit Latency\")",
-              "textEditor": true
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": "15m",
-          "timeShift": null,
-          "title": "OSD Apply vs Commit Latency",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": false,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "ms",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": false
-            }
-          ]
+          "dashUri": "db/ceph-osd-information", 
+          "dashboard": "Ceph OSD Information", 
+          "includeVars": true, 
+          "keepTime": true, 
+          "targetBlank": true, 
+          "title": "Ceph OSD Information", 
+          "type": "dashboard"
         }
-      ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": false,
-      "title": "Performance",
-      "titleSize": "h5"
-    },
+      ], 
+      "mappingType": 1, 
+      "mappingTypes": [
+        {
+          "name": "value to text", 
+          "value": 1
+        }, 
+        {
+          "name": "range to text", 
+          "value": 2
+        }
+      ], 
+      "maxDataPoints": 100, 
+      "minSpan": 2, 
+      "nullPointMode": "connected", 
+      "nullText": null, 
+      "postfix": "", 
+      "postfixFontSize": "10%", 
+      "prefix": "", 
+      "prefixFontSize": "10%", 
+      "rangeMaps": [
+        {
+          "from": "null", 
+          "text": "N/A", 
+          "to": "null"
+        }
+      ], 
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)", 
+        "full": false, 
+        "lineColor": "rgb(31, 120, 193)", 
+        "show": false
+      }, 
+      "tableColumn": "", 
+      "targets": [
+        {
+          "expr": "", 
+          "format": "time_series", 
+          "intervalFactor": 2, 
+          "refId": "A", 
+          "target": ""
+        }
+      ], 
+      "thresholds": "", 
+      "title": "", 
+      "transparent": true, 
+      "type": "singlestat", 
+      "valueFontSize": "35%", 
+      "valueMaps": [
+        {
+          "op": "=", 
+          "text": "OSDs", 
+          "value": "null"
+        }
+      ], 
+      "valueName": "current"
+    }, 
     {
-      "collapse": false,
-      "height": "230px",
-      "panels": [
+      "cacheTimeout": null, 
+      "colorBackground": false, 
+      "colorValue": false, 
+      "colors": [
+        "rgba(245, 54, 54, 0.9)", 
+        "rgba(237, 129, 40, 0.89)", 
+        "rgba(50, 172, 45, 0.97)"
+      ], 
+      "datasource": null, 
+      "format": "none", 
+      "gauge": {
+        "maxValue": 100, 
+        "minValue": 0, 
+        "show": false, 
+        "thresholdLabels": false, 
+        "thresholdMarkers": true
+      }, 
+      "gridPos": {
+        "h": 2, 
+        "w": 2, 
+        "x": 6, 
+        "y": 0
+      }, 
+      "height": "50px", 
+      "id": 40, 
+      "interval": null, 
+      "links": [
         {
-          "cacheTimeout": null,
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "rgba(50, 172, 45, 0.97)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(245, 54, 54, 0.9)"
-          ],
-          "datasource": null,
-          "decimals": 0,
-          "description": "CPU usage is presented based on the $percentile%ile across all OSD hosts",
-          "format": "short",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "id": 27,
-          "interval": null,
-          "links": [],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": "90",
-          "minSpan": 2,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": " %",
-          "postfixFontSize": "50%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 2,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": true
-          },
-          "tableColumn": "",
-          "targets": [
-            {
-              "expr": "quantile(\n  $percentile / 100, (\n    avg (\n      irate(\n          node_cpu{mode=~\"system|user|iowait\", instance=~'[[osd_servers]]'}[1m]\n        )\n    ) by (instance)\n  ) * 100\n)",
-              "format": "time_series",
-              "hide": false,
-              "intervalFactor": 1,
-              "refId": "A",
-              "target": "percentileOfSeries(groupByNode(collectd.$osd_servers.$domain.cpu.percent.{system,user,wait},1,\"sumSeries\"),$percentile)",
-              "textEditor": true
-            }
-          ],
-          "thresholds": "70,90",
-          "title": "OSD Hosts CPU Busy",
-          "type": "singlestat",
-          "valueFontSize": "100%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "N/A",
-              "value": "null"
-            }
-          ],
-          "valueName": "current"
-        },
-        {
-          "cacheTimeout": null,
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "datasource": null,
-          "decimals": 0,
-          "description": "Total IOPS from all OSDs in the cluster",
-          "format": "none",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "id": 28,
-          "interval": null,
-          "links": [
-            {
-              "dashUri": "db/ceph-backend-storage",
-              "dashboard": "Ceph Backend Storage",
-              "includeVars": true,
-              "keepTime": true,
-              "targetBlank": true,
-              "title": "Ceph OSD Host Performance",
-              "type": "dashboard"
-            }
-          ],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": "90",
-          "minSpan": 2,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "",
-          "postfixFontSize": "50%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 2,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": true
-          },
-          "tableColumn": "",
-          "targets": [
-            {
-              "dsType": "influxdb",
-              "expr": "sum(\n  sum(\n    rate(\n      node_disk_reads_completed{instance=~\"[[osd_servers]]\"}[$__interval]\n    )\n  ) by (instance,device)\n)\n+\nsum(\n  sum(\n    rate(\n      node_disk_writes_completed{instance=~\"[[osd_servers]]\"}[$__interval]\n    )\n  ) by (instance,device)\n)",
-              "format": "time_series",
-              "groupBy": [],
-              "hide": false,
-              "intervalFactor": 1,
-              "measurement": "collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.pools._all_.read_op_per_sec",
-              "policy": "default",
-              "query": "SELECT \"value\" FROM \"collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.pools._all_.read_bytes_sec\" WHERE $timeFilter",
-              "rawQuery": true,
-              "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "value"
-                    ],
-                    "type": "field"
-                  }
-                ]
-              ],
-              "tags": [],
-              "target": "alias(sumSeries(collectd.$osd_servers.$domain.cephmetrics.gauge.$cluster_name.osd.*.perf.iops),\"IOPS\")",
-              "textEditor": true
-            }
-          ],
-          "thresholds": "",
-          "title": "Disk IOPS",
-          "type": "singlestat",
-          "valueFontSize": "100%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "N/A",
-              "value": "null"
-            }
-          ],
-          "valueName": "current"
-        },
-        {
-          "cacheTimeout": null,
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "datasource": null,
-          "decimals": 1,
-          "format": "decbytes",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "id": 29,
-          "interval": null,
-          "links": [
-            {
-              "dashUri": "db/ceph-backend-storage",
-              "dashboard": "Ceph Backend Storage",
-              "includeVars": true,
-              "keepTime": true,
-              "targetBlank": true,
-              "title": "Ceph OSD Host Performance",
-              "type": "dashboard"
-            }
-          ],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": "90",
-          "minSpan": 2,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "/s",
-          "postfixFontSize": "50%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 2,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": true
-          },
-          "tableColumn": "",
-          "targets": [
-            {
-              "dsType": "influxdb",
-              "expr": "# should only include OSD hosts\nsum(\n  sum(\n    rate(\n      node_disk_bytes_read[$__interval]\n    )\n  ) by (instance,device)\n  + ignoring(ceph_daemon,job) group_right(instance) ceph_disk_occupation\n)\n+\nsum(\n  sum(\n    rate(\n      node_disk_bytes_written[$__interval]\n    )\n  ) by (instance,device)\n  + ignoring(ceph_daemon,job) group_right(instance) ceph_disk_occupation\n)",
-              "format": "time_series",
-              "groupBy": [],
-              "hide": false,
-              "intervalFactor": 1,
-              "measurement": "collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.pools._all_.read_op_per_sec",
-              "policy": "default",
-              "query": "SELECT \"value\" FROM \"collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.pools._all_.read_bytes_sec\" WHERE $timeFilter",
-              "rawQuery": true,
-              "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "value"
-                    ],
-                    "type": "field"
-                  }
-                ]
-              ],
-              "tags": [],
-              "target": "sumSeries(collectd.$osd_servers.$domain.cephmetrics.gauge.$cluster_name.osd.*.perf.bytes_per_sec)",
-              "textEditor": true
-            },
-            {
-              "dsType": "influxdb",
-              "expr": "# will include non-OSD hosts\nsum(\n  rate(\n    node_disk_bytes_read[$__interval]\n  ) + \n  rate(\n    node_disk_bytes_written[$__interval]\n  )\n)",
-              "format": "time_series",
-              "groupBy": [],
-              "hide": true,
-              "intervalFactor": 1,
-              "measurement": "collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.pools._all_.read_op_per_sec",
-              "policy": "default",
-              "query": "SELECT \"value\" FROM \"collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.pools._all_.read_bytes_sec\" WHERE $timeFilter",
-              "rawQuery": true,
-              "refId": "B",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "value"
-                    ],
-                    "type": "field"
-                  }
-                ]
-              ],
-              "tags": [],
-              "target": "sumSeries(collectd.$osd_servers.$domain.cephmetrics.gauge.$cluster_name.osd.*.perf.bytes_per_sec)",
-              "textEditor": true
-            }
-          ],
-          "thresholds": "",
-          "title": "Disk Throughput",
-          "type": "singlestat",
-          "valueFontSize": "70%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "N/A",
-              "value": "null"
-            }
-          ],
-          "valueName": "current"
-        },
-        {
-          "cacheTimeout": null,
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "datasource": null,
-          "decimals": 0,
-          "description": "The count of the number of disks in the cluster that are over $disk_full_threshold% full.",
-          "format": "short",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "id": 30,
-          "interval": null,
-          "links": [
-            {
-              "dashUri": "db/ceph-backend-storage",
-              "dashboard": "Ceph Backend Storage",
-              "includeVars": true,
-              "keepTime": true,
-              "targetBlank": true,
-              "title": "Ceph OSD Host Performance",
-              "type": "dashboard"
-            }
-          ],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": 100,
-          "minSpan": 1,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": "",
-          "postfixFontSize": "50%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 1,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": false
-          },
-          "tableColumn": "",
-          "targets": [
-            {
-              "expr": "count(\n  (ceph_osd_stat_bytes_used / ceph_osd_stat_bytes) > ($disk_full_threshold / 100)\n)",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "A",
-              "target": "countSeries(currentAbove(transformNull(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.osd_percent_used),0),$disk_full_threshold))",
-              "textEditor": true
-            }
-          ],
-          "thresholds": "",
-          "title": "Nearly Full Disks",
-          "type": "singlestat",
-          "valueFontSize": "80%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "0",
-              "value": "null"
-            }
-          ],
-          "valueName": "current"
-        },
-        {
-          "cacheTimeout": null,
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "datasource": null,
-          "decimals": 0,
-          "description": "RAM Usage shows the $percentile%ile of RAM used across all OSD hosts",
-          "format": "short",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "id": 31,
-          "interval": null,
-          "links": [
-            {
-              "dashUri": "db/ceph-backend-storage",
-              "dashboard": "Ceph Backend Storage",
-              "includeVars": true,
-              "keepTime": true,
-              "targetBlank": true,
-              "title": "Ceph OSD Host Performance",
-              "type": "dashboard"
-            }
-          ],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": "",
-          "minSpan": 1,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": " %",
-          "postfixFontSize": "50%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 1,
-          "sparkline": {
-            "fillColor": "rgba(46, 161, 15, 0)",
-            "full": false,
-            "lineColor": "rgb(164, 139, 4)",
-            "show": false
-          },
-          "tableColumn": "",
-          "targets": [
-            {
-              "dsType": "influxdb",
-              "expr": "quantile(\n  $percentile/100, \n  (\n    node_memory_MemTotal{job='node'} - node_memory_MemFree{job='node'} - node_memory_Buffers{job='node'} - node_memory_Cached{job='node'}\n  ) / node_memory_MemTotal{job='node'} * 100\n)",
-              "format": "time_series",
-              "groupBy": [],
-              "hide": false,
-              "intervalFactor": 2,
-              "measurement": "collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.pools._all_.read_op_per_sec",
-              "policy": "default",
-              "query": "SELECT \"value\" FROM \"collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.pools._all_.read_bytes_sec\" WHERE $timeFilter",
-              "rawQuery": true,
-              "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "value"
-                    ],
-                    "type": "field"
-                  }
-                ]
-              ],
-              "tags": [],
-              "target": "percentileOfSeries(collectd.$osd_servers.$domain.memory.percent.used,$percentile)",
-              "textEditor": true
-            }
-          ],
-          "thresholds": "",
-          "title": "RAM Util.",
-          "type": "singlestat",
-          "valueFontSize": "70%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "N/A",
-              "value": "null"
-            }
-          ],
-          "valueName": "current"
-        },
-        {
-          "cacheTimeout": null,
-          "colorBackground": false,
-          "colorValue": false,
-          "colors": [
-            "rgba(1, 167, 1,1)",
-            "rgba(255,165,0,1)",
-            "rgba(245, 54, 54, 0.9)"
-          ],
-          "datasource": null,
-          "decimals": 0,
-          "description": "This panel shows the $percentile%ile disk await time across all OSDs in the cliuster",
-          "format": "short",
-          "gauge": {
-            "maxValue": 100,
-            "minValue": 0,
-            "show": false,
-            "thresholdLabels": false,
-            "thresholdMarkers": true
-          },
-          "id": 32,
-          "interval": null,
-          "links": [
-            {
-              "dashUri": "db/latency-by-server",
-              "dashboard": "Latency by Server",
-              "includeVars": true,
-              "targetBlank": true,
-              "title": "Latency by Server",
-              "type": "dashboard"
-            }
-          ],
-          "mappingType": 1,
-          "mappingTypes": [
-            {
-              "name": "value to text",
-              "value": 1
-            },
-            {
-              "name": "range to text",
-              "value": 2
-            }
-          ],
-          "maxDataPoints": "90",
-          "minSpan": 2,
-          "nullPointMode": "connected",
-          "nullText": null,
-          "postfix": " ms",
-          "postfixFontSize": "50%",
-          "prefix": "",
-          "prefixFontSize": "50%",
-          "rangeMaps": [
-            {
-              "from": "null",
-              "text": "N/A",
-              "to": "null"
-            }
-          ],
-          "span": 2,
-          "sparkline": {
-            "fillColor": "rgba(31, 118, 189, 0.18)",
-            "full": false,
-            "lineColor": "rgb(31, 120, 193)",
-            "show": true
-          },
-          "tableColumn": "",
-          "targets": [
-            {
-              "expr": "quantile(\n  $percentile / 100,\n  (\n    irate(node_disk_read_time_ms[30s]) / irate(node_disk_reads_completed[30s])\n    +\n    irate(node_disk_write_time_ms[30s]) / irate(node_disk_writes_completed[30s])\n    + \n    ignoring(ceph_daemon,job) ceph_disk_occupation\n  )\n)",
-              "format": "time_series",
-              "hide": false,
-              "intervalFactor": 1,
-              "refId": "C"
-            },
-            {
-              "expr": "max(\n  irate(node_disk_read_time_ms[30s]) / irate(node_disk_reads_completed[30s])\n  +\n  irate(node_disk_write_time_ms[30s]) / irate(node_disk_writes_completed[30s])\n  + ignoring(ceph_daemon,job) ceph_disk_occupation\n)",
-              "format": "time_series",
-              "hide": true,
-              "intervalFactor": 2,
-              "refId": "B"
-            }
-          ],
-          "thresholds": "20,60",
-          "title": "Disk Latency",
-          "type": "singlestat",
-          "valueFontSize": "100%",
-          "valueMaps": [
-            {
-              "op": "=",
-              "text": "N/A",
-              "value": "null"
-            }
-          ],
-          "valueName": "current"
-        },
-        {
-          "aliasColors": {
-            "average %util": "#1f78c1"
-          },
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "description": "Chart shows the disk utilization over the past 15 mins expressed as an average across all OSDs, and at the $percentile%ile.",
-          "fill": 1,
-          "hideTimeOverride": true,
-          "id": 33,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 2,
-          "links": [
-            {
-              "dashUri": "db/disk-busy-by-server",
-              "dashboard": "Disk Busy by Server",
-              "includeVars": true,
-              "targetBlank": true,
-              "title": "Disk Busy by Server",
-              "type": "dashboard"
-            }
-          ],
-          "minSpan": 2,
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [
-            {
-              "alias": "%util @ 95%ile",
-              "fill": 0
-            }
-          ],
-          "spaceLength": 10,
-          "span": 2,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "avg (\n  max by (device) (\n    irate(node_disk_io_time_ms[5m]) \n    and on (instance, device) ceph_disk_occupation{instance=~\"($osd_servers)\"}\n  ) / 10\n)",
-              "format": "time_series",
-              "intervalFactor": 1,
-              "legendFormat": "average",
-              "refId": "A",
-              "target": "alias(averageSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.perf.util), 'average %util')",
-              "textEditor": false
-            },
-            {
-              "expr": "quantile(\n  $percentile/100, \n  (\n    max by (device) (\n      irate(node_disk_io_time_ms[5m]) \n      and on (instance, device) ceph_disk_occupation{instance=~\"($osd_servers)\"}\n    ) / 10\n  )\n)",
-              "format": "time_series",
-              "intervalFactor": 1,
-              "legendFormat": "$percentile%ile",
-              "refId": "B",
-              "target": "alias(percentileOfSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.perf.util, $percentile, 'false'), '%util @ $percentile%ile')"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": "15m",
-          "timeShift": null,
-          "title": "Disk Utilization",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "percent",
-              "label": "",
-              "logBase": 1,
-              "max": "100",
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
+          "dashUri": "db/ceph-rgw-workload", 
+          "dashboard": "Ceph RGW Workload", 
+          "includeVars": false, 
+          "keepTime": true, 
+          "targetBlank": true, 
+          "title": "Ceph RGW Workload", 
+          "type": "dashboard"
         }
-      ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": false,
-      "title": "Dashboard Row",
-      "titleSize": "h6"
+      ], 
+      "mappingType": 1, 
+      "mappingTypes": [
+        {
+          "name": "value to text", 
+          "value": 1
+        }, 
+        {
+          "name": "range to text", 
+          "value": 2
+        }
+      ], 
+      "maxDataPoints": 100, 
+      "minSpan": 2, 
+      "nullPointMode": "connected", 
+      "nullText": null, 
+      "postfix": "", 
+      "postfixFontSize": "10%", 
+      "prefix": "", 
+      "prefixFontSize": "10%", 
+      "rangeMaps": [
+        {
+          "from": "null", 
+          "text": "N/A", 
+          "to": "null"
+        }
+      ], 
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)", 
+        "full": false, 
+        "lineColor": "rgb(31, 120, 193)", 
+        "show": false
+      }, 
+      "tableColumn": "", 
+      "targets": [
+        {
+          "expr": "", 
+          "format": "time_series", 
+          "intervalFactor": 2, 
+          "refId": "A", 
+          "target": ""
+        }
+      ], 
+      "thresholds": "", 
+      "title": "", 
+      "transparent": true, 
+      "type": "singlestat", 
+      "valueFontSize": "35%", 
+      "valueMaps": [
+        {
+          "op": "=", 
+          "text": "S3/Swift", 
+          "value": "null"
+        }
+      ], 
+      "valueName": "current"
+    }, 
+    {
+      "cacheTimeout": null, 
+      "colorBackground": false, 
+      "colorValue": false, 
+      "colors": [
+        "rgba(245, 54, 54, 0.9)", 
+        "rgba(237, 129, 40, 0.89)", 
+        "rgba(50, 172, 45, 0.97)"
+      ], 
+      "datasource": null, 
+      "format": "none", 
+      "gauge": {
+        "maxValue": 100, 
+        "minValue": 0, 
+        "show": false, 
+        "thresholdLabels": false, 
+        "thresholdMarkers": true
+      }, 
+      "gridPos": {
+        "h": 2, 
+        "w": 2, 
+        "x": 8, 
+        "y": 0
+      }, 
+      "height": "50px", 
+      "id": 5, 
+      "interval": null, 
+      "links": [
+        {
+          "dashUri": "db/ceph-backend-storage", 
+          "dashboard": "Ceph Backend Storage", 
+          "includeVars": true, 
+          "keepTime": true, 
+          "targetBlank": true, 
+          "title": "OSD Host Performance", 
+          "type": "dashboard"
+        }
+      ], 
+      "mappingType": 1, 
+      "mappingTypes": [
+        {
+          "name": "value to text", 
+          "value": 1
+        }, 
+        {
+          "name": "range to text", 
+          "value": 2
+        }
+      ], 
+      "maxDataPoints": 100, 
+      "minSpan": 2, 
+      "nullPointMode": "connected", 
+      "nullText": null, 
+      "postfix": "", 
+      "postfixFontSize": "10%", 
+      "prefix": "", 
+      "prefixFontSize": "10%", 
+      "rangeMaps": [
+        {
+          "from": "null", 
+          "text": "N/A", 
+          "to": "null"
+        }
+      ], 
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)", 
+        "full": false, 
+        "lineColor": "rgb(31, 120, 193)", 
+        "show": false
+      }, 
+      "tableColumn": "", 
+      "targets": [
+        {
+          "expr": "", 
+          "format": "time_series", 
+          "intervalFactor": 2, 
+          "refId": "A", 
+          "target": ""
+        }
+      ], 
+      "thresholds": "", 
+      "title": "", 
+      "transparent": true, 
+      "type": "singlestat", 
+      "valueFontSize": "35%", 
+      "valueMaps": [
+        {
+          "op": "=", 
+          "text": "OSD Hosts", 
+          "value": "null"
+        }
+      ], 
+      "valueName": "current"
+    }, 
+    {
+      "cacheTimeout": null, 
+      "colorBackground": false, 
+      "colorValue": false, 
+      "colors": [
+        "rgba(245, 54, 54, 0.9)", 
+        "rgba(237, 129, 40, 0.89)", 
+        "rgba(50, 172, 45, 0.97)"
+      ], 
+      "datasource": null, 
+      "format": "none", 
+      "gauge": {
+        "maxValue": 100, 
+        "minValue": 0, 
+        "show": false, 
+        "thresholdLabels": false, 
+        "thresholdMarkers": true
+      }, 
+      "gridPos": {
+        "h": 2, 
+        "w": 2, 
+        "x": 10, 
+        "y": 0
+      }, 
+      "height": "50px", 
+      "id": 6, 
+      "interval": null, 
+      "links": [
+        {
+          "dashUri": "db/network-usage-by-server", 
+          "dashboard": "Network Usage by Server", 
+          "includeVars": true, 
+          "keepTime": true, 
+          "targetBlank": true, 
+          "title": "Network Usage by Server", 
+          "type": "dashboard"
+        }
+      ], 
+      "mappingType": 1, 
+      "mappingTypes": [
+        {
+          "name": "value to text", 
+          "value": 1
+        }, 
+        {
+          "name": "range to text", 
+          "value": 2
+        }
+      ], 
+      "maxDataPoints": 100, 
+      "minSpan": 2, 
+      "nullPointMode": "connected", 
+      "nullText": null, 
+      "postfix": "", 
+      "postfixFontSize": "10%", 
+      "prefix": "", 
+      "prefixFontSize": "10%", 
+      "rangeMaps": [
+        {
+          "from": "null", 
+          "text": "N/A", 
+          "to": "null"
+        }
+      ], 
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)", 
+        "full": false, 
+        "lineColor": "rgb(31, 120, 193)", 
+        "show": false
+      }, 
+      "tableColumn": "", 
+      "targets": [
+        {
+          "expr": "", 
+          "format": "time_series", 
+          "intervalFactor": 2, 
+          "refId": "A", 
+          "target": ""
+        }
+      ], 
+      "thresholds": "", 
+      "title": "", 
+      "transparent": true, 
+      "type": "singlestat", 
+      "valueFontSize": "35%", 
+      "valueMaps": [
+        {
+          "op": "=", 
+          "text": "Network", 
+          "value": "null"
+        }
+      ], 
+      "valueName": "current"
+    }, 
+    {
+      "gridPos": {
+        "h": 4, 
+        "w": 6, 
+        "x": 18, 
+        "y": 0
+      }, 
+      "id": 8, 
+      "limit": 10, 
+      "links": [
+        {
+          "dashUri": "db/alert-status", 
+          "dashboard": "Alert Status", 
+          "targetBlank": true, 
+          "title": "Alert Status", 
+          "type": "dashboard"
+        }
+      ], 
+      "minSpan": 4, 
+      "onlyAlertsOnDashboard": false, 
+      "show": "current", 
+      "sortOrder": 3, 
+      "stateFilter": [
+        "alerting"
+      ], 
+      "title": "Active Alerts", 
+      "type": "alertlist"
+    }, 
+    {
+      "collapsed": false, 
+      "gridPos": {
+        "h": 1, 
+        "w": 24, 
+        "x": 0, 
+        "y": 4
+      }, 
+      "id": 35, 
+      "panels": [], 
+      "repeat": null, 
+      "title": "At a Glance", 
+      "type": "row"
+    }, 
+    {
+      "cacheTimeout": null, 
+      "colorBackground": true, 
+      "colorValue": false, 
+      "colors": [
+        "rgba(1, 167, 1, 1)", 
+        "rgba(255,165,0, 1)", 
+        "rgba(255, 0, 0, 1)"
+      ], 
+      "datasource": null, 
+      "description": "Shows the overall health of the ceph cluster", 
+      "format": "none", 
+      "gauge": {
+        "maxValue": 100, 
+        "minValue": 0, 
+        "show": false, 
+        "thresholdLabels": false, 
+        "thresholdMarkers": true
+      }, 
+      "gridPos": {
+        "h": 6, 
+        "w": 2, 
+        "x": 0, 
+        "y": 5
+      }, 
+      "hideTimeOverride": true, 
+      "id": 9, 
+      "interval": null, 
+      "links": [
+        {
+          "dashUri": "db/ceph-health", 
+          "dashboard": "Ceph Health", 
+          "includeVars": true, 
+          "keepTime": false, 
+          "targetBlank": true, 
+          "title": "Ceph Health", 
+          "type": "dashboard"
+        }
+      ], 
+      "mappingType": 2, 
+      "mappingTypes": [
+        {
+          "name": "value to text", 
+          "value": 1
+        }, 
+        {
+          "name": "range to text", 
+          "value": 2
+        }
+      ], 
+      "maxDataPoints": "", 
+      "minSpan": 2, 
+      "nullPointMode": "connected", 
+      "nullText": null, 
+      "postfix": "", 
+      "postfixFontSize": "50%", 
+      "prefix": "", 
+      "prefixFontSize": "50%", 
+      "rangeMaps": [
+        {
+          "from": "0", 
+          "text": "OK", 
+          "to": "0"
+        }, 
+        {
+          "from": "1", 
+          "text": "WARN", 
+          "to": "4"
+        }, 
+        {
+          "from": "5", 
+          "text": "ERROR", 
+          "to": "99"
+        }, 
+        {
+          "from": "-10", 
+          "text": "NODATA", 
+          "to": "0"
+        }
+      ], 
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)", 
+        "full": false, 
+        "lineColor": "rgb(31, 120, 193)", 
+        "show": false
+      }, 
+      "tableColumn": "", 
+      "targets": [
+        {
+          "expr": "ceph_health_status", 
+          "format": "time_series", 
+          "intervalFactor": 2, 
+          "refId": "A", 
+          "target": "consolidateBy(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.health),\"max\")", 
+          "textEditor": true
+        }
+      ], 
+      "thresholds": "1,5", 
+      "timeFrom": "1m", 
+      "timeShift": null, 
+      "title": "Health", 
+      "type": "singlestat", 
+      "valueFontSize": "50%", 
+      "valueMaps": [
+        {
+          "op": "=", 
+          "text": "OK", 
+          "value": "0"
+        }, 
+        {
+          "op": "=", 
+          "text": "WARN", 
+          "value": "4"
+        }, 
+        {
+          "op": "=", 
+          "text": "ERROR", 
+          "value": "8"
+        }
+      ], 
+      "valueName": "current"
+    }, 
+    {
+      "clusterName": "MONs", 
+      "colorMode": "Panel", 
+      "colors": {
+        "crit": "rgba(245, 54, 54, 0.9)", 
+        "disable": "rgba(128, 128, 128, 0.9)", 
+        "ok": "rgb(1,167,1)", 
+        "warn": "rgba(237, 129, 40, 0.9)"
+      }, 
+      "cornerRadius": 0, 
+      "datasource": null, 
+      "displayName": "MONs", 
+      "flipCard": false, 
+      "flipTime": 5, 
+      "fontFormat": "Regular", 
+      "gridPos": {
+        "h": 6, 
+        "w": 2, 
+        "x": 2, 
+        "y": 5
+      }, 
+      "hideTimeOverride": true, 
+      "id": 10, 
+      "isAutoScrollOnOverflow": false, 
+      "isGrayOnNoData": true, 
+      "isHideAlertsOnDisable": false, 
+      "isIgnoreOKColors": false, 
+      "links": [], 
+      "minSpan": 2, 
+      "namePrefix": "", 
+      "targets": [
+        {
+          "aggregation": "Last", 
+          "alias": "total", 
+          "displayType": "Regular", 
+          "expr": "count(ceph_mon_quorum_status)", 
+          "format": "time_series", 
+          "instant": true, 
+          "intervalFactor": 1, 
+          "legendFormat": "total", 
+          "refId": "D", 
+          "target": "alias(keepLastValue(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_mon), \"max\")),\"total\")", 
+          "textEditor": true, 
+          "valueHandler": "Text Only"
+        }, 
+        {
+          "aggregation": "Last", 
+          "alias": "quorum", 
+          "displayAliasType": "Always", 
+          "displayType": "Regular", 
+          "displayValueWithAlias": "When Alias Displayed", 
+          "expr": "count(ceph_mon_quorum_status == 1)", 
+          "format": "time_series", 
+          "instant": true, 
+          "intervalFactor": 1, 
+          "legendFormat": "quorum", 
+          "refId": "E", 
+          "target": "alias(keepLastValue(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_mon_quorum), \"max\")),\"quorum\")", 
+          "textEditor": true, 
+          "valueHandler": "String Threshold", 
+          "warn": "1"
+        }, 
+        {
+          "aggregation": "Last", 
+          "alias": "down", 
+          "crit": 2, 
+          "decimals": 2, 
+          "displayAliasType": "Always", 
+          "displayType": "Regular", 
+          "displayValueWithAlias": "When Alias Displayed", 
+          "expr": "count(ceph_mon_quorum_status != 1)", 
+          "format": "time_series", 
+          "hide": false, 
+          "instant": true, 
+          "intervalFactor": 1, 
+          "legendFormat": "down", 
+          "refId": "A", 
+          "target": "alias(diffSeries(#D,#E), \"down\")", 
+          "targetFull": "alias(diffSeries(alias(keepLastValue(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_mon), \"max\")),\"total\"),alias(keepLastValue(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_mon_quorum), \"max\")),\"quorum\")), \"down\")", 
+          "textEditor": true, 
+          "units": "none", 
+          "valueHandler": "Number Threshold", 
+          "warn": 1
+        }
+      ], 
+      "timeFrom": "1m", 
+      "timeShift": null, 
+      "title": "", 
+      "type": "vonage-status-panel"
+    }, 
+    {
+      "clusterName": "OSDs", 
+      "colorMode": "Panel", 
+      "colors": {
+        "crit": "rgba(245, 54, 54, 0.9)", 
+        "disable": "rgba(128, 128, 128, 0.9)", 
+        "ok": "rgb(1,167,1)", 
+        "warn": "rgba(237, 129, 40, 0.9)"
+      }, 
+      "cornerRadius": 0, 
+      "datasource": null, 
+      "displayName": "OSDs", 
+      "flipCard": false, 
+      "flipTime": 5, 
+      "fontFormat": "Regular", 
+      "gridPos": {
+        "h": 6, 
+        "w": 2, 
+        "x": 4, 
+        "y": 5
+      }, 
+      "hideTimeOverride": true, 
+      "id": 11, 
+      "isAutoScrollOnOverflow": false, 
+      "isGrayOnNoData": false, 
+      "isHideAlertsOnDisable": false, 
+      "isIgnoreOKColors": false, 
+      "links": [
+        {
+          "dashUri": "db/ceph-osd-information", 
+          "dashboard": "Ceph OSD Information", 
+          "targetBlank": true, 
+          "title": "Ceph OSD Information", 
+          "type": "dashboard"
+        }
+      ], 
+      "minSpan": 2, 
+      "namePrefix": "", 
+      "targets": [
+        {
+          "aggregation": "Last", 
+          "alias": "total", 
+          "displayType": "Regular", 
+          "expr": "count(ceph_osd_up)", 
+          "format": "time_series", 
+          "hide": false, 
+          "intervalFactor": 2, 
+          "legendFormat": "total", 
+          "refId": "E", 
+          "target": "alias(keepLastValue(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_osd), \"max\")),\"total\")", 
+          "textEditor": true, 
+          "valueHandler": "Text Only"
+        }, 
+        {
+          "aggregation": "Last", 
+          "alias": "in", 
+          "displayType": "Regular", 
+          "expr": "count(ceph_osd_up == 1)", 
+          "format": "time_series", 
+          "hide": false, 
+          "intervalFactor": 2, 
+          "legendFormat": "up", 
+          "refId": "F", 
+          "target": "alias(keepLastValue(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_osd_up), \"max\")),\"up\")", 
+          "textEditor": true, 
+          "valueHandler": "Text Only"
+        }, 
+        {
+          "aggregation": "Last", 
+          "alias": "up", 
+          "displayType": "Regular", 
+          "expr": "count(ceph_osd_in == 1)", 
+          "format": "time_series", 
+          "hide": false, 
+          "intervalFactor": 2, 
+          "legendFormat": "in", 
+          "refId": "A", 
+          "target": "alias(keepLastValue(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_osd_in), \"max\")),\"in\")", 
+          "textEditor": true, 
+          "valueHandler": "Text Only"
+        }, 
+        {
+          "aggregation": "Last", 
+          "alias": "out", 
+          "displayType": "Regular", 
+          "expr": "count(ceph_osd_in == 0)", 
+          "format": "time_series", 
+          "intervalFactor": 2, 
+          "legendFormat": "out", 
+          "refId": "C", 
+          "target": "alias(countSeries(currentBelow(groupByNode(transformNull(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.osd_state.*.in,99),-2,\"maxSeries\"),0.5)),\"out\")", 
+          "textEditor": true, 
+          "valueHandler": "Text Only"
+        }, 
+        {
+          "aggregation": "Last", 
+          "alias": "down", 
+          "crit": 5, 
+          "decimals": 2, 
+          "displayAliasType": "Always", 
+          "displayType": "Regular", 
+          "displayValueWithAlias": "When Alias Displayed", 
+          "expr": "count(ceph_osd_up == 0)", 
+          "format": "time_series", 
+          "intervalFactor": 2, 
+          "legendFormat": "down", 
+          "refId": "B", 
+          "target": "alias(countSeries(currentBelow(groupByNode(transformNull(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.osd_state.*.up,99),-2,\"maxSeries\"),0.5)),\"down\")", 
+          "textEditor": true, 
+          "units": "none", 
+          "valueHandler": "Number Threshold", 
+          "warn": 1
+        }
+      ], 
+      "timeFrom": "1m", 
+      "timeShift": null, 
+      "title": "", 
+      "type": "vonage-status-panel"
+    }, 
+    {
+      "clusterName": "OSD Hosts", 
+      "colorMode": "Panel", 
+      "colors": {
+        "crit": "rgba(245, 54, 54, 0.9)", 
+        "disable": "rgba(128, 128, 128, 0.9)", 
+        "ok": "rgb(1,167,1)", 
+        "warn": "rgba(237, 129, 40, 0.9)"
+      }, 
+      "cornerRadius": 0, 
+      "datasource": null, 
+      "displayName": "OSD Hosts", 
+      "flipCard": false, 
+      "flipTime": 5, 
+      "fontFormat": "Regular", 
+      "gridPos": {
+        "h": 6, 
+        "w": 2, 
+        "x": 6, 
+        "y": 5
+      }, 
+      "hideTimeOverride": true, 
+      "id": 12, 
+      "isAutoScrollOnOverflow": false, 
+      "isGrayOnNoData": false, 
+      "isHideAlertsOnDisable": false, 
+      "isIgnoreOKColors": false, 
+      "links": [
+        {
+          "dashUri": "db/ceph-health", 
+          "dashboard": "Ceph Health", 
+          "targetBlank": true, 
+          "title": "Ceph Health", 
+          "type": "dashboard"
+        }
+      ], 
+      "minSpan": 2, 
+      "targets": [
+        {
+          "aggregation": "Last", 
+          "alias": "total", 
+          "displayType": "Regular", 
+          "expr": "count(\n  count(\n    ceph_disk_occupation\n  ) by (instance)\n)", 
+          "format": "time_series", 
+          "instant": true, 
+          "intervalFactor": 1, 
+          "legendFormat": "total", 
+          "refId": "A", 
+          "target": "alias(countSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.num_osds),\"total\")", 
+          "textEditor": true, 
+          "valueHandler": "Text Only"
+        }, 
+        {
+          "aggregation": "Last", 
+          "alias": "up", 
+          "displayType": "Regular", 
+          "expr": "count(\n  count(\n    ceph_disk_occupation\n  ) by (instance)) -\ncount(\n  (count by(instance) (ceph_disk_occupation * \n    on(ceph_daemon) group_right(instance) ceph_osd_up == 0) - \n  count by(instance) (ceph_disk_occupation)) == 0)", 
+          "format": "time_series", 
+          "instant": true, 
+          "intervalFactor": 1, 
+          "legendFormat": "up", 
+          "refId": "B", 
+          "target": "alias(countSeries(currentAbove(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.num_osds,0)),\"up\")", 
+          "textEditor": true, 
+          "valueHandler": "Text Only"
+        }, 
+        {
+          "aggregation": "Last", 
+          "alias": "down", 
+          "crit": 2, 
+          "decimals": 2, 
+          "displayAliasType": "Always", 
+          "displayType": "Regular", 
+          "displayValueWithAlias": "When Alias Displayed", 
+          "expr": "count(\n  (count by(instance) (ceph_disk_occupation * \n    on(ceph_daemon) group_right(instance) ceph_osd_up == 0) - \n  count by(instance) (ceph_disk_occupation)) == 0)", 
+          "format": "time_series", 
+          "hide": false, 
+          "instant": true, 
+          "intervalFactor": 1, 
+          "legendFormat": "down", 
+          "refId": "C", 
+          "target": "alias(diffSeries(#A, #B), \"down\")", 
+          "targetFull": "alias(diffSeries(alias(countSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.num_osds),\"total\"), alias(countSeries(currentAbove(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.num_osds,0)),\"up\")), \"down\")", 
+          "textEditor": true, 
+          "units": "none", 
+          "url": "dashboard/db/ceph-health", 
+          "valueHandler": "Number Threshold", 
+          "warn": 1
+        }
+      ], 
+      "timeFrom": "30s", 
+      "timeShift": null, 
+      "title": "", 
+      "type": "vonage-status-panel"
+    }, 
+    {
+      "cacheTimeout": null, 
+      "colorBackground": false, 
+      "colorValue": false, 
+      "colors": [
+        "#299c46", 
+        "rgba(237, 129, 40, 0.89)", 
+        "#d44a3a"
+      ], 
+      "datasource": null, 
+      "decimals": 0, 
+      "description": "Number of RGW daemons active", 
+      "format": "none", 
+      "gauge": {
+        "maxValue": 100, 
+        "minValue": 0, 
+        "show": false, 
+        "thresholdLabels": false, 
+        "thresholdMarkers": true
+      }, 
+      "gridPos": {
+        "h": 6, 
+        "w": 2, 
+        "x": 8, 
+        "y": 5
+      }, 
+      "id": 39, 
+      "interval": null, 
+      "links": [
+        {
+          "dashUri": "db/ceph-rgw-workload", 
+          "dashboard": "Ceph RGW Workload", 
+          "targetBlank": true, 
+          "title": "Ceph RGW Workload", 
+          "type": "dashboard"
+        }
+      ], 
+      "mappingType": 1, 
+      "mappingTypes": [
+        {
+          "name": "value to text", 
+          "value": 1
+        }, 
+        {
+          "name": "range to text", 
+          "value": 2
+        }
+      ], 
+      "maxDataPoints": 100, 
+      "nullPointMode": "connected", 
+      "nullText": null, 
+      "postfix": "", 
+      "postfixFontSize": "50%", 
+      "prefix": "", 
+      "prefixFontSize": "50%", 
+      "rangeMaps": [
+        {
+          "from": "null", 
+          "text": "N/A", 
+          "to": "null"
+        }
+      ], 
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)", 
+        "full": false, 
+        "lineColor": "rgb(31, 120, 193)", 
+        "show": false
+      }, 
+      "tableColumn": "", 
+      "targets": [
+        {
+          "expr": "count(ceph_rgw_metadata)", 
+          "format": "time_series", 
+          "intervalFactor": 1, 
+          "refId": "A"
+        }
+      ], 
+      "thresholds": "", 
+      "title": "RGWs", 
+      "type": "singlestat", 
+      "valueFontSize": "80%", 
+      "valueMaps": [
+        {
+          "op": "=", 
+          "text": "N/A", 
+          "value": "null"
+        }
+      ], 
+      "valueName": "current"
+    }, 
+    {
+      "cacheTimeout": null, 
+      "colorBackground": false, 
+      "colorValue": false, 
+      "colors": [
+        "#299c46", 
+        "rgba(237, 129, 40, 0.89)", 
+        "#d44a3a"
+      ], 
+      "datasource": null, 
+      "decimals": 0, 
+      "description": "Number of MDS daemons active", 
+      "format": "none", 
+      "gauge": {
+        "maxValue": 100, 
+        "minValue": 0, 
+        "show": false, 
+        "thresholdLabels": false, 
+        "thresholdMarkers": true
+      }, 
+      "gridPos": {
+        "h": 6, 
+        "w": 2, 
+        "x": 10, 
+        "y": 5
+      }, 
+      "id": 41, 
+      "interval": null, 
+      "links": [
+        {
+          "dashUri": "db/mds-performance", 
+          "dashboard": "MDS Performance", 
+          "targetBlank": true, 
+          "title": "MDS Performance", 
+          "type": "dashboard"
+        }
+      ], 
+      "mappingType": 1, 
+      "mappingTypes": [
+        {
+          "name": "value to text", 
+          "value": 1
+        }, 
+        {
+          "name": "range to text", 
+          "value": 2
+        }
+      ], 
+      "maxDataPoints": 100, 
+      "nullPointMode": "connected", 
+      "nullText": null, 
+      "postfix": "", 
+      "postfixFontSize": "50%", 
+      "prefix": "", 
+      "prefixFontSize": "50%", 
+      "rangeMaps": [
+        {
+          "from": "null", 
+          "text": "N/A", 
+          "to": "null"
+        }
+      ], 
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)", 
+        "full": false, 
+        "lineColor": "rgb(31, 120, 193)", 
+        "show": false
+      }, 
+      "tableColumn": "", 
+      "targets": [
+        {
+          "expr": "count(ceph_mds_metadata)", 
+          "format": "time_series", 
+          "intervalFactor": 1, 
+          "refId": "A"
+        }
+      ], 
+      "thresholds": "", 
+      "title": "MDS", 
+      "type": "singlestat", 
+      "valueFontSize": "80%", 
+      "valueMaps": [
+        {
+          "op": "=", 
+          "text": "N/A", 
+          "value": "null"
+        }
+      ], 
+      "valueName": "current"
+    }, 
+    {
+      "cacheTimeout": null, 
+      "colorBackground": false, 
+      "colorValue": false, 
+      "colors": [
+        "rgba(1, 167, 1, 1)", 
+        "rgba(237, 129, 40, 0.89)", 
+        "rgba(245, 54, 54, 0.9)"
+      ], 
+      "datasource": null, 
+      "decimals": 0, 
+      "format": "short", 
+      "gauge": {
+        "maxValue": 100, 
+        "minValue": 0, 
+        "show": true, 
+        "thresholdLabels": false, 
+        "thresholdMarkers": true
+      }, 
+      "gridPos": {
+        "h": 6, 
+        "w": 4, 
+        "x": 12, 
+        "y": 5
+      }, 
+      "hideTimeOverride": true, 
+      "id": 15, 
+      "interval": null, 
+      "links": [
+        {
+          "dashUri": "db/ceph-cluster", 
+          "dashboard": "Ceph Cluster", 
+          "params": "panelId=3&fullscreen&orgId=1", 
+          "targetBlank": true, 
+          "title": "Cluster Capacity Information", 
+          "type": "dashboard"
+        }
+      ], 
+      "mappingType": 1, 
+      "mappingTypes": [
+        {
+          "name": "value to text", 
+          "value": 1
+        }, 
+        {
+          "name": "range to text", 
+          "value": 2
+        }
+      ], 
+      "maxDataPoints": 100, 
+      "minSpan": 4, 
+      "nullPointMode": "connected", 
+      "nullText": null, 
+      "postfix": "%", 
+      "postfixFontSize": "40%", 
+      "prefix": "", 
+      "prefixFontSize": "50%", 
+      "rangeMaps": [
+        {
+          "from": "null", 
+          "text": "N/A", 
+          "to": "null"
+        }
+      ], 
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)", 
+        "full": false, 
+        "lineColor": "rgb(31, 120, 193)", 
+        "show": false
+      }, 
+      "tableColumn": "", 
+      "targets": [
+        {
+          "expr": "sum(ceph_osd_stat_bytes_used) / sum(ceph_osd_stat_bytes) * 100", 
+          "format": "time_series", 
+          "hide": false, 
+          "instant": true, 
+          "intervalFactor": 2, 
+          "refId": "A", 
+          "target": "alias(maxSeries(groupByNode(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.osd_bytes, 1,\"maxSeries\")), \"raw capacity\")", 
+          "textEditor": true
+        }
+      ], 
+      "thresholds": "70,90", 
+      "timeFrom": "1m", 
+      "timeShift": null, 
+      "title": "Capacity Utilization", 
+      "type": "singlestat", 
+      "valueFontSize": "70%", 
+      "valueMaps": [
+        {
+          "op": "=", 
+          "text": "N/A", 
+          "value": "null"
+        }
+      ], 
+      "valueName": "current"
+    }, 
+    {
+      "cacheTimeout": null, 
+      "colorBackground": false, 
+      "colorValue": false, 
+      "colors": [
+        "rgba(245, 54, 54, 0.9)", 
+        "rgba(237, 129, 40, 0.89)", 
+        "rgba(50, 172, 45, 0.97)"
+      ], 
+      "datasource": null, 
+      "decimals": 1, 
+      "description": "Shows the growth rate based on osd usage over the past $growth_window.", 
+      "format": "bytes", 
+      "gauge": {
+        "maxValue": 100, 
+        "minValue": 0, 
+        "show": false, 
+        "thresholdLabels": false, 
+        "thresholdMarkers": true
+      }, 
+      "gridPos": {
+        "h": 6, 
+        "w": 2, 
+        "x": 16, 
+        "y": 5
+      }, 
+      "id": 16, 
+      "interval": null, 
+      "links": [], 
+      "mappingType": 1, 
+      "mappingTypes": [
+        {
+          "name": "value to text", 
+          "value": 1
+        }, 
+        {
+          "name": "range to text", 
+          "value": 2
+        }
+      ], 
+      "maxDataPoints": 100, 
+      "minSpan": 2, 
+      "nullPointMode": "connected", 
+      "nullText": null, 
+      "postfix": "", 
+      "postfixFontSize": "50%", 
+      "prefix": "", 
+      "prefixFontSize": "50%", 
+      "rangeMaps": [
+        {
+          "from": "null", 
+          "text": "N/A", 
+          "to": "null"
+        }
+      ], 
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)", 
+        "full": false, 
+        "lineColor": "rgb(31, 120, 193)", 
+        "show": false
+      }, 
+      "tableColumn": "", 
+      "targets": [
+        {
+          "expr": "topk(1, ceph_cluster_total_used_bytes offset 1d) - ignoring (instance,job) topk(1, ceph_cluster_total_used_bytes offset 7d)", 
+          "format": "time_series", 
+          "intervalFactor": 2, 
+          "refId": "A"
+        }
+      ], 
+      "thresholds": "", 
+      "title": "$growth_window Growth Rate", 
+      "type": "singlestat", 
+      "valueFontSize": "70%", 
+      "valueMaps": [
+        {
+          "op": "=", 
+          "text": "N/A", 
+          "value": "null"
+        }
+      ], 
+      "valueName": "current"
+    }, 
+    {
+      "cacheTimeout": null, 
+      "colorBackground": false, 
+      "colorValue": false, 
+      "colors": [
+        "rgba(245, 54, 54, 0.9)", 
+        "rgba(237, 129, 40, 0.89)", 
+        "rgba(50, 172, 45, 0.97)"
+      ], 
+      "datasource": null, 
+      "decimals": 0, 
+      "description": "Shows the estimated number of weeks left, based on consumption over the past $growth_window.", 
+      "format": "locale", 
+      "gauge": {
+        "maxValue": 100, 
+        "minValue": 0, 
+        "show": false, 
+        "thresholdLabels": false, 
+        "thresholdMarkers": true
+      }, 
+      "gridPos": {
+        "h": 6, 
+        "w": 2, 
+        "x": 18, 
+        "y": 5
+      }, 
+      "id": 17, 
+      "interval": null, 
+      "links": [], 
+      "mappingType": 2, 
+      "mappingTypes": [
+        {
+          "name": "value to text", 
+          "value": 1
+        }, 
+        {
+          "name": "range to text", 
+          "value": 2
+        }
+      ], 
+      "maxDataPoints": 100, 
+      "minSpan": 2, 
+      "nullPointMode": "connected", 
+      "nullText": null, 
+      "postfix": "", 
+      "postfixFontSize": "50%", 
+      "prefix": "", 
+      "prefixFontSize": "50%", 
+      "rangeMaps": [
+        {
+          "from": "null", 
+          "text": "N/A", 
+          "to": "null"
+        }, 
+        {
+          "from": "-99999999999999999999999", 
+          "text": "No Growth", 
+          "to": "0"
+        }
+      ], 
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)", 
+        "full": false, 
+        "lineColor": "rgb(31, 120, 193)", 
+        "show": false
+      }, 
+      "tableColumn": "", 
+      "targets": [
+        {
+          "expr": "(ceph_cluster_total_bytes - ceph_cluster_total_used_bytes) /\n  scalar(topk(1, ceph_cluster_total_used_bytes offset 1d) - ignoring (instance,job) topk(1, ceph_cluster_total_used_bytes offset 7d))\n", 
+          "format": "time_series", 
+          "hide": false, 
+          "instant": true, 
+          "intervalFactor": 1, 
+          "refId": "A", 
+          "target": "alias(consolidateBy(maxSeries(timeShift(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.osd_bytes_used,\"7d\")), \"max\"),\"-$growth_window ago\")", 
+          "textEditor": true
+        }
+      ], 
+      "thresholds": "", 
+      "title": "Weeks Remaining", 
+      "type": "singlestat", 
+      "valueFontSize": "70%", 
+      "valueMaps": [
+        {
+          "op": "=", 
+          "text": "N/A", 
+          "value": "null"
+        }
+      ], 
+      "valueName": "current"
+    }, 
+    {
+      "aliasColors": {
+        "active + clean": "#01a701", 
+        "collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.num_pg_active_clean": "#01a701", 
+        "collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.num_pg_peering": "#ffa500", 
+        "peering": "#0A50A1"
+      }, 
+      "breakPoint": "50%", 
+      "cacheTimeout": null, 
+      "combine": {
+        "label": "Others", 
+        "threshold": ""
+      }, 
+      "datasource": null, 
+      "fontSize": "100%", 
+      "format": "none", 
+      "gridPos": {
+        "h": 6, 
+        "w": 4, 
+        "x": 20, 
+        "y": 5
+      }, 
+      "height": "", 
+      "hideTimeOverride": true, 
+      "id": 18, 
+      "interval": null, 
+      "legend": {
+        "percentage": false, 
+        "show": true, 
+        "values": true
+      }, 
+      "legendType": "Under graph", 
+      "links": [
+        {
+          "dashUri": "db/ceph-cluster", 
+          "dashboard": "Ceph Cluster", 
+          "includeVars": false, 
+          "keepTime": false, 
+          "targetBlank": true, 
+          "title": "Ceph Cluster Information", 
+          "type": "dashboard"
+        }
+      ], 
+      "maxDataPoints": "1", 
+      "minSpan": 4, 
+      "nullPointMode": "connected", 
+      "pieType": "pie", 
+      "strokeWidth": "", 
+      "targets": [
+        {
+          "expr": "ceph_pg_clean", 
+          "format": "time_series", 
+          "hide": true, 
+          "instant": false, 
+          "intervalFactor": 1, 
+          "legendFormat": "clean", 
+          "refId": "A", 
+          "target": "alias(keepLastValue(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_pg_active_clean), \"max\")),\"active + clean\")", 
+          "textEditor": true
+        }, 
+        {
+          "expr": "ceph_pg_active", 
+          "format": "time_series", 
+          "hide": false, 
+          "instant": false, 
+          "intervalFactor": 1, 
+          "legendFormat": "active", 
+          "refId": "B", 
+          "target": "alias(keepLastValue(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_pg_active), \"max\")),\"active\")", 
+          "textEditor": true
+        }, 
+        {
+          "expr": "ceph_pg_degraded", 
+          "format": "time_series", 
+          "hide": false, 
+          "instant": false, 
+          "intervalFactor": 1, 
+          "legendFormat": "degraded", 
+          "refId": "C", 
+          "target": "alias(diffSeries(#B,#A),\"active + degraded\")", 
+          "targetFull": "alias(diffSeries(alias(keepLastValue(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_pg_active), \"max\")),\"active\"),alias(keepLastValue(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_pg_active_clean), \"max\")),\"active + clean\")),\"active + degraded\")", 
+          "textEditor": true
+        }, 
+        {
+          "expr": "ceph_pg_peering", 
+          "format": "time_series", 
+          "hide": false, 
+          "instant": false, 
+          "intervalFactor": 1, 
+          "legendFormat": "peering", 
+          "refId": "D", 
+          "target": "alias(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_pg_peering), \"max\"),\"peering\")", 
+          "textEditor": true
+        }
+      ], 
+      "timeFrom": "1m", 
+      "timeShift": null, 
+      "title": "Placement Group Status", 
+      "type": "grafana-piechart-panel", 
+      "valueName": "current"
+    }, 
+    {
+      "collapsed": false, 
+      "gridPos": {
+        "h": 1, 
+        "w": 24, 
+        "x": 0, 
+        "y": 11
+      }, 
+      "id": 36, 
+      "panels": [], 
+      "repeat": null, 
+      "title": "Performance", 
+      "type": "row"
+    }, 
+    {
+      "cacheTimeout": null, 
+      "colorBackground": false, 
+      "colorValue": false, 
+      "colors": [
+        "rgba(251,251,251, 0.97)", 
+        "rgba(255,165,0, 0.89)", 
+        "rgba(255, 0, 0, 1)"
+      ], 
+      "datasource": null, 
+      "decimals": 1, 
+      "format": "none", 
+      "gauge": {
+        "maxValue": 100, 
+        "minValue": 0, 
+        "show": false, 
+        "thresholdLabels": false, 
+        "thresholdMarkers": true
+      }, 
+      "gridPos": {
+        "h": 6, 
+        "w": 4, 
+        "x": 0, 
+        "y": 12
+      }, 
+      "id": 20, 
+      "interval": null, 
+      "links": [
+        {
+          "dashUri": "db/ceph-pools", 
+          "dashboard": "Ceph Pools", 
+          "includeVars": true, 
+          "keepTime": true, 
+          "targetBlank": true, 
+          "title": "Ceph Pools", 
+          "type": "dashboard"
+        }
+      ], 
+      "mappingType": 2, 
+      "mappingTypes": [
+        {
+          "name": "value to text", 
+          "value": 1
+        }, 
+        {
+          "name": "range to text", 
+          "value": 2
+        }
+      ], 
+      "maxDataPoints": "90", 
+      "minSpan": 2, 
+      "nullPointMode": "connected", 
+      "nullText": null, 
+      "postfix": "/s", 
+      "postfixFontSize": "50%", 
+      "prefix": "", 
+      "prefixFontSize": "50%", 
+      "rangeMaps": [], 
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)", 
+        "full": false, 
+        "lineColor": "rgb(31, 120, 193)", 
+        "show": true
+      }, 
+      "tableColumn": "", 
+      "targets": [
+        {
+          "expr": "sum(irate(ceph_osd_recovery_ops[1m]))", 
+          "format": "time_series", 
+          "intervalFactor": 2, 
+          "refId": "A", 
+          "target": "sumSeries(groupByNode(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.*.recovering_bytes_per_sec,-2,\"avg\"))", 
+          "textEditor": true
+        }
+      ], 
+      "thresholds": "1,2", 
+      "title": "Recovery/Backfill Ops", 
+      "type": "singlestat", 
+      "valueFontSize": "50%", 
+      "valueMaps": [
+        {
+          "op": "=", 
+          "text": "N/A", 
+          "value": "null"
+        }
+      ], 
+      "valueName": "current"
+    }, 
+    {
+      "cacheTimeout": null, 
+      "colorBackground": false, 
+      "colorValue": false, 
+      "colors": [
+        "rgba(251,251,251, 0.97)", 
+        "rgba(255,0,0,1)", 
+        "rgba(255, 0, 0, 1)"
+      ], 
+      "datasource": null, 
+      "description": "This panel indicate whether scrub/deep scrub is running within the cluster. NB. If either of these features are turned off, the cluster will enter a WARN state. Click on the panel or the link below to look at cluster information in more detail", 
+      "format": "none", 
+      "gauge": {
+        "maxValue": 100, 
+        "minValue": 0, 
+        "show": false, 
+        "thresholdLabels": false, 
+        "thresholdMarkers": true
+      }, 
+      "gridPos": {
+        "h": 6, 
+        "w": 2, 
+        "x": 4, 
+        "y": 12
+      }, 
+      "id": 19, 
+      "interval": null, 
+      "links": [
+        {
+          "dashUri": "db/ceph-cluster", 
+          "dashboard": "Ceph Cluster", 
+          "includeVars": false, 
+          "keepTime": false, 
+          "targetBlank": true, 
+          "title": "Ceph Cluster", 
+          "type": "dashboard"
+        }
+      ], 
+      "mappingType": 2, 
+      "mappingTypes": [
+        {
+          "name": "value to text", 
+          "value": 1
+        }, 
+        {
+          "name": "range to text", 
+          "value": 2
+        }
+      ], 
+      "maxDataPoints": "", 
+      "minSpan": 2, 
+      "nullPointMode": "connected", 
+      "nullText": null, 
+      "postfix": "", 
+      "postfixFontSize": "50%", 
+      "prefix": "", 
+      "prefixFontSize": "50%", 
+      "rangeMaps": [
+        {
+          "from": "0", 
+          "text": "INACTIVE", 
+          "to": "0"
+        }, 
+        {
+          "from": "1", 
+          "text": "ACTIVE", 
+          "to": "99999"
+        }
+      ], 
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)", 
+        "full": false, 
+        "lineColor": "rgb(31, 120, 193)", 
+        "show": false
+      }, 
+      "tableColumn": "", 
+      "targets": [
+        {
+          "expr": "ceph_pg_scrubbing{job=\"ceph\"}", 
+          "format": "time_series", 
+          "hide": false, 
+          "intervalFactor": 2, 
+          "refId": "A", 
+          "target": "consolidateBy(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.features.deep_scrub),\"max\")", 
+          "textEditor": true
+        }
+      ], 
+      "thresholds": "1", 
+      "title": "Scrub", 
+      "type": "singlestat", 
+      "valueFontSize": "50%", 
+      "valueMaps": [
+        {
+          "op": "=", 
+          "text": "INACTIVE", 
+          "value": "0"
+        }, 
+        {
+          "op": "=", 
+          "text": "ACTIVE", 
+          "value": "1"
+        }, 
+        {
+          "op": "=", 
+          "text": "DISABLED", 
+          "value": "2"
+        }, 
+        {
+          "op": "=", 
+          "text": "", 
+          "value": ""
+        }
+      ], 
+      "valueName": "current"
+    }, 
+    {
+      "cacheTimeout": null, 
+      "colorBackground": false, 
+      "colorValue": false, 
+      "colors": [
+        "rgba(245, 54, 54, 0.9)", 
+        "rgba(237, 129, 40, 0.89)", 
+        "rgba(50, 172, 45, 0.97)"
+      ], 
+      "datasource": null, 
+      "decimals": 0, 
+      "format": "none", 
+      "gauge": {
+        "maxValue": 100, 
+        "minValue": 0, 
+        "show": false, 
+        "thresholdLabels": false, 
+        "thresholdMarkers": true
+      }, 
+      "gridPos": {
+        "h": 6, 
+        "w": 4, 
+        "x": 6, 
+        "y": 12
+      }, 
+      "id": 21, 
+      "interval": null, 
+      "links": [
+        {
+          "dashUri": "db/ceph-pools", 
+          "dashboard": "Ceph Pools", 
+          "includeVars": true, 
+          "keepTime": true, 
+          "targetBlank": true, 
+          "title": "Ceph Pools", 
+          "type": "dashboard"
+        }
+      ], 
+      "mappingType": 1, 
+      "mappingTypes": [
+        {
+          "name": "value to text", 
+          "value": 1
+        }, 
+        {
+          "name": "range to text", 
+          "value": 2
+        }
+      ], 
+      "maxDataPoints": "90", 
+      "minSpan": 4, 
+      "nullPointMode": "connected", 
+      "nullText": null, 
+      "postfix": "", 
+      "postfixFontSize": "50%", 
+      "prefix": "", 
+      "prefixFontSize": "50%", 
+      "rangeMaps": [
+        {
+          "from": "null", 
+          "text": "N/A", 
+          "to": "null"
+        }
+      ], 
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)", 
+        "full": false, 
+        "lineColor": "rgb(31, 120, 193)", 
+        "show": true
+      }, 
+      "tableColumn": "", 
+      "targets": [
+        {
+          "dsType": "influxdb", 
+          "expr": "sum(\n  rate(ceph_pool_wr[$__interval])\n)\n+ \nsum(\n  rate(ceph_pool_rd[$__interval])\n)", 
+          "format": "time_series", 
+          "groupBy": [], 
+          "hide": false, 
+          "intervalFactor": 1, 
+          "legendFormat": "IOPS", 
+          "measurement": "collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.pools._all_.read_op_per_sec", 
+          "policy": "default", 
+          "query": "SELECT mean(\"value\") FROM \"measurement\" WHERE $timeFilter GROUP BY time($__interval) fill(null)", 
+          "rawQuery": false, 
+          "refId": "A", 
+          "resultFormat": "time_series", 
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ], 
+                "type": "field"
+              }
+            ]
+          ], 
+          "tags": [], 
+          "target": "sumSeries(groupByNode(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.*.op_per_sec,-2,\"maxSeries\"))", 
+          "textEditor": true
+        }
+      ], 
+      "thresholds": "", 
+      "title": "Client IOPS", 
+      "type": "singlestat", 
+      "valueFontSize": "100%", 
+      "valueMaps": [
+        {
+          "op": "=", 
+          "text": "N/A", 
+          "value": "null"
+        }
+      ], 
+      "valueName": "current"
+    }, 
+    {
+      "cacheTimeout": null, 
+      "colorBackground": false, 
+      "colorValue": false, 
+      "colors": [
+        "rgba(245, 54, 54, 0.9)", 
+        "rgba(237, 129, 40, 0.89)", 
+        "rgba(50, 172, 45, 0.97)"
+      ], 
+      "datasource": null, 
+      "decimals": 1, 
+      "format": "decbytes", 
+      "gauge": {
+        "maxValue": 100, 
+        "minValue": 0, 
+        "show": false, 
+        "thresholdLabels": false, 
+        "thresholdMarkers": true
+      }, 
+      "gridPos": {
+        "h": 6, 
+        "w": 4, 
+        "x": 10, 
+        "y": 12
+      }, 
+      "id": 22, 
+      "interval": null, 
+      "links": [
+        {
+          "dashUri": "db/ceph-pools", 
+          "dashboard": "Ceph Pools", 
+          "includeVars": true, 
+          "keepTime": true, 
+          "targetBlank": true, 
+          "title": "Ceph Pools", 
+          "type": "dashboard"
+        }
+      ], 
+      "mappingType": 1, 
+      "mappingTypes": [
+        {
+          "name": "value to text", 
+          "value": 1
+        }, 
+        {
+          "name": "range to text", 
+          "value": 2
+        }
+      ], 
+      "maxDataPoints": "90", 
+      "minSpan": 4, 
+      "nullPointMode": "connected", 
+      "nullText": null, 
+      "postfix": "/s", 
+      "postfixFontSize": "50%", 
+      "prefix": "", 
+      "prefixFontSize": "50%", 
+      "rangeMaps": [
+        {
+          "from": "null", 
+          "text": "N/A", 
+          "to": "null"
+        }
+      ], 
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)", 
+        "full": false, 
+        "lineColor": "rgb(31, 120, 193)", 
+        "show": true
+      }, 
+      "tableColumn": "", 
+      "targets": [
+        {
+          "dsType": "influxdb", 
+          "expr": "sum(rate(ceph_pool_wr_bytes[$__interval]) + rate(ceph_pool_rd_bytes[$__interval]))", 
+          "format": "time_series", 
+          "groupBy": [], 
+          "hide": false, 
+          "intervalFactor": 1, 
+          "measurement": "collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.pools._all_.read_op_per_sec", 
+          "policy": "default", 
+          "query": "SELECT \"value\" FROM \"collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.pools._all_.read_bytes_sec\" WHERE $timeFilter", 
+          "rawQuery": true, 
+          "refId": "A", 
+          "resultFormat": "time_series", 
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ], 
+                "type": "field"
+              }
+            ]
+          ], 
+          "tags": [], 
+          "target": "sumSeries(groupByNode(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.*.bytes_sec,-2,\"maxSeries\"))", 
+          "textEditor": true
+        }
+      ], 
+      "thresholds": "", 
+      "title": "Client Throughput", 
+      "type": "singlestat", 
+      "valueFontSize": "70%", 
+      "valueMaps": [
+        {
+          "op": "=", 
+          "text": "N/A", 
+          "value": "null"
+        }
+      ], 
+      "valueName": "current"
+    }, 
+    {
+      "cacheTimeout": null, 
+      "colorBackground": false, 
+      "colorValue": false, 
+      "colors": [
+        "rgba(245, 54, 54, 0.9)", 
+        "rgba(237, 129, 40, 0.89)", 
+        "rgba(50, 172, 45, 0.97)"
+      ], 
+      "datasource": null, 
+      "decimals": 0, 
+      "format": "short", 
+      "gauge": {
+        "maxValue": 100, 
+        "minValue": 0, 
+        "show": false, 
+        "thresholdLabels": false, 
+        "thresholdMarkers": true
+      }, 
+      "gridPos": {
+        "h": 6, 
+        "w": 2, 
+        "x": 14, 
+        "y": 12
+      }, 
+      "id": 23, 
+      "interval": null, 
+      "links": [], 
+      "mappingType": 1, 
+      "mappingTypes": [
+        {
+          "name": "value to text", 
+          "value": 1
+        }, 
+        {
+          "name": "range to text", 
+          "value": 2
+        }
+      ], 
+      "maxDataPoints": 100, 
+      "minSpan": 2, 
+      "nullPointMode": "connected", 
+      "nullText": null, 
+      "postfix": "", 
+      "postfixFontSize": "50%", 
+      "prefix": "", 
+      "prefixFontSize": "50%", 
+      "rangeMaps": [
+        {
+          "from": "null", 
+          "text": "N/A", 
+          "to": "null"
+        }
+      ], 
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)", 
+        "full": false, 
+        "lineColor": "rgb(31, 120, 193)", 
+        "show": false
+      }, 
+      "tableColumn": "", 
+      "targets": [
+        {
+          "dsType": "influxdb", 
+          "expr": "count(ceph_pool_metadata)", 
+          "format": "time_series", 
+          "groupBy": [], 
+          "intervalFactor": 2, 
+          "measurement": "collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.num_pool", 
+          "policy": "default", 
+          "refId": "A", 
+          "resultFormat": "time_series", 
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ], 
+                "type": "field"
+              }
+            ]
+          ], 
+          "tags": [], 
+          "target": "maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.num_pool)", 
+          "textEditor": true
+        }
+      ], 
+      "thresholds": "", 
+      "title": "Pools", 
+      "type": "singlestat", 
+      "valueFontSize": "70%", 
+      "valueMaps": [
+        {
+          "op": "=", 
+          "text": "N/A", 
+          "value": "null"
+        }
+      ], 
+      "valueName": "current"
+    }, 
+    {
+      "aliasColors": {
+        "Reads": "#01a701", 
+        "Writes": "#82B5D8"
+      }, 
+      "breakPoint": "50%", 
+      "cacheTimeout": null, 
+      "combine": {
+        "label": "Others", 
+        "threshold": 0
+      }, 
+      "datasource": null, 
+      "description": "Shows the read/write threshold of client IOPS serviced by the ceph cluster", 
+      "fontSize": "80%", 
+      "format": "none", 
+      "gridPos": {
+        "h": 6, 
+        "w": 4, 
+        "x": 16, 
+        "y": 12
+      }, 
+      "height": "230", 
+      "id": 25, 
+      "interval": null, 
+      "legend": {
+        "percentage": false, 
+        "show": false, 
+        "values": false
+      }, 
+      "legendType": "Under graph", 
+      "links": [], 
+      "maxDataPoints": "90", 
+      "minSpan": 4, 
+      "nullPointMode": "connected", 
+      "pieType": "pie", 
+      "strokeWidth": 1, 
+      "targets": [
+        {
+          "expr": "round(sum(irate(ceph_pool_rd[30s])))", 
+          "format": "time_series", 
+          "intervalFactor": 2, 
+          "legendFormat": "reads", 
+          "refId": "A", 
+          "target": "alias(sumSeries(groupByNode(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.*.read_op_per_sec,-2,\"maxSeries\")), \"Reads\")", 
+          "textEditor": true
+        }, 
+        {
+          "expr": "round(sum(irate(ceph_pool_wr[30s])))", 
+          "format": "time_series", 
+          "intervalFactor": 2, 
+          "legendFormat": "writes", 
+          "refId": "B", 
+          "target": "alias(sumSeries(groupByNode(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.*.write_op_per_sec,-2,\"maxSeries\")), \"Writes\")", 
+          "textEditor": true
+        }
+      ], 
+      "title": "Client Read/Write Ratio", 
+      "type": "grafana-piechart-panel", 
+      "valueName": "current"
+    }, 
+    {
+      "aliasColors": {
+        "95%ile Commit Latency": "#447EBC", 
+        "Apply Latency Max": "#890F02", 
+        "Commit Latency": "#447EBC", 
+        "apply": "#508642", 
+        "commit": "#0a50a1"
+      }, 
+      "bars": false, 
+      "dashLength": 10, 
+      "dashes": false, 
+      "datasource": null, 
+      "description": "Shows the OSD apply and commit latency at the $percentile%ile across the cluster over the past 15 minutes", 
+      "fill": 0, 
+      "gridPos": {
+        "h": 6, 
+        "w": 4, 
+        "x": 20, 
+        "y": 12
+      }, 
+      "hideTimeOverride": true, 
+      "id": 26, 
+      "legend": {
+        "alignAsTable": false, 
+        "avg": false, 
+        "current": false, 
+        "max": false, 
+        "min": false, 
+        "rightSide": false, 
+        "show": true, 
+        "total": false, 
+        "values": false
+      }, 
+      "lines": true, 
+      "linewidth": 2, 
+      "links": [
+        {
+          "dashUri": "db/ceph-osd-information", 
+          "dashboard": "Ceph OSD Information", 
+          "includeVars": true, 
+          "keepTime": true, 
+          "targetBlank": true, 
+          "title": "Ceph OSD Information", 
+          "type": "dashboard"
+        }
+      ], 
+      "minSpan": 4, 
+      "nullPointMode": "null as zero", 
+      "percentage": false, 
+      "pointradius": 5, 
+      "points": false, 
+      "renderer": "flot", 
+      "seriesOverrides": [], 
+      "spaceLength": 10, 
+      "stack": false, 
+      "steppedLine": false, 
+      "targets": [
+        {
+          "expr": "quantile($percentile / 100, ceph_osd_commit_latency_ms)", 
+          "format": "time_series", 
+          "intervalFactor": 1, 
+          "legendFormat": "commit", 
+          "refId": "A", 
+          "target": "alias(percentileOfSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.apply_latency,$percentile), \"Apply Latency\")", 
+          "textEditor": true
+        }, 
+        {
+          "expr": "quantile($percentile / 100, ceph_osd_apply_latency_ms)", 
+          "format": "time_series", 
+          "intervalFactor": 1, 
+          "legendFormat": "apply", 
+          "refId": "B", 
+          "target": "alias(percentileOfSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.commitcycle_latency, $percentile), \"Commit Latency\")", 
+          "textEditor": true
+        }
+      ], 
+      "thresholds": [], 
+      "timeFrom": "15m", 
+      "timeShift": null, 
+      "title": "OSD Apply vs Commit Latency", 
+      "tooltip": {
+        "shared": true, 
+        "sort": 0, 
+        "value_type": "individual"
+      }, 
+      "type": "graph", 
+      "xaxis": {
+        "buckets": null, 
+        "mode": "time", 
+        "name": null, 
+        "show": false, 
+        "values": []
+      }, 
+      "yaxes": [
+        {
+          "format": "ms", 
+          "label": null, 
+          "logBase": 1, 
+          "max": null, 
+          "min": "0", 
+          "show": true
+        }, 
+        {
+          "format": "short", 
+          "label": null, 
+          "logBase": 1, 
+          "max": null, 
+          "min": null, 
+          "show": false
+        }
+      ]
+    }, 
+    {
+      "cacheTimeout": null, 
+      "colorBackground": false, 
+      "colorValue": false, 
+      "colors": [
+        "rgba(50, 172, 45, 0.97)", 
+        "rgba(237, 129, 40, 0.89)", 
+        "rgba(245, 54, 54, 0.9)"
+      ], 
+      "datasource": null, 
+      "decimals": 0, 
+      "description": "CPU usage is presented based on the $percentile%ile across all OSD hosts", 
+      "format": "short", 
+      "gauge": {
+        "maxValue": 100, 
+        "minValue": 0, 
+        "show": false, 
+        "thresholdLabels": false, 
+        "thresholdMarkers": true
+      }, 
+      "gridPos": {
+        "h": 6, 
+        "w": 4, 
+        "x": 0, 
+        "y": 18
+      }, 
+      "id": 27, 
+      "interval": null, 
+      "links": [], 
+      "mappingType": 1, 
+      "mappingTypes": [
+        {
+          "name": "value to text", 
+          "value": 1
+        }, 
+        {
+          "name": "range to text", 
+          "value": 2
+        }
+      ], 
+      "maxDataPoints": "90", 
+      "minSpan": 4, 
+      "nullPointMode": "connected", 
+      "nullText": null, 
+      "postfix": " %", 
+      "postfixFontSize": "50%", 
+      "prefix": "", 
+      "prefixFontSize": "50%", 
+      "rangeMaps": [
+        {
+          "from": "null", 
+          "text": "N/A", 
+          "to": "null"
+        }
+      ], 
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)", 
+        "full": false, 
+        "lineColor": "rgb(31, 120, 193)", 
+        "show": true
+      }, 
+      "tableColumn": "", 
+      "targets": [
+        {
+          "expr": "quantile(\n  $percentile / 100, (\n    avg (\n      sum (\n        irate(node_cpu{mode=~\"(system|user|irq|nice)\", instance=~'[[osd_servers_raw]].*'}[1m]))\n      by (instance,cpu)\n    ) by (instance)\n  ) * 100\n)", 
+          "format": "time_series", 
+          "hide": false, 
+          "intervalFactor": 1, 
+          "refId": "A", 
+          "target": "percentileOfSeries(groupByNode(collectd.$osd_servers.$domain.cpu.percent.{system,user,wait},1,\"sumSeries\"),$percentile)", 
+          "textEditor": true
+        }
+      ], 
+      "thresholds": "70,90", 
+      "title": "OSD Hosts CPU Busy", 
+      "type": "singlestat", 
+      "valueFontSize": "100%", 
+      "valueMaps": [
+        {
+          "op": "=", 
+          "text": "N/A", 
+          "value": "null"
+        }
+      ], 
+      "valueName": "current"
+    }, 
+    {
+      "cacheTimeout": null, 
+      "colorBackground": false, 
+      "colorValue": false, 
+      "colors": [
+        "rgba(245, 54, 54, 0.9)", 
+        "rgba(237, 129, 40, 0.89)", 
+        "rgba(50, 172, 45, 0.97)"
+      ], 
+      "datasource": null, 
+      "decimals": 0, 
+      "description": "RAM Usage shows the $percentile%ile of RAM used across all OSD hosts", 
+      "format": "short", 
+      "gauge": {
+        "maxValue": 100, 
+        "minValue": 0, 
+        "show": false, 
+        "thresholdLabels": false, 
+        "thresholdMarkers": true
+      }, 
+      "gridPos": {
+        "h": 6, 
+        "w": 2, 
+        "x": 4, 
+        "y": 18
+      }, 
+      "id": 31, 
+      "interval": null, 
+      "links": [
+        {
+          "dashUri": "db/ceph-backend-storage", 
+          "dashboard": "Ceph Backend Storage", 
+          "includeVars": true, 
+          "keepTime": true, 
+          "targetBlank": true, 
+          "title": "Ceph OSD Host Performance", 
+          "type": "dashboard"
+        }
+      ], 
+      "mappingType": 1, 
+      "mappingTypes": [
+        {
+          "name": "value to text", 
+          "value": 1
+        }, 
+        {
+          "name": "range to text", 
+          "value": 2
+        }
+      ], 
+      "maxDataPoints": "", 
+      "minSpan": 2, 
+      "nullPointMode": "connected", 
+      "nullText": null, 
+      "postfix": " %", 
+      "postfixFontSize": "50%", 
+      "prefix": "", 
+      "prefixFontSize": "50%", 
+      "rangeMaps": [
+        {
+          "from": "null", 
+          "text": "N/A", 
+          "to": "null"
+        }
+      ], 
+      "sparkline": {
+        "fillColor": "rgba(46, 161, 15, 0)", 
+        "full": false, 
+        "lineColor": "rgb(164, 139, 4)", 
+        "show": false
+      }, 
+      "tableColumn": "", 
+      "targets": [
+        {
+          "dsType": "influxdb", 
+          "expr": "quantile(\n  $percentile/100, \n  (\n    node_memory_MemTotal{job='node'} - node_memory_MemFree{job='node'} - node_memory_Buffers{job='node'} - node_memory_Cached{job='node'}\n  ) / node_memory_MemTotal{job='node'} * 100\n)", 
+          "format": "time_series", 
+          "groupBy": [], 
+          "hide": false, 
+          "intervalFactor": 2, 
+          "measurement": "collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.pools._all_.read_op_per_sec", 
+          "policy": "default", 
+          "query": "SELECT \"value\" FROM \"collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.pools._all_.read_bytes_sec\" WHERE $timeFilter", 
+          "rawQuery": true, 
+          "refId": "A", 
+          "resultFormat": "time_series", 
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ], 
+                "type": "field"
+              }
+            ]
+          ], 
+          "tags": [], 
+          "target": "percentileOfSeries(collectd.$osd_servers.$domain.memory.percent.used,$percentile)", 
+          "textEditor": true
+        }
+      ], 
+      "thresholds": "", 
+      "title": "RAM Util.", 
+      "type": "singlestat", 
+      "valueFontSize": "70%", 
+      "valueMaps": [
+        {
+          "op": "=", 
+          "text": "N/A", 
+          "value": "null"
+        }
+      ], 
+      "valueName": "current"
+    }, 
+    {
+      "cacheTimeout": null, 
+      "colorBackground": false, 
+      "colorValue": false, 
+      "colors": [
+        "rgba(245, 54, 54, 0.9)", 
+        "rgba(237, 129, 40, 0.89)", 
+        "rgba(50, 172, 45, 0.97)"
+      ], 
+      "datasource": null, 
+      "decimals": 0, 
+      "description": "Total IOPS from all OSDs in the cluster", 
+      "format": "none", 
+      "gauge": {
+        "maxValue": 100, 
+        "minValue": 0, 
+        "show": false, 
+        "thresholdLabels": false, 
+        "thresholdMarkers": true
+      }, 
+      "gridPos": {
+        "h": 6, 
+        "w": 4, 
+        "x": 6, 
+        "y": 18
+      }, 
+      "id": 28, 
+      "interval": null, 
+      "links": [
+        {
+          "dashUri": "db/ceph-backend-storage", 
+          "dashboard": "Ceph Backend Storage", 
+          "includeVars": true, 
+          "keepTime": true, 
+          "targetBlank": true, 
+          "title": "Ceph OSD Host Performance", 
+          "type": "dashboard"
+        }
+      ], 
+      "mappingType": 1, 
+      "mappingTypes": [
+        {
+          "name": "value to text", 
+          "value": 1
+        }, 
+        {
+          "name": "range to text", 
+          "value": 2
+        }
+      ], 
+      "maxDataPoints": "90", 
+      "minSpan": 4, 
+      "nullPointMode": "connected", 
+      "nullText": null, 
+      "postfix": "", 
+      "postfixFontSize": "50%", 
+      "prefix": "", 
+      "prefixFontSize": "50%", 
+      "rangeMaps": [
+        {
+          "from": "null", 
+          "text": "N/A", 
+          "to": "null"
+        }
+      ], 
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)", 
+        "full": false, 
+        "lineColor": "rgb(31, 120, 193)", 
+        "show": true
+      }, 
+      "tableColumn": "", 
+      "targets": [
+        {
+          "dsType": "influxdb", 
+          "expr": "sum(\n  sum(\n    rate(\n      node_disk_reads_completed[$__interval]\n    )\n  ) by (instance,device)\n   + ignoring(ceph_daemon,job) group_right(instance) ceph_disk_occupation\n)\n+\nsum(\n  sum(\n    rate(\n      node_disk_writes_completed[$__interval]\n    )\n  ) by (instance,device)\n   + ignoring(ceph_daemon,job) group_right(instance) ceph_disk_occupation\n)", 
+          "format": "time_series", 
+          "groupBy": [], 
+          "hide": false, 
+          "intervalFactor": 1, 
+          "measurement": "collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.pools._all_.read_op_per_sec", 
+          "policy": "default", 
+          "query": "SELECT \"value\" FROM \"collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.pools._all_.read_bytes_sec\" WHERE $timeFilter", 
+          "rawQuery": true, 
+          "refId": "A", 
+          "resultFormat": "time_series", 
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ], 
+                "type": "field"
+              }
+            ]
+          ], 
+          "tags": [], 
+          "target": "alias(sumSeries(collectd.$osd_servers.$domain.cephmetrics.gauge.$cluster_name.osd.*.perf.iops),\"IOPS\")", 
+          "textEditor": true
+        }
+      ], 
+      "thresholds": "", 
+      "title": "Disk IOPS", 
+      "type": "singlestat", 
+      "valueFontSize": "100%", 
+      "valueMaps": [
+        {
+          "op": "=", 
+          "text": "N/A", 
+          "value": "null"
+        }
+      ], 
+      "valueName": "current"
+    }, 
+    {
+      "cacheTimeout": null, 
+      "colorBackground": false, 
+      "colorValue": false, 
+      "colors": [
+        "rgba(245, 54, 54, 0.9)", 
+        "rgba(237, 129, 40, 0.89)", 
+        "rgba(50, 172, 45, 0.97)"
+      ], 
+      "datasource": null, 
+      "decimals": 1, 
+      "format": "decbytes", 
+      "gauge": {
+        "maxValue": 100, 
+        "minValue": 0, 
+        "show": false, 
+        "thresholdLabels": false, 
+        "thresholdMarkers": true
+      }, 
+      "gridPos": {
+        "h": 6, 
+        "w": 4, 
+        "x": 10, 
+        "y": 18
+      }, 
+      "id": 29, 
+      "interval": null, 
+      "links": [
+        {
+          "dashUri": "db/ceph-backend-storage", 
+          "dashboard": "Ceph Backend Storage", 
+          "includeVars": true, 
+          "keepTime": true, 
+          "targetBlank": true, 
+          "title": "Ceph OSD Host Performance", 
+          "type": "dashboard"
+        }
+      ], 
+      "mappingType": 1, 
+      "mappingTypes": [
+        {
+          "name": "value to text", 
+          "value": 1
+        }, 
+        {
+          "name": "range to text", 
+          "value": 2
+        }
+      ], 
+      "maxDataPoints": "90", 
+      "minSpan": 4, 
+      "nullPointMode": "connected", 
+      "nullText": null, 
+      "postfix": "/s", 
+      "postfixFontSize": "50%", 
+      "prefix": "", 
+      "prefixFontSize": "50%", 
+      "rangeMaps": [
+        {
+          "from": "null", 
+          "text": "N/A", 
+          "to": "null"
+        }
+      ], 
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)", 
+        "full": false, 
+        "lineColor": "rgb(31, 120, 193)", 
+        "show": true
+      }, 
+      "tableColumn": "", 
+      "targets": [
+        {
+          "dsType": "influxdb", 
+          "expr": "# should only include OSD hosts\nsum(\n  sum(\n    rate(\n      node_disk_bytes_read[$__interval]\n    )\n  ) by (instance,device)\n  + ignoring(ceph_daemon,job) group_right(instance) ceph_disk_occupation\n)\n+\nsum(\n  sum(\n    rate(\n      node_disk_bytes_written[$__interval]\n    )\n  ) by (instance,device)\n  + ignoring(ceph_daemon,job) group_right(instance) ceph_disk_occupation\n)", 
+          "format": "time_series", 
+          "groupBy": [], 
+          "hide": false, 
+          "intervalFactor": 1, 
+          "measurement": "collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.pools._all_.read_op_per_sec", 
+          "policy": "default", 
+          "query": "SELECT \"value\" FROM \"collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.pools._all_.read_bytes_sec\" WHERE $timeFilter", 
+          "rawQuery": true, 
+          "refId": "A", 
+          "resultFormat": "time_series", 
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ], 
+                "type": "field"
+              }
+            ]
+          ], 
+          "tags": [], 
+          "target": "sumSeries(collectd.$osd_servers.$domain.cephmetrics.gauge.$cluster_name.osd.*.perf.bytes_per_sec)", 
+          "textEditor": true
+        }, 
+        {
+          "dsType": "influxdb", 
+          "expr": "# will include non-OSD hosts\nsum(\n  rate(\n    node_disk_bytes_read[$__interval]\n  ) + \n  rate(\n    node_disk_bytes_written[$__interval]\n  )\n)", 
+          "format": "time_series", 
+          "groupBy": [], 
+          "hide": true, 
+          "intervalFactor": 1, 
+          "measurement": "collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.pools._all_.read_op_per_sec", 
+          "policy": "default", 
+          "query": "SELECT \"value\" FROM \"collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.pools._all_.read_bytes_sec\" WHERE $timeFilter", 
+          "rawQuery": true, 
+          "refId": "B", 
+          "resultFormat": "time_series", 
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ], 
+                "type": "field"
+              }
+            ]
+          ], 
+          "tags": [], 
+          "target": "sumSeries(collectd.$osd_servers.$domain.cephmetrics.gauge.$cluster_name.osd.*.perf.bytes_per_sec)", 
+          "textEditor": true
+        }
+      ], 
+      "thresholds": "", 
+      "title": "Disk Throughput", 
+      "type": "singlestat", 
+      "valueFontSize": "70%", 
+      "valueMaps": [
+        {
+          "op": "=", 
+          "text": "N/A", 
+          "value": "null"
+        }
+      ], 
+      "valueName": "current"
+    }, 
+    {
+      "cacheTimeout": null, 
+      "colorBackground": false, 
+      "colorValue": false, 
+      "colors": [
+        "rgba(245, 54, 54, 0.9)", 
+        "rgba(237, 129, 40, 0.89)", 
+        "rgba(50, 172, 45, 0.97)"
+      ], 
+      "datasource": null, 
+      "decimals": 0, 
+      "description": "The count of the number of disks in the cluster that are over $disk_full_threshold% full.", 
+      "format": "short", 
+      "gauge": {
+        "maxValue": 100, 
+        "minValue": 0, 
+        "show": false, 
+        "thresholdLabels": false, 
+        "thresholdMarkers": true
+      }, 
+      "gridPos": {
+        "h": 6, 
+        "w": 2, 
+        "x": 14, 
+        "y": 18
+      }, 
+      "id": 30, 
+      "interval": null, 
+      "links": [
+        {
+          "dashUri": "db/ceph-backend-storage", 
+          "dashboard": "Ceph Backend Storage", 
+          "includeVars": true, 
+          "keepTime": true, 
+          "targetBlank": true, 
+          "title": "Ceph OSD Host Performance", 
+          "type": "dashboard"
+        }
+      ], 
+      "mappingType": 1, 
+      "mappingTypes": [
+        {
+          "name": "value to text", 
+          "value": 1
+        }, 
+        {
+          "name": "range to text", 
+          "value": 2
+        }
+      ], 
+      "maxDataPoints": 100, 
+      "minSpan": 2, 
+      "nullPointMode": "connected", 
+      "nullText": null, 
+      "postfix": "", 
+      "postfixFontSize": "50%", 
+      "prefix": "", 
+      "prefixFontSize": "50%", 
+      "rangeMaps": [
+        {
+          "from": "null", 
+          "text": "N/A", 
+          "to": "null"
+        }
+      ], 
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)", 
+        "full": false, 
+        "lineColor": "rgb(31, 120, 193)", 
+        "show": false
+      }, 
+      "tableColumn": "", 
+      "targets": [
+        {
+          "expr": "count(\n  (ceph_osd_stat_bytes_used / ceph_osd_stat_bytes) > ($disk_full_threshold / 100)\n)", 
+          "format": "time_series", 
+          "intervalFactor": 2, 
+          "refId": "A", 
+          "target": "countSeries(currentAbove(transformNull(keepLastValue(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.osd_percent_used),0),$disk_full_threshold))", 
+          "textEditor": true
+        }
+      ], 
+      "thresholds": "", 
+      "title": "Nearly Full Disks", 
+      "type": "singlestat", 
+      "valueFontSize": "80%", 
+      "valueMaps": [
+        {
+          "op": "=", 
+          "text": "0", 
+          "value": "null"
+        }
+      ], 
+      "valueName": "current"
+    }, 
+    {
+      "cacheTimeout": null, 
+      "colorBackground": false, 
+      "colorValue": false, 
+      "colors": [
+        "rgba(1, 167, 1,1)", 
+        "rgba(255,165,0,1)", 
+        "rgba(245, 54, 54, 0.9)"
+      ], 
+      "datasource": null, 
+      "decimals": 0, 
+      "description": "This panel shows the 5th %ile disk latency, indicating that 95% of the OSDs are delivering this latency or higher", 
+      "format": "short", 
+      "gauge": {
+        "maxValue": 100, 
+        "minValue": 0, 
+        "show": false, 
+        "thresholdLabels": false, 
+        "thresholdMarkers": true
+      }, 
+      "gridPos": {
+        "h": 6, 
+        "w": 4, 
+        "x": 16, 
+        "y": 18
+      }, 
+      "id": 32, 
+      "interval": null, 
+      "links": [
+        {
+          "dashUri": "db/latency-by-server", 
+          "dashboard": "Latency by Server", 
+          "includeVars": true, 
+          "targetBlank": true, 
+          "title": "Latency by Server", 
+          "type": "dashboard"
+        }
+      ], 
+      "mappingType": 1, 
+      "mappingTypes": [
+        {
+          "name": "value to text", 
+          "value": 1
+        }, 
+        {
+          "name": "range to text", 
+          "value": 2
+        }
+      ], 
+      "maxDataPoints": "90", 
+      "minSpan": 4, 
+      "nullPointMode": "connected", 
+      "nullText": null, 
+      "postfix": " ms", 
+      "postfixFontSize": "50%", 
+      "prefix": "", 
+      "prefixFontSize": "50%", 
+      "rangeMaps": [
+        {
+          "from": "null", 
+          "text": "N/A", 
+          "to": "null"
+        }
+      ], 
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)", 
+        "full": false, 
+        "lineColor": "rgb(31, 120, 193)", 
+        "show": true
+      }, 
+      "tableColumn": "", 
+      "targets": [
+        {
+          "expr": "quantile(\n  5 / 100,\n    (irate(node_disk_read_time_ms[1m]) + irate(node_disk_write_time_ms[1m]) / \n    (irate(node_disk_reads_completed[1m]) + irate(node_disk_writes_completed[1m])) \n    +\n    ignoring(ceph_daemon,job) ceph_disk_occupation))", 
+          "format": "time_series", 
+          "hide": false, 
+          "intervalFactor": 1, 
+          "refId": "C"
+        }, 
+        {
+          "expr": "max(\n  irate(node_disk_read_time_ms[30s]) / irate(node_disk_reads_completed[30s])\n  +\n  irate(node_disk_write_time_ms[30s]) / irate(node_disk_writes_completed[30s])\n  + ignoring(ceph_daemon,job) ceph_disk_occupation\n)", 
+          "format": "time_series", 
+          "hide": true, 
+          "intervalFactor": 2, 
+          "refId": "B"
+        }, 
+        {
+          "expr": "sum(\n    (irate(node_disk_read_time_ms[1m]) + irate(node_disk_write_time_ms[1m]) / \n    (irate(node_disk_reads_completed[1m]) + irate(node_disk_writes_completed[1m])) \n    +\n    ignoring(ceph_daemon,job) ceph_disk_occupation)) / count(ceph_osd_up)", 
+          "format": "time_series", 
+          "hide": true, 
+          "intervalFactor": 1, 
+          "refId": "A"
+        }
+      ], 
+      "thresholds": "20,60", 
+      "title": "Disk Latency", 
+      "type": "singlestat", 
+      "valueFontSize": "100%", 
+      "valueMaps": [
+        {
+          "op": "=", 
+          "text": "0", 
+          "value": "null"
+        }
+      ], 
+      "valueName": "current"
+    }, 
+    {
+      "aliasColors": {
+        "average": "#0a50a1", 
+        "average %util": "#1f78c1"
+      }, 
+      "bars": false, 
+      "dashLength": 10, 
+      "dashes": false, 
+      "datasource": null, 
+      "description": "Chart shows the disk utilization over the past 15 mins expressed as an average across all OSDs, and at the $percentile%ile.", 
+      "fill": 1, 
+      "gridPos": {
+        "h": 6, 
+        "w": 4, 
+        "x": 20, 
+        "y": 18
+      }, 
+      "hideTimeOverride": true, 
+      "id": 33, 
+      "legend": {
+        "avg": false, 
+        "current": false, 
+        "max": false, 
+        "min": false, 
+        "show": true, 
+        "total": false, 
+        "values": false
+      }, 
+      "lines": true, 
+      "linewidth": 2, 
+      "links": [
+        {
+          "dashUri": "db/disk-busy-by-server", 
+          "dashboard": "Disk Busy by Server", 
+          "includeVars": true, 
+          "targetBlank": true, 
+          "title": "Disk Busy by Server", 
+          "type": "dashboard"
+        }
+      ], 
+      "minSpan": 4, 
+      "nullPointMode": "null", 
+      "percentage": false, 
+      "pointradius": 5, 
+      "points": false, 
+      "renderer": "flot", 
+      "seriesOverrides": [
+        {
+          "alias": "95%ile", 
+          "fill": 0
+        }
+      ], 
+      "spaceLength": 10, 
+      "stack": false, 
+      "steppedLine": false, 
+      "targets": [
+        {
+          "expr": "avg (\n  max by (device) (\n    irate(node_disk_io_time_ms[1m]) \n    and on (instance, device) ceph_disk_occupation\n  ) / 10\n)", 
+          "format": "time_series", 
+          "intervalFactor": 1, 
+          "legendFormat": "average", 
+          "refId": "A", 
+          "target": "alias(averageSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.perf.util), 'average %util')", 
+          "textEditor": false
+        }, 
+        {
+          "expr": "quantile(\n  $percentile/100, \n  (\n    max by (device) (\n      irate(node_disk_io_time_ms[1m]) \n      and on (instance, device) ceph_disk_occupation\n    ) / 10\n  )\n)", 
+          "format": "time_series", 
+          "intervalFactor": 1, 
+          "legendFormat": "$percentile%ile", 
+          "refId": "B", 
+          "target": "alias(percentileOfSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.osd.*.perf.util, $percentile, 'false'), '%util @ $percentile%ile')"
+        }
+      ], 
+      "thresholds": [], 
+      "timeFrom": "15m", 
+      "timeShift": null, 
+      "title": "Disk Utilization", 
+      "tooltip": {
+        "shared": true, 
+        "sort": 0, 
+        "value_type": "individual"
+      }, 
+      "type": "graph", 
+      "xaxis": {
+        "buckets": null, 
+        "mode": "time", 
+        "name": null, 
+        "show": true, 
+        "values": []
+      }, 
+      "yaxes": [
+        {
+          "format": "percent", 
+          "label": "", 
+          "logBase": 1, 
+          "max": "100", 
+          "min": "0", 
+          "show": true
+        }, 
+        {
+          "format": "short", 
+          "label": null, 
+          "logBase": 1, 
+          "max": null, 
+          "min": null, 
+          "show": true
+        }
+      ]
     }
-  ],
-  "schemaVersion": 14,
-  "style": "dark",
+  ], 
+  "refresh": "15s", 
+  "schemaVersion": 16, 
+  "style": "dark", 
   "tags": [
     "overview"
-  ],
+  ], 
   "templating": {
     "list": [
       {
-        "allValue": null,
+        "allValue": null, 
         "current": {
-          "selected": true,
-          "text": "95",
+          "selected": true, 
+          "text": "95", 
           "value": "95"
-        },
-        "hide": 0,
-        "includeAll": false,
-        "label": "Percentile",
-        "multi": false,
-        "name": "percentile",
+        }, 
+        "hide": 0, 
+        "includeAll": false, 
+        "label": "Percentile", 
+        "multi": false, 
+        "name": "percentile", 
         "options": [
           {
-            "selected": false,
-            "text": "80",
+            "selected": false, 
+            "text": "80", 
             "value": "80"
-          },
+          }, 
           {
-            "selected": false,
-            "text": "85",
+            "selected": false, 
+            "text": "85", 
             "value": "85"
-          },
+          }, 
           {
-            "selected": false,
-            "text": "90",
+            "selected": false, 
+            "text": "90", 
             "value": "90"
-          },
+          }, 
           {
-            "selected": true,
-            "text": "95",
+            "selected": true, 
+            "text": "95", 
             "value": "95"
-          },
+          }, 
           {
-            "selected": false,
-            "text": "98",
+            "selected": false, 
+            "text": "98", 
             "value": "98"
           }
-        ],
-        "query": "80,85,90,95,98",
+        ], 
+        "query": "80,85,90,95,98", 
         "type": "custom"
-      },
+      }, 
       {
-        "allValue": null,
+        "allValue": null, 
         "current": {
-          "text": "85",
+          "text": "85", 
           "value": "85"
-        },
-        "hide": 2,
-        "includeAll": false,
-        "label": null,
-        "multi": false,
-        "name": "disk_full_threshold",
+        }, 
+        "hide": 2, 
+        "includeAll": false, 
+        "label": null, 
+        "multi": false, 
+        "name": "disk_full_threshold", 
         "options": [
           {
-            "selected": true,
-            "text": "85",
+            "selected": true, 
+            "text": "85", 
             "value": "85"
           }
-        ],
-        "query": "85",
+        ], 
+        "query": "85", 
         "type": "custom"
-      },
+      }, 
       {
-        "allValue": null,
+        "allValue": null, 
         "current": {
-          "text": "7d",
+          "text": "7d", 
           "value": "7d"
-        },
-        "hide": 2,
-        "includeAll": false,
-        "label": null,
-        "multi": false,
-        "name": "growth_window",
+        }, 
+        "hide": 2, 
+        "includeAll": false, 
+        "label": null, 
+        "multi": false, 
+        "name": "growth_window", 
         "options": [
           {
-            "selected": true,
-            "text": "7d",
+            "selected": true, 
+            "text": "7d", 
             "value": "7d"
           }
-        ],
-        "query": "7d",
+        ], 
+        "query": "7d", 
         "type": "custom"
-      },
+      }, 
       {
-        "allValue": "",
-        "current": {
-          "text": "All",
-          "value": "$__all"
-        },
-        "datasource": null,
-        "hide": 2,
-        "includeAll": true,
-        "label": "OSD Host",
-        "multi": false,
-        "name": "osd_servers",
-        "options": [],
-        "query": "label_values(ceph_disk_occupation, instance)",
-        "refresh": 1,
-        "regex": "([^.]*).*",
-        "sort": 1,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
+        "allValue": "", 
+        "current": {}, 
+        "datasource": null, 
+        "hide": 2, 
+        "includeAll": true, 
+        "label": "OSD Host", 
+        "multi": false, 
+        "name": "osd_servers", 
+        "options": [], 
+        "query": "label_values(ceph_disk_occupation, instance)", 
+        "refresh": 1, 
+        "regex": "([^.]*).*", 
+        "sort": 1, 
+        "tagValuesQuery": "", 
+        "tags": [], 
+        "tagsQuery": "", 
+        "type": "query", 
+        "useTags": false
+      }, 
+      {
+        "allValue": "", 
+        "current": {}, 
+        "datasource": null, 
+        "hide": 2, 
+        "includeAll": true, 
+        "label": "OSD Host", 
+        "multi": false, 
+        "name": "osd_servers_raw", 
+        "options": [], 
+        "query": "label_values(ceph_disk_occupation, instance)", 
+        "refresh": 1, 
+        "regex": "", 
+        "sort": 1, 
+        "tagValuesQuery": "", 
+        "tags": [], 
+        "tagsQuery": "", 
+        "type": "query", 
         "useTags": false
       }
     ]
-  },
+  }, 
   "time": {
-    "from": "now-1h",
+    "from": "now-1h", 
     "to": "now"
-  },
+  }, 
   "timepicker": {
     "refresh_intervals": [
-      "5s",
-      "10s",
-      "15s",
-      "30s",
-      "1m",
-      "5m",
-      "15m",
-      "30m",
-      "1h",
-      "2h",
+      "5s", 
+      "10s", 
+      "15s", 
+      "30s", 
+      "1m", 
+      "5m", 
+      "15m", 
+      "30m", 
+      "1h", 
+      "2h", 
       "1d"
-    ],
+    ], 
     "time_options": [
-      "5m",
-      "15m",
-      "1h",
-      "6h",
-      "12h",
-      "24h",
-      "2d",
-      "7d",
+      "5m", 
+      "15m", 
+      "1h", 
+      "6h", 
+      "12h", 
+      "24h", 
+      "2d", 
+      "7d", 
       "30d"
     ]
-  },
-  "timezone": "browser",
-  "title": "Ceph - At A Glance"
+  }, 
+  "timezone": "browser", 
+  "title": "Ceph - At A Glance", 
+  "uid": "000000011", 
+  "version": 39
 }
