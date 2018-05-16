@@ -48,7 +48,7 @@
   "gnetId": null, 
   "graphTooltip": 0, 
   "id": null, 
-  "iteration": 1526260871845, 
+  "iteration": 1526456532165, 
   "links": [
     {
       "asDropdown": true, 
@@ -189,16 +189,14 @@
       "panels": [
         {
           "aliasColors": {
-            "Ceph Health": "#0a50a1", 
-            "Ceph Health (0:OK, 4:Warning,8:Error)": "#DEDAF7", 
-            "collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.health": "#DEDAF7"
+            "Ceph Health": "#0a50a1"
           }, 
           "bars": false, 
           "dashLength": 10, 
           "dashes": false, 
           "datasource": null, 
-          "description": "The chart plots the clusters health, over time. Health is depicted as a integer; 0, 1 or 2 where 0 is OK, 1 is WARN and 2 represents an ERROR state. Horizontal thresholds (drawn in yellow and red) indicate when the cluster's health transitions to 'warning' or 'error'.", 
-          "fill": 1, 
+          "description": "The chart plots the clusters health, over time. The colored bands show 3 distinct areas; green (OK), yellow(WARN) and red(ERROR). The plot line in blue is this clusters current health, so you can see over time how long the cluster spends in an OK, WARN or ERROR state", 
+          "fill": 0, 
           "gridPos": {
             "h": 9, 
             "w": 24, 
@@ -233,7 +231,7 @@
           "steppedLine": true, 
           "targets": [
             {
-              "expr": "ceph_health_status", 
+              "expr": "ceph_health_status ", 
               "format": "time_series", 
               "instant": false, 
               "intervalFactor": 2, 
@@ -246,21 +244,27 @@
           "thresholds": [
             {
               "colorMode": "custom", 
-              "fill": false, 
-              "fillColor": "rgba(222, 226, 0, 0.47)", 
-              "line": true, 
-              "lineColor": "rgb(247, 172, 0)", 
-              "op": "gt", 
-              "value": 1
+              "fill": true, 
+              "fillColor": "#9ac48a", 
+              "line": false, 
+              "op": "lt", 
+              "value": 0.1
             }, 
             {
               "colorMode": "custom", 
-              "fill": false, 
-              "fillColor": "rgba(246, 3, 3, 0.5)", 
-              "line": true, 
-              "lineColor": "rgb(203, 0, 0)", 
+              "fill": true, 
+              "fillColor": "rgba(244, 213, 152, 0.58)", 
+              "line": false, 
+              "op": "lt", 
+              "value": 1.1
+            }, 
+            {
+              "colorMode": "custom", 
+              "fill": true, 
+              "fillColor": "rgba(163, 0, 0, 0.3)", 
+              "line": false, 
               "op": "gt", 
-              "value": 2
+              "value": 1.1
             }
           ], 
           "timeFrom": "3d", 
@@ -285,7 +289,7 @@
               "label": "", 
               "logBase": 1, 
               "max": "2", 
-              "min": "0", 
+              "min": "-0.5", 
               "show": false
             }, 
             {
@@ -1309,311 +1313,8 @@
         "x": 0, 
         "y": 12
       }, 
-      "id": 24, 
+      "id": 64, 
       "panels": [
-        {
-          "columns": [
-            {
-              "text": "Current", 
-              "value": "current"
-            }
-          ], 
-          "datasource": null, 
-          "fontSize": "100%", 
-          "gridPos": {
-            "h": 7, 
-            "w": 2, 
-            "x": 0, 
-            "y": 22
-          }, 
-          "id": 14, 
-          "links": [], 
-          "minSpan": 2, 
-          "pageSize": null, 
-          "scroll": true, 
-          "showHeader": true, 
-          "sort": {
-            "col": 0, 
-            "desc": true
-          }, 
-          "styles": [
-            {
-              "alias": "Time", 
-              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
-              "pattern": "Time", 
-              "type": "date"
-            }, 
-            {
-              "alias": "% Full", 
-              "colorMode": null, 
-              "colors": [
-                "rgba(245, 54, 54, 0.9)", 
-                "rgba(237, 129, 40, 0.89)", 
-                "rgba(50, 172, 45, 0.97)"
-              ], 
-              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
-              "decimals": 0, 
-              "pattern": "Current", 
-              "thresholds": [], 
-              "type": "hidden", 
-              "unit": "none"
-            }, 
-            {
-              "alias": "Host.OSD Id", 
-              "colorMode": null, 
-              "colors": [
-                "rgba(245, 54, 54, 0.9)", 
-                "rgba(237, 129, 40, 0.89)", 
-                "rgba(50, 172, 45, 0.97)"
-              ], 
-              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
-              "decimals": 2, 
-              "pattern": "Metric", 
-              "thresholds": [], 
-              "type": "number", 
-              "unit": "short"
-            }, 
-            {
-              "alias": "", 
-              "colorMode": null, 
-              "colors": [
-                "rgba(245, 54, 54, 0.9)", 
-                "rgba(237, 129, 40, 0.89)", 
-                "rgba(50, 172, 45, 0.97)"
-              ], 
-              "decimals": 2, 
-              "pattern": "/.*/", 
-              "thresholds": [], 
-              "type": "number", 
-              "unit": "short"
-            }
-          ], 
-          "targets": [
-            {
-              "expr": "ceph_osd_stat_bytes_used / ceph_osd_stat_bytes * 100 > $disk_full_threshold", 
-              "format": "time_series", 
-              "intervalFactor": 2, 
-              "legendFormat": "{{ceph_daemon}}", 
-              "refId": "A", 
-              "step": 60, 
-              "textEditor": true
-            }
-          ], 
-          "title": "Disks Near Full", 
-          "transform": "timeseries_aggregations", 
-          "type": "table"
-        }, 
-        {
-          "columns": [
-            {
-              "text": "Current", 
-              "value": "current"
-            }
-          ], 
-          "datasource": null, 
-          "fontSize": "100%", 
-          "gridPos": {
-            "h": 7, 
-            "w": 6, 
-            "x": 2, 
-            "y": 22
-          }, 
-          "hideTimeOverride": true, 
-          "id": 15, 
-          "links": [], 
-          "minSpan": 2, 
-          "pageSize": 100, 
-          "scroll": true, 
-          "showHeader": true, 
-          "sort": {
-            "col": 1, 
-            "desc": false
-          }, 
-          "styles": [
-            {
-              "alias": "OSD ID", 
-              "colorMode": null, 
-              "colors": [
-                "rgba(245, 54, 54, 0.9)", 
-                "rgba(237, 129, 40, 0.89)", 
-                "rgba(50, 172, 45, 0.97)"
-              ], 
-              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
-              "decimals": 0, 
-              "pattern": "_id", 
-              "thresholds": [], 
-              "type": "number", 
-              "unit": "none"
-            }, 
-            {
-              "alias": "Hostname", 
-              "colorMode": null, 
-              "colors": [
-                "rgba(245, 54, 54, 0.9)", 
-                "rgba(237, 129, 40, 0.89)", 
-                "rgba(50, 172, 45, 0.97)"
-              ], 
-              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
-              "decimals": 2, 
-              "pattern": "osd_host", 
-              "thresholds": [], 
-              "type": "string", 
-              "unit": "short"
-            }, 
-            {
-              "alias": "Device", 
-              "colorMode": null, 
-              "colors": [
-                "rgba(245, 54, 54, 0.9)", 
-                "rgba(237, 129, 40, 0.89)", 
-                "rgba(50, 172, 45, 0.97)"
-              ], 
-              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
-              "decimals": 2, 
-              "pattern": "device", 
-              "thresholds": [], 
-              "type": "string", 
-              "unit": "short"
-            }, 
-            {
-              "alias": "", 
-              "colorMode": null, 
-              "colors": [
-                "rgba(245, 54, 54, 0.9)", 
-                "rgba(237, 129, 40, 0.89)", 
-                "rgba(50, 172, 45, 0.97)"
-              ], 
-              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
-              "decimals": 2, 
-              "pattern": "/.*/", 
-              "thresholds": [], 
-              "type": "hidden", 
-              "unit": "short"
-            }
-          ], 
-          "targets": [
-            {
-              "expr": "label_replace(ceph_osd_up,\"_id\",\"$1\",\"ceph_daemon\",\"osd.(.*)\") * on(ceph_daemon) \n  group_left(osd_host,device) label_replace(ceph_disk_occupation,\"osd_host\",\"$1\",\"instance\",\"(.+?)\\\\.(.*)\") < 0.5", 
-              "format": "table", 
-              "hide": false, 
-              "instant": true, 
-              "intervalFactor": 2, 
-              "legendFormat": "", 
-              "refId": "B", 
-              "step": 2, 
-              "textEditor": true
-            }
-          ], 
-          "timeFrom": "1m", 
-          "timeShift": null, 
-          "title": "OSD's Down", 
-          "transform": "table", 
-          "type": "table"
-        }, 
-        {
-          "columns": [
-            {
-              "text": "Current", 
-              "value": "current"
-            }
-          ], 
-          "datasource": null, 
-          "fontSize": "100%", 
-          "gridPos": {
-            "h": 7, 
-            "w": 6, 
-            "x": 8, 
-            "y": 22
-          }, 
-          "hideTimeOverride": true, 
-          "id": 16, 
-          "links": [], 
-          "minSpan": 2, 
-          "pageSize": null, 
-          "scroll": true, 
-          "showHeader": true, 
-          "sort": {
-            "col": 1, 
-            "desc": false
-          }, 
-          "styles": [
-            {
-              "alias": "OSD ID", 
-              "colorMode": null, 
-              "colors": [
-                "rgba(245, 54, 54, 0.9)", 
-                "rgba(237, 129, 40, 0.89)", 
-                "rgba(50, 172, 45, 0.97)"
-              ], 
-              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
-              "decimals": 2, 
-              "pattern": "_id", 
-              "thresholds": [], 
-              "type": "number", 
-              "unit": "short"
-            }, 
-            {
-              "alias": "Hostname", 
-              "colorMode": null, 
-              "colors": [
-                "rgba(245, 54, 54, 0.9)", 
-                "rgba(237, 129, 40, 0.89)", 
-                "rgba(50, 172, 45, 0.97)"
-              ], 
-              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
-              "decimals": 2, 
-              "pattern": "osd_host", 
-              "thresholds": [], 
-              "type": "string", 
-              "unit": "short"
-            }, 
-            {
-              "alias": "Device", 
-              "colorMode": null, 
-              "colors": [
-                "rgba(245, 54, 54, 0.9)", 
-                "rgba(237, 129, 40, 0.89)", 
-                "rgba(50, 172, 45, 0.97)"
-              ], 
-              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
-              "decimals": 2, 
-              "pattern": "device", 
-              "thresholds": [], 
-              "type": "number", 
-              "unit": "short"
-            }, 
-            {
-              "alias": "", 
-              "colorMode": null, 
-              "colors": [
-                "rgba(245, 54, 54, 0.9)", 
-                "rgba(237, 129, 40, 0.89)", 
-                "rgba(50, 172, 45, 0.97)"
-              ], 
-              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
-              "decimals": 2, 
-              "pattern": "/.*/", 
-              "thresholds": [], 
-              "type": "hidden", 
-              "unit": "short"
-            }
-          ], 
-          "targets": [
-            {
-              "expr": "label_replace(ceph_osd_in,\"_id\",\"$1\",\"ceph_daemon\",\"osd.(.*)\") * on(ceph_daemon) \n  group_left(osd_host,device) label_replace(ceph_disk_occupation,\"osd_host\",\"$1\",\"instance\",\"(.+?)\\\\.(.*)\") < 0.5", 
-              "format": "table", 
-              "hide": false, 
-              "instant": true, 
-              "intervalFactor": 1, 
-              "refId": "B"
-            }
-          ], 
-          "timeFrom": "5m", 
-          "timeShift": null, 
-          "title": "OSDs Out", 
-          "transform": "table", 
-          "type": "table"
-        }, 
         {
           "columns": [
             {
@@ -1627,8 +1328,8 @@
           "gridPos": {
             "h": 7, 
             "w": 5, 
-            "x": 14, 
-            "y": 22
+            "x": 0, 
+            "y": 13
           }, 
           "id": 18, 
           "links": [], 
@@ -1773,8 +1474,8 @@
           "gridPos": {
             "h": 7, 
             "w": 5, 
-            "x": 19, 
-            "y": 22
+            "x": 5, 
+            "y": 13
           }, 
           "id": 20, 
           "links": [], 
@@ -1873,6 +1574,435 @@
           "title": "PG Summary", 
           "transform": "timeseries_aggregations", 
           "type": "table"
+        }
+      ], 
+      "title": "RADOS Information", 
+      "type": "row"
+    }, 
+    {
+      "collapsed": true, 
+      "gridPos": {
+        "h": 1, 
+        "w": 24, 
+        "x": 0, 
+        "y": 13
+      }, 
+      "id": 24, 
+      "panels": [
+        {
+          "columns": [
+            {
+              "text": "Current", 
+              "value": "current"
+            }
+          ], 
+          "datasource": null, 
+          "fontSize": "100%", 
+          "gridPos": {
+            "h": 7, 
+            "w": 3, 
+            "x": 0, 
+            "y": 14
+          }, 
+          "id": 14, 
+          "links": [], 
+          "minSpan": 2, 
+          "pageSize": null, 
+          "scroll": true, 
+          "showHeader": true, 
+          "sort": {
+            "col": 0, 
+            "desc": true
+          }, 
+          "styles": [
+            {
+              "alias": "Time", 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "pattern": "Time", 
+              "type": "date"
+            }, 
+            {
+              "alias": "% Full", 
+              "colorMode": null, 
+              "colors": [
+                "rgba(245, 54, 54, 0.9)", 
+                "rgba(237, 129, 40, 0.89)", 
+                "rgba(50, 172, 45, 0.97)"
+              ], 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "decimals": 0, 
+              "pattern": "Current", 
+              "thresholds": [], 
+              "type": "hidden", 
+              "unit": "none"
+            }, 
+            {
+              "alias": "Host.OSD Id", 
+              "colorMode": null, 
+              "colors": [
+                "rgba(245, 54, 54, 0.9)", 
+                "rgba(237, 129, 40, 0.89)", 
+                "rgba(50, 172, 45, 0.97)"
+              ], 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "decimals": 2, 
+              "pattern": "Metric", 
+              "thresholds": [], 
+              "type": "number", 
+              "unit": "short"
+            }, 
+            {
+              "alias": "", 
+              "colorMode": null, 
+              "colors": [
+                "rgba(245, 54, 54, 0.9)", 
+                "rgba(237, 129, 40, 0.89)", 
+                "rgba(50, 172, 45, 0.97)"
+              ], 
+              "decimals": 2, 
+              "pattern": "/.*/", 
+              "thresholds": [], 
+              "type": "number", 
+              "unit": "short"
+            }
+          ], 
+          "targets": [
+            {
+              "expr": "ceph_osd_stat_bytes_used / ceph_osd_stat_bytes * 100 > $disk_full_threshold", 
+              "format": "time_series", 
+              "intervalFactor": 2, 
+              "legendFormat": "{{ceph_daemon}}", 
+              "refId": "A", 
+              "step": 60, 
+              "textEditor": true
+            }
+          ], 
+          "title": "Disks Near Full", 
+          "transform": "timeseries_aggregations", 
+          "type": "table"
+        }, 
+        {
+          "columns": [
+            {
+              "text": "Current", 
+              "value": "current"
+            }
+          ], 
+          "datasource": null, 
+          "fontSize": "100%", 
+          "gridPos": {
+            "h": 7, 
+            "w": 6, 
+            "x": 3, 
+            "y": 14
+          }, 
+          "hideTimeOverride": true, 
+          "id": 15, 
+          "links": [], 
+          "minSpan": 2, 
+          "pageSize": 100, 
+          "scroll": true, 
+          "showHeader": true, 
+          "sort": {
+            "col": 1, 
+            "desc": false
+          }, 
+          "styles": [
+            {
+              "alias": "OSD ID", 
+              "colorMode": null, 
+              "colors": [
+                "rgba(245, 54, 54, 0.9)", 
+                "rgba(237, 129, 40, 0.89)", 
+                "rgba(50, 172, 45, 0.97)"
+              ], 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "decimals": 0, 
+              "pattern": "_id", 
+              "thresholds": [], 
+              "type": "number", 
+              "unit": "none"
+            }, 
+            {
+              "alias": "Hostname", 
+              "colorMode": null, 
+              "colors": [
+                "rgba(245, 54, 54, 0.9)", 
+                "rgba(237, 129, 40, 0.89)", 
+                "rgba(50, 172, 45, 0.97)"
+              ], 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "decimals": 2, 
+              "pattern": "osd_host", 
+              "thresholds": [], 
+              "type": "string", 
+              "unit": "short"
+            }, 
+            {
+              "alias": "Device", 
+              "colorMode": null, 
+              "colors": [
+                "rgba(245, 54, 54, 0.9)", 
+                "rgba(237, 129, 40, 0.89)", 
+                "rgba(50, 172, 45, 0.97)"
+              ], 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "decimals": 2, 
+              "pattern": "device", 
+              "thresholds": [], 
+              "type": "string", 
+              "unit": "short"
+            }, 
+            {
+              "alias": "", 
+              "colorMode": null, 
+              "colors": [
+                "rgba(245, 54, 54, 0.9)", 
+                "rgba(237, 129, 40, 0.89)", 
+                "rgba(50, 172, 45, 0.97)"
+              ], 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "decimals": 2, 
+              "pattern": "/.*/", 
+              "thresholds": [], 
+              "type": "hidden", 
+              "unit": "short"
+            }
+          ], 
+          "targets": [
+            {
+              "expr": "label_replace(ceph_osd_up,\"_id\",\"$1\",\"ceph_daemon\",\"osd.(.*)\") * on(ceph_daemon) \n  group_left(osd_host,device) label_replace(ceph_disk_occupation,\"osd_host\",\"$1\",\"instance\",\"(.+?)\\\\.(.*)\") < 0.5", 
+              "format": "table", 
+              "hide": false, 
+              "instant": true, 
+              "intervalFactor": 2, 
+              "legendFormat": "", 
+              "refId": "B", 
+              "step": 2, 
+              "textEditor": true
+            }
+          ], 
+          "timeFrom": "1m", 
+          "timeShift": null, 
+          "title": "OSD's Down", 
+          "transform": "table", 
+          "type": "table"
+        }, 
+        {
+          "columns": [
+            {
+              "text": "Current", 
+              "value": "current"
+            }
+          ], 
+          "datasource": null, 
+          "fontSize": "100%", 
+          "gridPos": {
+            "h": 7, 
+            "w": 6, 
+            "x": 9, 
+            "y": 14
+          }, 
+          "hideTimeOverride": true, 
+          "id": 16, 
+          "links": [], 
+          "minSpan": 2, 
+          "pageSize": null, 
+          "scroll": true, 
+          "showHeader": true, 
+          "sort": {
+            "col": 1, 
+            "desc": false
+          }, 
+          "styles": [
+            {
+              "alias": "OSD ID", 
+              "colorMode": null, 
+              "colors": [
+                "rgba(245, 54, 54, 0.9)", 
+                "rgba(237, 129, 40, 0.89)", 
+                "rgba(50, 172, 45, 0.97)"
+              ], 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "decimals": 2, 
+              "pattern": "_id", 
+              "thresholds": [], 
+              "type": "number", 
+              "unit": "short"
+            }, 
+            {
+              "alias": "Hostname", 
+              "colorMode": null, 
+              "colors": [
+                "rgba(245, 54, 54, 0.9)", 
+                "rgba(237, 129, 40, 0.89)", 
+                "rgba(50, 172, 45, 0.97)"
+              ], 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "decimals": 2, 
+              "pattern": "osd_host", 
+              "thresholds": [], 
+              "type": "string", 
+              "unit": "short"
+            }, 
+            {
+              "alias": "Device", 
+              "colorMode": null, 
+              "colors": [
+                "rgba(245, 54, 54, 0.9)", 
+                "rgba(237, 129, 40, 0.89)", 
+                "rgba(50, 172, 45, 0.97)"
+              ], 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "decimals": 2, 
+              "pattern": "device", 
+              "thresholds": [], 
+              "type": "number", 
+              "unit": "short"
+            }, 
+            {
+              "alias": "", 
+              "colorMode": null, 
+              "colors": [
+                "rgba(245, 54, 54, 0.9)", 
+                "rgba(237, 129, 40, 0.89)", 
+                "rgba(50, 172, 45, 0.97)"
+              ], 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "decimals": 2, 
+              "pattern": "/.*/", 
+              "thresholds": [], 
+              "type": "hidden", 
+              "unit": "short"
+            }
+          ], 
+          "targets": [
+            {
+              "expr": "label_replace(ceph_osd_in,\"_id\",\"$1\",\"ceph_daemon\",\"osd.(.*)\") * on(ceph_daemon) \n  group_left(osd_host,device) label_replace(ceph_disk_occupation,\"osd_host\",\"$1\",\"instance\",\"(.+?)\\\\.(.*)\") < 0.5", 
+              "format": "table", 
+              "hide": false, 
+              "instant": true, 
+              "intervalFactor": 1, 
+              "refId": "B"
+            }
+          ], 
+          "timeFrom": "5m", 
+          "timeShift": null, 
+          "title": "OSDs Out", 
+          "transform": "table", 
+          "type": "table"
+        }, 
+        {
+          "columns": [], 
+          "datasource": null, 
+          "description": "This table shows all OSDs with > 275 PG's", 
+          "fontSize": "100%", 
+          "gridPos": {
+            "h": 7, 
+            "w": 9, 
+            "x": 15, 
+            "y": 14
+          }, 
+          "id": 68, 
+          "links": [], 
+          "pageSize": null, 
+          "scroll": true, 
+          "showHeader": true, 
+          "sort": {
+            "col": 5, 
+            "desc": true
+          }, 
+          "styles": [
+            {
+              "alias": "OSD", 
+              "colorMode": null, 
+              "colors": [
+                "rgba(245, 54, 54, 0.9)", 
+                "rgba(237, 129, 40, 0.89)", 
+                "rgba(50, 172, 45, 0.97)"
+              ], 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "decimals": 2, 
+              "pattern": "ceph_daemon", 
+              "thresholds": [], 
+              "type": "string", 
+              "unit": "short"
+            }, 
+            {
+              "alias": "Device", 
+              "colorMode": null, 
+              "colors": [
+                "rgba(245, 54, 54, 0.9)", 
+                "rgba(237, 129, 40, 0.89)", 
+                "rgba(50, 172, 45, 0.97)"
+              ], 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "decimals": 2, 
+              "pattern": "device", 
+              "thresholds": [], 
+              "type": "string", 
+              "unit": "short"
+            }, 
+            {
+              "alias": "Host", 
+              "colorMode": null, 
+              "colors": [
+                "rgba(245, 54, 54, 0.9)", 
+                "rgba(237, 129, 40, 0.89)", 
+                "rgba(50, 172, 45, 0.97)"
+              ], 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "decimals": 2, 
+              "pattern": "instance", 
+              "thresholds": [], 
+              "type": "number", 
+              "unit": "short"
+            }, 
+            {
+              "alias": "# PGs", 
+              "colorMode": "row", 
+              "colors": [
+                "rgba(50, 172, 45, 0.97)", 
+                "rgba(237, 129, 40, 0.89)", 
+                "rgba(245, 54, 54, 0.9)"
+              ], 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "decimals": 0, 
+              "pattern": "Value", 
+              "thresholds": [
+                "200", 
+                "250"
+              ], 
+              "type": "number", 
+              "unit": "none"
+            }, 
+            {
+              "alias": "", 
+              "colorMode": null, 
+              "colors": [
+                "rgba(245, 54, 54, 0.9)", 
+                "rgba(237, 129, 40, 0.89)", 
+                "rgba(50, 172, 45, 0.97)"
+              ], 
+              "decimals": 2, 
+              "pattern": "/.*/", 
+              "thresholds": [], 
+              "type": "hidden", 
+              "unit": "short"
+            }
+          ], 
+          "targets": [
+            {
+              "expr": "(ceph_osd_numpg > 275) * on(ceph_daemon) group_left(instance,device) ceph_disk_occupation", 
+              "format": "table", 
+              "instant": true, 
+              "intervalFactor": 1, 
+              "refId": "A"
+            }
+          ], 
+          "title": "OSDs with High PG Counts", 
+          "transform": "table", 
+          "type": "table"
         }, 
         {
           "content": "", 
@@ -1880,7 +2010,7 @@
             "h": 7, 
             "w": 2, 
             "x": 6, 
-            "y": 29
+            "y": 21
           }, 
           "id": 17, 
           "links": [], 
@@ -1896,7 +2026,7 @@
             "h": 7, 
             "w": 2, 
             "x": 16, 
-            "y": 29
+            "y": 21
           }, 
           "id": 19, 
           "links": [], 
@@ -1923,7 +2053,7 @@
       {
         "allValue": null, 
         "current": {}, 
-        "datasource": null, 
+        "datasource": "${DS_LOCAL}", 
         "hide": 2, 
         "includeAll": false, 
         "label": null, 
@@ -1965,7 +2095,7 @@
       {
         "allValue": null, 
         "current": {}, 
-        "datasource": null, 
+        "datasource": "${DS_LOCAL}", 
         "hide": 2, 
         "includeAll": true, 
         "label": null, 
@@ -2017,5 +2147,5 @@
   "timezone": "browser", 
   "title": "Ceph Health", 
   "uid": "000000009", 
-  "version": 34
+  "version": 37
 }
