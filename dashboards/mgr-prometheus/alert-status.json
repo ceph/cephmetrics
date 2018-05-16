@@ -42,6 +42,7 @@
   "gnetId": null, 
   "graphTooltip": 0, 
   "id": null, 
+  "iteration": 1526437197732, 
   "links": [], 
   "panels": [
     {
@@ -1543,6 +1544,133 @@
           "show": false
         }
       ]
+    }, 
+    {
+      "alert": {
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                0
+              ], 
+              "type": "gt"
+            }, 
+            "operator": {
+              "type": "and"
+            }, 
+            "query": {
+              "params": [
+                "A", 
+                "1m", 
+                "now"
+              ]
+            }, 
+            "reducer": {
+              "params": [], 
+              "type": "last"
+            }, 
+            "type": "query"
+          }
+        ], 
+        "executionErrorState": "alerting", 
+        "frequency": "60s", 
+        "handler": 1, 
+        "name": "OSDs with High PG Count", 
+        "noDataState": "ok", 
+        "notifications": [
+          {
+            "id": 1
+          }
+        ]
+      }, 
+      "aliasColors": {}, 
+      "bars": true, 
+      "dashLength": 10, 
+      "dashes": false, 
+      "datasource": null, 
+      "description": "Shows the number of PGs that have a pg count > 275.", 
+      "fill": 1, 
+      "gridPos": {
+        "h": 7, 
+        "w": 4, 
+        "x": 20, 
+        "y": 16
+      }, 
+      "id": 16, 
+      "legend": {
+        "avg": false, 
+        "current": false, 
+        "max": false, 
+        "min": false, 
+        "show": true, 
+        "total": false, 
+        "values": false
+      }, 
+      "lines": false, 
+      "linewidth": 1, 
+      "links": [], 
+      "nullPointMode": "null", 
+      "percentage": false, 
+      "pointradius": 5, 
+      "points": false, 
+      "renderer": "flot", 
+      "seriesOverrides": [], 
+      "spaceLength": 10, 
+      "stack": false, 
+      "steppedLine": false, 
+      "targets": [
+        {
+          "expr": "count(ceph_osd_numpg > 275)", 
+          "format": "time_series", 
+          "instant": true, 
+          "intervalFactor": 1, 
+          "refId": "A"
+        }
+      ], 
+      "thresholds": [
+        {
+          "colorMode": "critical", 
+          "fill": true, 
+          "line": true, 
+          "op": "gt", 
+          "value": 0
+        }
+      ], 
+      "timeFrom": null, 
+      "timeShift": null, 
+      "title": "OSDs with High PG Count", 
+      "tooltip": {
+        "shared": true, 
+        "sort": 0, 
+        "value_type": "individual"
+      }, 
+      "type": "graph", 
+      "xaxis": {
+        "buckets": null, 
+        "mode": "time", 
+        "name": null, 
+        "show": true, 
+        "values": []
+      }, 
+      "yaxes": [
+        {
+          "decimals": 0, 
+          "format": "short", 
+          "label": "#NUM OSDs with high PG Count", 
+          "logBase": 1, 
+          "max": null, 
+          "min": "0", 
+          "show": true
+        }, 
+        {
+          "format": "short", 
+          "label": null, 
+          "logBase": 1, 
+          "max": null, 
+          "min": null, 
+          "show": false
+        }
+      ]
     }
   ], 
   "refresh": "15s", 
@@ -1585,5 +1713,5 @@
   "timezone": "browser", 
   "title": "Alert Status", 
   "uid": "000000013", 
-  "version": 13
+  "version": 16
 }
