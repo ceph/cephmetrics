@@ -1972,6 +1972,207 @@
               "show": false
             }
           ]
+        }, 
+        {
+          "aliasColors": {}, 
+          "bars": true, 
+          "dashLength": 10, 
+          "dashes": false, 
+          "datasource": null, 
+          "description": "Each bar indicates the number of OSD's that have a PG count in a specific range as shown on the x axis.", 
+          "fill": 1, 
+          "gridPos": {
+            "h": 8, 
+            "w": 12, 
+            "x": 0, 
+            "y": 16
+          }, 
+          "id": 37, 
+          "legend": {
+            "alignAsTable": false, 
+            "avg": false, 
+            "current": false, 
+            "hideEmpty": false, 
+            "hideZero": false, 
+            "max": false, 
+            "min": false, 
+            "rightSide": false, 
+            "show": false, 
+            "total": false, 
+            "values": false
+          }, 
+          "lines": false, 
+          "linewidth": 1, 
+          "links": [], 
+          "nullPointMode": "null", 
+          "percentage": false, 
+          "pointradius": 5, 
+          "points": false, 
+          "renderer": "flot", 
+          "seriesOverrides": [], 
+          "spaceLength": 10, 
+          "stack": false, 
+          "steppedLine": false, 
+          "targets": [
+            {
+              "expr": "ceph_osd_numpg\n", 
+              "format": "time_series", 
+              "instant": true, 
+              "intervalFactor": 1, 
+              "legendFormat": "PGs per OSD", 
+              "refId": "A"
+            }
+          ], 
+          "thresholds": [], 
+          "timeFrom": null, 
+          "timeShift": null, 
+          "title": "Distribution of PGs per OSD", 
+          "tooltip": {
+            "shared": false, 
+            "sort": 0, 
+            "value_type": "individual"
+          }, 
+          "type": "graph", 
+          "xaxis": {
+            "buckets": 20, 
+            "mode": "histogram", 
+            "name": null, 
+            "show": true, 
+            "values": [
+              "total"
+            ]
+          }, 
+          "yaxes": [
+            {
+              "decimals": 0, 
+              "format": "short", 
+              "label": "# of OSDs", 
+              "logBase": 1, 
+              "max": null, 
+              "min": "0", 
+              "show": true
+            }, 
+            {
+              "format": "short", 
+              "label": null, 
+              "logBase": 1, 
+              "max": null, 
+              "min": null, 
+              "show": false
+            }
+          ]
+        }, 
+        {
+          "columns": [], 
+          "datasource": null, 
+          "description": "This table shows all OSDs sorted by their PG Count. The PG count is color coded.", 
+          "fontSize": "100%", 
+          "gridPos": {
+            "h": 8, 
+            "w": 12, 
+            "x": 12, 
+            "y": 16
+          }, 
+          "id": 35, 
+          "links": [], 
+          "pageSize": null, 
+          "scroll": true, 
+          "showHeader": true, 
+          "sort": {
+            "col": 5, 
+            "desc": true
+          }, 
+          "styles": [
+            {
+              "alias": "OSD", 
+              "colorMode": null, 
+              "colors": [
+                "rgba(245, 54, 54, 0.9)", 
+                "rgba(237, 129, 40, 0.89)", 
+                "rgba(50, 172, 45, 0.97)"
+              ], 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "decimals": 2, 
+              "pattern": "ceph_daemon", 
+              "thresholds": [], 
+              "type": "string", 
+              "unit": "short"
+            }, 
+            {
+              "alias": "Device", 
+              "colorMode": null, 
+              "colors": [
+                "rgba(245, 54, 54, 0.9)", 
+                "rgba(237, 129, 40, 0.89)", 
+                "rgba(50, 172, 45, 0.97)"
+              ], 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "decimals": 2, 
+              "pattern": "device", 
+              "thresholds": [], 
+              "type": "string", 
+              "unit": "short"
+            }, 
+            {
+              "alias": "Host", 
+              "colorMode": null, 
+              "colors": [
+                "rgba(245, 54, 54, 0.9)", 
+                "rgba(237, 129, 40, 0.89)", 
+                "rgba(50, 172, 45, 0.97)"
+              ], 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "decimals": 2, 
+              "pattern": "instance", 
+              "thresholds": [], 
+              "type": "number", 
+              "unit": "short"
+            }, 
+            {
+              "alias": "# PGs", 
+              "colorMode": "value", 
+              "colors": [
+                "rgba(50, 172, 45, 0.97)", 
+                "rgba(237, 129, 40, 0.89)", 
+                "rgba(245, 54, 54, 0.9)"
+              ], 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "decimals": 0, 
+              "pattern": "Value", 
+              "thresholds": [
+                "200", 
+                "250"
+              ], 
+              "type": "number", 
+              "unit": "none"
+            }, 
+            {
+              "alias": "", 
+              "colorMode": null, 
+              "colors": [
+                "rgba(245, 54, 54, 0.9)", 
+                "rgba(237, 129, 40, 0.89)", 
+                "rgba(50, 172, 45, 0.97)"
+              ], 
+              "decimals": 2, 
+              "pattern": "/.*/", 
+              "thresholds": [], 
+              "type": "hidden", 
+              "unit": "short"
+            }
+          ], 
+          "targets": [
+            {
+              "expr": "ceph_osd_numpg * on(ceph_daemon) group_left(instance,device) ceph_disk_occupation", 
+              "format": "table", 
+              "instant": true, 
+              "intervalFactor": 1, 
+              "refId": "A"
+            }
+          ], 
+          "title": "OSDs by PG Counts", 
+          "transform": "table", 
+          "type": "table"
         }
       ], 
       "repeat": null, 
@@ -2399,5 +2600,5 @@
   "timezone": "browser", 
   "title": "Ceph Cluster", 
   "uid": "000000005", 
-  "version": 10
+  "version": 11
 }
