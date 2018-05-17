@@ -16,7 +16,14 @@ scrape_configs:
 {% endfor %}
   - job_name: 'node'
     static_configs:
-{% for host in groups['all'] %}
+{% for host in (groups['all'] | difference(groups['ceph-grafana'])) %}
+      - targets: ['{{ host }}:9100']
+        labels:
+          instance: "{{ hostvars[host]['ansible_nodename'] }}"
+{% endfor %}
+  - job_name: 'cephmetrics'
+    static_configs:
+{% for host in groups['ceph-grafana'] %}
       - targets: ['{{ host }}:9100']
         labels:
           instance: "{{ hostvars[host]['ansible_nodename'] }}"
