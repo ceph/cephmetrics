@@ -13,17 +13,15 @@
     createhome: false
     system: true
 
-- name: Create /etc/grafana
+- name: Create /etc/grafana and /var/lib/grafana
   file:
-    path: /etc/grafana
+    path: "{{ item }}"
     state: directory
-    owner: root
-
-- name: Create /var/lib/grafana
-  file:
-    path: /var/lib/grafana
-    state: directory
-    owner: root
+    owner: "{{ grafana.uid }}"
+    recurse: true
+  with_items:
+    - /etc/grafana
+    - /var/lib/grafana
 
 - name: Create docker container
   docker_container:
