@@ -11,7 +11,7 @@ defaults:
     # container_memory is in GB
     container_memory: 4
     # version currently only applies to containers
-    version: 5.0.4
+    version: 5.1.3
     datasource: Local
     # You need to change these in the web UI on an already deployed machine, first
     # New deployments work fine
