@@ -62,7 +62,7 @@
   "gnetId": null, 
   "graphTooltip": 0, 
   "id": null, 
-  "iteration": 1526262167932, 
+  "iteration": 1526962541471, 
   "links": [
     {
       "asDropdown": true, 
@@ -1565,6 +1565,7 @@
     }, 
     {
       "aliasColors": {
+        "Unknown": "#bf1b00", 
         "active + clean": "#01a701", 
         "collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.num_pg_active_clean": "#01a701", 
         "collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.num_pg_peering": "#ffa500", 
@@ -1613,23 +1614,12 @@
       "strokeWidth": "", 
       "targets": [
         {
-          "expr": "ceph_pg_clean", 
-          "format": "time_series", 
-          "hide": true, 
-          "instant": false, 
-          "intervalFactor": 1, 
-          "legendFormat": "clean", 
-          "refId": "A", 
-          "target": "alias(keepLastValue(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_pg_active_clean), \"max\")),\"active + clean\")", 
-          "textEditor": true
-        }, 
-        {
           "expr": "ceph_pg_active", 
           "format": "time_series", 
           "hide": false, 
-          "instant": false, 
+          "instant": true, 
           "intervalFactor": 1, 
-          "legendFormat": "active", 
+          "legendFormat": "Active", 
           "refId": "B", 
           "target": "alias(keepLastValue(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_pg_active), \"max\")),\"active\")", 
           "textEditor": true
@@ -1638,9 +1628,9 @@
           "expr": "ceph_pg_degraded", 
           "format": "time_series", 
           "hide": false, 
-          "instant": false, 
+          "instant": true, 
           "intervalFactor": 1, 
-          "legendFormat": "degraded", 
+          "legendFormat": "Degraded", 
           "refId": "C", 
           "target": "alias(diffSeries(#B,#A),\"active + degraded\")", 
           "targetFull": "alias(diffSeries(alias(keepLastValue(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_pg_active), \"max\")),\"active\"),alias(keepLastValue(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_pg_active_clean), \"max\")),\"active + clean\")),\"active + degraded\")", 
@@ -1650,12 +1640,20 @@
           "expr": "ceph_pg_peering", 
           "format": "time_series", 
           "hide": false, 
-          "instant": false, 
+          "instant": true, 
           "intervalFactor": 1, 
-          "legendFormat": "peering", 
+          "legendFormat": "Peering", 
           "refId": "D", 
           "target": "alias(consolidateBy(maxSeries(collectd.$mon_servers.$domain.cephmetrics.gauge.$cluster_name.mon.num_pg_peering), \"max\"),\"peering\")", 
           "textEditor": true
+        }, 
+        {
+          "expr": "ceph_pg_unknown", 
+          "format": "time_series", 
+          "instant": true, 
+          "intervalFactor": 1, 
+          "legendFormat": "Unknown", 
+          "refId": "E"
         }
       ], 
       "timeFrom": "1m", 
@@ -3242,7 +3240,7 @@
       {
         "allValue": "", 
         "current": {}, 
-        "datasource": null, 
+        "datasource": "${DS_LOCAL}", 
         "hide": 2, 
         "includeAll": true, 
         "label": "OSD Host", 
@@ -3262,7 +3260,7 @@
       {
         "allValue": "", 
         "current": {}, 
-        "datasource": null, 
+        "datasource": "${DS_LOCAL}", 
         "hide": 2, 
         "includeAll": true, 
         "label": "OSD Host", 
@@ -3314,5 +3312,5 @@
   "timezone": "browser", 
   "title": "Ceph - At A Glance", 
   "uid": "000000011", 
-  "version": 39
+  "version": 42
 }
