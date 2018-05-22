@@ -48,7 +48,7 @@
   "gnetId": null, 
   "graphTooltip": 0, 
   "id": null, 
-  "iteration": 1526265098261, 
+  "iteration": 1526509711107, 
   "links": [
     {
       "asDropdown": true, 
@@ -755,7 +755,7 @@
       "fill": 3, 
       "gridPos": {
         "h": 7, 
-        "w": 12, 
+        "w": 8, 
         "x": 0, 
         "y": 24
       }, 
@@ -832,6 +832,123 @@
       ]
     }, 
     {
+      "aliasColors": {
+        "Available": "#508642", 
+        "Free": "#508642", 
+        "Total": "#bf1b00", 
+        "Used": "#bf1b00", 
+        "total": "#bf1b00", 
+        "used": "#0a50a1"
+      }, 
+      "bars": false, 
+      "dashLength": 10, 
+      "dashes": false, 
+      "datasource": null, 
+      "fill": 1, 
+      "gridPos": {
+        "h": 7, 
+        "w": 8, 
+        "x": 8, 
+        "y": 24
+      }, 
+      "id": 14, 
+      "legend": {
+        "avg": false, 
+        "current": false, 
+        "max": false, 
+        "min": false, 
+        "show": true, 
+        "total": false, 
+        "values": false
+      }, 
+      "lines": true, 
+      "linewidth": 1, 
+      "links": [], 
+      "nullPointMode": "null", 
+      "percentage": false, 
+      "pointradius": 5, 
+      "points": false, 
+      "renderer": "flot", 
+      "seriesOverrides": [
+        {
+          "alias": "total", 
+          "color": "#bf1b00", 
+          "fill": 0, 
+          "linewidth": 2, 
+          "stack": false
+        }
+      ], 
+      "spaceLength": 10, 
+      "stack": true, 
+      "steppedLine": false, 
+      "targets": [
+        {
+          "expr": "node_memory_MemTotal{instance=~\"[[osd_servers]].*\"} - (\n  node_memory_MemFree{instance=~\"[[osd_servers]].*\"}  + \n  node_memory_Cached{instance=~\"[[osd_servers]].*\"} + \n  node_memory_Buffers{instance=~\"[[osd_servers]].*\"} +\n  node_memory_Slab{instance=~\"[[osd_servers]].*\"}\n  )\n  \n", 
+          "format": "time_series", 
+          "intervalFactor": 1, 
+          "legendFormat": "used", 
+          "refId": "D"
+        }, 
+        {
+          "expr": "node_memory_MemFree{instance=~\"[[osd_servers]].*\"} ", 
+          "format": "time_series", 
+          "intervalFactor": 1, 
+          "legendFormat": "Free", 
+          "refId": "A"
+        }, 
+        {
+          "expr": "node_memory_Cached{instance=~\"[[osd_servers]].*\"} + \nnode_memory_Buffers{instance=~\"[[osd_servers]].*\"} +\nnode_memory_Slab{instance=~\"[[osd_servers]].*\"} \n", 
+          "format": "time_series", 
+          "intervalFactor": 1, 
+          "legendFormat": "buffers/cache", 
+          "refId": "C"
+        }, 
+        {
+          "expr": "node_memory_MemTotal{instance=~\"[[osd_servers]].*\"}", 
+          "format": "time_series", 
+          "hide": false, 
+          "intervalFactor": 1, 
+          "legendFormat": "total", 
+          "refId": "B"
+        }
+      ], 
+      "thresholds": [], 
+      "timeFrom": null, 
+      "timeShift": null, 
+      "title": "RAM Usage", 
+      "tooltip": {
+        "shared": true, 
+        "sort": 0, 
+        "value_type": "individual"
+      }, 
+      "type": "graph", 
+      "xaxis": {
+        "buckets": null, 
+        "mode": "time", 
+        "name": null, 
+        "show": true, 
+        "values": []
+      }, 
+      "yaxes": [
+        {
+          "format": "bytes", 
+          "label": null, 
+          "logBase": 1, 
+          "max": null, 
+          "min": "0", 
+          "show": true
+        }, 
+        {
+          "format": "short", 
+          "label": null, 
+          "logBase": 1, 
+          "max": null, 
+          "min": null, 
+          "show": false
+        }
+      ]
+    }, 
+    {
       "aliasColors": {}, 
       "bars": false, 
       "dashLength": 10, 
@@ -840,8 +957,8 @@
       "fill": 1, 
       "gridPos": {
         "h": 7, 
-        "w": 12, 
-        "x": 12, 
+        "w": 8, 
+        "x": 16, 
         "y": 24
       }, 
       "id": 10, 
@@ -1030,5 +1147,5 @@
   "timezone": "browser", 
   "title": "OSD Node Detail", 
   "uid": "000000004", 
-  "version": 13
+  "version": 14
 }
