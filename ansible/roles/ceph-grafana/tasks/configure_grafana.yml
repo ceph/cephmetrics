@@ -23,7 +23,7 @@
     path: /etc/grafana
     state: directory
     # This is the UID used by the grafana/grafana container
-    owner: 104
+    owner: "{{ grafana.uid }}"
     recurse: true
   when:
     - containerized
