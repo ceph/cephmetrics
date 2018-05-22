@@ -9,6 +9,9 @@ require {
 	type ceph_var_lib_t;
 	type fixed_disk_device_t;
 	type tmp_t;
+	type configfs_t;
+	type mount_exec_t;
+	type rpm_exec_t;
 	class unix_stream_socket connectto;
 	class dir read;
 	class file getattr;
@@ -22,6 +25,9 @@ require {
 
 #============= collectd_t ==============
 
+allow collectd_t configfs_t:dir search;
+allow collectd_t mount_exec_t:file execute;
+allow collectd_t rpm_exec_t:file getattr;
 allow collectd_t bin_t:file { execute execute_no_trans };
 #!!!! This avc can be allowed using the boolean 'daemons_enable_cluster_mode'
 allow collectd_t ceph_t:unix_stream_socket connectto;
