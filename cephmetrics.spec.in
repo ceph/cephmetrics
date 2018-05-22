@@ -25,6 +25,7 @@ Requires(postun): policycoreutils
 Requires:	PyYAML
 Requires:	graphite-web
 Requires:	python-carbon
+Requires:	python-requests
 Requires:       cephmetrics-grafana-plugins = %{version}-%{release}
 
 %description
