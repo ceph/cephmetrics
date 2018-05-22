@@ -17,18 +17,6 @@
       "id": "singlestat", 
       "name": "Singlestat", 
       "version": "5.0.0"
-    }, 
-    {
-      "type": "panel", 
-      "id": "table", 
-      "name": "Table", 
-      "version": "5.0.0"
-    }, 
-    {
-      "type": "panel", 
-      "id": "text", 
-      "name": "Text", 
-      "version": "5.0.0"
     }
   ], 
   "annotations": {
@@ -48,7 +36,7 @@
   "gnetId": null, 
   "graphTooltip": 0, 
   "id": null, 
-  "iteration": 1526456532165, 
+  "iteration": 1526964924155, 
   "links": [
     {
       "asDropdown": true, 
@@ -308,7 +296,7 @@
       "type": "row"
     }, 
     {
-      "collapsed": false, 
+      "collapsed": true, 
       "gridPos": {
         "h": 1, 
         "w": 24, 
@@ -316,994 +304,1206 @@
         "y": 4
       }, 
       "id": 23, 
-      "panels": [], 
+      "panels": [
+        {
+          "content": "<h2 style=\"text-align: center;\">MONs</h2>", 
+          "gridPos": {
+            "h": 5, 
+            "w": 2, 
+            "x": 0, 
+            "y": 5
+          }, 
+          "id": 6, 
+          "links": [], 
+          "minSpan": 2, 
+          "mode": "html", 
+          "title": "", 
+          "transparent": true, 
+          "type": "text"
+        }, 
+        {
+          "cacheTimeout": null, 
+          "colorBackground": true, 
+          "colorValue": false, 
+          "colors": [
+            "#d44a3a", 
+            "rgba(237, 129, 40, 0.89)", 
+            "#299c46"
+          ], 
+          "datasource": null, 
+          "format": "none", 
+          "gauge": {
+            "maxValue": 100, 
+            "minValue": 0, 
+            "show": false, 
+            "thresholdLabels": false, 
+            "thresholdMarkers": true
+          }, 
+          "gridPos": {
+            "h": 2, 
+            "w": 3, 
+            "x": 2, 
+            "y": 5
+          }, 
+          "id": 28, 
+          "interval": null, 
+          "links": [], 
+          "mappingType": 1, 
+          "mappingTypes": [
+            {
+              "name": "value to text", 
+              "value": 1
+            }, 
+            {
+              "name": "range to text", 
+              "value": 2
+            }
+          ], 
+          "maxDataPoints": 100, 
+          "nullPointMode": "connected", 
+          "nullText": null, 
+          "postfix": "", 
+          "postfixFontSize": "50%", 
+          "prefix": "", 
+          "prefixFontSize": "50%", 
+          "rangeMaps": [
+            {
+              "from": "null", 
+              "text": "N/A", 
+              "to": "null"
+            }
+          ], 
+          "repeat": "mon_servers", 
+          "repeatDirection": "v", 
+          "scopedVars": {
+            "mon_servers": {
+              "selected": false, 
+              "text": "mon.rhs-cli-04", 
+              "value": "mon.rhs-cli-04"
+            }
+          }, 
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)", 
+            "full": false, 
+            "lineColor": "rgb(31, 120, 193)", 
+            "show": false
+          }, 
+          "tableColumn": "", 
+          "targets": [
+            {
+              "expr": "label_replace(ceph_mon_quorum_status{ceph_daemon=~\"[[mon_servers]]\"},\"mon_host\",\"$2\",\"ceph_daemon\",\"(.*)_(.*)\")", 
+              "format": "time_series", 
+              "intervalFactor": 1, 
+              "legendFormat": "", 
+              "refId": "A"
+            }
+          ], 
+          "thresholds": "0.5,1", 
+          "title": "$mon_servers", 
+          "type": "singlestat", 
+          "valueFontSize": "50%", 
+          "valueMaps": [
+            {
+              "op": "=", 
+              "text": "N/A", 
+              "value": "null"
+            }, 
+            {
+              "op": "=", 
+              "text": "OK", 
+              "value": "1"
+            }, 
+            {
+              "op": "=", 
+              "text": "DOWN", 
+              "value": "0"
+            }
+          ], 
+          "valueName": "current"
+        }, 
+        {
+          "content": "<h2 style=\"text-align: center;\">Cluster Flags:</h2>", 
+          "description": "Show cluster flags that determine automatic maintenance and recovery operations", 
+          "gridPos": {
+            "h": 3, 
+            "w": 2, 
+            "x": 8, 
+            "y": 5
+          }, 
+          "id": 31, 
+          "links": [], 
+          "minSpan": 2, 
+          "mode": "html", 
+          "title": "", 
+          "transparent": true, 
+          "type": "text"
+        }, 
+        {
+          "cacheTimeout": null, 
+          "colorBackground": true, 
+          "colorValue": false, 
+          "colors": [
+            "rgba(50, 172, 45, 0.97)", 
+            "rgba(237, 129, 40, 0.89)", 
+            "rgba(245, 54, 54, 0.9)"
+          ], 
+          "datasource": null, 
+          "description": "Scrub activity takes place daily basis across the OSD's and performs object size and attribute checks. Scrub activity can be controlled with the \"ceph osd scrub\" command.", 
+          "format": "none", 
+          "gauge": {
+            "maxValue": 100, 
+            "minValue": 0, 
+            "show": false, 
+            "thresholdLabels": false, 
+            "thresholdMarkers": true
+          }, 
+          "gridPos": {
+            "h": 3, 
+            "w": 2, 
+            "x": 10, 
+            "y": 5
+          }, 
+          "height": "95", 
+          "hideTimeOverride": true, 
+          "id": 7, 
+          "interval": null, 
+          "links": [], 
+          "mappingType": 1, 
+          "mappingTypes": [
+            {
+              "name": "value to text", 
+              "value": 1
+            }, 
+            {
+              "name": "range to text", 
+              "value": 2
+            }
+          ], 
+          "maxDataPoints": "", 
+          "minSpan": 2, 
+          "nullPointMode": "connected", 
+          "nullText": null, 
+          "postfix": "", 
+          "postfixFontSize": "50%", 
+          "prefix": "", 
+          "prefixFontSize": "50%", 
+          "rangeMaps": [
+            {
+              "from": "null", 
+              "text": "N/A", 
+              "to": "null"
+            }
+          ], 
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)", 
+            "full": false, 
+            "lineColor": "rgb(31, 120, 193)", 
+            "show": false
+          }, 
+          "tableColumn": "", 
+          "targets": [
+            {
+              "expr": "2*scalar(ceph_osd_flag_noscrub) + scalar(ceph_pg_scrubbing >bool 0)", 
+              "format": "time_series", 
+              "intervalFactor": 2, 
+              "refId": "A", 
+              "step": 2, 
+              "textEditor": true
+            }
+          ], 
+          "thresholds": "1,2", 
+          "timeFrom": "1m", 
+          "title": "SCRUB", 
+          "type": "singlestat", 
+          "valueFontSize": "40%", 
+          "valueMaps": [
+            {
+              "op": "=", 
+              "text": "N/A", 
+              "value": "null"
+            }, 
+            {
+              "op": "=", 
+              "text": "ENABLED", 
+              "value": "0"
+            }, 
+            {
+              "op": "=", 
+              "text": "ACTIVE", 
+              "value": "1"
+            }, 
+            {
+              "op": "=", 
+              "text": "DISABLED", 
+              "value": "2"
+            }, 
+            {
+              "op": "=", 
+              "text": "DISABLED", 
+              "value": "3"
+            }
+          ], 
+          "valueName": "current"
+        }, 
+        {
+          "cacheTimeout": null, 
+          "colorBackground": true, 
+          "colorValue": false, 
+          "colors": [
+            "rgba(50, 172, 45, 0.97)", 
+            "rgba(237, 129, 40, 0.89)", 
+            "rgba(245, 54, 54, 0.9)"
+          ], 
+          "datasource": null, 
+          "description": "Deep scrub acts on the objects within placement groups (PGs). Objects are read, and checksum's compared to protect against silent bit-rot events. Although a weekly activity, in large clusters is normal to see deep-scrub active on a daily basis. Scrub activity can be controlled with the \"ceph osd scrub\" command.", 
+          "format": "none", 
+          "gauge": {
+            "maxValue": 100, 
+            "minValue": 0, 
+            "show": false, 
+            "thresholdLabels": false, 
+            "thresholdMarkers": true
+          }, 
+          "gridPos": {
+            "h": 3, 
+            "w": 2, 
+            "x": 12, 
+            "y": 5
+          }, 
+          "height": "95", 
+          "hideTimeOverride": true, 
+          "id": 8, 
+          "interval": null, 
+          "links": [], 
+          "mappingType": 1, 
+          "mappingTypes": [
+            {
+              "name": "value to text", 
+              "value": 1
+            }, 
+            {
+              "name": "range to text", 
+              "value": 2
+            }
+          ], 
+          "maxDataPoints": "", 
+          "minSpan": 2, 
+          "nullPointMode": "connected", 
+          "nullText": null, 
+          "postfix": "", 
+          "postfixFontSize": "50%", 
+          "prefix": "", 
+          "prefixFontSize": "50%", 
+          "rangeMaps": [
+            {
+              "from": "null", 
+              "text": "N/A", 
+              "to": "null"
+            }
+          ], 
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)", 
+            "full": false, 
+            "lineColor": "rgb(31, 120, 193)", 
+            "show": false
+          }, 
+          "tableColumn": "", 
+          "targets": [
+            {
+              "expr": "2*scalar(ceph_osd_flag_nodeep_scrub) + scalar(ceph_pg_deep >bool 0)", 
+              "format": "time_series", 
+              "intervalFactor": 2, 
+              "refId": "A", 
+              "step": 2, 
+              "textEditor": true
+            }
+          ], 
+          "thresholds": "1,2", 
+          "timeFrom": "1m", 
+          "title": "DEEP", 
+          "type": "singlestat", 
+          "valueFontSize": "40%", 
+          "valueMaps": [
+            {
+              "op": "=", 
+              "text": "N/A", 
+              "value": "null"
+            }, 
+            {
+              "op": "=", 
+              "text": "ENABLED", 
+              "value": "0"
+            }, 
+            {
+              "op": "=", 
+              "text": "ACTIVE", 
+              "value": "1"
+            }, 
+            {
+              "op": "=", 
+              "text": "DISABLED", 
+              "value": "2"
+            }, 
+            {
+              "op": "=", 
+              "text": "DISABLED", 
+              "value": "3"
+            }
+          ], 
+          "valueName": "current"
+        }, 
+        {
+          "cacheTimeout": null, 
+          "colorBackground": true, 
+          "colorValue": false, 
+          "colors": [
+            "rgba(50, 172, 45, 0.97)", 
+            "rgba(237, 129, 40, 0.89)", 
+            "rgba(245, 54, 54, 0.9)"
+          ], 
+          "datasource": null, 
+          "description": "The OUT flag setting allows the mon's to mark OSD's as out of the configuration when they stop sending hearbeats to the mon's. By marking them OUT, recovery takes place. However, for planned maintenance you can set the cluster to noout to disable this behavior.", 
+          "format": "none", 
+          "gauge": {
+            "maxValue": 100, 
+            "minValue": 0, 
+            "show": false, 
+            "thresholdLabels": false, 
+            "thresholdMarkers": true
+          }, 
+          "gridPos": {
+            "h": 3, 
+            "w": 2, 
+            "x": 14, 
+            "y": 5
+          }, 
+          "height": "95", 
+          "hideTimeOverride": true, 
+          "id": 12, 
+          "interval": null, 
+          "links": [], 
+          "mappingType": 1, 
+          "mappingTypes": [
+            {
+              "name": "value to text", 
+              "value": 1
+            }, 
+            {
+              "name": "range to text", 
+              "value": 2
+            }
+          ], 
+          "maxDataPoints": "", 
+          "minSpan": 2, 
+          "nullPointMode": "connected", 
+          "nullText": null, 
+          "postfix": "", 
+          "postfixFontSize": "50%", 
+          "prefix": "", 
+          "prefixFontSize": "50%", 
+          "rangeMaps": [
+            {
+              "from": "null", 
+              "text": "N/A", 
+              "to": "null"
+            }
+          ], 
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)", 
+            "full": false, 
+            "lineColor": "rgb(31, 120, 193)", 
+            "show": false
+          }, 
+          "tableColumn": "", 
+          "targets": [
+            {
+              "expr": "2*scalar(ceph_osd_flag_noout)", 
+              "format": "time_series", 
+              "intervalFactor": 2, 
+              "refId": "A", 
+              "step": 2, 
+              "textEditor": true
+            }
+          ], 
+          "thresholds": "1,2", 
+          "timeFrom": "1m", 
+          "timeShift": null, 
+          "title": "OUT", 
+          "type": "singlestat", 
+          "valueFontSize": "40%", 
+          "valueMaps": [
+            {
+              "op": "=", 
+              "text": "N/A", 
+              "value": "null"
+            }, 
+            {
+              "op": "=", 
+              "text": "ENABLED", 
+              "value": "0"
+            }, 
+            {
+              "op": "=", 
+              "text": "ACTIVE", 
+              "value": "1"
+            }, 
+            {
+              "op": "=", 
+              "text": "DISABLED", 
+              "value": "2"
+            }, 
+            {
+              "op": "=", 
+              "text": "DISABLED", 
+              "value": "3"
+            }
+          ], 
+          "valueName": "current"
+        }, 
+        {
+          "cacheTimeout": null, 
+          "colorBackground": true, 
+          "colorValue": false, 
+          "colors": [
+            "rgba(50, 172, 45, 0.97)", 
+            "rgba(237, 129, 40, 0.89)", 
+            "rgba(245, 54, 54, 0.9)"
+          ], 
+          "datasource": null, 
+          "description": "The down feature allows OSD's to mark their peers as DOWN when they are not reachable. However, if there is a poor network or planned outages, you may want to set this flag to nodown to prevent OSD's flapping between up/down states", 
+          "format": "none", 
+          "gauge": {
+            "maxValue": 100, 
+            "minValue": 0, 
+            "show": false, 
+            "thresholdLabels": false, 
+            "thresholdMarkers": true
+          }, 
+          "gridPos": {
+            "h": 3, 
+            "w": 2, 
+            "x": 16, 
+            "y": 5
+          }, 
+          "height": "95", 
+          "hideTimeOverride": true, 
+          "id": 13, 
+          "interval": null, 
+          "links": [], 
+          "mappingType": 1, 
+          "mappingTypes": [
+            {
+              "name": "value to text", 
+              "value": 1
+            }, 
+            {
+              "name": "range to text", 
+              "value": 2
+            }
+          ], 
+          "maxDataPoints": "", 
+          "minSpan": 2, 
+          "nullPointMode": "connected", 
+          "nullText": null, 
+          "postfix": "", 
+          "postfixFontSize": "50%", 
+          "prefix": "", 
+          "prefixFontSize": "50%", 
+          "rangeMaps": [
+            {
+              "from": "null", 
+              "text": "N/A", 
+              "to": "null"
+            }
+          ], 
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)", 
+            "full": false, 
+            "lineColor": "rgb(31, 120, 193)", 
+            "show": false
+          }, 
+          "tableColumn": "", 
+          "targets": [
+            {
+              "expr": "2*scalar(ceph_osd_flag_nodown) + scalar(ceph_pg_down >bool 0)", 
+              "format": "time_series", 
+              "intervalFactor": 2, 
+              "refId": "A", 
+              "step": 2, 
+              "textEditor": true
+            }
+          ], 
+          "thresholds": "1,2", 
+          "timeFrom": "1m", 
+          "timeShift": null, 
+          "title": "DOWN", 
+          "type": "singlestat", 
+          "valueFontSize": "40%", 
+          "valueMaps": [
+            {
+              "op": "=", 
+              "text": "N/A", 
+              "value": "null"
+            }, 
+            {
+              "op": "=", 
+              "text": "ENABLED", 
+              "value": "0"
+            }, 
+            {
+              "op": "=", 
+              "text": "ACTIVE", 
+              "value": "1"
+            }, 
+            {
+              "op": "=", 
+              "text": "DISABLED", 
+              "value": "2"
+            }, 
+            {
+              "op": "=", 
+              "text": "DISABLED", 
+              "value": "3"
+            }
+          ], 
+          "valueName": "current"
+        }, 
+        {
+          "cacheTimeout": null, 
+          "colorBackground": true, 
+          "colorValue": false, 
+          "colors": [
+            "rgba(50, 172, 45, 0.97)", 
+            "rgba(237, 129, 40, 0.89)", 
+            "rgba(245, 54, 54, 0.9)"
+          ], 
+          "datasource": null, 
+          "format": "none", 
+          "gauge": {
+            "maxValue": 100, 
+            "minValue": 0, 
+            "show": false, 
+            "thresholdLabels": false, 
+            "thresholdMarkers": true
+          }, 
+          "gridPos": {
+            "h": 3, 
+            "w": 2, 
+            "x": 18, 
+            "y": 5
+          }, 
+          "height": "95", 
+          "hideTimeOverride": true, 
+          "id": 34, 
+          "interval": null, 
+          "links": [], 
+          "mappingType": 1, 
+          "mappingTypes": [
+            {
+              "name": "value to text", 
+              "value": 1
+            }, 
+            {
+              "name": "range to text", 
+              "value": 2
+            }
+          ], 
+          "maxDataPoints": "", 
+          "minSpan": 2, 
+          "nullPointMode": "connected", 
+          "nullText": null, 
+          "postfix": "", 
+          "postfixFontSize": "50%", 
+          "prefix": "", 
+          "prefixFontSize": "50%", 
+          "rangeMaps": [
+            {
+              "from": "null", 
+              "text": "N/A", 
+              "to": "null"
+            }
+          ], 
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)", 
+            "full": false, 
+            "lineColor": "rgb(31, 120, 193)", 
+            "show": false
+          }, 
+          "tableColumn": "", 
+          "targets": [
+            {
+              "expr": "2*scalar(ceph_osd_flag_nobackfill) + scalar(ceph_pg_backfilling >bool 0)", 
+              "format": "time_series", 
+              "intervalFactor": 2, 
+              "refId": "A", 
+              "step": 2, 
+              "textEditor": true
+            }, 
+            {
+              "expr": "", 
+              "format": "time_series", 
+              "intervalFactor": 1, 
+              "refId": "B"
+            }
+          ], 
+          "thresholds": "1,2", 
+          "timeFrom": "1m", 
+          "title": "BACKFILL", 
+          "type": "singlestat", 
+          "valueFontSize": "40%", 
+          "valueMaps": [
+            {
+              "op": "=", 
+              "text": "N/A", 
+              "value": "null"
+            }, 
+            {
+              "op": "=", 
+              "text": "ENABLED", 
+              "value": "0"
+            }, 
+            {
+              "op": "=", 
+              "text": "ACTIVE", 
+              "value": "1"
+            }, 
+            {
+              "op": "=", 
+              "text": "DISABLED", 
+              "value": "2"
+            }, 
+            {
+              "op": "=", 
+              "text": "DISABLED", 
+              "value": "3"
+            }
+          ], 
+          "valueName": "current"
+        }, 
+        {
+          "cacheTimeout": null, 
+          "colorBackground": true, 
+          "colorValue": false, 
+          "colors": [
+            "rgba(50, 172, 45, 0.97)", 
+            "rgba(237, 129, 40, 0.89)", 
+            "rgba(245, 54, 54, 0.9)"
+          ], 
+          "datasource": null, 
+          "format": "none", 
+          "gauge": {
+            "maxValue": 100, 
+            "minValue": 0, 
+            "show": false, 
+            "thresholdLabels": false, 
+            "thresholdMarkers": true
+          }, 
+          "gridPos": {
+            "h": 3, 
+            "w": 2, 
+            "x": 20, 
+            "y": 5
+          }, 
+          "height": "95", 
+          "hideTimeOverride": true, 
+          "id": 11, 
+          "interval": null, 
+          "links": [], 
+          "mappingType": 1, 
+          "mappingTypes": [
+            {
+              "name": "value to text", 
+              "value": 1
+            }, 
+            {
+              "name": "range to text", 
+              "value": 2
+            }
+          ], 
+          "maxDataPoints": "", 
+          "minSpan": 2, 
+          "nullPointMode": "connected", 
+          "nullText": null, 
+          "postfix": "", 
+          "postfixFontSize": "50%", 
+          "prefix": "", 
+          "prefixFontSize": "50%", 
+          "rangeMaps": [
+            {
+              "from": "null", 
+              "text": "N/A", 
+              "to": "null"
+            }
+          ], 
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)", 
+            "full": false, 
+            "lineColor": "rgb(31, 120, 193)", 
+            "show": false
+          }, 
+          "tableColumn": "", 
+          "targets": [
+            {
+              "expr": "2*scalar(ceph_osd_flag_norebalance)", 
+              "format": "time_series", 
+              "intervalFactor": 2, 
+              "refId": "A", 
+              "step": 2, 
+              "textEditor": true
+            }
+          ], 
+          "thresholds": "1,2", 
+          "timeFrom": "1m", 
+          "title": "REBALANCE", 
+          "type": "singlestat", 
+          "valueFontSize": "40%", 
+          "valueMaps": [
+            {
+              "op": "=", 
+              "text": "N/A", 
+              "value": "null"
+            }, 
+            {
+              "op": "=", 
+              "text": "ENABLED", 
+              "value": "0"
+            }, 
+            {
+              "op": "=", 
+              "text": "ACTIVE", 
+              "value": "1"
+            }, 
+            {
+              "op": "=", 
+              "text": "DISABLED", 
+              "value": "2"
+            }, 
+            {
+              "op": "=", 
+              "text": "DISABLED", 
+              "value": "3"
+            }
+          ], 
+          "valueName": "current"
+        }, 
+        {
+          "cacheTimeout": null, 
+          "colorBackground": true, 
+          "colorValue": false, 
+          "colors": [
+            "rgba(50, 172, 45, 0.97)", 
+            "rgba(237, 129, 40, 0.89)", 
+            "rgba(245, 54, 54, 0.9)"
+          ], 
+          "datasource": null, 
+          "description": "With the recovery flag enabled, disruption in the cluster will result in data being recreated to freespace within the cluster to honor the pool's protection schema. Under some circumstances, you may use the norecover flag to prevent automatic recovery.", 
+          "format": "none", 
+          "gauge": {
+            "maxValue": 100, 
+            "minValue": 0, 
+            "show": false, 
+            "thresholdLabels": false, 
+            "thresholdMarkers": true
+          }, 
+          "gridPos": {
+            "h": 3, 
+            "w": 2, 
+            "x": 22, 
+            "y": 5
+          }, 
+          "height": "95", 
+          "hideTimeOverride": true, 
+          "id": 9, 
+          "interval": null, 
+          "links": [], 
+          "mappingType": 1, 
+          "mappingTypes": [
+            {
+              "name": "value to text", 
+              "value": 1
+            }, 
+            {
+              "name": "range to text", 
+              "value": 2
+            }
+          ], 
+          "maxDataPoints": "", 
+          "minSpan": 2, 
+          "nullPointMode": "connected", 
+          "nullText": null, 
+          "postfix": "", 
+          "postfixFontSize": "50%", 
+          "prefix": "", 
+          "prefixFontSize": "50%", 
+          "rangeMaps": [
+            {
+              "from": "null", 
+              "text": "N/A", 
+              "to": "null"
+            }
+          ], 
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)", 
+            "full": false, 
+            "lineColor": "rgb(31, 120, 193)", 
+            "show": false
+          }, 
+          "tableColumn": "", 
+          "targets": [
+            {
+              "expr": "2*scalar(ceph_osd_flag_norecover) + scalar(ceph_pg_recovering >bool 0)", 
+              "format": "time_series", 
+              "intervalFactor": 2, 
+              "refId": "A", 
+              "step": 2, 
+              "textEditor": true
+            }
+          ], 
+          "thresholds": "1,2", 
+          "timeFrom": "1m", 
+          "title": "RECOVERY", 
+          "type": "singlestat", 
+          "valueFontSize": "40%", 
+          "valueMaps": [
+            {
+              "op": "=", 
+              "text": "N/A", 
+              "value": "null"
+            }, 
+            {
+              "op": "=", 
+              "text": "ENABLED", 
+              "value": "0"
+            }, 
+            {
+              "op": "=", 
+              "text": "ACTIVE", 
+              "value": "1"
+            }, 
+            {
+              "op": "=", 
+              "text": "DISABLED", 
+              "value": "2"
+            }, 
+            {
+              "op": "=", 
+              "text": "DISABLED", 
+              "value": "3"
+            }
+          ], 
+          "valueName": "current"
+        }, 
+        {
+          "cacheTimeout": null, 
+          "colorBackground": true, 
+          "colorValue": false, 
+          "colors": [
+            "#d44a3a", 
+            "rgba(237, 129, 40, 0.89)", 
+            "#299c46"
+          ], 
+          "datasource": null, 
+          "format": "none", 
+          "gauge": {
+            "maxValue": 100, 
+            "minValue": 0, 
+            "show": false, 
+            "thresholdLabels": false, 
+            "thresholdMarkers": true
+          }, 
+          "gridPos": {
+            "h": 2, 
+            "w": 3, 
+            "x": 2, 
+            "y": 7
+          }, 
+          "id": 69, 
+          "interval": null, 
+          "links": [], 
+          "mappingType": 1, 
+          "mappingTypes": [
+            {
+              "name": "value to text", 
+              "value": 1
+            }, 
+            {
+              "name": "range to text", 
+              "value": 2
+            }
+          ], 
+          "maxDataPoints": 100, 
+          "nullPointMode": "connected", 
+          "nullText": null, 
+          "postfix": "", 
+          "postfixFontSize": "50%", 
+          "prefix": "", 
+          "prefixFontSize": "50%", 
+          "rangeMaps": [
+            {
+              "from": "null", 
+              "text": "N/A", 
+              "to": "null"
+            }
+          ], 
+          "repeat": null, 
+          "repeatDirection": "v", 
+          "repeatIteration": 1526963039202, 
+          "repeatPanelId": 28, 
+          "scopedVars": {
+            "mon_servers": {
+              "selected": false, 
+              "text": "mon.rhs-cli-05", 
+              "value": "mon.rhs-cli-05"
+            }
+          }, 
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)", 
+            "full": false, 
+            "lineColor": "rgb(31, 120, 193)", 
+            "show": false
+          }, 
+          "tableColumn": "", 
+          "targets": [
+            {
+              "expr": "label_replace(ceph_mon_quorum_status{ceph_daemon=~\"[[mon_servers]]\"},\"mon_host\",\"$2\",\"ceph_daemon\",\"(.*)_(.*)\")", 
+              "format": "time_series", 
+              "intervalFactor": 1, 
+              "legendFormat": "", 
+              "refId": "A"
+            }
+          ], 
+          "thresholds": "0.5,1", 
+          "title": "$mon_servers", 
+          "type": "singlestat", 
+          "valueFontSize": "50%", 
+          "valueMaps": [
+            {
+              "op": "=", 
+              "text": "N/A", 
+              "value": "null"
+            }, 
+            {
+              "op": "=", 
+              "text": "OK", 
+              "value": "1"
+            }, 
+            {
+              "op": "=", 
+              "text": "DOWN", 
+              "value": "0"
+            }
+          ], 
+          "valueName": "current"
+        }, 
+        {
+          "content": "<h2 style=\"text-align: center;\">OSD<br>Hosts<br>Down</h2>", 
+          "description": "Shows which OSD hosts have all defined osd daemons in a down state", 
+          "gridPos": {
+            "h": 4, 
+            "w": 2, 
+            "x": 8, 
+            "y": 8
+          }, 
+          "id": 54, 
+          "links": [], 
+          "minSpan": 2, 
+          "mode": "html", 
+          "title": "", 
+          "transparent": true, 
+          "type": "text"
+        }, 
+        {
+          "columns": [], 
+          "datasource": null, 
+          "fontSize": "100%", 
+          "gridPos": {
+            "h": 4, 
+            "w": 10, 
+            "x": 10, 
+            "y": 8
+          }, 
+          "id": 58, 
+          "links": [], 
+          "pageSize": null, 
+          "scroll": true, 
+          "showHeader": true, 
+          "sort": {
+            "col": 2, 
+            "desc": false
+          }, 
+          "styles": [
+            {
+              "alias": "Hostname", 
+              "colorMode": "row", 
+              "colors": [
+                "rgba(245, 54, 54, 0.9)", 
+                "rgba(237, 129, 40, 0.89)", 
+                "rgba(50, 172, 45, 0.97)"
+              ], 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "decimals": 2, 
+              "pattern": "instance", 
+              "thresholds": [
+                ""
+              ], 
+              "type": "string", 
+              "unit": "short"
+            }, 
+            {
+              "alias": "OSDs Active", 
+              "colorMode": "row", 
+              "colors": [
+                "rgba(245, 54, 54, 0.9)", 
+                "rgba(237, 129, 40, 0.89)", 
+                "rgba(50, 172, 45, 0.97)"
+              ], 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "decimals": 0, 
+              "pattern": "Value", 
+              "thresholds": [
+                "1"
+              ], 
+              "type": "hidden", 
+              "unit": "none"
+            }, 
+            {
+              "alias": "", 
+              "colorMode": null, 
+              "colors": [
+                "rgba(245, 54, 54, 0.9)", 
+                "rgba(237, 129, 40, 0.89)", 
+                "rgba(50, 172, 45, 0.97)"
+              ], 
+              "dateFormat": "YYYY-MM-DD HH:mm:ss", 
+              "decimals": 2, 
+              "pattern": "/.*/", 
+              "thresholds": [], 
+              "type": "hidden", 
+              "unit": "short"
+            }
+          ], 
+          "targets": [
+            {
+              "expr": "(count by(instance) (ceph_disk_occupation * on(ceph_daemon) group_right(instance) ceph_osd_up == 0) - count by(instance) (ceph_disk_occupation))", 
+              "format": "table", 
+              "hide": false, 
+              "instant": true, 
+              "intervalFactor": 1, 
+              "legendFormat": "", 
+              "refId": "A"
+            }
+          ], 
+          "title": "", 
+          "transform": "table", 
+          "transparent": false, 
+          "type": "table"
+        }, 
+        {
+          "cacheTimeout": null, 
+          "colorBackground": true, 
+          "colorValue": false, 
+          "colors": [
+            "#d44a3a", 
+            "rgba(237, 129, 40, 0.89)", 
+            "#299c46"
+          ], 
+          "datasource": null, 
+          "format": "none", 
+          "gauge": {
+            "maxValue": 100, 
+            "minValue": 0, 
+            "show": false, 
+            "thresholdLabels": false, 
+            "thresholdMarkers": true
+          }, 
+          "gridPos": {
+            "h": 2, 
+            "w": 3, 
+            "x": 2, 
+            "y": 9
+          }, 
+          "id": 70, 
+          "interval": null, 
+          "links": [], 
+          "mappingType": 1, 
+          "mappingTypes": [
+            {
+              "name": "value to text", 
+              "value": 1
+            }, 
+            {
+              "name": "range to text", 
+              "value": 2
+            }
+          ], 
+          "maxDataPoints": 100, 
+          "nullPointMode": "connected", 
+          "nullText": null, 
+          "postfix": "", 
+          "postfixFontSize": "50%", 
+          "prefix": "", 
+          "prefixFontSize": "50%", 
+          "rangeMaps": [
+            {
+              "from": "null", 
+              "text": "N/A", 
+              "to": "null"
+            }
+          ], 
+          "repeat": null, 
+          "repeatDirection": "v", 
+          "repeatIteration": 1526963039202, 
+          "repeatPanelId": 28, 
+          "scopedVars": {
+            "mon_servers": {
+              "selected": false, 
+              "text": "mon.rhs-cli-06", 
+              "value": "mon.rhs-cli-06"
+            }
+          }, 
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)", 
+            "full": false, 
+            "lineColor": "rgb(31, 120, 193)", 
+            "show": false
+          }, 
+          "tableColumn": "", 
+          "targets": [
+            {
+              "expr": "label_replace(ceph_mon_quorum_status{ceph_daemon=~\"[[mon_servers]]\"},\"mon_host\",\"$2\",\"ceph_daemon\",\"(.*)_(.*)\")", 
+              "format": "time_series", 
+              "intervalFactor": 1, 
+              "legendFormat": "", 
+              "refId": "A"
+            }
+          ], 
+          "thresholds": "0.5,1", 
+          "title": "$mon_servers", 
+          "type": "singlestat", 
+          "valueFontSize": "50%", 
+          "valueMaps": [
+            {
+              "op": "=", 
+              "text": "N/A", 
+              "value": "null"
+            }, 
+            {
+              "op": "=", 
+              "text": "OK", 
+              "value": "1"
+            }, 
+            {
+              "op": "=", 
+              "text": "DOWN", 
+              "value": "0"
+            }
+          ], 
+          "valueName": "current"
+        }
+      ], 
       "repeat": null, 
       "title": "Cluster State", 
       "type": "row"
-    }, 
-    {
-      "content": "<h2 style=\"text-align: center;\">MONs</h2>", 
-      "gridPos": {
-        "h": 5, 
-        "w": 2, 
-        "x": 0, 
-        "y": 5
-      }, 
-      "id": 6, 
-      "links": [], 
-      "minSpan": 2, 
-      "mode": "html", 
-      "title": "", 
-      "transparent": true, 
-      "type": "text"
-    }, 
-    {
-      "cacheTimeout": null, 
-      "colorBackground": true, 
-      "colorValue": false, 
-      "colors": [
-        "#d44a3a", 
-        "rgba(237, 129, 40, 0.89)", 
-        "#299c46"
-      ], 
-      "datasource": null, 
-      "format": "none", 
-      "gauge": {
-        "maxValue": 100, 
-        "minValue": 0, 
-        "show": false, 
-        "thresholdLabels": false, 
-        "thresholdMarkers": true
-      }, 
-      "gridPos": {
-        "h": 2, 
-        "w": 3, 
-        "x": 2, 
-        "y": 5
-      }, 
-      "id": 28, 
-      "interval": null, 
-      "links": [], 
-      "mappingType": 1, 
-      "mappingTypes": [
-        {
-          "name": "value to text", 
-          "value": 1
-        }, 
-        {
-          "name": "range to text", 
-          "value": 2
-        }
-      ], 
-      "maxDataPoints": 100, 
-      "nullPointMode": "connected", 
-      "nullText": null, 
-      "postfix": "", 
-      "postfixFontSize": "50%", 
-      "prefix": "", 
-      "prefixFontSize": "50%", 
-      "rangeMaps": [
-        {
-          "from": "null", 
-          "text": "N/A", 
-          "to": "null"
-        }
-      ], 
-      "repeat": "mon_servers", 
-      "repeatDirection": "v", 
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)", 
-        "full": false, 
-        "lineColor": "rgb(31, 120, 193)", 
-        "show": false
-      }, 
-      "tableColumn": "", 
-      "targets": [
-        {
-          "expr": "label_replace(ceph_mon_quorum_status{ceph_daemon=~\"[[mon_servers]]\"},\"mon_host\",\"$2\",\"ceph_daemon\",\"(.*)_(.*)\")", 
-          "format": "time_series", 
-          "intervalFactor": 1, 
-          "legendFormat": "", 
-          "refId": "A"
-        }
-      ], 
-      "thresholds": "0.5,1", 
-      "title": "$mon_servers", 
-      "type": "singlestat", 
-      "valueFontSize": "50%", 
-      "valueMaps": [
-        {
-          "op": "=", 
-          "text": "N/A", 
-          "value": "null"
-        }, 
-        {
-          "op": "=", 
-          "text": "OK", 
-          "value": "1"
-        }, 
-        {
-          "op": "=", 
-          "text": "DOWN", 
-          "value": "0"
-        }
-      ], 
-      "valueName": "current"
-    }, 
-    {
-      "content": "<h2 style=\"text-align: center;\">Cluster Flags:</h2>", 
-      "description": "Show cluster flags that determine automatic maintenance and recovery operations", 
-      "gridPos": {
-        "h": 3, 
-        "w": 2, 
-        "x": 8, 
-        "y": 5
-      }, 
-      "id": 31, 
-      "links": [], 
-      "minSpan": 2, 
-      "mode": "html", 
-      "title": "", 
-      "transparent": true, 
-      "type": "text"
-    }, 
-    {
-      "cacheTimeout": null, 
-      "colorBackground": true, 
-      "colorValue": false, 
-      "colors": [
-        "rgba(50, 172, 45, 0.97)", 
-        "rgba(237, 129, 40, 0.89)", 
-        "rgba(245, 54, 54, 0.9)"
-      ], 
-      "datasource": null, 
-      "description": "Scrub activity takes place daily basis across the OSD's and performs object size and attribute checks. Scrub activity can be controlled with the \"ceph osd scrub\" command.", 
-      "format": "none", 
-      "gauge": {
-        "maxValue": 100, 
-        "minValue": 0, 
-        "show": false, 
-        "thresholdLabels": false, 
-        "thresholdMarkers": true
-      }, 
-      "gridPos": {
-        "h": 3, 
-        "w": 2, 
-        "x": 10, 
-        "y": 5
-      }, 
-      "height": "95", 
-      "hideTimeOverride": true, 
-      "id": 7, 
-      "interval": null, 
-      "links": [], 
-      "mappingType": 1, 
-      "mappingTypes": [
-        {
-          "name": "value to text", 
-          "value": 1
-        }, 
-        {
-          "name": "range to text", 
-          "value": 2
-        }
-      ], 
-      "maxDataPoints": "", 
-      "minSpan": 2, 
-      "nullPointMode": "connected", 
-      "nullText": null, 
-      "postfix": "", 
-      "postfixFontSize": "50%", 
-      "prefix": "", 
-      "prefixFontSize": "50%", 
-      "rangeMaps": [
-        {
-          "from": "null", 
-          "text": "N/A", 
-          "to": "null"
-        }
-      ], 
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)", 
-        "full": false, 
-        "lineColor": "rgb(31, 120, 193)", 
-        "show": false
-      }, 
-      "tableColumn": "", 
-      "targets": [
-        {
-          "expr": "2*scalar(ceph_osd_flag_noscrub) + scalar(ceph_pg_scrubbing >bool 0)", 
-          "format": "time_series", 
-          "intervalFactor": 2, 
-          "refId": "A", 
-          "step": 2, 
-          "textEditor": true
-        }
-      ], 
-      "thresholds": "1,2", 
-      "timeFrom": "1m", 
-      "title": "SCRUB", 
-      "type": "singlestat", 
-      "valueFontSize": "40%", 
-      "valueMaps": [
-        {
-          "op": "=", 
-          "text": "N/A", 
-          "value": "null"
-        }, 
-        {
-          "op": "=", 
-          "text": "ENABLED", 
-          "value": "0"
-        }, 
-        {
-          "op": "=", 
-          "text": "ACTIVE", 
-          "value": "1"
-        }, 
-        {
-          "op": "=", 
-          "text": "DISABLED", 
-          "value": "2"
-        }, 
-        {
-          "op": "=", 
-          "text": "DISABLED", 
-          "value": "3"
-        }
-      ], 
-      "valueName": "current"
-    }, 
-    {
-      "cacheTimeout": null, 
-      "colorBackground": true, 
-      "colorValue": false, 
-      "colors": [
-        "rgba(50, 172, 45, 0.97)", 
-        "rgba(237, 129, 40, 0.89)", 
-        "rgba(245, 54, 54, 0.9)"
-      ], 
-      "datasource": null, 
-      "description": "Deep scrub acts on the objects within placement groups (PGs). Objects are read, and checksum's compared to protect against silent bit-rot events. Although a weekly activity, in large clusters is normal to see deep-scrub active on a daily basis. Scrub activity can be controlled with the \"ceph osd scrub\" command.", 
-      "format": "none", 
-      "gauge": {
-        "maxValue": 100, 
-        "minValue": 0, 
-        "show": false, 
-        "thresholdLabels": false, 
-        "thresholdMarkers": true
-      }, 
-      "gridPos": {
-        "h": 3, 
-        "w": 2, 
-        "x": 12, 
-        "y": 5
-      }, 
-      "height": "95", 
-      "hideTimeOverride": true, 
-      "id": 8, 
-      "interval": null, 
-      "links": [], 
-      "mappingType": 1, 
-      "mappingTypes": [
-        {
-          "name": "value to text", 
-          "value": 1
-        }, 
-        {
-          "name": "range to text", 
-          "value": 2
-        }
-      ], 
-      "maxDataPoints": "", 
-      "minSpan": 2, 
-      "nullPointMode": "connected", 
-      "nullText": null, 
-      "postfix": "", 
-      "postfixFontSize": "50%", 
-      "prefix": "", 
-      "prefixFontSize": "50%", 
-      "rangeMaps": [
-        {
-          "from": "null", 
-          "text": "N/A", 
-          "to": "null"
-        }
-      ], 
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)", 
-        "full": false, 
-        "lineColor": "rgb(31, 120, 193)", 
-        "show": false
-      }, 
-      "tableColumn": "", 
-      "targets": [
-        {
-          "expr": "2*scalar(ceph_osd_flag_nodeep_scrub) + scalar(ceph_pg_deep >bool 0)", 
-          "format": "time_series", 
-          "intervalFactor": 2, 
-          "refId": "A", 
-          "step": 2, 
-          "textEditor": true
-        }
-      ], 
-      "thresholds": "1,2", 
-      "timeFrom": "1m", 
-      "title": "DEEP", 
-      "type": "singlestat", 
-      "valueFontSize": "40%", 
-      "valueMaps": [
-        {
-          "op": "=", 
-          "text": "N/A", 
-          "value": "null"
-        }, 
-        {
-          "op": "=", 
-          "text": "ENABLED", 
-          "value": "0"
-        }, 
-        {
-          "op": "=", 
-          "text": "ACTIVE", 
-          "value": "1"
-        }, 
-        {
-          "op": "=", 
-          "text": "DISABLED", 
-          "value": "2"
-        }, 
-        {
-          "op": "=", 
-          "text": "DISABLED", 
-          "value": "3"
-        }
-      ], 
-      "valueName": "current"
-    }, 
-    {
-      "cacheTimeout": null, 
-      "colorBackground": true, 
-      "colorValue": false, 
-      "colors": [
-        "rgba(50, 172, 45, 0.97)", 
-        "rgba(237, 129, 40, 0.89)", 
-        "rgba(245, 54, 54, 0.9)"
-      ], 
-      "datasource": null, 
-      "description": "The OUT flag setting allows the mon's to mark OSD's as out of the configuration when they stop sending hearbeats to the mon's. By marking them OUT, recovery takes place. However, for planned maintenance you can set the cluster to noout to disable this behavior.", 
-      "format": "none", 
-      "gauge": {
-        "maxValue": 100, 
-        "minValue": 0, 
-        "show": false, 
-        "thresholdLabels": false, 
-        "thresholdMarkers": true
-      }, 
-      "gridPos": {
-        "h": 3, 
-        "w": 2, 
-        "x": 14, 
-        "y": 5
-      }, 
-      "height": "95", 
-      "hideTimeOverride": true, 
-      "id": 12, 
-      "interval": null, 
-      "links": [], 
-      "mappingType": 1, 
-      "mappingTypes": [
-        {
-          "name": "value to text", 
-          "value": 1
-        }, 
-        {
-          "name": "range to text", 
-          "value": 2
-        }
-      ], 
-      "maxDataPoints": "", 
-      "minSpan": 2, 
-      "nullPointMode": "connected", 
-      "nullText": null, 
-      "postfix": "", 
-      "postfixFontSize": "50%", 
-      "prefix": "", 
-      "prefixFontSize": "50%", 
-      "rangeMaps": [
-        {
-          "from": "null", 
-          "text": "N/A", 
-          "to": "null"
-        }
-      ], 
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)", 
-        "full": false, 
-        "lineColor": "rgb(31, 120, 193)", 
-        "show": false
-      }, 
-      "tableColumn": "", 
-      "targets": [
-        {
-          "expr": "2*scalar(ceph_osd_flag_noout)", 
-          "format": "time_series", 
-          "intervalFactor": 2, 
-          "refId": "A", 
-          "step": 2, 
-          "textEditor": true
-        }
-      ], 
-      "thresholds": "1,2", 
-      "timeFrom": "1m", 
-      "timeShift": null, 
-      "title": "OUT", 
-      "type": "singlestat", 
-      "valueFontSize": "40%", 
-      "valueMaps": [
-        {
-          "op": "=", 
-          "text": "N/A", 
-          "value": "null"
-        }, 
-        {
-          "op": "=", 
-          "text": "ENABLED", 
-          "value": "0"
-        }, 
-        {
-          "op": "=", 
-          "text": "ACTIVE", 
-          "value": "1"
-        }, 
-        {
-          "op": "=", 
-          "text": "DISABLED", 
-          "value": "2"
-        }, 
-        {
-          "op": "=", 
-          "text": "DISABLED", 
-          "value": "3"
-        }
-      ], 
-      "valueName": "current"
-    }, 
-    {
-      "cacheTimeout": null, 
-      "colorBackground": true, 
-      "colorValue": false, 
-      "colors": [
-        "rgba(50, 172, 45, 0.97)", 
-        "rgba(237, 129, 40, 0.89)", 
-        "rgba(245, 54, 54, 0.9)"
-      ], 
-      "datasource": null, 
-      "description": "The down feature allows OSD's to mark their peers as DOWN when they are not reachable. However, if there is a poor network or planned outages, you may want to set this flag to nodown to prevent OSD's flapping between up/down states", 
-      "format": "none", 
-      "gauge": {
-        "maxValue": 100, 
-        "minValue": 0, 
-        "show": false, 
-        "thresholdLabels": false, 
-        "thresholdMarkers": true
-      }, 
-      "gridPos": {
-        "h": 3, 
-        "w": 2, 
-        "x": 16, 
-        "y": 5
-      }, 
-      "height": "95", 
-      "hideTimeOverride": true, 
-      "id": 13, 
-      "interval": null, 
-      "links": [], 
-      "mappingType": 1, 
-      "mappingTypes": [
-        {
-          "name": "value to text", 
-          "value": 1
-        }, 
-        {
-          "name": "range to text", 
-          "value": 2
-        }
-      ], 
-      "maxDataPoints": "", 
-      "minSpan": 2, 
-      "nullPointMode": "connected", 
-      "nullText": null, 
-      "postfix": "", 
-      "postfixFontSize": "50%", 
-      "prefix": "", 
-      "prefixFontSize": "50%", 
-      "rangeMaps": [
-        {
-          "from": "null", 
-          "text": "N/A", 
-          "to": "null"
-        }
-      ], 
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)", 
-        "full": false, 
-        "lineColor": "rgb(31, 120, 193)", 
-        "show": false
-      }, 
-      "tableColumn": "", 
-      "targets": [
-        {
-          "expr": "2*scalar(ceph_osd_flag_nodown) + scalar(ceph_pg_down >bool 0)", 
-          "format": "time_series", 
-          "intervalFactor": 2, 
-          "refId": "A", 
-          "step": 2, 
-          "textEditor": true
-        }
-      ], 
-      "thresholds": "1,2", 
-      "timeFrom": "1m", 
-      "timeShift": null, 
-      "title": "DOWN", 
-      "type": "singlestat", 
-      "valueFontSize": "40%", 
-      "valueMaps": [
-        {
-          "op": "=", 
-          "text": "N/A", 
-          "value": "null"
-        }, 
-        {
-          "op": "=", 
-          "text": "ENABLED", 
-          "value": "0"
-        }, 
-        {
-          "op": "=", 
-          "text": "ACTIVE", 
-          "value": "1"
-        }, 
-        {
-          "op": "=", 
-          "text": "DISABLED", 
-          "value": "2"
-        }, 
-        {
-          "op": "=", 
-          "text": "DISABLED", 
-          "value": "3"
-        }
-      ], 
-      "valueName": "current"
-    }, 
-    {
-      "cacheTimeout": null, 
-      "colorBackground": true, 
-      "colorValue": false, 
-      "colors": [
-        "rgba(50, 172, 45, 0.97)", 
-        "rgba(237, 129, 40, 0.89)", 
-        "rgba(245, 54, 54, 0.9)"
-      ], 
-      "datasource": null, 
-      "format": "none", 
-      "gauge": {
-        "maxValue": 100, 
-        "minValue": 0, 
-        "show": false, 
-        "thresholdLabels": false, 
-        "thresholdMarkers": true
-      }, 
-      "gridPos": {
-        "h": 3, 
-        "w": 2, 
-        "x": 18, 
-        "y": 5
-      }, 
-      "height": "95", 
-      "hideTimeOverride": true, 
-      "id": 34, 
-      "interval": null, 
-      "links": [], 
-      "mappingType": 1, 
-      "mappingTypes": [
-        {
-          "name": "value to text", 
-          "value": 1
-        }, 
-        {
-          "name": "range to text", 
-          "value": 2
-        }
-      ], 
-      "maxDataPoints": "", 
-      "minSpan": 2, 
-      "nullPointMode": "connected", 
-      "nullText": null, 
-      "postfix": "", 
-      "postfixFontSize": "50%", 
-      "prefix": "", 
-      "prefixFontSize": "50%", 
-      "rangeMaps": [
-        {
-          "from": "null", 
-          "text": "N/A", 
-          "to": "null"
-        }
-      ], 
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)", 
-        "full": false, 
-        "lineColor": "rgb(31, 120, 193)", 
-        "show": false
-      }, 
-      "tableColumn": "", 
-      "targets": [
-        {
-          "expr": "2*scalar(ceph_osd_flag_nobackfill) + scalar(ceph_pg_backfilling >bool 0)", 
-          "format": "time_series", 
-          "intervalFactor": 2, 
-          "refId": "A", 
-          "step": 2, 
-          "textEditor": true
-        }, 
-        {
-          "expr": "", 
-          "format": "time_series", 
-          "intervalFactor": 1, 
-          "refId": "B"
-        }
-      ], 
-      "thresholds": "1,2", 
-      "timeFrom": "1m", 
-      "title": "BACKFILL", 
-      "type": "singlestat", 
-      "valueFontSize": "40%", 
-      "valueMaps": [
-        {
-          "op": "=", 
-          "text": "N/A", 
-          "value": "null"
-        }, 
-        {
-          "op": "=", 
-          "text": "ENABLED", 
-          "value": "0"
-        }, 
-        {
-          "op": "=", 
-          "text": "ACTIVE", 
-          "value": "1"
-        }, 
-        {
-          "op": "=", 
-          "text": "DISABLED", 
-          "value": "2"
-        }, 
-        {
-          "op": "=", 
-          "text": "DISABLED", 
-          "value": "3"
-        }
-      ], 
-      "valueName": "current"
-    }, 
-    {
-      "cacheTimeout": null, 
-      "colorBackground": true, 
-      "colorValue": false, 
-      "colors": [
-        "rgba(50, 172, 45, 0.97)", 
-        "rgba(237, 129, 40, 0.89)", 
-        "rgba(245, 54, 54, 0.9)"
-      ], 
-      "datasource": null, 
-      "format": "none", 
-      "gauge": {
-        "maxValue": 100, 
-        "minValue": 0, 
-        "show": false, 
-        "thresholdLabels": false, 
-        "thresholdMarkers": true
-      }, 
-      "gridPos": {
-        "h": 3, 
-        "w": 2, 
-        "x": 20, 
-        "y": 5
-      }, 
-      "height": "95", 
-      "hideTimeOverride": true, 
-      "id": 11, 
-      "interval": null, 
-      "links": [], 
-      "mappingType": 1, 
-      "mappingTypes": [
-        {
-          "name": "value to text", 
-          "value": 1
-        }, 
-        {
-          "name": "range to text", 
-          "value": 2
-        }
-      ], 
-      "maxDataPoints": "", 
-      "minSpan": 2, 
-      "nullPointMode": "connected", 
-      "nullText": null, 
-      "postfix": "", 
-      "postfixFontSize": "50%", 
-      "prefix": "", 
-      "prefixFontSize": "50%", 
-      "rangeMaps": [
-        {
-          "from": "null", 
-          "text": "N/A", 
-          "to": "null"
-        }
-      ], 
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)", 
-        "full": false, 
-        "lineColor": "rgb(31, 120, 193)", 
-        "show": false
-      }, 
-      "tableColumn": "", 
-      "targets": [
-        {
-          "expr": "2*scalar(ceph_osd_flag_norebalance)", 
-          "format": "time_series", 
-          "intervalFactor": 2, 
-          "refId": "A", 
-          "step": 2, 
-          "textEditor": true
-        }
-      ], 
-      "thresholds": "1,2", 
-      "timeFrom": "1m", 
-      "title": "REBALANCE", 
-      "type": "singlestat", 
-      "valueFontSize": "40%", 
-      "valueMaps": [
-        {
-          "op": "=", 
-          "text": "N/A", 
-          "value": "null"
-        }, 
-        {
-          "op": "=", 
-          "text": "ENABLED", 
-          "value": "0"
-        }, 
-        {
-          "op": "=", 
-          "text": "ACTIVE", 
-          "value": "1"
-        }, 
-        {
-          "op": "=", 
-          "text": "DISABLED", 
-          "value": "2"
-        }, 
-        {
-          "op": "=", 
-          "text": "DISABLED", 
-          "value": "3"
-        }
-      ], 
-      "valueName": "current"
-    }, 
-    {
-      "cacheTimeout": null, 
-      "colorBackground": true, 
-      "colorValue": false, 
-      "colors": [
-        "rgba(50, 172, 45, 0.97)", 
-        "rgba(237, 129, 40, 0.89)", 
-        "rgba(245, 54, 54, 0.9)"
-      ], 
-      "datasource": null, 
-      "description": "With the recovery flag enabled, disruption in the cluster will result in data being recreated to freespace within the cluster to honor the pool's protection schema. Under some circumstances, you may use the norecover flag to prevent automatic recovery.", 
-      "format": "none", 
-      "gauge": {
-        "maxValue": 100, 
-        "minValue": 0, 
-        "show": false, 
-        "thresholdLabels": false, 
-        "thresholdMarkers": true
-      }, 
-      "gridPos": {
-        "h": 3, 
-        "w": 2, 
-        "x": 22, 
-        "y": 5
-      }, 
-      "height": "95", 
-      "hideTimeOverride": true, 
-      "id": 9, 
-      "interval": null, 
-      "links": [], 
-      "mappingType": 1, 
-      "mappingTypes": [
-        {
-          "name": "value to text", 
-          "value": 1
-        }, 
-        {
-          "name": "range to text", 
-          "value": 2
-        }
-      ], 
-      "maxDataPoints": "", 
-      "minSpan": 2, 
-      "nullPointMode": "connected", 
-      "nullText": null, 
-      "postfix": "", 
-      "postfixFontSize": "50%", 
-      "prefix": "", 
-      "prefixFontSize": "50%", 
-      "rangeMaps": [
-        {
-          "from": "null", 
-          "text": "N/A", 
-          "to": "null"
-        }
-      ], 
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)", 
-        "full": false, 
-        "lineColor": "rgb(31, 120, 193)", 
-        "show": false
-      }, 
-      "tableColumn": "", 
-      "targets": [
-        {
-          "expr": "2*scalar(ceph_osd_flag_norecover) + scalar(ceph_pg_recovering >bool 0)", 
-          "format": "time_series", 
-          "intervalFactor": 2, 
-          "refId": "A", 
-          "step": 2, 
-          "textEditor": true
-        }
-      ], 
-      "thresholds": "1,2", 
-      "timeFrom": "1m", 
-      "title": "RECOVERY", 
-      "type": "singlestat", 
-      "valueFontSize": "40%", 
-      "valueMaps": [
-        {
-          "op": "=", 
-          "text": "N/A", 
-          "value": "null"
-        }, 
-        {
-          "op": "=", 
-          "text": "ENABLED", 
-          "value": "0"
-        }, 
-        {
-          "op": "=", 
-          "text": "ACTIVE", 
-          "value": "1"
-        }, 
-        {
-          "op": "=", 
-          "text": "DISABLED", 
-          "value": "2"
-        }, 
-        {
-          "op": "=", 
-          "text": "DISABLED", 
-          "value": "3"
-        }
-      ], 
-      "valueName": "current"
-    }, 
-    {
-      "content": "<h2 style=\"text-align: center;\">OSD<br>Hosts<br>Down</h2>", 
-      "description": "Shows which OSD hosts have all defined osd daemons in a down state", 
-      "gridPos": {
-        "h": 4, 
-        "w": 2, 
-        "x": 8, 
-        "y": 8
-      }, 
-      "id": 54, 
-      "links": [], 
-      "minSpan": 2, 
-      "mode": "html", 
-      "title": "", 
-      "transparent": true, 
-      "type": "text"
-    }, 
-    {
-      "columns": [], 
-      "datasource": null, 
-      "fontSize": "100%", 
-      "gridPos": {
-        "h": 4, 
-        "w": 10, 
-        "x": 10, 
-        "y": 8
-      }, 
-      "id": 58, 
-      "links": [], 
-      "pageSize": null, 
-      "scroll": true, 
-      "showHeader": true, 
-      "sort": {
-        "col": 2, 
-        "desc": false
-      }, 
-      "styles": [
-        {
-          "alias": "Hostname", 
-          "colorMode": "row", 
-          "colors": [
-            "rgba(245, 54, 54, 0.9)", 
-            "rgba(237, 129, 40, 0.89)", 
-            "rgba(50, 172, 45, 0.97)"
-          ], 
-          "dateFormat": "YYYY-MM-DD HH:mm:ss", 
-          "decimals": 2, 
-          "pattern": "instance", 
-          "thresholds": [
-            ""
-          ], 
-          "type": "string", 
-          "unit": "short"
-        }, 
-        {
-          "alias": "OSDs Active", 
-          "colorMode": "row", 
-          "colors": [
-            "rgba(245, 54, 54, 0.9)", 
-            "rgba(237, 129, 40, 0.89)", 
-            "rgba(50, 172, 45, 0.97)"
-          ], 
-          "dateFormat": "YYYY-MM-DD HH:mm:ss", 
-          "decimals": 0, 
-          "pattern": "Value", 
-          "thresholds": [
-            "1"
-          ], 
-          "type": "hidden", 
-          "unit": "none"
-        }, 
-        {
-          "alias": "", 
-          "colorMode": null, 
-          "colors": [
-            "rgba(245, 54, 54, 0.9)", 
-            "rgba(237, 129, 40, 0.89)", 
-            "rgba(50, 172, 45, 0.97)"
-          ], 
-          "dateFormat": "YYYY-MM-DD HH:mm:ss", 
-          "decimals": 2, 
-          "pattern": "/.*/", 
-          "thresholds": [], 
-          "type": "hidden", 
-          "unit": "short"
-        }
-      ], 
-      "targets": [
-        {
-          "expr": "(count by(instance) (ceph_disk_occupation * on(ceph_daemon) group_right(instance) ceph_osd_up == 0) - count by(instance) (ceph_disk_occupation))", 
-          "format": "table", 
-          "hide": false, 
-          "instant": true, 
-          "intervalFactor": 1, 
-          "legendFormat": "", 
-          "refId": "A"
-        }
-      ], 
-      "title": "", 
-      "transform": "table", 
-      "transparent": false, 
-      "type": "table"
     }, 
     {
       "collapsed": true, 
@@ -1311,7 +1511,7 @@
         "h": 1, 
         "w": 24, 
         "x": 0, 
-        "y": 12
+        "y": 5
       }, 
       "id": 64, 
       "panels": [
@@ -1329,7 +1529,7 @@
             "h": 7, 
             "w": 5, 
             "x": 0, 
-            "y": 13
+            "y": 6
           }, 
           "id": 18, 
           "links": [], 
@@ -1464,8 +1664,8 @@
         {
           "columns": [
             {
-              "text": "Current", 
-              "value": "current"
+              "text": "Avg", 
+              "value": "avg"
             }
           ], 
           "datasource": null, 
@@ -1475,7 +1675,7 @@
             "h": 7, 
             "w": 5, 
             "x": 5, 
-            "y": 13
+            "y": 6
           }, 
           "id": 20, 
           "links": [], 
@@ -1541,7 +1741,8 @@
             {
               "expr": "ceph_pg_total", 
               "format": "time_series", 
-              "intervalFactor": 2, 
+              "instant": true, 
+              "intervalFactor": 1, 
               "legendFormat": "PGs", 
               "refId": "A", 
               "step": 20
@@ -1549,7 +1750,9 @@
             {
               "expr": "ceph_pg_active", 
               "format": "time_series", 
-              "intervalFactor": 2, 
+              "hide": false, 
+              "instant": true, 
+              "intervalFactor": 1, 
               "legendFormat": "PGs Active", 
               "refId": "B", 
               "step": 20
@@ -1557,7 +1760,9 @@
             {
               "expr": "ceph_pg_clean", 
               "format": "time_series", 
-              "intervalFactor": 2, 
+              "hide": false, 
+              "instant": true, 
+              "intervalFactor": 1, 
               "legendFormat": "PGs Active+clean", 
               "refId": "C", 
               "step": 20
@@ -1565,10 +1770,21 @@
             {
               "expr": "ceph_pg_peering", 
               "format": "time_series", 
-              "intervalFactor": 2, 
-              "legendFormat": "PGs peering", 
+              "hide": false, 
+              "instant": true, 
+              "intervalFactor": 1, 
+              "legendFormat": "PGs Peering", 
               "refId": "D", 
               "step": 20
+            }, 
+            {
+              "expr": "ceph_pg_unknown", 
+              "format": "time_series", 
+              "hide": false, 
+              "instant": true, 
+              "intervalFactor": 1, 
+              "legendFormat": "PG's Unknown", 
+              "refId": "E"
             }
           ], 
           "title": "PG Summary", 
@@ -1585,7 +1801,7 @@
         "h": 1, 
         "w": 24, 
         "x": 0, 
-        "y": 13
+        "y": 6
       }, 
       "id": 24, 
       "panels": [
@@ -2147,5 +2363,5 @@
   "timezone": "browser", 
   "title": "Ceph Health", 
   "uid": "000000009", 
-  "version": 37
+  "version": 42
 }
