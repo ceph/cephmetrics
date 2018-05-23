@@ -10,128 +10,45 @@ Summary:	Monitoring service for Ceph clusters
 License:	GPLv3
 URL:		https://github.com/ceph/cephmetrics
 Source0:	cephmetrics-@VERSION@.zip
-Source1:	vonage-status-panel-1.0.4.zip
-Source2:	grafana-piechart-panel-1.1.5.zip
-
-# SELinux deps
-BuildRequires:  checkpolicy
-BuildRequires:  selinux-policy-devel
-BuildRequires:  /usr/share/selinux/devel/policyhelp
-BuildRequires:  hardlink
-Requires:       policycoreutils, libselinux-utils
-Requires(post): selinux-policy >= %{_selinux_policy_version}, policycoreutils
-Requires(postun): policycoreutils
-
-Requires:	PyYAML
-Requires:	graphite-web
-Requires:	python-carbon
-Requires:	python-requests
-Requires:       cephmetrics-grafana-plugins = %{version}-%{release}
 
 %description
 The monitoring service with web frontend for Ceph storage clusters providing several statistical data graphed by grafana.
 
-
-%package grafana-plugins
-Summary:	Vonage plugin for graphana
-Requires:	grafana
-License:        ASL 2.0
-%description grafana-plugins
-The vonage status panel and piechart panel for grafana web server.
-
-
-%package collectors
-Summary:	Ceph metrics collectors
-Requires:	collectd
-Requires:	collectd-python
-Requires:	libsemanage-python
-%description collectors
-The collectors for Ceph implemented with help of statistics collection daemon collectd.
-
-
 %package ansible
-Summary:	Ansible playbooks for Ceph metrics
+Summary:	Monitoring service for Ceph clusters deployment tool
 Requires:	ceph-ansible
+Requires:	PyYAML
+Requires:	python-requests
 Requires:	python-netaddr
+Obsoletes:	cephmetrics-grafana-plugins < %{version}-%{release}
+Obsoletes:	cephmetrics-collectors < %{version}-%{release}
+Obsoletes:	cephmetrics < %{version}-%{release}
 %description ansible
-Ansible playbooks for Ceph metrics
-
+The monitoring service with web frontend for Ceph storage clusters providing several statistical data graphed by grafana. This package contains a set of ansible playbooks to deploy a cephmetrics server.
 
 %prep
 %setup -q
 # Disable devel_mode in the rpms
 patch -p1 < patches/0001-ansible-Disable-devel_mode.patch
-# Unzip grafana plugins
-unzip %SOURCE1
-mv -f Vonage* cephmetrics-vonage
-unzip %SOURCE2
-mv -f grafana-piechart-panel* cephmetrics-piechart
 
 
 %build
-make -f /usr/share/selinux/devel/Makefile cephmetrics.pp
-
 # Change the devel_mode defaults
 sed -i -e 's/devel_mode: true/devel_mode: false/' ansible/roles/*/defaults/main.yml
 
-# Support light mode better
-sed -i -e 's/green/rgb(1,167,1)/g' cephmetrics-vonage/dist/css/status_panel.css
-
 
 %install
-# Install dashUpdater.py
-install -d %{buildroot}%{_libexecdir}/cephmetrics
-install -m 755 dashUpdater.py %{buildroot}%{_libexecdir}/cephmetrics/
-install -d %{buildroot}%{_datadir}/cephmetrics/dashboards
-install -m 644 dashboards/current/* %{buildroot}%{_datadir}/cephmetrics/dashboards/
-
-# Install vonage and piechart plugin
-install -d %{buildroot}%{_localstatedir}/lib/grafana/plugins/
-cp -r cephmetrics-vonage %{buildroot}%{_localstatedir}/lib/grafana/plugins/
-cp -r cephmetrics-piechart %{buildroot}%{_localstatedir}/lib/grafana/plugins/
-
-# Install collectors
-install -d %{buildroot}%{_libdir}/collectd/cephmetrics/collectors
-install -m 755 cephmetrics.py %{buildroot}%{_libdir}/collectd/cephmetrics
-install -m 644 collectors/* %{buildroot}%{_libdir}/collectd/cephmetrics/collectors
-
 # Install ansible playbooks
 install -d %{buildroot}%{_datadir}
 cp -L -r ansible %{buildroot}%{_datadir}/cephmetrics-ansible
-
-# Install SELinux
-install -d %{buildroot}%{_datadir}/selinux/packages
-install -m 644 cephmetrics.pp %{buildroot}%{_datadir}/selinux/packages/cephmetrics.pp
 exit 0
 
 
-%files
-%{_libexecdir}/cephmetrics/dashUpdater.py
-%{_datadir}/cephmetrics
+%files ansible
+%{_datadir}/cephmetrics-ansible
 %doc dashboard.yml
 %doc etc/grafana
 %doc LICENSE
 %doc README
-
-%files grafana-plugins
-%{_localstatedir}/lib/grafana/plugins/cephmetrics-vonage
-%{_localstatedir}/lib/grafana/plugins/cephmetrics-piechart
-
-%files collectors
-%{_libdir}/collectd/cephmetrics
-%doc etc/collectd.conf
-%doc etc/collectd.d
-%{_datadir}/selinux/packages/cephmetrics.pp
-
-%post collectors
-/usr/sbin/semodule -i %{_datadir}/selinux/packages/cephmetrics.pp &> /dev/null || :
-
-%postun collectors
-if [ $1 == 0 ] ; then
-	/usr/sbin/semodule -r cephmetrics &> /dev/null || :
-fi
-
-%files ansible
-%{_datadir}/cephmetrics-ansible
 
 %changelog
