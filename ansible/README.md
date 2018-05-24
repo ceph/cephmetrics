@@ -70,9 +70,6 @@ You may override certain variables by creating a `vars.yml` file:
         baseurl: http://example.com/my/repo
     ```
 
-These variables are only relevent when `devel_mode` is true:
-- `use_epel`: Whether or not to use EPEL and grafana.com instead of ceph.com-sourced packages for dependencies. Default: false
-
 ## Current Limitations
 
 - Currently, metrics are only *displayed* for `osd` and `rgw` hosts.

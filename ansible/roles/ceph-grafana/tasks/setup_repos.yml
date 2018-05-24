@@ -5,19 +5,9 @@
     dest: /etc/yum.repos.d/grafana.repo
   when:
     - ansible_pkg_mgr == 'yum'
-    - use_epel
     - devel_mode
 
-- name: Remove Grafana repo
-  file:
-    path: /etc/yum.repos.d/grafana.repo
-    state: absent
-  when:
-    - ansible_pkg_mgr == "yum"
-    - not use_epel
-    - devel_mode
-
-- name: Install grafana repo
+- name: Add grafana repo
   copy:
     src: files/grafana.list
     dest: /etc/apt/sources.list.d/grafana.list
