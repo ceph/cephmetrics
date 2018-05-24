@@ -1,10 +1,20 @@
 {
+  "__inputs": [
+    {
+      "name": "DS_LOCAL",
+      "label": "Local",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "prometheus",
+      "pluginName": "Prometheus"
+    }
+  ],
   "__requires": [
     {
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "5.0.4"
+      "version": "5.1.3"
     },
     {
       "type": "panel",
@@ -42,7 +52,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1524726965851,
+  "iteration": 1527118585082,
   "links": [],
   "panels": [
     {
@@ -137,7 +147,11 @@
           "min": null,
           "show": true
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "aliasColors": {},
@@ -225,7 +239,11 @@
           "min": null,
           "show": true
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "aliasColors": {},
@@ -306,7 +324,11 @@
           "min": null,
           "show": true
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "cacheTimeout": null,
@@ -519,8 +541,8 @@
           "scopedVars": {
             "rgw_servers": {
               "selected": false,
-              "text": "rgw.rhs-srv-01",
-              "value": "rgw.rhs-srv-01"
+              "text": "rgw.radosgw-staticsite.dl-rgw-pub01",
+              "value": "rgw.radosgw-staticsite.dl-rgw-pub01"
             }
           },
           "seriesOverrides": [],
@@ -627,8 +649,8 @@
           "scopedVars": {
             "rgw_servers": {
               "selected": false,
-              "text": "rgw.rhs-srv-01",
-              "value": "rgw.rhs-srv-01"
+              "text": "rgw.radosgw-staticsite.dl-rgw-pub01",
+              "value": "rgw.radosgw-staticsite.dl-rgw-pub01"
             }
           },
           "seriesOverrides": [],
@@ -724,8 +746,8 @@
           "scopedVars": {
             "rgw_servers": {
               "selected": false,
-              "text": "rgw.rhs-srv-01",
-              "value": "rgw.rhs-srv-01"
+              "text": "rgw.radosgw-staticsite.dl-rgw-pub01",
+              "value": "rgw.radosgw-staticsite.dl-rgw-pub01"
             }
           },
           "strokeWidth": 1,
@@ -780,7 +802,7 @@
       {
         "allValue": null,
         "current": {},
-        "datasource": null,
+        "datasource": "${DS_LOCAL}",
         "hide": 2,
         "includeAll": true,
         "label": null,
@@ -831,5 +853,5 @@
   },
   "timezone": "",
   "title": "Ceph RGW Workload",
-  "version": 15
+  "version": 8
 }
