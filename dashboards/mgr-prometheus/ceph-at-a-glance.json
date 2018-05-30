@@ -3240,7 +3240,7 @@
       {
         "allValue": "",
         "current": {},
-        "datasource": "${DS_LOCAL}",
+        "datasource": null,
         "hide": 2,
         "includeAll": true,
         "label": "OSD Host",
@@ -3260,7 +3260,7 @@
       {
         "allValue": "",
         "current": {},
-        "datasource": "${DS_LOCAL}",
+        "datasource": null,
         "hide": 2,
         "includeAll": true,
         "label": "OSD Host",

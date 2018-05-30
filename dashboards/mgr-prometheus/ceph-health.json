@@ -2269,7 +2269,7 @@
       {
         "allValue": null,
         "current": {},
-        "datasource": "${DS_LOCAL}",
+        "datasource": null,
         "hide": 2,
         "includeAll": false,
         "label": null,
@@ -2311,7 +2311,7 @@
       {
         "allValue": null,
         "current": {},
-        "datasource": "${DS_LOCAL}",
+        "datasource": null,
         "hide": 2,
         "includeAll": true,
         "label": null,
