@@ -359,27 +359,6 @@
       },
       {
         "allValue": null,
-        "current": {
-          "text": "All",
-          "value": "$__all"
-        },
-        "hide": 2,
-        "includeAll": true,
-        "label": "",
-        "multi": false,
-        "name": "mon_servers",
-        "options": [
-          {
-            "selected": true,
-            "text": "All",
-            "value": "$__all"
-          }
-        ],
-        "query": "",
-        "type": "custom"
-      },
-      {
-        "allValue": null,
         "current": {},
         "datasource": null,
         "hide": 2,
@@ -406,12 +385,12 @@
         "includeAll": true,
         "label": null,
         "multi": false,
-        "name": "copy_of_mon_servers",
+        "name": "mon_servers",
         "options": [],
-        "query": "label_values(ceph_server_metadata{services=~\".*mon.*\"}, hostname)",
+        "query": "label_values(ceph_mon_quorum_status, ceph_daemon)",
         "refresh": 1,
         "regex": "",
-        "sort": 0,
+        "sort": 1,
         "tagValuesQuery": "",
         "tags": [],
         "tagsQuery": "",
