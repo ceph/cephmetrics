@@ -375,13 +375,6 @@
           ],
           "repeat": "mon_servers",
           "repeatDirection": "v",
-          "scopedVars": {
-            "mon_servers": {
-              "selected": false,
-              "text": "mon.rhs-cli-04",
-              "value": "mon.rhs-cli-04"
-            }
-          },
           "sparkline": {
             "fillColor": "rgba(31, 118, 189, 0.18)",
             "full": false,
@@ -1249,13 +1242,6 @@
           "repeatDirection": "v",
           "repeatIteration": 1526963039202,
           "repeatPanelId": 28,
-          "scopedVars": {
-            "mon_servers": {
-              "selected": false,
-              "text": "mon.rhs-cli-05",
-              "value": "mon.rhs-cli-05"
-            }
-          },
           "sparkline": {
             "fillColor": "rgba(31, 118, 189, 0.18)",
             "full": false,
@@ -1454,13 +1440,6 @@
           "repeatDirection": "v",
           "repeatIteration": 1526963039202,
           "repeatPanelId": 28,
-          "scopedVars": {
-            "mon_servers": {
-              "selected": false,
-              "text": "mon.rhs-cli-06",
-              "value": "mon.rhs-cli-06"
-            }
-          },
           "sparkline": {
             "fillColor": "rgba(31, 118, 189, 0.18)",
             "full": false,
@@ -1594,7 +1573,6 @@
           "targets": [
             {
               "alias": "Objects",
-              "dsType": "influxdb",
               "expr": "ceph_cluster_total_objects",
               "format": "time_series",
               "groupBy": [
@@ -1613,7 +1591,6 @@
               ],
               "intervalFactor": 1,
               "legendFormat": "Total Objects",
-              "measurement": "collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.num_object",
               "policy": "default",
               "refId": "A",
               "resultFormat": "time_series",

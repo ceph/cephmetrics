@@ -373,24 +373,9 @@
             "selected": true,
             "text": "All",
             "value": "$__all"
-          },
-          {
-            "selected": false,
-            "text": "rhs-cli-04.ceph-dev.lab.eng.rdu2.redhat.com",
-            "value": "rhs-cli-04.ceph-dev.lab.eng.rdu2.redhat.com"
-          },
-          {
-            "selected": false,
-            "text": "rhs-cli-05.ceph-dev.lab.eng.rdu2.redhat.com",
-            "value": "rhs-cli-05.ceph-dev.lab.eng.rdu2.redhat.com"
-          },
-          {
-            "selected": false,
-            "text": "rhs-cli-06.ceph-dev.lab.eng.rdu2.redhat.com",
-            "value": "rhs-cli-06.ceph-dev.lab.eng.rdu2.redhat.com"
           }
         ],
-        "query": "rhs-cli-04.ceph-dev.lab.eng.rdu2.redhat.com,rhs-cli-05.ceph-dev.lab.eng.rdu2.redhat.com,rhs-cli-06.ceph-dev.lab.eng.rdu2.redhat.com",
+        "query": "",
         "type": "custom"
       },
       {

@@ -64,7 +64,6 @@
               "intervalFactor": 1,
               "legendFormat": "{{host}}",
               "refId": "A",
-              "target": "groupByNode(collectd.$osd_servers.$domain.cephmetrics.gauge.$ceph_cluster.osd.*.perf.util,1,\"maxSeries\")",
               "textEditor": true
             }
           ],
@@ -143,13 +142,6 @@
           "points": false,
           "renderer": "flot",
           "repeat": "osd_servers",
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "apama002",
-              "value": "apama002"
-            }
-          },
           "seriesOverrides": [],
           "spaceLength": 10,
           "span": 2,
@@ -230,13 +222,6 @@
           "repeat": null,
           "repeatIteration": 1519090074308,
           "repeatPanelId": 4,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "mira019",
-              "value": "mira019"
-            }
-          },
           "seriesOverrides": [],
           "spaceLength": 10,
           "span": 2,
@@ -317,13 +302,6 @@
           "repeat": null,
           "repeatIteration": 1519090074308,
           "repeatPanelId": 4,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "mira021",
-              "value": "mira021"
-            }
-          },
           "seriesOverrides": [],
           "spaceLength": 10,
           "span": 2,
@@ -404,13 +382,6 @@
           "repeat": null,
           "repeatIteration": 1519090074308,
           "repeatPanelId": 4,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "mira031",
-              "value": "mira031"
-            }
-          },
           "seriesOverrides": [],
           "spaceLength": 10,
           "span": 2,
@@ -491,13 +462,6 @@
           "repeat": null,
           "repeatIteration": 1519090074308,
           "repeatPanelId": 4,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "mira049",
-              "value": "mira049"
-            }
-          },
           "seriesOverrides": [],
           "spaceLength": 10,
           "span": 2,
@@ -578,13 +542,6 @@
           "repeat": null,
           "repeatIteration": 1519090074308,
           "repeatPanelId": 4,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "mira055",
-              "value": "mira055"
-            }
-          },
           "seriesOverrides": [],
           "spaceLength": 10,
           "span": 2,
@@ -665,13 +622,6 @@
           "repeat": null,
           "repeatIteration": 1519090074308,
           "repeatPanelId": 4,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "mira060",
-              "value": "mira060"
-            }
-          },
           "seriesOverrides": [],
           "spaceLength": 10,
           "span": 2,
@@ -752,13 +702,6 @@
           "repeat": null,
           "repeatIteration": 1519090074308,
           "repeatPanelId": 4,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "mira070",
-              "value": "mira070"
-            }
-          },
           "seriesOverrides": [],
           "spaceLength": 10,
           "span": 2,
@@ -839,13 +782,6 @@
           "repeat": null,
           "repeatIteration": 1519090074308,
           "repeatPanelId": 4,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "mira076",
-              "value": "mira076"
-            }
-          },
           "seriesOverrides": [],
           "spaceLength": 10,
           "span": 2,
@@ -926,13 +862,6 @@
           "repeat": null,
           "repeatIteration": 1519090074308,
           "repeatPanelId": 4,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "mira087",
-              "value": "mira087"
-            }
-          },
           "seriesOverrides": [],
           "spaceLength": 10,
           "span": 2,
@@ -1013,13 +942,6 @@
           "repeat": null,
           "repeatIteration": 1519090074308,
           "repeatPanelId": 4,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "mira093",
-              "value": "mira093"
-            }
-          },
           "seriesOverrides": [],
           "spaceLength": 10,
           "span": 2,
@@ -1100,13 +1022,6 @@
           "repeat": null,
           "repeatIteration": 1519090074308,
           "repeatPanelId": 4,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "mira099",
-              "value": "mira099"
-            }
-          },
           "seriesOverrides": [],
           "spaceLength": 10,
           "span": 2,
@@ -1187,13 +1102,6 @@
           "repeat": null,
           "repeatIteration": 1519090074308,
           "repeatPanelId": 4,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "mira116",
-              "value": "mira116"
-            }
-          },
           "seriesOverrides": [],
           "spaceLength": 10,
           "span": 2,
@@ -1274,13 +1182,6 @@
           "repeat": null,
           "repeatIteration": 1519090074308,
           "repeatPanelId": 4,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "mira120",
-              "value": "mira120"
-            }
-          },
           "seriesOverrides": [],
           "spaceLength": 10,
           "span": 2,
@@ -1361,13 +1262,6 @@
           "repeat": null,
           "repeatIteration": 1519090074308,
           "repeatPanelId": 4,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "mira122",
-              "value": "mira122"
-            }
-          },
           "seriesOverrides": [],
           "spaceLength": 10,
           "span": 2,
@@ -1448,13 +1342,6 @@
           "repeat": null,
           "repeatIteration": 1519090074308,
           "repeatPanelId": 4,
-          "scopedVars": {
-            "osd_servers": {
-              "selected": false,
-              "text": "reesi001",
-              "value": "reesi001"
-            }
-          },
           "seriesOverrides": [],
           "spaceLength": 10,
           "span": 2,

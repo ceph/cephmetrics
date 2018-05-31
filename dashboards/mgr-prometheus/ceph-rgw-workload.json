@@ -516,13 +516,6 @@
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
-          "scopedVars": {
-            "rgw_servers": {
-              "selected": false,
-              "text": "rgw.rhs-srv-01",
-              "value": "rgw.rhs-srv-01"
-            }
-          },
           "seriesOverrides": [],
           "spaceLength": 10,
           "stack": true,
@@ -624,13 +617,6 @@
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
-          "scopedVars": {
-            "rgw_servers": {
-              "selected": false,
-              "text": "rgw.rhs-srv-01",
-              "value": "rgw.rhs-srv-01"
-            }
-          },
           "seriesOverrides": [],
           "spaceLength": 10,
           "stack": true,
@@ -721,13 +707,6 @@
           "maxDataPoints": 3,
           "nullPointMode": "connected",
           "pieType": "pie",
-          "scopedVars": {
-            "rgw_servers": {
-              "selected": false,
-              "text": "rgw.rhs-srv-01",
-              "value": "rgw.rhs-srv-01"
-            }
-          },
           "strokeWidth": 1,
           "targets": [
             {
