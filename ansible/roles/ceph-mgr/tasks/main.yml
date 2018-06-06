@@ -8,14 +8,21 @@
   when: backend.metrics != 'mgr' or backend.storage != 'prometheus'
 
 - name: Check to see if the mgr is containerized
-  command: "docker inspect ceph-mgr@{{ ansible_hostname }}"
+  command: "docker inspect {{ item }}"
+  with_items:
+    - "ceph-mgr@{{ ansible_hostname }}"
+    - "ceph-mgr-{{ ansible_hostname }}"
   register: mgr_container
   failed_when: false
 
+- name: Choose the correct container name
+  set_fact:
+    container_name: "{% for res in mgr_container.results if res.rc == 0 %}{{ res.item }}{% endfor %}"
+
 - name: Prefix the mgr command with a docker command
   set_fact:
-    mgr_prefix: "docker exec ceph-mgr@{{ ansible_hostname }}"
-  when: mgr_container.rc == 0
+    mgr_prefix: "docker exec {{ container_name }}"
+  when: container_name != ""
 
 - name: Enable mgr prometheus module
   command: "{{ mgr_prefix|default('') }} ceph mgr module enable prometheus"
