@@ -184,7 +184,6 @@
           "intervalFactor": 1,
           "legendFormat": "{{name}}",
           "refId": "A",
-          "target": "groupByNode(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.bytes_sec,-2,\"maxSeries\")",
           "textEditor": true
         }
       ],
@@ -377,7 +376,6 @@
           "instant": true,
           "intervalFactor": 2,
           "refId": "A",
-          "target": "limit(sortByMaxima(groupByNode(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.*.op_per_sec,-2,\"maxSeries\")),5)",
           "textEditor": true
         }
       ],
@@ -515,7 +513,6 @@
           "instant": true,
           "intervalFactor": 2,
           "refId": "A",
-          "target": "limit(sortByMaxima(groupByNode(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.*.bytes_sec,-2,\"maxSeries\")),5)",
           "textEditor": true
         }
       ],
@@ -698,13 +695,6 @@
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
-          "scopedVars": {
-            "pool_name": {
-              "selected": false,
-              "text": ".rgw.root",
-              "value": ".rgw.root"
-            }
-          },
           "seriesOverrides": [],
           "spaceLength": 10,
           "stack": true,
@@ -715,16 +705,14 @@
               "format": "time_series",
               "intervalFactor": 1,
               "legendFormat": "reads",
-              "refId": "B",
-              "target": "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.write_op_per_sec), -1)"
+              "refId": "B"
             },
             {
               "expr": "(label_replace(irate(ceph_pool_wr[1m]),\"id\",\"$1\",\"pool_id\",\"(.*)\") * on(pool_id) group_left(instance,name) ceph_pool_metadata{name=~\"[[pool_name]]\"})",
               "format": "time_series",
               "intervalFactor": 1,
               "legendFormat": "writes",
-              "refId": "C",
-              "target": "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.write_op_per_sec), -1)"
+              "refId": "C"
             }
           ],
           "thresholds": [],
@@ -798,13 +786,6 @@
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
-          "scopedVars": {
-            "pool_name": {
-              "selected": false,
-              "text": ".rgw.root",
-              "value": ".rgw.root"
-            }
-          },
           "seriesOverrides": [],
           "spaceLength": 10,
           "stack": true,
@@ -815,16 +796,14 @@
               "format": "time_series",
               "intervalFactor": 1,
               "legendFormat": "reads",
-              "refId": "A",
-              "target": "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.read_bytes_sec), -1)"
+              "refId": "A"
             },
             {
               "expr": "(label_replace(irate(ceph_pool_wr_bytes[1m]),\"id\",\"$1\",\"pool_id\",\"(.*)\") + on(pool_id) group_left(instance,name) ceph_pool_metadata{name=~\"[[pool_name]]\"})",
               "format": "time_series",
               "intervalFactor": 1,
               "legendFormat": "writes",
-              "refId": "C",
-              "target": "aliasByNode(maxSeries(collectd.*.$domain.cephmetrics.gauge.$cluster_name.mon.pools.$pool_name.read_bytes_sec), -1)"
+              "refId": "C"
             }
           ],
           "thresholds": [],

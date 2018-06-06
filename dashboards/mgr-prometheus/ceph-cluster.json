@@ -150,13 +150,11 @@
       "tableColumn": "",
       "targets": [
         {
-          "dsType": "influxdb",
           "expr": "count(ceph_mon_metadata)",
           "format": "time_series",
           "groupBy": [],
           "instant": true,
           "intervalFactor": 1,
-          "measurement": "collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.num_pool",
           "policy": "default",
           "refId": "A",
           "resultFormat": "time_series",
@@ -335,13 +333,11 @@
       "tableColumn": "",
       "targets": [
         {
-          "dsType": "influxdb",
           "expr": "count(ceph_mds_metadata)",
           "format": "time_series",
           "groupBy": [],
           "instant": true,
           "intervalFactor": 1,
-          "measurement": "collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.num_pool",
           "policy": "default",
           "refId": "A",
           "resultFormat": "time_series",
@@ -597,13 +593,11 @@
       "tableColumn": "",
       "targets": [
         {
-          "dsType": "influxdb",
           "expr": "count(max by (id) (ceph_osd_metadata))",
           "format": "time_series",
           "groupBy": [],
           "intervalFactor": 2,
           "legendFormat": "",
-          "measurement": "collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.num_pool",
           "policy": "default",
           "refId": "A",
           "resultFormat": "time_series",
@@ -697,12 +691,10 @@
       "tableColumn": "",
       "targets": [
         {
-          "dsType": "influxdb",
           "expr": "count(ceph_pool_metadata)",
           "format": "time_series",
           "groupBy": [],
           "intervalFactor": 2,
-          "measurement": "collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.num_pool",
           "policy": "default",
           "refId": "A",
           "resultFormat": "time_series",
@@ -1674,13 +1666,11 @@
           "targets": [
             {
               "alias": "Used",
-              "dsType": "influxdb",
               "expr": "scalar(ceph_cluster_total_used_bytes)",
               "format": "time_series",
               "groupBy": [],
               "intervalFactor": 2,
               "legendFormat": "Used",
-              "measurement": "collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.osd_bytes_used",
               "policy": "default",
               "refId": "B",
               "resultFormat": "time_series",
@@ -1700,13 +1690,11 @@
             },
             {
               "alias": "Raw Capacity",
-              "dsType": "influxdb",
               "expr": "scalar(ceph_cluster_total_bytes)",
               "format": "time_series",
               "groupBy": [],
               "intervalFactor": 2,
               "legendFormat": "Raw",
-              "measurement": "collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.osd_bytes",
               "policy": "default",
               "refId": "A",
               "resultFormat": "time_series",
@@ -1807,7 +1795,6 @@
           "targets": [
             {
               "alias": "Used",
-              "dsType": "influxdb",
               "expr": "max by (name) (\n  ceph_pool_bytes_used / (ceph_pool_bytes_used + ceph_pool_max_avail) * 100 + on (pool_id) group_left (name) ceph_pool_metadata\n)",
               "format": "time_series",
               "groupBy": [],
@@ -1912,13 +1899,11 @@
           "targets": [
             {
               "alias": "Used",
-              "dsType": "influxdb",
               "expr": "scalar(ceph_cluster_total_objects)",
               "format": "time_series",
               "groupBy": [],
               "intervalFactor": 2,
               "legendFormat": "RADOS Objects",
-              "measurement": "collectd.obj-mon-1.storage.lab.cephmetrics.gauge.ceph.mon.osd_bytes_used",
               "policy": "default",
               "refId": "B",
               "resultFormat": "time_series",
