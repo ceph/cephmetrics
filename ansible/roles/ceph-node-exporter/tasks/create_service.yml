@@ -16,7 +16,7 @@
 - name: Ship defaults file
   template:
     src: sysconfig
-    dest: "/etc/{{ sysconfig_dir }}/node_exporter"
+    dest: "/etc/{{ sysconfig_dir }}/{{ node_exporter.service_name }}"
     owner: root
     group: root
     mode: 0644
@@ -24,7 +24,7 @@
 - name: Ship systemd service file
   template:
     src: node_exporter.service
-    dest: '/etc/systemd/system/'
+    dest: '/etc/systemd/system/{{ node_exporter.service_name }}.service'
     owner: root
     group: root
     mode: 0644

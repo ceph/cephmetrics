@@ -3,7 +3,7 @@ Description=Node Exporter
 
 [Service]
 User=node_exporter
-EnvironmentFile=/etc/{{ sysconfig_dir }}/node_exporter
+EnvironmentFile=/etc/{{ sysconfig_dir }}/{{ node_exporter.service_name }}
 ExecStart=/usr/local/sbin/node_exporter $OPTIONS
 
 [Install]
