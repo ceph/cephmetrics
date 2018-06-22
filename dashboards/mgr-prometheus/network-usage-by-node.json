@@ -90,7 +90,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum (irate(node_network_receive_bytes{instance=~\"[[mon_servers]].*\",device=~\"[[interfaces]].*\"}[30s])) + \nsum (irate(node_network_transmit_bytes{instance=~\"[[mon_servers]].*\",device=~\"[[interfaces]].*\"}[30s]))",
+          "expr": "sum (irate(node_network_receive_bytes{instance=~\"([[mon_servers]]).*\",device=~\"[[interfaces]].*\"}[30s])) + \nsum (irate(node_network_transmit_bytes{instance=~\"([[mon_servers]]).*\",device=~\"[[interfaces]].*\"}[30s]))",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "MONs",
@@ -187,7 +187,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum (irate(node_network_receive_bytes{instance=~\"[[mon_servers]].*\", device=~\"[[interfaces]].*\"}[30s])) by (instance) + \nsum (irate(node_network_transmit_bytes{instance=~\"[[mon_servers]].*\", device=~\"[[interfaces]].*\"}[30s])) by (instance)",
+              "expr": "sum (irate(node_network_receive_bytes{instance=~\"([[mon_servers]]).*\", device=~\"[[interfaces]].*\"}[30s])) by (instance) + \nsum (irate(node_network_transmit_bytes{instance=~\"([[mon_servers]]).*\", device=~\"[[interfaces]].*\"}[30s])) by (instance)",
               "format": "time_series",
               "intervalFactor": 1,
               "legendFormat": "{{instance}}",
@@ -389,7 +389,7 @@
         "options": [],
         "query": "label_values(ceph_mon_quorum_status, ceph_daemon)",
         "refresh": 1,
-        "regex": "",
+        "regex": "/mon.(.*)/",
         "sort": 1,
         "tagValuesQuery": "",
         "tags": [],
