@@ -7,7 +7,7 @@
   tags:
     - skip_ansible_lint
 
-- name: Open ports for Grafana
+- name: Open ports for node_exporter
   firewalld:
     port: "{{ item }}"
     zone: "{{ firewalld_zone }}"
