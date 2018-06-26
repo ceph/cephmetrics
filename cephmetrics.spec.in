@@ -44,6 +44,8 @@ sed -i -e 's|version: .*$|version: v3.9|' ansible/roles/ceph-prometheus/defaults
 sed -i -e 's|container_name: .*$|container_name: registry.access.redhat.com/rhceph/rhceph-3-dashboard-rhel7|' ansible/roles/ceph-grafana/defaults/main.yml
 sed -i -e 's|version: .*$|version: 3|' ansible/roles/ceph-grafana/defaults/main.yml
 
+# Change the service_name for node_exporter
+sed -i -e 's|service_name: .*|service_name: prometheus-node-exporter|' ansible/roles/ceph-node-exporter/defaults/main.yml
 
 %install
 # Install ansible playbooks
