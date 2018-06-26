@@ -78,9 +78,9 @@
   register: dashboard_home
   no_log: true
 
-- name: Set the home dashboard
+- name: Set the org's home dashboard
   uri:
-    url: http://localhost:3000/api/org/preferences
+    url: "http://localhost:3000/api/{{ item }}/preferences"
     method: PUT
     user: "{{ grafana.admin_user }}"
     password: "{{ grafana.admin_password }}"
@@ -88,3 +88,6 @@
     status_code: 200
     body_format: json
     body: '{"homeDashboardId": {{ dashboard_home.json.dashboard.id }} }'
+  with_items:
+    - user
+    - org
