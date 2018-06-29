@@ -46,6 +46,7 @@
   - rbdmirrors
   - clients
   - mgrs
+  - iscsis
   # This role is (so far) only used for testing
   - cluster
   become: true
