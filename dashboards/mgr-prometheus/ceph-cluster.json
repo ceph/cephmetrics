@@ -2206,7 +2206,7 @@
               ],
               "dateFormat": "YYYY-MM-DD HH:mm:ss",
               "decimals": 2,
-              "pattern": "id",
+              "pattern": "ceph_daemon",
               "thresholds": [],
               "type": "string",
               "unit": "short"
@@ -2295,7 +2295,7 @@
               ],
               "dateFormat": "YYYY-MM-DD HH:mm:ss",
               "decimals": 0,
-              "pattern": "id",
+              "pattern": "ceph_daemon",
               "thresholds": [],
               "type": "number",
               "unit": "none"
@@ -2383,7 +2383,7 @@
               ],
               "dateFormat": "YYYY-MM-DD HH:mm:ss",
               "decimals": 2,
-              "pattern": "id",
+              "pattern": "ceph_daemon",
               "thresholds": [],
               "type": "string",
               "unit": "short"
@@ -2471,7 +2471,7 @@
               ],
               "dateFormat": "YYYY-MM-DD HH:mm:ss",
               "decimals": 2,
-              "pattern": "id",
+              "pattern": "ceph_daemon",
               "thresholds": [],
               "type": "string",
               "unit": "short"
