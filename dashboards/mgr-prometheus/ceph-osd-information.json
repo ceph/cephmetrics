@@ -1,33 +1,33 @@
 {
   "__requires": [
     {
-      "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "5.0.4"
+      "type": "grafana",
+      "version": "5.0.0"
     },
     {
-      "type": "panel",
       "id": "grafana-piechart-panel",
       "name": "Pie Chart",
-      "version": "1.3.0"
+      "type": "panel",
+      "version": "1.3.3"
     },
     {
-      "type": "datasource",
       "id": "prometheus",
-      "name": "Local",
+      "name": "Prometheus",
+      "type": "datasource",
       "version": "5.0.0"
     },
     {
-      "type": "panel",
       "id": "singlestat",
       "name": "Singlestat",
+      "type": "panel",
       "version": "5.0.0"
     },
     {
-      "type": "panel",
       "id": "table",
       "name": "Table",
+      "type": "panel",
       "version": "5.0.0"
     }
   ],
@@ -48,7 +48,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1526250090593,
+  "iteration": 1530217097188,
   "links": [
     {
       "asDropdown": true,
@@ -138,7 +138,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "count(max by (id) (ceph_osd_metadata))",
+          "expr": "count(max by (ceph_daemon) (ceph_osd_metadata))",
           "format": "time_series",
           "intervalFactor": 2,
           "refId": "A",
@@ -538,9 +538,9 @@
         "show": true,
         "sideWidth": null,
         "sortDesc": true,
-        "values": false
+        "values": true
       },
-      "legendType": "Right side",
+      "legendType": "Under graph",
       "links": [],
       "maxDataPoints": "",
       "minSpan": 6,
@@ -742,11 +742,11 @@
           "id": 9,
           "links": [],
           "minSpan": 2,
-          "pageSize": 50,
+          "pageSize": 0,
           "scroll": true,
           "showHeader": true,
           "sort": {
-            "col": null,
+            "col": 0,
             "desc": false
           },
           "styles": [
@@ -757,7 +757,7 @@
               "type": "date"
             },
             {
-              "alias": "",
+              "alias": "OSD ID",
               "colorMode": null,
               "colors": [
                 "rgba(245, 54, 54, 0.9)",
@@ -766,39 +766,9 @@
               ],
               "dateFormat": "YYYY-MM-DD HH:mm:ss",
               "decimals": 2,
-              "pattern": "",
-              "thresholds": [],
-              "type": "number",
-              "unit": "short"
-            },
-            {
-              "alias": "OSD Id",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 0,
               "pattern": "Metric",
               "thresholds": [],
               "type": "number",
-              "unit": "none"
-            },
-            {
-              "alias": "",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "pattern": "Current",
-              "thresholds": [],
-              "type": "hidden",
               "unit": "short"
             },
             {
@@ -812,13 +782,13 @@
               "decimals": 2,
               "pattern": "/.*/",
               "thresholds": [],
-              "type": "number",
+              "type": "hidden",
               "unit": "short"
             }
           ],
           "targets": [
             {
-              "expr": "label_replace(ceph_disk_occupation{ceph_daemon!~\"$bluestore_osd_id\"},\"osd_num\",\"$1\",\"ceph_daemon\",\"osd.(.*)\")",
+              "expr": "label_replace(\n  ceph_disk_occupation{ceph_daemon=~\"osd.($filestore_osd_id)\"},\n  \"osd_num\",\n  \"$1\",\n  \"ceph_daemon\",\n  \"osd.(.*)\"\n)",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "{{osd_num}}",
@@ -849,7 +819,7 @@
           "id": 12,
           "links": [],
           "minSpan": 4,
-          "pageSize": 50,
+          "pageSize": 0,
           "scroll": true,
           "showHeader": true,
           "sort": {
@@ -869,7 +839,7 @@
               "decimals": 2,
               "pattern": "osd_num",
               "thresholds": [],
-              "type": "string",
+              "type": "number",
               "unit": "short"
             },
             {
@@ -907,7 +877,7 @@
           ],
           "targets": [
             {
-              "expr": "label_replace(ceph_osd_apply_latency_ms{ceph_daemon=~\"osd.[[osd_id]]\"},\"osd_num\",\"$1\",\"ceph_daemon\",\"osd.(.*)\")",
+              "expr": "label_replace(\n  topk($max_devices,\n    ceph_osd_apply_latency_ms{ceph_daemon=~\"osd.[[osd_id]]\"} + on (ceph_daemon) (ceph_filestore_journal_latency_count * 0)\n  ),\n  \"osd_num\",\n  \"$1\",\n  \"ceph_daemon\",\n  \"osd.(.*)\"\n)",
               "format": "table",
               "instant": true,
               "intervalFactor": 1,
@@ -942,8 +912,8 @@
           "id": 13,
           "links": [],
           "minSpan": 4,
-          "pageSize": 50,
-          "scroll": true,
+          "pageSize": 0,
+          "scroll": false,
           "showHeader": true,
           "sort": {
             "col": 6,
@@ -962,7 +932,7 @@
               "decimals": 2,
               "pattern": "osd_num",
               "thresholds": [],
-              "type": "string",
+              "type": "number",
               "unit": "short"
             },
             {
@@ -1000,7 +970,7 @@
           ],
           "targets": [
             {
-              "expr": "label_replace(ceph_osd_commit_latency_ms{ceph_daemon=~\"osd.[[osd_id]]\"},\"osd_num\",\"$1\",\"ceph_daemon\",\"osd.(.*)\")",
+              "expr": "label_replace(\n  topk($max_devices,\n    ceph_osd_commit_latency_ms{ceph_daemon=~\"osd.[[osd_id]]\"} + on (ceph_daemon) (ceph_filestore_journal_latency_count * 0)\n  ),\n  \"osd_num\",\n  \"$1\",\n  \"ceph_daemon\",\n  \"osd.(.*)\"\n  )",
               "format": "table",
               "instant": true,
               "intervalFactor": 1,
@@ -1067,7 +1037,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "ceph_osd_commit_latency_ms{ceph_daemon=\"osd.[[osd_id]]\"}",
+              "expr": "avg(\n  ceph_osd_commit_latency_ms{ceph_daemon=~\"osd.([[osd_id]])\"} + on (ceph_daemon) (ceph_filestore_journal_latency_count * 0)\n)",
               "format": "time_series",
               "intervalFactor": 1,
               "legendFormat": "commit",
@@ -1075,8 +1045,9 @@
               "textEditor": true
             },
             {
-              "expr": "ceph_osd_apply_latency_ms{ceph_daemon=\"osd.[[osd_id]]\"}",
+              "expr": "avg(\n  ceph_osd_apply_latency_ms{ceph_daemon=~\"osd.([[osd_id]])\"} + on (ceph_daemon) (ceph_filestore_journal_latency_count * 0)\n)",
               "format": "time_series",
+              "hide": false,
               "interval": "",
               "intervalFactor": 1,
               "legendFormat": "apply",
@@ -1159,7 +1130,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "quantile($percentile/100,\n         ceph_osd_commit_latency_ms)",
+              "expr": "quantile(\n  $percentile/100,\n  ceph_osd_commit_latency_ms + on (ceph_daemon) (ceph_filestore_journal_latency_count * 0)\n)",
               "format": "time_series",
               "intervalFactor": 1,
               "legendFormat": "commit",
@@ -1167,7 +1138,7 @@
               "textEditor": true
             },
             {
-              "expr": "quantile($percentile/100,\n         ceph_osd_apply_latency_ms)",
+              "expr": "quantile(\n  $percentile/100,\n  ceph_osd_apply_latency_ms + on (ceph_daemon) (ceph_filestore_journal_latency_count * 0)\n)",
               "format": "time_series",
               "intervalFactor": 1,
               "legendFormat": "apply",
@@ -1175,17 +1146,12 @@
               "textEditor": true
             },
             {
-              "expr": "",
+              "expr": "quantile(\n  $percentile/100,\n    rate(ceph_filestore_journal_latency_sum[$__interval]) / \n    (rate(ceph_filestore_journal_latency_count[$__interval]) != 0)\n)",
               "format": "time_series",
+              "hide": false,
               "intervalFactor": 2,
+              "legendFormat": "journal",
               "refId": "C",
-              "textEditor": true
-            },
-            {
-              "expr": "",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "D",
               "textEditor": true
             }
           ],
@@ -1257,12 +1223,7 @@
           "type": "text"
         },
         {
-          "columns": [
-            {
-              "text": "Current",
-              "value": "current"
-            }
-          ],
+          "columns": [],
           "datasource": "Local",
           "description": "Bluestore OSDs",
           "fontSize": "100%",
@@ -1286,58 +1247,7 @@
           },
           "styles": [
             {
-              "alias": "Time",
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "pattern": "Time",
-              "type": "date"
-            },
-            {
-              "alias": "",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "pattern": "",
-              "thresholds": [],
-              "type": "number",
-              "unit": "short"
-            },
-            {
-              "alias": "",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "pattern": "Current",
-              "thresholds": [],
-              "type": "hidden",
-              "unit": "short"
-            },
-            {
-              "alias": "OSD Id",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 0,
-              "pattern": "Metric",
-              "thresholds": [],
-              "type": "number",
-              "unit": "none"
-            },
-            {
-              "alias": "",
+              "alias": "OSD ID",
               "colorMode": null,
               "colors": [
                 "rgba(245, 54, 54, 0.9)",
@@ -1353,10 +1263,11 @@
           ],
           "targets": [
             {
-              "expr": "ceph_disk_occupation{ceph_daemon=~\"($bluestore_osd_id)\"}",
+              "expr": "label_replace(\n  ceph_disk_occupation{ceph_daemon=~\"osd.($bluestore_osd_id)\"},\n  \"osd_num\",\n  \"$1\",\n  \"ceph_daemon\",\n  \"osd.(.*)\"\n)",
               "format": "time_series",
+              "instant": true,
               "intervalFactor": 2,
-              "legendFormat": "{{ceph_daemon}}",
+              "legendFormat": "{{osd_num}}",
               "refId": "A",
               "textEditor": true
             }
@@ -1368,12 +1279,7 @@
           "type": "table"
         },
         {
-          "columns": [
-            {
-              "text": "Current",
-              "value": "current"
-            }
-          ],
+          "columns": [],
           "datasource": "Local",
           "description": "Time spent preparing the request (transaction)",
           "fontSize": "100%",
@@ -1388,19 +1294,28 @@
           "id": 18,
           "links": [],
           "minSpan": 4,
-          "pageSize": 5,
-          "scroll": false,
+          "pageSize": 0,
+          "scroll": true,
           "showHeader": true,
           "sort": {
-            "col": 1,
+            "col": null,
             "desc": false
           },
           "styles": [
             {
-              "alias": "Time",
+              "alias": "OSD ID",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
               "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "pattern": "Time",
-              "type": "date"
+              "decimals": 0,
+              "pattern": "osd_num",
+              "thresholds": [],
+              "type": "number",
+              "unit": "short"
             },
             {
               "alias": "Submit Latency",
@@ -1412,28 +1327,13 @@
               ],
               "dateFormat": "YYYY-MM-DD HH:mm:ss",
               "decimals": 2,
-              "pattern": "Current",
+              "pattern": "Value",
               "thresholds": [
                 ".001",
                 ".003"
               ],
               "type": "number",
-              "unit": "s"
-            },
-            {
-              "alias": "OSD Id",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "pattern": "Metric",
-              "thresholds": [],
-              "type": "number",
-              "unit": "short"
+              "unit": "ms"
             },
             {
               "alias": "",
@@ -1446,14 +1346,15 @@
               "decimals": 2,
               "pattern": "/.*/",
               "thresholds": [],
-              "type": "number",
+              "type": "hidden",
               "unit": "short"
             }
           ],
           "targets": [
             {
-              "expr": "",
+              "expr": "label_replace(\n  (\n    topk($max_devices,\n      rate(ceph_bluestore_submit_lat_sum{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) / \n      (rate(ceph_bluestore_submit_lat_count{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) != 0)\n    )\n  ),\n  \"osd_num\",\n  \"$1\",\n  \"ceph_daemon\",\n  \"osd.(.*)\"\n)",
               "format": "table",
+              "instant": true,
               "intervalFactor": 2,
               "refId": "A",
               "textEditor": true
@@ -1461,16 +1362,11 @@
           ],
           "timeFrom": "2m",
           "title": "",
-          "transform": "timeseries_aggregations",
+          "transform": "table",
           "type": "table"
         },
         {
-          "columns": [
-            {
-              "text": "Current",
-              "value": "current"
-            }
-          ],
+          "columns": [],
           "datasource": "Local",
           "description": "Time requests wait due to throttling or busy conditions",
           "fontSize": "100%",
@@ -1485,19 +1381,28 @@
           "id": 19,
           "links": [],
           "minSpan": 4,
-          "pageSize": 5,
-          "scroll": false,
+          "pageSize": 0,
+          "scroll": true,
           "showHeader": true,
           "sort": {
-            "col": 1,
-            "desc": true
+            "col": 4,
+            "desc": false
           },
           "styles": [
             {
-              "alias": "Time",
+              "alias": "OSD ID",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
               "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "pattern": "Time",
-              "type": "date"
+              "decimals": 0,
+              "pattern": "osd_num",
+              "thresholds": [],
+              "type": "number",
+              "unit": "short"
             },
             {
               "alias": "Throttle Latency",
@@ -1509,30 +1414,13 @@
               ],
               "dateFormat": "YYYY-MM-DD HH:mm:ss",
               "decimals": 2,
-              "pattern": "Current",
+              "pattern": "Value",
               "thresholds": [
                 ".002",
                 ".005"
               ],
               "type": "number",
-              "unit": "s"
-            },
-            {
-              "alias": "OSD Id",
-              "colorMode": null,
-              "colors": [
-                "rgba(50, 172, 45, 0.97)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(245, 54, 54, 0.9)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "pattern": "Metric",
-              "thresholds": [
-                ""
-              ],
-              "type": "number",
-              "unit": "short"
+              "unit": "ms"
             },
             {
               "alias": "",
@@ -1545,14 +1433,15 @@
               "decimals": 2,
               "pattern": "/.*/",
               "thresholds": [],
-              "type": "number",
+              "type": "hidden",
               "unit": "short"
             }
           ],
           "targets": [
             {
-              "expr": "",
+              "expr": "label_replace(\n  (\n    topk($max_devices,\n      rate(ceph_bluestore_throttle_lat_sum{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) / \n      (rate(ceph_bluestore_throttle_lat_count{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) != 0)\n    )\n  ),\n  \"osd_num\",\n  \"$1\",\n  \"ceph_daemon\",\n  \"osd.(.*)\"\n)",
               "format": "table",
+              "instant": true,
               "intervalFactor": 2,
               "refId": "A",
               "textEditor": true
@@ -1560,16 +1449,11 @@
           ],
           "timeFrom": "2m",
           "title": "",
-          "transform": "timeseries_aggregations",
+          "transform": "table",
           "type": "table"
         },
         {
-          "columns": [
-            {
-              "text": "Current",
-              "value": "current"
-            }
-          ],
+          "columns": [],
           "datasource": "Local",
           "description": "Time spent waiting for the physical I/O request to complete",
           "fontSize": "100%",
@@ -1584,19 +1468,28 @@
           "id": 20,
           "links": [],
           "minSpan": 4,
-          "pageSize": 5,
-          "scroll": false,
+          "pageSize": 0,
+          "scroll": true,
           "showHeader": true,
           "sort": {
-            "col": 1,
-            "desc": true
+            "col": 5,
+            "desc": false
           },
           "styles": [
             {
-              "alias": "Time",
+              "alias": "OSD ID",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
               "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "pattern": "Time",
-              "type": "date"
+              "decimals": 0,
+              "pattern": "osd_num",
+              "thresholds": [],
+              "type": "number",
+              "unit": "short"
             },
             {
               "alias": "AIO Wait Time",
@@ -1608,28 +1501,13 @@
               ],
               "dateFormat": "YYYY-MM-DD HH:mm:ss",
               "decimals": 2,
-              "pattern": "Current",
+              "pattern": "Value",
               "thresholds": [
                 ".020",
                 ".050"
               ],
               "type": "number",
-              "unit": "s"
-            },
-            {
-              "alias": "OSD Id",
-              "colorMode": null,
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "pattern": "Metric",
-              "thresholds": [],
-              "type": "number",
-              "unit": "short"
+              "unit": "ms"
             },
             {
               "alias": "",
@@ -1642,14 +1520,15 @@
               "decimals": 2,
               "pattern": "/.*/",
               "thresholds": [],
-              "type": "number",
+              "type": "hidden",
               "unit": "short"
             }
           ],
           "targets": [
             {
-              "expr": "",
+              "expr": "label_replace(\n  (\n    topk($max_devices,\n      rate(ceph_bluestore_state_aio_wait_lat_sum{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) / \n      (rate(ceph_bluestore_state_aio_wait_lat_count{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) != 0)\n    )\n  ),\n  \"osd_num\",\n  \"$1\",\n  \"ceph_daemon\",\n  \"osd.(.*)\"\n)",
               "format": "table",
+              "instant": true,
               "intervalFactor": 2,
               "refId": "A",
               "textEditor": true
@@ -1657,16 +1536,11 @@
           ],
           "timeFrom": "2m",
           "title": "",
-          "transform": "timeseries_aggregations",
+          "transform": "table",
           "type": "table"
         },
         {
-          "columns": [
-            {
-              "text": "Current",
-              "value": "current"
-            }
-          ],
+          "columns": [],
           "datasource": "Local",
           "description": "Time spent waiting for rocksdb (metadata store) to commit meta data",
           "fontSize": "100%",
@@ -1681,40 +1555,16 @@
           "id": 21,
           "links": [],
           "minSpan": 4,
-          "pageSize": 5,
-          "scroll": false,
+          "pageSize": 0,
+          "scroll": true,
           "showHeader": true,
           "sort": {
-            "col": 1,
-            "desc": true
+            "col": null,
+            "desc": false
           },
           "styles": [
             {
-              "alias": "Time",
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "pattern": "Time",
-              "type": "date"
-            },
-            {
-              "alias": "KV Commit ",
-              "colorMode": "row",
-              "colors": [
-                "rgba(50, 172, 45, 0.97)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(245, 54, 54, 0.9)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "pattern": "Current",
-              "thresholds": [
-                ".003",
-                ".005"
-              ],
-              "type": "number",
-              "unit": "s"
-            },
-            {
-              "alias": "OSD Id",
+              "alias": "OSD ID",
               "colorMode": null,
               "colors": [
                 "rgba(245, 54, 54, 0.9)",
@@ -1723,10 +1573,28 @@
               ],
               "dateFormat": "YYYY-MM-DD HH:mm:ss",
               "decimals": 2,
-              "pattern": "Metric",
+              "pattern": "osd_num",
               "thresholds": [],
               "type": "number",
               "unit": "short"
+            },
+            {
+              "alias": "KV Commit Latency",
+              "colorMode": "row",
+              "colors": [
+                "rgba(50, 172, 45, 0.97)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(245, 54, 54, 0.9)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "pattern": "Value",
+              "thresholds": [
+                ".003",
+                ".005"
+              ],
+              "type": "number",
+              "unit": "ms"
             },
             {
               "alias": "",
@@ -1739,14 +1607,15 @@
               "decimals": 2,
               "pattern": "/.*/",
               "thresholds": [],
-              "type": "number",
+              "type": "hidden",
               "unit": "short"
             }
           ],
           "targets": [
             {
-              "expr": "",
+              "expr": "label_replace(\n  (\n    topk($max_devices,\n      rate(ceph_bluestore_commit_lat_sum{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) / \n      (rate(ceph_bluestore_commit_lat_count{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) != 0)\n    )\n  ),\n  \"osd_num\",\n  \"$1\",\n  \"ceph_daemon\",\n  \"osd.(.*)\"\n)",
               "format": "table",
+              "instant": true,
               "intervalFactor": 2,
               "refId": "A",
               "textEditor": true
@@ -1754,7 +1623,7 @@
           ],
           "timeFrom": "2m",
           "title": "",
-          "transform": "timeseries_aggregations",
+          "transform": "table",
           "type": "table"
         },
         {
@@ -1792,34 +1661,42 @@
           "renderer": "flot",
           "seriesOverrides": [],
           "spaceLength": 10,
-          "stack": true,
+          "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "",
+              "expr": "avg(\n  rate(ceph_bluestore_submit_lat_sum{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) / \n  (rate(ceph_bluestore_submit_lat_count{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) != 0)\n)",
               "format": "time_series",
+              "hide": false,
               "intervalFactor": 2,
+              "legendFormat": "Submit",
               "refId": "A",
               "textEditor": true
             },
             {
-              "expr": "",
+              "expr": "avg(\n  rate(ceph_bluestore_throttle_lat_sum{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) / \n  (rate(ceph_bluestore_throttle_lat_count{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) != 0)\n)",
               "format": "time_series",
+              "hide": false,
               "intervalFactor": 2,
+              "legendFormat": "Throttle",
               "refId": "B",
               "textEditor": true
             },
             {
-              "expr": "",
+              "expr": "avg(\n  rate(ceph_bluestore_state_aio_wait_lat_sum{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) / \n  (rate(ceph_bluestore_state_aio_wait_lat_count{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) != 0)\n)",
               "format": "time_series",
+              "hide": false,
               "intervalFactor": 2,
+              "legendFormat": "AIO Wait",
               "refId": "C",
               "textEditor": true
             },
             {
-              "expr": "",
+              "expr": "avg(\n    rate(ceph_bluestore_commit_lat_sum{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) / \n    (rate(ceph_bluestore_commit_lat_count{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) != 0)\n)",
               "format": "time_series",
+              "hide": false,
               "intervalFactor": 2,
+              "legendFormat": "KV Commit",
               "refId": "D",
               "textEditor": true
             }
@@ -1843,7 +1720,7 @@
           },
           "yaxes": [
             {
-              "format": "s",
+              "format": "ms",
               "label": null,
               "logBase": 1,
               "max": null,
@@ -1900,30 +1777,34 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "",
+              "expr": "quantile(\n  $percentile/100,\n    rate(ceph_bluestore_submit_lat_sum[$__interval]) / \n    (rate(ceph_bluestore_submit_lat_count[$__interval]) != 0)\n)",
               "format": "time_series",
               "intervalFactor": 2,
+              "legendFormat": "Submit",
               "refId": "A",
               "textEditor": true
             },
             {
-              "expr": "",
+              "expr": "quantile(\n  $percentile/100,\n    rate(ceph_bluestore_throttle_lat_sum[$__interval]) / \n    (rate(ceph_bluestore_throttle_lat_count[$__interval]) != 0)\n)",
               "format": "time_series",
               "intervalFactor": 2,
+              "legendFormat": "Throttle",
               "refId": "B",
               "textEditor": true
             },
             {
-              "expr": "",
+              "expr": "quantile(\n  $percentile/100,\n    rate(ceph_bluestore_state_aio_wait_lat_sum[$__interval]) / \n    (rate(ceph_bluestore_state_aio_wait_lat_count[$__interval]) != 0)\n)",
               "format": "time_series",
               "intervalFactor": 2,
+              "legendFormat": "AIO Wait",
               "refId": "C",
               "textEditor": true
             },
             {
-              "expr": "",
+              "expr": "quantile(\n  $percentile/100,\n    rate(ceph_bluestore_commit_lat_sum[$__interval]) / \n    (rate(ceph_bluestore_commit_lat_count[$__interval]) != 0)\n)",
               "format": "time_series",
               "intervalFactor": 2,
+              "legendFormat": "KV Commit",
               "refId": "D",
               "textEditor": true
             }
@@ -1947,7 +1828,7 @@
           },
           "yaxes": [
             {
-              "format": "s",
+              "format": "ms",
               "label": null,
               "logBase": 1,
               "max": null,
@@ -2052,29 +1933,9 @@
         "multi": false,
         "name": "osd_id",
         "options": [],
-        "query": "ceph_osd_metadata",
+        "query": "label_values(ceph_osd_metadata, ceph_daemon)",
         "refresh": 1,
-        "regex": "/id=\"([^\"]*)\"/",
-        "sort": 3,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
-      },
-      {
-        "allValue": null,
-        "current": {},
-        "datasource": null,
-        "hide": 2,
-        "includeAll": true,
-        "label": "OSD Id",
-        "multi": false,
-        "name": "osd_id_hidden",
-        "options": [],
-        "query": "ceph_osd_metadata",
-        "refresh": 1,
-        "regex": "/id=\"([^\"]*)\"/",
+        "regex": "/osd\\.(.*)/",
         "sort": 3,
         "tagValuesQuery": "",
         "tags": [],
@@ -2094,8 +1955,28 @@
         "options": [],
         "query": "label_values(ceph_bluefs_bytes_written_wal, ceph_daemon)",
         "refresh": 2,
-        "regex": "",
-        "sort": 0,
+        "regex": "/osd\\.(.*)/",
+        "sort": 3,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": "",
+        "current": {},
+        "datasource": null,
+        "hide": 2,
+        "includeAll": true,
+        "label": null,
+        "multi": false,
+        "name": "filestore_osd_id",
+        "options": [],
+        "query": "label_values(ceph_filestore_journal_latency_count, ceph_daemon)",
+        "refresh": 2,
+        "regex": "/osd\\.(.*)/",
+        "sort": 3,
         "tagValuesQuery": "",
         "tags": [],
         "tagsQuery": "",
@@ -2136,5 +2017,5 @@
   },
   "timezone": "browser",
   "title": "Ceph OSD Information",
-  "version": 14
+  "version": 28
 }
