@@ -1,33 +1,33 @@
 {
   "__requires": [
     {
+      "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "type": "grafana",
       "version": "5.0.0"
     },
     {
+      "type": "panel",
       "id": "grafana-piechart-panel",
       "name": "Pie Chart",
-      "type": "panel",
       "version": "1.3.3"
     },
     {
-      "id": "prometheus",
-      "name": "Prometheus",
       "type": "datasource",
+      "id": "prometheus",
+      "name": "Local",
       "version": "5.0.0"
     },
     {
+      "type": "panel",
       "id": "singlestat",
       "name": "Singlestat",
-      "type": "panel",
       "version": "5.0.0"
     },
     {
+      "type": "panel",
       "id": "table",
       "name": "Table",
-      "type": "panel",
       "version": "5.0.0"
     }
   ],
@@ -48,7 +48,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1530217097188,
+  "iteration": 1531263612973,
   "links": [
     {
       "asDropdown": true,
@@ -1207,7 +1207,7 @@
       "id": 26,
       "panels": [
         {
-          "content": "<h1>Ceph Bluestore I/O Process</h1>\n<p style=\"text-align: justify;\">\nUnlike filestore, bluestore does not suffer from a double-write penalty (i.e write to journal then write to HDD). With bluestore, once a write is scheduled (<b>submit</b> and <b>throttle</b> latencies), it is done directly to the disk (<b>AIO wait</b>), and then the metadata relating to the object is changed (<b>kv_commit</b>). Writes are not considered complete until the kv store is updated. <p> The tables on the right focus on  the top 10 Bluestore OSDs with the highest latencies.\n",
+          "content": "<h1>Ceph Bluestore I/O Process</h1>\n<p style=\"text-align: justify;\">\nUnlike filestore, bluestore does not suffer from a double-write penalty (i.e write to journal then write to HDD). With bluestore, once a write is scheduled (<b>submit</b> and <b>throttle</b> latencies), it is done directly to the disk (<b>AIO wait</b>), and then the metadata relating to the object is changed (<b>kv_latency</b>). Writes are not considered complete until the kv store is updated. <p> The tables on the right focus on  the top 10 Bluestore OSDs with the highest latencies.\n",
           "gridPos": {
             "h": 8,
             "w": 6,
@@ -1314,8 +1314,8 @@
               "decimals": 0,
               "pattern": "osd_num",
               "thresholds": [],
-              "type": "number",
-              "unit": "short"
+              "type": "string",
+              "unit": "s"
             },
             {
               "alias": "Submit Latency",
@@ -1333,7 +1333,7 @@
                 ".003"
               ],
               "type": "number",
-              "unit": "ms"
+              "unit": "s"
             },
             {
               "alias": "",
@@ -1352,7 +1352,7 @@
           ],
           "targets": [
             {
-              "expr": "label_replace(\n  (\n    topk($max_devices,\n      rate(ceph_bluestore_submit_lat_sum{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) / \n      (rate(ceph_bluestore_submit_lat_count{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) != 0)\n    )\n  ),\n  \"osd_num\",\n  \"$1\",\n  \"ceph_daemon\",\n  \"osd.(.*)\"\n)",
+              "expr": "label_replace(\n  (\n    topk($max_devices,\n      irate(ceph_bluestore_submit_lat_sum{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) / \n      (irate(ceph_bluestore_submit_lat_count{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) != 0)\n    )\n  ),\n  \"osd_num\",\n  \"$1\",\n  \"ceph_daemon\",\n  \"osd.(.*)\"\n)",
               "format": "table",
               "instant": true,
               "intervalFactor": 2,
@@ -1401,7 +1401,7 @@
               "decimals": 0,
               "pattern": "osd_num",
               "thresholds": [],
-              "type": "number",
+              "type": "string",
               "unit": "short"
             },
             {
@@ -1416,11 +1416,11 @@
               "decimals": 2,
               "pattern": "Value",
               "thresholds": [
-                ".002",
-                ".005"
+                ".001",
+                ".003"
               ],
               "type": "number",
-              "unit": "ms"
+              "unit": "s"
             },
             {
               "alias": "",
@@ -1439,7 +1439,7 @@
           ],
           "targets": [
             {
-              "expr": "label_replace(\n  (\n    topk($max_devices,\n      rate(ceph_bluestore_throttle_lat_sum{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) / \n      (rate(ceph_bluestore_throttle_lat_count{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) != 0)\n    )\n  ),\n  \"osd_num\",\n  \"$1\",\n  \"ceph_daemon\",\n  \"osd.(.*)\"\n)",
+              "expr": "label_replace(\n  (\n    topk($max_devices,\n      irate(ceph_bluestore_throttle_lat_sum{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) / \n      (irate(ceph_bluestore_throttle_lat_count{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) != 0)\n    )\n  ),\n  \"osd_num\",\n  \"$1\",\n  \"ceph_daemon\",\n  \"osd.(.*)\"\n)",
               "format": "table",
               "instant": true,
               "intervalFactor": 2,
@@ -1488,7 +1488,7 @@
               "decimals": 0,
               "pattern": "osd_num",
               "thresholds": [],
-              "type": "number",
+              "type": "string",
               "unit": "short"
             },
             {
@@ -1507,7 +1507,7 @@
                 ".050"
               ],
               "type": "number",
-              "unit": "ms"
+              "unit": "s"
             },
             {
               "alias": "",
@@ -1526,7 +1526,7 @@
           ],
           "targets": [
             {
-              "expr": "label_replace(\n  (\n    topk($max_devices,\n      rate(ceph_bluestore_state_aio_wait_lat_sum{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) / \n      (rate(ceph_bluestore_state_aio_wait_lat_count{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) != 0)\n    )\n  ),\n  \"osd_num\",\n  \"$1\",\n  \"ceph_daemon\",\n  \"osd.(.*)\"\n)",
+              "expr": "label_replace(\n  (\n    topk($max_devices,\n      irate(ceph_bluestore_state_aio_wait_lat_sum{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) / \n      (irate(ceph_bluestore_state_aio_wait_lat_count{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) != 0)\n    )\n  ),\n  \"osd_num\",\n  \"$1\",\n  \"ceph_daemon\",\n  \"osd.(.*)\"\n)",
               "format": "table",
               "instant": true,
               "intervalFactor": 2,
@@ -1575,11 +1575,11 @@
               "decimals": 2,
               "pattern": "osd_num",
               "thresholds": [],
-              "type": "number",
+              "type": "string",
               "unit": "short"
             },
             {
-              "alias": "KV Commit Latency",
+              "alias": "KV Latency",
               "colorMode": "row",
               "colors": [
                 "rgba(50, 172, 45, 0.97)",
@@ -1590,11 +1590,11 @@
               "decimals": 2,
               "pattern": "Value",
               "thresholds": [
-                ".003",
-                ".005"
+                ".020",
+                ".050"
               ],
               "type": "number",
-              "unit": "ms"
+              "unit": "s"
             },
             {
               "alias": "",
@@ -1613,7 +1613,7 @@
           ],
           "targets": [
             {
-              "expr": "label_replace(\n  (\n    topk($max_devices,\n      rate(ceph_bluestore_commit_lat_sum{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) / \n      (rate(ceph_bluestore_commit_lat_count{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) != 0)\n    )\n  ),\n  \"osd_num\",\n  \"$1\",\n  \"ceph_daemon\",\n  \"osd.(.*)\"\n)",
+              "expr": "label_replace(\n  (\n    topk($max_devices,\n      irate(ceph_bluestore_kv_lat_sum{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) / \n      (irate(ceph_bluestore_kv_lat_count{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) != 0)\n    )\n  ),\n  \"osd_num\",\n  \"$1\",\n  \"ceph_daemon\",\n  \"osd.(.*)\"\n)",
               "format": "table",
               "instant": true,
               "intervalFactor": 2,
@@ -1665,7 +1665,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "avg(\n  rate(ceph_bluestore_submit_lat_sum{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) / \n  (rate(ceph_bluestore_submit_lat_count{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) != 0)\n)",
+              "expr": "avg(\n  irate(ceph_bluestore_submit_lat_sum{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) / \n  (irate(ceph_bluestore_submit_lat_count{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) != 0)\n)",
               "format": "time_series",
               "hide": false,
               "intervalFactor": 2,
@@ -1674,7 +1674,7 @@
               "textEditor": true
             },
             {
-              "expr": "avg(\n  rate(ceph_bluestore_throttle_lat_sum{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) / \n  (rate(ceph_bluestore_throttle_lat_count{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) != 0)\n)",
+              "expr": "avg(\n  irate(ceph_bluestore_throttle_lat_sum{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) / \n  (irate(ceph_bluestore_throttle_lat_count{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) != 0)\n)",
               "format": "time_series",
               "hide": false,
               "intervalFactor": 2,
@@ -1683,7 +1683,7 @@
               "textEditor": true
             },
             {
-              "expr": "avg(\n  rate(ceph_bluestore_state_aio_wait_lat_sum{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) / \n  (rate(ceph_bluestore_state_aio_wait_lat_count{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) != 0)\n)",
+              "expr": "avg(\n  irate(ceph_bluestore_state_aio_wait_lat_sum{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) / \n  (irate(ceph_bluestore_state_aio_wait_lat_count{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) != 0)\n)",
               "format": "time_series",
               "hide": false,
               "intervalFactor": 2,
@@ -1692,11 +1692,11 @@
               "textEditor": true
             },
             {
-              "expr": "avg(\n    rate(ceph_bluestore_commit_lat_sum{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) / \n    (rate(ceph_bluestore_commit_lat_count{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) != 0)\n)",
+              "expr": "avg(\n    irate(ceph_bluestore_kv_lat_sum{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) / \n    (irate(ceph_bluestore_kv_lat_count{ceph_daemon=~\"osd.[[osd_id]]\"}[$__interval]) != 0)\n)",
               "format": "time_series",
               "hide": false,
               "intervalFactor": 2,
-              "legendFormat": "KV Commit",
+              "legendFormat": "KV Latency",
               "refId": "D",
               "textEditor": true
             }
@@ -1720,7 +1720,7 @@
           },
           "yaxes": [
             {
-              "format": "ms",
+              "format": "s",
               "label": null,
               "logBase": 1,
               "max": null,
@@ -1777,7 +1777,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "quantile(\n  $percentile/100,\n    rate(ceph_bluestore_submit_lat_sum[$__interval]) / \n    (rate(ceph_bluestore_submit_lat_count[$__interval]) != 0)\n)",
+              "expr": "quantile(\n  $percentile/100,\n    irate(ceph_bluestore_submit_lat_sum[$__interval]) / \n    (irate(ceph_bluestore_submit_lat_count[$__interval]) != 0)\n)",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "Submit",
@@ -1785,7 +1785,7 @@
               "textEditor": true
             },
             {
-              "expr": "quantile(\n  $percentile/100,\n    rate(ceph_bluestore_throttle_lat_sum[$__interval]) / \n    (rate(ceph_bluestore_throttle_lat_count[$__interval]) != 0)\n)",
+              "expr": "quantile(\n  $percentile/100,\n    irate(ceph_bluestore_throttle_lat_sum[$__interval]) / \n    (irate(ceph_bluestore_throttle_lat_count[$__interval]) != 0)\n)",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "Throttle",
@@ -1793,7 +1793,7 @@
               "textEditor": true
             },
             {
-              "expr": "quantile(\n  $percentile/100,\n    rate(ceph_bluestore_state_aio_wait_lat_sum[$__interval]) / \n    (rate(ceph_bluestore_state_aio_wait_lat_count[$__interval]) != 0)\n)",
+              "expr": "quantile(\n  $percentile/100,\n    irate(ceph_bluestore_state_aio_wait_lat_sum[$__interval]) / \n    (irate(ceph_bluestore_state_aio_wait_lat_count[$__interval]) != 0)\n)",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "AIO Wait",
@@ -1801,10 +1801,10 @@
               "textEditor": true
             },
             {
-              "expr": "quantile(\n  $percentile/100,\n    rate(ceph_bluestore_commit_lat_sum[$__interval]) / \n    (rate(ceph_bluestore_commit_lat_count[$__interval]) != 0)\n)",
+              "expr": "quantile(\n  $percentile/100,\n    irate(ceph_bluestore_kv_lat_sum[$__interval]) / \n    (irate(ceph_bluestore_kv_lat_count[$__interval]) != 0)\n)",
               "format": "time_series",
               "intervalFactor": 2,
-              "legendFormat": "KV Commit",
+              "legendFormat": "KV Latency",
               "refId": "D",
               "textEditor": true
             }
@@ -1828,7 +1828,7 @@
           },
           "yaxes": [
             {
-              "format": "ms",
+              "format": "s",
               "label": null,
               "logBase": 1,
               "max": null,
@@ -2017,5 +2017,5 @@
   },
   "timezone": "browser",
   "title": "Ceph OSD Information",
-  "version": 28
+  "version": 31
 }
