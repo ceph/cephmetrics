@@ -503,7 +503,7 @@
           "pattern": "Value",
           "thresholds": [],
           "type": "number",
-          "unit": "bytes"
+          "unit": "decbytes"
         }
       ],
       "targets": [
@@ -825,7 +825,7 @@
           },
           "yaxes": [
             {
-              "format": "bytes",
+              "format": "decbytes",
               "label": "",
               "logBase": 1,
               "max": null,
