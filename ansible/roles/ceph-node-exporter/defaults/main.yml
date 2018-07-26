@@ -9,4 +9,4 @@ defaults:
         - prometheus-node-exporter
       yum:
         - prometheus-node_exporter
-  service_name: node_exporter
+    service_name: node_exporter

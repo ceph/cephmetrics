@@ -883,28 +883,28 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "node_memory_MemTotal{instance=~\"[[osd_servers]].*\"} - (\n  node_memory_MemFree{instance=~\"[[osd_servers]].*\"}  + \n  node_memory_Cached{instance=~\"[[osd_servers]].*\"} + \n  node_memory_Buffers{instance=~\"[[osd_servers]].*\"} +\n  node_memory_Slab{instance=~\"[[osd_servers]].*\"}\n  )\n  \n",
+          "expr": "sum(node_memory_MemTotal{instance=~\"[[osd_servers]].*\"}) - (\n  sum(node_memory_MemFree{instance=~\"[[osd_servers]].*\"})  + \n  sum(node_memory_Cached{instance=~\"[[osd_servers]].*\"}) + \n  sum(node_memory_Buffers{instance=~\"[[osd_servers]].*\"}) +\n  sum(node_memory_Slab{instance=~\"[[osd_servers]].*\"})\n  )\n  \n",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "used",
           "refId": "D"
         },
         {
-          "expr": "node_memory_MemFree{instance=~\"[[osd_servers]].*\"} ",
+          "expr": "sum(node_memory_MemFree{instance=~\"[[osd_servers]].*\"}) ",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Free",
           "refId": "A"
         },
         {
-          "expr": "node_memory_Cached{instance=~\"[[osd_servers]].*\"} + \nnode_memory_Buffers{instance=~\"[[osd_servers]].*\"} +\nnode_memory_Slab{instance=~\"[[osd_servers]].*\"} \n",
+          "expr": "sum(node_memory_Cached{instance=~\"[[osd_servers]].*\"}) + \nsum(node_memory_Buffers{instance=~\"[[osd_servers]].*\"}) +\nsum(node_memory_Slab{instance=~\"[[osd_servers]].*\"}) \n",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "buffers/cache",
           "refId": "C"
         },
         {
-          "expr": "node_memory_MemTotal{instance=~\"[[osd_servers]].*\"}",
+          "expr": "sum(node_memory_MemTotal{instance=~\"[[osd_servers]].*\"})",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
