@@ -1,5 +1,7 @@
 dummy:
 
+#cluster_name: ceph
+
 #containerized: true
 
 # Set the backend options, mgr+prometheus or cephmetrics+graphite

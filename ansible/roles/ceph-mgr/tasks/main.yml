@@ -25,4 +25,4 @@
   when: container_name != ""
 
 - name: Enable mgr prometheus module
-  command: "{{ mgr_prefix|default('') }} ceph mgr module enable prometheus"
+  command: "{{ mgr_prefix|default('') }} ceph --cluster {{ cluster_name }} mgr module enable prometheus"

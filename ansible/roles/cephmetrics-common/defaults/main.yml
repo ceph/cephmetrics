@@ -1,5 +1,6 @@
 ---
 defaults:
+  cluster_name: ceph
   containerized: true
   backend:
     metrics: mgr  # mgr, cephmetrics
