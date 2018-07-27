@@ -21,14 +21,6 @@
 
 - hosts:
   - ceph-grafana
-  become: true
-  roles:
-  - ceph-grafana
-  tags:
-  - grafana
-
-- hosts:
-  - ceph-grafana
   # These are roles used by ceph-ansible
   - mons
   - agents
@@ -48,6 +40,14 @@
   - ceph-node-exporter
   tags:
   - node-exporter
+
+- hosts:
+  - ceph-grafana
+  become: true
+  roles:
+  - ceph-grafana
+  tags:
+  - grafana
 
 - hosts: localhost
   connection: local
