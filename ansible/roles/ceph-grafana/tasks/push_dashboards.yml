@@ -11,7 +11,7 @@
     get_mime: false
   connection: local
   become: false
-  with_fileglob: "dashboards/{{ backend.metrics }}-{{ backend.storage }}/*.json"
+  with_fileglob: "dashboards/cephmetrics/*.json"
   register: dashboard_files
   no_log: true
 
