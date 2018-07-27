@@ -1,6 +1,0 @@
----
-- name: Install packages
-  package:
-    name: "{{ node_exporter.packages[ansible_pkg_mgr] }}"
-    state: latest
-  notify: "Restart service"

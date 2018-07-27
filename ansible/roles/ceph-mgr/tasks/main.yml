@@ -3,10 +3,6 @@
   tags:
     - always
 
-- name: End play if the mgr prometheus module isn't desired
-  meta: end_play
-  when: backend.metrics != 'mgr' or backend.storage != 'prometheus'
-
 - name: Check to see if the mgr is containerized
   command: "docker inspect {{ item }}"
   with_items:

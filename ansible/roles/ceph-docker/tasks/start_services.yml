@@ -8,5 +8,5 @@
 - name: Enable and start services
   service:
     name: "{{ docker.service_name }}"
-    state: started
+    state: restarted
     enabled: true

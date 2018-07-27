@@ -39,6 +39,7 @@
       - /etc/carbon/storage-schemas.conf
       - /etc/httpd/conf.d/graphite-web.conf
       - /etc/yum.repos.d/cephmetrics.repo
+      - /etc/yum.repos.d/cephmetrics-custom.repo
       - /etc/yum.repos.d/grafana.repo
       - /tmp/dashboard.yml
       - /tmp/dashUpdater.py

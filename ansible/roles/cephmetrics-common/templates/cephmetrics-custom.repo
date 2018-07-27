@@ -1,9 +1,0 @@
-{% for repo in custom_repos.yum %}
-[{{ repo.name }}]
-name={{ repo.name }}
-baseurl={{ repo.baseurl }}
-enabled={{ repo.enabled|default('1') }}
-gpgcheck={{ repo.gpgcheck|default('0') }}
-type={{ repo.type|default('rpm-md') }}
-
-{% endfor %}

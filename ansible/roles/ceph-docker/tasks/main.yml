@@ -8,10 +8,6 @@
   when:
     - not containerized
 
-- include: sanity.yml
-  tags:
-    - sanity
-
 - include: install_packages.yml
   tags:
     - packages

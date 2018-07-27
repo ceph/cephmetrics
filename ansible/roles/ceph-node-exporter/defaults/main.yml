@@ -5,8 +5,5 @@ defaults:
       x86_64: amd64
       i386: '386'
     packages:
-      apt:
-        - prometheus-node-exporter
-      yum:
-        - prometheus-node_exporter
+      - prometheus-node-exporter
     service_name: node_exporter

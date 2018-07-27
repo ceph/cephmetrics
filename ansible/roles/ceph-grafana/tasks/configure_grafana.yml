@@ -75,26 +75,12 @@
     grafana_data_source: >
       {
         "name":"{{ grafana.datasource }}",
-        "type":"graphite",
-        "url":"http://localhost:{{ graphite.web_port if graphite.service == 'graphite-web' else graphite.api_port }}",
-        "access":"proxy",
-        "basicAuth":false,
-        "isDefault":true
-      }
-  when: backend.storage == 'graphite'
-
-- name: Set grafana_data_source
-  set_fact:
-    grafana_data_source: >
-      {
-        "name":"{{ grafana.datasource }}",
         "type":"prometheus",
         "url":"http://prometheus:9090",
         "access":"proxy",
         "basicAuth":false,
         "isDefault":true
       }
-  when: backend.storage == 'prometheus'
 
 - name: Add data source
   uri:
@@ -137,18 +123,7 @@
     status_code: 200
   when: grafana_data_source_result is defined and grafana_data_source_result.status == 409
 
-- include: push_dashboards_dashupdater.yml
-  when:
-    - not containerized
-    - backend.metrics == "cephmetrics"
-    - backend.storage == "graphite"
-  tags:
-    - dashboards
-
 - include: push_dashboards.yml
-  when:
-    - backend.metrics == "mgr"
-    - backend.storage == "prometheus"
   tags:
     - dashboards
 

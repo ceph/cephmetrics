@@ -26,7 +26,7 @@
 - name: Create docker container
   docker_container:
     name: grafana-server
-    image: "{{ grafana.container_name }}:{{ grafana.version }}"
+    image: "{{ grafana.container_name }}:{{ grafana.container_tag }}"
     state: present
     # restart to allow updates
     restart: true

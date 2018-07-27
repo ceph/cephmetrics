@@ -1,7 +1,0 @@
----
- - name: Fail when containerized and classic are combined
-   fail:
-     msg: "Containers are not supported with backend.metrics set to 'cephmetrics'!"
-   when:
-     - backend.metrics == 'cephmetrics'
-     - containerized

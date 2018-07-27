@@ -6,12 +6,11 @@ defaults:
   update_alerts: false
   grafana:
     container_name: "grafana/grafana"
+    container_tag: latest
     container_cpu_period: 100000
     container_cpu_cores: 2
     # container_memory is in GB
     container_memory: 4
-    # version currently only applies to containers
-    version: latest
     uid: 472
     datasource: Local
     # You need to change these in the web UI on an already deployed machine, first

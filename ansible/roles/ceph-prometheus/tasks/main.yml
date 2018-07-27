@@ -3,10 +3,6 @@
   tags:
     - always
 
-- name: End play if the prometheus backend isn't desired
-  meta: end_play
-  when: backend.metrics != 'mgr' or backend.storage != 'prometheus'
-
 - name: Create prometheus data directory
   file:
     path: "{{ prometheus.data_dir }}"

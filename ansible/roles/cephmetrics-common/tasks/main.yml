@@ -7,3 +7,5 @@
   tags:
     - packages
     - repos
+  when:
+    - devel_mode

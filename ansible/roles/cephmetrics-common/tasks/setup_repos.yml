@@ -5,27 +5,9 @@
     state: present
   when:
     - ansible_pkg_mgr == "yum"
-    - devel_mode
-
-- name: Add custom repos
-  template:
-    src: cephmetrics-custom.repo
-    dest: /etc/yum.repos.d/cephmetrics-custom.repo
-  when:
-    - ansible_pkg_mgr == "yum"
-    - custom_repos is defined
-
-- name: Remove custom repos
-  file:
-    path: /etc/yum.repos.d/cephmetrics-custom.repo
-    state: absent
-  when:
-    - ansible_pkg_mgr == "yum"
-    - custom_repos is not defined
 
 - name: Update apt cache
   apt:
     update_cache: true
   when:
     - ansible_pkg_mgr == 'apt'
-    - devel_mode
