@@ -23,12 +23,6 @@
   - ceph-grafana
   become: true
   roles:
-  - ceph-graphite
-
-- hosts:
-  - ceph-grafana
-  become: true
-  roles:
   - ceph-grafana
   tags:
   - grafana
@@ -54,24 +48,6 @@
   - ceph-node-exporter
   tags:
   - node-exporter
-
-- hosts:
-  # These are roles used by ceph-ansible
-  - mons
-  - agents
-  - osds
-  - mdss
-  - rgws
-  - nfss
-  - restapis
-  - rbdmirrors
-  - clients
-  - mgrs
-  # This role is (so far) only used for testing
-  - cluster
-  become: true
-  roles:
-  - ceph-collectd
 
 - hosts: localhost
   connection: local
