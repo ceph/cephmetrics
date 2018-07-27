@@ -56,8 +56,6 @@ exit 0
 
 %files ansible
 %{_datadir}/cephmetrics-ansible
-%doc dashboard.yml
-%doc etc/grafana
 %doc LICENSE
 %doc README
 
