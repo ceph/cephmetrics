@@ -11,7 +11,7 @@
     get_mime: false
   connection: local
   become: false
-  with_fileglob: "dashboards/cephmetrics/*.json"
+  with_fileglob: "{{ dashboards_path }}/*.json"
   register: dashboard_files
   no_log: true
 
