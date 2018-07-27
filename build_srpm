@@ -1,0 +1,52 @@
+#! /usr/bin/bash
+set -ex
+
+## Install any setup-time deps (to make dist package)
+
+# We need this to get the major version from lsb_release
+#sudo yum install -y redhat-lsb-core mock git wget
+
+# Run the install-deps.sh upstream script if it exists
+if [ -x install-deps.sh ]; then
+    echo "Ensuring dependencies are installed"
+    sudo ./install-deps.sh
+fi
+
+# Clean dist dir
+rm -rf dist/ && mkdir dist
+rm -f *.any.src.rpm
+
+## Get some basic information about the system and the repository
+DESCRIBE="$(git describe --tags 2>/dev/null | cut -b 2-)"
+test -z "$DESCRIBE" && DESCRIBE="0.1-$(git rev-list --count HEAD)-g$(git rev-parse --short HEAD)"
+VERSION="$(echo $DESCRIBE | cut -d - -f 1)"
+REVISION="$(echo $DESCRIBE | cut -s -d - -f 2-)"
+test -z "$REVISION" && REVISION=0
+RPM_RELEASE=$(echo $REVISION | tr '-' '_') # the '-' has a special meaning
+
+
+## Build the source tarball
+echo "Building source distribution"
+git archive --format=zip --prefix=cephmetrics-${VERSION}/ HEAD > dist/cephmetrics-${VERSION}.zip
+#wget https://grafana.com/api/plugins/vonage-status-panel/versions/1.0.4/download -O dist/vonage-status-panel-1.0.4.zip
+#wget https://grafana.com/api/plugins/grafana-piechart-panel/versions/1.1.5/download -O dist/grafana-piechart-panel-1.1.5.zip
+
+
+## Prepare the spec file for build
+sed -e "s/@VERSION@/${VERSION}/g" -e "s/@RELEASE@/${RPM_RELEASE}/g" < cephmetrics.spec.in > dist/cephmetrics.spec
+
+
+## Create the source rpm
+echo "Building SRPM"
+rpmbuild \
+    --define "_sourcedir ./dist" \
+    --define "_specdir ." \
+    --define "_builddir ." \
+    --define "_srcrpmdir ." \
+    --define "_rpmdir ." \
+    --define "dist .any" \
+    --define "fedora 21" \
+    --define "rhel 7" \
+    --nodeps -bs dist/cephmetrics.spec
+SRPM=$(readlink -f *.src.rpm)
+echo "SRPM='$SRPM'"
