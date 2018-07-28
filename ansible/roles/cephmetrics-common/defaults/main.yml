@@ -4,3 +4,9 @@ defaults:
   devel_mode: true
   # The firewalld zone that carbon and grafana will use
   firewalld_zone: public
+  # We need this for both grafana and the mgr-dashboard module
+  grafana:
+    # You need to change these in the web UI on an already deployed machine, first
+    # New deployments work fine
+    admin_user: admin
+    admin_password: admin

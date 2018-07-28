@@ -1,0 +1,45 @@
+---
+- include: merge_vars.yml
+  tags:
+    - always
+
+- name: Check to see if the mgr is containerized
+  command: "docker inspect {{ item }}"
+  with_items:
+    - "ceph-mgr@{{ ansible_hostname }}"
+    - "ceph-mgr-{{ ansible_hostname }}"
+  register: mgr_container
+  failed_when: false
+
+- name: Choose the correct container name
+  set_fact:
+    container_name: "{% for res in mgr_container.results if res.rc == 0 %}{{ res.item }}{% endfor %}"
+
+- name: Prefix the mgr command with a docker command
+  set_fact:
+    mgr_prefix: "docker exec {{ container_name }}"
+  when: container_name != ""
+
+- name: Enable mgr dashboard module
+  command: "{{ mgr_prefix|default('') }} ceph mgr module enable dashboard"
+
+- name: Create self-signed certificate
+  command: "{{ mgr_prefix|default('') }} ceph dashboard create-self-signed-cert"
+
+- name: Disable mgr dashboard module (restart)
+  command: "{{ mgr_prefix|default('') }} ceph mgr module disable dashboard"
+
+- name: Enable mgr dashboard module (restart)
+  command: "{{ mgr_prefix|default('') }} ceph mgr module enable dashboard"
+
+- name: Set admin username and password
+  command: "{{ mgr_prefix|default('') }} ceph dashboard ac-user-create {{ dashboard.admin_user }} {{dashboard.admin_password }} administrator"
+
+- name: Set authentication method
+  command: "{{ mgr_prefix|default('') }} ceph dashboard set-grafana-api-auth-method password"
+
+- name: Set grafana username
+  command: "{{ mgr_prefix|default('') }} ceph dashboard set-grafana-api-username {{ grafana.admin_user }}"
+
+- name: Set grafana password
+  command: "{{ mgr_prefix|default('') }} ceph dashboard set-grafana-api-password {{ grafana.admin_password }}"

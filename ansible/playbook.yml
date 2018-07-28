@@ -6,10 +6,10 @@
   - always
 
 - hosts:
-  - mgrs
+  - mgrs[0]
   become: true
   roles:
-  - ceph-mgr
+  - ceph-mgr-prometheus
 
 - hosts:
   - ceph-grafana
@@ -49,9 +49,16 @@
   tags:
   - grafana
 
+- hosts:
+  - mgrs[0]
+  become: true
+  roles:
+  - ceph-mgr-dashboard
+
 - hosts: localhost
   connection: local
   gather_facts: false
+
   tasks:
     - name: Print dashboard URL
       debug:

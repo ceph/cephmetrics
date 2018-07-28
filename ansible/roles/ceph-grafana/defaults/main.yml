@@ -14,10 +14,6 @@ defaults:
     container_memory: 4
     uid: 472
     datasource: Local
-    # You need to change these in the web UI on an already deployed machine, first
-    # New deployments work fine
-    admin_user: admin
-    admin_password: admin
     plugins:
       - vonage-status-panel
       - grafana-piechart-panel

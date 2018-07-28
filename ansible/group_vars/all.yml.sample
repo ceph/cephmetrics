@@ -16,3 +16,8 @@ dummy:
 #grafana:
 #  admin_user: admin
 #  admin_password: admin
+
+# Set dashboard admin user and password
+#dashboard:
+#  admin_user: admin
+#  admin_password: admin
