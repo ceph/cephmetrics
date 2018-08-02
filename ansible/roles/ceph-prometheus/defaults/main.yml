@@ -6,6 +6,9 @@ defaults:
     container_cpu_cores: 2
     # container_memory is in GB
     container_memory: 4
+    # This is passed directly to the docker_container module. It is only used
+    # for containerized deployments.
+    etc_hosts: {}
     version: latest
     data_dir: /var/lib/cephmetrics
     user_id: '65534'  # This is the UID used by the prom/prometheus docker image
