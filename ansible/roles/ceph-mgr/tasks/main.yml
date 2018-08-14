@@ -7,6 +7,10 @@
   meta: end_play
   when: backend.metrics != 'mgr' or backend.storage != 'prometheus'
 
+- import_tasks: configure_firewall.yml
+  tags:
+    - firewall
+
 - name: Check to see if the mgr is containerized
   command: "docker inspect {{ item }}"
   with_items:
