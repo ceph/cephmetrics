@@ -18,6 +18,7 @@
       - "{{ prometheus.data_dir }}:/prometheus:Z"
     networks:
       - name: "{{ docker.network_name }}"
+    etc_hosts: "{{ prometheus.etc_hosts }}"
     user: "{{ prometheus.user_id }}"
     keep_volumes: true
     pull: true
