@@ -1,30 +1,4 @@
 {
-  "__requires": [
-    {
-      "type": "panel",
-      "id": "alertlist",
-      "name": "Alert List",
-      "version": "5.0.0"
-    },
-    {
-      "type": "grafana",
-      "id": "grafana",
-      "name": "Grafana",
-      "version": "5.0.4"
-    },
-    {
-      "type": "panel",
-      "id": "graph",
-      "name": "Graph",
-      "version": "5.0.0"
-    },
-    {
-      "type": "datasource",
-      "id": "prometheus",
-      "name": "Local",
-      "version": "5.0.0"
-    }
-  ],
   "annotations": {
     "list": [
       {
@@ -42,7 +16,6 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1526437197732,
   "links": [],
   "panels": [
     {
@@ -257,6 +230,142 @@
         "executionErrorState": "alerting",
         "frequency": "60s",
         "handler": 1,
+        "name": "Ceph Error State alert",
+        "noDataState": "no_data",
+        "notifications": [
+          {
+            "id": 1
+          }
+        ]
+      },
+      "aliasColors": {
+        "Ceph Health": "#890F02",
+        "Ceph Health (0:OK, 4:Warning,8:Error)": "#DEDAF7",
+        "ceph health": "#890F02"
+      },
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "description": "The chart plots the error state of cluster, over time. The state is depicted as a boolean 0 or 1 where 0 is False and 1 is True.",
+      "fill": 1,
+      "gridPos": {
+        "h": 7,
+        "w": 4,
+        "x": 4,
+        "y": 9
+      },
+      "hideTimeOverride": false,
+      "id": 17,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "maxDataPoints": "360",
+      "minSpan": 4,
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": true,
+      "targets": [
+        {
+          "expr": "ceph_health_status > bool 1",
+          "format": "time_series",
+          "intervalFactor": 2,
+          "legendFormat": "Error State",
+          "refId": "A",
+          "step": 20,
+          "textEditor": true
+        }
+      ],
+      "thresholds": [
+        {
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 0
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Ceph Error State",
+      "tooltip": {
+        "shared": false,
+        "sort": 1,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": 0,
+          "format": "short",
+          "label": "",
+          "logBase": 1,
+          "max": "1",
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ]
+    },
+    {
+      "alert": {
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                0
+              ],
+              "type": "gt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "A",
+                "1m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "max"
+            },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "alerting",
+        "frequency": "60s",
+        "handler": 1,
         "name": "Disks Near Full alert",
         "noDataState": "ok",
         "notifications": [
@@ -275,7 +384,7 @@
       "gridPos": {
         "h": 7,
         "w": 4,
-        "x": 4,
+        "x": 8,
         "y": 9
       },
       "id": 3,
@@ -406,7 +515,7 @@
       "gridPos": {
         "h": 7,
         "w": 4,
-        "x": 8,
+        "x": 12,
         "y": 9
       },
       "hideTimeOverride": true,
@@ -540,7 +649,7 @@
       "gridPos": {
         "h": 7,
         "w": 4,
-        "x": 12,
+        "x": 16,
         "y": 9
       },
       "hideTimeOverride": true,
@@ -674,8 +783,8 @@
       "gridPos": {
         "h": 7,
         "w": 4,
-        "x": 16,
-        "y": 9
+        "x": 0,
+        "y": 16
       },
       "hideTimeOverride": true,
       "id": 6,
@@ -808,8 +917,8 @@
       "gridPos": {
         "h": 7,
         "w": 4,
-        "x": 20,
-        "y": 9
+        "x": 4,
+        "y": 16
       },
       "id": 7,
       "legend": {
@@ -939,7 +1048,7 @@
       "gridPos": {
         "h": 7,
         "w": 4,
-        "x": 0,
+        "x": 8,
         "y": 16
       },
       "hideTimeOverride": true,
@@ -1070,7 +1179,7 @@
       "gridPos": {
         "h": 7,
         "w": 4,
-        "x": 4,
+        "x": 12,
         "y": 16
       },
       "id": 9,
@@ -1198,7 +1307,7 @@
       "gridPos": {
         "h": 7,
         "w": 4,
-        "x": 8,
+        "x": 16,
         "y": 16
       },
       "id": 10,
@@ -1328,8 +1437,8 @@
       "gridPos": {
         "h": 7,
         "w": 4,
-        "x": 12,
-        "y": 16
+        "x": 0,
+        "y": 23
       },
       "hideTimeOverride": true,
       "id": 13,
@@ -1463,8 +1572,8 @@
       "gridPos": {
         "h": 7,
         "w": 4,
-        "x": 16,
-        "y": 16
+        "x": 4,
+        "y": 23
       },
       "id": 5,
       "legend": {
@@ -1593,8 +1702,8 @@
       "gridPos": {
         "h": 7,
         "w": 4,
-        "x": 20,
-        "y": 16
+        "x": 8,
+        "y": 23
       },
       "id": 16,
       "legend": {
