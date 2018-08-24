@@ -745,17 +745,12 @@
         {
           "from": "1",
           "text": "WARN",
-          "to": "4"
+          "to": "1"
         },
         {
-          "from": "5",
+          "from": "2",
           "text": "ERROR",
-          "to": "99"
-        },
-        {
-          "from": "-10",
-          "text": "NODATA",
-          "to": "0"
+          "to": "2"
         }
       ],
       "sparkline": {
@@ -774,7 +769,7 @@
           "textEditor": true
         }
       ],
-      "thresholds": "1,5",
+      "thresholds": "1,2",
       "timeFrom": "1m",
       "timeShift": null,
       "title": "Health",
@@ -789,12 +784,12 @@
         {
           "op": "=",
           "text": "WARN",
-          "value": "4"
+          "value": "1"
         },
         {
           "op": "=",
           "text": "ERROR",
-          "value": "8"
+          "value": "2"
         }
       ],
       "valueName": "current"
