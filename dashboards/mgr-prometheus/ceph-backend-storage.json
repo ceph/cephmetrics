@@ -1090,7 +1090,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum (irate(node_network_receive_bytes{instance=~\"($osd_servers)\", device=~\"(eth|en|bond|ib|mlx).*\"}[5m])) + \nsum (irate(node_network_transmit_bytes{instance=~\"($osd_servers)\", device=~\"(eth|en|bond|ib|mlx).*\"}[5m]))",
+              "expr": "sum (irate(node_network_receive_bytes{instance=~\"($osd_servers)\", device=~\"(eth|en|bond|ib|mlx|p).*\"}[5m])) + \nsum (irate(node_network_transmit_bytes{instance=~\"($osd_servers)\", device=~\"(eth|en|bond|ib|mlx|p).*\"}[5m]))",
               "format": "time_series",
               "hide": false,
               "intervalFactor": 2,

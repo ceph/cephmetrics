@@ -400,8 +400,8 @@
       {
         "allValue": null,
         "current": {
-          "text": "(eth|en|bond|mlx|ib)",
-          "value": "(eth|en|bond|mlx|ib)"
+          "text": "(eth|en|bond|mlx|ib|p)",
+          "value": "(eth|en|bond|mlx|ib|p)"
         },
         "hide": 2,
         "includeAll": false,
@@ -411,11 +411,11 @@
         "options": [
           {
             "selected": true,
-            "text": "(eth|en|bond|mlx|ib)",
-            "value": "(eth|en|bond|mlx|ib)"
+            "text": "(eth|en|bond|mlx|ib|p)",
+            "value": "(eth|en|bond|mlx|ib|p)"
           }
         ],
-        "query": "(eth|en|bond|mlx|ib)",
+        "query": "(eth|en|bond|mlx|ib|p)",
         "type": "custom"
       }
     ]

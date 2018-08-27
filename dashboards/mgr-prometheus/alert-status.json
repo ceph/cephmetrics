@@ -1098,7 +1098,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum by (instance, device) (\n  irate(node_network_receive_drop{device=~\"(eth|en|bond|ib|mlx).*\"}[5m]) +\n  irate(node_network_receive_errs{device=~\"(eth|en|bond|ib|mlx).*\"}[5m]) +\n  irate(node_network_transmit_drop{device=~\"(eth|en|bond|ib|mlx).*\"}[5m]) +\n  irate(node_network_transmit_errs{device=~\"(eth|en|bond|ib|mlx).*\"}[5m])\n) > 0",
+          "expr": "sum by (instance, device) (\n  irate(node_network_receive_drop{device=~\"(eth|en|bond|ib|mlx|p).*\"}[5m]) +\n  irate(node_network_receive_errs{device=~\"(eth|en|bond|ib|mlx|p).*\"}[5m]) +\n  irate(node_network_transmit_drop{device=~\"(eth|en|bond|ib|mlx|p).*\"}[5m]) +\n  irate(node_network_transmit_errs{device=~\"(eth|en|bond|ib|mlx|p).*\"}[5m])\n) > 0",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{instance}} / {{device}}",
