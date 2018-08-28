@@ -989,7 +989,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum by (device) (irate(node_network_receive_bytes{instance=~\"($osd_servers).*\", device=~\"(eth|en|bond|ib|mlx).*\"}[5m]))",
+          "expr": "sum by (device) (irate(node_network_receive_bytes{instance=~\"($osd_servers).*\", device=~\"(eth|en|bond|ib|mlx|p).*\"}[5m]))",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{device}}.rx",
@@ -998,7 +998,7 @@
           "textEditor": true
         },
         {
-          "expr": "sum by (device) (irate(node_network_transmit_bytes{instance=~\"($osd_servers).*\", device=~\"(eth|en|bond|ib|mlx).*\"}[5m]))",
+          "expr": "sum by (device) (irate(node_network_transmit_bytes{instance=~\"($osd_servers).*\", device=~\"(eth|en|bond|ib|mlx|p).*\"}[5m]))",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{device}}.tx",

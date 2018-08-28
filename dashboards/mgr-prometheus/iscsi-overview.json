@@ -1478,8 +1478,8 @@
       {
         "allValue": null,
         "current": {
-          "text": "(eth|bon|en|ib|mlx)",
-          "value": "(eth|bon|en|ib|mlx)"
+          "text": "(eth|bon|en|ib|mlx|p)",
+          "value": "(eth|bon|en|ib|mlx|p)"
         },
         "hide": 2,
         "includeAll": false,
@@ -1489,11 +1489,11 @@
         "options": [
           {
             "selected": true,
-            "text": "(eth|bon|en|ib|mlx)",
-            "value": "(eth|bon|en|ib|mlx)"
+            "text": "(eth|bon|en|ib|mlx|p)",
+            "value": "(eth|bon|en|ib|mlx|p)"
           }
         ],
-        "query": "(eth|bon|en|ib|mlx)",
+        "query": "(eth|bon|en|ib|mlx|p)",
         "type": "custom"
       },
       {
