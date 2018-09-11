@@ -85,7 +85,7 @@
         "rgba(237, 129, 40, 0.89)",
         "rgba(50, 172, 45, 0.97)"
       ],
-      "datasource": "${DS_LOCAL}",
+      "datasource": "Local",
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -171,7 +171,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_LOCAL}",
+      "datasource": "Local",
       "description": "Shows the CPU breakdown. When multiple servers are selected, only the first host's cpu data is shown",
       "fill": 3,
       "gridPos": {
@@ -264,7 +264,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_LOCAL}",
+      "datasource": "Local",
       "fill": 1,
       "gridPos": {
         "h": 10,
@@ -374,7 +374,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_LOCAL}",
+      "datasource": "Local",
       "description": "Show the network load (rx,tx) across all interfaces (excluding loopback 'lo')",
       "fill": 1,
       "gridPos": {
@@ -469,7 +469,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_LOCAL}",
+      "datasource": "Local",
       "fill": 1,
       "gridPos": {
         "h": 5,
@@ -555,7 +555,7 @@
         "rgba(237, 129, 40, 0.89)",
         "rgba(50, 172, 45, 0.97)"
       ],
-      "datasource": "${DS_LOCAL}",
+      "datasource": "Local",
       "decimals": 0,
       "description": "Each OSD consists of a Journal/WAL partition and a data partition. The RAW Capacity shown is the sum of the data partitions across all OSDs on the selected OSD hosts.",
       "format": "bytes",
@@ -637,7 +637,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_LOCAL}",
+      "datasource": "Local",
       "fill": 1,
       "gridPos": {
         "h": 5,
@@ -1080,7 +1080,7 @@
       {
         "allValue": null,
         "current": {},
-        "datasource": "${DS_LOCAL}",
+        "datasource": "Local",
         "hide": 0,
         "includeAll": false,
         "label": "Hostname",

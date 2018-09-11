@@ -67,7 +67,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_LOCAL}",
+      "datasource": "Local",
       "fill": 1,
       "gridPos": {
         "h": 7,
@@ -154,7 +154,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_LOCAL}",
+      "datasource": "Local",
       "fill": 1,
       "gridPos": {
         "h": 7,
@@ -235,7 +235,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_LOCAL}",
+      "datasource": "Local",
       "description": "Latencies are shown stacked, without a yaxis to provide a visual indication of GET latency imbalance across RGW hosts",
       "fill": 1,
       "gridPos": {
@@ -317,7 +317,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_LOCAL}",
+      "datasource": "Local",
       "description": "Total bytes transferred in/out of all radosgw instances within the cluster",
       "fill": 1,
       "gridPos": {
@@ -405,7 +405,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_LOCAL}",
+      "datasource": "Local",
       "description": "Total bytes transferred in/out through get/put operations, by radosgw instance",
       "fill": 1,
       "gridPos": {
@@ -486,7 +486,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_LOCAL}",
+      "datasource": "Local",
       "description": "Latencies are shown stacked, without a yaxis to provide a visual indication of PUT latency imbalance across RGW hosts",
       "fill": 1,
       "gridPos": {
@@ -575,7 +575,7 @@
       {
         "allValue": null,
         "current": {},
-        "datasource": "${DS_LOCAL}",
+        "datasource": "Local",
         "hide": 2,
         "includeAll": true,
         "label": null,

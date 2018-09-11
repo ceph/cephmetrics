@@ -74,7 +74,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_LOCAL}",
+      "datasource": "Local",
       "fill": 1,
       "gridPos": {
         "h": 8,
@@ -161,7 +161,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_LOCAL}",
+      "datasource": "Local",
       "fill": 1,
       "gridPos": {
         "h": 8,
@@ -255,7 +255,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_LOCAL}",
+      "datasource": "Local",
       "fill": 1,
       "gridPos": {
         "h": 8,
@@ -364,7 +364,7 @@
         "label": "Others",
         "threshold": 0
       },
-      "datasource": "${DS_LOCAL}",
+      "datasource": "Local",
       "fontSize": "80%",
       "format": "none",
       "gridPos": {
@@ -431,7 +431,7 @@
       {
         "allValue": null,
         "current": {},
-        "datasource": "${DS_LOCAL}",
+        "datasource": "Local",
         "hide": 0,
         "includeAll": true,
         "label": null,

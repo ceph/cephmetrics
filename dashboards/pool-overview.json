@@ -74,7 +74,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_LOCAL}",
+      "datasource": "Local",
       "fill": 5,
       "gridPos": {
         "h": 7,
@@ -156,7 +156,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_LOCAL}",
+      "datasource": "Local",
       "fill": 5,
       "gridPos": {
         "h": 7,
@@ -254,7 +254,7 @@
           "value": "current"
         }
       ],
-      "datasource": "${DS_LOCAL}",
+      "datasource": "Local",
       "fontSize": "100%",
       "gridPos": {
         "h": 7,
@@ -400,7 +400,7 @@
           "value": "current"
         }
       ],
-      "datasource": "${DS_LOCAL}",
+      "datasource": "Local",
       "fontSize": "100%",
       "gridPos": {
         "h": 7,
@@ -532,7 +532,7 @@
     },
     {
       "columns": [],
-      "datasource": "${DS_LOCAL}",
+      "datasource": "Local",
       "fontSize": "100%",
       "gridPos": {
         "h": 7,
@@ -670,7 +670,7 @@
       {
         "allValue": null,
         "current": {},
-        "datasource": "${DS_LOCAL}",
+        "datasource": "Local",
         "hide": 2,
         "includeAll": true,
         "label": null,
@@ -690,7 +690,7 @@
       {
         "allValue": null,
         "current": {},
-        "datasource": "${DS_LOCAL}",
+        "datasource": "Local",
         "hide": 2,
         "includeAll": true,
         "label": "Pool Name",
