@@ -65,29 +65,3 @@
     body_format: json
     body: '{"dashboard": {{ dashboards[item].body|to_json }}, "overwrite": true}'
   with_items: "{{ dashboards.keys() }}"
-
-# We need the home dashboard info for its ID
-- name: Get home dashboard info
-  uri:
-    url: "http://localhost:3000/api/dashboards/db/ceph-at-a-glance"
-    method: GET
-    user: "{{ grafana.admin_user }}"
-    password: "{{ grafana.admin_password }}"
-    force_basic_auth: yes
-    status_code: 200
-  register: dashboard_home
-  no_log: true
-
-- name: Set the org's home dashboard
-  uri:
-    url: "http://localhost:3000/api/{{ item }}/preferences"
-    method: PUT
-    user: "{{ grafana.admin_user }}"
-    password: "{{ grafana.admin_password }}"
-    force_basic_auth: yes
-    status_code: 200
-    body_format: json
-    body: '{"homeDashboardId": {{ dashboard_home.json.dashboard.id }} }'
-  with_items:
-    - user
-    - org
