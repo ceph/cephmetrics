@@ -34,6 +34,7 @@
 
 - name: Set admin username and password
   command: "{{ mgr_prefix|default('') }} ceph dashboard ac-user-create {{ dashboard.admin_user }} {{dashboard.admin_password }} administrator"
+  failed_when: false
 
 - name: Set authentication method
   command: "{{ mgr_prefix|default('') }} ceph dashboard set-grafana-api-auth-method password"
