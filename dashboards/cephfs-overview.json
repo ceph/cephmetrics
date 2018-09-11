@@ -1,10 +1,20 @@
 {
+  "__inputs": [
+    {
+      "name": "DS_LOCAL",
+      "label": "Local",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "prometheus",
+      "pluginName": "Prometheus"
+    }
+  ],
   "__requires": [
     {
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "5.0.4"
+      "version": "5.0.0"
     },
     {
       "type": "panel",
@@ -15,7 +25,7 @@
     {
       "type": "datasource",
       "id": "prometheus",
-      "name": "Local",
+      "name": "Prometheus",
       "version": "5.0.0"
     }
   ],
@@ -32,11 +42,11 @@
       }
     ]
   },
-  "editable": false,
+  "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1524194437238,
+  "iteration": 1534386614546,
   "links": [],
   "panels": [
     {
@@ -47,10 +57,9 @@
         "x": 0,
         "y": 0
       },
-      "id": 18,
+      "id": 10,
       "panels": [],
-      "repeat": null,
-      "title": "All OSD Hosts",
+      "title": "MDS Performance",
       "type": "row"
     },
     {
@@ -58,15 +67,102 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "${DS_LOCAL}",
       "fill": 1,
       "gridPos": {
-        "h": 7,
-        "w": 24,
+        "h": 9,
+        "w": 12,
         "x": 0,
         "y": 1
       },
-      "id": 1,
+      "id": 2,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": true,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(ceph_objecter_op_r{ceph_daemon=~\"($mds_servers).*\"})",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "MDS Reads",
+          "refId": "A"
+        },
+        {
+          "expr": "sum(ceph_objecter_op_w{ceph_daemon=~\"($mds_servers).*\"})",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "MDS Writes",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "MDS Workload - $mds_servers",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "none",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ]
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "${DS_LOCAL}",
+      "fill": 1,
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 1
+      },
+      "id": 4,
       "legend": {
         "avg": false,
         "current": false,
@@ -90,123 +186,17 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "max(\n    (irate(node_disk_read_time_ms[30s]) + irate(node_disk_write_time_ms[30s]) / \n    (irate(node_disk_reads_completed[30s]) + irate(node_disk_writes_completed[30s])) +\n    ignoring(ceph_daemon,job) ceph_disk_occupation))\n    by(instance)",
+          "expr": "ceph_mds_server_handle_client_request{ceph_daemon=~\"($mds_servers).*\"}",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "{{instance}}",
-          "refId": "B"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "All OSD Hosts - Highest Latency",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "none",
-          "label": "ms",
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ]
-    },
-    {
-      "collapsed": false,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 8
-      },
-      "id": 19,
-      "panels": [],
-      "repeat": null,
-      "title": "Each OSD Host's Max Disk Latency",
-      "type": "row"
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": null,
-      "fill": 1,
-      "gridPos": {
-        "h": 7,
-        "w": 4,
-        "x": 0,
-        "y": 9
-      },
-      "id": 2,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": false,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [
-        {
-          "dashUri": "db/osd-node-detail",
-          "dashboard": "OSD Node Detail",
-          "includeVars": true,
-          "targetBlank": true,
-          "title": "OSD Node Detail",
-          "type": "dashboard"
-        }
-      ],
-      "minSpan": 4,
-      "nullPointMode": "null",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "repeat": "osd_servers",
-      "repeatDirection": "h",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "max(label_replace((irate(node_disk_write_time_ms{instance=~\"[[osd_servers]].*\"}[30s]) + irate(node_disk_read_time_ms{instance=~\"[[osd_servers]].*\"}[30s])) / \n(irate(node_disk_writes_completed{instance=~\"[[osd_servers]].*\"}[30s]) + irate(node_disk_reads_completed{instance=~\"[[osd_servers]].*\"}[30s])),\"host\",\"$1\",\"instance\",\"([^.]*).*\")) by(host)",
-          "format": "time_series",
-          "hide": false,
-          "intervalFactor": 1,
+          "legendFormat": "{{ceph_daemon}}",
           "refId": "A"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "$osd_servers Max Latency",
+      "title": "Client Request Load - $mds_servers",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -223,7 +213,7 @@
       "yaxes": [
         {
           "format": "none",
-          "label": "ms",
+          "label": null,
           "logBase": 1,
           "max": null,
           "min": "0",
@@ -249,17 +239,17 @@
       {
         "allValue": null,
         "current": {},
-        "datasource": null,
-        "hide": 2,
+        "datasource": "${DS_LOCAL}",
+        "hide": 0,
         "includeAll": true,
-        "label": null,
+        "label": "MDS Server",
         "multi": false,
-        "name": "osd_servers",
+        "name": "mds_servers",
         "options": [],
-        "query": "label_values(ceph_disk_occupation, instance)",
+        "query": "label_values(ceph_mds_inodes, ceph_daemon)",
         "refresh": 1,
-        "regex": "([^.]*).*",
-        "sort": 1,
+        "regex": "",
+        "sort": 0,
         "tagValuesQuery": "",
         "tags": [],
         "tagsQuery": "",
@@ -299,6 +289,7 @@
     ]
   },
   "timezone": "",
-  "title": "Latency by Server",
-  "version": 12
+  "title": "MDS Performance",
+  "uid": "rRfFzWtik",
+  "version": 2
 }
