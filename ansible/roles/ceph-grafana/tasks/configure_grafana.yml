@@ -16,7 +16,6 @@
     owner: root
     group: grafana
     mode: 0640
-  tags: [ini]
 
 - name: Set owner on /etc/grafana
   file:
@@ -27,7 +26,6 @@
     recurse: true
   when:
     - containerized
-  tags: [ini]
 
 - name: Set domain in grafana.ini
   ini_file:
@@ -35,7 +33,13 @@
     section: server
     option: domain
     value: "{{ ansible_fqdn }}"
-  tags: [ini]
+
+- name: Set protocol in grafana.ini
+  ini_file:
+    path: /etc/grafana/grafana.ini
+    section: server
+    option: protocol
+    value: "{{ protocol }}"
 
 - name: Set admin_user in grafana.ini
   ini_file:
@@ -44,7 +48,6 @@
     option: admin_user
     value: "{{ grafana.admin_user }}"
   no_log: true
-  tags: [ini]
 
 - name: Set admin_password in grafana.ini
   ini_file:
@@ -53,7 +56,6 @@
     option: admin_password
     value: "{{ grafana.admin_password }}"
   no_log: true
-  tags: [ini]
 
 - include: grafana_plugins.yml
   when:
@@ -84,7 +86,7 @@
 
 - name: Add data source
   uri:
-    url: http://localhost:3000/api/datasources
+    url: "{{ protocol }}://localhost:3000/api/datasources"
     method: POST
     user: "{{ grafana.admin_user }}"
     password: "{{ grafana.admin_password }}"
@@ -103,7 +105,7 @@
 
 - name: Get datasource ID
   uri:
-    url: "http://localhost:3000/api/datasources/id/{{ grafana.datasource }}"
+    url: "{{ protocol }}://localhost:3000/api/datasources/id/{{ grafana.datasource }}"
     method: GET
     user: "{{ grafana.admin_user }}"
     password: "{{ grafana.admin_password }}"
@@ -113,7 +115,7 @@
 
 - name: Update datasource
   uri:
-    url: "http://localhost:3000/api/datasources/{{ grafana_data_source_id.json.id }}"
+    url: "{{ protocol }}://localhost:3000/api/datasources/{{ grafana_data_source_id.json.id }}"
     method: PUT
     user: "{{ grafana.admin_user }}"
     password: "{{ grafana.admin_password }}"
@@ -124,9 +126,5 @@
   when: grafana_data_source_result is defined and grafana_data_source_result.status == 409
 
 - include: push_dashboards.yml
-  tags:
-    - dashboards
 
 - include: add_notification_channel.yml
-  tags:
-    - notification

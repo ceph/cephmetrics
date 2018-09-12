@@ -4,7 +4,6 @@
     name: ceph-docker
     allow_duplicates: false
   when: containerized
-  tags: docker
 
 - name: Create grafana user
   user:

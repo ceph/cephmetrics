@@ -4,6 +4,8 @@ defaults:
   devel_mode: true
   # The firewalld zone that carbon and grafana will use
   firewalld_zone: public
+  # Only http is supported at the moment
+  protocol: http
   # We need this for both grafana and the mgr-dashboard module
   grafana:
     # You need to change these in the web UI on an already deployed machine, first

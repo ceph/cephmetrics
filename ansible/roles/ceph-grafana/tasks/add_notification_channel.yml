@@ -1,7 +1,7 @@
 ---
 - name: Check if notification channel is present
   uri:
-    url: "http://localhost:3000/api/alert-notifications"
+    url: "{{ protocol }}://localhost:3000/api/alert-notifications"
     method: GET
     user: "{{ grafana.admin_user }}"
     password: "{{ grafana.admin_password }}"
@@ -20,7 +20,7 @@
 
 - name: Add notification channel
   uri:
-    url: "http://localhost:3000/api/alert-notifications"
+    url: "{{ protocol }}://localhost:3000/api/alert-notifications"
     method: POST
     user: "{{ grafana.admin_user }}"
     password: "{{ grafana.admin_password }}"

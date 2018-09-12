@@ -4,9 +4,6 @@
     daemon_reload: yes
     # Even when just calling daemon-reload, ansible < 2.4 requires a name for this call
     name: grafana-server
-  tags:
-    - packages
-    - services
 
 - name: Enable and start services
   service:

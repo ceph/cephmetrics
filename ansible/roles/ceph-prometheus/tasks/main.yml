@@ -1,7 +1,5 @@
 ---
 - include: merge_vars.yml
-  tags:
-    - always
 
 - name: Create prometheus data directory
   file:

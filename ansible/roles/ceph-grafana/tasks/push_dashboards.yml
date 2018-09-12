@@ -35,7 +35,7 @@
 # can update instead of adding another copy. So first we grab that.
 - name: Get dashboard IDs
   uri:
-    url: "http://localhost:3000/api/dashboards/db/{{ item }}"
+    url: "{{ protocol }}://localhost:3000/api/dashboards/db/{{ item }}"
     method: GET
     user: "{{ grafana.admin_user }}"
     password: "{{ grafana.admin_password }}"
@@ -56,7 +56,7 @@
 # Now we can actually push the dashboards!
 - name: Push updated dashboards
   uri:
-    url: "http://localhost:3000/api/dashboards/db"
+    url: "{{ protocol }}://localhost:3000/api/dashboards/db"
     method: POST
     user: "{{ grafana.admin_user }}"
     password: "{{ grafana.admin_password }}"

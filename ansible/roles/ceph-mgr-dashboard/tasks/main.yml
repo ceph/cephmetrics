@@ -1,7 +1,5 @@
 ---
 - include: merge_vars.yml
-  tags:
-    - always
 
 - name: Check to see if the mgr is containerized
   command: "docker inspect {{ item }}"
@@ -25,6 +23,11 @@
 
 - name: Create self-signed certificate
   command: "{{ mgr_prefix|default('') }} ceph dashboard create-self-signed-cert"
+  when: protocol == "https"
+
+- name: Disable SSL for dashboard
+  command: "{{ mgr_prefix|default('') }} ceph config set mgr mgr/dashboard/ssl false"
+  when: protocol == "http"
 
 - name: Disable mgr dashboard module (restart)
   command: "{{ mgr_prefix|default('') }} ceph mgr module disable dashboard"
@@ -44,3 +47,12 @@
 
 - name: Set grafana password
   command: "{{ mgr_prefix|default('') }} ceph dashboard set-grafana-api-password {{ grafana.admin_password }}"
+
+- name: Set grafana url
+  command: "{{ mgr_prefix|default('') }} ceph dashboard set-grafana-api-url {{ protocol }}://{{ ansible_hostname }}:3000/"
+
+- name: Disable mgr dashboard module (restart)
+  command: "{{ mgr_prefix|default('') }} ceph mgr module disable dashboard"
+
+- name: Enable mgr dashboard module (restart)
+  command: "{{ mgr_prefix|default('') }} ceph mgr module enable dashboard"

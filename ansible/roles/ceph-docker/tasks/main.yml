@@ -1,7 +1,5 @@
 ---
 - include: merge_vars.yml
-  tags:
-    - always
 
 - name: End play if no containers are desired
   meta: end_play
@@ -9,12 +7,8 @@
     - not containerized
 
 - include: install_packages.yml
-  tags:
-    - packages
 
 - include: start_services.yml
-  tags:
-    - services
 
 - name: Create a network
   docker_network:

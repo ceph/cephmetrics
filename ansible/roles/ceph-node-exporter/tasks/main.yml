@@ -1,7 +1,5 @@
 ---
 - include: merge_vars.yml
-  tags:
-    - always
 
 - name: Install packages
   package:
@@ -14,8 +12,6 @@
   register: firewalld_status
   failed_when: false
   changed_when: false
-  tags:
-    - skip_ansible_lint
 
 - name: Open ports for node_exporter
   firewalld:
