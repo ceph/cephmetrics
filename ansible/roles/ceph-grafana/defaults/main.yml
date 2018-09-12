@@ -1,6 +1,6 @@
 ---
 defaults:
-  # graphite defaults are now in the cephmetrics-common role since the
+  # graphite defaults are now in the ceph-defaults role since the
   # ceph-collectd role needs access to them
   dashboards_path: "dashboards"
   replace_dashboards: true
