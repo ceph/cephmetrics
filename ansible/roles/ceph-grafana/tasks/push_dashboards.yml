@@ -41,6 +41,7 @@
     password: "{{ grafana.admin_password }}"
     force_basic_auth: yes
     status_code: 200,404
+    validate_certs: no
   with_items: "{{ dashboards.keys() }}"
   register: dashboard_ids
   no_log: true
@@ -64,4 +65,5 @@
     status_code: 200
     body_format: json
     body: '{"dashboard": {{ dashboards[item].body|to_json }}, "overwrite": true}'
+    validate_certs: no
   with_items: "{{ dashboards.keys() }}"

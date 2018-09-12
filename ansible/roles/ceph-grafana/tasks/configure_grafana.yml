@@ -57,6 +57,42 @@
     value: "{{ grafana.admin_password }}"
   no_log: true
 
+- name: Set protocol in grafana.ini
+  ini_file:
+    path: /etc/grafana/grafana.ini
+    section: server
+    option: protocol
+    value: "{{ protocol }}"
+  no_log: true
+
+- name: Copy grafana SSL certificate file
+  copy:
+    src: "{{ grafana.crt }}"
+    dest: "/etc/grafana/ceph-grafana.crt"
+    owner: root
+    group: root
+    mode: 0644
+  when:
+    - grafana.crt
+    - protocol == "https"
+
+- name: Copy grafana SSL certificate key
+  copy:
+    src: "{{ grafana.key }}"
+    dest: "/etc/grafana/ceph-grafana.key"
+    owner: root
+    group: root
+    mode: 0644
+  when:
+    - grafana.key
+    - protocol == "https"
+
+- name: Generate a Self Signed OpenSSL certificate for dashboard
+  command: "openssl req -new -nodes -x509 -subj '/O=IT/CN=ceph-grafana' -days 3650 -keyout /etc/grafana/ceph-grafana.key -out /etc/grafana/ceph-grafana.crt -extensions v3_ca"
+  when:
+    - protocol == "https"
+    - not grafana.key or not grafana.crt
+
 - include: grafana_plugins.yml
   when:
     - devel_mode
@@ -96,6 +132,7 @@
     # If we get a 409 Conflict, it means we're already set up. We'll update
     # after this.
     status_code: 200,409
+    validate_certs: no
   register: grafana_data_source_result
   # If grafana is containerized, it may take a few more seconds to start after
   # the port is open.
@@ -110,6 +147,7 @@
     user: "{{ grafana.admin_user }}"
     password: "{{ grafana.admin_password }}"
     force_basic_auth: yes
+    validate_certs: no
   register: grafana_data_source_id
   when: grafana_data_source_result is defined and grafana_data_source_result.status == 409
 
@@ -123,6 +161,7 @@
     body_format: json
     body: "{{ grafana_data_source }}"
     status_code: 200
+    validate_certs: no
   when: grafana_data_source_result is defined and grafana_data_source_result.status == 409
 
 - include: push_dashboards.yml

@@ -4,7 +4,8 @@ defaults:
   devel_mode: true
   # The firewalld zone that carbon and grafana will use
   firewalld_zone: public
-  # Only http is supported at the moment
+  # Choose http or https
+  # For https, you should set grafana.crt/key and dashboard.crt/key
   protocol: http
   # We need this for both grafana and the mgr-dashboard module
   grafana:
@@ -12,3 +13,10 @@ defaults:
     # New deployments work fine
     admin_user: admin
     admin_password: admin
+    # We only need this for SSL (https) connections
+    crt: ''
+    key: ''
+  dashboard:
+    # We only need this for SSL (https) connections
+    crt: ''
+    key: ''

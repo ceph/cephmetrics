@@ -21,13 +21,49 @@
 - name: Enable mgr dashboard module
   command: "{{ mgr_prefix|default('') }} ceph mgr module enable dashboard"
 
-- name: Create self-signed certificate
-  command: "{{ mgr_prefix|default('') }} ceph dashboard create-self-signed-cert"
-  when: protocol == "https"
-
 - name: Disable SSL for dashboard
   command: "{{ mgr_prefix|default('') }} ceph config set mgr mgr/dashboard/ssl false"
-  when: protocol == "http"
+  when: protocol != "https"
+
+- name: Enable SSL for dashboard
+  command: "{{ mgr_prefix|default('') }} ceph config set mgr mgr/dashboard/ssl true"
+  when: protocol == "https"
+
+- name: Copy dashboard SSL certificate file
+  copy:
+    src: "{{ dashboard.crt }}"
+    dest: "/etc/ceph/ceph-dashboard.crt"
+    owner: root
+    group: root
+    mode: 0644
+  when:
+    - dashboard.crt
+    - protocol == "https"
+
+- name: Copy dashboard SSL certificate key
+  copy:
+    src: "{{ dashboard.key }}"
+    dest: "/etc/ceph/ceph-dashboard.key"
+    owner: root
+    group: root
+    mode: 0644
+  when:
+    - dashboard.key
+    - protocol == "https"
+
+- name: Generate a Self Signed OpenSSL certificate for dashboard
+  command: "openssl req -new -nodes -x509 -subj '/O=IT/CN=ceph-mgr-dashboard' -days 3650 -keyout /etc/ceph/ceph-dashboard.key -out /etc/ceph/ceph-dashboard.crt -extensions v3_ca"
+  when:
+    - protocol == "https"
+    - not dashboard.key or not dashboard.crt
+
+- name: Import dashboard certificate file
+  command: "{{ mgr_prefix|default('') }} ceph config-key set mgr mgr/dashboard/crt -i /etc/ceph/ceph-dashboard.crt"
+  when: protocol == "https"
+
+- name: Import dashboard certificate key
+  command: "{{ mgr_prefix|default('') }} ceph config-key set mgr mgr/dashboard/key -i /etc/ceph/ceph-dashboard.crt"
+  when: protocol == "https"
 
 - name: Disable mgr dashboard module (restart)
   command: "{{ mgr_prefix|default('') }} ceph mgr module disable dashboard"
