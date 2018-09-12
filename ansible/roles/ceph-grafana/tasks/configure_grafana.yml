@@ -165,5 +165,3 @@
   when: grafana_data_source_result is defined and grafana_data_source_result.status == 409
 
 - include: push_dashboards.yml
-
-- include: add_notification_channel.yml
