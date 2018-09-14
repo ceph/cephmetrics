@@ -65,6 +65,9 @@
   command: "{{ mgr_prefix|default('') }} ceph config-key set mgr mgr/dashboard/key -i /etc/ceph/ceph-dashboard.crt"
   when: protocol == "https"
 
+- name: "Set the dashboard port ({{ dashboard.port }})"
+  command: "{{ mgr_prefix|default('') }} ceph config set mgr mgr/dashboard/server_port {{ dashboard.port }}"
+
 - name: Disable mgr dashboard module (restart)
   command: "{{ mgr_prefix|default('') }} ceph mgr module disable dashboard"
 

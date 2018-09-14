@@ -20,3 +20,4 @@ defaults:
     # We only need this for SSL (https) connections
     crt: ''
     key: ''
+    port: 8004

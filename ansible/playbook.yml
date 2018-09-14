@@ -54,4 +54,4 @@
   tasks:
     - name: Print dashboard URL
       debug:
-        msg: "All done! You may access your dashboard at http://{{ groups['ceph-grafana'][0] }}:8080/ with your pre-defined user and password (admin/admin by default)."
+        msg: "All done! You may access your dashboard at http://{{ groups['ceph-grafana'][0] }}:<port>/ (default port is 8004) with your pre-defined username and password (admin/admin by default)."
