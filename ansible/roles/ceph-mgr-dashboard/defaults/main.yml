@@ -3,3 +3,4 @@ defaults:
   dashboard:
     admin_user: admin
     admin_password: admin
+    rgw_user: ceph-dashboard

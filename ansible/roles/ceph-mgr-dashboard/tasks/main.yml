@@ -90,6 +90,25 @@
 - name: Set grafana url
   command: "{{ mgr_prefix|default('') }} ceph dashboard set-grafana-api-url {{ protocol }}://{{ ansible_hostname }}:3000/"
 
+- name: Create radosgw system user
+  command: "{{ mgr_prefix|default('') }} radosgw-admin user create --uid={{ dashboard.rgw_user }} --display-name='Ceph dashboard' --system"
+  register: rgw_user_output
+
+- name: Get the rgw access and secret keys
+  set_fact:
+    rgw_access_key: "{{ (rgw_user_output.stdout | from_json)['keys'][0]['access_key'] }}"
+    rgw_secret_key: "{{ (rgw_user_output.stdout | from_json)['keys'][0]['secret_key'] }}"
+
+- name: Set the rgw access key
+  command: "{{ mgr_prefix|default('') }} ceph dashboard set-rgw-api-access-key {{ rgw_access_key }}"
+
+- name: Set the rgw secret key
+  command: "{{ mgr_prefix|default('') }} ceph dashboard set-rgw-api-secret-key {{ rgw_secret_key }}"
+
+- name: Disable ssl verification for rgw
+  command: "{{ mgr_prefix|default('') }} ceph dashboard set-rgw-api-ssl-verify False"
+  when: false
+
 - name: Disable mgr dashboard module (restart)
   command: "{{ mgr_prefix|default('') }} ceph mgr module disable dashboard"
 
