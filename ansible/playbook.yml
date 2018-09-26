@@ -10,13 +10,7 @@
   - ceph-mgr-prometheus
 
 - hosts:
-  - ceph-grafana
-  become: true
-  roles:
-  - ceph-prometheus
-
-- hosts:
-  - ceph-grafana
+  - ceph-dashboard
   # These are roles used by ceph-ansible
   - mons
   - agents
@@ -36,9 +30,10 @@
   - ceph-node-exporter
 
 - hosts:
-  - ceph-grafana
+  - ceph-dashboard
   become: true
   roles:
+  - ceph-prometheus
   - ceph-grafana
 
 - hosts:
@@ -54,4 +49,4 @@
   tasks:
     - name: Print dashboard URL
       debug:
-        msg: "All done! You may access your dashboard at http://{{ groups['ceph-grafana'][0] }}:<port>/ (default port is 8004) with your pre-defined username and password (admin/admin by default)."
+        msg: "All done! You may access your dashboard at http://{{ groups['ceph-dashboard'][0] }}:<port>/ (default port is 8004) with your pre-defined username and password (admin/admin by default)."

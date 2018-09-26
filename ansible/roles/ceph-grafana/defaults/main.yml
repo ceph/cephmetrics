@@ -8,7 +8,7 @@ defaults:
     # container_memory is in GB
     container_memory: 4
     uid: 472
-    datasource: Local
+    datasource: Dashboard
     dashboards_path: "/etc/grafana/dashboards/ceph-dashboard"
     plugins:
       - vonage-status-panel

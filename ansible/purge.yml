@@ -1,7 +1,7 @@
 ---
 - name: purge grafana host
   hosts:
-    - ceph-grafana
+    - ceph-dashboard
   become: true
   tasks:
   - name: Stop and disable services
@@ -37,8 +37,8 @@
       - /var/lib/grafana
       - /var/lib/carbon
       - /etc/grafana/grafana.ini
-      - /etc/grafana/ceph-grafana.crt
-      - /etc/grafana/ceph-grafana.key
+      - /etc/grafana/ceph-dashboard.crt
+      - /etc/grafana/ceph-dashboard.key
       - /etc/grafana/provisioning/dashboards/ceph-dashboard.yml
       - /etc/grafana/provisioning/datasources/ceph-dashboard.yml
       - /etc/grafana/dashboards/ceph-dashboard
