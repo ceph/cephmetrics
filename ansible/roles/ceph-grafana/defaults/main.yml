@@ -1,7 +1,5 @@
 ---
 defaults:
-  # graphite defaults are now in the ceph-defaults role since the
-  # ceph-collectd role needs access to them
   grafana:
     container_name: "grafana/grafana"
     container_tag: latest
@@ -11,7 +9,7 @@ defaults:
     container_memory: 4
     uid: 472
     datasource: Local
-    dashboards_path: "/var/lib/grafana/dashboards/ceph-dashboard"
+    dashboards_path: "/etc/grafana/dashboards/ceph-dashboard"
     plugins:
       - vonage-status-panel
       - grafana-piechart-panel

@@ -25,6 +25,7 @@
       - grafana
       - cephmetrics
       - prometheus
+      - ceph-grafana-dashboards
 
   - name: Remove files
     file:
@@ -36,6 +37,11 @@
       - /var/lib/grafana
       - /var/lib/carbon
       - /etc/grafana/grafana.ini
+      - /etc/grafana/ceph-grafana.crt
+      - /etc/grafana/ceph-grafana.key
+      - /etc/grafana/provisioning/dashboards/ceph-dashboard.yml
+      - /etc/grafana/provisioning/datasources/ceph-dashboard.yml
+      - /etc/grafana/dashboards/ceph-dashboard
       - /etc/carbon/storage-schemas.conf
       - /etc/httpd/conf.d/graphite-web.conf
       - /etc/yum.repos.d/cephmetrics.repo
