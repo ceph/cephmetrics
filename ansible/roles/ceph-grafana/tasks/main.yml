@@ -14,3 +14,5 @@
 - include: configure_firewall.yml
 
 - include: configure_grafana.yml
+
+- include: configure_dashboard.yml

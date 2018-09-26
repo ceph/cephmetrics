@@ -12,6 +12,7 @@
 - name: Choose the correct container name
   set_fact:
     container_name: "{% for res in mgr_container.results if res.rc == 0 %}{{ res.item }}{% endfor %}"
+    mgr_prefix: "" # Set the default value for mgr_prefix
 
 - name: Prefix the mgr command with a docker command
   set_fact:
@@ -19,4 +20,7 @@
   when: container_name != ""
 
 - name: Enable mgr prometheus module
-  command: "{{ mgr_prefix|default('') }} ceph mgr module enable prometheus"
+  command: "{{ mgr_prefix }} ceph mgr module enable prometheus"
+
+- name: Enable mgr dashboard module
+  command: "{{ mgr_prefix }} ceph mgr module enable dashboard"

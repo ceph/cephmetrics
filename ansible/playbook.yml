@@ -7,7 +7,7 @@
   - mgrs[0]
   become: true
   roles:
-  - ceph-mgr-prometheus
+  - ceph-mgr
 
 - hosts:
   - ceph-dashboard
@@ -35,12 +35,6 @@
   roles:
   - ceph-prometheus
   - ceph-grafana
-
-- hosts:
-  - mgrs[0]
-  become: true
-  roles:
-  - ceph-mgr-dashboard
 
 - hosts: localhost
   connection: local

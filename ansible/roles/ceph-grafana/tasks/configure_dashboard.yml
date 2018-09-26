@@ -1,6 +1,4 @@
 ---
-- include: merge_vars.yml
-
 - name: Check to see if the mgr is containerized
   command: "docker inspect {{ item }}"
   with_items:
@@ -18,9 +16,6 @@
   set_fact:
     mgr_prefix: "docker exec {{ container_name }}"
   when: container_name != ""
-
-- name: Enable mgr dashboard module
-  command: "{{ mgr_prefix }} ceph mgr module enable dashboard"
 
 - name: Disable SSL for dashboard
   command: "{{ mgr_prefix }} ceph config set mgr mgr/dashboard/ssl false"
