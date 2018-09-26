@@ -7,15 +7,10 @@
   when:
     - containerized
 
-- include: setup_repos.yml
+- include: install_packages.yml
   when:
     - not containerized
-
-- include: install_packages.yml
-  when: not containerized
 
 - include: configure_firewall.yml
 
 - include: configure_grafana.yml
-
-- include: start_services.yml
