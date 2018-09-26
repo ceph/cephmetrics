@@ -81,6 +81,19 @@
 
 - name: Set grafana url
   command: "{{ mgr_prefix }} ceph dashboard set-grafana-api-url {{ protocol }}://{{ ansible_hostname }}:3000/"
+  failed_when: false
+
+- name: Set grafana api protocol
+  command: "{{ mgr_prefix }} ceph dashboard set-grafana-api-protocol {{ protocol }}"
+  failed_when: false
+
+- name: Set grafana api host
+  command: "{{ mgr_prefix }} ceph dashboard set-grafana-api-host {{ ansible_hostname }}"
+  failed_when: false
+
+- name: Set grafana api port
+  command: "{{ mgr_prefix }} ceph dashboard set-grafana-api-port 3000"
+  failed_when: false
 
 - name: Create radosgw system user
   command: "{{ mgr_prefix }} radosgw-admin user create --uid={{ dashboard.rgw_api_user_id }} --display-name='Ceph dashboard' --system"
