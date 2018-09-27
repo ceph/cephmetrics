@@ -1,8 +1,6 @@
 ---
 - include: merge_vars.yml
 
-- include: sanity.yml
-
 - include: setup_container.yml
   when:
     - containerized
