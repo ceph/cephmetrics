@@ -1,4 +1,4 @@
-[ceph-grafana]
+[ceph-dashboard]
 grafana_host.example.com
 
 [osds]

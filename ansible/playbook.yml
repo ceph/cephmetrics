@@ -34,7 +34,7 @@
   become: true
   roles:
   - ceph-prometheus
-  - ceph-grafana
+  - ceph-dashboard
 
 - hosts: localhost
   connection: local
