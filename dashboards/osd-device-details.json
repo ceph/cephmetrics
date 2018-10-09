@@ -26,7 +26,7 @@
       }
     ]
   },
-  "editable": true,
+  "editable": false,
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
@@ -668,8 +668,13 @@
   "templating": {
     "list": [
       {
+        "current": {
+          "tags": [],
+          "text": "default",
+          "value": "default"
+        },
         "hide": 0,
-        "label": null,
+        "label": "Data Source",
         "name": "datasource",
         "options": [],
         "query": "prometheus",
