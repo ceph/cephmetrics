@@ -593,7 +593,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "count(max by (id) (ceph_osd_metadata))",
+          "expr": "count(max by (ceph_daemon) (ceph_osd_metadata))",
           "format": "time_series",
           "groupBy": [],
           "intervalFactor": 2,
