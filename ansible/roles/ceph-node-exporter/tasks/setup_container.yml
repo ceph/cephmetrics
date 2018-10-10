@@ -1,0 +1,32 @@
+---
+- name: Include ceph-docker
+  include_role:
+    name: ceph-docker
+    allow_duplicates: false
+
+- name: Start docker container
+  docker_container:
+    name: node-exporter
+    image: "{{ node_exporter.container_name }}:{{ node_exporter.container_tag }}"
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.sysfs=/host/sys'
+      - '--no-collector.timex'
+    restart_policy: no
+    detach: true
+    volumes:
+      - '/proc:/host/proc:ro'
+      - '/sys:/host/sys:ro'
+    network_mode: host
+    keep_volumes: true
+    pull: true
+  notify: Restart service
+
+- name: Ship systemd service
+  copy:
+    src: node_exporter.service
+    dest: "/etc/systemd/system/"
+    owner: root
+    group: root
+    mode: 0644
+  notify: Restart service

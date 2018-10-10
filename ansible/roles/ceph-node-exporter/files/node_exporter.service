@@ -1,0 +1,17 @@
+# This file is managed by ansible, don't make changes here - they will be
+# overwritten.
+[Unit]
+Description=Node Exporter
+After=docker.service
+
+[Service]
+EnvironmentFile=-/etc/environment
+ExecStart=/usr/bin/docker start --attach node-exporter
+ExecStop=-/usr/bin/docker stop node-exporter
+Restart=always
+RestartSec=10s
+TimeoutStartSec=120
+TimeoutStopSec=15
+
+[Install]
+WantedBy=multi-user.target

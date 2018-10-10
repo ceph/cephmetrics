@@ -13,6 +13,8 @@
       - grafana-server
       - carbon-cache
       - httpd
+      - node_exporter
+      - prometheus-node-exporter
     failed_when: false
 
   - name: Remove packages
@@ -76,11 +78,15 @@
     - cluster
   become: true
   tasks:
-  - name: Stop and disable collectd
+  - name: Stop and disable services
     service:
-      name: collectd
+      name: "{{ item }}"
       enabled: no
       state: stopped
+    with_items:
+      - collectd
+      - node_exporter
+      - prometheus-node-exporter
     failed_when: false
 
   - name: Remove packages
@@ -106,3 +112,10 @@
       - /etc/yum.repos.d/cephmetrics.repo
       - /usr/lib64/collectd
       - /usr/local/sbin/node_exporter
+
+  - name: Remove containers
+    docker_container:
+      name: "{{ item }}"
+      state: absent
+    with_items:
+      - node-exporter

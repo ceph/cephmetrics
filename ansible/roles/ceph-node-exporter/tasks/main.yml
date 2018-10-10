@@ -1,11 +1,11 @@
 ---
 - include: merge_vars.yml
 
-- name: Install packages
-  package:
-    name: "{{ node_exporter.packages }}"
-    state: latest
-  notify: "Restart service"
+- include: setup_container.yml
+  when: containerized
+
+- include: install_packages.yml
+  when: not containerized
 
 - name: Check firewalld status
   shell: "systemctl show firewalld | grep UnitFileState"
@@ -23,7 +23,3 @@
   with_items:
     - 9100/tcp
   when: "'enabled' in firewalld_status.stdout"
-
-- include: create_service.yml
-  when:
-    - devel_mode

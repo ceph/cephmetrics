@@ -1,0 +1,6 @@
+---
+- name: Install node_exporter
+  package:
+    name: "{{ node.exporter.packages }}"
+    state: latest
+  notify: Restart service

@@ -7,3 +7,5 @@ defaults:
     packages:
       - prometheus-node-exporter
     service_name: node_exporter
+    container_name: prom/node-exporter
+    container_tag: latest
