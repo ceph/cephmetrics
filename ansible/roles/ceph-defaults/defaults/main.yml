@@ -6,7 +6,7 @@ defaults:
   firewalld_zone: public
   # Choose http or https
   # For https, you should set grafana.crt/key and dashboard.crt/key
-  protocol: http
+  protocol: https
   # We need this for both grafana and the mgr-dashboard module
   grafana:
     # You need to change these in the web UI on an already deployed machine, first

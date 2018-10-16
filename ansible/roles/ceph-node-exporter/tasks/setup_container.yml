@@ -7,7 +7,7 @@
 - name: Start docker container
   docker_container:
     name: node-exporter
-    image: "{{ node_exporter.container_name }}:{{ node_exporter.container_tag }}"
+    image: "{{ node_exporter.container_image }}"
     command:
       - '--path.procfs=/host/proc'
       - '--path.sysfs=/host/sys'

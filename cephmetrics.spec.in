@@ -2,14 +2,14 @@
 
 %{!?_selinux_policy_version: %global _selinux_policy_version %(sed -e 's,.*selinux-policy-\\([^/]*\\)/.*,\\1,' /usr/share/selinux/devel/policyhelp 2>/dev/null)}
 
-Name:		cephmetrics
+Name:		dashboard
 Version:	@VERSION@
 Release:	@RELEASE@%{?dist}
 Summary:	Monitoring service for Ceph clusters
 
 License:	GPLv3
 URL:		https://github.com/ceph/cephmetrics
-Source0:	cephmetrics-@VERSION@.zip
+Source0:	dashboard-@VERSION@.zip
 
 %description
 The monitoring service with web frontend for Ceph storage clusters providing several statistical data graphed by grafana.
@@ -20,16 +20,17 @@ Requires:	ceph-ansible
 Requires:	PyYAML
 Requires:	python-requests
 Requires:	python-netaddr
-Requires:	cephmetrics-dashboards = %{version}-%{release}
+Requires:	dashboard-grafana-dashboards = %{version}-%{release}
 Obsoletes:	cephmetrics-grafana-plugins < %{version}-%{release}
 Obsoletes:	cephmetrics-collectors < %{version}-%{release}
 Obsoletes:	cephmetrics < %{version}-%{release}
+Obsoletes:	cephmetrics-ansible < %{version}-%{release}
 %description ansible
 The monitoring service with web frontend for Ceph storage clusters providing several statistical data graphed by grafana. This package contains a set of ansible playbooks to deploy a cephmetrics server.
 
-%package dashboards
+%package grafana-dashboards
 Summary:	A set of grafana dashboards for cephmetris
-%description dashboards
+%description grafana-dashboards
 The grafana dashboards for consumption by grafana as configured by cephmetrics ansible scripts.
 
 %prep
@@ -43,35 +44,38 @@ patch -p1 < patches/0001-ansible-Disable-devel_mode.patch
 sed -i -e 's/devel_mode: true/devel_mode: false/' ansible/roles/*/defaults/main.yml
 
 # Change the prometheus container location/version
-sed -i -e 's|container_name: .*$|container_name: registry.access.redhat.com/openshift3/prometheus|' ansible/roles/ceph-prometheus/defaults/main.yml
-sed -i -e 's|version: .*$|version: v3.9|' ansible/roles/ceph-prometheus/defaults/main.yml
+sed -i -e 's|container_image: .*$|container_image: registry.access.redhat.com/openshift3/prometheus:v3.10|' ansible/roles/ceph-prometheus/defaults/main.yml
+#sed -i -e 's|version: .*$|version: v3.9|' ansible/roles/ceph-prometheus/defaults/main.yml
 
 # Change the grafana container location/version
-sed -i -e 's|container_name: .*$|container_name: registry.access.redhat.com/rhceph/rhceph-3-dashboard-rhel7|' ansible/roles/ceph-grafana/defaults/main.yml
-sed -i -e 's|version: .*$|version: 3|' ansible/roles/ceph-grafana/defaults/main.yml
+sed -i -e 's|container_name: .*$|container_image: registry.access.redhat.com/rhceph/rhceph-3-dashboard-rhel7:3|' ansible/roles/ceph-grafana/defaults/main.yml
+#sed -i -e 's|version: .*$|version: 3|' ansible/roles/ceph-grafana/defaults/main.yml
+
+# Change the node_exporter container location/version
+sed -i -e 's|container_image: .*$|container_image: registry.access.redhat.com/openshift3/prometheus-node-exporter:v3.10|' ansible/roles/ceph-node-exporter/defaults/main.yml
 
 # Set the dashboards path
-sed -i -e 's|dashboards_path: .*$|dashboards_path: %{_datadir}/cephmetrics-dashboards|' ansible/roles/ceph-grafana/defaults/main.yml
+#sed -i -e 's|dashboards_path: .*$|dashboards_path: %{_datadir}/cephmetrics-dashboards|' ansible/roles/ceph-grafana/defaults/main.yml
 
 # Change the service_name for node_exporter
-sed -i -e 's|service_name: .*|service_name: prometheus-node-exporter|' ansible/roles/ceph-node-exporter/defaults/main.yml
+#sed -i -e 's|service_name: .*|service_name: prometheus-node-exporter|' ansible/roles/ceph-node-exporter/defaults/main.yml
 
 
 %install
 # Install ansible playbooks
 install -d %{buildroot}%{_datadir}
-cp -r ansible %{buildroot}%{_datadir}/cephmetrics-ansible
-rm -f %{buildroot}%{_datadir}/cephmetrics-ansible/roles/ceph-grafana/files/dashboards
-cp -r dashboards %{buildroot}%{_datadir}/cephmetrics-dashboards
+cp -r ansible %{buildroot}%{_datadir}/dashboard-ansible
+rm -f %{buildroot}%{_datadir}/dashboard-ansible/roles/ceph-grafana/files/dashboards
+cp -r dashboards %{buildroot}%{_datadir}/grafana-dashboards
 exit 0
 
 
 %files ansible
-%{_datadir}/cephmetrics-ansible
+%{_datadir}/dashboard-ansible
 %doc LICENSE
 %doc README
 
-%files dashboards
-%{_datadir}/cephmetrics-dashboards
+%files grafana-dashboards
+%{_datadir}/grafana-dashboards
 
 %changelog

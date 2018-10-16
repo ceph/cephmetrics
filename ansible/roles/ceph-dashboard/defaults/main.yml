@@ -1,8 +1,7 @@
 ---
 defaults:
   grafana:
-    container_name: "grafana/grafana"
-    container_tag: latest
+    container_image: "grafana/grafana:latest"
     container_cpu_period: 100000
     container_cpu_cores: 2
     # container_memory is in GB

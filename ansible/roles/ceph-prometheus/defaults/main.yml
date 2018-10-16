@@ -1,8 +1,7 @@
 ---
 defaults:
   prometheus:
-    container_name: prom/prometheus
-    container_tag: latest
+    container_image: prom/prometheus:latest
     container_cpu_period: 100000
     container_cpu_cores: 2
     # container_memory is in GB

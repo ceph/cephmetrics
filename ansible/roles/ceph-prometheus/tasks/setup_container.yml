@@ -8,7 +8,7 @@
 - name: Start docker container
   docker_container:
     name: prometheus
-    image: "{{ prometheus.container_name }}:{{ prometheus.container_tag }}"
+    image: "{{ prometheus.container_image }}"
     command: "--config.file=/prometheus/prometheus.yml"
     restart_policy: no
     published_ports: '9090:9090'
