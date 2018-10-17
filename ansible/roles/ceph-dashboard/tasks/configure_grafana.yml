@@ -38,27 +38,19 @@
 
 - name: Copy grafana SSL certificate file
   copy:
-    src: "{{ grafana.crt }}"
+    src: "{{ grafana.crt | default('/tmp/ceph-dashboard.crt') }}"
     dest: "/etc/grafana/ceph-dashboard.crt"
     mode: 0640
   when:
-    - grafana.crt
     - protocol == "https"
 
 - name: Copy grafana SSL certificate key
   copy:
-    src: "{{ grafana.key }}"
+    src: "{{ grafana.key | default('/tmp/ceph-dashboard.key') }}"
     dest: "/etc/grafana/ceph-dashboard.key"
     mode: 0640
   when:
-    - grafana.key
     - protocol == "https"
-
-- name: Generate a Self Signed OpenSSL certificate for dashboard
-  command: "openssl req -new -nodes -x509 -subj '/O=IT/CN=ceph-dashboard' -days 3650 -keyout /etc/grafana/ceph-dashboard.key -out /etc/grafana/ceph-dashboard.crt -extensions v3_ca"
-  when:
-    - protocol == "https"
-    - not grafana.key or not grafana.crt
 
 - name: Set owner/group on /etc/grafana
   file:

@@ -29,6 +29,13 @@
   roles:
   - ceph-node-exporter
 
+- hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: Generate a preliminary Self Signed OpenSSL certificate for grafana and dashboard
+      command: "openssl req -new -nodes -x509 -subj '/O=IT/CN=ceph-dashboard' -days 3650 -keyout /tmp/ceph-dashboard.key -out /tmp/ceph-dashboard.crt -extensions v3_ca"
+
 - hosts:
   - ceph-dashboard
   become: true
@@ -39,8 +46,7 @@
 - hosts: localhost
   connection: local
   gather_facts: false
-
   tasks:
     - name: Print dashboard URL
       debug:
-        msg: "All done! You may access your dashboard at http://{{ groups['ceph-dashboard'][0] }}:<port>/ (default port is 8004) with your pre-defined username and password (admin/admin by default)."
+        msg: "All done! You may access your dashboard at http://{{ groups['ceph-dashboard'][0] }}:<port>/ (default port is 8234) with your pre-defined username and password (admin/admin by default)."
