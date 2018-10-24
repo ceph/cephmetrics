@@ -2,36 +2,27 @@
 
 %{!?_selinux_policy_version: %global _selinux_policy_version %(sed -e 's,.*selinux-policy-\\([^/]*\\)/.*,\\1,' /usr/share/selinux/devel/policyhelp 2>/dev/null)}
 
-Name:		dashboard
+Name:		dashboard-ansible
 Version:	@VERSION@
 Release:	@RELEASE@%{?dist}
-Summary:	Monitoring service for Ceph clusters
+Summary:	Monitoring service for Ceph clusters deployment tool
 
 License:	GPLv3
 URL:		https://github.com/ceph/cephmetrics
-Source0:	dashboard-@VERSION@.zip
+Source0:	dashboard-ansible-@VERSION@.zip
+BuildArch:	noarch
 
-%description
-The monitoring service with web frontend for Ceph storage clusters providing several statistical data graphed by grafana.
-
-%package ansible
-Summary:	Monitoring service for Ceph clusters deployment tool
 Requires:	ceph-ansible
 Requires:	PyYAML
 Requires:	python-requests
 Requires:	python-netaddr
-Requires:	dashboard-grafana-dashboards = %{version}-%{release}
 Obsoletes:	cephmetrics-grafana-plugins < %{version}-%{release}
 Obsoletes:	cephmetrics-collectors < %{version}-%{release}
 Obsoletes:	cephmetrics < %{version}-%{release}
 Obsoletes:	cephmetrics-ansible < %{version}-%{release}
-%description ansible
-The monitoring service with web frontend for Ceph storage clusters providing several statistical data graphed by grafana. This package contains a set of ansible playbooks to deploy a cephmetrics server.
 
-%package grafana-dashboards
-Summary:	A set of grafana dashboards for cephmetris
-%description grafana-dashboards
-The grafana dashboards for consumption by grafana as configured by cephmetrics ansible scripts.
+%description
+The monitoring service with web frontend for Ceph storage clusters providing several statistical data graphed by grafana. This package contains a set of ansible playbooks to deploy a cephmetrics server.
 
 %prep
 %setup -q
@@ -48,14 +39,11 @@ sed -i -e 's|container_image: .*$|container_image: registry.access.redhat.com/op
 #sed -i -e 's|version: .*$|version: v3.9|' ansible/roles/ceph-prometheus/defaults/main.yml
 
 # Change the grafana container location/version
-sed -i -e 's|container_name: .*$|container_image: registry.access.redhat.com/rhceph/rhceph-3-dashboard-rhel7:3|' ansible/roles/ceph-grafana/defaults/main.yml
+sed -i -e 's|container_name: .*$|container_image: registry.access.redhat.com/rhceph/rhceph-3-dashboard-rhel7:3|' ansible/roles/ceph-dashboard/defaults/main.yml
 #sed -i -e 's|version: .*$|version: 3|' ansible/roles/ceph-grafana/defaults/main.yml
 
 # Change the node_exporter container location/version
 sed -i -e 's|container_image: .*$|container_image: registry.access.redhat.com/openshift3/prometheus-node-exporter:v3.10|' ansible/roles/ceph-node-exporter/defaults/main.yml
-
-# Set the dashboards path
-#sed -i -e 's|dashboards_path: .*$|dashboards_path: %{_datadir}/cephmetrics-dashboards|' ansible/roles/ceph-grafana/defaults/main.yml
 
 # Change the service_name for node_exporter
 #sed -i -e 's|service_name: .*|service_name: prometheus-node-exporter|' ansible/roles/ceph-node-exporter/defaults/main.yml
@@ -64,18 +52,14 @@ sed -i -e 's|container_image: .*$|container_image: registry.access.redhat.com/op
 %install
 # Install ansible playbooks
 install -d %{buildroot}%{_datadir}
-cp -r ansible %{buildroot}%{_datadir}/dashboard-ansible
+cp -L -r ansible %{buildroot}%{_datadir}/dashboard-ansible
 rm -f %{buildroot}%{_datadir}/dashboard-ansible/roles/ceph-grafana/files/dashboards
-cp -r dashboards %{buildroot}%{_datadir}/grafana-dashboards
 exit 0
 
 
-%files ansible
+%files
 %{_datadir}/dashboard-ansible
 %doc LICENSE
 %doc README
-
-%files grafana-dashboards
-%{_datadir}/grafana-dashboards
 
 %changelog

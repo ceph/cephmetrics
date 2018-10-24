@@ -5,13 +5,13 @@ Subject: [PATCH] ansible: Disable devel_mode
 
 Signed-off-by: Boris Ranto <branto@redhat.com>
 ---
- ansible/roles/cephmetrics-common/tasks/merge_vars.yml | 6 ++++++
+ ansible/roles/ceph-defaults/tasks/merge_vars.yml | 6 ++++++
  1 file changed, 6 insertions(+)
 
-diff --git a/ansible/roles/cephmetrics-common/tasks/merge_vars.yml b/ansible/roles/cephmetrics-common/tasks/merge_vars.yml
+diff --git a/ansible/roles/ceph-defaults/tasks/merge_vars.yml b/ansible/roles/ceph-defaults/tasks/merge_vars.yml
 index f8dbcd0..15d2a6b 100644
---- a/ansible/roles/cephmetrics-common/tasks/merge_vars.yml
-+++ b/ansible/roles/cephmetrics-common/tasks/merge_vars.yml
+--- a/ansible/roles/ceph-defaults/tasks/merge_vars.yml
++++ b/ansible/roles/ceph-defaults/tasks/merge_vars.yml
 @@ -3,3 +3,9 @@
    set_fact: {"{{ item }}": "{% if vars[item] is not defined %}{{ defaults[item] }}{% elif vars[item] is mapping %}{{ defaults[item]|combine(vars[item]|default({})) }}{% else %}{{ vars[item] }}{% endif %}"}
    with_items: "{{ defaults.keys() }}"

@@ -27,13 +27,13 @@ RPM_RELEASE=$(echo $REVISION | tr '-' '_') # the '-' has a special meaning
 
 ## Build the source tarball
 echo "Building source distribution"
-git archive --format=zip --prefix=cephmetrics-${VERSION}/ HEAD > dist/cephmetrics-${VERSION}.zip
+git archive --format=zip --prefix=dashboard-ansible-${VERSION}/ HEAD > dist/dashboard-ansible-${VERSION}.zip
 #wget https://grafana.com/api/plugins/vonage-status-panel/versions/1.0.4/download -O dist/vonage-status-panel-1.0.4.zip
 #wget https://grafana.com/api/plugins/grafana-piechart-panel/versions/1.1.5/download -O dist/grafana-piechart-panel-1.1.5.zip
 
 
 ## Prepare the spec file for build
-sed -e "s/@VERSION@/${VERSION}/g" -e "s/@RELEASE@/${RPM_RELEASE}/g" < cephmetrics.spec.in > dist/cephmetrics.spec
+sed -e "s/@VERSION@/${VERSION}/g" -e "s/@RELEASE@/${RPM_RELEASE}/g" < dashboard-ansible.spec.in > dist/dashboard-ansible.spec
 
 
 ## Create the source rpm
@@ -47,6 +47,6 @@ rpmbuild \
     --define "dist .any" \
     --define "fedora 21" \
     --define "rhel 7" \
-    --nodeps -bs dist/cephmetrics.spec
+    --nodeps -bs dist/dashboard-ansible.spec
 SRPM=$(readlink -f *.src.rpm)
 echo "SRPM='$SRPM'"
