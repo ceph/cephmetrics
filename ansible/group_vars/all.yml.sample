@@ -1,15 +1,15 @@
 dummy:
 
-# Turn on/off containerized deployment
-#containerized: true
-
-# Turn on/off devel_mode
-#devel_mode: true
-
-# Choose http or https
+## Choose protocol -- http or https
 # For https, you should set grafana.crt/key and dashboard.crt/key
-#protocol: http
 #
+# If you don't, the scripts will use self-signed certificates and
+# you will have to confirm security exceptions for both dashboard
+# web UI and Grafana.
+#
+# Please note that http might not be supported everywhere
+#protocol: https
+
 ## Set grafana options
 # For new deployments, you can directly set the user/password,here.
 # Please change user/pwd in the web UI on an already deployed machine
