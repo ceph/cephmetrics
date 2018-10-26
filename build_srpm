@@ -19,10 +19,10 @@ rm -f *.any.src.rpm
 ## Get some basic information about the system and the repository
 DESCRIBE="$(git describe --tags 2>/dev/null | cut -b 2-)"
 test -z "$DESCRIBE" && DESCRIBE="0.1-$(git rev-list --count HEAD)-g$(git rev-parse --short HEAD)"
-VERSION="$(echo $DESCRIBE | cut -d - -f 1)"
+VERSION=1.0
 REVISION="$(echo $DESCRIBE | cut -s -d - -f 2-)"
 test -z "$REVISION" && REVISION=0
-RPM_RELEASE=$(echo $REVISION | tr '-' '_') # the '-' has a special meaning
+RPM_RELEASE=1
 
 
 ## Build the source tarball
