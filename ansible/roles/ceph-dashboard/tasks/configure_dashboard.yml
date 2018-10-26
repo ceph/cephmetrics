@@ -68,10 +68,13 @@
 - name: Enable mgr dashboard module (restart)
   command: "{{ mgr_prefix }} ceph mgr module enable dashboard"
 
-- name: Set dashboard admin username and password
+- name: Set or update dashboard admin username and password
   shell: |
-    {{ mgr_prefix }} ceph dashboard ac-user-show {{ dashboard.admin_user }} || \
-    {{ mgr_prefix }} ceph dashboard ac-user-create {{ dashboard.admin_user }} {{dashboard.admin_password }} administrator"
+    if {{ mgr_prefix }} ceph dashboard ac-user-show {{ dashboard.admin_user }}; then
+      {{ mgr_prefix }} ceph dashboard ac-user-set-password {{ dashboard.admin_user }} {{dashboard.admin_password }}
+    else
+      {{ mgr_prefix }} ceph dashboard ac-user-create {{ dashboard.admin_user }} {{dashboard.admin_password }} administrator
+    fi
 
 - name: Set grafana url
   command: "{{ mgr_prefix }} ceph dashboard set-grafana-api-url {{ protocol }}://{{ ansible_hostname }}:3000/"

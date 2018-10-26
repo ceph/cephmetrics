@@ -34,7 +34,9 @@
   gather_facts: false
   tasks:
     - name: Generate a preliminary Self Signed OpenSSL certificate for grafana and dashboard
-      command: "openssl req -new -nodes -x509 -subj '/O=IT/CN=ceph-dashboard' -days 3650 -keyout /tmp/ceph-dashboard.key -out /tmp/ceph-dashboard.crt -extensions v3_ca"
+      shell: |
+        test -f /tmp/ceph-dashboard.key -a -f /tmp/ceph-dashboard.crt || \
+        openssl req -new -nodes -x509 -subj '/O=IT/CN=ceph-dashboard' -days 3650 -keyout /tmp/ceph-dashboard.key -out /tmp/ceph-dashboard.crt -extensions v3_ca
 
 - hosts:
   - ceph-dashboard
