@@ -18,11 +18,15 @@
   when: container_name != ""
 
 - name: Disable SSL for dashboard
-  command: "{{ mgr_prefix }} ceph config set mgr mgr/dashboard/ssl false"
+  shell: |
+    {{ mgr_prefix }} ceph config set mgr mgr/dashboard/ssl false || \
+    {{ mgr_prefix }} ceph config-key set mgr/dashboard/ssl false
   when: protocol != "https"
 
 - name: Enable SSL for dashboard
-  command: "{{ mgr_prefix }} ceph config set mgr mgr/dashboard/ssl true"
+  shell: |
+    {{ mgr_prefix }} ceph config set mgr mgr/dashboard/ssl true || \
+    {{ mgr_prefix }} ceph config-key set mgr/dashboard/ssl true
   when: protocol == "https"
 
 - name: Copy dashboard SSL certificate file
@@ -54,7 +58,9 @@
   when: protocol == "https"
 
 - name: "Set the dashboard port ({{ dashboard.port }})"
-  command: "{{ mgr_prefix }} ceph config set mgr mgr/dashboard/server_port {{ dashboard.port }}"
+  shell: |
+    {{ mgr_prefix }} ceph config set mgr mgr/dashboard/server_port {{ dashboard.port }} || \
+    {{ mgr_prefix }} ceph config-key set mgr/dashboard/server_port {{ dashboard.port }}
 
 - name: Disable mgr dashboard module (restart)
   command: "{{ mgr_prefix }} ceph mgr module disable dashboard"
@@ -63,28 +69,12 @@
   command: "{{ mgr_prefix }} ceph mgr module enable dashboard"
 
 - name: Set dashboard admin username and password
-  command: "{{ mgr_prefix }} ceph dashboard ac-user-create {{ dashboard.admin_user }} {{dashboard.admin_password }} administrator"
-  failed_when: false
-
-- name: Set dashboard admin username and password (old method)
-  command: "{{ mgr_prefix }} ceph dashboard set-login-credentials {{ dashboard.admin_user }} {{dashboard.admin_password }}"
-  failed_when: false
+  shell: |
+    {{ mgr_prefix }} ceph dashboard ac-user-create {{ dashboard.admin_user }} {{dashboard.admin_password }} administrator || \
+    {{ mgr_prefix }} ceph dashboard set-login-credentials {{ dashboard.admin_user }} {{dashboard.admin_password }}
 
 - name: Set grafana url
   command: "{{ mgr_prefix }} ceph dashboard set-grafana-api-url {{ protocol }}://{{ ansible_hostname }}:3000/"
-  failed_when: false
-
-- name: Set grafana api protocol
-  command: "{{ mgr_prefix }} ceph dashboard set-grafana-api-protocol {{ protocol }}"
-  failed_when: false
-
-- name: Set grafana api host
-  command: "{{ mgr_prefix }} ceph dashboard set-grafana-api-host {{ ansible_hostname }}"
-  failed_when: false
-
-- name: Set grafana api port
-  command: "{{ mgr_prefix }} ceph dashboard set-grafana-api-port 3000"
-  failed_when: false
 
 - name: Create radosgw system user
   command: "{{ mgr_prefix }} radosgw-admin user create --uid={{ dashboard.rgw_api_user_id }} --display-name='Ceph dashboard' --system"
