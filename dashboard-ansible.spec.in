@@ -39,7 +39,7 @@ sed -i -e 's|container_image: .*$|container_image: registry.access.redhat.com/op
 #sed -i -e 's|version: .*$|version: v3.9|' ansible/roles/ceph-prometheus/defaults/main.yml
 
 # Change the grafana container location/version
-sed -i -e 's|container_name: .*$|container_image: registry.access.redhat.com/rhceph/rhceph-3-dashboard-rhel7:3|' ansible/roles/ceph-dashboard/defaults/main.yml
+sed -i -e 's|container_image: .*$|container_image: registry.access.redhat.com/rhceph/rhceph-3-dashboard-rhel7:3|' ansible/roles/ceph-dashboard/defaults/main.yml
 #sed -i -e 's|version: .*$|version: 3|' ansible/roles/ceph-grafana/defaults/main.yml
 
 # Change the node_exporter container location/version
