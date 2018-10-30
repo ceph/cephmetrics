@@ -6,9 +6,7 @@ dummy:
 # If you don't, the scripts will use self-signed certificates and
 # you will have to confirm security exceptions for both dashboard
 # web UI and Grafana.
-#
-# Please note that http might not be supported everywhere
-#protocol: https
+#protocol: http
 
 ## Set grafana options
 # For new deployments, you can directly set the user/password,here.
@@ -26,4 +24,4 @@ dummy:
 #  admin_password: admin
 #  crt: ''
 #  key: ''
-#  port: 8004
+#  port: 8234
