@@ -31,23 +31,33 @@
 
 - name: Copy dashboard SSL certificate file
   copy:
-    src: "{{ dashboard.crt | default('/tmp/ceph-dashboard.crt') }}"
+    src: "{{ dashboard.crt }}"
     dest: "/etc/ceph/ceph-dashboard.crt"
     owner: root
     group: root
     mode: 0644
   when:
+    - dashboard.crt
     - protocol == "https"
 
 - name: Copy dashboard SSL certificate key
   copy:
-    src: "{{ dashboard.key | default('/tmp/ceph-dashboard.key') }}"
+    src: "{{ dashboard.key }}"
     dest: "/etc/ceph/ceph-dashboard.key"
     owner: root
     group: root
     mode: 0644
   when:
+    - dashboard.key
     - protocol == "https"
+
+- name: Generate a Self Signed OpenSSL certificate for dashboard
+  shell: |
+    test -f /etc/ceph/ceph-dashboard.key -a -f /etc/ceph/ceph-dashboard.crt || \
+    openssl req -new -nodes -x509 -subj '/O=IT/CN=ceph-dashboard' -days 3650 -keyout /etc/ceph/ceph-dashboard.key -out /etc/ceph/ceph-dashboard.crt -extensions v3_ca
+  when:
+    - protocol == "https"
+    - not dashboard.key or not dashboard.crt
 
 - name: Import dashboard certificate file
   command: "{{ mgr_prefix }} ceph config-key set mgr/dashboard/crt -i /etc/ceph/ceph-dashboard.crt"

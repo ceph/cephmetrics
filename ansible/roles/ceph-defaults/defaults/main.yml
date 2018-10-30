@@ -14,10 +14,10 @@ defaults:
     admin_user: admin
     admin_password: admin
     # We only need this for SSL (https) connections
-    # crt: ''
-    # key: ''
+    crt: ''
+    key: ''
   dashboard:
     # We only need this for SSL (https) connections
-    # crt: ''
-    # key: ''
+    crt: ''
+    key: ''
     port: 8234
