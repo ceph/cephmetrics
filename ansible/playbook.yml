@@ -4,6 +4,14 @@
   any_errors_fatal: true
 
 - hosts:
+  - mgrs
+  become: true
+  tasks:
+    - name: Restart ceph-mgr services to make sure they are properly loaded
+      shell: |
+        systemctl restart ceph-mgr*.service
+
+- hosts:
   - mgrs[0]
   become: true
   roles:
@@ -44,11 +52,3 @@
   roles:
   - ceph-prometheus
   - ceph-dashboard
-
-- hosts: localhost
-  connection: local
-  gather_facts: false
-  tasks:
-    - name: Print dashboard URL
-      debug:
-        msg: "All done! You may access your dashboard at http://{{ groups['ceph-dashboard'][0] }}:<port>/ (default port is 8234) with your pre-defined username and password (admin/admin by default)."
