@@ -7,6 +7,9 @@ After=docker.service
 [Service]
 EnvironmentFile=-/etc/environment
 ExecStart=/usr/bin/docker start --attach node-exporter
+# Make sure the cfg80211 is loaded before running the container, the node
+# exporter needs this module loaded to test for presence of wi-fi devices
+ExecStartPre=/usr/sbin/modprobe cfg80211
 ExecStop=-/usr/bin/docker stop node-exporter
 Restart=always
 RestartSec=10s
