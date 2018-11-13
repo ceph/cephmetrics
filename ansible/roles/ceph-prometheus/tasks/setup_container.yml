@@ -5,12 +5,22 @@
     allow_duplicates: false
   when: containerized
 
+- name: Make sure the prometheus service is down
+  service:
+    name: prometheus
+    state: stopped
+  failed_when: false
+
 - name: Start docker container
   docker_container:
     name: prometheus
     image: "{{ prometheus.container_image }}"
+    state: started
     command: "--config.file=/prometheus/prometheus.yml"
+    # restart to allow updates
+    restart: true
     restart_policy: no
+    force_kill: yes
     published_ports: '9090:9090'
     detach: true
     volumes:

@@ -3,16 +3,27 @@
   include_role:
     name: ceph-docker
     allow_duplicates: false
+  when: containerized
+
+- name: Make sure the node_exporter service is down
+  service:
+    name: node_exporter
+    state: stopped
+  failed_when: false
 
 - name: Start docker container
   docker_container:
     name: node-exporter
     image: "{{ node_exporter.container_image }}"
+    state: started
     command:
       - '--path.procfs=/host/proc'
       - '--path.sysfs=/host/sys'
       - '--no-collector.timex'
+    # restart to allow updates
+    restart: true
     restart_policy: no
+    force_kill: yes
     detach: true
     volumes:
       - '/proc:/host/proc:ro'

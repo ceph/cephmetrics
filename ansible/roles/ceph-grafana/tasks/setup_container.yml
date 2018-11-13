@@ -22,6 +22,12 @@
     - /etc/grafana
     - /var/lib/grafana
 
+- name: Make sure the grafana-server service is down
+  service:
+    name: grafana-server
+    state: stopped
+  failed_when: false
+
 - name: Create docker container
   docker_container:
     name: grafana-server
@@ -30,6 +36,7 @@
     # restart to allow updates
     restart: true
     restart_policy: no
+    force_kill: yes
     published_ports: '3000:3000'
     detach: true
     volumes:
