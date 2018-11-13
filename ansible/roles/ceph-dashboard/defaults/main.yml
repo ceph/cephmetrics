@@ -1,17 +1,5 @@
 ---
 defaults:
-  grafana:
-    container_image: "grafana/grafana:latest"
-    container_cpu_period: 100000
-    container_cpu_cores: 2
-    # container_memory is in GB
-    container_memory: 4
-    uid: 472
-    datasource: Dashboard
-    dashboards_path: "/etc/grafana/dashboards/ceph-dashboard"
-    plugins:
-      - vonage-status-panel
-      - grafana-piechart-panel
   dashboard:
     admin_user: admin
     admin_password: admin

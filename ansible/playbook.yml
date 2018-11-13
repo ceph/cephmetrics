@@ -18,7 +18,7 @@
   - ceph-mgr
 
 - hosts:
-  - ceph-dashboard
+  - ceph-grafana
   # These are roles used by ceph-ansible
   - mons
   - agents
@@ -38,8 +38,14 @@
   - ceph-node-exporter
 
 - hosts:
-  - ceph-dashboard
+  - ceph-grafana
   become: true
   roles:
   - ceph-prometheus
+  - ceph-grafana
+
+- hosts:
+  - mgrs[0]
+  become: true
+  roles:
   - ceph-dashboard

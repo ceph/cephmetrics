@@ -53,7 +53,7 @@ sed -i -e 's|container_image: .*$|container_image: registry.access.redhat.com/op
 # Install ansible playbooks
 install -d %{buildroot}%{_datadir}
 cp -L -r ansible %{buildroot}%{_datadir}/dashboard-ansible
-rm -f %{buildroot}%{_datadir}/dashboard-ansible/roles/ceph-grafana/files/dashboards
+#rm -f %{buildroot}%{_datadir}/dashboard-ansible/roles/ceph-grafana/files/dashboards
 exit 0
 
 

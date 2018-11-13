@@ -1,0 +1,29 @@
+---
+defaults:
+  grafana:
+    container_image: "grafana/grafana:latest"
+    container_cpu_period: 100000
+    container_cpu_cores: 2
+    # container_memory is in GB
+    container_memory: 4
+    uid: 472
+    datasource: Dashboard
+    dashboards_path: "/etc/grafana/dashboards/ceph-dashboard"
+    plugins:
+      - vonage-status-panel
+      - grafana-piechart-panel
+devel_packages:
+  yum:
+    # unzip is needed to extract the Vonage plugin
+    - unzip
+    - grafana
+    # for dashUpdater.py
+    - PyYAML
+    - python-requests
+  apt:
+    # unzip is needed to extract the Vonage plugin
+    - unzip
+    - grafana
+    # for dashUpdater.py
+    - python-yaml
+    - python-requests
