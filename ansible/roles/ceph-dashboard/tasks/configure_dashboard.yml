@@ -78,12 +78,15 @@
 - name: Enable mgr dashboard module (restart)
   command: "{{ mgr_prefix }} ceph mgr module enable dashboard"
 
+- name: Wait a while for mgr module to come up
+  command: "sleep 3"
+
 - name: Set or update dashboard admin username and password
   shell: |
     if {{ mgr_prefix }} ceph dashboard ac-user-show {{ dashboard.admin_user }}; then
-      {{ mgr_prefix }} ceph dashboard ac-user-set-password {{ dashboard.admin_user }} {{dashboard.admin_password }}
+      {{ mgr_prefix }} ceph dashboard ac-user-set-password {{ dashboard.admin_user }} {{ dashboard.admin_password }}
     else
-      {{ mgr_prefix }} ceph dashboard ac-user-create {{ dashboard.admin_user }} {{dashboard.admin_password }} administrator
+      {{ mgr_prefix }} ceph dashboard ac-user-create {{ dashboard.admin_user }} {{ dashboard.admin_password }} administrator
     fi
 
 - name: Set grafana url
