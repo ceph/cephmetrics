@@ -28,10 +28,10 @@ scrape_configs:
         labels:
           instance: "{{ hostvars[host]['ansible_nodename'] }}"
 {% endfor %}
-{% if 'iscsis' in groups %}
+{% if 'iscsigws' in groups %}
   - job_name: 'iscsi-gws'
     static_configs:
-{% for host in groups['iscsis'] %}
+{% for host in groups['iscsigws'] %}
       - targets: ['{{ host }}:9287']
         labels:
           instance: "{{ hostvars[host]['ansible_nodename'] }}"
