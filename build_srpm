@@ -22,7 +22,7 @@ test -z "$DESCRIBE" && DESCRIBE="0.1-$(git rev-list --count HEAD)-g$(git rev-par
 VERSION=1.0
 REVISION="$(echo $DESCRIBE | cut -s -d - -f 2-)"
 test -z "$REVISION" && REVISION=0
-RPM_RELEASE=1
+RPM_RELEASE=2
 
 
 ## Build the source tarball
