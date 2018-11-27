@@ -1,6 +1,24 @@
 ---
 - include: merge_vars.yml
 
+- name: Check firewalld status
+  shell: "systemctl show firewalld | grep UnitFileState"
+  register: firewalld_status
+  failed_when: false
+  changed_when: false
+
+- name: Open ports for Ceph Manager plugins
+  firewalld:
+    port: "{{ item }}"
+    zone: "{{ firewalld_zone }}"
+    state: enabled
+    immediate: true
+    permanent: true
+  with_items:
+    - 9283/tcp
+    - "{{ dashboard.port }}/tcp"
+  when: "'enabled' in firewalld_status.stdout"
+
 - name: Check to see if the mgr is containerized
   command: "docker inspect {{ item }}"
   with_items:
