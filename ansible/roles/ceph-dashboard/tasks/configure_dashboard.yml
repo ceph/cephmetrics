@@ -93,8 +93,10 @@
   command: "{{ mgr_prefix }} ceph dashboard set-grafana-api-url {{ protocol }}://{{ groups['ceph-grafana'][0] }}:3000/"
 
 - name: Create radosgw system user
-  command: "{{ mgr_prefix }} radosgw-admin user create --uid={{ dashboard.rgw_api_user_id }} --display-name='Ceph dashboard' --system"
+  shell: "timeout 20 {{ mgr_prefix }} radosgw-admin user create --uid={{ dashboard.rgw_api_user_id }} --display-name='Ceph dashboard' --system"
   register: rgw_user_output
+  until: rgw_user_output.rc == 0
+  retries: 3
 
 - name: Get the rgw access and secret keys
   set_fact:
