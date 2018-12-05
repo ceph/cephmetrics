@@ -1,17 +1,36 @@
 ---
 - include: merge_vars.yml
 
-- name: Create prometheus data directory
+- name: Create prometheus directories
   file:
-    path: "{{ prometheus.data_dir }}"
+    path: "{{ item }}"
     state: directory
     owner: "{{ prometheus.user_id }}"
+  with_items:
+   - "{{ prometheus.conf_dir }}"
+   - "{{ prometheus.data_dir }}"
 
-- name: Write config file
+- name: Write prometheus config file
   template:
     src: prometheus.yml
-    dest: "{{ prometheus.data_dir }}/"
+    dest: "{{ prometheus.conf_dir }}/"
     owner: "{{ prometheus.user_id }}"
+  notify: Service handler
+
+- name: Create alertmanager directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "root"
+  with_items:
+   - "{{ alertmanager.conf_dir }}"
+   - "{{ alertmanager.data_dir }}"
+
+- name: Write alertmanager config file
+  template:
+    src: alertmanager.yml
+    dest: "{{ alertmanager.conf_dir }}/"
+    owner: "root"
   notify: Service handler
 
 - include: setup_container.yml

@@ -1,13 +1,13 @@
 # This file is managed by ansible, don't make changes here - they will be
 # overwritten.
 [Unit]
-Description=prometheus
+Description=alertmanager
 After=docker.service
 
 [Service]
 EnvironmentFile=-/etc/environment
-ExecStart=/usr/bin/docker start --attach prometheus
-ExecStop=/usr/bin/docker stop prometheus
+ExecStart=/usr/bin/docker start --attach alertmanager
+ExecStop=/usr/bin/docker stop alertmanager
 Restart=always
 RestartSec=10s
 TimeoutStartSec=120

@@ -6,5 +6,14 @@ defaults:
     container_cpu_cores: 2
     # container_memory is in GB
     container_memory: 4
-    data_dir: /var/lib/cephmetrics
+    data_dir: /var/lib/prometheus
+    conf_dir: /etc/prometheus
     user_id: '65534'  # This is the UID used by the prom/prometheus docker image
+  alertmanager:
+    container_image: prom/alertmanager:latest
+    container_cpu_period: 100000
+    container_cpu_cores: 2
+    # container_memory is in GB
+    container_memory: 4
+    data_dir: /var/lib/alertmanager
+    conf_dir: /etc/alertmanager

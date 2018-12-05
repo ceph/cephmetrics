@@ -35,18 +35,16 @@ patch -p1 < patches/0001-ansible-Disable-devel_mode.patch
 sed -i -e 's/devel_mode: true/devel_mode: false/' ansible/roles/*/defaults/main.yml
 
 # Change the prometheus container location/version
-sed -i -e 's|container_image: .*$|container_image: registry.access.redhat.com/openshift3/prometheus:v3.10|' ansible/roles/ceph-prometheus/defaults/main.yml
-#sed -i -e 's|version: .*$|version: v3.9|' ansible/roles/ceph-prometheus/defaults/main.yml
+sed -i -e 's|container_image: prom/prometheus:.*$|container_image: registry.access.redhat.com/openshift3/prometheus:v3.10|' ansible/roles/ceph-prometheus/defaults/main.yml
 
-# Change the grafana container location/version
-sed -i -e 's|container_image: .*$|container_image: registry.access.redhat.com/rhceph/rhceph-3-dashboard-rhel7:3|' ansible/roles/ceph-grafana/defaults/main.yml
-#sed -i -e 's|version: .*$|version: 3|' ansible/roles/ceph-grafana/defaults/main.yml
+# Change the alertmanager container location/version
+sed -i -e 's|container_image: prom/alertmanager:.*$|container_image: registry.access.redhat.com/openshift3/prometheus-alertmanager:v3.10|' ansible/roles/ceph-prometheus/defaults/main.yml
 
 # Change the node_exporter container location/version
 sed -i -e 's|container_image: .*$|container_image: registry.access.redhat.com/openshift3/prometheus-node-exporter:v3.10|' ansible/roles/ceph-node-exporter/defaults/main.yml
 
-# Change the service_name for node_exporter
-#sed -i -e 's|service_name: .*|service_name: prometheus-node-exporter|' ansible/roles/ceph-node-exporter/defaults/main.yml
+# Change the grafana container location/version
+sed -i -e 's|container_image: .*$|container_image: registry.access.redhat.com/rhceph/rhceph-3-dashboard-rhel7:3|' ansible/roles/ceph-grafana/defaults/main.yml
 
 
 %install

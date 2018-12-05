@@ -3,7 +3,10 @@
   # We use the systemd module here so we can use the daemon_reload feature,
   # since we're shipping the .service file ourselves
   systemd:
-    name: prometheus
+    name: "{{ item }}"
     daemon_reload: true
     enabled: true
     state: restarted
+  with_items:
+    - 'alertmanager'
+    - 'prometheus'
