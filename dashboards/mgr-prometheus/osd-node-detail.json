@@ -526,7 +526,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "max by (device) (\n  irate(node_disk_reads_completed{device=~\"($device_id)\", instance=~\"($osd_servers).*\"}[5m]) +\n  irate(node_disk_writes_completed{device=~\"($device_id)\", instance=~\"($osd_servers).*\"}[5m])\n)",
+          "expr": "max by (instance, device) (\n  irate(node_disk_reads_completed{device=~\"($device_id)\", instance=~\"($osd_servers).*\"}[5m]) +\n  irate(node_disk_writes_completed{device=~\"($device_id)\", instance=~\"($osd_servers).*\"}[5m])\n) + on (instance, device) group_left (ceph_daemon) ceph_disk_occupation",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{device}}",
