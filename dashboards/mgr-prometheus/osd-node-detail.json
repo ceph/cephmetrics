@@ -48,7 +48,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1526509711107,
+  "iteration": 1544737450178,
   "links": [
     {
       "asDropdown": true,
@@ -240,7 +240,7 @@
           "decimals": 2,
           "pattern": "device_class",
           "thresholds": [],
-          "type": "number",
+          "type": "string",
           "unit": "short"
         },
         {
@@ -291,7 +291,7 @@
       ],
       "targets": [
         {
-          "expr": "(label_replace(ceph_disk_occupation{instance=~\"($osd_servers).*\",device=~\"($device_id)\"},\"aa_hostname\",\"$1\",\"instance\",\"(.*)\") * \n  on(ceph_daemon) group_left(aa_instance) ceph_osd_stat_bytes) *\n  on(ceph_daemon) group_left(device_class,ceph_ver) label_replace(label_replace(ceph_osd_metadata,\"ceph_daemon\",\"osd.$1\",\"id\",\"(.*)\"),\"ceph_ver\",\"$1\",\"ceph_version\",\"ceph version (.*) (.*) (.*) (.*)\")",
+          "expr": "(label_replace(ceph_disk_occupation{instance=~\"($osd_servers).*\",device=~\"($device_id)\"},\"aa_hostname\",\"$1\",\"instance\",\"(.*)\") * \n  on(ceph_daemon) group_left(aa_instance) ceph_osd_stat_bytes) *\n  on(ceph_daemon) group_left(ceph_ver, device_class) label_replace(ceph_osd_metadata,\"ceph_ver\",\"$1\",\"ceph_version\",\"ceph version (.*) (.*) (.*) (.*)\") ",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -486,7 +486,11 @@
           "min": null,
           "show": false
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "aliasColors": {},
@@ -526,7 +530,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "max by (device) (\n  irate(node_disk_reads_completed{device=~\"($device_id)\", instance=~\"($osd_servers).*\"}[5m]) +\n  irate(node_disk_writes_completed{device=~\"($device_id)\", instance=~\"($osd_servers).*\"}[5m])\n)",
+          "expr": "max by (device) ((\n  irate(node_disk_reads_completed{device=~\"($device_id)\", instance=~\"($osd_servers).*\"}[5m]) +\n  irate(node_disk_writes_completed{device=~\"($device_id)\", instance=~\"($osd_servers).*\"}[5m])\n) and on (instance, device) ceph_disk_occupation{instance=~\"($osd_servers).*\", device=~\"($device_id)\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{device}}",
@@ -569,7 +573,11 @@
           "min": null,
           "show": false
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "aliasColors": {},
@@ -609,7 +617,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "max by (device) (\n  irate(node_disk_write_time_ms{device=~ \"($device_id)\", instance=~\"($osd_servers).*\"}[5m])\n  /\n  clamp_min(irate(node_disk_writes_completed{device=~ \"($device_id)\", instance=~\"($osd_servers).*\"}[5m]), 0.001)\n+\n  irate(node_disk_read_time_ms{device=~ \"($device_id)\", instance=~\"($osd_servers).*\"}[5m])\n  /\n  clamp_min(irate(node_disk_reads_completed{device=~ \"($device_id)\", instance=~\"($osd_servers).*\"}[5m]), 0.001)\n)",
+          "expr": "max by (device) ((\n  irate(node_disk_write_time_ms{device=~ \"($device_id)\", instance=~\"($osd_servers).*\"}[5m])\n  /\n  clamp_min(irate(node_disk_writes_completed{device=~ \"($device_id)\", instance=~\"($osd_servers).*\"}[5m]), 0.001)\n+\n  irate(node_disk_read_time_ms{device=~ \"($device_id)\", instance=~\"($osd_servers).*\"}[5m])\n  /\n  clamp_min(irate(node_disk_reads_completed{device=~ \"($device_id)\", instance=~\"($osd_servers).*\"}[5m]), 0.001)\n) and on (instance, device) ceph_disk_occupation{instance=~\"($osd_servers).*\", device=~\"($device_id)\"})",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
@@ -653,7 +661,11 @@
           "min": null,
           "show": true
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "aliasColors": {},
@@ -693,7 +705,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "max by (device) (\n  irate(node_disk_bytes_read{device=~\"($device_id)\", instance=~\"($osd_servers).*\"}[5m]) + \n  irate(node_disk_bytes_written{device=~\"($device_id)\", instance=~\"($osd_servers).*\"}[5m])\n)",
+          "expr": "max by (device) ((\n  irate(node_disk_bytes_read{device=~\"($device_id)\", instance=~\"($osd_servers).*\"}[5m]) + \n  irate(node_disk_bytes_written{device=~\"($device_id)\", instance=~\"($osd_servers).*\"}[5m])\n) and on (instance, device) ceph_disk_occupation{instance=~\"($osd_servers).*\", device=~\"($device_id)\"})",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -737,7 +749,11 @@
           "min": null,
           "show": false
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "aliasColors": {
@@ -829,7 +845,11 @@
           "min": null,
           "show": false
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "aliasColors": {
@@ -946,7 +966,11 @@
           "min": null,
           "show": false
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "aliasColors": {},
@@ -1040,7 +1064,11 @@
           "min": null,
           "show": false
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     }
   ],
   "refresh": "10s",
@@ -1146,5 +1174,5 @@
   },
   "timezone": "browser",
   "title": "OSD Node Detail",
-  "version": 15
+  "version": 16
 }
