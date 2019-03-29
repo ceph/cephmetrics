@@ -19,6 +19,9 @@ defaults:
     # New deployments work fine
     admin_user: admin
     admin_password: admin
+    default_theme: light
+    snmp_enabled: false
+    auth_anonymous: false
     plugins:
       - vonage-status-panel
       - grafana-piechart-panel
