@@ -26,7 +26,7 @@
 - name: Prefix the mgr command with a docker command
   set_fact:
     mgr_prefix: "docker exec {{ container_name }}"
-  when: container_name != ""
+  when: container_name
 
 - name: Enable mgr prometheus module
   command: "{{ mgr_prefix|default('') }} ceph --cluster {{ cluster_name }} mgr module enable prometheus"
