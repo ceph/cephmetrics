@@ -16,4 +16,5 @@
     permanent: true
   with_items:
     - 9100/tcp
+    - 9283/tcp
   when: "'enabled' in firewalld_status.stdout"
