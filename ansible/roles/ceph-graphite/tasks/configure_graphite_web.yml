@@ -81,7 +81,7 @@
   notify: Restart graphite-web
 
 - name: Get timezone
-  shell: "timedatectl | grep 'Time zone'"
+  shell: "timedatectl | grep 'Time zone'"  # noqa 306
   register: timezone
 
 - name: Set timezone in local_settings.py
