@@ -28,7 +28,7 @@
 #   ... and so on
 - name: Set dashboards var keys
   set_fact:
-    dashboards: "{% for item in dashboard_files.results %}{{ dashboards.update({item.stat.path.split('/')[-1].split('.')[:-1]|join('.'): {'body': lookup('file', item.stat.path)|from_json }}) }}{% endfor %}{{ dashboards }}"
+    dashboards: "{% for item in dashboard_files.results %}{{ dashboards.update({item.stat.path.split('/')[-1].split('.')[:-1]|join('.'): {'body': lookup('file', item.stat.path)|from_json }}) }}{% endfor %}{{ dashboards }}"  # noqa 204
   no_log: true
 
 # If the dashboards have been previously deployed, we need the ID so that we
