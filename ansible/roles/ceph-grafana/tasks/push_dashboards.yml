@@ -1,8 +1,8 @@
 ---
 # First, look at our local filesystem for the dashboards we need to push.
 - name: Stat dashboard files
-  local_action:
-    module: stat
+  delegate_to: localhost
+  stat:
     path: "{{ item }}"
     follow: true
     get_attributes: false
