@@ -3,8 +3,8 @@
   # We use local_action here to reduce the amount of times we hit the GitHub
   # API; without it, a moderately-large cluster could actually cause them to
   # invoke their API rate limiting!
-  local_action:
-    module: uri
+  delegate_to: localhost
+  uri:
     url: https://api.github.com/repos/prometheus/node_exporter/releases/latest
     return_content: true
   connection: local

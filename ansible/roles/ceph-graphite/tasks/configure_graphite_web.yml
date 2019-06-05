@@ -74,14 +74,14 @@
 - name: Allow connecting to graphite without auth
   lineinfile:
     dest: "{{ graphite.site_conf[ansible_pkg_mgr] }}"
-    line: "	Require all granted"
+    line: "	Require all granted"  # noqa 203
     insertafter: '<Directory "/usr/share/graphite/">'
     state: present
   when: ansible_pkg_mgr == "yum"
   notify: Restart graphite-web
 
 - name: Get timezone
-  shell: "timedatectl | grep 'Time zone'"
+  shell: "timedatectl | grep 'Time zone'"  # noqa 306
   register: timezone
 
 - name: Set timezone in local_settings.py
