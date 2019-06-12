@@ -55,6 +55,64 @@
   no_log: true
   tags: [ini]
 
+- name: Set grafana default_theme grafana.ini
+  ini_file:
+    path: /etc/grafana/grafana.ini
+    section: users
+    option: default_theme
+    value: "{{ grafana.default_theme }}"
+  no_log: true
+  tags: [ini]
+
+- name: Set SMTP configuration in grafana.ini
+  ini_file:
+    path: /etc/grafana/grafana.ini
+    section: smtp
+    option: enabled
+    value: "{{ grafana.smtp_enabled }}"
+  no_log: true
+  tags: [ini]
+
+- name: Set SMTP host in grafana.ini
+  ini_file:
+    path: /etc/grafana/grafana.ini
+    section: smtp
+    option: host
+    value: "{{ grafana.smtp_host }}"
+  no_log: true
+  tags: [ini]
+  when: grafana.smtp_enabled
+
+- name: Set SMTP user in grafana.ini
+  ini_file:
+    path: /etc/grafana/grafana.ini
+    section: smtp
+    option: user
+    value: "{{ grafana.smtp_user }}"
+  no_log: true
+  tags: [ini]
+  when: grafana.smtp_enabled and grafana.smtp_user is defined
+
+- name: Set SMTP password in grafana.ini
+  ini_file:
+    path: /etc/grafana/grafana.ini
+    section: smtp
+    option: password
+    value: "{{ grafana.smtp_password }}"
+  no_log: true
+  tags: [ini]
+  when: grafana.smtp_enabled and grafana.smtp_password is defined
+
+- name: Set anonymous login in grafana.ini
+  ini_file:
+    path: /etc/grafana/grafana.ini
+    section: auth.anonymous
+    option: enabled
+    value: "{{ grafana.auth_anonymous }}"
+  no_log: true
+  tags: [ini]
+  when: grafana.auth_anonymous
+
 - include: grafana_plugins.yml
   when:
     - devel_mode

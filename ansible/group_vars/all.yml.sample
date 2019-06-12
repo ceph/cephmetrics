@@ -18,3 +18,12 @@ dummy:
 #grafana:
 #  admin_user: admin
 #  admin_password: admin
+# You may want to change the default theme to dark
+#  default_theme: light
+# If you use email alerting, configure your SMTP connection. If your SMTP Server dos not require authentication, skip smtp_user and smtp_password
+#  smtp_enabled: false
+#  smtp_host: smtp.mail.example.com:25
+#  smtp_user: username
+#  smtp_password: password
+# If you like to enable Anonymous login, set auth_anonymous to true
+#  auth_anonymous: false
