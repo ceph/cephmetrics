@@ -281,7 +281,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(ceph_mds_sessions_session_count)",
+          "expr": "sum(ceph_mds_sessions_sessions_open)",
           "format": "time_series",
           "instant": true,
           "intervalFactor": 1,
