@@ -22,6 +22,7 @@
     user: "{{ prometheus.user_id }}"
     keep_volumes: true
     pull: "{{ prometheus.pull_image }}"
+    trust_image_content: "{{ prometheus.trust_image_content }}"
     cpu_period: "{{ prometheus.container_cpu_period }}"
     # As of ansible-2.5.2, this module doesn't support the equivalent of the
     # --cpus flag, so we must use period/quota for now
