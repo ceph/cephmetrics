@@ -15,6 +15,7 @@ defaults:
     uid: 472
     datasource: Local
     pull_image: true
+    trust_image_content: false
     # You need to change these in the web UI on an already deployed machine, first
     # New deployments work fine
     admin_user: admin
