@@ -16,6 +16,7 @@
     owner: root
     group: grafana
     mode: 0640
+    force: "{{ grafana.overwrite_config }}"
   tags: [ini]
 
 - name: Set owner on /etc/grafana

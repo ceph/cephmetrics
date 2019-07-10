@@ -23,6 +23,10 @@ defaults:
     default_theme: light
     snmp_enabled: false
     auth_anonymous: false
+    # You can change this option if you want to keep your custom grafana configuration.
+    # The script will still update the grafana config with the other configured options
+    # but it won't overwrite your custom options.
+    overwrite_config: true
     plugins:
       - vonage-status-panel
       - grafana-piechart-panel
