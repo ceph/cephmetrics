@@ -21,7 +21,7 @@ defaults:
     admin_user: admin
     admin_password: admin
     default_theme: light
-    snmp_enabled: false
+    smtp_enabled: false
     auth_anonymous: false
     # You can change this option if you want to keep your custom grafana configuration.
     # The script will still update the grafana config with the other configured options
