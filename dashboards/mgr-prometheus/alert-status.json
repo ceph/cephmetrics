@@ -96,7 +96,7 @@
         "frequency": "10s",
         "handler": 1,
         "name": "Overall Ceph Health alert",
-        "noDataState": "no_data",
+        "noDataState": "ok",
         "notifications": [
           {
             "id": 1
@@ -231,7 +231,7 @@
         "frequency": "60s",
         "handler": 1,
         "name": "Ceph Error State alert",
-        "noDataState": "no_data",
+        "noDataState": "ok",
         "notifications": [
           {
             "id": 1
@@ -898,7 +898,7 @@
         "frequency": "60s",
         "handler": 1,
         "name": "OSD Host Loss Check alert",
-        "noDataState": "no_data",
+        "noDataState": "ok",
         "notifications": [
           {
             "id": 1
@@ -1162,7 +1162,7 @@
         "frequency": "30s",
         "handler": 1,
         "name": "Network Errors alert",
-        "noDataState": "no_data",
+        "noDataState": "ok",
         "notifications": [
           {
             "id": 1
@@ -1291,7 +1291,7 @@
         "frequency": "60s",
         "handler": 1,
         "name": "Pool Capacity alert",
-        "noDataState": "no_data",
+        "noDataState": "ok",
         "notifications": [
           {
             "id": 1
@@ -1555,7 +1555,7 @@
         "frequency": "60s",
         "handler": 1,
         "name": "Cluster Capacity alert",
-        "noDataState": "no_data",
+        "noDataState": "ok",
         "notifications": [
           {
             "id": 1
