@@ -6,7 +6,7 @@
   - always
 
 - hosts:
-  - mgrs[0]
+  - mgrs
   become: true
   roles:
   - ceph-mgr
