@@ -2599,7 +2599,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(\n  sum(\n    rate(\n      node_disk_reads_completed[$__interval]\n    )\n  ) by (instance,device)\n   + ignoring(ceph_daemon,job) group_right(instance) ceph_disk_occupation\n)\n+\nsum(\n  sum(\n    rate(\n      node_disk_writes_completed[$__interval]\n    )\n  ) by (instance,device)\n   + ignoring(ceph_daemon,job) group_right(instance) ceph_disk_occupation\n)",
+          "expr": "sum(\n  sum(\n    rate(\n      node_disk_reads_completed[$__interval]\n    )\n  ) by (instance,device)\n   + ignoring(ceph_daemon,job,wal_device) group_right(instance) ceph_disk_occupation\n)\n+\nsum(\n  sum(\n    rate(\n      node_disk_writes_completed[$__interval]\n    )\n  ) by (instance,device)\n   + ignoring(ceph_daemon,job,wal_device) group_right(instance) ceph_disk_occupation\n)",
           "format": "time_series",
           "groupBy": [],
           "hide": false,
@@ -2708,7 +2708,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "# should only include OSD hosts\nsum(\n  sum(\n    rate(\n      node_disk_bytes_read[$__interval]\n    )\n  ) by (instance,device)\n  + ignoring(ceph_daemon,job) group_right(instance) ceph_disk_occupation\n)\n+\nsum(\n  sum(\n    rate(\n      node_disk_bytes_written[$__interval]\n    )\n  ) by (instance,device)\n  + ignoring(ceph_daemon,job) group_right(instance) ceph_disk_occupation\n)",
+          "expr": "# should only include OSD hosts\nsum(\n  sum(\n    rate(\n      node_disk_bytes_read[$__interval]\n    )\n  ) by (instance,device)\n  + ignoring(ceph_daemon,job,wal_device) group_right(instance) ceph_disk_occupation\n)\n+\nsum(\n  sum(\n    rate(\n      node_disk_bytes_written[$__interval]\n    )\n  ) by (instance,device)\n  + ignoring(ceph_daemon,job,wal_device) group_right(instance) ceph_disk_occupation\n)",
           "format": "time_series",
           "groupBy": [],
           "hide": false,
@@ -2934,21 +2934,21 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "quantile(\n  5 / 100,\n    (irate(node_disk_read_time_ms[1m]) + irate(node_disk_write_time_ms[1m]) / \n    (irate(node_disk_reads_completed[1m]) + irate(node_disk_writes_completed[1m])) \n    +\n    ignoring(ceph_daemon,job) ceph_disk_occupation))",
+          "expr": "quantile(\n  5 / 100,\n    (irate(node_disk_read_time_ms[1m]) + irate(node_disk_write_time_ms[1m]) / \n    (irate(node_disk_reads_completed[1m]) + irate(node_disk_writes_completed[1m])) \n    +\n    ignoring(ceph_daemon,job,wal_device) ceph_disk_occupation))",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
           "refId": "C"
         },
         {
-          "expr": "max(\n  irate(node_disk_read_time_ms[30s]) / irate(node_disk_reads_completed[30s])\n  +\n  irate(node_disk_write_time_ms[30s]) / irate(node_disk_writes_completed[30s])\n  + ignoring(ceph_daemon,job) ceph_disk_occupation\n)",
+          "expr": "max(\n  irate(node_disk_read_time_ms[30s]) / irate(node_disk_reads_completed[30s])\n  +\n  irate(node_disk_write_time_ms[30s]) / irate(node_disk_writes_completed[30s])\n  + ignoring(ceph_daemon,job,wal_device) ceph_disk_occupation\n)",
           "format": "time_series",
           "hide": true,
           "intervalFactor": 2,
           "refId": "B"
         },
         {
-          "expr": "sum(\n    (irate(node_disk_read_time_ms[1m]) + irate(node_disk_write_time_ms[1m]) / \n    (irate(node_disk_reads_completed[1m]) + irate(node_disk_writes_completed[1m])) \n    +\n    ignoring(ceph_daemon,job) ceph_disk_occupation)) / count(ceph_osd_up)",
+          "expr": "sum(\n    (irate(node_disk_read_time_ms[1m]) + irate(node_disk_write_time_ms[1m]) / \n    (irate(node_disk_reads_completed[1m]) + irate(node_disk_writes_completed[1m])) \n    +\n    ignoring(ceph_daemon,job,wal_device) ceph_disk_occupation)) / count(ceph_osd_up)",
           "format": "time_series",
           "hide": true,
           "intervalFactor": 1,

@@ -93,7 +93,7 @@
               "refId": "B"
             },
             {
-              "expr": "sum(\n  sum(\n    irate(node_disk_reads_completed{job=\"node\" }[1m]) + \n    irate(node_disk_writes_completed{job=\"node\"}[1m]))\n  by(instance, device) + ignoring(ceph_daemon,job) group_right(instance) ceph_disk_occupation)\n  by(instance)",
+              "expr": "sum(\n  sum(\n    irate(node_disk_reads_completed{job=\"node\" }[1m]) + \n    irate(node_disk_writes_completed{job=\"node\"}[1m]))\n  by(instance, device) + ignoring(ceph_daemon,job,wal_device) group_right(instance) ceph_disk_occupation)\n  by(instance)",
               "format": "time_series",
               "intervalFactor": 1,
               "legendFormat": "{{instance}}",
@@ -181,7 +181,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(\n  sum(\n    irate(node_disk_reads_completed{instance=~\"[[osd_servers]].*\"}[1m]) + irate(node_disk_writes_completed[1m]))\n  by(instance,device) +\n  ignoring(ceph_daemon,job) group_right(instance) ceph_disk_occupation)\n    \n  \n",
+              "expr": "sum(\n  sum(\n    irate(node_disk_reads_completed{instance=~\"[[osd_servers]].*\"}[1m]) + irate(node_disk_writes_completed[1m]))\n  by(instance,device) +\n  ignoring(ceph_daemon,job,wal_device) group_right(instance) ceph_disk_occupation)\n    \n  \n",
               "format": "time_series",
               "intervalFactor": 2,
               "refId": "A"
