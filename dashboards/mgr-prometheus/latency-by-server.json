@@ -90,7 +90,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "max(\n    (irate(node_disk_read_time_ms[30s]) + irate(node_disk_write_time_ms[30s]) / \n    (irate(node_disk_reads_completed[30s]) + irate(node_disk_writes_completed[30s])) +\n    ignoring(ceph_daemon,job) ceph_disk_occupation))\n    by(instance)",
+          "expr": "max(\n    (irate(node_disk_read_time_ms[30s]) + irate(node_disk_write_time_ms[30s]) / \n    (irate(node_disk_reads_completed[30s]) + irate(node_disk_writes_completed[30s])) +\n    ignoring(ceph_daemon,job,wal_device) ceph_disk_occupation))\n    by(instance)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{instance}}",
