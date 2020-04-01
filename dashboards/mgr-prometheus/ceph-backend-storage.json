@@ -136,6 +136,7 @@
         {
           "expr": "count(ceph_osd_up < 0.5)",
           "format": "time_series",
+          "instant": true,
           "intervalFactor": 2,
           "refId": "A",
           "step": 60
@@ -152,7 +153,7 @@
           "value": "null"
         }
       ],
-      "valueName": "avg"
+      "valueName": "current"
     },
     {
       "columns": [
