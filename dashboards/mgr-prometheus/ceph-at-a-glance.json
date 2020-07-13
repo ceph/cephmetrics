@@ -62,7 +62,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1526962541471,
+  "iteration": 1594326505937,
   "links": [
     {
       "asDropdown": true,
@@ -2599,7 +2599,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(\n  sum(\n    rate(\n      node_disk_reads_completed[$__interval]\n    )\n  ) by (instance,device)\n   + ignoring(ceph_daemon,job,wal_device) group_right(instance) ceph_disk_occupation\n)\n+\nsum(\n  sum(\n    rate(\n      node_disk_writes_completed[$__interval]\n    )\n  ) by (instance,device)\n   + ignoring(ceph_daemon,job,wal_device) group_right(instance) ceph_disk_occupation\n)",
+          "expr": "sum(\n  sum(\n    rate(\n      node_disk_reads_completed[$__interval]\n    )\n  ) by (instance,device)\n   + ignoring(ceph_daemon,job,wal_device,db_device) group_right(instance) ceph_disk_occupation\n)\n+\nsum(\n  sum(\n    rate(\n      node_disk_writes_completed[$__interval]\n    )\n  ) by (instance,device)\n   + ignoring(ceph_daemon,job,wal_device,db_device) group_right(instance) ceph_disk_occupation\n)",
           "format": "time_series",
           "groupBy": [],
           "hide": false,
@@ -2708,7 +2708,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "# should only include OSD hosts\nsum(\n  sum(\n    rate(\n      node_disk_bytes_read[$__interval]\n    )\n  ) by (instance,device)\n  + ignoring(ceph_daemon,job,wal_device) group_right(instance) ceph_disk_occupation\n)\n+\nsum(\n  sum(\n    rate(\n      node_disk_bytes_written[$__interval]\n    )\n  ) by (instance,device)\n  + ignoring(ceph_daemon,job,wal_device) group_right(instance) ceph_disk_occupation\n)",
+          "expr": "# should only include OSD hosts\nsum(\n  sum(\n    rate(\n      node_disk_bytes_read[$__interval]\n    )\n  ) by (instance,device)\n  + ignoring(ceph_daemon,job,wal_device,db_device) group_right(instance) ceph_disk_occupation\n)\n+\nsum(\n  sum(\n    rate(\n      node_disk_bytes_written[$__interval]\n    )\n  ) by (instance,device)\n  + ignoring(ceph_daemon,job,wal_device,db_device) group_right(instance) ceph_disk_occupation\n)",
           "format": "time_series",
           "groupBy": [],
           "hide": false,
@@ -3243,5 +3243,5 @@
   },
   "timezone": "browser",
   "title": "Ceph - At A Glance",
-  "version": 43
+  "version": 44
 }
